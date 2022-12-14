@@ -7,13 +7,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float moveSpeed = 5;
+    
     private Rigidbody2D _rigidbody2D;
     private Vector2 _movementToApply;
+    private Vector2 _currentInput;
     private Camera _camera;
-
-    [SerializeField] private float shotSpeed;
-    private float shotTimer;
+    
+    [SerializeField] private float moveSpeed = 5;
+    [SerializeField] private float Acceleration = 20;
+    [SerializeField] private float shotSpeed = 0.1f;
+    
+    private float shotTimer = 0;
+    
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -24,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         GetMovement();
         TryShoot();
+        Move();
     }
 
     private void GetMovement()
@@ -49,7 +55,7 @@ public class PlayerController : MonoBehaviour
             input.y -= 1;
         }
 
-        _movementToApply = input;
+        _currentInput = input * moveSpeed;
     }
 
     private void TryShoot()
@@ -62,6 +68,8 @@ public class PlayerController : MonoBehaviour
             GameObject projectileGO = Instantiate(projectilePrefab);
             projectileGO.transform.position = transform.position;
             Projectile projectile = projectileGO.GetComponent<Projectile>();
+            projectile.SetOwner(Projectile.OwnerType.Player);
+            projectile.SetDamage(10);
 
             
             Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -69,15 +77,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Move()
+    {
+        _rigidbody2D.velocity = _movementToApply;
+    }
+    
     private void FixedUpdate()
     {
-        if (_movementToApply.magnitude > 0)
-        {
-            _rigidbody2D.AddForce(_movementToApply * moveSpeed);
-        }
-        else
-        {
-            _rigidbody2D.AddForce(-_rigidbody2D.velocity);
-        }
+        ApplyGroundAcceleration();
+    }
+    
+    private void ApplyGroundAcceleration()
+    {
+        _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, Acceleration * Time.deltaTime);
+        _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, Acceleration * Time.deltaTime);
     }
 }
