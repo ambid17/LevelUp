@@ -3279,6 +3279,7 @@ GameObject:
   - component: {fileID: 1801835150}
   - component: {fileID: 1801835152}
   - component: {fileID: 1801835151}
+  - component: {fileID: 1801835153}
   m_Layer: 5
   m_Name: PerksPanel
   m_TagString: Untagged
@@ -3344,6 +3345,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801835149}
   m_CullTransparentMesh: 1
+--- !u!114 &1801835153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801835149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd72b01318b42894a8caaef737094ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1898048239
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,6 +3368,7 @@ GameObject:
   - component: {fileID: 1898048240}
   - component: {fileID: 1898048242}
   - component: {fileID: 1898048241}
+  - component: {fileID: 1898048243}
   m_Layer: 5
   m_Name: HomePanel
   m_TagString: Untagged
@@ -3424,6 +3438,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898048239}
   m_CullTransparentMesh: 1
+--- !u!114 &1898048243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898048239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1f2087e4c7ce842995e59788fd0f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2023272752
 GameObject:
   m_ObjectHideFlags: 0
