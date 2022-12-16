@@ -21,6 +21,7 @@ public class RusherEnemyController : EnemyController
         }
         
         _rigidbody2D.velocity = velocity;
+        FlipSpriteOnDirection();
     }
     override protected void TryShoot() 
     { 

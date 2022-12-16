@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     protected GameObject player;
     [SerializeField] protected GameObject projectilePrefab;
     protected Rigidbody2D _rigidbody2D;
+    [SerializeField] protected SpriteRenderer _spriteRenderer;
     [SerializeField] protected float shotSpeed;
     protected float shotTimer;
     [SerializeField] protected float moveSpeed;
@@ -19,6 +20,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         player = GameManager.Instance.player.gameObject;
         currentHp = maxHp;
@@ -62,6 +64,8 @@ public class EnemyController : MonoBehaviour
         }
         
         _rigidbody2D.velocity = velocity;
+
+        FlipSpriteOnDirection();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -85,6 +89,15 @@ public class EnemyController : MonoBehaviour
         {
             Die();
         }
+    }
+
+    protected void  FlipSpriteOnDirection()
+    {
+        //Flip the sprite based on velocity
+        if(_rigidbody2D.velocity.x < 0) 
+            _spriteRenderer.flipX = true;
+        else 
+            _spriteRenderer.flipX = false;
     }
 
     private void Die()
