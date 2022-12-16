@@ -40,14 +40,18 @@ public class EnemySpawner : MonoBehaviour
             spawnTimer = 0;
             EnemyType typeToSpawn = GetWeightedRandomEnemy();
             GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
-            Instantiate(enemyGO);
+            GameObject instance = Instantiate(enemyGO);
+            instance.transform.position = GetRandomInDonut(5, 15);
+
         }
     }
     
+    // See this for more info:
+    // https://limboh27.medium.com/implementing-weighted-rng-in-unity-ed7186e3ff3b
     public EnemyType GetWeightedRandomEnemy ()
     {
         int[] weights = weightTable.Keys.ToArray();
-        int randomWeight = UnityEngine.Random.Range(0, weights.Sum());
+        int randomWeight = Random.Range(0, weights.Sum());
         for (int i = 0; i < weights.Length; ++i)
         {
             randomWeight -= weights[i];
@@ -58,5 +62,14 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return EnemyType.easy;
+    }
+    
+    public Vector2 GetRandomInDonut(float min, float max)
+    {
+        Vector2 point = Random.insideUnitCircle;
+        point = point.normalized;
+        point *= Random.Range(min, max);
+
+        return point;
     }
 }
