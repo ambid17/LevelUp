@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] protected float maxHp = 100;
     protected float currentHp;
-    
+
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -83,7 +83,14 @@ public class EnemyController : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        GameManager.Instance.AddCurrency(goldValue);
+        Destroy(gameObject);
+
     }
 }
