@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RusherEnemyController : EnemyController
 {
+    bool touchingPlayer = false;
+
     override protected void TryMove()
     {
         Vector2 velocity = Vector2.zero;
@@ -20,10 +22,28 @@ public class RusherEnemyController : EnemyController
         
         _rigidbody2D.velocity = velocity;
     }
-    override protected void TryShoot() { }
+    override protected void TryShoot() 
+    { 
+        if(touchingPlayer)
+        {
+            shotTimer += Time.deltaTime;
+            if (shotTimer > shotSpeed)
+            {
+                shotTimer = 0;   
+                Debug.Log("Melee attack!");
+            }
+        }
+    }
 
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Melee!");
+        if(col.gameObject.layer == GameManager.PlayerLayer)
+            touchingPlayer = true;
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if(col.gameObject.layer == GameManager.PlayerLayer)
+            touchingPlayer = false;
     }
 }
