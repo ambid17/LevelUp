@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public PlayerController player;
     public GameObject enemyPrefab;
+    public EnemySpawner enemySpawner;
     
     public static int PlayerLayer = 6;
     public static int ProjectileLayer = 7;

@@ -24,28 +24,29 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
 
     [SerializeField] private int enemyMaxCount;
-    private int enemyCount;
+    private int _enemyCount;
+    public int EnemyCount { get; set; }
 
     [SerializeField] private float minSpawnRadius;
     [SerializeField] private float maxSpawnRadius;
     
-    void Start()
+    void Awake()
     {
-        
+        GameManager.Instance.enemySpawner = this;
     }
 
     void Update()
     {
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer > spawnInterval && enemyCount < enemyMaxCount)
+        if (spawnTimer > spawnInterval && _enemyCount < enemyMaxCount)
         {
             spawnTimer = 0;
             EnemyType typeToSpawn = GetWeightedRandomEnemy();
             GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
             GameObject instance = Instantiate(enemyGO);
             instance.transform.position = GetRandomInDonut(minSpawnRadius, maxSpawnRadius);
-            enemyCount++;
+            _enemyCount++;
         }
     }
     

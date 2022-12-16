@@ -89,8 +89,8 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.enemySpawner.EnemyCount--;
         GameManager.Instance.AddCurrency(goldValue);
         Destroy(gameObject);
-
     }
 }
