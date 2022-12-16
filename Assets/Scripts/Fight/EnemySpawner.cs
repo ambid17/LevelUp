@@ -11,8 +11,6 @@ public enum EnemyType
 
 public class EnemySpawner : MonoBehaviour
 {
-    
-
     public Dictionary<int, EnemyType> weightTable = new Dictionary<int, EnemyType>()
     {
         { 10, EnemyType.easy},
@@ -24,7 +22,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private float spawnInterval;
     private float spawnTimer;
-    
+
+    [SerializeField] private int enemyMaxCount;
+    private int enemyCount;
     
     void Start()
     {
@@ -35,14 +35,14 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer > spawnInterval)
+        if (spawnTimer > spawnInterval && enemyCount < enemyMaxCount)
         {
             spawnTimer = 0;
             EnemyType typeToSpawn = GetWeightedRandomEnemy();
             GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
             GameObject instance = Instantiate(enemyGO);
             instance.transform.position = GetRandomInDonut(5, 15);
-
+            enemyCount++;
         }
     }
     
