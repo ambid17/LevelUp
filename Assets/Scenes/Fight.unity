@@ -586,7 +586,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDataContainer: {fileID: 11400000, guid: 726ee7721093dcf4e9d5164d4e92d63c, type: 2}
-  spawnInterval: 0
+  spawnInterval: 1
+  enemyMaxCount: 100
+  minSpawnRadius: 8
+  maxSpawnRadius: 15
 --- !u!1 &1382564849
 GameObject:
   m_ObjectHideFlags: 0

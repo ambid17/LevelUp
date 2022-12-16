@@ -25,6 +25,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private int enemyMaxCount;
     private int enemyCount;
+
+    [SerializeField] private float minSpawnRadius;
+    [SerializeField] private float maxSpawnRadius;
     
     void Start()
     {
@@ -41,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyType typeToSpawn = GetWeightedRandomEnemy();
             GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
             GameObject instance = Instantiate(enemyGO);
-            instance.transform.position = GetRandomInDonut(5, 15);
+            instance.transform.position = GetRandomInDonut(minSpawnRadius, maxSpawnRadius);
             enemyCount++;
         }
     }
