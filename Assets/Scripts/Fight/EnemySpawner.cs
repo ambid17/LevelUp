@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -40,6 +38,9 @@ public class EnemySpawner : MonoBehaviour
         if (spawnTimer > spawnInterval)
         {
             spawnTimer = 0;
+            EnemyType typeToSpawn = GetWeightedRandomEnemy();
+            GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
+            Instantiate(enemyGO);
         }
     }
     
@@ -47,30 +48,15 @@ public class EnemySpawner : MonoBehaviour
     {
         int[] weights = weightTable.Keys.ToArray();
         int randomWeight = UnityEngine.Random.Range(0, weights.Sum());
-        for (int i = 0;i < weights.Length; ++i)
+        for (int i = 0; i < weights.Length; ++i)
         {
             randomWeight -= weights[i];
             if (randomWeight < 0)
             {
-                return weightTable[i];
+                return weightTable.ElementAt(i).Value;
             }
         }
 
         return EnemyType.easy;
     }
-}
-
-[CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData", order = 1)]
-[Serializable]
-public class EnemyDataContainer : ScriptableObject
-{
-    public List<EnemyData> enemyContainer;
-}
-
-
-[Serializable]
-public class EnemyData
-{
-    public EnemyType enemyType;
-    public GameObject prefab;
 }
