@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private GameObject player;
-    [SerializeField] private GameObject projectilePrefab;
-    private Rigidbody2D _rigidbody2D;
-    [SerializeField] private float shotSpeed;
-    private float shotTimer;
-    [SerializeField] private float moveSpeed;
+    protected GameObject player;
+    [SerializeField] protected GameObject projectilePrefab;
+    protected Rigidbody2D _rigidbody2D;
+    [SerializeField] protected float shotSpeed;
+    protected float shotTimer;
+    [SerializeField] protected float moveSpeed;
 
-    [SerializeField] private float maxHp = 100;
-    private float currentHp;
+    [SerializeField] protected float maxHp = 100;
+    protected float currentHp;
     
     void Start()
     {
@@ -23,13 +23,13 @@ public class EnemyController : MonoBehaviour
         currentHp = maxHp;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         TryShoot();
         TryMove();
     }
 
-    void TryShoot()
+    protected virtual void TryShoot()
     {
         shotTimer += Time.deltaTime;
         if (shotTimer > shotSpeed)
@@ -46,7 +46,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void TryMove()
+    protected virtual void TryMove()
     {
         Vector2 velocity = Vector2.zero;
         Vector2 offset = player.transform.position - transform.position;
