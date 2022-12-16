@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] protected float goldValue;
     protected GameObject player;
     [SerializeField] protected GameObject projectilePrefab;
     protected Rigidbody2D _rigidbody2D;
