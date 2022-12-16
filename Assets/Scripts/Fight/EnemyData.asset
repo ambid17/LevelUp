@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5adaab9a8fd832a43aae2a6a4168a3a1, type: 3}
   m_Name: EnemyData
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataContainer
+  m_EditorClassIdentifier: 
   enemyContainer:
   - enemyType: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 8510735526301981988, guid: 180c465e3088ff14eaca2eac7ad3ba31, type: 3}
+  - enemyType: 1
+    prefab: {fileID: 8510735526301981988, guid: 20ea7b6e46f2d024998cf66b6ad16ad8, type: 3}
+  - enemyType: 2
+    prefab: {fileID: 8510735526301981988, guid: 4e2dec209d1847144a9df6bf90e303b1, type: 3}

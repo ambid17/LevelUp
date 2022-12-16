@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -40,37 +38,38 @@ public class EnemySpawner : MonoBehaviour
         if (spawnTimer > spawnInterval)
         {
             spawnTimer = 0;
+            EnemyType typeToSpawn = GetWeightedRandomEnemy();
+            GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
+            GameObject instance = Instantiate(enemyGO);
+            instance.transform.position = GetRandomInDonut(5, 15);
+
         }
     }
     
+    // See this for more info:
+    // https://limboh27.medium.com/implementing-weighted-rng-in-unity-ed7186e3ff3b
     public EnemyType GetWeightedRandomEnemy ()
     {
         int[] weights = weightTable.Keys.ToArray();
-        int randomWeight = UnityEngine.Random.Range(0, weights.Sum());
-        for (int i = 0;i < weights.Length; ++i)
+        int randomWeight = Random.Range(0, weights.Sum());
+        for (int i = 0; i < weights.Length; ++i)
         {
             randomWeight -= weights[i];
             if (randomWeight < 0)
             {
-                return weightTable[i];
+                return weightTable.ElementAt(i).Value;
             }
         }
 
         return EnemyType.easy;
     }
-}
+    
+    public Vector2 GetRandomInDonut(float min, float max)
+    {
+        Vector2 point = Random.insideUnitCircle;
+        point = point.normalized;
+        point *= Random.Range(min, max);
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData", order = 1)]
-[Serializable]
-public class EnemyDataContainer : ScriptableObject
-{
-    public List<EnemyData> enemyContainer;
-}
-
-
-[Serializable]
-public class EnemyData
-{
-    public EnemyType enemyType;
-    public GameObject prefab;
+        return point;
+    }
 }
