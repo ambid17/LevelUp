@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movementToApply;
     private Vector2 _currentInput;
     private Camera _camera;
+    private SpriteRenderer _spriteRenderer;
     
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float Acceleration = 20;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _camera = Camera.main;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -80,6 +82,12 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         _rigidbody2D.velocity = _movementToApply;
+
+        //Flip the sprite based on velocity
+        if(_rigidbody2D.velocity.x < 0) 
+            _spriteRenderer.flipX = true;
+        else 
+            _spriteRenderer.flipX = false;
     }
     
     private void FixedUpdate()
