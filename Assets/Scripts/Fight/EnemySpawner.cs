@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float minSpawnRadius;
     [SerializeField] private float maxSpawnRadius;
     
-    void Awake()
+    void Start()
     {
         GameManager.Instance.enemySpawner = this;
     }
