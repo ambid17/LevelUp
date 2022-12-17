@@ -41,13 +41,18 @@ public class EnemySpawner : MonoBehaviour
 
         if (spawnTimer > spawnInterval && _enemyCount < enemyMaxCount)
         {
-            spawnTimer = 0;
-            EnemyType typeToSpawn = GetWeightedRandomEnemy();
-            GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
-            GameObject instance = Instantiate(enemyGO);
-            instance.transform.position = GetRandomInDonut(minSpawnRadius, maxSpawnRadius);
-            _enemyCount++;
+            SpawnEnemy();
         }
+    }
+
+    private void SpawnEnemy()
+    {
+        spawnTimer = 0;
+        EnemyType typeToSpawn = GetWeightedRandomEnemy();
+        GameObject enemyGO = enemyDataContainer.enemyContainer.First(e => e.enemyType == typeToSpawn).prefab;
+        GameObject instance = Instantiate(enemyGO);
+        instance.transform.position = GetRandomInDonut(minSpawnRadius, maxSpawnRadius);
+        _enemyCount++;
     }
     
     // See this for more info:
