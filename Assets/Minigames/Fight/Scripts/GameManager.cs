@@ -78,6 +78,7 @@ public class GameManager : Singleton<GameManager>
         if (_deathTimer > _deathTime)
         {
             _isDead = false;
+            CurrentPlayerHP = _maxPlayerHp;
             playerDidRevive.Invoke();
         }
     }

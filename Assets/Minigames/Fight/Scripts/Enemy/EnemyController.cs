@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         playerTransform = GameManager.Instance.playerMovement.gameObject.transform;
-        GameManager.Instance.playerDidDie.AddListener(Die);
+        GameManager.Instance.playerDidDie.AddListener(() => Die(false));
     }
 
     public void Setup(EnemyInstanceSettings settings)
@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
         Vector2 offsetFromPlayer = playerTransform.position - transform.position;
         if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
         {
-            Die();
+            Die(false);
         }
     }
 
@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            Die();
+            Die(true);
         }
     }
 
@@ -121,10 +121,14 @@ public class EnemyController : MonoBehaviour
             _spriteRenderer.flipX = false;
     }
 
-    private void Die()
+    private void Die(bool shouldAwardCurrency)
     {
         GameManager.Instance.enemySpawner.EnemyCount--;
-        GameManager.Instance.AddCurrency(settings.goldValue);
+
+        if (shouldAwardCurrency)
+        {
+            GameManager.Instance.AddCurrency(settings.goldValue);
+        }
         Destroy(gameObject);
     }
 }

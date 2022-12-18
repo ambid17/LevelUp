@@ -14,9 +14,14 @@ public class EnemySpawner : MonoBehaviour
     public EnemySpawnerSettings settings;
 
     private float waveTimer;
-    private int _enemyCount;
-    public int EnemyCount { get; set; }
-    
+    [SerializeField] private int _enemyCount;
+
+    public int EnemyCount
+    {
+        get => _enemyCount;
+        set => _enemyCount = value;
+    }
+
     void Start()
     {
         GameManager.Instance.enemySpawner = this;
