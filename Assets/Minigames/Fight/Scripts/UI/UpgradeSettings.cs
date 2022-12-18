@@ -20,18 +20,18 @@ public class Upgrade
     public int baseCost;
     public float costScalar;
 
-    public string GetPurchaseCount()
+    public string GetUpgradeCountText()
     {
-        string upgradeCountMessage = $"{numberPurchased}";
+        string upgradeCountText = $"{numberPurchased}";
 
         if (maxPurchases > 0)
         {
-            upgradeCountMessage += $" / {maxPurchases}";
+            upgradeCountText += $" / {maxPurchases}";
         }
 
-        upgradeCountMessage += " Purchased";
+        upgradeCountText += " Purchased";
 
-        return upgradeCountMessage;
+        return upgradeCountText;
     }
 
     public float GetCost()

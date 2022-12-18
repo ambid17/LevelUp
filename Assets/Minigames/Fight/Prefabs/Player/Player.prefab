@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4274406417404922724}
   - component: {fileID: 4274406417404922725}
-  - component: {fileID: 4274406417404922727}
+  - component: {fileID: 5589054606432594642}
   - component: {fileID: 4274406417404922746}
   - component: {fileID: 4274406417404922747}
   - component: {fileID: 4274406417404922744}
@@ -51,13 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3639063276670690416, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
-  idleSprite: {fileID: 21300000, guid: 0d7b5e75960f8684ca7c191c135936f3, type: 3}
-  movingSprite: {fileID: 21300000, guid: 17a6f50a29336c44b928fde52ae6fd18, type: 3}
-  moveSpeed: 5
-  Acceleration: 15
-  shotSpeed: 0.1
-  shotDamage: 10
---- !u!114 &4274406417404922727
+--- !u!114 &5589054606432594642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,9 +60,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4274406417404922745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f8c25be2d39e14280b3e650ff99b84, type: 3}
+  m_Script: {fileID: 11500000, guid: c7abe4e7d83e2424d91f384aa9a5ed33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3639063276670690416, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
 --- !u!212 &4274406417404922746
 SpriteRenderer:
   m_ObjectHideFlags: 0

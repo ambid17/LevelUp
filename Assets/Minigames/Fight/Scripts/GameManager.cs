@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class GameManager : Singleton<GameManager>
 {
     public PlayerMovementController playerMovement;
-    public PlayerDataController playerDataController;
     public EnemySpawner enemySpawner;
+    public PlayerSettings PlayerSettings;
     
     public static int PlayerLayer = 6;
     public static int ProjectileLayer = 7;

@@ -22,7 +22,7 @@ public class UpgradeItem : MonoBehaviour
     {
         nameText.text = upgrade.name;
         descriptionText.text = upgrade.description;
-        upgradeCountText.text = upgrade.GetPurchaseCount();
+        upgradeCountText.text = upgrade.GetUpgradeCountText();
         upgradeButton.interactable = GameManager.Instance.Currency > upgrade.GetCost();
         upgradeButton.onClick.AddListener(() => BuyUpgrade(upgrade));
         upgradeButtonText.text = upgrade.GetCost().ToCurrencyString();
