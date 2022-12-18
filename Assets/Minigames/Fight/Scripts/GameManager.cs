@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     public static int EnemyLayer = 9;
 
     [SerializeField] private float _currency;
+    public float Currency => _currency;
     public UnityEvent<float> currencyDidUpdate;
 
     [SerializeField] private float _currentPlayerHp;
@@ -57,6 +58,18 @@ public class GameManager : Singleton<GameManager>
     {
         _currency += currency;
         currencyDidUpdate.Invoke(_currency);
+    }
+
+    public void TrySpendCurrency(float currencyToSpend)
+    {
+        if (currencyToSpend > _currency)
+        {
+            return;
+        }
+        else
+        {
+            _currency -= currencyToSpend;
+        }
     }
 
     public void TakeDamage(float damage)
