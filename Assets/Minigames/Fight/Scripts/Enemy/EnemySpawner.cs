@@ -36,9 +36,12 @@ public class EnemySpawner : MonoBehaviour
     {
         waveTimer += Time.deltaTime;
 
-        if (waveTimer < settings.WaveInterval || _enemyCount > settings.MaxEnemyCount)
+        if (_enemyCount > 0) // Make sure there's always enemies on the map
         {
-            return;
+            if (waveTimer < settings.WaveInterval || _enemyCount > settings.MaxEnemyCount)
+            {
+                return;
+            }
         }
 
         waveTimer = 0;
