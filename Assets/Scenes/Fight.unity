@@ -782,11 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3daa1e2b5cab27c4ea0e0c4c5d7b8d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDataContainer: {fileID: 11400000, guid: 726ee7721093dcf4e9d5164d4e92d63c, type: 2}
-  spawnInterval: 1
-  enemyMaxCount: 100
-  minSpawnRadius: 8
-  maxSpawnRadius: 15
+  settings: {fileID: 11400000, guid: 0932afc41d8717c4cb75fb6d14ee8fba, type: 2}
 --- !u!1 &1310067273
 GameObject:
   m_ObjectHideFlags: 0
@@ -13165,6 +13161,10 @@ PrefabInstance:
     - target: {fileID: 4274406417404922745, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274406417404922747, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
+      propertyPath: m_Mass
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}

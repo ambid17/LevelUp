@@ -6,26 +6,29 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] protected float goldValue;
-    protected GameObject player;
+    protected Transform playerTransform;
     [SerializeField] protected GameObject projectilePrefab;
     protected Rigidbody2D _rigidbody2D;
-    [SerializeField] protected SpriteRenderer _spriteRenderer;
-    [SerializeField] protected float shotSpeed;
+    protected SpriteRenderer _spriteRenderer;
+    
     protected float shotTimer;
-    [SerializeField] protected float moveSpeed;
-
-    [SerializeField] protected float maxHp = 100;
     protected float currentHp;
-    [SerializeField] protected float weaponDamage;
+    protected EnemyInstanceSettings settings;
+
+    [SerializeField] private float idealDistanceFromPlayer;
 
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        player = GameManager.Instance.playerMovement.gameObject;
-        currentHp = maxHp;
+        playerTransform = GameManager.Instance.playerMovement.gameObject.transform;
         GameManager.Instance.playerDidDie.AddListener(Die);
+    }
+
+    public void Setup(EnemyInstanceSettings settings)
+    {
+        this.settings = settings;
+        currentHp = settings.maxHp;
     }
 
     protected virtual void Update()
@@ -37,17 +40,18 @@ public class EnemyController : MonoBehaviour
     protected virtual void TryShoot()
     {
         shotTimer += Time.deltaTime;
-        if (shotTimer > shotSpeed)
+        if (shotTimer > settings.shotSpeed)
         {
             shotTimer = 0;
             
             GameObject projectileGO = Instantiate(projectilePrefab);
             projectileGO.transform.position = transform.position;
+            
             Projectile projectile = projectileGO.GetComponent<Projectile>();
             projectile.SetOwner(Projectile.OwnerType.Enemy);
-            projectile.SetDamage(weaponDamage);
+            projectile.SetDamage(settings.weaponDamage);
             
-            Vector2 direction = player.transform.position - transform.position;
+            Vector2 direction = playerTransform.position - transform.position;
             projectile.SetDirection(direction);
         }
     }
@@ -55,11 +59,11 @@ public class EnemyController : MonoBehaviour
     protected virtual void TryMove()
     {
         Vector2 velocity = Vector2.zero;
-        Vector2 offset = player.transform.position - transform.position;
+        Vector2 offset = playerTransform.position - transform.position;
 
-        if (offset.magnitude > 2)
+        if (offset.magnitude > idealDistanceFromPlayer)
         {
-            velocity = offset.normalized * moveSpeed;
+            velocity = offset.normalized * settings.moveSpeed;
         }
         else
         {
@@ -107,7 +111,7 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         GameManager.Instance.enemySpawner.EnemyCount--;
-        GameManager.Instance.AddCurrency(goldValue);
+        GameManager.Instance.AddCurrency(settings.goldValue);
         Destroy(gameObject);
     }
 }
