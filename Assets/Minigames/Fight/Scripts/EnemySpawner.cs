@@ -37,6 +37,10 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.IsDead)
+        {
+            return;
+        }
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer > spawnInterval && _enemyCount < enemyMaxCount)

@@ -79,6 +79,7 @@ public class EnemyController : MonoBehaviour
 
             if (projectile.Owner == Projectile.OwnerType.Player)
             {
+                Destroy(projectile.gameObject);
                 TakeDamage(projectile.Damage);
             }
         }

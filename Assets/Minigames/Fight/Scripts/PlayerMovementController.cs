@@ -32,7 +32,7 @@ public class PlayerMovementController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         GameManager.Instance.playerDidDie.AddListener(Die);
-        GameManager.Instance.playerDidDie.AddListener(Revive);
+        GameManager.Instance.playerDidRevive.AddListener(Revive);
     }
 
     void Update()
@@ -131,6 +131,7 @@ public class PlayerMovementController : MonoBehaviour
 
             if (projectile.Owner == Projectile.OwnerType.Enemy)
             {
+                Destroy(projectile.gameObject);
                 GameManager.Instance.TakeDamage(projectile.Damage);
             }
         }
