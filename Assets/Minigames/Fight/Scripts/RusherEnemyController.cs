@@ -32,6 +32,7 @@ public class RusherEnemyController : EnemyController
             {
                 shotTimer = 0;   
                 Debug.Log("Melee attack!");
+                GameManager.Instance.TakeDamage(weaponDamage);
             }
         }
     }

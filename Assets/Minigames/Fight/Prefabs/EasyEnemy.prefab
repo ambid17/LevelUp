@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510735526301981977}
+  - component: {fileID: 8789358854941681159}
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
-  - component: {fileID: 8789358854941681159}
   - component: {fileID: 2009908225796347555}
   m_Layer: 9
   m_Name: EasyEnemy
@@ -35,6 +35,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8789358854941681159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldValue: 0
+  projectilePrefab: {fileID: 3639063276670690416, guid: 4db1821d7cd4b2843bc06ba1bff6d532, type: 3}
+  _spriteRenderer: {fileID: 0}
+  shotSpeed: 1
+  moveSpeed: 1
+  maxHp: 15
+  weaponDamage: 1
 --- !u!212 &8510735526301981991
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,24 +127,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8789358854941681159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goldValue: 0
-  projectilePrefab: {fileID: 3639063276670690416, guid: 4db1821d7cd4b2843bc06ba1bff6d532, type: 3}
-  _spriteRenderer: {fileID: 0}
-  shotSpeed: 1
-  moveSpeed: 1
-  maxHp: 15
 --- !u!61 &2009908225796347555
 BoxCollider2D:
   m_ObjectHideFlags: 0

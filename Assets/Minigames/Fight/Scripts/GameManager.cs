@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    public PlayerController player;
-    public GameObject enemyPrefab;
+    public PlayerMovementController playerMovement;
+    public PlayerDataController playerDataController;
     public EnemySpawner enemySpawner;
     
     public static int PlayerLayer = 6;
@@ -16,20 +16,69 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private float _currency;
     public UnityEvent<float> currencyDidUpdate;
+
+    [SerializeField] private float _currentPlayerHp;
+
+    public float CurrentPlayerHP
+    {
+        get => _currentPlayerHp;
+        set
+        {
+            _currentPlayerHp = value;
+            float hpPercent = _currentPlayerHp / _maxPlayerHp;
+            hpDidUpdate.Invoke(hpPercent);
+        }
+    }
+    [SerializeField] private float _maxPlayerHp;
+    
+    public UnityEvent playerDidDie;
+    public UnityEvent playerDidRevive;
+    public UnityEvent<float> hpDidUpdate;
+    
+    private float _deathTime = 5;
+    private float _deathTimer = 0;
+    private bool _isDead;
+    public bool IsDead => _isDead;
     
     void Start()
     {
-        
+        CurrentPlayerHP = _maxPlayerHp;
     }
 
     void Update()
     {
-        
+        if (_isDead)
+        {
+            WaitForRevive();
+        }
     }
 
     public void AddCurrency(float currency)
     {
         _currency += currency;
         currencyDidUpdate.Invoke(_currency);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentPlayerHP -= damage;
+
+        if (CurrentPlayerHP <= 0)
+        {
+            _deathTimer = 0;
+            _isDead = true;
+            playerDidDie.Invoke();
+        }
+    }
+    
+    private void WaitForRevive()
+    {
+        _deathTimer += Time.deltaTime;
+
+        if (_deathTimer > _deathTime)
+        {
+            _isDead = false;
+            playerDidRevive.Invoke();
+        }
     }
 }

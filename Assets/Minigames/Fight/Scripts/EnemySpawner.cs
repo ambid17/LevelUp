@@ -73,11 +73,11 @@ public class EnemySpawner : MonoBehaviour
         return EnemyType.easy;
     }
     
-    public Vector2 GetRandomInDonut(float min, float max)
+    public Vector2 GetRandomInDonut(float minDistance, float maxDistance)
     {
         Vector2 point = Random.insideUnitCircle;
         point = point.normalized;
-        point *= Random.Range(min, max);
+        point *= Random.Range(minDistance, maxDistance);
 
         return point;
     }

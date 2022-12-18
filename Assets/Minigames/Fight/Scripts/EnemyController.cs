@@ -17,13 +17,15 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] protected float maxHp = 100;
     protected float currentHp;
+    [SerializeField] protected float weaponDamage;
 
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        player = GameManager.Instance.player.gameObject;
+        player = GameManager.Instance.playerMovement.gameObject;
         currentHp = maxHp;
+        GameManager.Instance.playerDidDie.AddListener(Die);
     }
 
     protected virtual void Update()
@@ -43,6 +45,7 @@ public class EnemyController : MonoBehaviour
             projectileGO.transform.position = transform.position;
             Projectile projectile = projectileGO.GetComponent<Projectile>();
             projectile.SetOwner(Projectile.OwnerType.Enemy);
+            projectile.SetDamage(weaponDamage);
             
             Vector2 direction = player.transform.position - transform.position;
             projectile.SetDirection(direction);

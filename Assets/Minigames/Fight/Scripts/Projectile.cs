@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
     private Vector2 shootDirection;
     void Start()
     {
+        GameManager.Instance.playerDidDie.AddListener(Die);
     }
 
     void Update()
@@ -64,12 +65,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        bool canDestroyByEnemy = _owner == OwnerType.Player && col.gameObject.layer == GameManager.EnemyLayer;
-        bool canDestroyByPlayer = _owner == OwnerType.Enemy && col.gameObject.layer == GameManager.PlayerLayer;
-        // check if the layer is in our mask
-        if (canDestroyByEnemy || canDestroyByPlayer)
+        if (col.gameObject.layer == GameManager.GroundLayer)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
