@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float idealDistanceFromPlayer;
 
+    private const float MaxDistanceFromPlayer = 25; 
+
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,6 +37,7 @@ public class EnemyController : MonoBehaviour
     {
         TryShoot();
         TryMove();
+        TryCull();
     }
 
     protected virtual void TryShoot()
@@ -73,6 +76,16 @@ public class EnemyController : MonoBehaviour
         _rigidbody2D.velocity = velocity;
 
         FlipSpriteOnDirection();
+    }
+
+    // If the player runs too far from the enemy, kill it off
+    private void TryCull()
+    {
+        Vector2 offsetFromPlayer = playerTransform.position - transform.position;
+        if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
+        {
+            Die();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
