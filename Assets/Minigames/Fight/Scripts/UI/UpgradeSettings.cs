@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UpgradeSettings", menuName = "ScriptableObjects/UpgradeSettings", order = 1)]
@@ -8,6 +9,17 @@ using UnityEngine;
 public class UpgradeSettings : ScriptableObject
 {
     public List<Upgrade> upgrades;
+
+    public Upgrade GetUpgrade(string upgradeName)
+    {
+        return upgrades.First(u => u.name == upgradeName);
+    }
+}
+
+public enum UpgradeCostType
+{
+    additive,
+    exponential,
 }
 
 [Serializable]
@@ -17,8 +29,10 @@ public class Upgrade
     public string description;
     public int numberPurchased;
     public int maxPurchases;
+    
     public int baseCost;
     public float costScalar;
+    public UpgradeCostType costType;
 
     public string GetUpgradeCountText()
     {
@@ -34,8 +48,32 @@ public class Upgrade
         return upgradeCountText;
     }
 
-    public float GetCost()
+    public virtual float GetCost()
     {
-        return Mathf.Pow(baseCost, costScalar * numberPurchased);
+        switch (costType)
+        {
+            case UpgradeCostType.additive:
+                return GetAdditiveCost();
+            case UpgradeCostType.exponential:
+                return GetExponentialCost();
+            default:
+                return float.MaxValue;
+        }
+    }
+
+    // example:
+    // base cost = 10, scalar = 1
+    // 10, 11, 12, 13, 14
+    private float GetAdditiveCost()
+    {
+        return baseCost + (costScalar * numberPurchased);
+    }
+
+    // example:
+    // base cost = 100, scalar (percentage) = 0.5;
+    // 100, 150, 225
+    private float GetExponentialCost()
+    {
+        return baseCost * Mathf.Pow(1 + costScalar, numberPurchased);
     }
 }

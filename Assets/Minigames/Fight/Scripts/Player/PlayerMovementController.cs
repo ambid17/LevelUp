@@ -58,7 +58,7 @@ public class PlayerMovementController : MonoBehaviour
             input.y -= 1;
         }
 
-        _currentInput = input.normalized * GameManager.Instance.PlayerSettings.moveSpeed;
+        _currentInput = input.normalized * GameManager.Instance.PlayerSettings.UpgradedShotSpeed;
     }
     private void Move()
     {
