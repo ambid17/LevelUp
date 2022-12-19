@@ -1,6 +1,7 @@
 using UnityEngine;
+using Interfaces;
 
-public class VehicleBody : MonoBehaviour
+public class VehicleBody : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
 
@@ -16,4 +17,14 @@ public class VehicleBody : MonoBehaviour
     {
         rb.velocity = new Vector2(speed, rb.velocity.y);
     }
+    public void ApplyDamage(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Destroyed()
+    {
+        throw new System.NotImplementedException();
+    }
+
 }
