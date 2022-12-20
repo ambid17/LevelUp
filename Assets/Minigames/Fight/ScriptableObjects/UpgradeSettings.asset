@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerUpgrades:
   - name: Move speed
-    description: asdflhjasdkjfhj
+    description: 10% move speed
     numberPurchased: 0
     maxPurchases: 5
     baseCost: 10
-    costScalar: 1.02
+    costScalar: 1.1
     costType: 1
     upgradeType: 0
   - name: Acceleration
-    description: klqjhwertqemr te
+    description: 50% accel
     numberPurchased: 0
     maxPurchases: 5
     baseCost: 15
-    costScalar: 1.02
+    costScalar: 1.5
     costType: 1
     upgradeType: 1
   WeaponUpgrades: []

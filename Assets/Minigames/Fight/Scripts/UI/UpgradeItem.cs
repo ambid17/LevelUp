@@ -14,7 +14,7 @@ public class UpgradeItem : MonoBehaviour
     public Button upgradeButton;
     public TMP_Text upgradeButtonText;
 
-    public static UnityEvent<Upgrade> upgradePurchased;
+    public static event Action<Upgrade> upgradePurchased;
     
     private void Start()
     {
@@ -34,7 +34,7 @@ public class UpgradeItem : MonoBehaviour
         if (GameManager.GameStateManager.TrySpendCurrency(upgrade.GetCost()))
         {
             upgrade.numberPurchased++;
-            upgradePurchased.Invoke(upgrade);
+            upgradePurchased?.Invoke(upgrade);
             UpgradeChanged(upgrade);
         }
     }

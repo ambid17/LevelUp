@@ -12,10 +12,7 @@ public class UpgradeManager : MonoBehaviour
     
     void Start()
     {
-        if (UpgradeItem.upgradePurchased != null)
-        {
-            UpgradeItem.upgradePurchased.AddListener(OnUpgradePurchased);
-        }
+        UpgradeItem.upgradePurchased += OnUpgradePurchased;
 
         LoadDefaults();
     }

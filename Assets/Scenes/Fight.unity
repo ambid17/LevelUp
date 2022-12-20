@@ -1896,12 +1896,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96997650341aa394c8c9d2bc133e1127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currency: 0
+  _currency: 10000
   currencyDidUpdate:
     m_PersistentCalls:
       m_Calls: []
   _currentPlayerHp: 0
-  _maxPlayerHp: 0
   playerDidDie:
     m_PersistentCalls:
       m_Calls: []
@@ -2401,7 +2400,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.0078125, y: 0.0078125, z: 0}
   m_MaxChunkCount: 16
