@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UpgradeItem : MonoBehaviour
@@ -13,6 +14,7 @@ public class UpgradeItem : MonoBehaviour
     public Button upgradeButton;
     public TMP_Text upgradeButtonText;
 
+    public static UnityEvent<Upgrade> upgradePurchased;
     private void Start()
     {
         upgradeButtonText = upgradeButton.GetComponentInChildren<TMP_Text>();
@@ -29,6 +31,7 @@ public class UpgradeItem : MonoBehaviour
     public void BuyUpgrade(Upgrade upgrade)
     {
         upgrade.numberPurchased++;
+        upgradePurchased.Invoke(upgrade);
         UpgradeChanged(upgrade);
     }
     

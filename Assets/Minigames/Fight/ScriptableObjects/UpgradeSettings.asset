@@ -12,64 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45a71a4000946642837015b35982fee, type: 3}
   m_Name: UpgradeSettings
   m_EditorClassIdentifier: 
-  upgrades:
-  - name: Fire Rate
-    description: Increase fire rate by 10%
+  PlayerUpgrades:
+  - name: Move speed
+    description: asdflhjasdkjfhj
     numberPurchased: 0
-    maxPurchases: 10
+    maxPurchases: 5
     baseCost: 10
-    costScalar: 1.01
-  - name: Damage
-    description: Increase damage by 10%
+    costScalar: 1.02
+    costType: 1
+    upgradeType: 0
+  - name: Acceleration
+    description: klqjhwertqemr te
     numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 10
-    costScalar: 1.01
-  - name: Move Speed
-    description: Increase speed by 10%
-    numberPurchased: 0
-    maxPurchases: 20
-    baseCost: 10
-    costScalar: 1.01
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
-  - name: 
-    description: 
-    numberPurchased: 0
-    maxPurchases: 0
-    baseCost: 0
-    costScalar: 0
+    maxPurchases: 5
+    baseCost: 15
+    costScalar: 1.02
+    costType: 1
+    upgradeType: 1
+  WeaponUpgrades: []

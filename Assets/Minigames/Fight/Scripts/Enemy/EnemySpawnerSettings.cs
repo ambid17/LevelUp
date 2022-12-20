@@ -23,6 +23,7 @@ public class EnemySpawnerSettings : ScriptableObject
 [Serializable]
 public class EnemySettings
 {
+    // easy - 100, medium - 10, hard - 1
     public List<Enemy> Enemies;
     
     private int _weightTotal;

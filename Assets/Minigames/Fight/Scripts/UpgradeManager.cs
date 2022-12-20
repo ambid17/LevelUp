@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
+    public PlayerSettings playerSettings;
+    public EnemySpawnerSettings enemySettings;
+    public WeaponSettings weaponSettings;
+    
     void Start()
     {
-        
+        UpgradeItem.upgradePurchased.AddListener(OnUpgradePurchased);
     }
 
-    void Update()
+    private void OnUpgradePurchased(Upgrade upgrade)
     {
-        
-    }
-
-    public void ApplyUpgrade(Upgrade upgrade)
-    {
-        if (upgrade.name == "X")
+        switch (upgrade)
         {
-            GameManager.Instance.PlayerSettings.SetShotSpeed(upgrade);
+            case PlayerUpgrade playerUpgrade:
+                playerSettings.ApplyUpgrade(playerUpgrade);
+                break;
+            case WeaponUpgrade weaponUpgrade:
+                weaponSettings.ApplyUpgrade(weaponUpgrade);
+                break;
+            default:
+                Debug.LogError($"Invalid upgrade type: {upgrade.name}");
+                break;
         }
     }
 }

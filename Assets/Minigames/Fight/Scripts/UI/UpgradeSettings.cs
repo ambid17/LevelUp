@@ -8,12 +8,8 @@ using UnityEngine;
 [Serializable]
 public class UpgradeSettings : ScriptableObject
 {
-    public List<Upgrade> upgrades;
-
-    public Upgrade GetUpgrade(string upgradeName)
-    {
-        return upgrades.First(u => u.name == upgradeName);
-    }
+    public List<PlayerUpgrade> PlayerUpgrades;
+    public List<WeaponUpgrade> WeaponUpgrades;
 }
 
 public enum UpgradeCostType
@@ -76,4 +72,16 @@ public class Upgrade
     {
         return baseCost * Mathf.Pow(1 + costScalar, numberPurchased);
     }
+}
+
+[Serializable]
+public class PlayerUpgrade : Upgrade
+{
+    public PlayerUpgradeType upgradeType;
+}
+
+[Serializable]
+public class WeaponUpgrade : Upgrade
+{
+    public WeaponUpgradeType upgradeType;
 }

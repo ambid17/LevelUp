@@ -8,7 +8,9 @@ public class GameManager : Singleton<GameManager>
     public PlayerMovementController playerMovement;
     public EnemySpawner enemySpawner;
     public PlayerSettings PlayerSettings;
-    public UpgradeSettings UpgradeSettings;
+    [SerializeField] private UpgradeManager upgradeManager;
+
+    public static UpgradeManager UpgradeManager => Instance.upgradeManager;
     
     public static int PlayerLayer = 6;
     public static int ProjectileLayer = 7;

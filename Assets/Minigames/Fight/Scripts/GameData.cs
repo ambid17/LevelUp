@@ -9,7 +9,7 @@ public class GameData
 
 public class UpgradeData
 {
-    private List<UpgradeSaveItem> upgrades;
+    private List<UpgradeModel> upgrades;
 
     void Load()
     {
@@ -24,7 +24,7 @@ public class UpgradeData
     }
 }
 
-public class UpgradeSaveItem
+public class UpgradeModel
 {
     public string name;
     public int numberPurchased;

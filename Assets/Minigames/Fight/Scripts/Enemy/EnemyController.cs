@@ -102,7 +102,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         currentHp -= damage;
 

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerCombatController : MonoBehaviour
 {
-    [SerializeField] private GameObject projectilePrefab;
-    private float _shotTimer = 0;
-    private Camera _camera;
+    private List<Weapon> weapons;
 
     void Start()
     {
-        _camera = Camera.main;
+        // TODO: reach into the save and init the weapons
     }
 
     void Update()
@@ -20,25 +18,17 @@ public class PlayerCombatController : MonoBehaviour
             return;
         }
 
-        TryShoot();
+        if (Input.GetMouseButton(0))
+        {
+            TryShootWeapons();
+        }
     }
     
-    private void TryShoot()
+    private void TryShootWeapons()
     {
-        _shotTimer += Time.deltaTime;
-        if (Input.GetMouseButton(0) && _shotTimer > GameManager.Instance.PlayerSettings.shotSpeed)
+        foreach (var weapon in weapons)
         {
-            _shotTimer = 0;
-            
-            GameObject projectileGO = Instantiate(projectilePrefab);
-            projectileGO.transform.position = transform.position;
-            Projectile projectile = projectileGO.GetComponent<Projectile>();
-            projectile.SetOwner(Projectile.OwnerType.Player);
-            projectile.SetDamage(GameManager.Instance.PlayerSettings.shotDamage);
-
-            
-            Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            projectile.SetDirection(direction);
+            weapon.TryShoot();
         }
     }
 }
