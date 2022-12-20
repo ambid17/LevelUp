@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932268072}
   - component: {fileID: 932268073}
+  - component: {fileID: 932268074}
   m_Layer: 0
   m_Name: TerrainManager
   m_TagString: Untagged
@@ -148,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932268071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.170119, y: 1.024892, z: 0.057233345}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,11 +168,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1db746296a93e41a72fa56dbf60275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vehicle: {fileID: 0}
+  vehicle: {fileID: 1762153470}
   currentTerrain: {fileID: 0}
-  blankTerrain: []
+  grid: {fileID: 1021051607}
+  blankTerrain:
+  - {fileID: 7432361647437544732, guid: bbfdcfff8fcd67146af0779d72693445, type: 3}
+  - {fileID: 2210914602044781477, guid: d05f551c25d2c124b893f7f874ef8b3a, type: 3}
+  - {fileID: 9158095507160383883, guid: ca433a821a8a03348a5c5c8577fa2bc3, type: 3}
   hazards: []
   enemies: []
+--- !u!114 &932268074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932268071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9879966df89b49c40a91f92e15e3e2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDist: 10
+  initSpawnHeight: 2
+--- !u!1 &1021051605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021051607}
+  - component: {fileID: 1021051606}
+  m_Layer: 0
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!156049354 &1021051606
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021051605}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
+--- !u!4 &1021051607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021051605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1762153465
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +247,7 @@ GameObject:
   - component: {fileID: 1762153467}
   - component: {fileID: 1762153468}
   - component: {fileID: 1762153469}
+  - component: {fileID: 1762153470}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -296,6 +360,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0000002, y: 2.0000005}
   m_Direction: 0
+--- !u!114 &1762153470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762153465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90950b2bcfde505408029a82235863c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &1945923458
 GameObject:
   m_ObjectHideFlags: 0
