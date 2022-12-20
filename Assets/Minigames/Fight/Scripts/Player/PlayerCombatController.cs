@@ -13,7 +13,7 @@ public class PlayerCombatController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.IsDead)
+        if (GameManager.GameStateManager.IsDead)
         {
             return;
         }

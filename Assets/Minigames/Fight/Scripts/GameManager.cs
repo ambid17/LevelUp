@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,96 +6,58 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    public PlayerMovementController playerMovement;
-    public EnemySpawner enemySpawner;
-    public PlayerSettings PlayerSettings;
+    [SerializeField] private GameObject player;
+    [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private UpgradeManager upgradeManager;
+    [SerializeField] private GameStateManager gameStateManager;
+    
+    public static GameObject Player => Instance.player;
+    public static EnemySpawner EnemySpawner => Instance.enemySpawner;
     public static UpgradeManager UpgradeManager => Instance.upgradeManager;
+    public static GameStateManager GameStateManager => Instance.gameStateManager;
+
+
+    private float autoSaveTimer;
+    private const float autoSaveInterval = 10; 
     
-    public static int PlayerLayer = 6;
-    public static int ProjectileLayer = 7;
-    public static int GroundLayer = 8;
-    public static int EnemyLayer = 9;
-
-    [SerializeField] private float _currency;
-    public float Currency => _currency;
-    public UnityEvent<float> currencyDidUpdate;
-
-    [SerializeField] private float _currentPlayerHp;
-
-    public float CurrentPlayerHP
+    public override void Initialize()
     {
-        get => _currentPlayerHp;
-        set
-        {
-            _currentPlayerHp = value;
-            float hpPercent = _currentPlayerHp / _maxPlayerHp;
-            hpDidUpdate.Invoke(hpPercent);
-        }
-    }
-    [SerializeField] private float _maxPlayerHp;
-    
-    public UnityEvent playerDidDie;
-    public UnityEvent playerDidRevive;
-    public UnityEvent<float> hpDidUpdate;
-    
-    private float _deathTime = 5;
-    private float _deathTimer = 0;
-    private bool _isDead;
-    public bool IsDead => _isDead;
-    
-    void Start()
-    {
-        CurrentPlayerHP = _maxPlayerHp;
+        Load();
     }
 
-    void Update()
+    private void Update()
     {
-        if (_isDead)
+        autoSaveTimer += Time.deltaTime;
+
+        if (autoSaveTimer > autoSaveInterval)
         {
-            WaitForRevive();
+            Save();
         }
     }
 
-    public void AddCurrency(float currency)
+    private void Load()
     {
-        _currency += currency;
-        currencyDidUpdate.Invoke(_currency);
+        ProgressDataManager.Load();
+        UpgradeDataManager.Load();
     }
 
-    public void TrySpendCurrency(float currencyToSpend)
+    private void Save()
     {
-        if (currencyToSpend > _currency)
-        {
-            return;
-        }
-        else
-        {
-            _currency -= currencyToSpend;
-        }
+        ProgressDataManager.Save();
+        UpgradeDataManager.Save();
     }
 
-    public void TakeDamage(float damage)
+    public Progress GetProgress()
     {
-        CurrentPlayerHP -= damage;
+        Progress toReturn = new Progress();
+        
+        toReturn.Currency = GameStateManager.Currency;
 
-        if (CurrentPlayerHP <= 0)
-        {
-            _deathTimer = 0;
-            _isDead = true;
-            playerDidDie.Invoke();
-        }
+        return toReturn;
     }
-    
-    private void WaitForRevive()
-    {
-        _deathTimer += Time.deltaTime;
 
-        if (_deathTimer > _deathTime)
-        {
-            _isDead = false;
-            CurrentPlayerHP = _maxPlayerHp;
-            playerDidRevive.Invoke();
-        }
+    public void ApplyProgress(Progress progress)
+    {
+        GameStateManager.LoadCurrency(progress.Currency);
     }
 }

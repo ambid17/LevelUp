@@ -14,8 +14,8 @@ public class FightUI : MonoBehaviour
     
     void Start()
     {
-        GameManager.Instance.currencyDidUpdate.AddListener(SetGoldText);
-        GameManager.Instance.hpDidUpdate.AddListener(SetHpSlider);
+        GameManager.GameStateManager.currencyDidUpdate.AddListener(SetGoldText);
+        GameManager.GameStateManager.hpDidUpdate.AddListener(SetHpSlider);
         upgradeButton.onClick.AddListener(OpenUpgrades);
         closeUpgradesButton.onClick.AddListener(CloseUpgrades);
         CloseUpgrades();

@@ -15,6 +15,7 @@ public class UpgradeItem : MonoBehaviour
     public TMP_Text upgradeButtonText;
 
     public static UnityEvent<Upgrade> upgradePurchased;
+    
     private void Start()
     {
         upgradeButtonText = upgradeButton.GetComponentInChildren<TMP_Text>();
@@ -30,15 +31,18 @@ public class UpgradeItem : MonoBehaviour
     
     public void BuyUpgrade(Upgrade upgrade)
     {
-        upgrade.numberPurchased++;
-        upgradePurchased.Invoke(upgrade);
-        UpgradeChanged(upgrade);
+        if (GameManager.GameStateManager.TrySpendCurrency(upgrade.GetCost()))
+        {
+            upgrade.numberPurchased++;
+            upgradePurchased.Invoke(upgrade);
+            UpgradeChanged(upgrade);
+        }
     }
     
     private void UpgradeChanged(Upgrade upgrade)
     {
         upgradeCountText.text = upgrade.GetUpgradeCountText();
-        upgradeButton.interactable = GameManager.Instance.Currency > upgrade.GetCost();
+        upgradeButton.interactable = GameManager.GameStateManager.Currency > upgrade.GetCost();
         upgradeButtonText.text = upgrade.GetCost().ToCurrencyString();
     }
 }

@@ -11,7 +11,7 @@ public enum EnemyType
 
 public class EnemySpawner : MonoBehaviour
 {
-    public EnemySpawnerSettings settings;
+    private EnemySpawnerSettings settings;
 
     private float waveTimer;
     [SerializeField] private int _enemyCount;
@@ -24,12 +24,12 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.enemySpawner = this;
+        settings = GameManager.UpgradeManager.enemySettings;
     }
 
     void Update()
     {
-        if (GameManager.Instance.IsDead)
+        if (GameManager.GameStateManager.IsDead)
         {
             return;
         }

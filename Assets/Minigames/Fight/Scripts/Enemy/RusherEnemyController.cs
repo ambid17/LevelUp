@@ -14,20 +14,20 @@ public class RusherEnemyController : EnemyController
             if (shotTimer > settings.shotSpeed)
             {
                 shotTimer = 0;   
-                GameManager.Instance.TakeDamage(settings.weaponDamage);
+                GameManager.GameStateManager.TakeDamage(settings.weaponDamage);
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.layer == GameManager.PlayerLayer)
+        if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
             touchingPlayer = true;
     }
 
     void OnCollisionExit2D(Collision2D col)
     {
-        if(col.gameObject.layer == GameManager.PlayerLayer)
+        if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
             touchingPlayer = false;
     }
 }

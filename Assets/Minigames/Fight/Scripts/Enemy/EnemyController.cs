@@ -23,8 +23,8 @@ public class EnemyController : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        playerTransform = GameManager.Instance.playerMovement.gameObject.transform;
-        GameManager.Instance.playerDidDie.AddListener(() => Die(false));
+        playerTransform = GameManager.Player.transform;
+        GameManager.GameStateManager.playerDidDie.AddListener(() => Die(false));
     }
 
     public void Setup(EnemyInstanceSettings settings)
@@ -90,7 +90,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == GameManager.ProjectileLayer)
+        if (col.gameObject.layer == PhysicsUtils.ProjectileLayer)
         {
             Projectile projectile = col.gameObject.GetComponent<Projectile>();
 
@@ -123,11 +123,11 @@ public class EnemyController : MonoBehaviour
 
     private void Die(bool shouldAwardCurrency)
     {
-        GameManager.Instance.enemySpawner.EnemyCount--;
+        GameManager.EnemySpawner.EnemyCount--;
 
         if (shouldAwardCurrency)
         {
-            GameManager.Instance.AddCurrency(settings.goldValue);
+            GameManager.GameStateManager.AddCurrency(settings.goldValue);
         }
         Destroy(gameObject);
     }

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdc6da373931c248a459e0698f1ddea, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  acceleration: 20
-  shotSpeed: 0.1
-  shotDamage: 10
+  baseMoveSpeed: 5
+  moveSpeedScalar: 1.1
+  baseAcceleration: 10
+  accelerationScalar: 1.1
+  baseMaxHp: 100
+  hpScalar: 1.1

@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
     private Vector2 shootDirection;
     void Start()
     {
-        GameManager.Instance.playerDidDie.AddListener(Die);
+        GameManager.GameStateManager.playerDidDie.AddListener(Die);
     }
 
     void Update()
@@ -65,7 +65,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == GameManager.GroundLayer)
+        if (col.gameObject.layer == PhysicsUtils.GroundLayer)
         {
             Die();
         }

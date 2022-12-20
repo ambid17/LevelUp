@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
-    public UpgradeSettings settings;
     public GameObject upgradeItemPrefab;
     public Transform itemParent;
 
@@ -32,7 +31,7 @@ public class UpgradeUI : MonoBehaviour
     {
         _playerUpgradeItems = new List<UpgradeItem>();
         
-        foreach (var upgrade in settings.PlayerUpgrades)
+        foreach (var upgrade in GameManager.UpgradeManager.upgradeSettings.PlayerUpgrades)
         {
             var itemInstance = Instantiate(upgradeItemPrefab, itemParent);
             UpgradeItem item = itemInstance.GetComponent<UpgradeItem>();
@@ -44,7 +43,7 @@ public class UpgradeUI : MonoBehaviour
     private void InitWeaponUpgrades()
     {
         _weaponUpgradeItems = new List<UpgradeItem>();
-        foreach (var upgrade in settings.WeaponUpgrades)
+        foreach (var upgrade in GameManager.UpgradeManager.upgradeSettings.WeaponUpgrades)
         {
             var itemInstance = Instantiate(upgradeItemPrefab, itemParent);
             UpgradeItem item = itemInstance.GetComponent<UpgradeItem>();

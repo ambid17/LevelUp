@@ -19,13 +19,13 @@ public class PlayerMovementController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         
-        GameManager.Instance.playerDidDie.AddListener(Die);
-        GameManager.Instance.playerDidRevive.AddListener(Revive);
+        GameManager.GameStateManager.playerDidDie.AddListener(Die);
+        GameManager.GameStateManager.playerDidRevive.AddListener(Revive);
     }
 
     void Update()
     {
-        if (GameManager.Instance.IsDead)
+        if (GameManager.GameStateManager.IsDead)
         {
             _rigidbody2D.velocity = Vector2.zero;
             return;
@@ -58,7 +58,7 @@ public class PlayerMovementController : MonoBehaviour
             input.y -= 1;
         }
 
-        _currentInput = input.normalized * GameManager.Instance.PlayerSettings.MoveSpeed;
+        _currentInput = input.normalized * GameManager.UpgradeManager.playerSettings.MoveSpeed;
     }
     
     private void Move()
@@ -88,21 +88,21 @@ public class PlayerMovementController : MonoBehaviour
     
     private void ApplyGroundAcceleration()
     {
-        float maxAcceleration = GameManager.Instance.PlayerSettings.Acceleration * Time.deltaTime;
+        float maxAcceleration = GameManager.UpgradeManager.playerSettings.Acceleration * Time.deltaTime;
         _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
         _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
     }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == GameManager.ProjectileLayer)
+        if (col.gameObject.layer == PhysicsUtils.ProjectileLayer)
         {
             Projectile projectile = col.gameObject.GetComponent<Projectile>();
 
             if (projectile.Owner == Projectile.OwnerType.Enemy)
             {
                 Destroy(projectile.gameObject);
-                GameManager.Instance.TakeDamage(projectile.Damage);
+                GameManager.GameStateManager.TakeDamage(projectile.Damage);
             }
         }
     }
