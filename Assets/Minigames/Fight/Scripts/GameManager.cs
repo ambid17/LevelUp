@@ -18,9 +18,9 @@ public class GameManager : Singleton<GameManager>
 
 
     private float autoSaveTimer;
-    private const float autoSaveInterval = 10; 
-    
-    public override void Initialize()
+    private const float autoSaveInterval = 10;
+
+    private void Start()
     {
         Load();
     }
@@ -31,8 +31,19 @@ public class GameManager : Singleton<GameManager>
 
         if (autoSaveTimer > autoSaveInterval)
         {
+            autoSaveTimer = 0;
             Save();
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+        
+        // In the editor we want to clear scriptable object changes that way we are using the save files properly when testing
+        #if UNITY_EDITOR
+            UpgradeManager.SetDefaults();
+        #endif
     }
 
     private void Load()

@@ -10,6 +10,19 @@ public class UpgradeSettings : ScriptableObject
 {
     public List<PlayerUpgrade> PlayerUpgrades;
     public List<WeaponUpgrade> WeaponUpgrades;
+
+    public void SetDefaults()
+    {
+        foreach (var upgrade in PlayerUpgrades)
+        {
+            upgrade.numberPurchased = 0;
+        }
+
+        foreach (var upgrade in WeaponUpgrades)
+        {
+            upgrade.numberPurchased = 0; 
+        }
+    }
 }
 
 public enum UpgradeCostType

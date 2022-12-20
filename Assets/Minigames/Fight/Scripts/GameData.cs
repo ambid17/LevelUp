@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -65,6 +66,7 @@ public class UpgradeDataManager
     }
 }
 
+[Serializable]
 public class UpgradeModelContainer
 {
     public List<UpgradeModel> upgrades;
@@ -99,11 +101,13 @@ public class UpgradeModelContainer
     }
 }
 
+[Serializable]
 public class UpgradeModel
 {
     public int numberPurchased;
 }
 
+[Serializable]
 public class PlayerUpgradeModel : UpgradeModel
 {
     public PlayerUpgradeType upgradeType;

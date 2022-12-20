@@ -6,7 +6,16 @@ using UnityEngine.Events;
 public class GameStateManager : MonoBehaviour
 {
     [SerializeField] private float _currency;
-    public float Currency => _currency;
+
+    public float Currency
+    {
+        get => _currency;
+        set
+        {
+            _currency = value;
+            currencyDidUpdate.Invoke(_currency);
+        }
+    }
     public UnityEvent<float> currencyDidUpdate;
 
     [SerializeField] private float _currentPlayerHp;
@@ -45,13 +54,12 @@ public class GameStateManager : MonoBehaviour
 
     public void LoadCurrency(float currency)
     {
-        _currency = currency;
+        Currency = currency;
     }
 
     public void AddCurrency(float currency)
     {
-        _currency += currency;
-        currencyDidUpdate.Invoke(_currency);
+        Currency += currency;
     }
 
     public bool TrySpendCurrency(float currencyToSpend)
@@ -61,7 +69,7 @@ public class GameStateManager : MonoBehaviour
             return false;
         }
         
-        _currency -= currencyToSpend;
+        Currency -= currencyToSpend;
         return true;
     }
 

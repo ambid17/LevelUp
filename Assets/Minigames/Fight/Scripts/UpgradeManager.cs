@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,17 @@ public class UpgradeManager : MonoBehaviour
     public EnemySpawnerSettings enemySettings;
     public WeaponSettings weaponSettings;
     public UpgradeSettings upgradeSettings;
-    
+
     void Start()
     {
         UpgradeItem.upgradePurchased += OnUpgradePurchased;
-
-        LoadDefaults();
     }
 
-    private void LoadDefaults()
+    public void SetDefaults()
     {
+        upgradeSettings.SetDefaults();
         playerSettings.SetDefaults();
-
     }
-    
-    
 
     private void OnUpgradePurchased(Upgrade upgrade)
     {
