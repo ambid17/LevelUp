@@ -9,7 +9,6 @@ public class GameManager : Singleton<GameManager>
     public EnemySpawner enemySpawner;
     public PlayerSettings PlayerSettings;
     [SerializeField] private UpgradeManager upgradeManager;
-
     public static UpgradeManager UpgradeManager => Instance.upgradeManager;
     
     public static int PlayerLayer = 6;

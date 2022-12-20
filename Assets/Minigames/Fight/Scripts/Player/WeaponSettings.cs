@@ -12,7 +12,7 @@ public enum WeaponUpgradeType
 
 [CreateAssetMenu(fileName = "WeaponSettings", menuName = "ScriptableObjects/WeaponSettings", order = 1)]
 [Serializable]
-public class WeaponSettings : MonoBehaviour
+public class WeaponSettings : ScriptableObject
 {
     public List<WeaponSetting> weapons;
     

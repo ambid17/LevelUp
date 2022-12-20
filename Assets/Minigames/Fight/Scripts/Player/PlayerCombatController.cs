@@ -20,7 +20,7 @@ public class PlayerCombatController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            TryShootWeapons();
+            //TryShootWeapons();
         }
     }
     
