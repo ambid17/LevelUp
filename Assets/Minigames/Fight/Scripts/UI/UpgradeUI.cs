@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class UpgradeUI : MonoBehaviour
         InitPlayerUpgrades();
         InitWeaponUpgrades();
         InitTabButtons();
+        ToggleUpgradeItems(UpgradeType.Player);
     }
 
     private void InitPlayerUpgrades()

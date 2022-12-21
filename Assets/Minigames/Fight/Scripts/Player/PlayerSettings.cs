@@ -63,6 +63,9 @@ public class PlayerSettings : ScriptableObject
             case PlayerUpgradeType.MoveAcceleration:
                 SetAcceleration(upgrade.numberPurchased);
                 break;
+            case PlayerUpgradeType.MaxHp:
+                SetMaxHp(upgrade.numberPurchased);
+                break;
         }
     }
 }

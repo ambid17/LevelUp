@@ -60,7 +60,8 @@ public class PlayerCombatController : MonoBehaviour
 
         if (GameManager.UpgradeManager.weaponSettings.CritChance > 0)
         {
-            bool shouldCrit = Random.Range(0, 1) < GameManager.UpgradeManager.weaponSettings.CritChance;
+            float randomValue = Random.Range(0f, 1f);
+            bool shouldCrit = randomValue < GameManager.UpgradeManager.weaponSettings.CritChance;
 
             if (shouldCrit)
             {

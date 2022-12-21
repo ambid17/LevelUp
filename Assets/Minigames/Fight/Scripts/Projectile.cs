@@ -67,14 +67,13 @@ public class Projectile : MonoBehaviour
         {
             EnemyController enemy = col.gameObject.GetComponent<EnemyController>();
 
-            _penetrationsLeft--;
-
             if (_penetrationsLeft <= 0)
             {
                 Die();
             }
             
             enemy.TakeDamage(_damage);
+            _penetrationsLeft--;
         }
         else if (col.gameObject.layer == PhysicsUtils.PlayerLayer && _owner == OwnerType.Enemy)
         {
