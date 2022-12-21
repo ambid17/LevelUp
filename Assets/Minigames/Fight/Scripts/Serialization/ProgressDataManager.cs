@@ -9,8 +9,11 @@ public class ProgressDataManager
     public static void LoadAndApplyData()
     {
         ProgressModel data = FileUtils.LoadFile<ProgressModel>(FileLocation);
-        GameManager.Instance.ApplyProgress(data);
 
+        if (data != null)
+        {
+            GameManager.Instance.ApplyProgress(data);
+        }
     }
 
     public static void Save()

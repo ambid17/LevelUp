@@ -40,7 +40,6 @@ public class GameStateManager : MonoBehaviour
     public bool IsDead => _isDead;
     
     
-    
     void Start()
     {
         CurrentPlayerHP = GameManager.UpgradeManager.playerSettings.MaxHp;

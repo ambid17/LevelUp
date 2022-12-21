@@ -92,20 +92,6 @@ public class PlayerMovementController : MonoBehaviour
         _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
         _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
     }
-    
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.layer == PhysicsUtils.ProjectileLayer)
-        {
-            Projectile projectile = col.gameObject.GetComponent<Projectile>();
-
-            if (projectile.Owner == Projectile.OwnerType.Enemy)
-            {
-                Destroy(projectile.gameObject);
-                GameManager.GameStateManager.TakeDamage(projectile.Damage);
-            }
-        }
-    }
 
     private void Revive()
     {

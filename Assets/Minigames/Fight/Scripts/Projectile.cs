@@ -14,14 +14,11 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float timeToLive = 5;
     [SerializeField] private float moveSpeed = 5;
     private OwnerType _owner;
-    public OwnerType Owner => _owner;
-
     private float _damage;
-    public float Damage => _damage;
+    private float _deathTimer = 0;
+    private Vector2 _shootDirection;
+    private int _penetrationsLeft;
     
-    
-    private float timer = 0;
-    private Vector2 shootDirection;
     void Start()
     {
         GameManager.GameStateManager.playerDidDie.AddListener(Die);
@@ -29,9 +26,9 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
+        _deathTimer += Time.deltaTime;
 
-        if (timer > timeToLive)
+        if (_deathTimer > timeToLive)
         {
             Destroy(gameObject);
         }
@@ -41,33 +38,48 @@ public class Projectile : MonoBehaviour
 
     private void Move()
     {
-        Vector2 delta = shootDirection * moveSpeed * Time.deltaTime;
+        Vector2 delta = _shootDirection * moveSpeed * Time.deltaTime;
         transform.position += new Vector3(delta.x, delta.y, 0);
     }
 
-    #region Setup
-    public void SetOwner(OwnerType owner)
+    public void SetupForEnemy(float damage, Vector2 direction)
     {
-        _owner = owner;
-    }
-
-    public void SetDirection(Vector2 dir)
-    {
-        shootDirection = dir.normalized;
-    }
-
-    public void SetDamage(float damage)
-    {
+        _owner = OwnerType.Enemy;
         _damage = damage;
+        _shootDirection = direction.normalized;
     }
-    #endregion
-    
+
+    public void SetupForPlayer(float damage, Vector2 direction)
+    {
+        _owner = OwnerType.Player;
+        _damage = damage;
+        _shootDirection = direction.normalized;
+        _penetrationsLeft = GameManager.UpgradeManager.weaponSettings.ProjectilePenetration;
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.layer == PhysicsUtils.GroundLayer)
         {
             Die();
+        }
+        else if (col.gameObject.layer == PhysicsUtils.EnemyLayer && _owner == OwnerType.Player)
+        {
+            EnemyController enemy = col.gameObject.GetComponent<EnemyController>();
+
+            _penetrationsLeft--;
+
+            if (_penetrationsLeft <= 0)
+            {
+                Die();
+            }
+            
+            enemy.TakeDamage(_damage);
+        }
+        else if (col.gameObject.layer == PhysicsUtils.PlayerLayer && _owner == OwnerType.Enemy)
+        {
+            Die();
+            GameManager.GameStateManager.TakeDamage(_damage);
         }
     }
 

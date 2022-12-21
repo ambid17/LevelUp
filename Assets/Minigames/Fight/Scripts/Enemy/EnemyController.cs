@@ -51,11 +51,9 @@ public class EnemyController : MonoBehaviour
             projectileGO.transform.position = transform.position;
             
             Projectile projectile = projectileGO.GetComponent<Projectile>();
-            projectile.SetOwner(Projectile.OwnerType.Enemy);
-            projectile.SetDamage(settings.weaponDamage);
-            
             Vector2 direction = playerTransform.position - transform.position;
-            projectile.SetDirection(direction);
+
+            projectile.SetupForEnemy(settings.weaponDamage, direction);
         }
     }
 
@@ -85,20 +83,6 @@ public class EnemyController : MonoBehaviour
         if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
         {
             Die(false);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.layer == PhysicsUtils.ProjectileLayer)
-        {
-            Projectile projectile = col.gameObject.GetComponent<Projectile>();
-
-            if (projectile.Owner == Projectile.OwnerType.Player)
-            {
-                Destroy(projectile.gameObject);
-                TakeDamage(projectile.Damage);
-            }
         }
     }
 

@@ -11,8 +11,10 @@ public class UpgradeDataManager
     public static void LoadAndApplyData()
     {
         UpgradeData data = FileUtils.LoadFile<UpgradeData>(FileLocation);
-        // update settings
-        GameManager.UpgradeManager.LoadSerializedUpgrades(data);
+        if (data != null)
+        {
+            GameManager.UpgradeManager.LoadSerializedUpgrades(data);
+        }
     }
 
     public static void Save()

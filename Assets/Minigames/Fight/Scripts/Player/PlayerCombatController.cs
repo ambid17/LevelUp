@@ -37,8 +37,6 @@ public class PlayerCombatController : MonoBehaviour
         {
             GameObject projectileGO = Instantiate(projectilePrefab);
             Projectile projectile = projectileGO.GetComponent<Projectile>();
-            projectile.SetOwner(Projectile.OwnerType.Player);
-            projectile.SetDamage(GameManager.UpgradeManager.weaponSettings.Damage);
             
             
             Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -49,9 +47,27 @@ public class PlayerCombatController : MonoBehaviour
             
             projectileGO.transform.position = transform.position.AsVector2() + offset;
 
+            float damage = CalculateDamage();
             
-            projectile.SetDirection(direction);
+            projectile.SetupForPlayer(damage, direction);
         }
         
+    }
+
+    private float CalculateDamage()
+    {
+        float damage = GameManager.UpgradeManager.weaponSettings.Damage;
+
+        if (GameManager.UpgradeManager.weaponSettings.CritChance > 0)
+        {
+            bool shouldCrit = Random.Range(0, 1) < GameManager.UpgradeManager.weaponSettings.CritChance;
+
+            if (shouldCrit)
+            {
+                damage *= GameManager.UpgradeManager.weaponSettings.CritDamage;
+            }
+        }
+
+        return damage;
     }
 }
