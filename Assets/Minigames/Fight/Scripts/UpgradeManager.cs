@@ -20,6 +20,7 @@ public class UpgradeManager : MonoBehaviour
     {
         upgradeSettings.SetDefaults();
         playerSettings.SetDefaults();
+        weaponSettings.SetDefaults();
     }
 
     private void OnUpgradePurchased(Upgrade upgrade)
@@ -52,6 +53,9 @@ public class UpgradeManager : MonoBehaviour
                 case PlayerUpgradeModel model:
                     UpdatePlayerUpgrades(model);
                     break;
+                case WeaponUpgradeModel model:
+                    UpdateWeaponUpgrades(model);
+                    break;
             }
         }
     }
@@ -59,6 +63,12 @@ public class UpgradeManager : MonoBehaviour
     private void UpdatePlayerUpgrades(PlayerUpgradeModel model)
     {
         PlayerUpgrade upgrade = upgradeSettings.PlayerUpgrades.First(u => u.upgradeType == model.upgradeType);
+        upgrade.numberPurchased = model.numberPurchased;
+    }
+    
+    private void UpdateWeaponUpgrades(WeaponUpgradeModel model)
+    {
+        WeaponUpgrade upgrade = upgradeSettings.WeaponUpgrades.First(u => u.upgradeType == model.upgradeType);
         upgrade.numberPurchased = model.numberPurchased;
     }
 

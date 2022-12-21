@@ -16,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     public static UpgradeManager UpgradeManager => Instance.upgradeManager;
     public static GameStateManager GameStateManager => Instance.gameStateManager;
 
+    public static event Action dataLoaded;
 
     private float autoSaveTimer;
     private const float autoSaveInterval = 10;
@@ -48,8 +49,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Load()
     {
+        UpgradeManager.SetDefaults();
         ProgressDataManager.Load();
         UpgradeDataManager.Load();
+        //dataLoaded();
     }
 
     private void Save()

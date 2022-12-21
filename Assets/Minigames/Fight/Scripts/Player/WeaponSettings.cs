@@ -7,64 +7,113 @@ public enum WeaponUpgradeType
 {
     FireRate,
     Damage,
-    Unlock
+    CritChance,
+    CritDamage,
+    ProjectileCount,
+    ProjectilePenetration,
 }
 
 [CreateAssetMenu(fileName = "WeaponSettings", menuName = "ScriptableObjects/WeaponSettings", order = 1)]
 [Serializable]
 public class WeaponSettings : ScriptableObject
 {
-    public List<WeaponSetting> weapons;
-    
-    public void ApplyUpgrade(WeaponUpgrade upgrade)
-    {
-        // switch (upgrade.upgradeType)
-        // {
-        //     case WeaponUpgradeType.FireRate:
-        //         SetFireRate(upgrade.numberPurchased);
-        //         break;
-        // }
-    }
-}
-
-[Serializable]
-public class WeaponSetting
-{
-    public string name;
     public float baseFireRate;
     public float fireRateScalar;
 
     public float baseDamage;
     public float damageScalar;
 
+    public float baseCritChance;
+    public float critChanceScalar;
+
+    public float baseCritDamage;
+    public float critDamageScalar;
+
+    public int baseProjectileCount;
+    public int projectileCountScalar;
+    
+    public int baseProjectilePenetration;
+    public int projectilePenetrationScalar;
+
     
     private float fireRate;
     public float FireRate => fireRate;
     public void SetFireRate(int upgradeLevel)
     {
-        float multiplier = upgradeLevel * 1.1f;
-        fireRate = baseFireRate * multiplier;
+        fireRate = baseFireRate * Mathf.Pow(1 + fireRateScalar, upgradeLevel);
     }
+    
     
     private float damage;
     public float Damage => damage;
     public void SetDamage(int upgradeLevel)
     {
-        float multiplier = upgradeLevel * 1.1f;
-        damage = baseFireRate * multiplier;
+        damage = baseDamage * Mathf.Pow(1 + damageScalar, upgradeLevel);
     }
     
     
-    
-
-    public float GetUpgrade(WeaponUpgradeType upgradeType)
+    private float critChance;
+    public float CritChance => critChance;
+    public void SetCritChance(int upgradeLevel)
     {
-        switch (upgradeType)
+        critChance = baseCritChance * Mathf.Pow(1 + critChanceScalar, upgradeLevel);
+    }
+    
+    private float critDamage;
+    public float CritDamage => critDamage;
+    public void SetCritDamage(int upgradeLevel)
+    {
+        critDamage = baseCritDamage * Mathf.Pow(1 + critDamageScalar, upgradeLevel);
+    }
+    
+    private int projectileCount;
+    public int ProjectileCount => projectileCount;
+    public void SetProjectileCount(int upgradeLevel)
+    {
+        projectileCount = baseProjectileCount + (upgradeLevel * projectileCountScalar);
+    }
+    
+    private int projectilePenetration;
+    public int ProjectilePenetration => projectilePenetration;
+    public void SetProjectilePenetration(int upgradeLevel)
+    {
+        projectilePenetration = baseProjectilePenetration + (upgradeLevel * projectilePenetrationScalar);
+    }
+    
+    
+    public void ApplyUpgrade(WeaponUpgrade upgrade)
+    {
+        switch (upgrade.upgradeType)
         {
             case WeaponUpgradeType.FireRate:
-                return FireRate;
+                SetFireRate(upgrade.numberPurchased);
+                break;
+            case WeaponUpgradeType.Damage:
+                SetDamage(upgrade.numberPurchased);
+                break;
+            case WeaponUpgradeType.CritChance:
+                SetCritChance(upgrade.numberPurchased);
+                break;
+            case WeaponUpgradeType.CritDamage:
+                SetCritDamage(upgrade.numberPurchased);
+                break;
+            case WeaponUpgradeType.ProjectileCount:
+                SetProjectileCount(upgrade.numberPurchased);
+                break;
+            case WeaponUpgradeType.ProjectilePenetration:
+                SetProjectilePenetration(upgrade.numberPurchased);
+                break;
+            
         }
+    }
 
-        return 0;
+    public void SetDefaults()
+    {
+        SetFireRate(0);
+        SetDamage(0);
+        SetCritChance(0);
+        SetCritDamage(0);
+        SetProjectileCount(0);
+        SetProjectilePenetration(0);
     }
 }

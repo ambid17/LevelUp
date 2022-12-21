@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class GameStateManager : MonoBehaviour
 {
     [SerializeField] private float _currency;
-
     public float Currency
     {
         get => _currency;
@@ -18,6 +17,7 @@ public class GameStateManager : MonoBehaviour
     }
     public UnityEvent<float> currencyDidUpdate;
 
+    
     [SerializeField] private float _currentPlayerHp;
     public float CurrentPlayerHP
     {
@@ -38,6 +38,8 @@ public class GameStateManager : MonoBehaviour
     private float _deathTimer = 0;
     private bool _isDead;
     public bool IsDead => _isDead;
+    
+    
     
     void Start()
     {

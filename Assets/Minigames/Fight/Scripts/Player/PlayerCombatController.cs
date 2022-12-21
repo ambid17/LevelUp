@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerCombatController : MonoBehaviour
 {
-    private List<Weapon> weapons;
+    [SerializeField] private GameObject projectilePrefab;
+    private float _projectileSpread = 0.15f;
+    private float _shotTimer = 0;
+    private Camera _camera;
 
-    void Start()
+    void Awake()
     {
-        // TODO: reach into the save and init the weapons
+        _camera = Camera.main;
     }
 
     void Update()
@@ -17,18 +20,38 @@ public class PlayerCombatController : MonoBehaviour
         {
             return;
         }
+        
+        _shotTimer += Time.deltaTime;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && _shotTimer > GameManager.UpgradeManager.weaponSettings.FireRate)
         {
-            //TryShootWeapons();
+            _shotTimer = 0;
+            Shoot();
         }
     }
     
-    private void TryShootWeapons()
+    private void Shoot()
     {
-        foreach (var weapon in weapons)
+        int projectileCount = GameManager.UpgradeManager.weaponSettings.ProjectileCount;
+        for (int i = 0; i < projectileCount; i++)
         {
-            weapon.TryShoot();
+            GameObject projectileGO = Instantiate(projectilePrefab);
+            Projectile projectile = projectileGO.GetComponent<Projectile>();
+            projectile.SetOwner(Projectile.OwnerType.Player);
+            projectile.SetDamage(GameManager.UpgradeManager.weaponSettings.Damage);
+            
+            
+            Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+            // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
+            float indexOffset = (float)i - i/2;
+            Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _projectileSpread;
+            
+            projectileGO.transform.position = transform.position.AsVector2() + offset;
+
+            
+            projectile.SetDirection(direction);
         }
+        
     }
 }

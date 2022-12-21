@@ -95,6 +95,12 @@ public class UpgradeModelContainer
                 typedUpgrade.upgradeType = playerUpgrade.upgradeType;
                 newUpgrade = typedUpgrade; 
                 break;
+            case WeaponUpgrade weaponUpgrade:
+                var typedUpgrade2 = new WeaponUpgradeModel();
+                typedUpgrade2.numberPurchased = weaponUpgrade.numberPurchased;
+                typedUpgrade2.upgradeType = weaponUpgrade.upgradeType;
+                newUpgrade = typedUpgrade2; 
+                break;
         }
         
         upgrades.Add(newUpgrade);
@@ -111,4 +117,10 @@ public class UpgradeModel
 public class PlayerUpgradeModel : UpgradeModel
 {
     public PlayerUpgradeType upgradeType;
+}
+
+[Serializable]
+public class WeaponUpgradeModel : UpgradeModel
+{
+    public WeaponUpgradeType upgradeType;
 }
