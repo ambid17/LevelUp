@@ -50,8 +50,8 @@ public class GameManager : Singleton<GameManager>
     private void Load()
     {
         UpgradeManager.SetDefaults();
-        ProgressDataManager.Load();
-        UpgradeDataManager.Load();
+        ProgressDataManager.LoadAndApplyData();
+        UpgradeDataManager.LoadAndApplyData();
         //dataLoaded();
     }
 
@@ -61,17 +61,17 @@ public class GameManager : Singleton<GameManager>
         UpgradeDataManager.Save();
     }
 
-    public Progress GetProgress()
+    public ProgressModel GetProgress()
     {
-        Progress toReturn = new Progress();
+        ProgressModel toReturn = new ProgressModel();
         
         toReturn.Currency = GameStateManager.Currency;
 
         return toReturn;
     }
 
-    public void ApplyProgress(Progress progress)
+    public void ApplyProgress(ProgressModel progressModel)
     {
-        GameStateManager.LoadCurrency(progress.Currency);
+        GameStateManager.LoadCurrency(progressModel.Currency);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UpgradeSettings", menuName = "ScriptableObjects/UpgradeSettings", order = 1)]
+[CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
 [Serializable]
 public class ProgressSettings : ScriptableObject
 {
@@ -20,4 +20,6 @@ public class World
 public class Country
 {
     public int EnemyKillCount;
+    public int MinSpawnWeight;
+    public int MaxSpawnWeight;
 }

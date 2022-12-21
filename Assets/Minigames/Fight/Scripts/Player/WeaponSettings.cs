@@ -56,7 +56,7 @@ public class WeaponSettings : ScriptableObject
     public float CritChance => critChance;
     public void SetCritChance(int upgradeLevel)
     {
-        critChance = baseCritChance * Mathf.Pow(1 + critChanceScalar, upgradeLevel);
+        critChance = baseCritChance + (critChanceScalar * upgradeLevel);
     }
     
     private float critDamage;

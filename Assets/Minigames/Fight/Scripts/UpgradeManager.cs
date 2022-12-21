@@ -39,7 +39,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
     
-    public void LoadSerializedUpgrades(UpgradeModelContainer container)
+    public void LoadSerializedUpgrades(UpgradeData container)
     {
         if (container == null || container.upgrades == null)
         {
