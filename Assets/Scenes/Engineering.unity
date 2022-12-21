@@ -172,9 +172,9 @@ MonoBehaviour:
   currentTerrain: {fileID: 0}
   grid: {fileID: 1021051607}
   blankTerrain:
-  - {fileID: 7432361647437544732, guid: bbfdcfff8fcd67146af0779d72693445, type: 3}
-  - {fileID: 2210914602044781477, guid: d05f551c25d2c124b893f7f874ef8b3a, type: 3}
-  - {fileID: 9158095507160383883, guid: ca433a821a8a03348a5c5c8577fa2bc3, type: 3}
+  - {fileID: 5566152209335163168, guid: bbfdcfff8fcd67146af0779d72693445, type: 3}
+  - {fileID: 3798015968093378457, guid: d05f551c25d2c124b893f7f874ef8b3a, type: 3}
+  - {fileID: 6125998493397460407, guid: ca433a821a8a03348a5c5c8577fa2bc3, type: 3}
   hazards: []
   enemies: []
 --- !u!114 &932268074
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90950b2bcfde505408029a82235863c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 5
 --- !u!1 &1945923458
 GameObject:
   m_ObjectHideFlags: 0

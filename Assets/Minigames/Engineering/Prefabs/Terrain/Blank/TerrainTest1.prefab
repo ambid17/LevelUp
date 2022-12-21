@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6301971095555626486}
   - component: {fileID: 1120477706771971831}
   - component: {fileID: -8307745648820806147}
+  - component: {fileID: -6033034659349315114}
   m_Layer: 0
   m_Name: TerrainTest1
   m_TagString: Untagged
@@ -326,3 +327,15 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &-6033034659349315114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7432361647437544732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6810dc714bab2214ebbebb65edb9b810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

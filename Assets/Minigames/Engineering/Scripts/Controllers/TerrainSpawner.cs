@@ -18,17 +18,45 @@ public class TerrainSpawner : MonoBehaviour
         TerrainManager.CurrentTerrain = Instantiate(initTerrain, initSpawnPos, initTerrain.transform.rotation, TerrainManager.Grid);
         while (Vector2.Distance(PlayerPos(), TerrainManager.CurrentTerrain.transform.position) < spawnDist)
         {
-            SpawnTerrain();
+            RandomizeTerrain();
         }
     }
-    private void SpawnTerrain()
+    private void Update()
     {
-        int RNG = Random.Range(0, TerrainManager.BlankTerrain.Count);
+        if (Vector2.Distance(PlayerPos(), TerrainManager.CurrentTerrain.transform.position) < spawnDist)
+        {
+            RandomizeTerrain();
+        }
+    }
+    private void RandomizeTerrain()
+    {
+        int RNG = Random.Range(0, 21);
+        List<Tilemap> tempList = new List<Tilemap>();
+        switch (RNG)
+        {
+            case 1:
+                tempList = TerrainManager.BlankTerrain;
+                break;
+            case <= 5:
+                tempList = TerrainManager.BlankTerrain;
+                break;
+            case <= 19:
+                tempList = TerrainManager.BlankTerrain;
+                break;
+            case 20:
+                tempList = TerrainManager.BlankTerrain;
+                break;
+        }
+        SpawnTerrain(tempList);
+    }
+    private void SpawnTerrain(List<Tilemap> list)
+    {
+        int RNG = Random.Range(0, list.Count);
         float currentEdge = TerrainManager.CurrentTerrain.transform.TransformPoint(TerrainManager.CurrentTerrain.cellBounds.max).x;
-        float newDiff = Mathf.Abs(TerrainManager.BlankTerrain[RNG].GetComponent<Tilemap>().cellBounds.xMin - TerrainManager.BlankTerrain[RNG].transform.position.x);
+        float newDiff = Mathf.Abs(list[RNG].cellBounds.xMin - list[RNG].transform.position.x);
         float newX = currentEdge + newDiff;
         Vector2 newPos = new Vector2(newX, TerrainManager.CurrentTerrain.transform.position.y);
-        TerrainManager.CurrentTerrain = Instantiate(TerrainManager.BlankTerrain[RNG], newPos, TerrainManager.BlankTerrain[RNG].transform.rotation, TerrainManager.Grid);
+        TerrainManager.CurrentTerrain = Instantiate(list[RNG], newPos, list[RNG].transform.rotation, TerrainManager.Grid);
     }
     private Vector2 PlayerPos()
     {
