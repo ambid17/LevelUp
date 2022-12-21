@@ -6,7 +6,8 @@ using UnityEngine;
 public enum PlayerUpgradeType
 {
     MoveSpeed,
-    MoveAcceleration
+    MoveAcceleration,
+    MaxHp
 }
 
 [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/PlayerSettings", order = 1)]

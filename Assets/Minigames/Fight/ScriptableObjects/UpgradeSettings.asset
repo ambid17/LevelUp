@@ -16,7 +16,7 @@ MonoBehaviour:
   - name: Move speed
     description: 10% move speed
     numberPurchased: 0
-    maxPurchases: 5
+    maxPurchases: 10
     baseCost: 10
     costScalar: 1.1
     costType: 1
@@ -29,4 +29,60 @@ MonoBehaviour:
     costScalar: 1.5
     costType: 1
     upgradeType: 1
-  WeaponUpgrades: []
+  - name: Max HP
+    description: 10% max hp
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 15
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 2
+  WeaponUpgrades:
+  - name: Fire rate
+    description: 
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 0.02
+    costType: 1
+    upgradeType: 0
+  - name: Damage
+    description: 
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 0.02
+    costType: 1
+    upgradeType: 1
+  - name: Crit Chance
+    description: 
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 100
+    costScalar: 1
+    costType: 1
+    upgradeType: 2
+  - name: Crit Damage
+    description: 
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 100
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 3
+  - name: Projectile Count
+    description: 
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 500
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 4
+  - name: Projectile Penetration
+    description: 
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 500
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 5
