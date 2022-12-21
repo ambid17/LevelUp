@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public static class FileUtils
@@ -11,7 +12,10 @@ public static class FileUtils
         if (File.Exists(fileLocation))
         {
             string fileData = File.ReadAllText(fileLocation);
-            T toReturn = JsonUtility.FromJson<T>(fileData);
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+
+            T toReturn = JsonConvert.DeserializeObject<T>(fileData, settings);
+            //T toReturn = JsonUtility.FromJson<T>(fileData);
             return toReturn;
         }
 
@@ -20,7 +24,11 @@ public static class FileUtils
 
     public static void SaveFile<T>(string filePath, T objectToSerialize)
     {
-        string fileContent = JsonUtility.ToJson(objectToSerialize);
+        var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+
+        string fileContent = JsonConvert.SerializeObject(objectToSerialize, settings);
+
+        //string fileContent = JsonUtility.ToJson(objectToSerialize);
         File.WriteAllText(filePath, fileContent);
     }
 }

@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float idealDistanceFromPlayer;
 
-    private const float MaxDistanceFromPlayer = 25; 
+    private const float MaxDistanceFromPlayer = 100; 
 
     void Start()
     {

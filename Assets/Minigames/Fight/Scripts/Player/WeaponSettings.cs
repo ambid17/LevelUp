@@ -40,7 +40,7 @@ public class WeaponSettings : ScriptableObject
     public float FireRate => fireRate;
     public void SetFireRate(int upgradeLevel)
     {
-        fireRate = baseFireRate * Mathf.Pow(1 + fireRateScalar, upgradeLevel);
+        fireRate = baseFireRate * Mathf.Pow(1 - fireRateScalar, upgradeLevel);
     }
     
     

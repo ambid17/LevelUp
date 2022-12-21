@@ -33,7 +33,7 @@ public class GameManager : Singleton<GameManager>
         if (autoSaveTimer > autoSaveInterval)
         {
             autoSaveTimer = 0;
-            Save();
+            //Save();
         }
     }
 

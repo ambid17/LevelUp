@@ -62,14 +62,16 @@ public class UpgradeManager : MonoBehaviour
 
     private void UpdatePlayerUpgrades(PlayerUpgradeModel model)
     {
-        PlayerUpgrade upgrade = upgradeSettings.PlayerUpgrades.First(u => u.upgradeType == model.upgradeType);
+        PlayerUpgrade upgrade = upgradeSettings.PlayerUpgrades.First(u => u.upgradeType == model.playerUpgradeType);
         upgrade.numberPurchased = model.numberPurchased;
+        playerSettings.ApplyUpgrade(upgrade);
     }
     
     private void UpdateWeaponUpgrades(WeaponUpgradeModel model)
     {
-        WeaponUpgrade upgrade = upgradeSettings.WeaponUpgrades.First(u => u.upgradeType == model.upgradeType);
+        WeaponUpgrade upgrade = upgradeSettings.WeaponUpgrades.First(u => u.upgradeType == model.weaponUpgradeType);
         upgrade.numberPurchased = model.numberPurchased;
+        weaponSettings.ApplyUpgrade(upgrade);
     }
 
     public List<Upgrade> GetAllUpgrades()

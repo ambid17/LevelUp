@@ -14,35 +14,43 @@ public class UpgradeItem : MonoBehaviour
     public Button upgradeButton;
     public TMP_Text upgradeButtonText;
 
+    private Upgrade _upgrade;
     public static event Action<Upgrade> upgradePurchased;
     
     private void Start()
     {
         upgradeButtonText = upgradeButton.GetComponentInChildren<TMP_Text>();
+        GameManager.GameStateManager.currencyDidUpdate.AddListener(OnCurrencyUpdated);
     }
 
     public void Setup(Upgrade upgrade)
     {
+        _upgrade = upgrade;
         nameText.text = upgrade.name;
         descriptionText.text = upgrade.description;
-        upgradeButton.onClick.AddListener(() => BuyUpgrade(upgrade));
-        UpgradeChanged(upgrade);
+        upgradeButton.onClick.AddListener(() => BuyUpgrade());
+        OnUpgradeUpdated();
     }
     
-    public void BuyUpgrade(Upgrade upgrade)
+    public void BuyUpgrade()
     {
-        if (GameManager.GameStateManager.TrySpendCurrency(upgrade.GetCost()))
+        if (GameManager.GameStateManager.TrySpendCurrency(_upgrade.GetCost()))
         {
-            upgrade.numberPurchased++;
-            upgradePurchased?.Invoke(upgrade);
-            UpgradeChanged(upgrade);
+            _upgrade.numberPurchased++;
+            upgradePurchased?.Invoke(_upgrade);
+            OnUpgradeUpdated();
         }
     }
     
-    private void UpgradeChanged(Upgrade upgrade)
+    private void OnUpgradeUpdated()
     {
-        upgradeCountText.text = upgrade.GetUpgradeCountText();
-        upgradeButton.interactable = GameManager.GameStateManager.Currency > upgrade.GetCost();
-        upgradeButtonText.text = upgrade.GetCost().ToCurrencyString();
+        upgradeCountText.text = _upgrade.GetUpgradeCountText();
+        upgradeButton.interactable = GameManager.GameStateManager.Currency > _upgrade.GetCost();
+        upgradeButtonText.text = _upgrade.GetCost().ToCurrencyString();
+    }
+
+    private void OnCurrencyUpdated(float newValue)
+    {
+        upgradeButton.interactable = newValue > _upgrade.GetCost();
     }
 }
