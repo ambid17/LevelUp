@@ -17,7 +17,9 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float idealDistanceFromPlayer;
 
-    private const float MaxDistanceFromPlayer = 100; 
+    private const float MaxDistanceFromPlayer = 100;
+
+    private bool isMarkedForDeath;
 
     void Start()
     {
@@ -107,6 +109,16 @@ public class EnemyController : MonoBehaviour
 
     private void Die(bool shouldAwardCurrency)
     {
+        // Since we are shooting so many projectiles...
+        // OnTriggerEnter() gets called in Projectile multiple times before we get destroyed
+        // This prevents duplicate deaths
+        if (isMarkedForDeath)
+        {
+            return;
+        }
+        
+        isMarkedForDeath = true;
+        
         GameManager.EnemySpawner.EnemyCount--;
 
         if (shouldAwardCurrency)
