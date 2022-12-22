@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         playerTransform = GameManager.Player.transform;
-        GameManager.GameStateManager.playerDidDie.AddListener(() => Die(false));
+        GameManager.GameStateManager.playerDidDie.AddListener(Cull);
     }
 
     public void Setup(EnemyInstanceSettings settings)
@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
         Vector2 offsetFromPlayer = playerTransform.position - transform.position;
         if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
         {
-            Die(false);
+            Cull();
         }
     }
 
@@ -94,7 +94,7 @@ public class EnemyController : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            Die(true);
+            Die();
         }
     }
 
@@ -107,7 +107,7 @@ public class EnemyController : MonoBehaviour
             _spriteRenderer.flipX = false;
     }
 
-    private void Die(bool shouldAwardCurrency)
+    private void Die()
     {
         // Since we are shooting so many projectiles...
         // OnTriggerEnter() gets called in Projectile multiple times before we get destroyed
@@ -120,11 +120,22 @@ public class EnemyController : MonoBehaviour
         isMarkedForDeath = true;
         
         GameManager.EnemySpawner.EnemyCount--;
+        GameManager.GameStateManager.EnemyKilled(settings);
+        
+        Destroy(gameObject);
+    }
 
-        if (shouldAwardCurrency)
+    private void Cull()
+    {
+        if (isMarkedForDeath)
         {
-            GameManager.GameStateManager.AddCurrency(settings.goldValue);
+            return;
         }
+        
+        isMarkedForDeath = true;
+        
+        GameManager.EnemySpawner.EnemyCount--;
+
         Destroy(gameObject);
     }
 }

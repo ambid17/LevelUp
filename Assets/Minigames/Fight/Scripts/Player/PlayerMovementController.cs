@@ -58,7 +58,7 @@ public class PlayerMovementController : MonoBehaviour
             input.y -= 1;
         }
 
-        _currentInput = input.normalized * GameManager.UpgradeManager.playerSettings.MoveSpeed;
+        _currentInput = input.normalized * GameManager.SettingsManager.playerSettings.MoveSpeed;
     }
     
     private void Move()
@@ -88,7 +88,7 @@ public class PlayerMovementController : MonoBehaviour
     
     private void ApplyGroundAcceleration()
     {
-        float maxAcceleration = GameManager.UpgradeManager.playerSettings.Acceleration * Time.deltaTime;
+        float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.deltaTime;
         _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
         _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
     }

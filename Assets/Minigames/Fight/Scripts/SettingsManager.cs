@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour
+public class SettingsManager : MonoBehaviour
 {
     public PlayerSettings playerSettings;
-    public EnemySpawnerSettings enemySettings;
+    public EnemySpawnerSettings enemySpawnerSettings;
     public WeaponSettings weaponSettings;
     public UpgradeSettings upgradeSettings;
+    public ProgressSettings progressSettings;
 
     void Start()
     {

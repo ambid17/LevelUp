@@ -23,7 +23,7 @@ public class PlayerCombatController : MonoBehaviour
         
         _shotTimer += Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && _shotTimer > GameManager.UpgradeManager.weaponSettings.FireRate)
+        if (Input.GetMouseButton(0) && _shotTimer > GameManager.SettingsManager.weaponSettings.FireRate)
         {
             _shotTimer = 0;
             Shoot();
@@ -32,7 +32,7 @@ public class PlayerCombatController : MonoBehaviour
     
     private void Shoot()
     {
-        int projectileCount = GameManager.UpgradeManager.weaponSettings.ProjectileCount;
+        int projectileCount = GameManager.SettingsManager.weaponSettings.ProjectileCount;
         for (int i = 0; i < projectileCount; i++)
         {
             GameObject projectileGO = Instantiate(projectilePrefab);
@@ -56,16 +56,16 @@ public class PlayerCombatController : MonoBehaviour
 
     private float CalculateDamage()
     {
-        float damage = GameManager.UpgradeManager.weaponSettings.Damage;
+        float damage = GameManager.SettingsManager.weaponSettings.Damage;
 
-        if (GameManager.UpgradeManager.weaponSettings.CritChance > 0)
+        if (GameManager.SettingsManager.weaponSettings.CritChance > 0)
         {
             float randomValue = Random.Range(0f, 1f);
-            bool shouldCrit = randomValue < GameManager.UpgradeManager.weaponSettings.CritChance;
+            bool shouldCrit = randomValue < GameManager.SettingsManager.weaponSettings.CritChance;
 
             if (shouldCrit)
             {
-                damage *= GameManager.UpgradeManager.weaponSettings.CritDamage;
+                damage *= GameManager.SettingsManager.weaponSettings.CritDamage;
             }
         }
 

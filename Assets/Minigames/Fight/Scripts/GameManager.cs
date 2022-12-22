@@ -8,12 +8,12 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject player;
     [SerializeField] private EnemySpawner enemySpawner;
-    [SerializeField] private UpgradeManager upgradeManager;
+    [SerializeField] private SettingsManager settingsManager;
     [SerializeField] private GameStateManager gameStateManager;
     
     public static GameObject Player => Instance.player;
     public static EnemySpawner EnemySpawner => Instance.enemySpawner;
-    public static UpgradeManager UpgradeManager => Instance.upgradeManager;
+    public static SettingsManager SettingsManager => Instance.settingsManager;
     public static GameStateManager GameStateManager => Instance.gameStateManager;
 
     public static event Action dataLoaded;
@@ -43,13 +43,13 @@ public class GameManager : Singleton<GameManager>
         
         // In the editor we want to clear scriptable object changes that way we are using the save files properly when testing
         #if UNITY_EDITOR
-            UpgradeManager.SetDefaults();
+            SettingsManager.SetDefaults();
         #endif
     }
 
     private void Load()
     {
-        UpgradeManager.SetDefaults();
+        SettingsManager.SetDefaults();
         ProgressDataManager.LoadAndApplyData();
         UpgradeDataManager.LoadAndApplyData();
         //dataLoaded();

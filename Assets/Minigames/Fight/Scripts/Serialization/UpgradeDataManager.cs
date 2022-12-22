@@ -13,14 +13,14 @@ public class UpgradeDataManager
         UpgradeData data = FileUtils.LoadFile<UpgradeData>(FileLocation);
         if (data != null)
         {
-            GameManager.UpgradeManager.LoadSerializedUpgrades(data);
+            GameManager.SettingsManager.LoadSerializedUpgrades(data);
         }
     }
 
     public static void Save()
     {
         // grab values from settings
-        List<Upgrade> upgrades = GameManager.UpgradeManager.GetAllUpgrades();
+        List<Upgrade> upgrades = GameManager.SettingsManager.GetAllUpgrades();
         UpgradeData data = new UpgradeData(upgrades);
         
         // write to file

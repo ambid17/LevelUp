@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class GameStateManager : MonoBehaviour
 {
-    [SerializeField] private float _currency;
+    private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
     public float Currency
     {
-        get => _currency;
+        get => _progressSettings.Currency;
         set
         {
-            _currency = value;
-            currencyDidUpdate.Invoke(_currency);
+            _progressSettings.Currency = value;
+            currencyDidUpdate.Invoke(value);
         }
     }
     public UnityEvent<float> currencyDidUpdate;
@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour
         set
         {
             _currentPlayerHp = value;
-            float hpPercent = _currentPlayerHp / GameManager.UpgradeManager.playerSettings.MaxHp;
+            float hpPercent = _currentPlayerHp / GameManager.SettingsManager.playerSettings.MaxHp;
             hpDidUpdate.Invoke(hpPercent);
         }
     }
@@ -35,14 +35,14 @@ public class GameStateManager : MonoBehaviour
     public UnityEvent<float> hpDidUpdate;
     
     private float _deathTime = 5;
-    private float _deathTimer = 0;
+    private float _deathTimer;
     private bool _isDead;
     public bool IsDead => _isDead;
     
     
     void Start()
     {
-        CurrentPlayerHP = GameManager.UpgradeManager.playerSettings.MaxHp;
+        CurrentPlayerHP = GameManager.SettingsManager.playerSettings.MaxHp;
     }
 
     void Update()
@@ -58,14 +58,19 @@ public class GameStateManager : MonoBehaviour
         Currency = currency;
     }
 
-    public void AddCurrency(float currency)
+    public void EnemyKilled(EnemyInstanceSettings enemy)
     {
-        Currency += currency;
+        float gold = enemy.goldValue;
+        Currency += gold;
+        _progressSettings.CurrentWorld.CurrentCountry.EnemyKillCount++;
+
+        _progressSettings.CurrentWorld.TrySetNextCountry();
+            
     }
 
     public bool TrySpendCurrency(float currencyToSpend)
     {
-        if (currencyToSpend > _currency)
+        if (currencyToSpend > Currency)
         {
             return false;
         }
@@ -93,7 +98,7 @@ public class GameStateManager : MonoBehaviour
         if (_deathTimer > _deathTime)
         {
             _isDead = false;
-            CurrentPlayerHP = GameManager.UpgradeManager.playerSettings.MaxHp;
+            CurrentPlayerHP = GameManager.SettingsManager.playerSettings.MaxHp;
             playerDidRevive.Invoke();
         }
     }

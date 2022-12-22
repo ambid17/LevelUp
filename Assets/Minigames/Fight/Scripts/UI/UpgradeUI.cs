@@ -33,7 +33,7 @@ public class UpgradeUI : MonoBehaviour
     {
         _playerUpgradeItems = new List<UpgradeItem>();
         
-        foreach (var upgrade in GameManager.UpgradeManager.upgradeSettings.PlayerUpgrades)
+        foreach (var upgrade in GameManager.SettingsManager.upgradeSettings.PlayerUpgrades)
         {
             var itemInstance = Instantiate(upgradeItemPrefab, itemParent);
             UpgradeItem item = itemInstance.GetComponent<UpgradeItem>();
@@ -45,7 +45,7 @@ public class UpgradeUI : MonoBehaviour
     private void InitWeaponUpgrades()
     {
         _weaponUpgradeItems = new List<UpgradeItem>();
-        foreach (var upgrade in GameManager.UpgradeManager.upgradeSettings.WeaponUpgrades)
+        foreach (var upgrade in GameManager.SettingsManager.upgradeSettings.WeaponUpgrades)
         {
             var itemInstance = Instantiate(upgradeItemPrefab, itemParent);
             UpgradeItem item = itemInstance.GetComponent<UpgradeItem>();

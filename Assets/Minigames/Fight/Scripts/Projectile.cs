@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour
         _owner = OwnerType.Player;
         _damage = damage;
         _shootDirection = direction.normalized;
-        _penetrationsLeft = GameManager.UpgradeManager.weaponSettings.ProjectilePenetration;
+        _penetrationsLeft = GameManager.SettingsManager.weaponSettings.ProjectilePenetration;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
