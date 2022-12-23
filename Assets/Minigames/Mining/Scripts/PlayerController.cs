@@ -6,19 +6,30 @@ namespace Mining
 {
     public class PlayerController : MonoBehaviour
     {
-        private Rigidbody2D _rigidbody2D;
         private Vector2 _currentInput;
         private Camera _camera;
         private SpriteRenderer _spriteRenderer;
-        
+        private Vector2 velocity;
+        [SerializeField] private float acceleration, jetpackAcceleration;
         private bool canDig = true;
+        private bool isGrounded;
+        [SerializeField] private float dragCoefficient;
+        [SerializeField] private float maxMoveSpeed;
+        [SerializeField] private float maxFallSpeed;
+        [SerializeField] private float maxJetpackSpeed;
         [SerializeField] private float digRange;
         [SerializeField] private ContactFilter2D digContactFilter;
-        [SerializeField] private float moveSpeed = 5;
+        private Rigidbody2D _rb;
+
+
+        public void SetGrounded(bool g)
+        {
+            isGrounded = g;
+        }
 
         void Awake()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody2D>();
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
@@ -36,7 +47,6 @@ namespace Mining
             if (Input.GetKey(KeyCode.D))
             {
                 input.x += 1;
-                Debug.Log("ASd");
             }
             
             if (Input.GetKey(KeyCode.A))
@@ -48,13 +58,8 @@ namespace Mining
             {
                 input.y += 1;
             }
-            
-            if (Input.GetKey(KeyCode.S))
-            {
-                input.y -= 1;
-            }
-
-            _currentInput = input * moveSpeed;
+            _currentInput.x = input.x * acceleration;
+            _currentInput.y = input.y * jetpackAcceleration;
         }
 
         void TryDig()
@@ -76,21 +81,44 @@ namespace Mining
                 Tilemap tilemap = hits[0].collider.GetComponent<Tilemap>();
                 
                 Vector3Int hitPos = tilemap.WorldToCell(hits[0].point);
-                tilemap.SetTile(hitPos, null);
+                GridManager.Instance.MineCell(hitPos);
             }
         }
 
         private void Move()
         {
-            _rigidbody2D.AddForce(_currentInput);
+            if(!isGrounded && !Input.GetKey(KeyCode.W))
+                velocity.y -= 9.8f * Time.deltaTime;
+            else if(velocity.y < 0)
+                velocity.y = 0;
+            
+            if(!isGrounded )
+            {
+                velocity.x -= velocity.x * dragCoefficient * Time.deltaTime;
+            }
 
+            if(isGrounded)
+            {
+                velocity.x -= velocity.x * dragCoefficient * Time.deltaTime * 10;
+            }
+
+            float newHorizontalVelocity = Mathf.Clamp(velocity.x + _currentInput.x, -maxMoveSpeed, maxMoveSpeed);
+            float newVerticalVelocity = Mathf.Clamp(velocity.y + _currentInput.y, -maxFallSpeed, maxJetpackSpeed);
+
+            velocity = new Vector3 (newHorizontalVelocity, newVerticalVelocity, 0f);
+
+            Debug.Log(_currentInput);
+            Debug.Log(velocity);
+
+            _rb.velocity = velocity;
 
             //Flip the sprite based on velocity
-            if(_rigidbody2D.velocity.x < 0) 
+            if(velocity.x < -.2f) 
                 _spriteRenderer.flipX = true;
-            else 
+            else if(velocity.x > .2f)
                 _spriteRenderer.flipX = false;
         }
+
     }
 }
 
