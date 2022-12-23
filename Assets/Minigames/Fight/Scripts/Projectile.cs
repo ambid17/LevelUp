@@ -66,19 +66,19 @@ public class Projectile : MonoBehaviour
         else if (col.gameObject.layer == PhysicsUtils.EnemyLayer && _owner == OwnerType.Player)
         {
             EnemyController enemy = col.gameObject.GetComponent<EnemyController>();
-
+            enemy.TakeDamage(_damage);
+            
             if (_penetrationsLeft <= 0)
             {
                 Die();
             }
             
-            enemy.TakeDamage(_damage);
             _penetrationsLeft--;
         }
         else if (col.gameObject.layer == PhysicsUtils.PlayerLayer && _owner == OwnerType.Enemy)
         {
-            Die();
             GameManager.GameStateManager.TakeDamage(_damage);
+            Die();
         }
     }
 

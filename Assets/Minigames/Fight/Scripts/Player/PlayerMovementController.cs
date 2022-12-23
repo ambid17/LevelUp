@@ -57,7 +57,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             input.y -= 1;
         }
-
+        
         _currentInput = input.normalized * GameManager.SettingsManager.playerSettings.MoveSpeed;
     }
     
@@ -75,7 +75,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         
         //Flip the sprite based on velocity
-        if(_rigidbody2D.velocity.x < 0) 
+        if(_rigidbody2D.velocity.x < -0.1f) 
             _spriteRenderer.flipX = false;
         else 
             _spriteRenderer.flipX = true;
@@ -88,7 +88,7 @@ public class PlayerMovementController : MonoBehaviour
     
     private void ApplyGroundAcceleration()
     {
-        float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.deltaTime;
+        float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.fixedDeltaTime;
         _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
         _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
     }
