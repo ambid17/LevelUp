@@ -12,13 +12,13 @@ public class ProgressDataManager
 
         if (data != null)
         {
-            GameManager.Instance.ApplyProgress(data);
+            GameManager.SettingsManager.LoadSerializedProgress(data);
         }
     }
 
     public static void Save()
     {
-        ProgressModel data = GameManager.Instance.GetProgress();
+        ProgressModel data = GameManager.SettingsManager.GetProgressForSerialization();
         FileUtils.SaveFile(FileLocation, data);
     }
 }

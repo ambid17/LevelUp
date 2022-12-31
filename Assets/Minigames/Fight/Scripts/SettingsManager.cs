@@ -22,6 +22,7 @@ public class SettingsManager : MonoBehaviour
         upgradeSettings.SetDefaults();
         playerSettings.SetDefaults();
         weaponSettings.SetDefaults();
+        progressSettings.SetDefaults();
     }
 
     private void OnUpgradePurchased(Upgrade upgrade)
@@ -82,6 +83,30 @@ public class SettingsManager : MonoBehaviour
         toReturn.AddRange(upgradeSettings.PlayerUpgrades);
         toReturn.AddRange(upgradeSettings.WeaponUpgrades);
         
+        return toReturn;
+    }
+
+    public void LoadSerializedProgress(ProgressModel progressModel)
+    {
+        progressSettings.Currency = progressModel.Currency;
+
+        for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
+        {
+            for (int countryIndex = 0; countryIndex < progressModel.WorldData[worldIndex].CountryData.Count; countryIndex++)
+            {
+                progressSettings.Worlds[worldIndex].Countries[countryIndex].EnemyKillCount =
+                    progressModel.WorldData[worldIndex].CountryData[countryIndex].kills;
+            }
+        }
+    }
+    
+    public ProgressModel GetProgressForSerialization()
+    {
+        ProgressModel toReturn = new ProgressModel();
+        
+        toReturn.Currency = GameManager.GameStateManager.Currency;
+        toReturn.WorldData = progressSettings.GetWorldData();
+
         return toReturn;
     }
 }

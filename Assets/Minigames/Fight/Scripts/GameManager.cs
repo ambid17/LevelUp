@@ -52,26 +52,12 @@ public class GameManager : Singleton<GameManager>
         SettingsManager.SetDefaults();
         ProgressDataManager.LoadAndApplyData();
         UpgradeDataManager.LoadAndApplyData();
-        //dataLoaded();
+        dataLoaded?.Invoke();
     }
 
     private void Save()
     {
         ProgressDataManager.Save();
         UpgradeDataManager.Save();
-    }
-
-    public ProgressModel GetProgress()
-    {
-        ProgressModel toReturn = new ProgressModel();
-        
-        toReturn.Currency = GameStateManager.Currency;
-
-        return toReturn;
-    }
-
-    public void ApplyProgress(ProgressModel progressModel)
-    {
-        GameStateManager.LoadCurrency(progressModel.Currency);
     }
 }

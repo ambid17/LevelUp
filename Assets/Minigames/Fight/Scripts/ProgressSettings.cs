@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
@@ -18,6 +19,25 @@ public class ProgressSettings : ScriptableObject
         Currency = 0;
         CurrentWorld = Worlds[0];
     }
+
+    public List<WorldData> GetWorldData()
+    {
+        List<WorldData> worldData = new List<WorldData>();
+        
+        foreach (var world in Worlds)
+        {
+            WorldData worldModel = new WorldData();
+            worldModel.CountryData = world.GetCountryData();
+            worldData.Add(worldModel);
+        }
+
+        return worldData;
+    }
+
+    public void AddKill()
+    {
+        CurrentWorld.CurrentCountry.EnemyKillCount++;
+    }
 }
 
 [Serializable]
@@ -30,20 +50,40 @@ public class World
 
     public Country CurrentCountry;
 
-    
-    public void TrySetNextCountry()
+    public List<CountryData> GetCountryData()
     {
-        if (CurrentCountry.EnemyKillCount >= CurrentCountry.EnemyKillsToComplete)
+        List<CountryData> countryData = new List<CountryData>();
+
+        foreach (var country in Countries)
         {
-            CurrentCountry = Countries[CurrentCountry.index + 1];
-            // TODO update progress UI, world sprite
+            CountryData countryModel = new CountryData();
+            countryModel.kills = country.EnemyKillCount;
+            countryData.Add(countryModel);
+        }
+
+        return countryData;
+    }
+
+    public void TrySetPreviousCountry()
+    {
+        if (CurrentCountry.Index > 0)
+        {
+            CurrentCountry = Countries[CurrentCountry.Index - 1];
         }
     }
     
-    private int _weightTotal;
+    public void TrySetNextCountry()
+    {
+        if (CurrentCountry.IsConquered)
+        {
+            CurrentCountry = Countries[CurrentCountry.Index + 1];
+        }
+    }
+    
     
     // See this for more info:
     // https://limboh27.medium.com/implementing-weighted-rng-in-unity-ed7186e3ff3b
+    private int _weightTotal;
     public Enemy GetRandomEnemy()
     {
         if (_weightTotal == 0)
@@ -68,13 +108,16 @@ public class World
 [Serializable]
 public class Country
 {
-    public int index;
+    public int Index;
     public int EnemyKillsToComplete;
     public float EnemyStatScalar;
     public List<Vector2> SpritePixels;
     public Color EnemyTierColor;
     
     public int EnemyKillCount;
+
+    public bool IsConquered => EnemyKillCount >= EnemyKillsToComplete;
+    public float ConquerPercent => (float) EnemyKillCount / EnemyKillsToComplete;
 }
 
 [Serializable]

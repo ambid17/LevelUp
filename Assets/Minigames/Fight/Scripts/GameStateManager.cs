@@ -38,7 +38,8 @@ public class GameStateManager : MonoBehaviour
     private float _deathTimer;
     private bool _isDead;
     public bool IsDead => _isDead;
-    
+
+    public UnityEvent enemyKilled;
     
     void Start()
     {
@@ -53,19 +54,12 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public void LoadCurrency(float currency)
-    {
-        Currency = currency;
-    }
-
     public void EnemyKilled(EnemyInstanceSettings enemy)
     {
         float gold = enemy.goldValue;
         Currency += gold;
-        _progressSettings.CurrentWorld.CurrentCountry.EnemyKillCount++;
-
-        _progressSettings.CurrentWorld.TrySetNextCountry();
-            
+        _progressSettings.AddKill();
+        enemyKilled.Invoke();
     }
 
     public bool TrySpendCurrency(float currencyToSpend)

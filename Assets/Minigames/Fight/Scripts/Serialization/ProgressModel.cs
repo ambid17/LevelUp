@@ -5,15 +5,17 @@ using UnityEngine;
 public class ProgressModel
 {
     public float Currency;
-    public WorldData WorldData;
+    public List<WorldData> WorldData;
 }
 
 public class WorldData
 {
-    public List<CountryData> CountryDatas;
+    public string worldName;
+    public List<CountryData> CountryData;
 }
 
 public class CountryData
 {
+    public string countryName;
     public int kills;
 }
