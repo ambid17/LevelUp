@@ -52,10 +52,10 @@ public class ProgressUI : MonoBehaviour
         float percentComplete = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.ConquerPercent;
         areaProgressSlider.value = percentComplete;
 
-        if (percentComplete >= 1)
-        {
-            nextCountryButton.interactable = true;
-        }
+        bool hasAnotherCountry = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.Index <
+                                 GameManager.SettingsManager.progressSettings.CurrentWorld.Countries.Count - 1;
+
+        nextCountryButton.interactable = percentComplete >= 1 && hasAnotherCountry;
         
         previousCountryButton.interactable =
             GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.Index > 0;
