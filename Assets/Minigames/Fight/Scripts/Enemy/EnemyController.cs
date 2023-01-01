@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         playerTransform = GameManager.Player.transform;
         GameManager.GameStateManager.playerDidDie.AddListener(Cull);
+        _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
     }
 
     public void Setup(EnemyInstanceSettings settings)

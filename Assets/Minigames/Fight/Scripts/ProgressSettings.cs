@@ -17,7 +17,19 @@ public class ProgressSettings : ScriptableObject
     public void SetDefaults()
     {
         Currency = 0;
+        CurrentWorld = null;
+
+        foreach (var world in Worlds)
+        {
+            world.SetDefaults();
+        }
+    }
+
+    public void Init()
+    {
+        Currency = 0;
         CurrentWorld = Worlds[0];
+        CurrentWorld.CurrentCountry = CurrentWorld.Countries[0];
     }
 
     public List<WorldData> GetWorldData()
@@ -27,6 +39,7 @@ public class ProgressSettings : ScriptableObject
         foreach (var world in Worlds)
         {
             WorldData worldModel = new WorldData();
+            worldModel.worldName = world.Name;
             worldModel.CountryData = world.GetCountryData();
             worldData.Add(worldModel);
         }
@@ -50,6 +63,16 @@ public class World
 
     public Country CurrentCountry;
 
+    public void SetDefaults()
+    {
+        CurrentCountry = null;
+
+        foreach (var country in Countries)
+        {
+            country.SetDefaults();
+        }
+    }
+
     public List<CountryData> GetCountryData()
     {
         List<CountryData> countryData = new List<CountryData>();
@@ -58,6 +81,7 @@ public class World
         {
             CountryData countryModel = new CountryData();
             countryModel.kills = country.EnemyKillCount;
+            countryModel.countryIndex = country.Index;
             countryData.Add(countryModel);
         }
 
@@ -118,6 +142,11 @@ public class Country
 
     public bool IsConquered => EnemyKillCount >= EnemyKillsToComplete;
     public float ConquerPercent => (float) EnemyKillCount / EnemyKillsToComplete;
+
+    public void SetDefaults()
+    {
+        EnemyKillCount = 0;
+    }
 }
 
 [Serializable]

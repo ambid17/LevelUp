@@ -43,7 +43,7 @@ public class PlayerSettings : ScriptableObject
         maxHp = baseMaxHp * Mathf.Pow(1 + hpScalar, upgradeLevel);
     }
 
-    public void SetDefaults()
+    public void Init()
     {
         SetMoveSpeed(0);
         SetAcceleration(0);

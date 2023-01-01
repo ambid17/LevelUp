@@ -23,6 +23,19 @@ public class UpgradeSettings : ScriptableObject
             upgrade.numberPurchased = 0; 
         }
     }
+    
+    public void Init()
+    {
+        foreach (var upgrade in PlayerUpgrades)
+        {
+            upgrade.numberPurchased = 0;
+        }
+
+        foreach (var upgrade in WeaponUpgrades)
+        {
+            upgrade.numberPurchased = 0; 
+        }
+    }
 }
 
 public enum UpgradeCostType

@@ -16,6 +16,6 @@ public class WorldData
 
 public class CountryData
 {
-    public string countryName;
+    public int countryIndex;
     public int kills;
 }

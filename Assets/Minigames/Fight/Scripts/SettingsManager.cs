@@ -17,12 +17,24 @@ public class SettingsManager : MonoBehaviour
         UpgradeItem.upgradePurchased += OnUpgradePurchased;
     }
 
+    /// <summary>
+    /// Reset settings to empty run-time stats where necessary.
+    /// </summary>
     public void SetDefaults()
     {
         upgradeSettings.SetDefaults();
-        playerSettings.SetDefaults();
-        weaponSettings.SetDefaults();
         progressSettings.SetDefaults();
+    }
+
+    /// <summary>
+    /// Sets up all of the scriptable object to have base values
+    /// </summary>
+    public void Init()
+    {
+        upgradeSettings.Init();
+        playerSettings.Init();
+        weaponSettings.Init();
+        progressSettings.Init();
     }
 
     private void OnUpgradePurchased(Upgrade upgrade)

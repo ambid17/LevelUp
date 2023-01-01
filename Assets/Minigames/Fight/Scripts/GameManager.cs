@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
     public static GameStateManager GameStateManager => Instance.gameStateManager;
 
     public static event Action dataLoaded;
+    private bool isLoaded;
+    public bool IsLoaded => isLoaded;
 
     private float autoSaveTimer;
     private const float autoSaveInterval = 10;
@@ -41,7 +43,8 @@ public class GameManager : Singleton<GameManager>
     {
         Save();
         
-        // In the editor we want to clear scriptable object changes that way we are using the save files properly when testing
+        // In the editor we want to clear scriptable object changes that way they aren't saved and always in the git history, and messing up tests
+        // This isn't a problem in the built application as scriptable object changes don't save
         #if UNITY_EDITOR
             SettingsManager.SetDefaults();
         #endif
@@ -49,9 +52,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Load()
     {
-        SettingsManager.SetDefaults();
+        SettingsManager.Init();
         ProgressDataManager.LoadAndApplyData();
         UpgradeDataManager.LoadAndApplyData();
+        isLoaded = true;
         dataLoaded?.Invoke();
     }
 

@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.GameStateManager.IsDead)
+        if (GameManager.GameStateManager.IsDead || !GameManager.Instance.IsLoaded)
         {
             return;
         }

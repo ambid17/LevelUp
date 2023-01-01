@@ -13,28 +13,52 @@ MonoBehaviour:
   m_Name: ProgressSettings
   m_EditorClassIdentifier: 
   Worlds:
-  - Name: Craftopia
+  - Name: test1
     WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries:
     - Index: 0
-      EnemyKillsToComplete: 10
+      EnemyKillsToComplete: 5
       EnemyStatScalar: 1
       SpritePixels: []
-      EnemyTierColor: {r: 1, g: 1, b: 1, a: 0}
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
       EnemyKillCount: 0
     - Index: 1
-      EnemyKillsToComplete: 25
+      EnemyKillsToComplete: 15
       EnemyStatScalar: 1.1
       SpritePixels: []
-      EnemyTierColor: {r: 1, g: 0, b: 0, a: 0}
+      EnemyTierColor: {r: 1, g: 0, b: 0, a: 1}
       EnemyKillCount: 0
     - Index: 2
-      EnemyKillsToComplete: 50
+      EnemyKillsToComplete: 30
       EnemyStatScalar: 1.5
       SpritePixels: []
-      EnemyTierColor: {r: 1, g: 0, b: 0.72496986, a: 0}
+      EnemyTierColor: {r: 1, g: 0, b: 0.76815224, a: 1}
       EnemyKillCount: 0
-    Enemies: []
+    Enemies:
+    - Prefab: {fileID: 8510735526301981988, guid: 180c465e3088ff14eaca2eac7ad3ba31, type: 3}
+      SpawnWeight: 90
+      Settings:
+        goldValue: 1
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 10
+        weaponDamage: 1
+    - Prefab: {fileID: 8510735526301981988, guid: 20ea7b6e46f2d024998cf66b6ad16ad8, type: 3}
+      SpawnWeight: 6
+      Settings:
+        goldValue: 2
+        shotSpeed: 1
+        moveSpeed: 1.5
+        maxHp: 25
+        weaponDamage: 2
+    - Prefab: {fileID: 8510735526301981988, guid: 4e2dec209d1847144a9df6bf90e303b1, type: 3}
+      SpawnWeight: 1
+      Settings:
+        goldValue: 10
+        shotSpeed: 0.5
+        moveSpeed: 0.5
+        maxHp: 100
+        weaponDamage: 5
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -42,21 +66,18 @@ MonoBehaviour:
       SpritePixels: []
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
-  - Name: Fishopolis
+  - Name: test2
     WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries: []
-    Enemies: []
-    CurrentCountry:
-      Index: 0
-      EnemyKillsToComplete: 0
-      EnemyStatScalar: 0
-      SpritePixels: []
-      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
-      EnemyKillCount: 0
-  - Name: Engineerton
-    WorldSprite: {fileID: -587347649, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
-    Countries: []
-    Enemies: []
+    Enemies:
+    - Prefab: {fileID: 0}
+      SpawnWeight: 0
+      Settings:
+        goldValue: 0
+        shotSpeed: 0
+        moveSpeed: 0
+        maxHp: 0
+        weaponDamage: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -66,27 +87,9 @@ MonoBehaviour:
       EnemyKillCount: 0
   Currency: 0
   CurrentWorld:
-    Name: Craftopia
-    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
-    Countries:
-    - Index: 0
-      EnemyKillsToComplete: 10
-      EnemyStatScalar: 1
-      SpritePixels: []
-      EnemyTierColor: {r: 1, g: 1, b: 1, a: 0}
-      EnemyKillCount: 0
-    - Index: 1
-      EnemyKillsToComplete: 25
-      EnemyStatScalar: 1.1
-      SpritePixels: []
-      EnemyTierColor: {r: 1, g: 0, b: 0, a: 0}
-      EnemyKillCount: 0
-    - Index: 2
-      EnemyKillsToComplete: 50
-      EnemyStatScalar: 1.5
-      SpritePixels: []
-      EnemyTierColor: {r: 1, g: 0, b: 0.72496986, a: 0}
-      EnemyKillCount: 0
+    Name: 
+    WorldSprite: {fileID: 0}
+    Countries: []
     Enemies: []
     CurrentCountry:
       Index: 0

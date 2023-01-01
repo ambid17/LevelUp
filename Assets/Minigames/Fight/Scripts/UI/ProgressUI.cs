@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,20 +12,27 @@ public class ProgressUI : MonoBehaviour
     [SerializeField] private Slider areaProgressSlider;
     [SerializeField] private Button previousCountryButton;
     [SerializeField] private Button nextCountryButton;
-    
+
+    private void Awake()
+    {
+        GameManager.dataLoaded += () => OnDataLoaded();
+    }
+
     void Start()
     {
         previousCountryButton.onClick.AddListener(PreviousCountry);
-        previousCountryButton.interactable =
-            GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.Index > 0;
+        previousCountryButton.interactable = false;
         
         nextCountryButton.onClick.AddListener(NextCountry);
-        nextCountryButton.interactable =
-            GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.IsConquered;
+        nextCountryButton.interactable = false;
         
-        GameManager.GameStateManager.enemyKilled.AddListener(OnEnemyKilled);
-        
+        GameManager.GameStateManager.enemyKilled.AddListener(UpdateProgress);
+    }
+
+    private void OnDataLoaded()
+    {
         SetWorld();
+        UpdateProgress();
     }
 
     void Update()
@@ -39,7 +47,7 @@ public class ProgressUI : MonoBehaviour
         worldImage.sprite = world.WorldSprite;
     }
 
-    private void OnEnemyKilled()
+    private void UpdateProgress()
     {
         float percentComplete = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.ConquerPercent;
         areaProgressSlider.value = percentComplete;
@@ -48,16 +56,21 @@ public class ProgressUI : MonoBehaviour
         {
             nextCountryButton.interactable = true;
         }
+        
+        previousCountryButton.interactable =
+            GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.Index > 0;
         // TODO update world sprite
     }
 
     private void PreviousCountry()
     {
         GameManager.SettingsManager.progressSettings.CurrentWorld.TrySetPreviousCountry();
+        UpdateProgress();
     }
 
     private void NextCountry()
     {
         GameManager.SettingsManager.progressSettings.CurrentWorld.TrySetNextCountry();
+        UpdateProgress();
     }
 }

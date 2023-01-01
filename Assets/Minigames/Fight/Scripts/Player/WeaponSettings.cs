@@ -107,7 +107,7 @@ public class WeaponSettings : ScriptableObject
         }
     }
 
-    public void SetDefaults()
+    public void Init()
     {
         SetFireRate(0);
         SetDamage(0);
