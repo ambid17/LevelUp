@@ -12,15 +12,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f16366b4a76dd4391aa550b11c2bd9, type: 3}
   m_Name: ProgressSettings
   m_EditorClassIdentifier: 
-  Worlds: []
-  Currency: 0
-  CurrentWorld:
-    Name: 
-    WorldSprite: {fileID: 0}
+  Worlds:
+  - Name: Craftopia
+    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 0}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 25
+      EnemyStatScalar: 1.1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 50
+      EnemyStatScalar: 1.5
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0.72496986, a: 0}
+      EnemyKillCount: 0
+    Enemies: []
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+  - Name: Fishopolis
+    WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries: []
     Enemies: []
     CurrentCountry:
-      index: 0
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+  - Name: Engineerton
+    WorldSprite: {fileID: -587347649, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries: []
+    Enemies: []
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+  Currency: 0
+  CurrentWorld:
+    Name: Craftopia
+    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 0}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 25
+      EnemyStatScalar: 1.1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 50
+      EnemyStatScalar: 1.5
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0.72496986, a: 0}
+      EnemyKillCount: 0
+    Enemies: []
+    CurrentCountry:
+      Index: 0
       EnemyKillsToComplete: 0
       EnemyStatScalar: 0
       SpritePixels: []

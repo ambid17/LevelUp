@@ -56,7 +56,7 @@ public class GameStateManager : MonoBehaviour
 
     public void EnemyKilled(EnemyInstanceSettings enemy)
     {
-        float gold = enemy.goldValue;
+        float gold = enemy.GoldValue;
         Currency += gold;
         _progressSettings.AddKill();
         enemyKilled.Invoke();

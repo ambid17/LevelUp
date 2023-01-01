@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
     public void Setup(EnemyInstanceSettings settings)
     {
         this.settings = settings;
-        currentHp = settings.maxHp;
+        currentHp = settings.MaxHp;
     }
 
     protected virtual void Update()
@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void TryShoot()
     {
         shotTimer += Time.deltaTime;
-        if (shotTimer > settings.shotSpeed)
+        if (shotTimer > settings.ShotSpeed)
         {
             shotTimer = 0;
             
@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
             Projectile projectile = projectileGO.GetComponent<Projectile>();
             Vector2 direction = playerTransform.position - transform.position;
 
-            projectile.SetupForEnemy(settings.weaponDamage, direction);
+            projectile.SetupForEnemy(settings.WeaponDamage, direction);
         }
     }
 
@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
 
         if (offset.magnitude > idealDistanceFromPlayer)
         {
-            velocity = offset.normalized * settings.moveSpeed;
+            velocity = offset.normalized * settings.MoveSpeed;
         }
         else
         {

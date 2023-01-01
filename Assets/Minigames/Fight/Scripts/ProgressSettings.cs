@@ -136,4 +136,14 @@ public class EnemyInstanceSettings
     public float moveSpeed;
     public float maxHp = 100;
     public float weaponDamage;
+
+    public float GoldValue =>
+        goldValue * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar;
+    public float ShotSpeed => shotSpeed;
+    public float MoveSpeed => moveSpeed;
+    public float MaxHp =>
+        maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar;
+    public float WeaponDamage => weaponDamage *
+                                 GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
+                                     .EnemyStatScalar;
 }
