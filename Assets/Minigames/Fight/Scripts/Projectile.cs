@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
     private float _deathTimer = 0;
     private Vector2 _shootDirection;
     private int _penetrationsLeft;
+    private bool _isMarkedForDeath;
     
     void Start()
     {
@@ -59,6 +60,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (_isMarkedForDeath)
+        {
+            return;
+        }
+        
         if (col.gameObject.layer == PhysicsUtils.GroundLayer)
         {
             Die();
@@ -84,6 +90,7 @@ public class Projectile : MonoBehaviour
 
     private void Die()
     {
+        _isMarkedForDeath = true;
         Destroy(gameObject);
     }
 }
