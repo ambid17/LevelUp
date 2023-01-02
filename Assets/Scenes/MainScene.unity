@@ -3337,6 +3337,7 @@ GameObject:
   - component: {fileID: 1898048242}
   - component: {fileID: 1898048241}
   - component: {fileID: 1898048243}
+  - component: {fileID: 1898048244}
   m_Layer: 5
   m_Name: HomePanel
   m_TagString: Untagged
@@ -3421,6 +3422,24 @@ MonoBehaviour:
   _buttonPrefab: {fileID: -3728853681734794509, guid: 530b86fcf413c37489371c6c30e82aa5, type: 3}
   _buttonContainer: {fileID: 623226362}
   _worldInspector: {fileID: 92648631}
+  _fightDataLoader: {fileID: 1898048244}
+--- !u!114 &1898048244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898048239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca270ea179297fb4c922ca2911dff1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
+  upgradeSettings: {fileID: 11400000, guid: a5b376cfe0b89344c85aec9b6b733b52, type: 2}
+  onDataLoaded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2056613799
 GameObject:
   m_ObjectHideFlags: 0
