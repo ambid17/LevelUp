@@ -40,7 +40,7 @@ public class LoadingManager : MonoBehaviour
         // make sure to wait at least 1 second so the loading screen doesn't just flicker
         while (!isDataLoaded)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
         
         SceneManager.LoadScene(_progressSettings.CurrentWorld.SceneIndex);
