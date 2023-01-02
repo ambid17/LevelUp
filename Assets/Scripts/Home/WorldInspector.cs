@@ -30,9 +30,11 @@ public class WorldInspector : MonoBehaviour
         _world = world;
         planetNameText.text = world.Name;
         planetImage.sprite = world.WorldSprite;
-        progressText.text = $"Conquered 0/12 countries";
+        progressText.text = $"Conquered {world.GetConqueredCountryCount()}/{world.Countries.Count} countries";
         conquerButton.onClick.AddListener(ConquerPlanet);
         travelButton.onClick.AddListener(TravelToPlanet);
+
+        travelButton.interactable = world.GetConqueredCountryCount() == world.Countries.Count;
     }
     
     

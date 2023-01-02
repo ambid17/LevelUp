@@ -129,6 +129,20 @@ public class World
             CurrentCountry = Countries[CurrentCountry.Index + 1];
         }
     }
+
+    public int GetConqueredCountryCount()
+    {
+        int count = 0;
+        foreach (var country in Countries)
+        {
+            if (country.IsConquered)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
     
     
     // See this for more info:
