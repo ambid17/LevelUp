@@ -13,6 +13,8 @@ public class ProgressSettings : ScriptableObject
     public List<World> Worlds;
     
     [Header("Run-time Values")]
+    public float Currency;
+
     private World _currentWorld;
 
     public World CurrentWorld
@@ -38,6 +40,7 @@ public class ProgressSettings : ScriptableObject
     public void SetDefaults()
     {
         CurrentWorld = null;
+        Currency = 0;
 
         foreach (var world in Worlds)
         {
@@ -72,7 +75,6 @@ public class ProgressSettings : ScriptableObject
             worldModel.WorldName = world.Name;
             worldModel.CountryData = world.GetCountryData();
             worldModel.LastTimeVisited = world == CurrentWorld ? DateTime.Now : world.LastTimeVisited;
-            worldModel.Currency = world.Currency;
             worldModel.CurrencyPerMinute = world.CurrencyPerMinute;
             
             worldData.Add(worldModel);
@@ -108,7 +110,6 @@ public class World
     public WorldType WorldType;
 
     [Header("Run-time Values")]
-    public float Currency;
     public float CurrencyPerMinute;
     public DateTime LastTimeVisited;
     public Country CurrentCountry;
@@ -117,7 +118,6 @@ public class World
     
     public void SetDefaults()
     {
-        Currency = 0;
         CurrencyPerMinute = 0;
         LastTimeVisited = DateTime.Now;
         CurrentCountry = null;

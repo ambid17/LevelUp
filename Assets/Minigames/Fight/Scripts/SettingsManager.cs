@@ -67,6 +67,7 @@ public class SettingsManager : MonoBehaviour
         ProgressModel toReturn = new ProgressModel();
         
         toReturn.WorldData = progressSettings.GetWorldData();
+        toReturn.Currency = progressSettings.Currency;
 
         return toReturn;
     }

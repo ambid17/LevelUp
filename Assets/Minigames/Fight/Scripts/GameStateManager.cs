@@ -13,10 +13,10 @@ public class GameStateManager : MonoBehaviour
     private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
     public float Currency
     {
-        get => _progressSettings.CurrentWorld.Currency;
+        get => _progressSettings.Currency;
         set
         {
-            _progressSettings.CurrentWorld.Currency = value;
+            _progressSettings.Currency = value;
             currencyDidUpdate.Invoke(value);
         }
     }
@@ -58,7 +58,7 @@ public class GameStateManager : MonoBehaviour
     
     private float _gpmTimer; // GPM: gold per minute
     private readonly float _gpmInterval = 5;
-    private float lastCurrency;
+    private float _currencyAcquiredThisInterval;
 
 
     private void Awake()
@@ -105,10 +105,9 @@ public class GameStateManager : MonoBehaviour
         if (_gpmTimer > _gpmInterval)
         {
             _gpmTimer = 0;
-            float delta = Currency - lastCurrency;
-            float currencyPerSecond = delta / _gpmInterval;
+            float currencyPerSecond = _currencyAcquiredThisInterval / _gpmInterval;
             CurrencyPerMinute = currencyPerSecond * 60;
-            lastCurrency = Currency;
+            _currencyAcquiredThisInterval = 0;
         }
     }
 
@@ -116,6 +115,7 @@ public class GameStateManager : MonoBehaviour
     {
         float gold = enemy.GoldValue;
         Currency += gold;
+        _currencyAcquiredThisInterval += gold;
         _progressSettings.AddKill();
         enemyKilled.Invoke();
     }

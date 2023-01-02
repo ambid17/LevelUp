@@ -8,8 +8,6 @@ public class FightDataLoader : MonoBehaviour
 {
     [SerializeField] private ProgressSettings progressSettings;
     [SerializeField] private UpgradeSettings upgradeSettings;
-    [SerializeField] private PlayerSettings playerSettings;
-    [SerializeField] private WeaponSettings weaponSettings;
 
     public UnityEvent onDataLoaded;
     public void Load()
@@ -73,9 +71,10 @@ public class FightDataLoader : MonoBehaviour
     
     public void LoadSerializedProgress(ProgressModel progressModel)
     {
+        progressSettings.Currency = progressModel.Currency;
+        
         for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
         {
-            progressSettings.Worlds[worldIndex].Currency = progressModel.WorldData[worldIndex].Currency;
             progressSettings.Worlds[worldIndex].CurrencyPerMinute = progressModel.WorldData[worldIndex].CurrencyPerMinute;
             progressSettings.Worlds[worldIndex].LastTimeVisited = progressModel.WorldData[worldIndex].LastTimeVisited;
             for (int countryIndex = 0; countryIndex < progressModel.WorldData[worldIndex].CountryData.Count; countryIndex++)

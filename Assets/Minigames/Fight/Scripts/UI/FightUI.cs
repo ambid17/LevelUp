@@ -22,7 +22,7 @@ public class FightUI : MonoBehaviour
         _upgradeButton.onClick.AddListener(OpenUpgrades);
         CloseUpgrades();
         
-        SetGoldText(GameManager.SettingsManager.progressSettings.CurrentWorld.Currency);
+        SetGoldText(GameManager.SettingsManager.progressSettings.Currency);
         SetGoldPerMinuteText(GameManager.SettingsManager.progressSettings.CurrentWorld.CurrencyPerMinute);
         SetHpSlider(1);
     }

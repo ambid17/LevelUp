@@ -9,10 +9,12 @@ public class HomeController : MonoBehaviour
     [SerializeField] private ProgressSettings _progressSettings;
     [SerializeField] private WorldButton _buttonPrefab;
     [SerializeField] private Transform _buttonContainer;
-    [SerializeField] private WorldInspector _worldInspector; 
+    [SerializeField] private WorldInspector _worldInspector;
+    [SerializeField] private FightDataLoader _fightDataLoader;
     
     void Start()
     {
+        _fightDataLoader.Load();
         CreatePlanetButtons();
     }
 
