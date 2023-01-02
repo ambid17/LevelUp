@@ -78,7 +78,7 @@ MonoBehaviour:
         moveSpeed: 0.5
         maxHp: 100
         weaponDamage: 5
-    WorldType: 0
+    WorldType: 1
     Currency: 0
     CurrencyPerMinute: 0
     CurrentCountry:
@@ -88,7 +88,7 @@ MonoBehaviour:
       SpritePixels: []
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
-    IsFighting: 0
+    IsFighting: 1
   - Name: fishing camp
     SkillingSceneIndex: 4
     WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
@@ -130,7 +130,7 @@ MonoBehaviour:
         moveSpeed: 1
         maxHp: 250
         weaponDamage: 10
-    WorldType: 0
+    WorldType: 3
     Currency: 0
     CurrencyPerMinute: 0
     CurrentCountry:
