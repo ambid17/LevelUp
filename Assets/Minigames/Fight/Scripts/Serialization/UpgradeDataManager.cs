@@ -1,26 +1,26 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
-public class UpgradeDataManager
+namespace Minigames.Fight
 {
-    private static string FileLocation = $"{Application.persistentDataPath}/Upgrades.dat";
-
-    public static UpgradeData Load()
+    public class UpgradeDataManager
     {
-        UpgradeData data = FileUtils.LoadFile<UpgradeData>(FileLocation);
-        return data;
-    }
+        private static string FileLocation = $"{Application.persistentDataPath}/Upgrades.dat";
 
-    public static void Save()
-    {
-        // grab values from settings
-        List<Upgrade> upgrades = GameManager.SettingsManager.GetAllUpgrades();
-        UpgradeData data = new UpgradeData(upgrades);
+        public static UpgradeData Load()
+        {
+            UpgradeData data = FileUtils.LoadFile<UpgradeData>(FileLocation);
+            return data;
+        }
+
+        public static void Save()
+        {
+            // grab values from settings
+            List<Upgrade> upgrades = GameManager.SettingsManager.GetAllUpgrades();
+            UpgradeData data = new UpgradeData(upgrades);
         
-        // write to file
-        FileUtils.SaveFile(FileLocation, data);
+            // write to file
+            FileUtils.SaveFile(FileLocation, data);
+        }
     }
 }

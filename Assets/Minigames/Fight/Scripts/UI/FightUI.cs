@@ -1,75 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FightUI : MonoBehaviour
+namespace Minigames.Fight
 {
-    [SerializeField] private TMP_Text _goldText;
-    [SerializeField] private TMP_Text _goldPerMinuteText;
-    [SerializeField] private Slider _hpSlider;
-    [SerializeField] private Button _upgradeButton;
-    
-    [SerializeField] private GameObject _upgradePanel;
-    [SerializeField] private GameObject _pausePanel;
-    
-    void Start()
+    public class FightUI : MonoBehaviour
     {
-        GameManager.GameStateManager.currencyDidUpdate.AddListener(SetGoldText);
-        GameManager.GameStateManager.currencyPerMinuteDidUpdate.AddListener(SetGoldPerMinuteText);
-        GameManager.GameStateManager.hpDidUpdate.AddListener(SetHpSlider);
-        _upgradeButton.onClick.AddListener(OpenUpgrades);
-        CloseUpgrades();
-        
-        SetGoldText(GameManager.SettingsManager.progressSettings.Currency);
-        SetGoldPerMinuteText(GameManager.SettingsManager.progressSettings.CurrentWorld.CurrencyPerMinute);
-        SetHpSlider(1);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
+        [SerializeField] private TMP_Text _goldText;
+        [SerializeField] private TMP_Text _goldPerMinuteText;
+        [SerializeField] private Slider _hpSlider;
+        [SerializeField] private Button _upgradeButton;
+    
+        [SerializeField] private GameObject _upgradePanel;
+        [SerializeField] private GameObject _pausePanel;
+    
+        void Start()
         {
-            OpenUpgrades();
-        }
+            GameManager.GameStateManager.currencyDidUpdate.AddListener(SetGoldText);
+            GameManager.GameStateManager.currencyPerMinuteDidUpdate.AddListener(SetGoldPerMinuteText);
+            GameManager.GameStateManager.hpDidUpdate.AddListener(SetHpSlider);
+            _upgradeButton.onClick.AddListener(OpenUpgrades);
+            CloseUpgrades();
         
-        if (Input.GetKeyDown(KeyCode.Escape))
+            SetGoldText(GameManager.SettingsManager.progressSettings.Currency);
+            SetGoldPerMinuteText(GameManager.SettingsManager.progressSettings.CurrentWorld.CurrencyPerMinute);
+            SetHpSlider(1);
+        }
+
+        void Update()
         {
-            if (_upgradePanel.activeInHierarchy)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                CloseUpgrades();
+                OpenUpgrades();
             }
-            else
+        
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+                if (_upgradePanel.activeInHierarchy)
+                {
+                    CloseUpgrades();
+                }
+                else
+                {
+                    _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+                }
             }
         }
-    }
 
-    private void SetGoldText(float newValue)
-    {
-        _goldText.text = newValue.ToCurrencyString();
-    }
+        private void SetGoldText(float newValue)
+        {
+            _goldText.text = newValue.ToCurrencyString();
+        }
     
-    private void SetGoldPerMinuteText(float newValue)
-    {
-        string value = newValue.ToCurrencyString();
-        _goldPerMinuteText.text = $"({value}/min)";
-    }
+        private void SetGoldPerMinuteText(float newValue)
+        {
+            string value = newValue.ToCurrencyString();
+            _goldPerMinuteText.text = $"({value}/min)";
+        }
 
-    private void SetHpSlider(float hpPercentage)
-    {
-        _hpSlider.value = hpPercentage;
-    }
+        private void SetHpSlider(float hpPercentage)
+        {
+            _hpSlider.value = hpPercentage;
+        }
 
-    private void OpenUpgrades()
-    {
-        _upgradePanel.SetActive(true);
-    }
+        private void OpenUpgrades()
+        {
+            _upgradePanel.SetActive(true);
+        }
 
-    private void CloseUpgrades()
-    {
-        _upgradePanel.SetActive(false);
+        private void CloseUpgrades()
+        {
+            _upgradePanel.SetActive(false);
+        }
     }
 }

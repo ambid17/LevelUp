@@ -1,18 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemySpawnerSettings", menuName = "ScriptableObjects/EnemySpawnerSettings", order = 1)]
-[Serializable]
-public class EnemySpawnerSettings : ScriptableObject
+namespace Minigames.Fight
 {
-    public float MinSpawnRadius;
-    public float MaxSpawnRadius;
+    [CreateAssetMenu(fileName = "EnemySpawnerSettings", menuName = "ScriptableObjects/EnemySpawnerSettings", order = 1)]
+    [Serializable]
+    public class EnemySpawnerSettings : ScriptableObject
+    {
+        public float MinSpawnRadius;
+        public float MaxSpawnRadius;
 
-    public float WaveInterval;
-    public float WaveSize;
+        public float WaveInterval;
+        public float WaveSize;
 
-    public int MaxEnemyCount;
+        public int MaxEnemyCount;
+    }
 }
