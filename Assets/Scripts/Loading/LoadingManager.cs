@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadingManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private ProgressSettings _progressSettings;
     void Start()
     {
-        
+        LoadData();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadData()
     {
-        
+        switch (_progressSettings.CurrentWorld.WorldType)
+        {
+            case WorldType.Fighting:
+                // serialize from game manager
+                break;
+        }
+
+        SceneManager.LoadScene(_progressSettings.CurrentWorld.SceneIndex);
     }
 }

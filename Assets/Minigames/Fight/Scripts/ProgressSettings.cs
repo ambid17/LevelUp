@@ -52,16 +52,28 @@ public class ProgressSettings : ScriptableObject
     }
 }
 
+public enum WorldType
+{
+    Fighting,
+    Crafting,
+    Engineering,
+    Fishing,
+    Mining
+}
+
 [Serializable]
 public class World
 {
     public string Name;
+    public string SceneIndex;
     public Sprite WorldSprite;
     public List<Country> Countries;
     public List<Enemy> Enemies;
+    public WorldType WorldType;
 
     public Country CurrentCountry;
 
+    
     public void SetDefaults()
     {
         CurrentCountry = null;

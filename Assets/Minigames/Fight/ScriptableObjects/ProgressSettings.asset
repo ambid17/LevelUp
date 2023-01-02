@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Worlds:
   - Name: craftopia
+    SceneIndex: 2
     WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries:
     - Index: 0
@@ -59,6 +60,7 @@ MonoBehaviour:
         moveSpeed: 0.5
         maxHp: 100
         weaponDamage: 5
+    WorldType: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -66,7 +68,8 @@ MonoBehaviour:
       SpritePixels: []
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
-  - Name: test2
+  - Name: fishing camp
+    SceneIndex: 3
     WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries: []
     Enemies:
@@ -78,6 +81,7 @@ MonoBehaviour:
         moveSpeed: 0
         maxHp: 0
         weaponDamage: 0
+    WorldType: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -88,9 +92,11 @@ MonoBehaviour:
   Currency: 0
   CurrentWorld:
     Name: 
+    SceneIndex: 
     WorldSprite: {fileID: 0}
     Countries: []
     Enemies: []
+    WorldType: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
