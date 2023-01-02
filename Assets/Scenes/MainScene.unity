@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 160093823}
   - component: {fileID: 160093822}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: FarmingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 828142252}
   - component: {fileID: 828142251}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: PetsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2337,7 +2337,7 @@ GameObject:
   - component: {fileID: 1203409722}
   - component: {fileID: 1203409721}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CraftButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2568,13 +2568,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homePanel: {fileID: 1898048239}
-  fightPanel: {fileID: 1060478720}
   perksPanel: {fileID: 1801835149}
   settingsPanel: {fileID: 1664911594}
   statsPanel: {fileID: 1445214322}
   gemsPanel: {fileID: 1541536949}
   homeButton: {fileID: 177674430}
-  fightButton: {fileID: 0}
   perksButton: {fileID: 388383794}
   settingsButton: {fileID: 147010499}
   statsButton: {fileID: 1129002914}
@@ -2812,7 +2810,7 @@ GameObject:
   - component: {fileID: 1544990716}
   - component: {fileID: 1544990715}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: ResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3314,3 +3312,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1f2087e4c7ce842995e59788fd0f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  craftButton: {fileID: 1203409721}

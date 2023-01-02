@@ -20,13 +20,12 @@ public class PlayerSettings : ScriptableObject
     public float accelerationScalar;
     public float baseMaxHp;
     public float hpScalar;
-    
 
-    private float moveSpeed;
-    public float MoveSpeed => moveSpeed;
+
+    public float MoveSpeed { get; private set; }
     public void SetMoveSpeed(int upgradeLevel)
     {
-        moveSpeed = baseMoveSpeed * Mathf.Pow(1 + moveSpeedScalar, upgradeLevel);
+        MoveSpeed = baseMoveSpeed * Mathf.Pow(1 + moveSpeedScalar, upgradeLevel);
     }
     
     private float acceleration;
