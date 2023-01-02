@@ -42,8 +42,15 @@ public class LoadingManager : MonoBehaviour
         {
             yield return new WaitForSeconds(2);
         }
-        
-        SceneManager.LoadScene(_progressSettings.CurrentWorld.SceneIndex);
+
+        if (_progressSettings.CurrentWorld.IsFighting)
+        {
+            SceneManager.LoadScene("Fight");
+        }
+        else
+        {
+            SceneManager.LoadScene(_progressSettings.CurrentWorld.SkillingSceneIndex);
+        }
     }
     
     

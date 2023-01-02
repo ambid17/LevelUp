@@ -41,12 +41,14 @@ public class WorldInspector : MonoBehaviour
     private void ConquerPlanet()
     {
         _progressSettings.CurrentWorld = _world;
+        _progressSettings.CurrentWorld.IsFighting = true;
         SceneManager.LoadScene(loadingSceneName);
     }
     
     private void TravelToPlanet()
     {
         _progressSettings.CurrentWorld = _world;
+        _progressSettings.CurrentWorld.IsFighting = false;
         SceneManager.LoadScene(loadingSceneName);
     }
 }

@@ -24,7 +24,7 @@ public class ProgressSettings : ScriptableObject
                 if (string.IsNullOrEmpty(_currentWorld.Name))
                 {
                     int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
-                    _currentWorld = Worlds.First(world => world.SceneIndex == currentBuildIndex);
+                    _currentWorld = Worlds.First(world => world.SkillingSceneIndex == currentBuildIndex);
                 }
             #endif
             return _currentWorld;
@@ -101,7 +101,7 @@ public class World
 {
     [Header("Set in Editor")]
     public string Name;
-    public int SceneIndex;
+    public int SkillingSceneIndex;
     public Sprite WorldSprite;
     public List<Country> Countries;
     public List<Enemy> Enemies;
@@ -112,14 +112,15 @@ public class World
     public float CurrencyPerMinute;
     public DateTime LastTimeVisited;
     public Country CurrentCountry;
+    public bool IsFighting;
 
     
     public void SetDefaults()
     {
         Currency = 0;
         CurrencyPerMinute = 0;
-        CurrentCountry = null;
         LastTimeVisited = DateTime.Now;
+        CurrentCountry = null;
 
         foreach (var country in Countries)
         {

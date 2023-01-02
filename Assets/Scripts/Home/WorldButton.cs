@@ -34,6 +34,6 @@ public class WorldButton : MonoBehaviour
     {
         _button.onClick.AddListener(() => callback());
         _image.sprite = world.WorldSprite;
-        _sceneIndex = world.SceneIndex;
+        _sceneIndex = world.SkillingSceneIndex;
     }
 }
