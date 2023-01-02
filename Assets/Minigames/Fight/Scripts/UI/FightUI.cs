@@ -6,20 +6,20 @@ using UnityEngine.UI;
 
 public class FightUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text goldText;
-    [SerializeField] private TMP_Text goldPerMinuteText;
-    [SerializeField] private Slider hpSlider;
-    [SerializeField] private Button upgradeButton;
-    [SerializeField] private Button closeUpgradesButton;
-    [SerializeField] private GameObject upgradePanel;
+    [SerializeField] private TMP_Text _goldText;
+    [SerializeField] private TMP_Text _goldPerMinuteText;
+    [SerializeField] private Slider _hpSlider;
+    [SerializeField] private Button _upgradeButton;
+    
+    [SerializeField] private GameObject _upgradePanel;
+    [SerializeField] private GameObject _pausePanel;
     
     void Start()
     {
         GameManager.GameStateManager.currencyDidUpdate.AddListener(SetGoldText);
         GameManager.GameStateManager.currencyPerMinuteDidUpdate.AddListener(SetGoldPerMinuteText);
         GameManager.GameStateManager.hpDidUpdate.AddListener(SetHpSlider);
-        upgradeButton.onClick.AddListener(OpenUpgrades);
-        closeUpgradesButton.onClick.AddListener(CloseUpgrades);
+        _upgradeButton.onClick.AddListener(OpenUpgrades);
         CloseUpgrades();
         
         SetGoldText(GameManager.SettingsManager.progressSettings.CurrentWorld.Currency);
@@ -34,35 +34,42 @@ public class FightUI : MonoBehaviour
             OpenUpgrades();
         }
         
-        if (Input.GetKeyDown(KeyCode.Escape) && upgradePanel.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            CloseUpgrades();
+            if (_upgradePanel.activeInHierarchy)
+            {
+                CloseUpgrades();
+            }
+            else
+            {
+                _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+            }
         }
     }
 
     private void SetGoldText(float newValue)
     {
-        goldText.text = newValue.ToCurrencyString();
+        _goldText.text = newValue.ToCurrencyString();
     }
     
     private void SetGoldPerMinuteText(float newValue)
     {
         string value = newValue.ToCurrencyString();
-        goldPerMinuteText.text = $"({value}/min)";
+        _goldPerMinuteText.text = $"({value}/min)";
     }
 
     private void SetHpSlider(float hpPercentage)
     {
-        hpSlider.value = hpPercentage;
+        _hpSlider.value = hpPercentage;
     }
 
     private void OpenUpgrades()
     {
-        upgradePanel.SetActive(true);
+        _upgradePanel.SetActive(true);
     }
 
     private void CloseUpgrades()
     {
-        upgradePanel.SetActive(false);
+        _upgradePanel.SetActive(false);
     }
 }

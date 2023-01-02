@@ -11,6 +11,7 @@ public class UpgradeUI : MonoBehaviour
 
     public Button playerTabButton; 
     public Button weaponTabButton; 
+    public Button closeButton; 
 
     private List<UpgradeItem> _playerUpgradeItems;
     private List<UpgradeItem> _weaponUpgradeItems;
@@ -23,10 +24,16 @@ public class UpgradeUI : MonoBehaviour
     
     void Start()
     {
+        closeButton.onClick.AddListener(Close);
         InitPlayerUpgrades();
         InitWeaponUpgrades();
         InitTabButtons();
         ToggleUpgradeItems(UpgradeType.Player);
+    }
+
+    private void Close()
+    {
+        gameObject.SetActive(false);
     }
 
     private void InitPlayerUpgrades()
