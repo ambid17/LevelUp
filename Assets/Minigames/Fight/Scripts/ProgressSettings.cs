@@ -49,6 +49,12 @@ public class ProgressSettings : ScriptableObject
             WorldData worldModel = new WorldData();
             worldModel.worldName = world.Name;
             worldModel.CountryData = world.GetCountryData();
+
+            if (world == CurrentWorld)
+            {
+                worldModel.lastTimeVisited = DateTime.Now;
+            }
+            
             worldData.Add(worldModel);
         }
 

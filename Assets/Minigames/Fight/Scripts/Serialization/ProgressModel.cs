@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class WorldData
 {
     public string worldName;
     public List<CountryData> CountryData;
+    public DateTime lastTimeVisited;
 }
 
 public class CountryData

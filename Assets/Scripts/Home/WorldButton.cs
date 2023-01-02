@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -13,12 +14,10 @@ public class WorldButton : MonoBehaviour
     [SerializeField] private Button _button;
     [SerializeField] private Image _image;
     [SerializeField] private TMP_Text _text;
-    [SerializeField] private ProgressSettings _progressSettings;
     private RectTransform _rectTransform;
 
     private const float planetSize = 100;
     private const float planetSpeed = 0.1f;
-    private const string loadingSceneName = "Loading";
 
     private World _world;
     private int _sceneIndex;
@@ -38,18 +37,12 @@ public class WorldButton : MonoBehaviour
         _rectTransform.anchoredPosition = position;
     }
 
-    public void SetForWorld(World world)
+    public void SetForWorld(Action callback, World world)
     {
         _world = world;
-        _button.onClick.AddListener(LoadGame);
+        _button.onClick.AddListener(() => callback());
         _image.sprite = world.WorldSprite;
         _text.text = world.Name;
         _sceneIndex = world.SceneIndex;
-    }
-
-    private void LoadGame()
-    {
-        _progressSettings.CurrentWorld = _world;
-        SceneManager.LoadScene(loadingSceneName);
     }
 }

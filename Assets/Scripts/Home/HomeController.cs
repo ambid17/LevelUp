@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class HomeController : MonoBehaviour
 {
     [SerializeField] private ProgressSettings _progressSettings;
-    [SerializeField] private WorldButton buttonPrefab;
+    [SerializeField] private WorldButton _buttonPrefab;
+    [SerializeField] private Transform _buttonContainer;
+    [SerializeField] private WorldInspector _worldInspector; 
     
     void Start()
     {
@@ -18,8 +20,13 @@ public class HomeController : MonoBehaviour
     {
         foreach (var world in _progressSettings.Worlds)
         {
-            WorldButton worldButton = Instantiate(buttonPrefab, transform);
-            worldButton.SetForWorld(world);
+            WorldButton worldButton = Instantiate(_buttonPrefab, _buttonContainer);
+            worldButton.SetForWorld(() => InspectWorld(world), world);
         }
+    }
+    
+    private void InspectWorld(World world)
+    {
+        _worldInspector.InspectWorld(world);
     }
 }
