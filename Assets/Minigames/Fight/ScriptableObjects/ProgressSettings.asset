@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProgressSettings
   m_EditorClassIdentifier: 
   Worlds:
-  - Name: craftopia
+  - Name: Craftopia
     SceneIndex: 2
     WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries:
@@ -27,13 +27,31 @@ MonoBehaviour:
       EnemyKillsToComplete: 15
       EnemyStatScalar: 1.1
       SpritePixels: []
-      EnemyTierColor: {r: 1, g: 0, b: 0, a: 1}
+      EnemyTierColor: {r: 0.21765637, g: 1, b: 0, a: 1}
       EnemyKillCount: 0
     - Index: 2
       EnemyKillsToComplete: 30
       EnemyStatScalar: 1.5
       SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.8564266, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 3
+      EnemyKillsToComplete: 50
+      EnemyStatScalar: 2
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.09787713, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 4
+      EnemyKillsToComplete: 100
+      EnemyStatScalar: 3
+      SpritePixels: []
       EnemyTierColor: {r: 1, g: 0, b: 0.76815224, a: 1}
+      EnemyKillCount: 0
+    - Index: 5
+      EnemyKillsToComplete: 200
+      EnemyStatScalar: 5
+      SpritePixels: []
+      EnemyTierColor: {r: 0.038573265, g: 0, b: 1, a: 1}
       EnemyKillCount: 0
     Enemies:
     - Prefab: {fileID: 8510735526301981988, guid: 180c465e3088ff14eaca2eac7ad3ba31, type: 3}
@@ -61,6 +79,8 @@ MonoBehaviour:
         maxHp: 100
         weaponDamage: 5
     WorldType: 0
+    Currency: 0
+    CurrencyPerMinute: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -82,21 +102,8 @@ MonoBehaviour:
         maxHp: 0
         weaponDamage: 0
     WorldType: 0
-    CurrentCountry:
-      Index: 0
-      EnemyKillsToComplete: 0
-      EnemyStatScalar: 0
-      SpritePixels: []
-      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
-      EnemyKillCount: 0
-  Currency: 0
-  CurrentWorld:
-    Name: 
-    SceneIndex: 
-    WorldSprite: {fileID: 0}
-    Countries: []
-    Enemies: []
-    WorldType: 0
+    Currency: 0
+    CurrencyPerMinute: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
