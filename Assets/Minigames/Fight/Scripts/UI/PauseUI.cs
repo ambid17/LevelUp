@@ -9,6 +9,7 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button homeButton;
     [SerializeField] private Button quitButton;
+    
     void Start()
     {
         resumeButton.onClick.AddListener(Resume);
