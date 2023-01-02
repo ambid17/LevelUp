@@ -3,19 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
 [Serializable]
 public class ProgressSettings : ScriptableObject
 {
+    [Header("Set in Editor")]
     public List<World> Worlds;
     
-    public float Currency;
-    public World CurrentWorld;
+    [Header("Run-time Values")]
+    private World _currentWorld;
+
+    public World CurrentWorld
+    {
+        get
+        {
+            #if UNITY_EDITOR
+                // Allow the game scenes to be played not from the main menu
+                if (string.IsNullOrEmpty(_currentWorld.Name))
+                {
+                    int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
+                    _currentWorld = Worlds.First(world => world.SceneIndex == currentBuildIndex);
+                }
+            #endif
+            return _currentWorld;
+        }
+        set
+        {
+            _currentWorld = value;
+        }
+    }
     
     public void SetDefaults()
     {
-        Currency = 0;
         CurrentWorld = null;
 
         foreach (var world in Worlds)
@@ -47,13 +68,12 @@ public class ProgressSettings : ScriptableObject
         foreach (var world in Worlds)
         {
             WorldData worldModel = new WorldData();
-            worldModel.worldName = world.Name;
+            
+            worldModel.WorldName = world.Name;
             worldModel.CountryData = world.GetCountryData();
-
-            if (world == CurrentWorld)
-            {
-                worldModel.lastTimeVisited = DateTime.Now;
-            }
+            worldModel.LastTimeVisited = world == CurrentWorld ? DateTime.Now : world.LastTimeVisited;
+            worldModel.Currency = world.Currency;
+            worldModel.CurrencyPerMinute = world.CurrencyPerMinute;
             
             worldData.Add(worldModel);
         }
@@ -79,6 +99,7 @@ public enum WorldType
 [Serializable]
 public class World
 {
+    [Header("Set in Editor")]
     public string Name;
     public int SceneIndex;
     public Sprite WorldSprite;
@@ -86,12 +107,19 @@ public class World
     public List<Enemy> Enemies;
     public WorldType WorldType;
 
+    [Header("Run-time Values")]
+    public float Currency;
+    public float CurrencyPerMinute;
+    public DateTime LastTimeVisited;
     public Country CurrentCountry;
 
     
     public void SetDefaults()
     {
+        Currency = 0;
+        CurrencyPerMinute = 0;
         CurrentCountry = null;
+        LastTimeVisited = DateTime.Now;
 
         foreach (var country in Countries)
         {
@@ -106,8 +134,8 @@ public class World
         foreach (var country in Countries)
         {
             CountryData countryModel = new CountryData();
-            countryModel.kills = country.EnemyKillCount;
-            countryModel.countryIndex = country.Index;
+            countryModel.Kills = country.EnemyKillCount;
+            countryModel.CountryIndex = country.Index;
             countryData.Add(countryModel);
         }
 
@@ -172,12 +200,14 @@ public class World
 [Serializable]
 public class Country
 {
+    [Header("Set in Editor")]
     public int Index;
     public int EnemyKillsToComplete;
     public float EnemyStatScalar;
     public List<Vector2> SpritePixels;
     public Color EnemyTierColor;
     
+    [Header("Run-time Values")]
     public int EnemyKillCount;
 
     public bool IsConquered => EnemyKillCount >= EnemyKillsToComplete;

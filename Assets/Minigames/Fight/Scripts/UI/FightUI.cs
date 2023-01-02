@@ -6,21 +6,24 @@ using UnityEngine.UI;
 
 public class FightUI : MonoBehaviour
 {
-    public TMP_Text goldText;
-    public Slider hpSlider;
-    public Button upgradeButton;
-    public Button closeUpgradesButton;
-    public GameObject upgradePanel;
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private TMP_Text goldPerMinuteText;
+    [SerializeField] private Slider hpSlider;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button closeUpgradesButton;
+    [SerializeField] private GameObject upgradePanel;
     
     void Start()
     {
         GameManager.GameStateManager.currencyDidUpdate.AddListener(SetGoldText);
+        GameManager.GameStateManager.currencyPerMinuteDidUpdate.AddListener(SetGoldPerMinuteText);
         GameManager.GameStateManager.hpDidUpdate.AddListener(SetHpSlider);
         upgradeButton.onClick.AddListener(OpenUpgrades);
         closeUpgradesButton.onClick.AddListener(CloseUpgrades);
         CloseUpgrades();
         
-        SetGoldText(GameManager.SettingsManager.progressSettings.Currency);
+        SetGoldText(GameManager.SettingsManager.progressSettings.CurrentWorld.Currency);
+        SetGoldPerMinuteText(GameManager.SettingsManager.progressSettings.CurrentWorld.CurrencyPerMinute);
         SetHpSlider(1);
     }
 
@@ -40,6 +43,12 @@ public class FightUI : MonoBehaviour
     private void SetGoldText(float newValue)
     {
         goldText.text = newValue.ToCurrencyString();
+    }
+    
+    private void SetGoldPerMinuteText(float newValue)
+    {
+        string value = newValue.ToCurrencyString();
+        goldPerMinuteText.text = $"({value}/min)";
     }
 
     private void SetHpSlider(float hpPercentage)

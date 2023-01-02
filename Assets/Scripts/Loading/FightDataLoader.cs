@@ -73,14 +73,15 @@ public class FightDataLoader : MonoBehaviour
     
     public void LoadSerializedProgress(ProgressModel progressModel)
     {
-        progressSettings.Currency = progressModel.Currency;
-
         for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
         {
+            progressSettings.Worlds[worldIndex].Currency = progressModel.WorldData[worldIndex].Currency;
+            progressSettings.Worlds[worldIndex].CurrencyPerMinute = progressModel.WorldData[worldIndex].CurrencyPerMinute;
+            progressSettings.Worlds[worldIndex].LastTimeVisited = progressModel.WorldData[worldIndex].LastTimeVisited;
             for (int countryIndex = 0; countryIndex < progressModel.WorldData[worldIndex].CountryData.Count; countryIndex++)
             {
                 progressSettings.Worlds[worldIndex].Countries[countryIndex].EnemyKillCount =
-                    progressModel.WorldData[worldIndex].CountryData[countryIndex].kills;
+                    progressModel.WorldData[worldIndex].CountryData[countryIndex].Kills;
             }
         }
     }

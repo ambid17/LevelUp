@@ -66,7 +66,6 @@ public class SettingsManager : MonoBehaviour
     {
         ProgressModel toReturn = new ProgressModel();
         
-        toReturn.Currency = GameManager.GameStateManager.Currency;
         toReturn.WorldData = progressSettings.GetWorldData();
 
         return toReturn;
