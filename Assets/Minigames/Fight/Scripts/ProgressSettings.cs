@@ -26,9 +26,18 @@ public class ProgressSettings : ScriptableObject
 
     public void Init()
     {
-        Currency = 0;
-        CurrentWorld = Worlds[0];
-        CurrentWorld.CurrentCountry = CurrentWorld.Countries[0];
+        Country highestCountry = CurrentWorld.Countries[0];
+
+        for(int i = CurrentWorld.Countries.Count - 1; i >= 0; i--)
+        {
+            if (CurrentWorld.Countries[i].EnemyKillCount > 0)
+            {
+                highestCountry = CurrentWorld.Countries[i];
+                break;
+            }
+        }
+        
+        CurrentWorld.CurrentCountry = highestCountry;
     }
 
     public List<WorldData> GetWorldData()
@@ -65,7 +74,7 @@ public enum WorldType
 public class World
 {
     public string Name;
-    public string SceneIndex;
+    public int SceneIndex;
     public Sprite WorldSprite;
     public List<Country> Countries;
     public List<Enemy> Enemies;

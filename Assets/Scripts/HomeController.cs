@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class HomeController : MonoBehaviour
 {
-    public static string FIGHT_SCENE = "Fight";
-    public Button craftButton;
+    [SerializeField] private ProgressSettings _progressSettings;
+    [SerializeField] private WorldButton buttonPrefab;
     
     void Start()
     {
-        craftButton.onClick.AddListener(() => LoadGame(FIGHT_SCENE));    
+        CreatePlanetButtons();
     }
 
-    private void LoadGame(string sceneName)
+    private void CreatePlanetButtons()
     {
-        SceneManager.LoadScene(sceneName);
+        foreach (var world in _progressSettings.Worlds)
+        {
+            WorldButton worldButton = Instantiate(buttonPrefab, transform);
+            worldButton.SetForWorld(world);
+        }
     }
 }

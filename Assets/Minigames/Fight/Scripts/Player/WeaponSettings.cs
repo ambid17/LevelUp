@@ -36,48 +36,42 @@ public class WeaponSettings : ScriptableObject
     public int projectilePenetrationScalar;
 
     
-    private float fireRate;
-    public float FireRate => fireRate;
+    public float FireRate { get; private set; } 
     public void SetFireRate(int upgradeLevel)
     {
-        fireRate = baseFireRate * Mathf.Pow(1 - fireRateScalar, upgradeLevel);
+        FireRate = baseFireRate * Mathf.Pow(1 - fireRateScalar, upgradeLevel);
     }
     
     
-    private float damage;
-    public float Damage => damage;
+    public float Damage { get; private set; }
     public void SetDamage(int upgradeLevel)
     {
-        damage = baseDamage * Mathf.Pow(1 + damageScalar, upgradeLevel);
+        Damage = baseDamage * Mathf.Pow(1 + damageScalar, upgradeLevel);
     }
     
     
-    private float critChance;
-    public float CritChance => critChance;
+    public float CritChance { get; private set; }
     public void SetCritChance(int upgradeLevel)
     {
-        critChance = baseCritChance + (critChanceScalar * upgradeLevel);
+        CritChance = baseCritChance + (critChanceScalar * upgradeLevel);
     }
     
-    private float critDamage;
-    public float CritDamage => critDamage;
+    public float CritDamage { get; private set; }
     public void SetCritDamage(int upgradeLevel)
     {
-        critDamage = baseCritDamage * Mathf.Pow(1 + critDamageScalar, upgradeLevel);
+        CritDamage = baseCritDamage * Mathf.Pow(1 + critDamageScalar, upgradeLevel);
     }
     
-    private int projectileCount;
-    public int ProjectileCount => projectileCount;
+    public int ProjectileCount { get; private set; }
     public void SetProjectileCount(int upgradeLevel)
     {
-        projectileCount = baseProjectileCount + (upgradeLevel * projectileCountScalar);
+        ProjectileCount = baseProjectileCount + (upgradeLevel * projectileCountScalar);
     }
     
-    private int projectilePenetration;
-    public int ProjectilePenetration => projectilePenetration;
+    public int ProjectilePenetration { get; private set; }
     public void SetProjectilePenetration(int upgradeLevel)
     {
-        projectilePenetration = baseProjectilePenetration + (upgradeLevel * projectilePenetrationScalar);
+        ProjectilePenetration = baseProjectilePenetration + (upgradeLevel * projectilePenetrationScalar);
     }
     
     
@@ -109,11 +103,11 @@ public class WeaponSettings : ScriptableObject
 
     public void Init()
     {
-        SetFireRate(0);
-        SetDamage(0);
-        SetCritChance(0);
-        SetCritDamage(0);
-        SetProjectileCount(0);
-        SetProjectilePenetration(0);
+        SetFireRate(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.FireRate).numberPurchased);
+        SetDamage(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.Damage).numberPurchased);
+        SetCritChance(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.CritChance).numberPurchased);
+        SetCritDamage(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.CritDamage).numberPurchased);
+        SetProjectileCount(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.ProjectileCount).numberPurchased);
+        SetProjectilePenetration(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.ProjectilePenetration).numberPurchased);
     }
 }

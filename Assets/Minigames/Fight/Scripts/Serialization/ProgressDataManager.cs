@@ -6,14 +6,10 @@ public class ProgressDataManager
 {
     private static string FileLocation = $"{Application.persistentDataPath}/Progress.dat";
 
-    public static void LoadAndApplyData()
+    public static ProgressModel Load()
     {
         ProgressModel data = FileUtils.LoadFile<ProgressModel>(FileLocation);
-
-        if (data != null)
-        {
-            GameManager.SettingsManager.LoadSerializedProgress(data);
-        }
+        return data;
     }
 
     public static void Save()

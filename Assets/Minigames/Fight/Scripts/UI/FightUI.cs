@@ -19,10 +19,18 @@ public class FightUI : MonoBehaviour
         upgradeButton.onClick.AddListener(OpenUpgrades);
         closeUpgradesButton.onClick.AddListener(CloseUpgrades);
         CloseUpgrades();
+        
+        SetGoldText(GameManager.SettingsManager.progressSettings.Currency);
+        SetHpSlider(1);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OpenUpgrades();
+        }
+        
         if (Input.GetKeyDown(KeyCode.Escape) && upgradePanel.activeInHierarchy)
         {
             CloseUpgrades();

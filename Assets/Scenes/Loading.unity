@@ -195,8 +195,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -373,6 +373,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingText: {fileID: 195104714}
+--- !u!1 &574285730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 574285731}
+  - component: {fileID: 574285732}
+  m_Layer: 0
+  m_Name: FightDataLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &574285731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574285730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 956922838}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &574285732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574285730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca270ea179297fb4c922ca2911dff1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
+  upgradeSettings: {fileID: 11400000, guid: a5b376cfe0b89344c85aec9b6b733b52, type: 2}
+  playerSettings: {fileID: 11400000, guid: 9bddfe638d36abc488c374dfec22eb28, type: 2}
+  weaponSettings: {fileID: 11400000, guid: b1949bc218afc0d4b8081f45c40fa767, type: 2}
+  onDataLoaded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &682330822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5214,6 +5265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75adc5eab497144a8ccabd1c89b8b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
+  _fightDataLoader: {fileID: 574285732}
 --- !u!4 &956922838
 Transform:
   m_ObjectHideFlags: 0
@@ -5225,7 +5278,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 574285731}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

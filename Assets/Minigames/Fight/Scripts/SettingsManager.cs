@@ -31,7 +31,6 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void Init()
     {
-        upgradeSettings.Init();
         playerSettings.Init();
         weaponSettings.Init();
         progressSettings.Init();
@@ -52,41 +51,6 @@ public class SettingsManager : MonoBehaviour
                 break;
         }
     }
-    
-    public void LoadSerializedUpgrades(UpgradeData container)
-    {
-        if (container == null || container.upgrades == null)
-        {
-            return;
-        }
-        
-        foreach (var upgrade in container.upgrades)
-        {
-            switch (upgrade)
-            {
-                case PlayerUpgradeModel model:
-                    UpdatePlayerUpgrades(model);
-                    break;
-                case WeaponUpgradeModel model:
-                    UpdateWeaponUpgrades(model);
-                    break;
-            }
-        }
-    }
-
-    private void UpdatePlayerUpgrades(PlayerUpgradeModel model)
-    {
-        PlayerUpgrade upgrade = upgradeSettings.PlayerUpgrades.First(u => u.upgradeType == model.playerUpgradeType);
-        upgrade.numberPurchased = model.numberPurchased;
-        playerSettings.ApplyUpgrade(upgrade);
-    }
-    
-    private void UpdateWeaponUpgrades(WeaponUpgradeModel model)
-    {
-        WeaponUpgrade upgrade = upgradeSettings.WeaponUpgrades.First(u => u.upgradeType == model.weaponUpgradeType);
-        upgrade.numberPurchased = model.numberPurchased;
-        weaponSettings.ApplyUpgrade(upgrade);
-    }
 
     public List<Upgrade> GetAllUpgrades()
     {
@@ -98,20 +62,6 @@ public class SettingsManager : MonoBehaviour
         return toReturn;
     }
 
-    public void LoadSerializedProgress(ProgressModel progressModel)
-    {
-        progressSettings.Currency = progressModel.Currency;
-
-        for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
-        {
-            for (int countryIndex = 0; countryIndex < progressModel.WorldData[worldIndex].CountryData.Count; countryIndex++)
-            {
-                progressSettings.Worlds[worldIndex].Countries[countryIndex].EnemyKillCount =
-                    progressModel.WorldData[worldIndex].CountryData[countryIndex].kills;
-            }
-        }
-    }
-    
     public ProgressModel GetProgressForSerialization()
     {
         ProgressModel toReturn = new ProgressModel();

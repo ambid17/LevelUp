@@ -28,25 +28,23 @@ public class PlayerSettings : ScriptableObject
         MoveSpeed = baseMoveSpeed * Mathf.Pow(1 + moveSpeedScalar, upgradeLevel);
     }
     
-    private float acceleration;
-    public float Acceleration => acceleration;
+    public float Acceleration { get; private set; }
     public void SetAcceleration(int upgradeLevel)
     {
-        acceleration = baseAcceleration * Mathf.Pow(1 + accelerationScalar, upgradeLevel);
+        Acceleration = baseAcceleration * Mathf.Pow(1 + accelerationScalar, upgradeLevel);
     }
     
-    private float maxHp;
-    public float MaxHp => maxHp;
+    public float MaxHp { get; private set; }
     public void SetMaxHp(int upgradeLevel)
     {
-        maxHp = baseMaxHp * Mathf.Pow(1 + hpScalar, upgradeLevel);
+        MaxHp = baseMaxHp * Mathf.Pow(1 + hpScalar, upgradeLevel);
     }
 
     public void Init()
     {
-        SetMoveSpeed(0);
-        SetAcceleration(0);
-        SetMaxHp(0);
+        SetMoveSpeed(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.MoveSpeed).numberPurchased);
+        SetAcceleration(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.MoveAcceleration).numberPurchased);
+        SetMaxHp(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.MaxHp).numberPurchased);
     }
 
     // Set on:

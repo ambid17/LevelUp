@@ -15,7 +15,6 @@ public class ProgressUI : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.dataLoaded += () => OnDataLoaded();
     }
 
     void Start()
@@ -27,17 +26,9 @@ public class ProgressUI : MonoBehaviour
         nextCountryButton.interactable = false;
         
         GameManager.GameStateManager.enemyKilled.AddListener(UpdateProgress);
-    }
-
-    private void OnDataLoaded()
-    {
+        
         SetWorld();
         UpdateProgress();
-    }
-
-    void Update()
-    {
-        
     }
 
     public void SetWorld()

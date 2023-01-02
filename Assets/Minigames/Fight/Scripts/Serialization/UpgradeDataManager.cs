@@ -8,13 +8,10 @@ public class UpgradeDataManager
 {
     private static string FileLocation = $"{Application.persistentDataPath}/Upgrades.dat";
 
-    public static void LoadAndApplyData()
+    public static UpgradeData Load()
     {
         UpgradeData data = FileUtils.LoadFile<UpgradeData>(FileLocation);
-        if (data != null)
-        {
-            GameManager.SettingsManager.LoadSerializedUpgrades(data);
-        }
+        return data;
     }
 
     public static void Save()

@@ -23,25 +23,22 @@ public class UpgradeSettings : ScriptableObject
             upgrade.numberPurchased = 0; 
         }
     }
-    
-    public void Init()
-    {
-        foreach (var upgrade in PlayerUpgrades)
-        {
-            upgrade.numberPurchased = 0;
-        }
 
-        foreach (var upgrade in WeaponUpgrades)
-        {
-            upgrade.numberPurchased = 0; 
-        }
+    public PlayerUpgrade GetPlayerUpgrade(PlayerUpgradeType upgradeType)
+    {
+        return PlayerUpgrades.First(u => u.upgradeType == upgradeType);
+    }
+    
+    public WeaponUpgrade GetWeaponUpgrade(WeaponUpgradeType upgradeType)
+    {
+        return WeaponUpgrades.First(u => u.upgradeType == upgradeType);
     }
 }
 
 public enum UpgradeCostType
 {
-    additive,
-    exponential,
+    Additive,
+    Exponential,
 }
 
 [Serializable]
@@ -74,9 +71,9 @@ public class Upgrade
     {
         switch (costType)
         {
-            case UpgradeCostType.additive:
+            case UpgradeCostType.Additive:
                 return GetAdditiveCost();
-            case UpgradeCostType.exponential:
+            case UpgradeCostType.Exponential:
                 return GetExponentialCost();
             default:
                 return float.MaxValue;
