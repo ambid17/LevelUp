@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45a71a4000946642837015b35982fee, type: 3}
+  m_Name: UpgradeSettings
+  m_EditorClassIdentifier: 
+  PlayerUpgrades:
+  - name: Move speed
+    description: 5% move speed
+    numberPurchased: 0
+    maxPurchases: 10
+    baseCost: 10
+    costScalar: 1.1
+    costType: 1
+    upgradeType: 0
+  - name: Acceleration
+    description: 5% accel
+    numberPurchased: 0
+    maxPurchases: 5
+    baseCost: 15
+    costScalar: 1.5
+    costType: 1
+    upgradeType: 1
+  - name: Max HP
+    description: 5% max hp
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 15
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 2
+  WeaponUpgrades:
+  - name: Fire rate
+    description: 5% fire rate per upgrade
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 0.04
+    costType: 1
+    upgradeType: 0
+  - name: Damage
+    description: 5% damage per upgrade
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 0.04
+    costType: 1
+    upgradeType: 1
+  - name: Crit Chance
+    description: 10% chance to double damage per hit
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 100
+    costScalar: 1
+    costType: 1
+    upgradeType: 2
+  - name: Crit Damage
+    description: 5% damage added to critical strikes
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 100
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 3
+  - name: Projectile Count
+    description: shoot 1 more projectile
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 500
+    costScalar: 1
+    costType: 1
+    upgradeType: 4
+  - name: Projectile Penetration
+    description: You bullets penetrate 1 more enemy
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 500
+    costScalar: 1
+    costType: 1
+    upgradeType: 5

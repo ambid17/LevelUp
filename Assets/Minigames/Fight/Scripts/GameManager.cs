@@ -1,35 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public PlayerController player;
-    public GameObject enemyPrefab;
-    public EnemySpawner enemySpawner;
+    [SerializeField] private GameObject player;
+    [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private SettingsManager settingsManager;
+    [SerializeField] private GameStateManager gameStateManager;
     
-    public static int PlayerLayer = 6;
-    public static int ProjectileLayer = 7;
-    public static int GroundLayer = 8;
-    public static int EnemyLayer = 9;
+    public static GameObject Player => Instance.player;
+    public static EnemySpawner EnemySpawner => Instance.enemySpawner;
+    public static SettingsManager SettingsManager => Instance.settingsManager;
+    public static GameStateManager GameStateManager => Instance.gameStateManager;
 
-    [SerializeField] private float _currency;
-    public UnityEvent<float> currencyDidUpdate;
-    
-    void Start()
+    private float autoSaveTimer;
+    private const float autoSaveInterval = 10;
+
+    public override void Initialize()
     {
-        
+        SettingsManager.Init();
     }
 
-    void Update()
+    private void Update()
     {
-        
+        autoSaveTimer += Time.deltaTime;
+
+        if (autoSaveTimer > autoSaveInterval)
+        {
+            autoSaveTimer = 0;
+            //Save();
+        }
     }
 
-    public void AddCurrency(float currency)
+    private void OnDestroy()
     {
-        _currency += currency;
-        currencyDidUpdate.Invoke(_currency);
+        Save();
+        
+        // In the editor we want to clear scriptable object changes that way they aren't saved and always in the git history, and messing up tests
+        // This isn't a problem in the built application as scriptable object changes don't save
+#if UNITY_EDITOR
+        SettingsManager.SetDefaults();
+#endif
+    }
+
+    private void Save()
+    {
+        ProgressDataManager.Save();
+        UpgradeDataManager.Save();
     }
 }
