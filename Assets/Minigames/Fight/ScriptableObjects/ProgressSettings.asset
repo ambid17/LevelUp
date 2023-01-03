@@ -22,7 +22,7 @@ MonoBehaviour:
       EnemyStatScalar: 1
       SpritePixels: []
       EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
-      EnemyKillCount: 0
+      EnemyKillCount: 3
     - Index: 1
       EnemyKillsToComplete: 15
       EnemyStatScalar: 1.1
@@ -79,8 +79,7 @@ MonoBehaviour:
         maxHp: 100
         weaponDamage: 5
     WorldType: 1
-    Currency: 0
-    CurrencyPerMinute: 0
+    CurrencyPerMinute: 12
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -131,7 +130,6 @@ MonoBehaviour:
         maxHp: 250
         weaponDamage: 10
     WorldType: 3
-    Currency: 0
     CurrencyPerMinute: 0
     CurrentCountry:
       Index: 0
@@ -141,3 +139,49 @@ MonoBehaviour:
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
     IsFighting: 1
+  - Name: Mining
+    SkillingSceneIndex: 5
+    WorldSprite: {fileID: -600369647, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 1
+      EnemyStatScalar: 1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 1
+    Enemies:
+    - Prefab: {fileID: 8510735526301981988, guid: 458e4066e4f0eb146ad71db93e8a3ef1, type: 3}
+      SpawnWeight: 80
+      Settings:
+        goldValue: 10
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 1
+        weaponDamage: 5
+    - Prefab: {fileID: 8510735526301981988, guid: ed5ce95c0aee1704b90308f25eb1ac3d, type: 3}
+      SpawnWeight: 6
+      Settings:
+        goldValue: 20
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 1
+        weaponDamage: 5
+    - Prefab: {fileID: 8510735526301981988, guid: 0f4dfd9ec6923e4479ab256810aa8330, type: 3}
+      SpawnWeight: 3
+      Settings:
+        goldValue: 50
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 1
+        weaponDamage: 10
+    WorldType: 4
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 0
+  Currency: 13

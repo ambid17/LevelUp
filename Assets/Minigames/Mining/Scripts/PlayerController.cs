@@ -78,6 +78,7 @@ namespace Mining
 
             if(Input.GetMouseButtonDown(0))
             {
+                //todo: dont be stupoid
                 Tilemap tilemap = hits[0].collider.GetComponent<Tilemap>();
                 
                 Vector3Int hitPos = tilemap.WorldToCell(hits[0].point);

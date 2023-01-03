@@ -1,3 +1,4 @@
+using Minigames.Mining;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,26 +8,49 @@ namespace Mining
     public class GridManager : Singleton<GridManager>
     {
         [SerializeField]
-        List<Tilemap> tilemaps;
+        Tilemap _rockTilemap;
+        [SerializeField]
+        Tilemap _oreTilemap;
         GameObject grid;
+        [SerializeField] TileSettings _tileSettings;
+        [SerializeField] RuleTile stoneTile;
+        [SerializeField] int width, height;
         public override void Initialize()
         {
             grid = gameObject;
-            tilemaps = new List<Tilemap>();
-            foreach(Tilemap tilemap in grid.GetComponentsInChildren<Tilemap>())
-            {
-                tilemaps.Add(tilemap);
-            }
+            
+            FillWithStone();
+            FillWithOre();
         }
 
         public void MineCell(Vector3Int hitPos)
         {
-            foreach (Tilemap tilemap in tilemaps)
-            {
-                tilemap.SetTile(hitPos, null);
-            }
-                
+            _tileSettings.AddToInventory(_oreTilemap.GetTile<MiningTile>(hitPos).TileType);
+            _rockTilemap.SetTile(hitPos, null);
+            _oreTilemap.SetTile(hitPos, null);
+
         }
 
+        void FillWithStone()
+        {
+            for (int x = -width / 2; x < width / 2; x++)
+            {
+                for (int y = 0; y > -height; y--)
+                {
+                    _rockTilemap.SetTile(new Vector3Int(x, y, 0), stoneTile);
+                }
+            }
+        }
+
+        void FillWithOre()
+        {
+            for (int x = -width / 2; x < width / 2; x++)
+            {
+                for (int y = 0; y > -height; y--)
+                {
+                    _oreTilemap.SetTile(new Vector3Int(x, y, 0), _tileSettings.GetRandomTile().Tile);
+                }
+            }
+        }
     }
 }

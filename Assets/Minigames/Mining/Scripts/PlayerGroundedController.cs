@@ -13,13 +13,13 @@ public class PlayerGroundedController : MonoBehaviour
 
         void OnTriggerEnter2D (Collider2D col)
         {
-            if(col.gameObject.layer == GameManager.GroundLayer)
+            if(col.gameObject.layer == PhysicsUtils.GroundLayer)
                 _playerController.SetGrounded(true);
         }
 
         void OnTriggerExit2D(Collider2D col)
         {
-            if(col.gameObject.layer == GameManager.GroundLayer)
+            if(col.gameObject.layer == PhysicsUtils.GroundLayer)
                 _playerController.SetGrounded(false);
         }
     }
