@@ -101,6 +101,7 @@ namespace Minigames.Fish
                 case GameState.Fling:
                     _eventService.Dispatch(new LureThrownEvent(_currentLure));
                     _currentLure.Throw(_flingForceVector);
+                    _launcher.ClearTrajectory();
                     break;
                 case GameState.RoundOver:
                     // TODO: show score
@@ -164,6 +165,7 @@ namespace Minigames.Fish
             _launcher.UpdateRotation(rotation, fill);
 
             _flingForceVector = finalVector * _launcherSettings.SlingshotStrength * fill;
+            _launcher.UpdateTrajectory(_projectileFirePos, _flingForceVector);
         }
 
         private Vector3 GetMouseWorldPosition()

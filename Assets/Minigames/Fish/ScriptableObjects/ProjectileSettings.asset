@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a65588e921c794398969ac6c967569, type: 3}
   m_Name: ProjectileSettings
   m_EditorClassIdentifier: 
-  Projectiles: []
-  CurrentProjectile:
-    Sprite: {fileID: 0}
-    Mass: 0
+  Projectiles:
+  - Sprite: {fileID: 369210190, guid: 96cd5266d0a62e74d8cd5479b9268226, type: 3}
+    Mass: 1

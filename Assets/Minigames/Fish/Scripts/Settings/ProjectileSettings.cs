@@ -11,7 +11,7 @@ namespace Minigames.Fish
     {
         public List<Projectile> Projectiles;
 
-        public Projectile CurrentProjectile;
+        public Projectile CurrentProjectile => Projectiles[0];
     }
 
     [Serializable]
