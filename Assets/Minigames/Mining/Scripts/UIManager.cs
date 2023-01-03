@@ -22,6 +22,7 @@ namespace Minigames.Mining
 
         void OnCanInteract()
         {
+            Debug.Log("Event called");
             _interactText.gameObject.SetActive(true);
         }
     }

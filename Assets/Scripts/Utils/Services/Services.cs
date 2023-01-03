@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utils
 {
-    public class Services : MonoBehaviour
+    public class Services
     {
         private static Services instance;
         public static Services Instance => instance ??= new Services();

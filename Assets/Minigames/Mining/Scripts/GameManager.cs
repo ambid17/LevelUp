@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 namespace Minigames.Mining
 {
     public class GameManager : Singleton<GameManager>
@@ -13,5 +13,6 @@ namespace Minigames.Mining
         public static PlayerController PlayerController => Instance._playerController;
         public static GridService GridService => Instance._gridService;
 
+        public static UnityEvent<ObjectType> OnCanInteractEvent;
     }
 }

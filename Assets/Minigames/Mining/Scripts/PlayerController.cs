@@ -109,8 +109,6 @@ namespace Minigames.Mining
 
             velocity = new Vector3 (newHorizontalVelocity, newVerticalVelocity, 0f);
 
-            Debug.Log(_currentInput);
-            Debug.Log(velocity);
 
             _rb.velocity = velocity;
 

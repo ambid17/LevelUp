@@ -1,10 +1,14 @@
 using Utils;
 
-public class OnCanInteractEvent
+namespace Minigames.Mining
 {
-    public ObjectType ObjectType;
-    public OnCanInteractEvent (ObjectType objectType)
+    public class OnCanInteractEvent
     {
-        ObjectType = objectType;
+        public ObjectType ObjectType;
+        public OnCanInteractEvent(ObjectType objectType)
+        {
+            ObjectType = objectType;
+        }
     }
+
 }
