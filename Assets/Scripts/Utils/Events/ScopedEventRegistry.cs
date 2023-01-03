@@ -1,4 +1,4 @@
-namespace Minigames.Fish {
+namespace Utils {
     public class ScopedEventRegistry : IEventDispatcher {
         private readonly EventRegistry permanent = new EventRegistry();
         private readonly EventRegistry transient = new EventRegistry();

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Minigames.Fish
+namespace Utils
 {
     public class EventRegistry : IEventRegistry, IEventDispatcher {
         private Dictionary<Type, IContainer> eventLookup = new Dictionary<Type, IContainer>();

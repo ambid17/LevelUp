@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-namespace Mining
+namespace Minigames.Mining
 {
-    public class GridManager : Singleton<GridManager>
+    public class GridService : MonoBehaviour
     {
         [SerializeField]
         Tilemap _rockTilemap;
@@ -15,7 +15,7 @@ namespace Mining
         [SerializeField] TileSettings _tileSettings;
         [SerializeField] RuleTile stoneTile;
         [SerializeField] int width, height;
-        public override void Initialize()
+        void Awake()
         {
             grid = gameObject;
             

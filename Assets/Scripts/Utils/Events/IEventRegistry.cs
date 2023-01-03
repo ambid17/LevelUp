@@ -1,6 +1,6 @@
 using System;
 
-namespace Minigames.Fish 
+namespace Utils 
 {
     public interface IEventRegistry 
     {

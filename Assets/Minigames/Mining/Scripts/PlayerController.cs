@@ -1,8 +1,9 @@
+using Minigames.Fight;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-namespace Mining
+namespace Minigames.Mining  
 {
     public class PlayerController : MonoBehaviour
     {
@@ -82,7 +83,7 @@ namespace Mining
                 Tilemap tilemap = hits[0].collider.GetComponent<Tilemap>();
                 
                 Vector3Int hitPos = tilemap.WorldToCell(hits[0].point);
-                GridManager.Instance.MineCell(hitPos);
+                GameManager.GridService.MineCell(hitPos);
             }
         }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Minigames.Fish
+namespace Utils
 {
     public class EventService : IEventDispatcher, IEventRegistry {
         private readonly ScopedEventRegistry registry = new ScopedEventRegistry();
