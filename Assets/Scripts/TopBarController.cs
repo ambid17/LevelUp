@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class TopBarController : MonoBehaviour
 {
     [SerializeField] private GameObject homePanel;
-    [SerializeField] private GameObject fightPanel;
     [SerializeField] private GameObject perksPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject statsPanel;
     [SerializeField] private GameObject gemsPanel;
 
     [SerializeField] private Button homeButton;
-    [SerializeField] private Button fightButton;
     [SerializeField] private Button perksButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button statsButton;
@@ -22,7 +20,6 @@ public class TopBarController : MonoBehaviour
     public enum TopBarPanel
     {
         Home,
-        Fight,
         Perks,
         Settings,
         Stats,
@@ -42,7 +39,6 @@ public class TopBarController : MonoBehaviour
     private void SetupButtons()
     {
         homeButton.onClick.AddListener(() => ShowPanel(TopBarPanel.Home));
-        fightButton.onClick.AddListener(() => ShowPanel(TopBarPanel.Fight));
         perksButton.onClick.AddListener(() => ShowPanel(TopBarPanel.Perks));
         settingsButton.onClick.AddListener(() => ShowPanel(TopBarPanel.Settings));
         statsButton.onClick.AddListener(() => ShowPanel(TopBarPanel.Stats));
@@ -52,7 +48,6 @@ public class TopBarController : MonoBehaviour
     public void ShowPanel(TopBarPanel panel)
     {
         homePanel.SetActive(panel == TopBarPanel.Home);
-        fightPanel.SetActive(panel == TopBarPanel.Fight);
         perksPanel.SetActive(panel == TopBarPanel.Perks);
         settingsPanel.SetActive(panel == TopBarPanel.Settings);
         statsPanel.SetActive(panel == TopBarPanel.Stats);

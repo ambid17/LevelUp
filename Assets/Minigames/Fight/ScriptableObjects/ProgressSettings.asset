@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f16366b4a76dd4391aa550b11c2bd9, type: 3}
+  m_Name: ProgressSettings
+  m_EditorClassIdentifier: 
+  Worlds:
+  - Name: Craftopia
+    SkillingSceneIndex: 3
+    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 5
+      EnemyStatScalar: 1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 15
+      EnemyStatScalar: 1.1
+      SpritePixels: []
+      EnemyTierColor: {r: 0.21765637, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 30
+      EnemyStatScalar: 1.5
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.8564266, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 3
+      EnemyKillsToComplete: 50
+      EnemyStatScalar: 2
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.09787713, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 4
+      EnemyKillsToComplete: 100
+      EnemyStatScalar: 3
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0.76815224, a: 1}
+      EnemyKillCount: 0
+    - Index: 5
+      EnemyKillsToComplete: 200
+      EnemyStatScalar: 5
+      SpritePixels: []
+      EnemyTierColor: {r: 0.038573265, g: 0, b: 1, a: 1}
+      EnemyKillCount: 0
+    Enemies:
+    - Prefab: {fileID: 8510735526301981988, guid: 180c465e3088ff14eaca2eac7ad3ba31, type: 3}
+      SpawnWeight: 90
+      Settings:
+        goldValue: 1
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 10
+        weaponDamage: 1
+    - Prefab: {fileID: 8510735526301981988, guid: 20ea7b6e46f2d024998cf66b6ad16ad8, type: 3}
+      SpawnWeight: 6
+      Settings:
+        goldValue: 2
+        shotSpeed: 1
+        moveSpeed: 1.5
+        maxHp: 25
+        weaponDamage: 2
+    - Prefab: {fileID: 8510735526301981988, guid: 4e2dec209d1847144a9df6bf90e303b1, type: 3}
+      SpawnWeight: 3
+      Settings:
+        goldValue: 10
+        shotSpeed: 0.5
+        moveSpeed: 0.5
+        maxHp: 100
+        weaponDamage: 5
+    WorldType: 1
+    Currency: 0
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 1
+  - Name: fishing camp
+    SkillingSceneIndex: 4
+    WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 20
+      EnemyStatScalar: 20
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 50
+      EnemyStatScalar: 30
+      SpritePixels: []
+      EnemyTierColor: {r: 0.24614811, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    Enemies:
+    - Prefab: {fileID: 8510735526301981988, guid: 458e4066e4f0eb146ad71db93e8a3ef1, type: 3}
+      SpawnWeight: 80
+      Settings:
+        goldValue: 10
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 100
+        weaponDamage: 5
+    - Prefab: {fileID: 8510735526301981988, guid: ed5ce95c0aee1704b90308f25eb1ac3d, type: 3}
+      SpawnWeight: 6
+      Settings:
+        goldValue: 20
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 150
+        weaponDamage: 5
+    - Prefab: {fileID: 8510735526301981988, guid: 0f4dfd9ec6923e4479ab256810aa8330, type: 3}
+      SpawnWeight: 3
+      Settings:
+        goldValue: 50
+        shotSpeed: 1
+        moveSpeed: 1
+        maxHp: 250
+        weaponDamage: 10
+    WorldType: 3
+    Currency: 0
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 1
