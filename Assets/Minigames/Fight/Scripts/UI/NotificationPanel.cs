@@ -1,44 +1,44 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NotificationPanel : MonoBehaviour
+namespace Minigames.Fight
 {
-    [SerializeField] private GameObject container;
-    [SerializeField] private TMP_Text awayText;
-    [SerializeField] private TMP_Text goldText;
-    [SerializeField] private Button closeButton;
-
-    private float _closeTimer;
-    private float _closeTime = 10;
-
-    void Start()
+    public class NotificationPanel : MonoBehaviour
     {
-        closeButton.onClick.AddListener(Close);
-    }
+        [SerializeField] private GameObject container;
+        [SerializeField] private TMP_Text awayText;
+        [SerializeField] private TMP_Text goldText;
+        [SerializeField] private Button closeButton;
 
-    void Update()
-    {
-        _closeTimer += Time.deltaTime;
+        private float _closeTimer;
+        private float _closeTime = 10;
 
-        if (_closeTimer > _closeTime)
+        void Start()
         {
-            Close();
+            closeButton.onClick.AddListener(Close);
         }
-    }
 
-    public void Notify(int minutesAway, float currencyAwarded)
-    {
-        container.SetActive(true);
-        awayText.text = $"You were gone for {minutesAway} minutes, you earned:";
-        goldText.text = $"{currencyAwarded.ToCurrencyString()}";
-    }
+        void Update()
+        {
+            _closeTimer += Time.deltaTime;
 
-    private void Close()
-    {
-        container.SetActive(false);
+            if (_closeTimer > _closeTime)
+            {
+                Close();
+            }
+        }
+
+        public void Notify(int minutesAway, float currencyAwarded)
+        {
+            container.SetActive(true);
+            awayText.text = $"You were gone for {minutesAway} minutes, you earned:";
+            goldText.text = $"{currencyAwarded.ToCurrencyString()}";
+        }
+
+        private void Close()
+        {
+            container.SetActive(false);
+        }
     }
 }

@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+namespace Minigames.Fish
 {
-    [SerializeField] private GameObject _pausePanel;
+    public class UIManager : MonoBehaviour
+    {
+        [SerializeField] private GameObject _pausePanel;
     
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        void Start()
         {
-            _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+        
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+            }
         }
     }
 }
+

@@ -1,56 +1,53 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
-public class GameManager : Singleton<GameManager>
+namespace Minigames.Fight
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private EnemySpawner enemySpawner;
-    [SerializeField] private SettingsManager settingsManager;
-    [SerializeField] private GameStateManager gameStateManager;
+    public class GameManager : Singleton<GameManager>
+    {
+        [SerializeField] private GameObject player;
+        [SerializeField] private EnemySpawner enemySpawner;
+        [SerializeField] private SettingsManager settingsManager;
+        [SerializeField] private GameStateManager gameStateManager;
     
-    public static GameObject Player => Instance.player;
-    public static EnemySpawner EnemySpawner => Instance.enemySpawner;
-    public static SettingsManager SettingsManager => Instance.settingsManager;
-    public static GameStateManager GameStateManager => Instance.gameStateManager;
+        public static GameObject Player => Instance.player;
+        public static EnemySpawner EnemySpawner => Instance.enemySpawner;
+        public static SettingsManager SettingsManager => Instance.settingsManager;
+        public static GameStateManager GameStateManager => Instance.gameStateManager;
 
-    private float autoSaveTimer;
-    private const float autoSaveInterval = 10;
+        private float autoSaveTimer;
+        private const float autoSaveInterval = 10;
 
-    public override void Initialize()
-    {
-        SettingsManager.Init();
-    }
-
-    private void Update()
-    {
-        autoSaveTimer += Time.deltaTime;
-
-        if (autoSaveTimer > autoSaveInterval)
+        public override void Initialize()
         {
-            autoSaveTimer = 0;
-            //Save();
+            SettingsManager.Init();
         }
-    }
 
-    private void OnDestroy()
-    {
-        Save();
+        private void Update()
+        {
+            autoSaveTimer += Time.deltaTime;
+
+            if (autoSaveTimer > autoSaveInterval)
+            {
+                autoSaveTimer = 0;
+                //Save();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            Save();
         
-        // In the editor we want to clear scriptable object changes that way they aren't saved and always in the git history, and messing up tests
-        // This isn't a problem in the built application as scriptable object changes don't save
+            // In the editor we want to clear scriptable object changes that way they aren't saved and always in the git history, and messing up tests
+            // This isn't a problem in the built application as scriptable object changes don't save
 #if UNITY_EDITOR
-        SettingsManager.SetDefaults();
+            SettingsManager.SetDefaults();
 #endif
-    }
+        }
 
-    private void Save()
-    {
-        ProgressDataManager.Save();
-        UpgradeDataManager.Save();
+        private void Save()
+        {
+            ProgressDataManager.Save();
+            UpgradeDataManager.Save();
+        }
     }
 }

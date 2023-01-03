@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Minigames.Fight;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
