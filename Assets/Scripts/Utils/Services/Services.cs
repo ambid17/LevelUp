@@ -9,8 +9,20 @@ namespace Utils
         private static Services instance;
         public static Services Instance => instance ??= new Services();
 
-        public EventService EventService { get; } = new EventService();
-        
+        private EventService _eventService;
+        public EventService EventService
+        {
+            get
+            {
+                if (_eventService == null)
+                {
+                    _eventService = new EventService();
+                }
+
+                return _eventService;
+            }
+        }
+
         public static void ClearInstance()
         {
             instance.EventService.Deinit();

@@ -7,8 +7,8 @@ namespace Minigames.Mining
 {
     public class InteractableObject : MonoBehaviour
     {
-        [SerializeField] private ObjectType ObjectType;
-        [SerializeField] private EventService _eventService;
+        private ObjectType ObjectType;
+        private EventService _eventService;
 
         // Start is called before the first frame update
         void Start()
@@ -26,7 +26,6 @@ namespace Minigames.Mining
         {
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                Debug.Log("Hit the player");
                 _eventService.Dispatch<OnCanInteractEvent>();
             }
         }

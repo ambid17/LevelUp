@@ -8,8 +8,7 @@ namespace Minigames.Mining
 {
     public class UIManager : MonoBehaviour
     {
-
-        [SerializeField] private EventService _eventService;
+        private EventService _eventService;
         [SerializeField] private TextMeshPro _interactText;
         // Start is called before the first frame update
         void Awake()
@@ -22,7 +21,6 @@ namespace Minigames.Mining
 
         void OnCanInteract()
         {
-            Debug.Log("Event called");
             _interactText.gameObject.SetActive(true);
         }
     }

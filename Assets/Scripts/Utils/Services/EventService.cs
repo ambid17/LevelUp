@@ -20,8 +20,16 @@ namespace Utils
             SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         }
 
-        private void OnActiveSceneChanged(Scene _, Scene __) {
-            registry.ClearTransient();
+        private void OnActiveSceneChanged(Scene current, Scene next)
+        {
+            bool isNewScene = current != next;
+            bool currentIsNotNull = !string.IsNullOrEmpty(current.name);
+            bool nextIsNotNull = !string.IsNullOrEmpty(next.name);
+            
+            if (isNewScene && currentIsNotNull && nextIsNotNull)
+            {
+                registry.ClearTransient();
+            }
         }
 
         public void Dispatch<T>() {
