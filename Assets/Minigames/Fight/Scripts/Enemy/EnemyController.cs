@@ -11,7 +11,7 @@ namespace Minigames.Fight
     
         protected float shotTimer;
         protected float currentHp;
-        protected EnemyInstanceSettings settings;
+        [SerializeField] protected EnemyInstanceSettings settings;
 
         [SerializeField] private float idealDistanceFromPlayer;
 

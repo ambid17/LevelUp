@@ -170,7 +170,7 @@ namespace Minigames.Fight
 
         // See this for more info:
         // https://limboh27.medium.com/implementing-weighted-rng-in-unity-ed7186e3ff3b
-        private int _weightTotal;
+        [NonSerialized] private int _weightTotal;
 
         public Enemy GetRandomEnemy()
         {
