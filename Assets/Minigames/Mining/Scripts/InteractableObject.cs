@@ -7,7 +7,7 @@ namespace Minigames.Mining
 {
     public class InteractableObject : MonoBehaviour
     {
-        private ObjectType ObjectType;
+        [SerializeField] private ObjectType ObjectType;
         private EventService _eventService;
 
         // Start is called before the first frame update
@@ -26,13 +26,20 @@ namespace Minigames.Mining
         {
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                _eventService.Dispatch<OnCanInteractEvent>();
+                _eventService.Dispatch(new OnCanInteractEvent(ObjectType));
+            }
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
+            {
+                _eventService.Dispatch(new OnCantInteractEvent(ObjectType));
             }
         }
     }
     public enum ObjectType
     {
-        FuelShop, OreMarket, UpgradeShop, RepairStation
+        None, FuelShop, OreMarket, UpgradeShop, RepairStation
     }
 
 

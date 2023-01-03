@@ -51,6 +51,7 @@ namespace Minigames.Mining
     {
         [Header("Set In Editor")]
         public MiningTile Tile;
+        public float Value;
         public int SpawnWeight;
         public TileType TileType;
         [Header("Runtime Values")]

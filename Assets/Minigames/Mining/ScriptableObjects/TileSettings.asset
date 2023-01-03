@@ -14,22 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tiles:
   - Tile: {fileID: 11400000, guid: edf1a7809393f094dbc64c44f6868aa2, type: 2}
+    Value: 0
     SpawnWeight: 1000
     TileType: 0
-    Count: 297
+    Count: 299
   - Tile: {fileID: 11400000, guid: 07efb1b8bc384454d98e392b1f1b9b3d, type: 2}
+    Value: 2
     SpawnWeight: 1
     TileType: 2
     Count: 28
   - Tile: {fileID: 11400000, guid: edd226494fe28c741867e36f41d49b4c, type: 2}
+    Value: 1
     SpawnWeight: 1
     TileType: 1
     Count: 29
   - Tile: {fileID: 11400000, guid: 4a130c1e24a015f41b2f6af93439a3b9, type: 2}
+    Value: 4
     SpawnWeight: 1
     TileType: 3
     Count: 29
   - Tile: {fileID: 11400000, guid: 6845b5dc88fa2c3409a59ff1a98d502c, type: 2}
+    Value: 10000000
     SpawnWeight: 1
     TileType: 4
     Count: 28

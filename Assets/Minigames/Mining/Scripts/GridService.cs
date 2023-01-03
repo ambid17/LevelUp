@@ -12,7 +12,7 @@ namespace Minigames.Mining
         [SerializeField]
         Tilemap _oreTilemap;
         GameObject grid;
-        [SerializeField] TileSettings _tileSettings;
+        
         [SerializeField] RuleTile stoneTile;
         [SerializeField] int width, height;
         void Awake()
@@ -25,7 +25,7 @@ namespace Minigames.Mining
 
         public void MineCell(Vector3Int hitPos)
         {
-            _tileSettings.AddToInventory(_oreTilemap.GetTile<MiningTile>(hitPos).TileType);
+            GameManager.TileSettings.AddToInventory(_oreTilemap.GetTile<MiningTile>(hitPos).TileType);
             _rockTilemap.SetTile(hitPos, null);
             _oreTilemap.SetTile(hitPos, null);
 
@@ -48,7 +48,7 @@ namespace Minigames.Mining
             {
                 for (int y = 0; y > -height; y--)
                 {
-                    _oreTilemap.SetTile(new Vector3Int(x, y, 0), _tileSettings.GetRandomTile().Tile);
+                    _oreTilemap.SetTile(new Vector3Int(x, y, 0), GameManager.TileSettings.GetRandomTile().Tile);
                 }
             }
         }

@@ -10,9 +10,11 @@ namespace Minigames.Mining
         private GridService _gridService;
         [SerializeField]
         private PlayerController _playerController;
+        [SerializeField] TileSettings _tileSettings;
         public static PlayerController PlayerController => Instance._playerController;
         public static GridService GridService => Instance._gridService;
 
         public static UnityEvent<ObjectType> OnCanInteractEvent;
+        public static TileSettings TileSettings => Instance._tileSettings;
     }
 }
