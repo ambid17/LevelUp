@@ -9,9 +9,9 @@ namespace Minigames.Fish
 
     public class FishCaughtEvent : IEvent
     {
-        public Fish Fish;
+        public FishInstanceSettings Fish;
 
-        public FishCaughtEvent(Fish fish)
+        public FishCaughtEvent(FishInstanceSettings fish)
         {
             Fish = fish;
         }

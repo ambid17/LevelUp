@@ -12,7 +12,7 @@ namespace Minigames.Fish
         RoundOver,
         Reset
     }
-
+    
     public class GameManager : Singleton<GameManager>
     {
         [Header("Set In Editor")] 
@@ -20,33 +20,31 @@ namespace Minigames.Fish
 
         [SerializeField] private LauncherSettings _launcherSettings;
         [SerializeField] private ProjectileSettings _projectileSettings;
+        [SerializeField] private FishSettings _fishSettings;
         [SerializeField] private Launcher _launcher;
 
 
         public static LauncherSettings LauncherSettings => Instance._launcherSettings;
         public static ProjectileSettings ProjectileSettings => Instance._projectileSettings;
+        public static FishSettings FishSettings => Instance._fishSettings;
 
         [Header("Debug")] 
         [SerializeField] private GameState _gameState;
+        public static GameState GameState => Instance._gameState;
+        
         private Camera _mainCamera;
         private Vector3 _projectileFirePos;
         private Vector3 _touchStartPosition;
         private Vector3 _flingForceVector;
 
 
-        [SerializeField] private List<Fish> _fishOnLure;
+        [SerializeField] private List<FishInstanceSettings> _fishOnLure;
         private Lure _currentLure;
+        public static Lure CurrentLure => Instance._currentLure;
 
         private EventService _eventService;
 
-        public enum GameState
-        {
-            WaitForSlingshot,
-            SlingShotting,
-            Fling,
-            RoundOver,
-            Reset
-        }
+        
 
         void Start()
         {

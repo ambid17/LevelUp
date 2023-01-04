@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff91169722f2f94e9f3a9f32302540e, type: 3}
   m_Name: FishSettings
   m_EditorClassIdentifier: 
-  Fish: []
+  Fish:
+  - Prefab: {fileID: 465910325408144222, guid: 74e6c81a44ac2f14c8aab55cdd523a77, type: 3}
+    SpawnWeight: 1
+    InstanceSettings:
+      goldValue: 1
+      moveSpeed: 1
+  - Prefab: {fileID: 465910325408144222, guid: 8ec0ee1c5dd285747b2aa48895df6883, type: 3}
+    SpawnWeight: 1
+    InstanceSettings:
+      goldValue: 2
+      moveSpeed: 2

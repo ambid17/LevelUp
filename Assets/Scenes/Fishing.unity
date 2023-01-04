@@ -6284,6 +6284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012148282}
   - component: {fileID: 2012148281}
+  - component: {fileID: 2012148283}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6306,6 +6307,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8591657815590719411, guid: 353bc188853a1a14fae8b1d8606456bf, type: 3}
   _launcherSettings: {fileID: 11400000, guid: f8148929be3c7114cb5a664198ea936b, type: 2}
   _projectileSettings: {fileID: 11400000, guid: 398eb7d4657fd7d4ea47d669f1d25c83, type: 2}
+  _fishSettings: {fileID: 11400000, guid: c92702a7933be784682852984d410709, type: 2}
   _launcher: {fileID: 769184307}
   _gameState: 0
   _fishOnLure: []
@@ -6324,3 +6326,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2012148283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012148280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55668c2f882a7de4897278164e830bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fishSpawnSettings: {fileID: 11400000, guid: 4e7f80496dfce2f45982d7e6bd21cee6, type: 2}

@@ -90,7 +90,6 @@ namespace Minigames.Fish
             input.x *= GameManager.ProjectileSettings.CurrentProjectile.HorizontalMoveSpeed;
             input.y *= GameManager.ProjectileSettings.CurrentProjectile.FallSpeed;
             
-            Debug.Log(input);
             _currentInput = input;
         }
         
@@ -136,11 +135,13 @@ namespace Minigames.Fish
 
         private void OnTriggerEnter2D(Collider2D col)
         {
+            Debug.Log($"Collided with {col.gameObject.name}");
             // if its a fish add it to our list of fishies
             if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
-                Fish fish = col.gameObject.GetComponent<FishController>().Fish;
+                FishInstanceSettings fish = col.gameObject.GetComponent<FishController>().Fish;
                 _eventService.Dispatch(new FishCaughtEvent(fish));
+                Destroy(col.gameObject);
             }
         }
 
