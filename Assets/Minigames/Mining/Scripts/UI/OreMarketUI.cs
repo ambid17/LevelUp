@@ -19,6 +19,7 @@ namespace Minigames.Mining
         {
             foreach(var ore in GameManager.TileSettings.Tiles)
             {
+                if (!ore.Sellable) continue;
                 OreMarketItem item = Instantiate(_itemPrefab, _parent);
                 item.Setup(ore);
             }

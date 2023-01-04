@@ -19,4 +19,8 @@ namespace Minigames.Mining
             ObjectType = objectType;
         }
     }
+    public class OnCurrencyUpdatedEvent { }
+    public class OnPlayerDamageEvent { }
+    public class OnFuelUpdatedEvent { }
+    public class OnHealthUpdatedEvent { }
 }

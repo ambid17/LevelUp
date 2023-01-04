@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Utils;
+
 namespace Minigames.Mining
 {
     public class GridService : MonoBehaviour
@@ -12,9 +14,10 @@ namespace Minigames.Mining
         [SerializeField]
         Tilemap _oreTilemap;
         GameObject grid;
-        
         [SerializeField] RuleTile stoneTile;
         [SerializeField] int width, height;
+        private EventService _eventService;
+        public Tilemap Tilemap => _rockTilemap;
         void Awake()
         {
             grid = gameObject;
@@ -23,11 +26,32 @@ namespace Minigames.Mining
             FillWithOre();
         }
 
-        public void MineCell(Vector3Int hitPos)
+        private void Start()
         {
-            GameManager.TileSettings.AddToInventory(_oreTilemap.GetTile<MiningTile>(hitPos).TileType);
-            _rockTilemap.SetTile(hitPos, null);
-            _oreTilemap.SetTile(hitPos, null);
+            _eventService = Services.Instance.EventService;
+        }
+
+        public void MineCell(Vector3 hitPos)
+        {
+            Vector3Int cellPos = _rockTilemap.WorldToCell(hitPos);
+
+            MiningTile miningTile = _oreTilemap.GetTile<MiningTile>(cellPos);
+
+            if(miningTile) 
+            {
+                if(miningTile.TileType == TileType.Lava)
+                {
+                    GameManager.MiningProgressSettings.HullHealth -= 1;
+                    _eventService.Dispatch<OnPlayerDamageEvent>();
+                    _eventService.Dispatch<OnHealthUpdatedEvent>();
+                }
+                
+
+
+                GameManager.TileSettings.AddToInventory(miningTile.TileType);
+            }
+            _rockTilemap.SetTile(cellPos, null);
+            _oreTilemap.SetTile(cellPos, null);
 
         }
 

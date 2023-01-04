@@ -32,6 +32,7 @@ namespace Minigames.Mining
         {
             _interactText.gameObject.SetActive(false);
             _objectType = ObjectType.None;
+            DisableAllPanels();
         }
 
         private void Update()
@@ -40,12 +41,18 @@ namespace Minigames.Mining
             {
                 TogglePanel();
             }
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                DisableAllPanels();
+            }
         }
 
         void TogglePanel()
         {
+            DisableAllPanels();
             switch (_objectType)
             {
+                
                 case ObjectType.FuelShop:
                     _fuelShopPanel.SetActive(true);
                     break;
@@ -60,7 +67,13 @@ namespace Minigames.Mining
                     break;
             }
         }
-
+        void DisableAllPanels()
+        {
+            _fuelShopPanel.SetActive(false);
+            _oreMarketPanel.SetActive(false);
+            _upgradeShopPanel.SetActive(false);
+            _repairStationPanel.SetActive(false);
+        }
     }
 
 }

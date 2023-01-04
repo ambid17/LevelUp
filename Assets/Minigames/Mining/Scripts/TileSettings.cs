@@ -51,6 +51,7 @@ namespace Minigames.Mining
     {
         [Header("Set In Editor")]
         public MiningTile Tile;
+        public bool Sellable;
         public float Value;
         public int SpawnWeight;
         public TileType TileType;
@@ -60,7 +61,7 @@ namespace Minigames.Mining
 
     public enum TileType
     {
-        Air, Copper, Iron, Gold, Adamantium
+        Air, Copper, Iron, Gold, Adamantium, Lava
     }
 }
 
