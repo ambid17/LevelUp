@@ -13,7 +13,7 @@ namespace Minigames.Fish
         Reset
     }
 
-    public class GameManager : MonoBehaviour
+    public class GameManager : Singleton<GameManager>
     {
         [Header("Set In Editor")] 
         [SerializeField] private GameObject projectilePrefab;
@@ -21,6 +21,10 @@ namespace Minigames.Fish
         [SerializeField] private LauncherSettings _launcherSettings;
         [SerializeField] private ProjectileSettings _projectileSettings;
         [SerializeField] private Launcher _launcher;
+
+
+        public static LauncherSettings LauncherSettings => Instance._launcherSettings;
+        public static ProjectileSettings ProjectileSettings => Instance._projectileSettings;
 
         [Header("Debug")] 
         [SerializeField] private GameState _gameState;
@@ -53,6 +57,7 @@ namespace Minigames.Fish
 
             _eventService.Add<FishCaughtEvent>(FishWasCaught);
             _eventService.Add<ResetGameEvent>(ResetGame);
+            _eventService.Add<ReeledInEvent>( () => SetState(GameState.RoundOver) );
         }
 
         void Update()
@@ -92,11 +97,10 @@ namespace Minigames.Fish
             switch (newState)
             {
                 case GameState.WaitForSlingshot:
-                    _eventService.Dispatch<SlingReadyWithProjectile>();
+                    _eventService.Dispatch<WaitingForSlingshotEvent>();
                     SetupProjectile();
                     break;
                 case GameState.SlingShotting:
-                    _eventService.Dispatch<BeginFlingEvent>();
                     break;
                 case GameState.Fling:
                     _eventService.Dispatch(new LureThrownEvent(_currentLure));
@@ -105,10 +109,6 @@ namespace Minigames.Fish
                     break;
                 case GameState.RoundOver:
                     // TODO: show score
-                    _eventService.Dispatch<EndGameEvent>();
-                    break;
-                case GameState.Reset:
-                    // TODO: reset scene
                     SetState(GameState.WaitForSlingshot);
                     break;
             }
@@ -156,7 +156,7 @@ namespace Minigames.Fish
             var deltaTouch = _touchStartPosition - touchPos;
 
             var angle = Vector3.SignedAngle(Vector3.right, deltaTouch, Vector3.forward);
-            angle = Mathf.Clamp(angle, 0, 75f);
+            //angle = Mathf.Clamp(angle, 0, 75f);
             var mag = Mathf.Min(deltaTouch.magnitude, _launcherSettings.SlingshotMaxDistance);
             var fill = Mathf.Max(mag / _launcherSettings.SlingshotMaxDistance, 0.20f);
             var rotation = Quaternion.AngleAxis(angle, Vector3.forward);

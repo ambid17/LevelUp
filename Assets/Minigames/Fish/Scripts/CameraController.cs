@@ -18,8 +18,8 @@ namespace Minigames.Fish
             _defaultPosition = transform.position;
             
             _eventService = Services.Instance.EventService;
-            _eventService.Add<SlingReadyWithProjectile>(ResetCamera);
-            _eventService.Add<LureThrownEvent>(TargetLavaling);
+            _eventService.Add<WaitingForSlingshotEvent>(ResetCamera);
+            _eventService.Add<LureThrownEvent>(TargetLure);
         }
 
         void Update()
@@ -33,7 +33,7 @@ namespace Minigames.Fish
             transform.position = dampPosition;
         }
         
-        void TargetLavaling(LureThrownEvent eventType) {
+        void TargetLure(LureThrownEvent eventType) {
             _currentLure = eventType.Lure;
         }
         
