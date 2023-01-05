@@ -12,6 +12,7 @@ namespace Minigames.Fish
 
         private Vector2 _currentTarget;
         private Bounds _targetBounds;
+        
         void Start()
         {
         
@@ -31,7 +32,7 @@ namespace Minigames.Fish
 
         private void GetNextTarget()
         {
-            _currentTarget = PhysicsUtils.RandomPointInBounds(_targetBounds);
+            _currentTarget = _targetBounds.RandomPointInBounds();
         }
 
         public void Setup(FishInstanceSettings instanceSettings, Bounds targetBounds)

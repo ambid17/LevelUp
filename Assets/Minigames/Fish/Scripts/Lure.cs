@@ -15,11 +15,12 @@ namespace Minigames.Fish
         private EventService _eventService;
 
         private bool _isThrown;
-        private Projectile _projectile;
         private bool _hasGoneUnderwater;
         
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
+
+        private readonly float _reeledInHeight = 0; // The height at which the lure is considered "Reeled in"
 
         private void Awake()
         {
@@ -31,12 +32,6 @@ namespace Minigames.Fish
         private void Start()
         {
             _eventService = Services.Instance.EventService;
-            _eventService.Add<LureThrownEvent>(OnThrown);
-        }
-
-        private void OnThrown(LureThrownEvent thrownEvent)
-        {
-            _eventService.Remove<LureThrownEvent>(OnThrown);
         }
 
         private void Update()
@@ -45,6 +40,7 @@ namespace Minigames.Fish
             {
                 if (_hasGoneUnderwater)
                 {
+                    // Let the projectile's settings handle fall speed
                     _rigidbody.gravityScale = 0;
                     GetMovementInput();
                     Move();
@@ -76,7 +72,8 @@ namespace Minigames.Fish
             {
                 input.x -= 1;
             }
-
+            
+            // Fall at the projectile's speed as long as we are above the MaxDepth
             if (transform.position.y > GameManager.ProjectileSettings.CurrentProjectile.MaxDepth)
             {
                 input.y -= 1;
@@ -86,6 +83,7 @@ namespace Minigames.Fish
             input.x *= GameManager.ProjectileSettings.CurrentProjectile.HorizontalMoveSpeed;
             input.y *= GameManager.ProjectileSettings.CurrentProjectile.FallSpeed;
             
+            // Override y velocity if reeling in
             if(Input.GetMouseButton(0))
             {
                 input.y = GameManager.ProjectileSettings.CurrentProjectile.ReelSpeed;
@@ -101,7 +99,7 @@ namespace Minigames.Fish
 
         private void CheckReeledIn()
         {
-            if (transform.position.y >= 0)
+            if (transform.position.y >= _reeledInHeight)
             {
                 _isThrown = false;
                 _eventService.Dispatch<ReeledInEvent>();
@@ -118,26 +116,26 @@ namespace Minigames.Fish
         {
             float xAcceleration = GameManager.ProjectileSettings.CurrentProjectile.HorizontalAcceleration * Time.fixedDeltaTime;
             float yAcceleration = GameManager.ProjectileSettings.CurrentProjectile.VerticalAcceleration * Time.fixedDeltaTime;
+            
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, xAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, yAcceleration);
         }
 
         public void Setup(Projectile projectile)
         {
-            _projectile = projectile;
             _spriteRenderer.sprite = projectile.Sprite;
         }
 
         public void Throw(Vector3 velocity)
         {
             _isThrown = true;
+            // The prefab is kinematic by default so it doesn't fall on spawn
             _rigidbody.isKinematic = false;
             _rigidbody.velocity = velocity;
         }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log($"Collided with {col.gameObject.name}");
             // if its a fish add it to our list of fishies
             if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
@@ -145,11 +143,6 @@ namespace Minigames.Fish
                 _eventService.Dispatch(new FishCaughtEvent(fish));
                 Destroy(col.gameObject);
             }
-        }
-
-        private void OnDestroy()
-        {
-            // TODO unsubscribe from events
         }
     }
 }

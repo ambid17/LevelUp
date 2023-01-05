@@ -14,6 +14,7 @@ namespace Minigames.Fish
         public float DepthInterval;
         public int FishPerWave;
         public float SpawnAreaWidth;
+
     }
 
 }

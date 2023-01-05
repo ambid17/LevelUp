@@ -21,7 +21,7 @@ public static class PhysicsUtils
         return point;
     }
 
-    public static Vector2 RandomPointInBounds(Bounds bounds)
+    public static Vector2 RandomPointInBounds(this Bounds bounds)
     {
         return new Vector2(
             Random.Range(bounds.min.x, bounds.max.x),
