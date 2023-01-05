@@ -6600,6 +6600,52 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1388000720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1388000722}
+  - component: {fileID: 1388000721}
+  m_Layer: 0
+  m_Name: FishSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1388000721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388000720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55668c2f882a7de4897278164e830bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fishParent: {fileID: 1604874525}
+--- !u!4 &1388000722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388000720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1604874525}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468519305
 GameObject:
   m_ObjectHideFlags: 0
@@ -6840,8 +6886,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1388000722}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1706157272
 GameObject:
@@ -7277,7 +7323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2012148282}
   - component: {fileID: 2012148281}
-  - component: {fileID: 2012148283}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7301,8 +7346,10 @@ MonoBehaviour:
   _launcherSettings: {fileID: 11400000, guid: f8148929be3c7114cb5a664198ea936b, type: 2}
   _projectileSettings: {fileID: 11400000, guid: 398eb7d4657fd7d4ea47d669f1d25c83, type: 2}
   _fishSettings: {fileID: 11400000, guid: c92702a7933be784682852984d410709, type: 2}
+  _fishSpawnSettings: {fileID: 11400000, guid: 4e7f80496dfce2f45982d7e6bd21cee6, type: 2}
   _progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
   _launcher: {fileID: 769184307}
+  _fishSpawner: {fileID: 1388000721}
   _gameState: 0
   _fishOnLure: []
 --- !u!4 &2012148282
@@ -7320,20 +7367,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2012148283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012148280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55668c2f882a7de4897278164e830bb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fishParent: {fileID: 1604874525}
-  _fishSpawnSettings: {fileID: 11400000, guid: 4e7f80496dfce2f45982d7e6bd21cee6, type: 2}
 --- !u!1 &2076177902
 GameObject:
   m_ObjectHideFlags: 0

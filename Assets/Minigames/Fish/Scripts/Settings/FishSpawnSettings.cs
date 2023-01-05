@@ -11,7 +11,7 @@ namespace Minigames.Fish
     [Serializable]
     public class FishSpawnSettings : ScriptableObject
     {
-        public float DepthInterval;
+        public int DepthInterval;
         public int FishPerWave;
         public float SpawnAreaWidth;
 

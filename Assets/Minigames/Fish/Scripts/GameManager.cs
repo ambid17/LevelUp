@@ -23,8 +23,10 @@ namespace Minigames.Fish
         [SerializeField] private LauncherSettings _launcherSettings;
         [SerializeField] private ProjectileSettings _projectileSettings;
         [SerializeField] private FishSettings _fishSettings;
+        [SerializeField] private FishSpawnSettings _fishSpawnSettings;
         [SerializeField] private ProgressSettings _progressSettings;
         [SerializeField] private Launcher _launcher;
+        [SerializeField] private FishSpawner _fishSpawner;
 
 
         public static float Currency => Instance._progressSettings.Currency;
@@ -34,6 +36,8 @@ namespace Minigames.Fish
         public static LauncherSettings LauncherSettings => Instance._launcherSettings;
         public static ProjectileSettings ProjectileSettings => Instance._projectileSettings;
         public static FishSettings FishSettings => Instance._fishSettings;
+        public static FishSpawnSettings FishSpawnSettings => Instance._fishSpawnSettings;
+        public static FishSpawner FishSpawner => Instance._fishSpawner;
 
         [Header("Debug")] 
         [SerializeField] private GameState _gameState;

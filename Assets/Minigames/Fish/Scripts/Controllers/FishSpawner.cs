@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fish
 {
     public class FishSpawner : MonoBehaviour
     {
         [SerializeField] private Transform _fishParent;
-        [SerializeField] private FishSpawnSettings _fishSpawnSettings;
         
+        private FishSpawnSettings _fishSpawnSettings;
         private FishSettings _fishSettings;
-        private float _lastSpawnDepth;
+        private EventService _eventService;
+        private int _lastSpawnDepth;
+        public int LastSpawnDepth => _lastSpawnDepth;
         
         void Start()
         {
+            _eventService = Services.Instance.EventService;
             _fishSettings = GameManager.FishSettings;
+            _fishSpawnSettings = GameManager.FishSpawnSettings;
         }
 
         void Update()
@@ -35,6 +40,7 @@ namespace Minigames.Fish
             {
                 _lastSpawnDepth -= _fishSpawnSettings.DepthInterval;
                 SpawnWave();
+                _eventService.Dispatch<LureNextDepthEvent>();
             }
         }
 
