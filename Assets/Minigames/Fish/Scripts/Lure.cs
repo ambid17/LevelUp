@@ -81,15 +81,15 @@ namespace Minigames.Fish
             {
                 input.y -= 1;
             }
-            
-            if(Input.GetMouseButton(0))
-            {
-                input.y = 1;
-            }
 
             input = input.normalized;
             input.x *= GameManager.ProjectileSettings.CurrentProjectile.HorizontalMoveSpeed;
             input.y *= GameManager.ProjectileSettings.CurrentProjectile.FallSpeed;
+            
+            if(Input.GetMouseButton(0))
+            {
+                input.y = GameManager.ProjectileSettings.CurrentProjectile.ReelSpeed;
+            }
             
             _currentInput = input;
         }
@@ -116,9 +116,10 @@ namespace Minigames.Fish
         
         private void ApplyAcceleration()
         {
-            float maxAcceleration = GameManager.ProjectileSettings.CurrentProjectile.Acceleration * Time.fixedDeltaTime;
-            _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
-            _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
+            float xAcceleration = GameManager.ProjectileSettings.CurrentProjectile.HorizontalAcceleration * Time.fixedDeltaTime;
+            float yAcceleration = GameManager.ProjectileSettings.CurrentProjectile.VerticalAcceleration * Time.fixedDeltaTime;
+            _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, xAcceleration);
+            _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, yAcceleration);
         }
 
         public void Setup(Projectile projectile)

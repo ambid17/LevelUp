@@ -142,24 +142,11 @@ namespace Minigames.Fish
         {
             if (Input.GetMouseButtonDown(0))
             {
-                var position = GetMouseWorldPosition();
-
-                if (Vector3.SqrMagnitude(position - _projectileFirePos) < 25f)
-                {
-                    _touchStartPosition = Input.mousePosition / Screen.height;
-                    return true;
-                }
+                _touchStartPosition = GetMouseWorldPosition();
+                return true;
             }
 
             return false;
-        }
-
-        void EndFling()
-        {
-            if (_gameState == GameState.Fling)
-            {
-                SetState(GameState.WaitForSlingshot);
-            }
         }
 
         private void ResetGame()
@@ -169,19 +156,16 @@ namespace Minigames.Fish
 
         void UpdateLurePosition()
         {
-            var touchPos = Input.mousePosition / Screen.height;
-            var deltaTouch = _touchStartPosition - touchPos;
+            var currentTouchPosition = GetMouseWorldPosition();
+            var touchDelta = _touchStartPosition - currentTouchPosition;
 
-            var angle = Vector3.SignedAngle(Vector3.right, deltaTouch, Vector3.forward);
-            //angle = Mathf.Clamp(angle, 0, 75f);
-            var mag = Mathf.Min(deltaTouch.magnitude, _launcherSettings.SlingshotMaxDistance);
-            var fill = Mathf.Max(mag / _launcherSettings.SlingshotMaxDistance, 0.20f);
+            var angle = Vector3.SignedAngle(Vector3.right, touchDelta, Vector3.forward);
             var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            var finalVector = rotation * Vector3.right; //Normalized
+            var finalVector = rotation * Vector3.right; // Get the Normalized x component
 
-            _launcher.UpdateRotation(rotation, fill);
+            _launcher.UpdateRotation(rotation);
 
-            _flingForceVector = finalVector * _launcherSettings.SlingshotStrength * fill;
+            _flingForceVector = finalVector * _launcherSettings.SlingshotStrength;
             _launcher.UpdateTrajectory(_projectileFirePos, _flingForceVector);
         }
 

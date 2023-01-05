@@ -17,7 +17,7 @@ public class Launcher : MonoBehaviour
         ClearTrajectory();
     }
     
-    public void UpdateRotation(Quaternion rotation, float fill) {
+    public void UpdateRotation(Quaternion rotation) {
         _rotator.rotation = rotation;
     }
 
