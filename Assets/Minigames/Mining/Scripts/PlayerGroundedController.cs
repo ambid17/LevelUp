@@ -6,7 +6,7 @@ namespace Minigames.Mining
     public class PlayerGroundedController : MonoBehaviour
     {
         PlayerController _playerController;
-        // Start is called before the first frame update
+
         void Awake()
         {
             _playerController = GetComponentInParent<PlayerController>();
