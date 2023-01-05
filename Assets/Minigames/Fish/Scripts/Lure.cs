@@ -23,6 +23,8 @@ namespace Minigames.Fish
 
         private readonly float _reeledInHeight = 0; // The height at which the lure is considered "Reeled in"
 
+        public float CurrentDepth => transform.position.y;
+        
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();

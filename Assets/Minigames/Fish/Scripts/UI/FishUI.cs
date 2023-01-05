@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ namespace Minigames.Fish
     {
         [SerializeField] private TMP_Text _goldText;
         [SerializeField] private Slider _weightSlider;
+        [SerializeField] private Slider _depthSlider;
         
         private EventService _eventService;
         
@@ -24,6 +26,11 @@ namespace Minigames.Fish
             UpdateWeightSlider();
         }
 
+        private void Update()
+        {
+            UpdateDepthSlider();
+        }
+
         private void UpdateGoldText()
         {
             _goldText.text = GameManager.Currency.ToCurrencyString();
@@ -32,6 +39,11 @@ namespace Minigames.Fish
         private void UpdateWeightSlider()
         {
             _weightSlider.value = GameManager.CurrentWeightPercentage;
+        }
+
+        private void UpdateDepthSlider()
+        {
+            _depthSlider.value = GameManager.CurrentDepthPercentage;
         }
     }
 }

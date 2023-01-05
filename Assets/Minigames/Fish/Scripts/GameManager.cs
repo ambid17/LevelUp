@@ -42,6 +42,9 @@ namespace Minigames.Fish
 
         public static float CurrentWeightPercentage =>
             Instance._fishOnLure.Sum(f => f.Weight) / Instance._launcherSettings.ReelMaxWeight;
+
+        public static float CurrentDepthPercentage => Instance._currentLure.CurrentDepth /
+                                                      Instance._projectileSettings.CurrentProjectile.MaxDepth;
         public static LauncherSettings LauncherSettings => Instance._launcherSettings;
         public static ProjectileSettings ProjectileSettings => Instance._projectileSettings;
         public static FishSettings FishSettings => Instance._fishSettings;
