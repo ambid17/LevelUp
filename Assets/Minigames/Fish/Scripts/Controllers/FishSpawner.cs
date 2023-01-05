@@ -18,13 +18,14 @@ namespace Minigames.Fish
         void Start()
         {
             _eventService = Services.Instance.EventService;
+            _eventService.Add<ReeledInEvent>(OnReeledIn);
             _fishSettings = GameManager.FishSettings;
             _fishSpawnSettings = GameManager.FishSpawnSettings;
         }
 
         void Update()
         {
-            if (GameManager.GameState != GameState.Fling)
+            if (GameManager.GameState != GameState.Fling || GameManager.CurrentLure == null)
             {
                 return;
             }
@@ -77,6 +78,11 @@ namespace Minigames.Fish
             spawnBounds.SetMinMax(min, max);
 
             return spawnBounds;
+        }
+
+        private void OnReeledIn()
+        {
+            _lastSpawnDepth = 0;
         }
     }
 }

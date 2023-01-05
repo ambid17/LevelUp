@@ -16,6 +16,7 @@ namespace Minigames.Fish
 
         private bool _isThrown;
         private bool _hasGoneUnderwater;
+        private bool _isMarkedForDestroy;
         
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
@@ -32,6 +33,7 @@ namespace Minigames.Fish
         private void Start()
         {
             _eventService = Services.Instance.EventService;
+            _eventService.Add<LureSnappedEvent>(OnLureSnapped);
         }
 
         private void Update()
@@ -103,8 +105,21 @@ namespace Minigames.Fish
             {
                 _isThrown = false;
                 _eventService.Dispatch<ReeledInEvent>();
-                Destroy(gameObject);
+                Die();
             }
+        }
+
+        private void OnLureSnapped()
+        {
+            Die();
+        }
+
+        private void Die()
+        {
+            if (_isMarkedForDestroy) return;
+            
+            _isMarkedForDestroy = true;
+            Destroy(gameObject);
         }
         
         private void FixedUpdate()
@@ -139,9 +154,9 @@ namespace Minigames.Fish
             // if its a fish add it to our list of fishies
             if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
-                FishInstanceSettings fish = col.gameObject.GetComponent<FishController>().Fish;
-                _eventService.Dispatch(new FishCaughtEvent(fish));
-                Destroy(col.gameObject);
+                FishController fishController = col.gameObject.GetComponent<FishController>();
+                _eventService.Dispatch(new FishCaughtEvent(fishController.Fish));
+                fishController.Catch(transform);
             }
         }
     }

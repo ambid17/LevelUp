@@ -19,6 +19,7 @@ namespace Minigames.Fish
             
             _eventService = Services.Instance.EventService;
             _eventService.Add<WaitingForSlingshotEvent>(ResetCamera);
+            _eventService.Add<LureSnappedEvent>(ResetCamera);
             _eventService.Add<LureThrownEvent>(TargetLure);
         }
 

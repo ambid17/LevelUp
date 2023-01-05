@@ -5,24 +5,16 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private InventoryItem _inventoryItemPrefab;
+    [SerializeField] private MarketItem marketItemPrefab;
     [SerializeField] private Transform _parent;
     [SerializeField] private GameObject _container;
     
     void Start()
     {
-        SetupItems();
         TogglePanel(false);
     }
 
-    private void SetupItems()
-    {
-        foreach (var fish in GameManager.FishSettings.Fish)
-        {
-            InventoryItem item = Instantiate(_inventoryItemPrefab, _parent);
-            item.Setup(fish);
-        }
-    }
+    
 
     public void TogglePanel(bool shouldBeActive)
     {

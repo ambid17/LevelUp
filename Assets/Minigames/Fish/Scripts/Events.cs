@@ -33,4 +33,6 @@ namespace Minigames.Fish
     public class FishOnLureUpdatedEvent { }
 
     public class LureNextDepthEvent { }
+
+    public class LureSnappedEvent { }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Minigames.Fight;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Utils;
 namespace Minigames.Fish
 {
@@ -11,8 +12,7 @@ namespace Minigames.Fish
         WaitForSlingshot,
         SlingShotting,
         Fling,
-        RoundOver,
-        Reset
+        RoundOver
     }
     
     public class GameManager : Singleton<GameManager>
@@ -29,7 +29,16 @@ namespace Minigames.Fish
         [SerializeField] private FishSpawner _fishSpawner;
 
 
-        public static float Currency => Instance._progressSettings.Currency;
+        public static float Currency
+        {
+            get => Instance._progressSettings.Currency;
+
+            set
+            {
+                Instance._progressSettings.Currency = value;
+                Instance._eventService.Dispatch<CurrencyUpdatedEvent>();
+            }
+        }
 
         public static float CurrentWeightPercentage =>
             Instance._fishOnLure.Sum(f => f.Weight) / Instance._launcherSettings.ReelMaxWeight;
@@ -50,6 +59,7 @@ namespace Minigames.Fish
 
 
         [SerializeField] private List<FishInstanceSettings> _fishOnLure;
+        private float _weightOfFishOnLure;
         
         private Lure _currentLure;
         public static Lure CurrentLure => Instance._currentLure;
@@ -66,7 +76,6 @@ namespace Minigames.Fish
             _mainCamera = Camera.main;
 
             _eventService.Add<FishCaughtEvent>(FishWasCaught);
-            _eventService.Add<ResetGameEvent>(ResetGame);
             _eventService.Add<ReeledInEvent>( () => SetState(GameState.RoundOver) );
         }
 
@@ -87,13 +96,6 @@ namespace Minigames.Fish
                     if (Input.GetMouseButtonUp(0))
                     {
                         SetState(GameState.Fling);
-                    }
-
-                    break;
-                case GameState.Fling:
-                    if (Input.GetMouseButtonDown(0) && _currentLure != null)
-                    {
-                        //_currentProjectile.UseAbility();
                     }
 
                     break;
@@ -131,7 +133,8 @@ namespace Minigames.Fish
                 _fishSettings.AddFish(fishInstance);
             }
 
-            _fishOnLure = new List<FishInstanceSettings>();
+            _fishOnLure.Clear();
+            _weightOfFishOnLure = 0;
             _eventService.Dispatch<FishOnLureUpdatedEvent>();
         }
 
@@ -144,18 +147,13 @@ namespace Minigames.Fish
 
         bool DidStartSlingshot()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 _touchStartPosition = GetMouseWorldPosition();
                 return true;
             }
 
             return false;
-        }
-
-        private void ResetGame()
-        {
-            SetState(GameState.Reset);
         }
 
         void UpdateLurePosition()
@@ -183,6 +181,16 @@ namespace Minigames.Fish
         public void FishWasCaught(FishCaughtEvent eventType)
         {
             _fishOnLure.Add(eventType.Fish);
+            _weightOfFishOnLure += eventType.Fish.Weight;
+
+            if (_weightOfFishOnLure > _launcherSettings.ReelMaxWeight)
+            {
+                _fishOnLure.Clear();
+                _weightOfFishOnLure = 0;
+                _eventService.Dispatch<LureSnappedEvent>();
+                SetState(GameState.RoundOver);
+            }
+            
             _eventService.Dispatch<FishOnLureUpdatedEvent>();
         }
     }
