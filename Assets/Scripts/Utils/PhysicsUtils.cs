@@ -11,5 +11,21 @@ public static class PhysicsUtils
     {
         return new Vector2(_v.x, _v.y);
     }
-}
 
+    public static Vector2 GetRandomInDonut(float minDistance, float maxDistance)
+    {
+        Vector2 point = Random.insideUnitCircle;
+        point = point.normalized;
+        point *= Random.Range(minDistance, maxDistance);
+
+        return point;
+    }
+
+    public static Vector2 RandomPointInBounds(Bounds bounds)
+    {
+        return new Vector2(
+            Random.Range(bounds.min.x, bounds.max.x),
+            Random.Range(bounds.min.y, bounds.max.y)
+        );
+    }
+}
