@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Minigames.Fight;
 using UnityEngine;
 
 namespace Minigames.Fish
@@ -21,9 +23,14 @@ namespace Minigames.Fish
         [SerializeField] private LauncherSettings _launcherSettings;
         [SerializeField] private ProjectileSettings _projectileSettings;
         [SerializeField] private FishSettings _fishSettings;
+        [SerializeField] private ProgressSettings _progressSettings;
         [SerializeField] private Launcher _launcher;
 
 
+        public static float Currency => Instance._progressSettings.Currency;
+
+        public static float CurrentWeightPercentage =>
+            Instance._fishOnLure.Sum(f => f.Weight) / Instance._launcherSettings.ReelMaxWeight;
         public static LauncherSettings LauncherSettings => Instance._launcherSettings;
         public static ProjectileSettings ProjectileSettings => Instance._projectileSettings;
         public static FishSettings FishSettings => Instance._fishSettings;
@@ -39,6 +46,7 @@ namespace Minigames.Fish
 
 
         [SerializeField] private List<FishInstanceSettings> _fishOnLure;
+        
         private Lure _currentLure;
         public static Lure CurrentLure => Instance._currentLure;
 
@@ -106,10 +114,21 @@ namespace Minigames.Fish
                     _launcher.ClearTrajectory();
                     break;
                 case GameState.RoundOver:
-                    // TODO: show score
+                    AddFishToInventory();
                     SetState(GameState.WaitForSlingshot);
                     break;
             }
+        }
+
+        void AddFishToInventory()
+        {
+            foreach (var fishInstance in _fishOnLure)
+            {
+                _fishSettings.AddFish(fishInstance);
+            }
+
+            _fishOnLure = new List<FishInstanceSettings>();
+            _eventService.Dispatch<FishOnLureUpdatedEvent>();
         }
 
         void SetupProjectile()
@@ -176,6 +195,7 @@ namespace Minigames.Fish
         public void FishWasCaught(FishCaughtEvent eventType)
         {
             _fishOnLure.Add(eventType.Fish);
+            _eventService.Dispatch<FishOnLureUpdatedEvent>();
         }
     }
 }

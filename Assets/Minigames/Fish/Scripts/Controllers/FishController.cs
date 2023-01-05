@@ -25,7 +25,7 @@ namespace Minigames.Fish
             }
 
             Vector2 currentPosition = transform.position;
-            Vector2 newPos = Vector2.MoveTowards(currentPosition, _currentTarget, _fish.moveSpeed * Time.deltaTime);
+            Vector2 newPos = Vector2.MoveTowards(currentPosition, _currentTarget, _fish.MoveSpeed * Time.deltaTime);
             transform.position = newPos;
         }
 

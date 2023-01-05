@@ -12,6 +12,8 @@ namespace Minigames.Fish
         public float SlingshotStrength;
         public float SlingshotMaxDistance;
 
+        public float ReelMaxWeight;
+
         public const int BlockLayer = 6;
         public const int ObstacleLayer = 7;
         public const int ProjectileProjectileLayer = 8;

@@ -35,12 +35,20 @@ namespace Minigames.Fish
 
             return Fish[0];
         }
+
+        public void AddFish(FishInstanceSettings fishInstance)
+        {
+            Fish.First(f => f.InstanceSettings.FishType == fishInstance.FishType).Count++;
+        }
     }
 
     [Serializable]
     public class Fish
     {
+        public string Name;
+        public int Count;
         public GameObject Prefab;
+        public Sprite Sprite;
         public int SpawnWeight;
         public FishInstanceSettings InstanceSettings;
     }
@@ -48,7 +56,14 @@ namespace Minigames.Fish
     [Serializable]
     public class FishInstanceSettings
     {
-        public float goldValue;
-        public float moveSpeed;
+        public float GoldValue;
+        public float MoveSpeed;
+        public float Weight;
+        public FishType FishType;
+    }
+
+    public enum FishType
+    {
+        Clam, Star
     }
 }

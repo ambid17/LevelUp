@@ -27,4 +27,12 @@ namespace Minigames.Fish
             Lure = lure;
         }
     }
+
+    public class CurrencyUpdatedEvent
+    {
+    }
+
+    public class FishOnLureUpdatedEvent
+    {
+    }
 }
