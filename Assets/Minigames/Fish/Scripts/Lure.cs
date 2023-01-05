@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Minigames.Fight;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
+using Utils;
 namespace Minigames.Fish
 {
     public class Lure : MonoBehaviour
