@@ -18,6 +18,9 @@ namespace Minigames.Fish
     public class Projectile
     {
         public Sprite Sprite;
-        public float Mass;
+        public float MaxDepth;
+        public float HorizontalMoveSpeed;
+        public float FallSpeed;
+        public float Acceleration;
     }
 }
