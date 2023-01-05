@@ -12,6 +12,8 @@ namespace Minigames.Mining
         ObjectType _objectType = ObjectType.None;
         [SerializeField] private TextMeshPro _interactText;
         [SerializeField] GameObject _fuelShopPanel, _oreMarketPanel, _upgradeShopPanel, _repairStationPanel;
+        [SerializeField] private GameObject _pausePanel;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -43,7 +45,16 @@ namespace Minigames.Mining
             }
             if(Input.GetKeyDown(KeyCode.Escape))
             {
-                DisableAllPanels();
+                bool anyPanelIsOpen = _fuelShopPanel.activeInHierarchy || _oreMarketPanel.activeInHierarchy ||
+                                      _upgradeShopPanel.activeInHierarchy || _repairStationPanel.activeInHierarchy ||  _pausePanel.activeInHierarchy;
+                if (anyPanelIsOpen)
+                {
+                    DisableAllPanels();
+                }
+                else
+                {
+                    _pausePanel.SetActive(true);
+                }
             }
         }
 
@@ -52,7 +63,6 @@ namespace Minigames.Mining
             DisableAllPanels();
             switch (_objectType)
             {
-                
                 case ObjectType.FuelShop:
                     _fuelShopPanel.SetActive(true);
                     break;
@@ -73,6 +83,7 @@ namespace Minigames.Mining
             _oreMarketPanel.SetActive(false);
             _upgradeShopPanel.SetActive(false);
             _repairStationPanel.SetActive(false);
+            _pausePanel.SetActive(false);
         }
     }
 

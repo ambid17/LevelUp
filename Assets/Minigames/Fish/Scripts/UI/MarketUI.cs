@@ -60,6 +60,11 @@ namespace Minigames.Fish
         {
             _container.SetActive(shouldBeActive);
         }
+
+        public bool IsActive()
+        {
+            return _container.activeInHierarchy;
+        }
     }
 }
 

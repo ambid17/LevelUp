@@ -21,6 +21,11 @@ namespace Minigames.Fish
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 CloseAllPanels();
+
+                if (!_marketUI.IsActive())
+                {
+                    _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+                }
             }
         }
 

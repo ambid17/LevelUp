@@ -14,7 +14,6 @@ namespace Minigames.Mining
         [SerializeField] private Slider _hpSlider;
         [SerializeField] private Slider _fuelSlider;
 
-        [SerializeField] private GameObject _pausePanel;
         private EventService _eventService;
         void Start()
         {

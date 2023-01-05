@@ -14,6 +14,7 @@ public class WorldButton : MonoBehaviour
     private float planetSpeed = 0.1f;
 
     private int _sceneIndex;
+    [SerializeField] private int _sceneIndexOffset = 2;
     [SerializeField] private float _timer;
 
     private void Awake()
@@ -35,6 +36,6 @@ public class WorldButton : MonoBehaviour
     {
         _button.onClick.AddListener(() => callback());
         _image.sprite = world.WorldSprite;
-        _sceneIndex = world.SkillingSceneIndex;
+        _sceneIndex = world.SkillingSceneIndex - _sceneIndexOffset;
     }
 }
