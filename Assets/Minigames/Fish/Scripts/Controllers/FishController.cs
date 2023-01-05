@@ -19,7 +19,7 @@ namespace Minigames.Fish
 
         void Update()
         {
-            if (_currentTarget == Vector2.zero)
+            if (_currentTarget == Vector2.zero || transform.position.AsVector2() == _currentTarget)
             {
                 GetNextTarget();
             }

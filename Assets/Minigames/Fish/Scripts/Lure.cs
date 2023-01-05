@@ -45,6 +45,7 @@ namespace Minigames.Fish
             {
                 if (_hasGoneUnderwater)
                 {
+                    _rigidbody.gravityScale = 0;
                     GetMovementInput();
                     Move();
                     CheckReeledIn();
