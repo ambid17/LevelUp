@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fish:
   - Name: clam
-    Count: 0
     Prefab: {fileID: 465910325408144222, guid: 74e6c81a44ac2f14c8aab55cdd523a77, type: 3}
     Sprite: {fileID: 1431769697, guid: 96cd5266d0a62e74d8cd5479b9268226, type: 3}
     SpawnWeight: 1
+    GoldValue: 1
+    Count: 15
     InstanceSettings:
-      GoldValue: 1
+      FishType: 0
       MoveSpeed: 1
       Weight: 1
-      FishType: 0
   - Name: star
-    Count: 1
     Prefab: {fileID: 465910325408144222, guid: 8ec0ee1c5dd285747b2aa48895df6883, type: 3}
     Sprite: {fileID: -909693910, guid: 96cd5266d0a62e74d8cd5479b9268226, type: 3}
     SpawnWeight: 1
+    GoldValue: 2
+    Count: 12
     InstanceSettings:
-      GoldValue: 2
+      FishType: 1
       MoveSpeed: 2
       Weight: 2
-      FishType: 1

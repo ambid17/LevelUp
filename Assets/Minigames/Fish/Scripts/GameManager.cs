@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Minigames.Fight;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Utils;
 namespace Minigames.Fish
 {
@@ -11,8 +12,7 @@ namespace Minigames.Fish
         WaitForSlingshot,
         SlingShotting,
         Fling,
-        RoundOver,
-        Reset
+        RoundOver
     }
     
     public class GameManager : Singleton<GameManager>
@@ -23,17 +23,33 @@ namespace Minigames.Fish
         [SerializeField] private LauncherSettings _launcherSettings;
         [SerializeField] private ProjectileSettings _projectileSettings;
         [SerializeField] private FishSettings _fishSettings;
+        [SerializeField] private FishSpawnSettings _fishSpawnSettings;
         [SerializeField] private ProgressSettings _progressSettings;
         [SerializeField] private Launcher _launcher;
+        [SerializeField] private FishSpawner _fishSpawner;
 
 
-        public static float Currency => Instance._progressSettings.Currency;
+        public static float Currency
+        {
+            get => Instance._progressSettings.Currency;
+
+            set
+            {
+                Instance._progressSettings.Currency = value;
+                Instance._eventService.Dispatch<CurrencyUpdatedEvent>();
+            }
+        }
 
         public static float CurrentWeightPercentage =>
             Instance._fishOnLure.Sum(f => f.Weight) / Instance._launcherSettings.ReelMaxWeight;
+
+        public static float CurrentDepthPercentage => Instance._currentLure.CurrentDepth /
+                                                      Instance._projectileSettings.CurrentProjectile.MaxDepth;
         public static LauncherSettings LauncherSettings => Instance._launcherSettings;
         public static ProjectileSettings ProjectileSettings => Instance._projectileSettings;
         public static FishSettings FishSettings => Instance._fishSettings;
+        public static FishSpawnSettings FishSpawnSettings => Instance._fishSpawnSettings;
+        public static FishSpawner FishSpawner => Instance._fishSpawner;
 
         [Header("Debug")] 
         [SerializeField] private GameState _gameState;
@@ -46,6 +62,7 @@ namespace Minigames.Fish
 
 
         [SerializeField] private List<FishInstanceSettings> _fishOnLure;
+        private float _weightOfFishOnLure;
         
         private Lure _currentLure;
         public static Lure CurrentLure => Instance._currentLure;
@@ -62,7 +79,6 @@ namespace Minigames.Fish
             _mainCamera = Camera.main;
 
             _eventService.Add<FishCaughtEvent>(FishWasCaught);
-            _eventService.Add<ResetGameEvent>(ResetGame);
             _eventService.Add<ReeledInEvent>( () => SetState(GameState.RoundOver) );
         }
 
@@ -83,13 +99,6 @@ namespace Minigames.Fish
                     if (Input.GetMouseButtonUp(0))
                     {
                         SetState(GameState.Fling);
-                    }
-
-                    break;
-                case GameState.Fling:
-                    if (Input.GetMouseButtonDown(0) && _currentLure != null)
-                    {
-                        //_currentProjectile.UseAbility();
                     }
 
                     break;
@@ -127,7 +136,8 @@ namespace Minigames.Fish
                 _fishSettings.AddFish(fishInstance);
             }
 
-            _fishOnLure = new List<FishInstanceSettings>();
+            _fishOnLure.Clear();
+            _weightOfFishOnLure = 0;
             _eventService.Dispatch<FishOnLureUpdatedEvent>();
         }
 
@@ -140,48 +150,27 @@ namespace Minigames.Fish
 
         bool DidStartSlingshot()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                var position = GetMouseWorldPosition();
-
-                if (Vector3.SqrMagnitude(position - _projectileFirePos) < 25f)
-                {
-                    _touchStartPosition = Input.mousePosition / Screen.height;
-                    return true;
-                }
+                _touchStartPosition = GetMouseWorldPosition();
+                return true;
             }
 
             return false;
         }
 
-        void EndFling()
-        {
-            if (_gameState == GameState.Fling)
-            {
-                SetState(GameState.WaitForSlingshot);
-            }
-        }
-
-        private void ResetGame()
-        {
-            SetState(GameState.Reset);
-        }
-
         void UpdateLurePosition()
         {
-            var touchPos = Input.mousePosition / Screen.height;
-            var deltaTouch = _touchStartPosition - touchPos;
+            var currentTouchPosition = GetMouseWorldPosition();
+            var touchDelta = _touchStartPosition - currentTouchPosition;
 
-            var angle = Vector3.SignedAngle(Vector3.right, deltaTouch, Vector3.forward);
-            //angle = Mathf.Clamp(angle, 0, 75f);
-            var mag = Mathf.Min(deltaTouch.magnitude, _launcherSettings.SlingshotMaxDistance);
-            var fill = Mathf.Max(mag / _launcherSettings.SlingshotMaxDistance, 0.20f);
+            var angle = Vector3.SignedAngle(Vector3.right, touchDelta, Vector3.forward);
             var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            var finalVector = rotation * Vector3.right; //Normalized
+            var finalVector = rotation * Vector3.right; // Get the Normalized x component
 
-            _launcher.UpdateRotation(rotation, fill);
+            _launcher.UpdateRotation(rotation);
 
-            _flingForceVector = finalVector * _launcherSettings.SlingshotStrength * fill;
+            _flingForceVector = finalVector * _launcherSettings.SlingshotStrength;
             _launcher.UpdateTrajectory(_projectileFirePos, _flingForceVector);
         }
 
@@ -195,6 +184,16 @@ namespace Minigames.Fish
         public void FishWasCaught(FishCaughtEvent eventType)
         {
             _fishOnLure.Add(eventType.Fish);
+            _weightOfFishOnLure += eventType.Fish.Weight;
+
+            if (_weightOfFishOnLure > _launcherSettings.ReelMaxWeight)
+            {
+                _fishOnLure.Clear();
+                _weightOfFishOnLure = 0;
+                _eventService.Dispatch<LureSnappedEvent>();
+                SetState(GameState.RoundOver);
+            }
+            
             _eventService.Dispatch<FishOnLureUpdatedEvent>();
         }
     }

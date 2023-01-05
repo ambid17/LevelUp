@@ -46,20 +46,20 @@ namespace Minigames.Fish
     public class Fish
     {
         public string Name;
-        public int Count;
         public GameObject Prefab;
         public Sprite Sprite;
         public int SpawnWeight;
+        public float GoldValue;
+        public int Count;
         public FishInstanceSettings InstanceSettings;
     }
 
     [Serializable]
     public class FishInstanceSettings
     {
-        public float GoldValue;
+        public FishType FishType;
         public float MoveSpeed;
         public float Weight;
-        public FishType FishType;
     }
 
     public enum FishType

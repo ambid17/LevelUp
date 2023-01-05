@@ -1,23 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fish
 {
     public class FishSpawner : MonoBehaviour
     {
-        [SerializeField] FishSpawnSettings _fishSpawnSettings;
+        [SerializeField] private Transform _fishParent;
+        
+        private FishSpawnSettings _fishSpawnSettings;
         private FishSettings _fishSettings;
-        private float _lastSpawnDepth;
+        private EventService _eventService;
+        private int _lastSpawnDepth;
+        public int LastSpawnDepth => _lastSpawnDepth;
         
         void Start()
         {
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<ReeledInEvent>(OnReeledIn);
             _fishSettings = GameManager.FishSettings;
+            _fishSpawnSettings = GameManager.FishSpawnSettings;
         }
 
         void Update()
         {
-            if (GameManager.GameState != GameState.Fling)
+            if (GameManager.GameState != GameState.Fling || GameManager.CurrentLure == null)
             {
                 return;
             }
@@ -33,6 +41,7 @@ namespace Minigames.Fish
             {
                 _lastSpawnDepth -= _fishSpawnSettings.DepthInterval;
                 SpawnWave();
+                _eventService.Dispatch<LureNextDepthEvent>();
             }
         }
 
@@ -40,19 +49,21 @@ namespace Minigames.Fish
         {
             for (int i = 0; i < _fishSpawnSettings.FishPerWave; i++)
             {
-                SpawnEnemy();
+                SpawnFish();
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnFish()
         {
             Fish fishToSpawn = _fishSettings.GetRandomFish();
             
-            GameObject instance = Instantiate(fishToSpawn.Prefab);
-            instance.transform.position = GetRandomPosition();
+            GameObject instance = Instantiate(fishToSpawn.Prefab, _fishParent);
+
+            Bounds spawnBounds = GetFishSpawnBounds();
+            instance.transform.position = spawnBounds.RandomPointInBounds();
 
             FishController controller = instance.GetComponent<FishController>();
-            controller.Setup(fishToSpawn.InstanceSettings, GetFishSpawnBounds());
+            controller.Setup(fishToSpawn.InstanceSettings, spawnBounds);
         }
 
         private Bounds GetFishSpawnBounds()
@@ -68,16 +79,10 @@ namespace Minigames.Fish
 
             return spawnBounds;
         }
-    
-        public Vector2 GetRandomPosition()
+
+        private void OnReeledIn()
         {
-            Vector2 point = new Vector2();
-
-            point.y = Random.Range(_lastSpawnDepth, _lastSpawnDepth + _fishSpawnSettings.DepthInterval);
-            float halfWidth = _fishSpawnSettings.SpawnAreaWidth / 2;
-            point.x = Random.Range(-halfWidth, halfWidth);
-
-            return point;
+            _lastSpawnDepth = 0;
         }
     }
 }

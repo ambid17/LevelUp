@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectiles:
   - Sprite: {fileID: 369210190, guid: 96cd5266d0a62e74d8cd5479b9268226, type: 3}
-    MaxDepth: -15
+    MaxDepth: -35
     HorizontalMoveSpeed: 6
-    FallSpeed: 2
-    Acceleration: 1
+    FallSpeed: 3
+    HorizontalAcceleration: 5
+    VerticalAcceleration: 5
+    ReelSpeed: 3

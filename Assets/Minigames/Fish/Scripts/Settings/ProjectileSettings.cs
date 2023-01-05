@@ -21,6 +21,8 @@ namespace Minigames.Fish
         public float MaxDepth;
         public float HorizontalMoveSpeed;
         public float FallSpeed;
-        public float Acceleration;
+        public float HorizontalAcceleration;
+        public float VerticalAcceleration;
+        public float ReelSpeed;
     }
 }

@@ -28,11 +28,11 @@ namespace Minigames.Fish
         }
     }
 
-    public class CurrencyUpdatedEvent
-    {
-    }
+    public class CurrencyUpdatedEvent { }
 
-    public class FishOnLureUpdatedEvent
-    {
-    }
+    public class FishOnLureUpdatedEvent { }
+
+    public class LureNextDepthEvent { }
+
+    public class LureSnappedEvent { }
 }
