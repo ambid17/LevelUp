@@ -12,6 +12,7 @@ namespace Minigames.Fight
         [SerializeField] private Slider areaProgressSlider;
         [SerializeField] private Button previousCountryButton;
         [SerializeField] private Button nextCountryButton;
+        [SerializeField] private TMP_Text progressText;
 
         private EventService _eventService;
         
@@ -53,6 +54,11 @@ namespace Minigames.Fight
         
             previousCountryButton.interactable =
                 GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.Index > 0;
+
+            float killCount = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyKillCount;
+            float maxKills = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
+                .EnemyKillsToComplete;
+            progressText.text = $"{killCount.ToKillString()} / {maxKills.ToKillString()}";
             // TODO update world sprite
         }
 

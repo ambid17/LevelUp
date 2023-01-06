@@ -20,6 +20,7 @@ public static class StringUtils
 
         return $"{currency:0.###}{magnitudes[index]}";
     }
+    
     public static string ToCurrencyString(this int currency)
     {
         int index = 0;
@@ -30,5 +31,17 @@ public static class StringUtils
         }
 
         return $"{currency}{magnitudes[index]}";
+    }
+    
+    public static string ToKillString(this float currency)
+    {
+        int index = 0;
+        while (currency > 1000)
+        {
+            currency /= 1000;
+            index++;
+        }
+
+        return $"{currency:0.#}{magnitudes[index]}";
     }
 }

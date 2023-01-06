@@ -8,7 +8,7 @@ namespace Minigames.Fight
     {
         [SerializeField] private Material _defaultMaterial;
         [SerializeField] private Material _flashMaterial;
-        [SerializeField] protected GameObject projectilePrefab;
+        [SerializeField] protected EnemyProjectile projectilePrefab;
         protected Rigidbody2D _rigidbody2D;
         protected SpriteRenderer _spriteRenderer;
         protected Transform playerTransform;
@@ -57,17 +57,16 @@ namespace Minigames.Fight
         protected virtual void TryShoot()
         {
             shotTimer += Time.deltaTime;
-            if (shotTimer > settings.ShotSpeed)
+            if (shotTimer > settings.FireRate)
             {
                 shotTimer = 0;
             
-                GameObject projectileGO = Instantiate(projectilePrefab);
-                projectileGO.transform.position = transform.position;
+                EnemyProjectile projectile = Instantiate(projectilePrefab);
+                projectile.transform.position = transform.position;
             
-                Projectile projectile = projectileGO.GetComponent<Projectile>();
                 Vector2 direction = playerTransform.position - transform.position;
 
-                projectile.SetupForEnemy(settings.WeaponDamage, direction);
+                projectile.Setup(settings, direction);
             }
         }
 

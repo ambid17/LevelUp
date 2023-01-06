@@ -11,7 +11,7 @@ namespace Minigames.Fight
             if(touchingPlayer)
             {
                 shotTimer += Time.deltaTime;
-                if (shotTimer > settings.shotSpeed)
+                if (shotTimer > settings.fireRate)
                 {
                     shotTimer = 0;   
                     GameManager.GameStateManager.TakeDamage(settings.weaponDamage);

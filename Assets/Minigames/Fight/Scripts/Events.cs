@@ -30,4 +30,16 @@ namespace Minigames.Fight
             Upgrade = upgrade;
         }
     }
+
+    public class CurrencyRewardEvent: IEvent
+    {
+        public float MinutesAway;
+        public float Award;
+
+        public CurrencyRewardEvent(float minutesAway, float award)
+        {
+            MinutesAway = minutesAway;
+            Award = award;
+        }
+    }
 }

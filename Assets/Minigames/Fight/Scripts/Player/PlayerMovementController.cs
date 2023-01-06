@@ -128,7 +128,7 @@ namespace Minigames.Fight
                 if (_flashTimer > _flashTime)
                 {
                     _spriteRenderer.material = _defaultMaterial;
-                    _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
+                    _spriteRenderer.color = Color.white;
                     _flashTimer = 0;
                     _isFlashing = false;
                 }
