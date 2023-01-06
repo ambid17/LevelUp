@@ -1,13 +1,16 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Minigames.Fight
 {
     public class EnemyController : MonoBehaviour
     {
-        protected Transform playerTransform;
+        [SerializeField] private Material _defaultMaterial;
+        [SerializeField] private Material _flashMaterial;
         [SerializeField] protected GameObject projectilePrefab;
         protected Rigidbody2D _rigidbody2D;
         protected SpriteRenderer _spriteRenderer;
+        protected Transform playerTransform;
     
         protected float shotTimer;
         protected float currentHp;
@@ -19,6 +22,10 @@ namespace Minigames.Fight
 
         private bool isMarkedForDeath;
 
+        private float _flashTimer;
+        private float _flashTime = 0.1f;
+        private bool _isFlashing;
+        
         void Start()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,6 +46,7 @@ namespace Minigames.Fight
             TryShoot();
             TryMove();
             TryCull();
+            CheckFlash();
         }
 
         protected virtual void TryShoot()
@@ -89,11 +97,30 @@ namespace Minigames.Fight
 
         public void TakeDamage(float damage)
         {
+            _spriteRenderer.material = _flashMaterial;
+            _spriteRenderer.color = Color.white;
+            _isFlashing = true;
             currentHp -= damage;
 
             if (currentHp <= 0)
             {
                 Die();
+            }
+        }
+
+        private void CheckFlash()
+        {
+            if (_isFlashing)
+            {
+                _flashTimer += Time.deltaTime;
+
+                if (_flashTimer > _flashTime)
+                {
+                    _spriteRenderer.material = _defaultMaterial;
+                    _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
+                    _flashTimer = 0;
+                    _isFlashing = false;
+                }
             }
         }
 

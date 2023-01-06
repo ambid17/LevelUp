@@ -47,7 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2286d01694b30d4fb543d6400174a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
+  _flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
   projectilePrefab: {fileID: 3639063276670690416, guid: 4db1821d7cd4b2843bc06ba1bff6d532, type: 3}
+  settings:
+    goldValue: 0
+    shotSpeed: 0
+    moveSpeed: 0
+    maxHp: 100
+    weaponDamage: 0
   idealDistanceFromPlayer: 0
 --- !u!212 &8510735526301981991
 SpriteRenderer:
