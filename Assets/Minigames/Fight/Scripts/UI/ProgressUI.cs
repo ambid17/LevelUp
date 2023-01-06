@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -12,6 +13,8 @@ namespace Minigames.Fight
         [SerializeField] private Button previousCountryButton;
         [SerializeField] private Button nextCountryButton;
 
+        private EventService _eventService;
+        
         private void Awake()
         {
         }
@@ -23,8 +26,9 @@ namespace Minigames.Fight
         
             nextCountryButton.onClick.AddListener(NextCountry);
             nextCountryButton.interactable = false;
-        
-            GameManager.GameStateManager.enemyKilled.AddListener(UpdateProgress);
+            
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<EnemyKilledEvent>(UpdateProgress);
         
             SetWorld();
             UpdateProgress();

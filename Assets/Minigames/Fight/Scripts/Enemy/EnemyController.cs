@@ -1,5 +1,6 @@
 using TMPro.EditorUtilities;
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -26,12 +27,16 @@ namespace Minigames.Fight
         private float _flashTime = 0.1f;
         private bool _isFlashing;
         
+        private EventService _eventService;
+        
         void Start()
         {
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<PlayerDiedEvent>(Cull);
+            
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             playerTransform = GameManager.Player.transform;
-            GameManager.GameStateManager.playerDidDie.AddListener(Cull);
             _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
         }
 

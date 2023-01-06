@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -16,10 +17,13 @@ namespace Minigames.Fight
         private Upgrade _upgrade;
         public static event Action<Upgrade> upgradePurchased;
     
+        private EventService _eventService;
+        
         private void Start()
         {
             upgradeButtonText = upgradeButton.GetComponentInChildren<TMP_Text>();
-            GameManager.GameStateManager.currencyDidUpdate.AddListener(OnCurrencyUpdated);
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
         }
 
         public void Setup(Upgrade upgrade)
@@ -48,9 +52,9 @@ namespace Minigames.Fight
             upgradeButtonText.text = _upgrade.GetCost().ToCurrencyString();
         }
 
-        private void OnCurrencyUpdated(float newValue)
+        private void OnCurrencyUpdated()
         {
-            upgradeButton.interactable = newValue > _upgrade.GetCost();
+            upgradeButton.interactable = GameManager.GameStateManager.Currency > _upgrade.GetCost();
         }
     }
 }

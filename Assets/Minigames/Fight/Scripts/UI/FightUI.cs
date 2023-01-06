@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -13,18 +14,21 @@ namespace Minigames.Fight
     
         [SerializeField] private GameObject _upgradePanel;
         [SerializeField] private GameObject _pausePanel;
+        
+        private EventService _eventService;
     
         void Start()
         {
-            GameManager.GameStateManager.currencyDidUpdate.AddListener(SetGoldText);
-            GameManager.GameStateManager.currencyPerMinuteDidUpdate.AddListener(SetGoldPerMinuteText);
-            GameManager.GameStateManager.hpDidUpdate.AddListener(SetHpSlider);
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<CurrencyUpdatedEvent>(SetGoldText);
+            _eventService.Add<CpmUpdatedEvent>(SetGoldPerMinuteText);
+            _eventService.Add<PlayerHpUpdatedEvent>(SetHpSlider);
             _upgradeButton.onClick.AddListener(OpenUpgrades);
             CloseUpgrades();
         
-            SetGoldText(GameManager.SettingsManager.progressSettings.Currency);
-            SetGoldPerMinuteText(GameManager.SettingsManager.progressSettings.CurrentWorld.CurrencyPerMinute);
-            SetHpSlider(1);
+            SetGoldText();
+            SetGoldPerMinuteText();
+            SetHpSlider(new PlayerHpUpdatedEvent(1));
         }
 
         void Update()
@@ -47,20 +51,20 @@ namespace Minigames.Fight
             }
         }
 
-        private void SetGoldText(float newValue)
+        private void SetGoldText()
         {
-            _goldText.text = newValue.ToCurrencyString();
+            _goldText.text = GameManager.GameStateManager.Currency.ToCurrencyString();
         }
     
-        private void SetGoldPerMinuteText(float newValue)
+        private void SetGoldPerMinuteText()
         {
-            string value = newValue.ToCurrencyString();
+            string value = GameManager.GameStateManager.CurrencyPerMinute.ToCurrencyString();
             _goldPerMinuteText.text = $"({value}/min)";
         }
 
-        private void SetHpSlider(float hpPercentage)
+        private void SetHpSlider(PlayerHpUpdatedEvent eventType)
         {
-            _hpSlider.value = hpPercentage;
+            _hpSlider.value = eventType.PercentHp;
         }
 
         private void OpenUpgrades()

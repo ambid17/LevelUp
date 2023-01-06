@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -10,6 +11,8 @@ namespace Minigames.Fight
     
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
+        
+        private EventService _eventService;
     
         void Start()
         {
@@ -17,8 +20,9 @@ namespace Minigames.Fight
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
         
-            GameManager.GameStateManager.playerDidDie.AddListener(Die);
-            GameManager.GameStateManager.playerDidRevive.AddListener(Revive);
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<PlayerDiedEvent>(Die);
+            _eventService.Add<PlayerRevivedEvent>(Revive);
         }
 
         void Update()

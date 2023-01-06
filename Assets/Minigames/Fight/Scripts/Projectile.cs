@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -18,10 +19,13 @@ namespace Minigames.Fight
         private Vector2 _shootDirection;
         private int _penetrationsLeft;
         private bool _isMarkedForDeath;
+
+        private EventService _eventService;
     
         void Start()
         {
-            GameManager.GameStateManager.playerDidDie.AddListener(Die);
+            _eventService = Services.Instance.EventService;
+            _eventService.Add<PlayerDiedEvent>(Die);
         }
 
         void Update()

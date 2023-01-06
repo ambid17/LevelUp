@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -15,7 +16,7 @@ namespace Minigames.Fight
             set
             {
                 _progressSettings.Currency = value;
-                currencyDidUpdate.Invoke(value);
+                _eventService.Dispatch<CurrencyUpdatedEvent>();
             }
         }
     
@@ -25,7 +26,7 @@ namespace Minigames.Fight
             set
             {
                 _progressSettings.CurrentWorld.CurrencyPerMinute = value;
-                currencyPerMinuteDidUpdate.Invoke(value);
+                _eventService.Dispatch<CpmUpdatedEvent>();
             }
         }
 
@@ -41,17 +42,11 @@ namespace Minigames.Fight
                 _currentPlayerHp = newHp;
                 
                 float hpPercent = _currentPlayerHp / GameManager.SettingsManager.playerSettings.MaxHp;
-                hpDidUpdate.Invoke(hpPercent);
+                _eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
             }
         }
-    
-        public UnityEvent<float> currencyDidUpdate;
-        public UnityEvent<float> currencyPerMinuteDidUpdate;
-        public UnityEvent playerDidDie;
-        public UnityEvent playerDidRevive;
-        public UnityEvent<float> hpDidUpdate;
-        public UnityEvent enemyKilled;
-    
+
+        private EventService _eventService;
         private float _deathTime = 5;
         private float _deathTimer;
         private bool _isDead;
@@ -65,6 +60,7 @@ namespace Minigames.Fight
 
         private void Awake()
         {
+            _eventService = Services.Instance.EventService;
             AwardAwayCurrency();
         }
 
@@ -119,7 +115,7 @@ namespace Minigames.Fight
             Currency += gold;
             _currencyAcquiredThisInterval += gold;
             _progressSettings.AddKill();
-            enemyKilled.Invoke();
+            _eventService.Dispatch<EnemyKilledEvent>();
         }
 
         public bool TrySpendCurrency(float currencyToSpend)
@@ -141,7 +137,7 @@ namespace Minigames.Fight
             {
                 _deathTimer = 0;
                 _isDead = true;
-                playerDidDie.Invoke();
+                _eventService.Dispatch<PlayerDiedEvent>();
             }
         }
     
@@ -153,7 +149,7 @@ namespace Minigames.Fight
             {
                 _isDead = false;
                 CurrentPlayerHP = GameManager.SettingsManager.playerSettings.MaxHp;
-                playerDidRevive.Invoke();
+                _eventService.Dispatch<PlayerRevivedEvent>();
             }
         }
     }
