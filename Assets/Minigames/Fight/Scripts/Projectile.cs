@@ -97,8 +97,11 @@ namespace Minigames.Fight
         }
 
         private void Die()
-        {
+        {  
+            if(_isMarkedForDeath) return;
+            
             _isMarkedForDeath = true;
+            
             Destroy(gameObject);
         }
     }
