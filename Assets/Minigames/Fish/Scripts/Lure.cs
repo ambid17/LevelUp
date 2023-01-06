@@ -34,7 +34,7 @@ namespace Minigames.Fish
 
         private void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<LureSnappedEvent>(OnLureSnapped);
         }
 

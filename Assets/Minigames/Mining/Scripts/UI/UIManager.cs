@@ -17,7 +17,7 @@ namespace Minigames.Mining
         // Start is called before the first frame update
         void Awake()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<OnCanInteractEvent>(OnCanInteract);
             _eventService.Add<OnCantInteractEvent>(OnCantInteract);
             _interactText = GameManager.PlayerController.GetComponentInChildren<TextMeshPro>(true);

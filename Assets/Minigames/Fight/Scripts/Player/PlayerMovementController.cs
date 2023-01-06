@@ -20,7 +20,7 @@ namespace Minigames.Fight
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
         
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
             _eventService.Add<PlayerRevivedEvent>(Revive);
         }

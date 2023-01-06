@@ -27,7 +27,7 @@ namespace Minigames.Fight
             nextCountryButton.onClick.AddListener(NextCountry);
             nextCountryButton.interactable = false;
             
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<EnemyKilledEvent>(UpdateProgress);
         
             SetWorld();

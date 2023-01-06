@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -16,6 +17,20 @@ namespace Minigames.Fight
 
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;
+        
+        private EventService _eventService;
+        public static EventService EventService
+        {
+            get
+            {
+                if (Instance._eventService == null)
+                {
+                    Instance._eventService = new EventService();
+                }
+
+                return Instance._eventService;
+            }
+        }
 
         public override void Initialize()
         {

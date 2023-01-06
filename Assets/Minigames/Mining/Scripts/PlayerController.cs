@@ -24,7 +24,7 @@ namespace Minigames.Mining
 
         private void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<OnPlayerDamageEvent>(OnTakeDamage);
         }
         public void SetGrounded(bool g)

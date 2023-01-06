@@ -60,7 +60,7 @@ namespace Minigames.Fight
 
         private void Awake()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             AwardAwayCurrency();
         }
 

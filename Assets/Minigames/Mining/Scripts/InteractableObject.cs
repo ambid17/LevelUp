@@ -13,7 +13,7 @@ namespace Minigames.Mining
         // Start is called before the first frame update
         void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
         }
 
         // Update is called once per frame

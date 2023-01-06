@@ -17,7 +17,7 @@ namespace Minigames.Fish
         {
             _defaultPosition = transform.position;
             
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<WaitingForSlingshotEvent>(ResetCamera);
             _eventService.Add<LureSnappedEvent>(ResetCamera);
             _eventService.Add<LureThrownEvent>(TargetLure);

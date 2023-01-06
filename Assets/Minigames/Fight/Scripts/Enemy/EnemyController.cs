@@ -31,7 +31,7 @@ namespace Minigames.Fight
         
         void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<PlayerDiedEvent>(Cull);
             
             _spriteRenderer = GetComponent<SpriteRenderer>();

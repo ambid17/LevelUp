@@ -28,7 +28,7 @@ namespace Minigames.Mining
 
         private void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
         }
 
         public void MineCell(Vector3 hitPos)

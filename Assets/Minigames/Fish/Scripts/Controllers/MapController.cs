@@ -16,7 +16,7 @@ public class MapController : MonoBehaviour
     
     void Start()
     {
-        _eventService = Services.Instance.EventService;
+        _eventService = GameManager.EventService;
         _eventService.Add<LureNextDepthEvent>(GenerateMap);
         _fishSpawnSettings = GameManager.FishSpawnSettings;
         GenerateMap();

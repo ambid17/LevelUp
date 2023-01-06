@@ -22,7 +22,7 @@ namespace Minigames.Fight
         private void Start()
         {
             upgradeButtonText = upgradeButton.GetComponentInChildren<TMP_Text>();
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
         }
 

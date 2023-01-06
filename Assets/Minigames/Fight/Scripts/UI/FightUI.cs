@@ -19,7 +19,7 @@ namespace Minigames.Fight
     
         void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(SetGoldText);
             _eventService.Add<CpmUpdatedEvent>(SetGoldPerMinuteText);
             _eventService.Add<PlayerHpUpdatedEvent>(SetHpSlider);
