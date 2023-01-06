@@ -106,7 +106,7 @@ namespace Minigames.Fight
                 _gpmTimer = 0;
                 float currencyPerSecond = _currencyAcquiredThisInterval / _gpmInterval;
                 float newCurrencyPerMinute = currencyPerSecond * 60;
-
+                newCurrencyPerMinute += GameManager.SettingsManager.incomeSettings.GoldPerMinute;
                 // If the upgrade is unlocked, only save new GPM if it's higher than before
                 if (GameManager.SettingsManager.incomeSettings.SaveHighestGold)
                 {

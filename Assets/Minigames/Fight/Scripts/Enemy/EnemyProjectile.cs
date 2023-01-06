@@ -26,7 +26,7 @@ namespace Minigames.Fight
 
             if (_deathTimer > _enemySettings.ProjectileLifeTime)
             {
-                Destroy(gameObject);
+                Die();
             }
 
             Move();

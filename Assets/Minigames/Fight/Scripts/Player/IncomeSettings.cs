@@ -38,7 +38,7 @@ public class IncomeSettings : ScriptableObject
     public float GoldPerMinute { get; private set; }
     private void SetGoldPerMinute(int upgradeLevel)
     {
-        GoldPerMinute = baseGoldPerMin * Mathf.Pow(1 + goldPerMinScalar, upgradeLevel);
+        GoldPerMinute = Mathf.Pow(1 + goldPerMinScalar, upgradeLevel);
     }
     
     public float IdleTime { get; private set; }
@@ -84,7 +84,7 @@ public class IncomeSettings : ScriptableObject
         switch (upgrade.upgradeType)
         {
             case IncomeUpgradeType.IdleGoldPerMin:
-                SetIdleGoldPercent(upgrade.numberPurchased);
+                SetGoldPerMinute(upgrade.numberPurchased);
                 break;
             case IncomeUpgradeType.IdleTime:
                 SetIdleTime(upgrade.numberPurchased);
