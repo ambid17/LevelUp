@@ -35,7 +35,11 @@ namespace Minigames.Fight
             get => _currentPlayerHp;
             set
             {
-                _currentPlayerHp = value;
+                float newHp = value;
+                // if adding to player hp, clamp it to max
+                newHp = Mathf.Clamp(newHp, 0, GameManager.SettingsManager.playerSettings.MaxHp);
+                _currentPlayerHp = newHp;
+                
                 float hpPercent = _currentPlayerHp / GameManager.SettingsManager.playerSettings.MaxHp;
                 hpDidUpdate.Invoke(hpPercent);
             }

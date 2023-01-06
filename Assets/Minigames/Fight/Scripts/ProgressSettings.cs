@@ -25,7 +25,13 @@ namespace Minigames.Fight
                 if (string.IsNullOrEmpty(_currentWorld.Name))
                 {
                     int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
-                    _currentWorld = Worlds.First(world => world.SkillingSceneIndex == currentBuildIndex);
+                    
+                    _currentWorld = Worlds.FirstOrDefault(world => world.SkillingSceneIndex == currentBuildIndex);
+
+                    if (_currentWorld == null)
+                    {
+                        _currentWorld = Worlds[0];
+                    }
                 }
 #endif
                 return _currentWorld;

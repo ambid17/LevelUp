@@ -77,6 +77,11 @@ namespace Minigames.Fight
                 {
                     Die();
                 }
+
+                if (GameManager.SettingsManager.playerSettings.LifeSteal > 0)
+                {
+                    GameManager.GameStateManager.CurrentPlayerHP += _damage;
+                }
             
                 _penetrationsLeft--;
             }

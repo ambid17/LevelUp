@@ -37,6 +37,14 @@ MonoBehaviour:
     costScalar: 0.5
     costType: 1
     upgradeType: 2
+  - name: Life steal
+    description: healt for 1% of damage dealt
+    numberPurchased: 0
+    maxPurchases: 20
+    baseCost: 15
+    costScalar: 0.5
+    costType: 1
+    upgradeType: 3
   WeaponUpgrades:
   - name: Fire rate
     description: 5% fire rate per upgrade
