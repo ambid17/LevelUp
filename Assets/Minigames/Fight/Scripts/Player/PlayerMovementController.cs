@@ -5,6 +5,8 @@ namespace Minigames.Fight
 {
     public class PlayerMovementController : MonoBehaviour
     {
+        [SerializeField] private Material _defaultMaterial;
+        [SerializeField] private Material _flashMaterial;
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
@@ -13,6 +15,10 @@ namespace Minigames.Fight
         private Vector2 _currentInput;
         
         private EventService _eventService;
+        
+        private float _flashTimer;
+        private float _flashTime = 0.1f;
+        private bool _isFlashing;
     
         void Start()
         {
@@ -23,6 +29,7 @@ namespace Minigames.Fight
             _eventService = GameManager.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
             _eventService.Add<PlayerRevivedEvent>(Revive);
+            _eventService.Add<PlayerDamagedEvent>(StartDamageFx);
         }
 
         void Update()
@@ -35,6 +42,7 @@ namespace Minigames.Fight
         
             GetMovementInput();
             Move();
+            CheckDamageFx();
         }
 
         private void GetMovementInput()
@@ -102,6 +110,29 @@ namespace Minigames.Fight
         private void Die()
         {
             _spriteRenderer.color = Color.black;
+        }
+
+        private void StartDamageFx()
+        {
+            _spriteRenderer.material = _flashMaterial;
+            _spriteRenderer.color = Color.white;
+            _isFlashing = true;
+        }
+        
+        private void CheckDamageFx()
+        {
+            if (_isFlashing)
+            {
+                _flashTimer += Time.deltaTime;
+
+                if (_flashTimer > _flashTime)
+                {
+                    _spriteRenderer.material = _defaultMaterial;
+                    _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
+                    _flashTimer = 0;
+                    _isFlashing = false;
+                }
+            }
         }
     }
 }

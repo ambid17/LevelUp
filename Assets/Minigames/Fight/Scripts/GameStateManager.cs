@@ -132,6 +132,7 @@ namespace Minigames.Fight
         public void TakeDamage(float damage)
         {
             CurrentPlayerHP -= damage;
+            _eventService.Dispatch<PlayerDamagedEvent>();
 
             if (CurrentPlayerHP <= 0)
             {

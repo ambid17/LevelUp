@@ -9,7 +9,7 @@ namespace Minigames.Fight
     public class CpmUpdatedEvent { }
     public class PlayerDiedEvent { }
     public class PlayerRevivedEvent { }
-
+    public class PlayerDamagedEvent { }
     public class PlayerHpUpdatedEvent : IEvent
     {
         public float PercentHp;
