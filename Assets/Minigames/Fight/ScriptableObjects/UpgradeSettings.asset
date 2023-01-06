@@ -94,3 +94,109 @@ MonoBehaviour:
     costScalar: 1
     costType: 1
     upgradeType: 5
+  EnemyUpgrades:
+  - name: Hp
+    description: Reduces enemy hp by 1%
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 100
+    costScalar: 1
+    costType: 1
+    upgradeType: 0
+  - name: Wave Size
+    description: Increases enemies per wave by 1
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 50
+    costScalar: 1
+    costType: 1
+    upgradeType: 1
+  - name: Wave Interval
+    description: Makes waves spawn 5% faster
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 50
+    costScalar: 1
+    costType: 1
+    upgradeType: 2
+  - name: Reduced Projectile Speed
+    description: Makes enemy projectiles 5% slower
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 50
+    costScalar: 1
+    costType: 1
+    upgradeType: 3
+  - name: Reduced Fire Rate
+    description: Makes enemies fire projectiles 5% slower
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 50
+    costScalar: 1
+    costType: 1
+    upgradeType: 4
+  - name: Reduced Move Speed
+    description: Reduces enemy move speed by 5%
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 50
+    costScalar: 1
+    costType: 1
+    upgradeType: 5
+  IncomeUpgrades:
+  - name: Idle gold
+    description: Adds a base number to idle gold
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 1
+    costType: 0
+    upgradeType: 0
+  - name: Idle time
+    description: increase max time away from game
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 1
+    costType: 0
+    upgradeType: 1
+  - name: Idle Gold Percent
+    description: increase percentage of gold per minute
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 1
+    costType: 0
+    upgradeType: 2
+  - name: Kills per kill
+    description: each kill gives 1.1 kills towards the conquer progress
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 1
+    costType: 0
+    upgradeType: 3
+  - name: Save Highest gold
+    description: Idle gold only tracks highest gold per minute achieved
+    numberPurchased: 0
+    maxPurchases: 1
+    baseCost: 1000
+    costScalar: 0
+    costType: 0
+    upgradeType: 4
+  - name: Gold per kill
+    description: 5% more gold per enemy kill
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 1
+    costType: 0
+    upgradeType: 5
+  - name: Reduced Death Timer
+    description: Lowers death timer by 5%
+    numberPurchased: 0
+    maxPurchases: 0
+    baseCost: 10
+    costScalar: 1
+    costType: 0
+    upgradeType: 6

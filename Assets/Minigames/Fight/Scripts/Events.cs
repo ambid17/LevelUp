@@ -20,4 +20,14 @@ namespace Minigames.Fight
         }
     }
     public class EnemyKilledEvent { }
+
+    public class UpgradePurchasedEvent : IEvent
+    {
+        public Upgrade Upgrade;
+
+        public UpgradePurchasedEvent(Upgrade upgrade)
+        {
+            Upgrade = upgrade;
+        }
+    }
 }

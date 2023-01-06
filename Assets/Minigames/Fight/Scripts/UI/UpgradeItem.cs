@@ -15,7 +15,6 @@ namespace Minigames.Fight
         public TMP_Text upgradeButtonText;
 
         private Upgrade _upgrade;
-        public static event Action<Upgrade> upgradePurchased;
     
         private EventService _eventService;
         
@@ -40,7 +39,7 @@ namespace Minigames.Fight
             if (GameManager.GameStateManager.TrySpendCurrency(_upgrade.GetCost()))
             {
                 _upgrade.numberPurchased++;
-                upgradePurchased?.Invoke(_upgrade);
+                _eventService.Dispatch(new UpgradePurchasedEvent(_upgrade));
                 OnUpgradeUpdated();
             }
         }

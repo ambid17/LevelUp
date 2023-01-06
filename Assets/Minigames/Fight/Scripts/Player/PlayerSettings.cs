@@ -13,7 +13,7 @@ namespace Minigames.Fight
         LifeSteal,
     }
 
-    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/PlayerSettings", order = 1)]
+    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/Fight/PlayerSettings", order = 1)]
     [Serializable]
     public class PlayerSettings : ScriptableObject
     {
