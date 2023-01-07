@@ -25,6 +25,7 @@ namespace Minigames.Fight
         private float _flashTimer;
         private float _flashTime = 0.1f;
         private bool _isFlashing;
+        private Color _defaultColor;
         
         private EventService _eventService;
         
@@ -101,6 +102,10 @@ namespace Minigames.Fight
         public void TakeDamage(float damage)
         {
             _spriteRenderer.material = _flashMaterial;
+            if (!_isFlashing)
+            {
+                _defaultColor = _spriteRenderer.color;
+            }
             _spriteRenderer.color = Color.white;
             _isFlashing = true;
             currentHp -= damage;
@@ -120,7 +125,7 @@ namespace Minigames.Fight
                 if (_flashTimer > _flashTime)
                 {
                     _spriteRenderer.material = _defaultMaterial;
-                    _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
+                    _spriteRenderer.color = _defaultColor;
                     _flashTimer = 0;
                     _isFlashing = false;
                 }
