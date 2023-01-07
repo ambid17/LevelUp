@@ -47,13 +47,20 @@ namespace Minigames.Fight
         private void OnUpgradeUpdated()
         {
             upgradeCountText.text = _upgrade.GetUpgradeCountText();
-            upgradeButton.interactable = GameManager.GameStateManager.Currency > _upgrade.GetCost();
+            SetInteractability();
             upgradeButtonText.text = _upgrade.GetCost().ToCurrencyString();
         }
 
         private void OnCurrencyUpdated()
         {
-            upgradeButton.interactable = GameManager.GameStateManager.Currency > _upgrade.GetCost();
+            SetInteractability();
+        }
+
+        private void SetInteractability()
+        {
+            bool hasMoney = GameManager.GameStateManager.Currency > _upgrade.GetCost();
+            bool canUpgrade = _upgrade.numberPurchased < _upgrade.maxPurchases; 
+            upgradeButton.interactable = hasMoney && canUpgrade;
         }
     }
 }
