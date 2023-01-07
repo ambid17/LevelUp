@@ -59,7 +59,7 @@ namespace Minigames.Fight
         private void SetInteractability()
         {
             bool hasMoney = GameManager.GameStateManager.Currency > _upgrade.GetCost();
-            bool canUpgrade = _upgrade.numberPurchased < _upgrade.maxPurchases; 
+            bool canUpgrade = _upgrade.numberPurchased < _upgrade.maxPurchases || _upgrade.maxPurchases == 0; 
             upgradeButton.interactable = hasMoney && canUpgrade;
         }
     }
