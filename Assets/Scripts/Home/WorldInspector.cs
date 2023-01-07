@@ -27,6 +27,11 @@ public class WorldInspector : MonoBehaviour
 
     public void InspectWorld(World world)
     {
+        if (world == null)
+        {
+            container.SetActive(false);
+            return;
+        }
         container.SetActive(true);
         _world = world;
         planetNameText.text = world.Name;
