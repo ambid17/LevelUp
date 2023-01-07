@@ -33,10 +33,8 @@ public class WorldButton : MonoBehaviour
         
         _timer += Time.deltaTime;
 
-        float radius = (_sceneIndex * planetSize) + 2;
         float angle = _timer * planetSpeed;
-        Vector2 position = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-        transform.position = position;
+        transform.position = GetRadialPosition(angle);
     }
 
     public void SetForWorld(World world)
@@ -50,12 +48,21 @@ public class WorldButton : MonoBehaviour
 
     private void SetOrbitLine()
     {
-        _lineRenderer.positionCount = _lineSegments;
-        for (int i = 0; i < _lineSegments; i++)
+        var pointCount = _lineSegments + 1; // Extra point to close the circle
+        _lineRenderer.positionCount = pointCount;
+
+        for (int i = 0; i < pointCount; i++)
         {
-            float angle = 360;
-            Vector3 position = new Vector3(0,0,0);
+            float angle = Mathf.Deg2Rad * (i * 360f / _lineSegments);
+            Vector3 position = GetRadialPosition(angle);
             _lineRenderer.SetPosition(i, position);
         }
+    }
+
+    private Vector3 GetRadialPosition(float angle)
+    {
+        float radius = (_sceneIndex * planetSize) + 2;
+        Vector2 position = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+        return new Vector3(position.x, position.y, 0);
     }
 }
