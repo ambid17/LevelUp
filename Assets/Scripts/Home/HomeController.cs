@@ -12,13 +12,11 @@ public class HomeController : MonoBehaviour
     [SerializeField] private WorldButton _buttonPrefab;
     [SerializeField] private Transform _worldContainer;
     [SerializeField] private WorldInspector _worldInspector;
-    [SerializeField] private FightDataLoader _fightDataLoader;
     private Camera _camera;
     
     void Start()
     {
         _camera = Camera.main;;
-        _fightDataLoader.Load();
         CreatePlanetButtons();
     }
 
