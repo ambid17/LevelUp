@@ -1972,9 +1972,17 @@ PrefabInstance:
       value: Sun
       objectReference: {fileID: 0}
     - target: {fileID: 6337338093105620827, guid: aede81eec854d7f4f9a73d1ac380a0f8, type: 3}
+      propertyPath: world.Name
+      value: Sun of Resetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337338093105620827, guid: aede81eec854d7f4f9a73d1ac380a0f8, type: 3}
       propertyPath: _shouldOrbit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6337338093105620827, guid: aede81eec854d7f4f9a73d1ac380a0f8, type: 3}
+      propertyPath: world.WorldSprite
+      value: 
+      objectReference: {fileID: -587347649, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aede81eec854d7f4f9a73d1ac380a0f8, type: 3}
 --- !u!1 &1060478720
@@ -3377,9 +3385,6 @@ MonoBehaviour:
   _worldContainer: {fileID: 1455406961}
   _worldInspector: {fileID: 92648631}
   _fightDataLoader: {fileID: 1898048244}
-  _planetMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1898048244
 MonoBehaviour:
   m_ObjectHideFlags: 0

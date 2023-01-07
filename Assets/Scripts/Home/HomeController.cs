@@ -13,7 +13,6 @@ public class HomeController : MonoBehaviour
     [SerializeField] private Transform _worldContainer;
     [SerializeField] private WorldInspector _worldInspector;
     [SerializeField] private FightDataLoader _fightDataLoader;
-    [SerializeField] private LayerMask _planetMask;
     private Camera _camera;
     
     void Start()

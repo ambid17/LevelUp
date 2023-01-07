@@ -16,7 +16,7 @@ MonoBehaviour:
   - name: Move speed
     description: 5% move speed
     numberPurchased: 0
-    maxPurchases: 10
+    maxPurchases: 20
     baseCost: 10
     costScalar: 1.1
     costType: 1
@@ -26,11 +26,11 @@ MonoBehaviour:
     numberPurchased: 0
     maxPurchases: 5
     baseCost: 15
-    costScalar: 1.5
+    costScalar: 1.1
     costType: 1
     upgradeType: 1
   - name: Max HP
-    description: 5% max hp
+    description: 10% max hp
     numberPurchased: 0
     maxPurchases: 0
     baseCost: 15
@@ -40,7 +40,7 @@ MonoBehaviour:
   - name: Life steal
     description: healt for 1% of damage dealt
     numberPurchased: 0
-    maxPurchases: 20
+    maxPurchases: 100
     baseCost: 15
     costScalar: 0.5
     costType: 1
@@ -80,7 +80,7 @@ MonoBehaviour:
     upgradeType: 3
   - name: Projectile Count
     description: shoot 1 more projectile
-    numberPurchased: 0
+    numberPurchased: 2
     maxPurchases: 0
     baseCost: 500
     costScalar: 1
@@ -88,7 +88,7 @@ MonoBehaviour:
     upgradeType: 4
   - name: Projectile Penetration
     description: You bullets penetrate 1 more enemy
-    numberPurchased: 0
+    numberPurchased: 2
     maxPurchases: 0
     baseCost: 500
     costScalar: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
     numberPurchased: 0
     maxPurchases: 0
     baseCost: 100
-    costScalar: 1
+    costScalar: 0.5
     costType: 1
     upgradeType: 0
   - name: Wave Size
@@ -108,7 +108,7 @@ MonoBehaviour:
     numberPurchased: 0
     maxPurchases: 0
     baseCost: 50
-    costScalar: 1
+    costScalar: 0.5
     costType: 1
     upgradeType: 1
   - name: Wave Interval
@@ -116,7 +116,7 @@ MonoBehaviour:
     numberPurchased: 0
     maxPurchases: 0
     baseCost: 50
-    costScalar: 1
+    costScalar: 0.5
     costType: 1
     upgradeType: 2
   - name: Reduced Projectile Speed
@@ -124,7 +124,7 @@ MonoBehaviour:
     numberPurchased: 0
     maxPurchases: 0
     baseCost: 50
-    costScalar: 1
+    costScalar: 0.5
     costType: 1
     upgradeType: 3
   - name: Reduced Fire Rate
@@ -135,7 +135,7 @@ MonoBehaviour:
     costScalar: 1
     costType: 1
     upgradeType: 4
-  - name: Reduced Move Speed
+  - name: Increased Move Speed
     description: Reduces enemy move speed by 5%
     numberPurchased: 0
     maxPurchases: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
     costType: 0
     upgradeType: 0
   - name: Idle time
-    description: increase max time away from game
+    description: Increase max time away from game
     numberPurchased: 0
     maxPurchases: 0
     baseCost: 10
