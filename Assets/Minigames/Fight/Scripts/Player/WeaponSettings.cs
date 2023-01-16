@@ -15,7 +15,7 @@ namespace Minigames.Fight
         ProjectilePenetration,
     }
 
-    [CreateAssetMenu(fileName = "WeaponSettings", menuName = "ScriptableObjects/WeaponSettings", order = 1)]
+    [CreateAssetMenu(fileName = "WeaponSettings", menuName = "ScriptableObjects/Fight/WeaponSettings", order = 1)]
     [Serializable]
     public class WeaponSettings : ScriptableObject
     {

@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
 namespace Minigames.Fight
 {
     public class GameStateManager : MonoBehaviour
     {
         [SerializeField] private NotificationPanel _notificationPanel;
-
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
         public float Currency
         {
@@ -15,17 +15,16 @@ namespace Minigames.Fight
             set
             {
                 _progressSettings.Currency = value;
-                currencyDidUpdate.Invoke(value);
+                _eventService.Dispatch<CurrencyUpdatedEvent>();
             }
         }
-    
         public float CurrencyPerMinute
         {
             get => _progressSettings.CurrentWorld.CurrencyPerMinute;
             set
             {
                 _progressSettings.CurrentWorld.CurrencyPerMinute = value;
-                currencyPerMinuteDidUpdate.Invoke(value);
+                _eventService.Dispatch<CpmUpdatedEvent>();
             }
         }
 
@@ -35,32 +34,28 @@ namespace Minigames.Fight
             get => _currentPlayerHp;
             set
             {
-                _currentPlayerHp = value;
+                float newHp = value;
+                // if adding to player hp, clamp it to max
+                newHp = Mathf.Clamp(newHp, 0, GameManager.SettingsManager.playerSettings.MaxHp);
+                _currentPlayerHp = newHp;
+                
                 float hpPercent = _currentPlayerHp / GameManager.SettingsManager.playerSettings.MaxHp;
-                hpDidUpdate.Invoke(hpPercent);
+                _eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
             }
         }
-    
-        public UnityEvent<float> currencyDidUpdate;
-        public UnityEvent<float> currencyPerMinuteDidUpdate;
-        public UnityEvent playerDidDie;
-        public UnityEvent playerDidRevive;
-        public UnityEvent<float> hpDidUpdate;
-        public UnityEvent enemyKilled;
-    
-        private float _deathTime = 5;
+
+        private EventService _eventService;
         private float _deathTimer;
         private bool _isDead;
         public bool IsDead => _isDead;
-
     
         private float _gpmTimer; // GPM: gold per minute
         private readonly float _gpmInterval = 5;
         private float _currencyAcquiredThisInterval;
 
-
         private void Awake()
         {
+            _eventService = GameManager.EventService;
             AwardAwayCurrency();
         }
 
@@ -89,11 +84,17 @@ namespace Minigames.Fight
             DateTime currentTime = DateTime.Now;
             TimeSpan awayTime = currentTime - GameManager.SettingsManager.progressSettings.CurrentWorld.LastTimeVisited;
 
-            int minutesAway = (int) awayTime.TotalMinutes;
-            float award = minutesAway * CurrencyPerMinute;
+            // Cap the away time based on upgrades
+            int clampedMinutesAway = (int) Mathf.Clamp((float)awayTime.TotalMinutes, 0,
+                GameManager.SettingsManager.incomeSettings.IdleTime);
+            float currencyPerMinuteScaled =
+                CurrencyPerMinute * GameManager.SettingsManager.incomeSettings.IdleGoldPercent;
+            float award = clampedMinutesAway * currencyPerMinuteScaled;
 
             Currency += award;
-            _notificationPanel.Notify(minutesAway, award);
+            _eventService.Dispatch(new CurrencyRewardEvent(clampedMinutesAway, award));
+            // This can't be an event as this happens in the Awake() of gameStateManager
+            _notificationPanel.AwardCurrency(clampedMinutesAway, award);
         }
 
         private void UpdateGPM()
@@ -104,7 +105,21 @@ namespace Minigames.Fight
             {
                 _gpmTimer = 0;
                 float currencyPerSecond = _currencyAcquiredThisInterval / _gpmInterval;
-                CurrencyPerMinute = currencyPerSecond * 60;
+                float newCurrencyPerMinute = currencyPerSecond * 60;
+                newCurrencyPerMinute += GameManager.SettingsManager.incomeSettings.GoldPerMinute;
+                // If the upgrade is unlocked, only save new GPM if it's higher than before
+                if (GameManager.SettingsManager.incomeSettings.SaveHighestGold)
+                {
+                    if (newCurrencyPerMinute > CurrencyPerMinute)
+                    {
+                        CurrencyPerMinute = newCurrencyPerMinute;
+                    }
+                }
+                else
+                {
+                    CurrencyPerMinute = newCurrencyPerMinute;
+                }
+                
                 _currencyAcquiredThisInterval = 0;
             }
         }
@@ -115,7 +130,7 @@ namespace Minigames.Fight
             Currency += gold;
             _currencyAcquiredThisInterval += gold;
             _progressSettings.AddKill();
-            enemyKilled.Invoke();
+            _eventService.Dispatch<EnemyKilledEvent>();
         }
 
         public bool TrySpendCurrency(float currencyToSpend)
@@ -132,12 +147,13 @@ namespace Minigames.Fight
         public void TakeDamage(float damage)
         {
             CurrentPlayerHP -= damage;
+            _eventService.Dispatch<PlayerDamagedEvent>();
 
             if (CurrentPlayerHP <= 0)
             {
                 _deathTimer = 0;
                 _isDead = true;
-                playerDidDie.Invoke();
+                _eventService.Dispatch<PlayerDiedEvent>();
             }
         }
     
@@ -145,11 +161,11 @@ namespace Minigames.Fight
         {
             _deathTimer += Time.deltaTime;
 
-            if (_deathTimer > _deathTime)
+            if (_deathTimer > GameManager.SettingsManager.incomeSettings.DeathTimer)
             {
                 _isDead = false;
                 CurrentPlayerHP = GameManager.SettingsManager.playerSettings.MaxHp;
-                playerDidRevive.Invoke();
+                _eventService.Dispatch<PlayerRevivedEvent>();
             }
         }
     }

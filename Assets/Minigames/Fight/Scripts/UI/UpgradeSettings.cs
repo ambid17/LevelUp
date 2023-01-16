@@ -6,12 +6,14 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "UpgradeSettings", menuName = "ScriptableObjects/UpgradeSettings", order = 1)]
+    [CreateAssetMenu(fileName = "UpgradeSettings", menuName = "ScriptableObjects/Fight/UpgradeSettings", order = 1)]
     [Serializable]
     public class UpgradeSettings : ScriptableObject
     {
         public List<PlayerUpgrade> PlayerUpgrades;
         public List<WeaponUpgrade> WeaponUpgrades;
+        public List<EnemyUpgrade> EnemyUpgrades;
+        public List<IncomeUpgrade> IncomeUpgrades;
 
         public void SetDefaults()
         {
@@ -21,6 +23,16 @@ namespace Minigames.Fight
             }
 
             foreach (var upgrade in WeaponUpgrades)
+            {
+                upgrade.numberPurchased = 0; 
+            }
+            
+            foreach (var upgrade in EnemyUpgrades)
+            {
+                upgrade.numberPurchased = 0; 
+            }
+            
+            foreach (var upgrade in IncomeUpgrades)
             {
                 upgrade.numberPurchased = 0; 
             }
@@ -34,6 +46,16 @@ namespace Minigames.Fight
         public WeaponUpgrade GetWeaponUpgrade(WeaponUpgradeType upgradeType)
         {
             return WeaponUpgrades.First(u => u.upgradeType == upgradeType);
+        }
+        
+        public EnemyUpgrade GetEnemyUpgrade(EnemyUpgradeType upgradeType)
+        {
+            return EnemyUpgrades.First(u => u.upgradeType == upgradeType);
+        }
+        
+        public IncomeUpgrade GetIncomeUpgrade(IncomeUpgradeType upgradeType)
+        {
+            return IncomeUpgrades.First(u => u.upgradeType == upgradeType);
         }
     }
 
@@ -109,5 +131,17 @@ namespace Minigames.Fight
     public class WeaponUpgrade : Upgrade
     {
         public WeaponUpgradeType upgradeType;
+    }
+    
+    [Serializable]
+    public class EnemyUpgrade : Upgrade
+    {
+        public EnemyUpgradeType upgradeType;
+    }
+    
+    [Serializable]
+    public class IncomeUpgrade : Upgrade
+    {
+        public IncomeUpgradeType upgradeType;
     }
 }

@@ -4,7 +4,7 @@ namespace Minigames.Fight
 {
     public class PlayerCombatController : MonoBehaviour
     {
-        [SerializeField] private GameObject projectilePrefab;
+        [SerializeField] private PlayerProjectile projectilePrefab;
         private float _projectileSpread = 0.15f;
         private float _shotTimer = 0;
         private Camera _camera;
@@ -35,9 +35,7 @@ namespace Minigames.Fight
             int projectileCount = GameManager.SettingsManager.weaponSettings.ProjectileCount;
             for (int i = 0; i < projectileCount; i++)
             {
-                GameObject projectileGO = Instantiate(projectilePrefab);
-                Projectile projectile = projectileGO.GetComponent<Projectile>();
-            
+                PlayerProjectile projectile = Instantiate(projectilePrefab);
             
                 Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
@@ -45,11 +43,11 @@ namespace Minigames.Fight
                 float indexOffset = (float)i - i/2;
                 Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _projectileSpread;
             
-                projectileGO.transform.position = transform.position.AsVector2() + offset;
+                projectile.transform.position = transform.position.AsVector2() + offset;
 
                 float damage = CalculateDamage();
             
-                projectile.SetupForPlayer(damage, direction);
+                projectile.Setup(damage, direction);
             }
         
         }

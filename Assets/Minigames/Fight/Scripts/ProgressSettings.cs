@@ -25,7 +25,13 @@ namespace Minigames.Fight
                 if (string.IsNullOrEmpty(_currentWorld.Name))
                 {
                     int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
-                    _currentWorld = Worlds.First(world => world.SkillingSceneIndex == currentBuildIndex);
+                    
+                    _currentWorld = Worlds.FirstOrDefault(world => world.SkillingSceneIndex == currentBuildIndex);
+
+                    if (_currentWorld == null)
+                    {
+                        _currentWorld = Worlds[0];
+                    }
                 }
 #endif
                 return _currentWorld;
@@ -81,7 +87,7 @@ namespace Minigames.Fight
 
         public void AddKill()
         {
-            CurrentWorld.CurrentCountry.EnemyKillCount++;
+            CurrentWorld.CurrentCountry.EnemyKillCount += GameManager.SettingsManager.incomeSettings.KillsPerKill;
         }
     }
 
@@ -202,7 +208,7 @@ namespace Minigames.Fight
         public List<Vector2> SpritePixels;
         public Color EnemyTierColor;
 
-        [Header("Run-time Values")] public int EnemyKillCount;
+        [Header("Run-time Values")] public float EnemyKillCount;
 
         public bool IsConquered => EnemyKillCount >= EnemyKillsToComplete;
         public float ConquerPercent => (float)EnemyKillCount / EnemyKillsToComplete;
@@ -225,22 +231,29 @@ namespace Minigames.Fight
     public class EnemyInstanceSettings
     {
         public float goldValue;
-        public float shotSpeed;
+        public float fireRate;
         public float moveSpeed;
         public float maxHp = 100;
         public float weaponDamage;
+        public float projectileSpeed;
+        public float projectileLifeTime;
 
         public float GoldValue =>
-            goldValue * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar;
+            goldValue * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar * GameManager.SettingsManager.incomeSettings.GoldPerKill;
 
-        public float ShotSpeed => shotSpeed;
-        public float MoveSpeed => moveSpeed;
+        public float FireRate => fireRate * GameManager.SettingsManager.enemySpawnerSettings.FireRate;
+        public float MoveSpeed => moveSpeed * GameManager.SettingsManager.enemySpawnerSettings.MoveSpeed;
 
         public float MaxHp =>
-            maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar;
+            maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar * GameManager.SettingsManager.enemySpawnerSettings.Hp;
 
         public float WeaponDamage => weaponDamage *
                                      GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
                                          .EnemyStatScalar;
+
+        public float ProjectileSpeed =>
+            projectileSpeed * GameManager.SettingsManager.enemySpawnerSettings.ProjectileSpeed;
+
+        public float ProjectileLifeTime => projectileLifeTime;
     }
 }

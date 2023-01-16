@@ -33,16 +33,28 @@ namespace Minigames.Fight
             switch (upgrade)
             {
                 case PlayerUpgrade playerUpgrade:
-                    var typedUpgrade = new PlayerUpgradeModel();
-                    typedUpgrade.numberPurchased = playerUpgrade.numberPurchased;
-                    typedUpgrade.playerUpgradeType = playerUpgrade.upgradeType;
-                    newUpgrade = typedUpgrade; 
+                    var playerUpgradeModel = new PlayerUpgradeModel();
+                    playerUpgradeModel.numberPurchased = playerUpgrade.numberPurchased;
+                    playerUpgradeModel.playerUpgradeType = playerUpgrade.upgradeType;
+                    newUpgrade = playerUpgradeModel; 
                     break;
                 case WeaponUpgrade weaponUpgrade:
-                    var typedUpgrade2 = new WeaponUpgradeModel();
-                    typedUpgrade2.numberPurchased = weaponUpgrade.numberPurchased;
-                    typedUpgrade2.weaponUpgradeType = weaponUpgrade.upgradeType;
-                    newUpgrade = typedUpgrade2; 
+                    var weaponUpgradeModel = new WeaponUpgradeModel();
+                    weaponUpgradeModel.numberPurchased = weaponUpgrade.numberPurchased;
+                    weaponUpgradeModel.weaponUpgradeType = weaponUpgrade.upgradeType;
+                    newUpgrade = weaponUpgradeModel; 
+                    break;
+                case IncomeUpgrade weaponUpgrade:
+                    var incomeUpgradeModel = new IncomeUpgradeModel();
+                    incomeUpgradeModel.numberPurchased = weaponUpgrade.numberPurchased;
+                    incomeUpgradeModel.incomeUpgradeType = weaponUpgrade.upgradeType;
+                    newUpgrade = incomeUpgradeModel; 
+                    break;
+                case EnemyUpgrade weaponUpgrade:
+                    var enemyUpgradeModel = new EnemyUpgradeModel();
+                    enemyUpgradeModel.numberPurchased = weaponUpgrade.numberPurchased;
+                    enemyUpgradeModel.enemyUpgradeType = weaponUpgrade.upgradeType;
+                    newUpgrade = enemyUpgradeModel; 
                     break;
             }
         
@@ -66,5 +78,17 @@ namespace Minigames.Fight
     public class WeaponUpgradeModel : UpgradeModel
     {
         public WeaponUpgradeType weaponUpgradeType;
+    }
+    
+    [Serializable]
+    public class EnemyUpgradeModel : UpgradeModel
+    {
+        public EnemyUpgradeType enemyUpgradeType;
+    }
+    
+    [Serializable]
+    public class IncomeUpgradeModel : UpgradeModel
+    {
+        public IncomeUpgradeType incomeUpgradeType;
     }
 }

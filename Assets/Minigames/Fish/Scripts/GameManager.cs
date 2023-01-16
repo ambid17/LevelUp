@@ -68,13 +68,24 @@ namespace Minigames.Fish
         public static Lure CurrentLure => Instance._currentLure;
 
         private EventService _eventService;
+        public static EventService EventService
+        {
+            get
+            {
+                if (Instance._eventService == null)
+                {
+                    Instance._eventService = new EventService();
+                }
 
+                return Instance._eventService;
+            }
+        }
         
 
         void Start()
         {
             _projectileFirePos = _launcher.FirePosition;
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             SetState(GameState.WaitForSlingshot);
             _mainCamera = Camera.main;
 

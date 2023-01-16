@@ -1,13 +1,16 @@
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
     public class EnemyController : MonoBehaviour
     {
-        protected Transform playerTransform;
-        [SerializeField] protected GameObject projectilePrefab;
+        [SerializeField] private Material _defaultMaterial;
+        [SerializeField] private Material _flashMaterial;
+        [SerializeField] protected EnemyProjectile projectilePrefab;
         protected Rigidbody2D _rigidbody2D;
         protected SpriteRenderer _spriteRenderer;
+        protected Transform playerTransform;
     
         protected float shotTimer;
         protected float currentHp;
@@ -19,12 +22,21 @@ namespace Minigames.Fight
 
         private bool isMarkedForDeath;
 
+        private float _flashTimer;
+        private float _flashTime = 0.1f;
+        private bool _isFlashing;
+        private Color _defaultColor;
+        
+        private EventService _eventService;
+        
         void Start()
         {
+            _eventService = GameManager.EventService;
+            _eventService.Add<PlayerDiedEvent>(Cull);
+            
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             playerTransform = GameManager.Player.transform;
-            GameManager.GameStateManager.playerDidDie.AddListener(Cull);
             _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
         }
 
@@ -39,22 +51,22 @@ namespace Minigames.Fight
             TryShoot();
             TryMove();
             TryCull();
+            CheckFlash();
         }
 
         protected virtual void TryShoot()
         {
             shotTimer += Time.deltaTime;
-            if (shotTimer > settings.ShotSpeed)
+            if (shotTimer > settings.FireRate)
             {
                 shotTimer = 0;
             
-                GameObject projectileGO = Instantiate(projectilePrefab);
-                projectileGO.transform.position = transform.position;
+                EnemyProjectile projectile = Instantiate(projectilePrefab);
+                projectile.transform.position = transform.position;
             
-                Projectile projectile = projectileGO.GetComponent<Projectile>();
                 Vector2 direction = playerTransform.position - transform.position;
 
-                projectile.SetupForEnemy(settings.WeaponDamage, direction);
+                projectile.Setup(settings, direction);
             }
         }
 
@@ -89,11 +101,34 @@ namespace Minigames.Fight
 
         public void TakeDamage(float damage)
         {
+            _spriteRenderer.material = _flashMaterial;
+            if (!_isFlashing)
+            {
+                _defaultColor = _spriteRenderer.color;
+            }
+            _spriteRenderer.color = Color.white;
+            _isFlashing = true;
             currentHp -= damage;
 
             if (currentHp <= 0)
             {
                 Die();
+            }
+        }
+
+        private void CheckFlash()
+        {
+            if (_isFlashing)
+            {
+                _flashTimer += Time.deltaTime;
+
+                if (_flashTimer > _flashTime)
+                {
+                    _spriteRenderer.material = _defaultMaterial;
+                    _spriteRenderer.color = _defaultColor;
+                    _flashTimer = 0;
+                    _isFlashing = false;
+                }
             }
         }
 

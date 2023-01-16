@@ -22,13 +22,13 @@ MonoBehaviour:
       EnemyStatScalar: 1
       SpritePixels: []
       EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
-      EnemyKillCount: 3
+      EnemyKillCount: 36
     - Index: 1
       EnemyKillsToComplete: 10
       EnemyStatScalar: 1.1
       SpritePixels: []
       EnemyTierColor: {r: 0.21765637, g: 1, b: 0, a: 1}
-      EnemyKillCount: 0
+      EnemyKillCount: 166
     - Index: 2
       EnemyKillsToComplete: 15
       EnemyStatScalar: 1.5
@@ -58,28 +58,34 @@ MonoBehaviour:
       SpawnWeight: 90
       Settings:
         goldValue: 1
-        shotSpeed: 1
+        fireRate: 0.5
         moveSpeed: 1
         maxHp: 10
         weaponDamage: 1
+        projectileSpeed: 0
+        projectileLifeTime: 0
     - Prefab: {fileID: 8510735526301981988, guid: 20ea7b6e46f2d024998cf66b6ad16ad8, type: 3}
       SpawnWeight: 6
       Settings:
         goldValue: 2
-        shotSpeed: 1
+        fireRate: 1
         moveSpeed: 1.5
         maxHp: 25
         weaponDamage: 2
+        projectileSpeed: 4
+        projectileLifeTime: 5
     - Prefab: {fileID: 8510735526301981988, guid: 4e2dec209d1847144a9df6bf90e303b1, type: 3}
       SpawnWeight: 3
       Settings:
         goldValue: 10
-        shotSpeed: 0.5
+        fireRate: 1.5
         moveSpeed: 0.5
         maxHp: 100
         weaponDamage: 5
+        projectileSpeed: 3
+        projectileLifeTime: 2
     WorldType: 1
-    CurrencyPerMinute: 0
+    CurrencyPerMinute: 14349027
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -93,7 +99,7 @@ MonoBehaviour:
     WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
     Countries:
     - Index: 0
-      EnemyKillsToComplete: 5
+      EnemyKillsToComplete: 10
       EnemyStatScalar: 10
       SpritePixels: []
       EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
@@ -104,33 +110,51 @@ MonoBehaviour:
       SpritePixels: []
       EnemyTierColor: {r: 0.24614811, g: 1, b: 0, a: 1}
       EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 20
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.913718, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 3
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 25
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.17356366, b: 0, a: 1}
+      EnemyKillCount: 0
     Enemies:
     - Prefab: {fileID: 8510735526301981988, guid: 458e4066e4f0eb146ad71db93e8a3ef1, type: 3}
       SpawnWeight: 80
       Settings:
         goldValue: 10
-        shotSpeed: 1
+        fireRate: 0.5
         moveSpeed: 1
         maxHp: 100
         weaponDamage: 5
+        projectileSpeed: 1
+        projectileLifeTime: 0
     - Prefab: {fileID: 8510735526301981988, guid: ed5ce95c0aee1704b90308f25eb1ac3d, type: 3}
       SpawnWeight: 6
       Settings:
         goldValue: 20
-        shotSpeed: 1
+        fireRate: 1
         moveSpeed: 1
         maxHp: 150
         weaponDamage: 5
+        projectileSpeed: 4
+        projectileLifeTime: 2
     - Prefab: {fileID: 8510735526301981988, guid: 0f4dfd9ec6923e4479ab256810aa8330, type: 3}
       SpawnWeight: 3
       Settings:
         goldValue: 50
-        shotSpeed: 1
+        fireRate: 1.5
         moveSpeed: 1
         maxHp: 250
         weaponDamage: 10
+        projectileSpeed: 1
+        projectileLifeTime: 10
     WorldType: 3
-    CurrencyPerMinute: 0
+    CurrencyPerMinute: 14374107
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -145,35 +169,59 @@ MonoBehaviour:
     Countries:
     - Index: 0
       EnemyKillsToComplete: 10
-      EnemyStatScalar: 100
+      EnemyStatScalar: 1000
       SpritePixels: []
       EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
-      EnemyKillCount: 1
+      EnemyKillCount: 0
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 2000
+      SpritePixels: []
+      EnemyTierColor: {r: 0.09620416, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 4500
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.88786775, b: 0.08018869, a: 1}
+      EnemyKillCount: 0
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 6000
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0, a: 1}
+      EnemyKillCount: 0
     Enemies:
     - Prefab: {fileID: 8510735526301981988, guid: 458e4066e4f0eb146ad71db93e8a3ef1, type: 3}
       SpawnWeight: 80
       Settings:
         goldValue: 10
-        shotSpeed: 1
+        fireRate: 1
         moveSpeed: 1
         maxHp: 1
         weaponDamage: 5
+        projectileSpeed: 0
+        projectileLifeTime: 0
     - Prefab: {fileID: 8510735526301981988, guid: ed5ce95c0aee1704b90308f25eb1ac3d, type: 3}
       SpawnWeight: 6
       Settings:
         goldValue: 20
-        shotSpeed: 1
+        fireRate: 1
         moveSpeed: 1
         maxHp: 1
         weaponDamage: 5
+        projectileSpeed: 2
+        projectileLifeTime: 5
     - Prefab: {fileID: 8510735526301981988, guid: 0f4dfd9ec6923e4479ab256810aa8330, type: 3}
       SpawnWeight: 3
       Settings:
         goldValue: 50
-        shotSpeed: 1
+        fireRate: 1
         moveSpeed: 1
         maxHp: 1
         weaponDamage: 10
+        projectileSpeed: 5
+        projectileLifeTime: 3
     WorldType: 4
     CurrencyPerMinute: 0
     CurrentCountry:
@@ -184,4 +232,4 @@ MonoBehaviour:
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
     IsFighting: 0
-  Currency: 281000200
+  Currency: 183047600

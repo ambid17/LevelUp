@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -14,12 +15,14 @@ namespace Minigames.Fight
         public TMP_Text upgradeButtonText;
 
         private Upgrade _upgrade;
-        public static event Action<Upgrade> upgradePurchased;
     
+        private EventService _eventService;
+        
         private void Start()
         {
             upgradeButtonText = upgradeButton.GetComponentInChildren<TMP_Text>();
-            GameManager.GameStateManager.currencyDidUpdate.AddListener(OnCurrencyUpdated);
+            _eventService = GameManager.EventService;
+            _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
         }
 
         public void Setup(Upgrade upgrade)
@@ -36,7 +39,7 @@ namespace Minigames.Fight
             if (GameManager.GameStateManager.TrySpendCurrency(_upgrade.GetCost()))
             {
                 _upgrade.numberPurchased++;
-                upgradePurchased?.Invoke(_upgrade);
+                _eventService.Dispatch(new UpgradePurchasedEvent(_upgrade));
                 OnUpgradeUpdated();
             }
         }
@@ -44,13 +47,20 @@ namespace Minigames.Fight
         private void OnUpgradeUpdated()
         {
             upgradeCountText.text = _upgrade.GetUpgradeCountText();
-            upgradeButton.interactable = GameManager.GameStateManager.Currency > _upgrade.GetCost();
+            SetInteractability();
             upgradeButtonText.text = _upgrade.GetCost().ToCurrencyString();
         }
 
-        private void OnCurrencyUpdated(float newValue)
+        private void OnCurrencyUpdated()
         {
-            upgradeButton.interactable = newValue > _upgrade.GetCost();
+            SetInteractability();
+        }
+
+        private void SetInteractability()
+        {
+            bool hasMoney = GameManager.GameStateManager.Currency > _upgrade.GetCost();
+            bool canUpgrade = _upgrade.numberPurchased < _upgrade.maxPurchases || _upgrade.maxPurchases == 0; 
+            upgradeButton.interactable = hasMoney && canUpgrade;
         }
     }
 }

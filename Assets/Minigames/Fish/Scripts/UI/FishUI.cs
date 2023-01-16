@@ -18,7 +18,7 @@ namespace Minigames.Fish
         
         void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(UpdateGoldText);
             _eventService.Add<FishOnLureUpdatedEvent>(UpdateWeightSlider);
             

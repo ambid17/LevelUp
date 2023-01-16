@@ -22,7 +22,7 @@ namespace Minigames.Fish
         void Start()
         {
             _collider = GetComponent<BoxCollider2D>();
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
         }
 
         void Update()

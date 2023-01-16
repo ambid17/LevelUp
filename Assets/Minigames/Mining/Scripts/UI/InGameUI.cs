@@ -20,7 +20,7 @@ namespace Minigames.Mining
             SetGoldText();
             SetHpSlider();
             SetFuelSlider();
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<OnFuelUpdatedEvent>(SetFuelSlider);
             _eventService.Add<OnCurrencyUpdatedEvent>(SetGoldText);
             _eventService.Add<OnHealthUpdatedEvent>(SetHpSlider);

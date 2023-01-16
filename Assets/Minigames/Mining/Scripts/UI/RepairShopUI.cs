@@ -21,7 +21,7 @@ namespace Minigames.Mining
         // Start is called before the first frame update
         void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _amountSlider.onValueChanged.AddListener(OnSliderValueChanged);
             _purchaseButton.onClick.AddListener(OnBuyButtonPress);
         }

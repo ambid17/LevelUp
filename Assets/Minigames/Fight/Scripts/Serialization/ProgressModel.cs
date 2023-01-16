@@ -23,6 +23,6 @@ namespace Minigames.Fight
     public class CountryData
     {
         public int CountryIndex;
-        public int Kills;
+        public float Kills;
     }
 }

@@ -17,7 +17,7 @@ namespace Minigames.Fish
         
         void Start()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
             _eventService.Add<ReeledInEvent>(OnReeledIn);
             _fishSettings = GameManager.FishSettings;
             _fishSpawnSettings = GameManager.FishSpawnSettings;

@@ -11,21 +11,22 @@ namespace Minigames.Fight
             if(touchingPlayer)
             {
                 shotTimer += Time.deltaTime;
-                if (shotTimer > settings.shotSpeed)
+                if (shotTimer > settings.fireRate)
                 {
                     shotTimer = 0;   
                     GameManager.GameStateManager.TakeDamage(settings.weaponDamage);
                 }
             }
         }
+        
 
-        void OnCollisionEnter2D(Collision2D col)
+        void OnTriggerEnter2D(Collider2D col)
         {
             if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
                 touchingPlayer = true;
         }
 
-        void OnCollisionExit2D(Collision2D col)
+        void OnTriggerExit2D(Collider2D col)
         {
             if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
                 touchingPlayer = false;

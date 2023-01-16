@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -14,7 +15,7 @@ namespace Minigames.Fight
         private float _closeTimer;
         private float _closeTime = 10;
 
-        void Start()
+        void Awake()
         {
             closeButton.onClick.AddListener(Close);
         }
@@ -29,11 +30,13 @@ namespace Minigames.Fight
             }
         }
 
-        public void Notify(int minutesAway, float currencyAwarded)
+        public void AwardCurrency(int minutesAway, float award)
         {
+            if(award == 0) return;
+            
             container.SetActive(true);
             awayText.text = $"You were gone for {minutesAway} minutes, you earned:";
-            goldText.text = $"{currencyAwarded.ToCurrencyString()}";
+            goldText.text = $"{award.ToCurrencyString()}";
         }
 
         private void Close()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Minigames.Fight;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -27,6 +28,11 @@ public class WorldInspector : MonoBehaviour
 
     public void InspectWorld(World world)
     {
+        if (world == null)
+        {
+            container.SetActive(false);
+            return;
+        }
         container.SetActive(true);
         _world = world;
         planetNameText.text = world.Name;
@@ -52,4 +58,6 @@ public class WorldInspector : MonoBehaviour
         _progressSettings.CurrentWorld.IsFighting = false;
         SceneManager.LoadScene(loadingSceneName);
     }
+
+    
 }

@@ -18,13 +18,27 @@ namespace Minigames.Mining
         [SerializeField] MiningProgressSettings _miningProgressSettings;
         [SerializeField] ProgressSettings _progressSettings;
         [SerializeField] PlayerSettings _playerSettings;
-        private EventService _eventService;
+        
         public static PlayerController PlayerController => Instance._playerController;
         public static GridService GridService => Instance._gridService;
         public static TileSettings TileSettings => Instance._tileSettings;
         public static MiningProgressSettings MiningProgressSettings => Instance._miningProgressSettings;
         public static ProgressSettings ProgressSettings => Instance._progressSettings;
         public static PlayerSettings PlayerSettings => Instance._playerSettings;
+        
+        private EventService _eventService;
+        public static EventService EventService
+        {
+            get
+            {
+                if (Instance._eventService == null)
+                {
+                    Instance._eventService = new EventService();
+                }
+
+                return Instance._eventService;
+            }
+        }
         
         //todo: this but for the rest of them
         public static float Currency
@@ -38,7 +52,7 @@ namespace Minigames.Mining
         }
         public override void Initialize()
         {
-            _eventService = Services.Instance.EventService;
+            _eventService = GameManager.EventService;
         }
     }
 }

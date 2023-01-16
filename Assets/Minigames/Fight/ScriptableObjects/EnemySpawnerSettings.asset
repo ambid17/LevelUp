@@ -14,35 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinSpawnRadius: 10
   MaxSpawnRadius: 15
-  WaveInterval: 10
-  WaveSize: 20
   MaxEnemyCount: 200
-  EnemySettings:
-    Enemies:
-    - EnemyType: 0
-      Prefab: {fileID: 8510735526301981988, guid: 180c465e3088ff14eaca2eac7ad3ba31, type: 3}
-      SpawnWeight: 15
-      Settings:
-        goldValue: 50
-        shotSpeed: 2
-        moveSpeed: 1
-        maxHp: 10
-        weaponDamage: 1
-    - EnemyType: 1
-      Prefab: {fileID: 8510735526301981988, guid: 20ea7b6e46f2d024998cf66b6ad16ad8, type: 3}
-      SpawnWeight: 4
-      Settings:
-        goldValue: 2
-        shotSpeed: 1.5
-        moveSpeed: 1.25
-        maxHp: 40
-        weaponDamage: 1
-    - EnemyType: 2
-      Prefab: {fileID: 8510735526301981988, guid: 4e2dec209d1847144a9df6bf90e303b1, type: 3}
-      SpawnWeight: 1
-      Settings:
-        goldValue: 10
-        shotSpeed: 2
-        moveSpeed: 0.5
-        maxHp: 60
-        weaponDamage: 4
+  hpScalar: 0.05
+  baseWaveSize: 10
+  waveSizeScalar: 1
+  baseWaveInterval: 20
+  waveIntervalScalar: 0.05
+  projectileSpeedScalar: 0.05
+  fireRateScalar: 0.05
+  moveSpeedScalar: 0.05

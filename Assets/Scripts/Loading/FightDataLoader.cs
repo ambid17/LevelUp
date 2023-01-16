@@ -44,6 +44,12 @@ public class FightDataLoader : MonoBehaviour
                 case WeaponUpgradeModel model:
                     UpdateWeaponUpgrades(model);
                     break;
+                case EnemyUpgradeModel model:
+                    UpdateEnemyUpgrades(model);
+                    break;
+                case IncomeUpgradeModel model:
+                    UpdateIncomeUpgrades(model);
+                    break;
             }
         }
     }
@@ -57,6 +63,18 @@ public class FightDataLoader : MonoBehaviour
     private void UpdateWeaponUpgrades(WeaponUpgradeModel model)
     {
         WeaponUpgrade upgrade = upgradeSettings.WeaponUpgrades.First(u => u.upgradeType == model.weaponUpgradeType);
+        upgrade.numberPurchased = model.numberPurchased;
+    }
+    
+    private void UpdateEnemyUpgrades(EnemyUpgradeModel model)
+    {
+        EnemyUpgrade upgrade = upgradeSettings.EnemyUpgrades.First(u => u.upgradeType == model.enemyUpgradeType);
+        upgrade.numberPurchased = model.numberPurchased;
+    }
+    
+    private void UpdateIncomeUpgrades(IncomeUpgradeModel model)
+    {
+        IncomeUpgrade upgrade = upgradeSettings.IncomeUpgrades.First(u => u.upgradeType == model.incomeUpgradeType);
         upgrade.numberPurchased = model.numberPurchased;
     }
     

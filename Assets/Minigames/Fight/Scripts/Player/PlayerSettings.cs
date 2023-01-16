@@ -9,10 +9,11 @@ namespace Minigames.Fight
     {
         MoveSpeed,
         MoveAcceleration,
-        MaxHp
+        MaxHp,
+        LifeSteal,
     }
 
-    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/PlayerSettings", order = 1)]
+    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/Fight/PlayerSettings", order = 1)]
     [Serializable]
     public class PlayerSettings : ScriptableObject
     {
@@ -22,6 +23,7 @@ namespace Minigames.Fight
         public float accelerationScalar;
         public float baseMaxHp;
         public float hpScalar;
+        public float lifeStealScalar;
 
 
         public float MoveSpeed { get; private set; }
@@ -41,12 +43,20 @@ namespace Minigames.Fight
         {
             MaxHp = baseMaxHp * Mathf.Pow(1 + hpScalar, upgradeLevel);
         }
+        
+        public float LifeSteal { get; private set; }
 
+        public void SetLifeSteal(int upgradeLevel)
+        {
+            LifeSteal = upgradeLevel * lifeStealScalar;
+        }
+        
         public void Init()
         {
             SetMoveSpeed(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.MoveSpeed).numberPurchased);
             SetAcceleration(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.MoveAcceleration).numberPurchased);
             SetMaxHp(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.MaxHp).numberPurchased);
+            SetLifeSteal(GameManager.SettingsManager.upgradeSettings.GetPlayerUpgrade(PlayerUpgradeType.LifeSteal).numberPurchased);
         }
 
         // Set on:
@@ -64,6 +74,9 @@ namespace Minigames.Fight
                     break;
                 case PlayerUpgradeType.MaxHp:
                     SetMaxHp(upgrade.numberPurchased);
+                    break;
+                case PlayerUpgradeType.LifeSteal:
+                    SetLifeSteal(upgrade.numberPurchased);
                     break;
             }
         }

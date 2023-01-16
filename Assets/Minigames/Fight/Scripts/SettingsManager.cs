@@ -1,19 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
     public class SettingsManager : MonoBehaviour
     {
         public PlayerSettings playerSettings;
-        public EnemySpawnerSettings enemySpawnerSettings;
         public WeaponSettings weaponSettings;
         public UpgradeSettings upgradeSettings;
         public ProgressSettings progressSettings;
+        public EnemySpawnerSettings enemySpawnerSettings;
+        public IncomeSettings incomeSettings;
 
+        private EventService _eventService;
         void Start()
         {
-            UpgradeItem.upgradePurchased += OnUpgradePurchased;
+            _eventService = GameManager.EventService;
+            _eventService.Add<UpgradePurchasedEvent>(OnUpgradePurchased);
         }
 
         /// <summary>
@@ -33,10 +37,13 @@ namespace Minigames.Fight
             playerSettings.Init();
             weaponSettings.Init();
             progressSettings.Init();
+            enemySpawnerSettings.Init();
+            incomeSettings.Init();
         }
 
-        private void OnUpgradePurchased(Upgrade upgrade)
+        private void OnUpgradePurchased(UpgradePurchasedEvent eventType)
         {
+            Upgrade upgrade = eventType.Upgrade;
             switch (upgrade)
             {
                 case PlayerUpgrade playerUpgrade:
@@ -44,6 +51,12 @@ namespace Minigames.Fight
                     break;
                 case WeaponUpgrade weaponUpgrade:
                     weaponSettings.ApplyUpgrade(weaponUpgrade);
+                    break;
+                case EnemyUpgrade enemyUpgrade:
+                    enemySpawnerSettings.ApplyUpgrade(enemyUpgrade);
+                    break;
+                case IncomeUpgrade incomeUpgrade:
+                    incomeSettings.ApplyUpgrade(incomeUpgrade);
                     break;
                 default:
                     Debug.LogError($"Invalid upgrade type: {upgrade.name}");
@@ -57,6 +70,8 @@ namespace Minigames.Fight
 
             toReturn.AddRange(upgradeSettings.PlayerUpgrades);
             toReturn.AddRange(upgradeSettings.WeaponUpgrades);
+            toReturn.AddRange(upgradeSettings.EnemyUpgrades);
+            toReturn.AddRange(upgradeSettings.IncomeUpgrades);
 
             return toReturn;
         }
