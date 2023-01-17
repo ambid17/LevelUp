@@ -31,6 +31,10 @@ public class HomeController : MonoBehaviour
                 WorldButton button = hit.transform.GetComponent<WorldButton>();
                 InspectWorld(button.world);
             }
+            else
+            {
+                InspectWorld(null);
+            }
         }
     }
 
