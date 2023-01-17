@@ -39,6 +39,22 @@ namespace Minigames.Fight
             set { _currentWorld = value; }
         }
 
+        public int WorldsConquered
+        {
+            get
+            {
+                int worldsCompleted = 0;
+
+                foreach (var world in Worlds)
+                {
+                    if (world.IsConquered())
+                        worldsCompleted++;
+                }
+
+                return worldsCompleted;
+            }
+        }
+
         public void SetDefaults()
         {
             CurrentWorld = null;
@@ -171,6 +187,11 @@ namespace Minigames.Fight
             }
 
             return count;
+        }
+
+        public bool IsConquered()
+        {
+            return Countries.TrueForAll(country => country.IsConquered);
         }
 
 

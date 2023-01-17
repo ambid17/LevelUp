@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Minigames.Fight;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class HomeController : MonoBehaviour
     [SerializeField] private WorldButton _buttonPrefab;
     [SerializeField] private Transform _worldContainer;
     [SerializeField] private WorldInspector _worldInspector;
+    [SerializeField] private SunInspector _sunInspector;
     private Camera _camera;
     
     void Start()
@@ -22,18 +24,32 @@ public class HomeController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit, 1000))
             {
                 WorldButton button = hit.transform.GetComponent<WorldButton>();
-                InspectWorld(button.world);
+
+                if (button != null)
+                {
+                    _worldInspector.InspectWorld(button.world);
+                    _sunInspector.Hide();
+                }
+
+                SunButton sunButton = hit.transform.GetComponent<SunButton>();
+
+                if (sunButton != null)
+                {
+                    _sunInspector.InspectSun();
+                    _worldInspector.Hide();
+                }
             }
             else
             {
-                InspectWorld(null);
+                _sunInspector.Hide();
+                _worldInspector.Hide();
             }
         }
     }
@@ -45,10 +61,5 @@ public class HomeController : MonoBehaviour
             WorldButton worldButton = Instantiate(_buttonPrefab, _worldContainer);
             worldButton.SetForWorld(world);
         }
-    }
-    
-    private void InspectWorld(World world)
-    {
-        _worldInspector.InspectWorld(world);
     }
 }

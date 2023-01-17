@@ -23,7 +23,7 @@ public class WorldInspector : MonoBehaviour
     private World _world;
     void Start()
     {
-        container.SetActive(false);
+        Hide();
     }
 
     public void InspectWorld(World world)
@@ -41,9 +41,14 @@ public class WorldInspector : MonoBehaviour
         conquerButton.onClick.AddListener(ConquerPlanet);
         travelButton.onClick.AddListener(TravelToPlanet);
 
-        travelButton.interactable = world.GetConqueredCountryCount() == world.Countries.Count;
+        travelButton.interactable = world.IsConquered();
     }
-    
+
+    public void Hide()
+    {
+        container.SetActive(false);
+
+    }
     
     private void ConquerPlanet()
     {

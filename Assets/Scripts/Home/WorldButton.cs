@@ -1,4 +1,4 @@
-using System;
+    using System;
 using Minigames.Fight;
 using UnityEngine;
 using UnityEngine.UI;
