@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private GameObject _pausePanel;
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
+        }
     }
 }
