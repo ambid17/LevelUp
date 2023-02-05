@@ -12,6 +12,7 @@ namespace Minigames.Fight
         [SerializeField] private UpgradeTier upgradeTierPrefab;
         [SerializeField] private Transform tierParent;
         [SerializeField] private UpgradeInspector inspector;
+        [SerializeField] private GameObject weaponTabs;
 
         [SerializeField] private Button playerTabButton;
         [SerializeField] private Button weaponTabButton;
@@ -46,7 +47,7 @@ namespace Minigames.Fight
             InitIncomeUpgrades();
             InitTabButtons();
             ToggleUpgradeItems(UpgradeType.Player);
-            inspector.OnUpgradeSelected(new UpgradeSelectedEvent(_playerUpgradeItems[0].upgrade));
+            inspector.ManuallySelectUpgrade(_playerUpgradeItems[0].upgrade);
         }
 
         private void Close()
@@ -124,6 +125,7 @@ namespace Minigames.Fight
 
         private void ToggleUpgradeItems(UpgradeType upgradeType)
         {
+            weaponTabs.SetActive(upgradeType == UpgradeType.Weapon);
             foreach (var item in _playerUpgradeItems)
             {
                 item.gameObject.SetActive(upgradeType == UpgradeType.Player);

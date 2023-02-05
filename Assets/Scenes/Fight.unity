@@ -1244,6 +1244,7 @@ MonoBehaviour:
   upgradeTierPrefab: {fileID: 81568974447562274, guid: 8a13769f8cd3f2d4babf013881ce3bbb, type: 3}
   tierParent: {fileID: 2034025107}
   inspector: {fileID: 595477065}
+  weaponTabs: {fileID: 1225581489}
   playerTabButton: {fileID: 309563498}
   weaponTabButton: {fileID: 1864015800}
   enemyTabButton: {fileID: 300912123}
@@ -3932,7 +3933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225581490}
   m_Layer: 5
-  m_Name: TreeTabs
+  m_Name: WeaponTabs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17723,7 +17724,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 170, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1962137397

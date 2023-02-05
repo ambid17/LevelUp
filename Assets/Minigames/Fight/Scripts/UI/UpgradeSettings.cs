@@ -202,6 +202,58 @@ namespace Minigames.Fight
     public class EnemyUpgrade : Upgrade
     {
         public EnemyUpgradeType upgradeType;
+        
+        public override string GetDescription()
+        {
+            string desc = description;
+            
+            string value = String.Empty;
+
+            switch (upgradeType)
+            {
+                case EnemyUpgradeType.Hp:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.HpScalarPercent.ToString();
+                    break;
+                case EnemyUpgradeType.FireRate:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.FireRatePercent.ToString();
+                    break;
+                case EnemyUpgradeType.WaveInterval:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.WaveIntervalScalarPercent.ToString();
+                    break;
+                case EnemyUpgradeType.WaveSize:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.WaveSizeScalar.ToString();
+                    break;
+            }
+            
+            desc = desc.Replace("{0}",value);
+            return desc;
+        }
+        
+        public override string GetBonusDescription()
+        {
+            string description = bonusDescription;
+            
+            string value = String.Empty;
+
+            switch (upgradeType)
+            {
+                case EnemyUpgradeType.Hp:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.HpScalePercent.ToString();
+                    break;
+                case EnemyUpgradeType.FireRate:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.FireRatePercent.ToString();
+                    break;
+                case EnemyUpgradeType.WaveInterval:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.WaveIntervalScalePercent.ToString();
+                    break;
+                case EnemyUpgradeType.WaveSize:
+                    value = GameManager.SettingsManager.enemySpawnerSettings.WaveSize.ToString();
+                    break;
+            }
+            
+            description = description.Replace("{0}",value);
+            return description;
+        }
     }
     
     [Serializable]

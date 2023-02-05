@@ -31,24 +31,33 @@ namespace Minigames.Fight
         public float fireRateScalar;
         
         public float Hp { get; private set; }
+        public float HpScalePercent => Hp * 100;
+        public float HpScalarPercent => hpScalar * 100;
         private void SetHp(int upgradeLevel)
         {
-            Hp = Mathf.Pow(1 - hpScalar, upgradeLevel);
+            Hp = 1 - (hpScalar * upgradeLevel);
         }
 
         public int WaveSize { get; private set; }
+        public int WaveSizeScalar => waveSizeScalar;
         private void SetWaveSize(int upgradeLevel)
         {
             WaveSize = baseWaveSize + (waveSizeScalar * upgradeLevel);
         }
         
         public float WaveInterval { get; private set; }
+        public float WaveIntervalScale { get; private set; }
+        public float WaveIntervalScalePercent => 1 / WaveIntervalScale;
+        public float WaveIntervalScalarPercent => waveIntervalScalar * 100;
         private void SetWaveInterval(int upgradeLevel)
         {
-            WaveInterval = baseWaveInterval * Mathf.Pow(1 - waveIntervalScalar, upgradeLevel);
+            WaveIntervalScale = Mathf.Pow(1 - waveIntervalScalar, upgradeLevel);
+            WaveInterval = baseWaveInterval * WaveIntervalScale;
         }
         
         public float FireRate { get; private set; }
+        public float FireRatePercent => FireRate * 100;
+        public float FireRateScalarPercent => fireRateScalar * 100;
         private void SetFireRate(int upgradeLevel)
         {
             FireRate = Mathf.Pow(1 - fireRateScalar, upgradeLevel);

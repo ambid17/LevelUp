@@ -54,7 +54,7 @@ MonoBehaviour:
     tier: 1
     icon: {fileID: -444801428, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 15
-    costScalar: 0.5
+    costScalar: 1.5
     costType: 1
     upgradeType: 3
   WeaponUpgrades:
@@ -127,35 +127,35 @@ MonoBehaviour:
   EnemyUpgrades:
   - name: HP
     description: Reduce enemy hp by {0}%
-    bonusDescription: -{0}% enemy HP
+    bonusDescription: 'Enemy HP: {0}% of max'
     numberPurchased: 0
-    maxPurchases: 0
+    maxPurchases: 10
     tier: 1
     icon: {fileID: -347326104, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 50
-    costScalar: 1
+    costScalar: 1.1
     costType: 1
     upgradeType: 0
   - name: Wave Size
     description: Increases enemies per wave by {0}
-    bonusDescription: +{0} enemies per wave
+    bonusDescription: '{0} enemies per wave'
     numberPurchased: 0
     maxPurchases: 0
     tier: 0
     icon: {fileID: -347326104, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 50
-    costScalar: 0.5
+    costScalar: 1.1
     costType: 1
     upgradeType: 1
   - name: Wave Interval
     description: Makes waves spawn {0}% faster
-    bonusDescription: -{0}% wave interval
+    bonusDescription: +{0}% wave speed
     numberPurchased: 0
     maxPurchases: 0
     tier: 0
     icon: {fileID: -347326104, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 50
-    costScalar: 0.5
+    costScalar: 1.1
     costType: 1
     upgradeType: 2
   - name: Reduced Fire Rate
@@ -166,7 +166,7 @@ MonoBehaviour:
     tier: 1
     icon: {fileID: -347326104, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 50
-    costScalar: 1
+    costScalar: 1.5
     costType: 1
     upgradeType: 3
   IncomeUpgrades:

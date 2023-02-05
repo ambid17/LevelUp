@@ -27,6 +27,15 @@ namespace Minigames.Fight
             _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
             _eventService.Add<UpgradeSelectedEvent>(OnUpgradeSelected);
+            upgradeButton.onClick.AddListener(() => BuyUpgrade());
+        }
+
+        public void ManuallySelectUpgrade(Upgrade upgrade)
+        {
+            _currentUpgrade = upgrade;
+            icon.sprite = upgrade.icon;
+            descriptionText.text = upgrade.GetDescription();
+            OnUpgradeUpdated();
         }
 
         public void OnUpgradeSelected(UpgradeSelectedEvent eventType)
@@ -35,9 +44,7 @@ namespace Minigames.Fight
             
             _currentUpgrade = upgrade;
             icon.sprite = upgrade.icon;
-            nameText.text = $"{upgrade.name}\n{_currentUpgrade.GetUpgradeCountText()}";
             descriptionText.text = upgrade.GetDescription();
-            upgradeButton.onClick.AddListener(() => BuyUpgrade());
             OnUpgradeUpdated();
         }
 
@@ -54,6 +61,7 @@ namespace Minigames.Fight
         private void OnUpgradeUpdated()
         {
             SetInteractability();
+            nameText.text = $"{_currentUpgrade.name}\n{_currentUpgrade.GetUpgradeCountText()}";
             upgradeButtonText.text = _currentUpgrade.GetCost().ToCurrencyString();
             bonusText.text = _currentUpgrade.GetBonusDescription();
         }
