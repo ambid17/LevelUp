@@ -27,28 +27,45 @@ namespace Minigames.Fight
 
 
         public float MoveSpeed { get; private set; }
+        public float MoveSpeedScale { get; private set; }
+        public float MoveSpeedScalePercent => MoveSpeedScale * 100;
+        public float MoveSpeedScalarPercent => moveSpeedScalar * 100;
+
         public void SetMoveSpeed(int upgradeLevel)
         {
-            MoveSpeed = baseMoveSpeed * Mathf.Pow(1 + moveSpeedScalar, upgradeLevel);
+            MoveSpeedScale = moveSpeedScalar * upgradeLevel;
+            MoveSpeed = baseMoveSpeed * (1 + MoveSpeedScale);
         }
     
         public float Acceleration { get; private set; }
+        public float AccelerationScale { get; private set; }
+        public float AccelerationScalePercent => AccelerationScale * 100;
+        public float AccelerationScalarPercent => accelerationScalar * 100;
         public void SetAcceleration(int upgradeLevel)
         {
-            Acceleration = baseAcceleration * Mathf.Pow(1 + accelerationScalar, upgradeLevel);
+            AccelerationScale = accelerationScalar * upgradeLevel;
+            Acceleration = baseAcceleration * (1 + AccelerationScale);
         }
     
         public float MaxHp { get; private set; }
+        public float MaxHpScale { get; private set; }
+        public float MaxHpScalePercent => MaxHpScale * 100;
+        public float MaxHpScalarPercent => hpScalar * 100;
         public void SetMaxHp(int upgradeLevel)
         {
-            MaxHp = baseMaxHp * Mathf.Pow(1 + hpScalar, upgradeLevel);
+            MaxHpScale = hpScalar * upgradeLevel;
+            MaxHp = baseMaxHp * (1 + MaxHpScale);
         }
         
         public float LifeSteal { get; private set; }
+        public float LifeStealScale { get; private set; }
+        public float LifeStealScalePercent => LifeStealScale * 100;
+        public float LifeStealScalarPercent => lifeStealScalar * 100;
 
         public void SetLifeSteal(int upgradeLevel)
         {
-            LifeSteal = upgradeLevel * lifeStealScalar;
+            LifeStealScale = lifeStealScalar * upgradeLevel;
+            LifeSteal = LifeStealScale;
         }
         
         public void Init()

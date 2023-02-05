@@ -263,7 +263,7 @@ namespace Minigames.Fight
             goldValue * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar * GameManager.SettingsManager.incomeSettings.GoldPerKill;
 
         public float FireRate => fireRate * GameManager.SettingsManager.enemySpawnerSettings.FireRate;
-        public float MoveSpeed => moveSpeed * GameManager.SettingsManager.enemySpawnerSettings.MoveSpeed;
+        public float MoveSpeed => moveSpeed;
 
         public float MaxHp =>
             maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar * GameManager.SettingsManager.enemySpawnerSettings.Hp;
@@ -272,8 +272,7 @@ namespace Minigames.Fight
                                      GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
                                          .EnemyStatScalar;
 
-        public float ProjectileSpeed =>
-            projectileSpeed * GameManager.SettingsManager.enemySpawnerSettings.ProjectileSpeed;
+        public float ProjectileSpeed => projectileSpeed;
 
         public float ProjectileLifeTime => projectileLifeTime;
     }

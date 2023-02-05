@@ -42,4 +42,14 @@ namespace Minigames.Fight
             Award = award;
         }
     }
+    
+    public class UpgradeSelectedEvent : IEvent
+    {
+        public Upgrade Upgrade;
+
+        public UpgradeSelectedEvent(Upgrade upgrade)
+        {
+            Upgrade = upgrade;
+        }
+    }
 }

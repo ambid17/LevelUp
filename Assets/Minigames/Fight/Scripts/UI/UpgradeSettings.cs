@@ -14,7 +14,7 @@ namespace Minigames.Fight
         public List<WeaponUpgrade> WeaponUpgrades;
         public List<EnemyUpgrade> EnemyUpgrades;
         public List<IncomeUpgrade> IncomeUpgrades;
-
+        
         public void SetDefaults()
         {
             foreach (var upgrade in PlayerUpgrades)
@@ -40,22 +40,22 @@ namespace Minigames.Fight
 
         public PlayerUpgrade GetPlayerUpgrade(PlayerUpgradeType upgradeType)
         {
-            return PlayerUpgrades.First(u => u.upgradeType == upgradeType);
+            return PlayerUpgrades.FirstOrDefault(u => u.upgradeType == upgradeType);
         }
     
         public WeaponUpgrade GetWeaponUpgrade(WeaponUpgradeType upgradeType)
         {
-            return WeaponUpgrades.First(u => u.upgradeType == upgradeType);
+            return WeaponUpgrades.FirstOrDefault(u => u.upgradeType == upgradeType);
         }
         
         public EnemyUpgrade GetEnemyUpgrade(EnemyUpgradeType upgradeType)
         {
-            return EnemyUpgrades.First(u => u.upgradeType == upgradeType);
+            return EnemyUpgrades.FirstOrDefault(u => u.upgradeType == upgradeType);
         }
         
         public IncomeUpgrade GetIncomeUpgrade(IncomeUpgradeType upgradeType)
         {
-            return IncomeUpgrades.First(u => u.upgradeType == upgradeType);
+            return IncomeUpgrades.FirstOrDefault(u => u.upgradeType == upgradeType);
         }
     }
 
@@ -106,6 +106,16 @@ namespace Minigames.Fight
                     return float.MaxValue;
             }
         }
+        
+        public virtual string GetDescription()
+        {
+            return string.Empty;
+        }
+
+        public virtual string GetBonusDescription()
+        {
+            return string.Empty;
+        }
 
         // example:
         // base cost = 10, scalar = 1
@@ -120,7 +130,7 @@ namespace Minigames.Fight
         // 100, 150, 225
         private float GetExponentialCost()
         {
-            return baseCost * Mathf.Pow(1 + costScalar, numberPurchased);
+            return baseCost * Mathf.Pow(costScalar, numberPurchased);
         }
     }
 
@@ -128,6 +138,58 @@ namespace Minigames.Fight
     public class PlayerUpgrade : Upgrade
     {
         public PlayerUpgradeType upgradeType;
+        
+        public override string GetDescription()
+        {
+            string desc = description;
+            
+            string value = String.Empty;
+
+            switch (upgradeType)
+            {
+                case PlayerUpgradeType.MaxHp:
+                    value = GameManager.SettingsManager.playerSettings.MaxHpScalarPercent.ToString();
+                    break;
+                case PlayerUpgradeType.MoveSpeed:
+                    value = GameManager.SettingsManager.playerSettings.MoveSpeedScalarPercent.ToString();
+                    break;
+                case PlayerUpgradeType.MoveAcceleration:
+                    value = GameManager.SettingsManager.playerSettings.AccelerationScalarPercent.ToString();
+                    break;
+                case PlayerUpgradeType.LifeSteal:
+                    value = GameManager.SettingsManager.playerSettings.LifeStealScalarPercent.ToString();
+                    break;
+            }
+            
+            desc = desc.Replace("{0}",value);
+            return desc;
+        }
+        
+        public override string GetBonusDescription()
+        {
+            string description = bonusDescription;
+            
+            string value = String.Empty;
+
+            switch (upgradeType)
+            {
+                case PlayerUpgradeType.MaxHp:
+                    value = GameManager.SettingsManager.playerSettings.MaxHpScalePercent.ToString();
+                    break;
+                case PlayerUpgradeType.MoveSpeed:
+                    value = GameManager.SettingsManager.playerSettings.MoveSpeedScalePercent.ToString();
+                    break;
+                case PlayerUpgradeType.MoveAcceleration:
+                    value = GameManager.SettingsManager.playerSettings.AccelerationScalePercent.ToString();
+                    break;
+                case PlayerUpgradeType.LifeSteal:
+                    value = GameManager.SettingsManager.playerSettings.LifeStealScalePercent.ToString();
+                    break;
+            }
+            
+            description = description.Replace("{0}",value);
+            return description;
+        }
     }
 
     [Serializable]
