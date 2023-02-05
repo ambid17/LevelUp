@@ -70,8 +70,11 @@ namespace Minigames.Fight
     {
         public string name;
         public string description;
+        public string bonusDescription;
         public int numberPurchased;
         public int maxPurchases;
+        public int tier;
+        public Sprite icon;
     
         public int baseCost;
         public float costScalar;
