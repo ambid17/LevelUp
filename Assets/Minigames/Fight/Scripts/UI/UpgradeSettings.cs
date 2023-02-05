@@ -260,5 +260,78 @@ namespace Minigames.Fight
     public class IncomeUpgrade : Upgrade
     {
         public IncomeUpgradeType upgradeType;
+        
+        public override string GetDescription()
+        {
+            string desc = description;
+            
+            string value = String.Empty;
+
+            switch (upgradeType)
+            {
+                case IncomeUpgradeType.DeathTimer:
+                    value = GameManager.SettingsManager.incomeSettings.DeathTimeScalarPercent.ToString();
+                    break;
+                case IncomeUpgradeType.IdleTime:
+                    value = GameManager.SettingsManager.incomeSettings.idleTimeScalar.ToString();
+                    break;
+                case IncomeUpgradeType.GoldPerKill:
+                    value = GameManager.SettingsManager.incomeSettings.GoldPerKillScalarPercent.ToString();
+                    break;
+                case IncomeUpgradeType.IdleGoldPercent:
+                    value = GameManager.SettingsManager.incomeSettings.IdleGoldScalarPercent.ToString();
+                    break;
+                case IncomeUpgradeType.KillsPerKill:
+                    value = GameManager.SettingsManager.incomeSettings.killsPerKillScalar.ToString();
+                    break;
+                case IncomeUpgradeType.SaveHighestGold:
+                    value = GameManager.SettingsManager.incomeSettings.DeathTimer.ToString();
+                    break;
+                case IncomeUpgradeType.IdleGoldPerMin:
+                    value = GameManager.SettingsManager.incomeSettings.GoldPerMinuteScalarPercent.ToString();
+                    break;
+            }
+            
+            desc = desc.Replace("{0}",value);
+            return desc;
+        }
+        
+        public override string GetBonusDescription()
+        {
+            string description = bonusDescription;
+            
+            string value = String.Empty;
+
+            switch (upgradeType)
+            {
+                case IncomeUpgradeType.DeathTimer:
+                    value = GameManager.SettingsManager.incomeSettings.DeathTimer.ToString();
+                    break;
+                case IncomeUpgradeType.IdleTime:
+                    value = GameManager.SettingsManager.incomeSettings.IdleTimeScale.ToString();
+                    break;
+                case IncomeUpgradeType.GoldPerKill:
+                    value = GameManager.SettingsManager.incomeSettings.GoldPerKillPercent.ToString();
+                    break;
+                case IncomeUpgradeType.IdleGoldPercent:
+                    value = GameManager.SettingsManager.incomeSettings.IdleGoldRatioPercent.ToString();
+                    break;
+                case IncomeUpgradeType.KillsPerKill:
+                    value = GameManager.SettingsManager.incomeSettings.KillsPerKill.ToString();
+                    break;
+                case IncomeUpgradeType.SaveHighestGold:
+                    if (GameManager.SettingsManager.incomeSettings.SaveHighestGold)
+                    {
+                        value = "Saving highest gold";
+                    }
+                    break;
+                case IncomeUpgradeType.IdleGoldPerMin:
+                    value = GameManager.SettingsManager.incomeSettings.GoldPerMinute.ToString();
+                    break;
+            }
+            
+            description = description.Replace("{0}",value);
+            return description;
+        }
     }
 }

@@ -182,8 +182,8 @@ MonoBehaviour:
     costType: 0
     upgradeType: 0
   - name: Idle time
-    description: Increase max time away by {0}
-    bonusDescription: +{0} time away
+    description: Increase max time away by {0} minutes
+    bonusDescription: 'Max away time: 10 minutes +{0} minutes '
     numberPurchased: 0
     maxPurchases: 0
     tier: 0
@@ -193,9 +193,9 @@ MonoBehaviour:
     costType: 0
     upgradeType: 1
   - name: Idle Gold Percent
-    description: You only get {0}% of your idle gold when away. Increase this by
-      {1}%
-    bonusDescription: +{0}% idle gold percent
+    description: Sets percentage of active gold used in idle calculations. 100% means
+      you earn the same gold while away.
+    bonusDescription: '{0}% idle gold'
     numberPurchased: 0
     maxPurchases: 0
     tier: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
     costType: 0
     upgradeType: 2
   - name: Kills per kill
-    description: each kill gives {0} kills towards the conquer progress
+    description: Each kill gives {0} EXTRA kills towards the conquer progress
     bonusDescription: +{0} kills per kill
     numberPurchased: 0
     maxPurchases: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
     costType: 0
     upgradeType: 3
   - name: Save Highest gold
-    description: Idle gold only tracks highest gold per minute achieved
+    description: 'When purchased, your idle gold no longer resets when idle. '
     bonusDescription: '{0}'
     numberPurchased: 0
     maxPurchases: 1
@@ -228,7 +228,7 @@ MonoBehaviour:
     upgradeType: 4
   - name: Gold per kill
     description: '{0}% more gold per enemy kill'
-    bonusDescription: +{0}% gold per kill
+    bonusDescription: '{0}% gold per kill'
     numberPurchased: 0
     maxPurchases: 0
     tier: 0
@@ -239,9 +239,9 @@ MonoBehaviour:
     upgradeType: 5
   - name: Reduced Death Timer
     description: Lowers death timer by {0}%
-    bonusDescription: -{0}% death timer
+    bonusDescription: 'Death timer: {0} seconds'
     numberPurchased: 0
-    maxPurchases: 0
+    maxPurchases: 20
     tier: 1
     icon: {fileID: 454058912, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 10

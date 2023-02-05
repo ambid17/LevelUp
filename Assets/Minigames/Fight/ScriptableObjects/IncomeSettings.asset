@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b15a83562d9644eaa8e810ccacfa47, type: 3}
   m_Name: IncomeSettings
   m_EditorClassIdentifier: 
-  baseGoldPerMin: 0
+  baseGoldPerMin: 1
   goldPerMinScalar: 2
-  baseIdleTimeInMinutes: 60
-  idleTimeScalar: 0.1
+  baseIdleTimeInMinutes: 10
+  idleTimeScalar: 10
   idleGoldPercentScalar: 0.05
   killsPerKillScalar: 0.1
   goldPerKillScalar: 0.05

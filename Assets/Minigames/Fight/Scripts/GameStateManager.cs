@@ -88,7 +88,7 @@ namespace Minigames.Fight
             int clampedMinutesAway = (int) Mathf.Clamp((float)awayTime.TotalMinutes, 0,
                 GameManager.SettingsManager.incomeSettings.IdleTime);
             float currencyPerMinuteScaled =
-                CurrencyPerMinute * GameManager.SettingsManager.incomeSettings.IdleGoldPercent;
+                CurrencyPerMinute * GameManager.SettingsManager.incomeSettings.IdleGoldRatio;
             float award = clampedMinutesAway * currencyPerMinuteScaled;
 
             Currency += award;

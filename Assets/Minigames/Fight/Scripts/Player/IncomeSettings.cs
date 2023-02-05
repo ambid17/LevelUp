@@ -38,24 +38,29 @@ namespace Minigames.Fight
 
 
         public float GoldPerMinute { get; private set; }
+        public float GoldPerMinuteScalarPercent => goldPerMinScalar * 100;
 
         private void SetGoldPerMinute(int upgradeLevel)
         {
-            GoldPerMinute = Mathf.Pow(1 + goldPerMinScalar, upgradeLevel);
+            GoldPerMinute = baseGoldPerMin * Mathf.Pow(1 + goldPerMinScalar, upgradeLevel);
         }
 
         public float IdleTime { get; private set; }
+        public float IdleTimeScale { get; private set; }
 
         private void SetIdleTime(int upgradeLevel)
         {
-            IdleTime = baseIdleTimeInMinutes * Mathf.Pow(1 + idleTimeScalar, upgradeLevel);
+            IdleTimeScale = idleTimeScalar * upgradeLevel;
+            IdleTime = baseIdleTimeInMinutes + IdleTimeScale;
         }
 
-        public float IdleGoldPercent { get; private set; }
+        public float IdleGoldRatio { get; private set; }
+        public float IdleGoldRatioPercent => IdleGoldRatio * 100;
+        public float IdleGoldScalarPercent => idleGoldPercentScalar * 100;
 
         private void SetIdleGoldPercent(int upgradeLevel)
         {
-            IdleGoldPercent = idleGoldPercentScalar * upgradeLevel;
+            IdleGoldRatio = idleGoldPercentScalar * upgradeLevel;
         }
 
         public float KillsPerKill { get; private set; }
@@ -73,6 +78,8 @@ namespace Minigames.Fight
         }
 
         public float GoldPerKill { get; private set; }
+        public float GoldPerKillPercent => GoldPerKill * 100;
+        public float GoldPerKillScalarPercent => goldPerKillScalar * 100;
 
         private void SetGoldPerKill(int upgradeLevel)
         {
@@ -80,10 +87,11 @@ namespace Minigames.Fight
         }
 
         public float DeathTimer { get; private set; }
+        public float DeathTimeScalarPercent => deathTimerScalar * 100;
 
         private void SetDeathTimer(int upgradeLevel)
         {
-            DeathTimer = baseDeathTimer * Mathf.Pow(1 - deathTimerScalar, upgradeLevel);
+            DeathTimer = baseDeathTimer * (1 - (deathTimerScalar * upgradeLevel));
         }
 
 
