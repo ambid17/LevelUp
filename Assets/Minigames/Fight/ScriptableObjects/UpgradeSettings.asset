@@ -149,9 +149,9 @@ MonoBehaviour:
     upgradeType: 1
   - name: Wave Interval
     description: Makes waves spawn {0}% faster
-    bonusDescription: +{0}% wave speed
+    bonusDescription: '{0}% wave interval'
     numberPurchased: 0
-    maxPurchases: 0
+    maxPurchases: 10
     tier: 0
     icon: {fileID: -347326104, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 50
@@ -160,7 +160,7 @@ MonoBehaviour:
     upgradeType: 2
   - name: Reduced Fire Rate
     description: Makes enemies fire projectiles {0}% slower
-    bonusDescription: -{0}% enemy fire rate
+    bonusDescription: '{0}% enemy shot interval'
     numberPurchased: 0
     maxPurchases: 0
     tier: 1
