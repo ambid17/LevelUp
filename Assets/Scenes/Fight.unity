@@ -1244,13 +1244,13 @@ MonoBehaviour:
   upgradeTierPrefab: {fileID: 81568974447562274, guid: 8a13769f8cd3f2d4babf013881ce3bbb, type: 3}
   tierParent: {fileID: 2034025107}
   inspector: {fileID: 595477065}
-  weaponTabs: {fileID: 1225581489}
+  weaponTabContainer: {fileID: 0}
+  weaponTabPrefab: {fileID: 0}
   playerTabButton: {fileID: 309563498}
   weaponTabButton: {fileID: 1864015800}
   enemyTabButton: {fileID: 300912123}
   incomeTabButton: {fileID: 890686630}
   closeButton: {fileID: 592538751}
-  purchaseCountButton: {fileID: 876522248}
 --- !u!1 &455914919
 GameObject:
   m_ObjectHideFlags: 0
@@ -3563,6 +3563,7 @@ MonoBehaviour:
   progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
   enemySpawnerSettings: {fileID: 11400000, guid: 0932afc41d8717c4cb75fb6d14ee8fba, type: 2}
   incomeSettings: {fileID: 11400000, guid: 7632685d0406e4745acfd25bc667368d, type: 2}
+  UpgradePurchaseCount: 0
 --- !u!114 &1191475635
 MonoBehaviour:
   m_ObjectHideFlags: 0
