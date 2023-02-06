@@ -1,21 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Minigames.Fight;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class FightDataLoader : MonoBehaviour
 {
-    [SerializeField] private ProgressSettings progressSettings;
-    [SerializeField] private UpgradeSettings upgradeSettings;
+    public ProgressSettings progressSettings;
+    public UpgradeSettings upgradeSettings;
+    public static int targetSceneIndex;
 
-    public UnityEvent onDataLoaded;
+
+    private void Awake()
+    {
+        Scene current = SceneManager.GetActiveScene();
+        if (current.buildIndex == AnySceneLaunch.ANY_SCENE_LAUNCH_INDEX)
+        {
+            Load();
+            SceneManager.LoadScene(targetSceneIndex);
+        }
+    }
+
     public void Load()
     {
         LoadUpgradeData();
         LoadProgressData();
-        onDataLoaded?.Invoke();
     }
     
     public void LoadUpgradeData()
