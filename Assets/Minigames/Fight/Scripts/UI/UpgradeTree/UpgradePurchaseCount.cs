@@ -15,7 +15,7 @@ namespace Minigames.Fight
 
         private EventService _eventService;
         private int purchaseCountIndex;
-        private List<int> purchaseCounts = new() { 1, 5, 10, 25, 100, 1000 };
+        private List<int> purchaseCounts = new() { 1, 5, 10, 25, 100 };
 
         void Start()
         {

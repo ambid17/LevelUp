@@ -86,9 +86,13 @@ namespace Minigames.Fight
         {
             int purchaseCount = GameManager.SettingsManager.UpgradePurchaseCount;
 
-            int purchasesToMax = _currentUpgrade.maxPurchases - _currentUpgrade.numberPurchased;
+            int purchasesToMax = 1;
+            if (_currentUpgrade.maxPurchases > 0)
+            {
+                purchasesToMax = _currentUpgrade.maxPurchases - _currentUpgrade.numberPurchased;
+                purchaseCount = Mathf.Min(purchaseCount, purchasesToMax);
+            }
 
-            purchaseCount = Mathf.Min(purchaseCount, purchasesToMax);
 
             return purchaseCount;
         }
