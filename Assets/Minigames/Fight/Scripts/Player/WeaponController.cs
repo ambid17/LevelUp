@@ -2,10 +2,9 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class PlayerCombatController : MonoBehaviour
+    public class WeaponController : MonoBehaviour
     {
-        [SerializeField] private PlayerProjectile projectilePrefab;
-        private float _projectileSpread = 0.15f;
+        [SerializeField] private ProjectileWeapon _weapon;
         private float _shotTimer = 0;
         private Camera _camera;
 
@@ -23,7 +22,7 @@ namespace Minigames.Fight
         
             _shotTimer += Time.deltaTime;
 
-            if (Input.GetMouseButton(0) && _shotTimer > GameManager.SettingsManager.weaponSettings.FireRate)
+            if (Input.GetMouseButton(0) && _shotTimer > _weapon.Stats.FireRate)
             {
                 _shotTimer = 0;
                 Shoot();
@@ -32,38 +31,38 @@ namespace Minigames.Fight
     
         private void Shoot()
         {
-            int projectileCount = GameManager.SettingsManager.weaponSettings.ProjectileCount;
+            int projectileCount = _weapon.Stats.ProjectileCount;
             for (int i = 0; i < projectileCount; i++)
             {
-                PlayerProjectile projectile = Instantiate(projectilePrefab);
+                PlayerProjectile projectile = Instantiate(_weapon.ProjectilePrefab);
             
                 Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i/2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _projectileSpread;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _weapon.ProjectileSpread;
             
                 projectile.transform.position = transform.position.AsVector2() + offset;
 
                 float damage = CalculateDamage();
             
-                projectile.Setup(damage, direction);
+                projectile.Setup(damage, direction, _weapon.Stats.ProjectilePenetration);
             }
         
         }
 
         private float CalculateDamage()
         {
-            float damage = GameManager.SettingsManager.weaponSettings.Damage;
+            float damage = _weapon.Stats.Damage;
 
-            if (GameManager.SettingsManager.weaponSettings.CritChance > 0)
+            if (_weapon.Stats.CritChance > 0)
             {
                 float randomValue = Random.Range(0f, 1f);
-                bool shouldCrit = randomValue < GameManager.SettingsManager.weaponSettings.CritChance;
+                bool shouldCrit = randomValue < _weapon.Stats.CritChance;
 
                 if (shouldCrit)
                 {
-                    damage *= GameManager.SettingsManager.weaponSettings.CritDamage;
+                    damage *= _weapon.Stats.CritDamage;
                 }
             }
 

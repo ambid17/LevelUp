@@ -39,11 +39,11 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(float damage, Vector2 direction)
+        public void Setup(float damage, Vector2 direction, int penetration)
         {
             _damage = damage;
             _shootDirection = direction.normalized;
-            _penetrationsLeft = GameManager.SettingsManager.weaponSettings.ProjectilePenetration;
+            _penetrationsLeft = penetration;
         }
 
         private void OnTriggerEnter2D(Collider2D col)

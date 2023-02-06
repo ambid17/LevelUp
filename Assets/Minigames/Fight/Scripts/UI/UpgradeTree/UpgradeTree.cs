@@ -12,20 +12,21 @@ namespace Minigames.Fight
         [SerializeField] private UpgradeTier upgradeTierPrefab;
         [SerializeField] private Transform tierParent;
         [SerializeField] private UpgradeInspector inspector;
-        [SerializeField] private GameObject weaponTabs;
+        [SerializeField] private Transform weaponTabContainer;
+        [SerializeField] private WeaponTab weaponTabPrefab;
 
         [SerializeField] private Button playerTabButton;
         [SerializeField] private Button weaponTabButton;
         [SerializeField] private Button enemyTabButton;
         [SerializeField] private Button incomeTabButton;
         [SerializeField] private Button closeButton;
-        [SerializeField] private Button purchaseCountButton;
 
         private List<UpgradeTreeItem> _playerUpgradeItems;
         private List<UpgradeTreeItem> _weaponUpgradeItems;
         private List<UpgradeTreeItem> _enemyUpgradeItems;
         private List<UpgradeTreeItem> _incomeUpgradeItems;
         private List<UpgradeTier> _upgradeTiers;
+        private List<WeaponTab> _weaponTabs;
 
 
         public enum UpgradeType
@@ -69,6 +70,12 @@ namespace Minigames.Fight
     
         private void InitWeaponUpgrades()
         {
+            foreach (var weapon in GameManager.SettingsManager.weaponSettings.equippedWeapons)
+            {
+                var tab = Instantiate(weaponTabPrefab, weaponTabContainer);
+                tab.Weapon = weapon;
+            }
+            
             _weaponUpgradeItems = new List<UpgradeTreeItem>();
             foreach (var upgrade in GameManager.SettingsManager.upgradeSettings.WeaponUpgrades)
             {
@@ -125,7 +132,7 @@ namespace Minigames.Fight
 
         private void ToggleUpgradeItems(UpgradeType upgradeType)
         {
-            weaponTabs.SetActive(upgradeType == UpgradeType.Weapon);
+            weaponTabContainer.gameObject.SetActive(upgradeType == UpgradeType.Weapon);
             foreach (var item in _playerUpgradeItems)
             {
                 item.gameObject.SetActive(upgradeType == UpgradeType.Player);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -18,6 +19,92 @@ namespace Minigames.Fight
     [CreateAssetMenu(fileName = "WeaponSettings", menuName = "ScriptableObjects/Fight/WeaponSettings", order = 1)]
     [Serializable]
     public class WeaponSettings : ScriptableObject
+    {        
+        [Header("Set in Editor")]
+        public List<Weapon> allWeapons;        
+        [Header("Set at Runtime")]
+        public List<Weapon> equippedWeapons;
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            if (!equippedWeapons.Contains(weapon))
+            {
+                equippedWeapons.Add(weapon);
+            }
+            else
+            {
+                Debug.LogError("weapon already equipped");
+            }
+        }
+
+        public void Init()
+        {
+            foreach (var equippedWeapon in equippedWeapons)
+            {
+                equippedWeapon.Stats.Init();
+            }
+        }
+
+        public void ApplyUpgrade(WeaponUpgrade upgrade)
+        {
+            var weapon = equippedWeapons.FirstOrDefault(w => w == upgrade.weapon);
+            weapon.Stats.ApplyUpgrade(upgrade);
+        }
+    }
+
+    public class Weapon
+    {
+        public GameObject Prefab;
+        public List<Synergy> AllSynergies;
+        public List<Synergy> UnlockedSynergies;
+        public WeaponStats Stats;
+
+        public void UnlockSynergy(Synergy synergy)
+        {
+            if (!UnlockedSynergies.Contains(synergy))
+            {
+                UnlockedSynergies.Add(synergy);
+            }else
+            {
+                Debug.LogError("synergy already unlocked");
+            }
+        }
+        
+        [NonSerialized] private int _weightTotal;
+
+        public Synergy GetRandomSynergy()
+        {
+            if (_weightTotal == 0)
+            {
+                _weightTotal = AllSynergies.Sum(e => e.SpawnWeight);
+            }
+
+            int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
+            foreach (var synergy in AllSynergies)
+            {
+                randomWeight -= synergy.SpawnWeight;
+                if (randomWeight < 0)
+                {
+                    return synergy;
+                }
+            }
+
+            return AllSynergies[0];
+        }
+    }
+
+    public class ProjectileWeapon : Weapon
+    {
+        public PlayerProjectile ProjectilePrefab;
+        public float ProjectileSpread = 0.15f;
+    }
+
+    public class Synergy
+    {
+        public int SpawnWeight;
+    }
+
+    public class WeaponStats
     {
         public float baseFireRate;
         public float fireRateScalar;

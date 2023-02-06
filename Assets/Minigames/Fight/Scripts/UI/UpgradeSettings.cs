@@ -208,6 +208,7 @@ namespace Minigames.Fight
     public class WeaponUpgrade : Upgrade
     {
         public WeaponUpgradeType upgradeType;
+        public Weapon weapon;
     }
     
     [Serializable]
