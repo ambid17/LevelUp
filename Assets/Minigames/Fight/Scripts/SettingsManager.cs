@@ -13,6 +13,8 @@ namespace Minigames.Fight
         public EnemySpawnerSettings enemySpawnerSettings;
         public IncomeSettings incomeSettings;
 
+        public int UpgradePurchaseCount;
+
         private EventService _eventService;
         void Start()
         {

@@ -27,6 +27,7 @@ namespace Minigames.Fight
             _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
             _eventService.Add<UpgradeSelectedEvent>(OnUpgradeSelected);
+            _eventService.Add<PurchaseCountChangedEvent>(OnUpgradeUpdated);
             upgradeButton.onClick.AddListener(() => BuyUpgrade());
         }
 
@@ -50,9 +51,11 @@ namespace Minigames.Fight
 
         public void BuyUpgrade()
         {
-            if (GameManager.GameStateManager.TrySpendCurrency(_currentUpgrade.GetCost()))
+            int purchaseCount = GetAvailablePurchaseCount();
+
+            if (GameManager.GameStateManager.TrySpendCurrency(_currentUpgrade.GetCost(purchaseCount)))
             {
-                _currentUpgrade.numberPurchased++;
+                _currentUpgrade.numberPurchased += purchaseCount;
                 _eventService.Dispatch(new UpgradePurchasedEvent(_currentUpgrade));
                 OnUpgradeUpdated();
             }
@@ -62,7 +65,7 @@ namespace Minigames.Fight
         {
             SetInteractability();
             nameText.text = $"{_currentUpgrade.name}\n{_currentUpgrade.GetUpgradeCountText()}";
-            upgradeButtonText.text = _currentUpgrade.GetCost().ToCurrencyString();
+            upgradeButtonText.text = _currentUpgrade.GetCost(GetAvailablePurchaseCount()).ToCurrencyString();
             bonusText.text = _currentUpgrade.GetBonusDescription();
         }
 
@@ -73,9 +76,21 @@ namespace Minigames.Fight
 
         private void SetInteractability()
         {
-            bool hasMoney = GameManager.GameStateManager.Currency > _currentUpgrade.GetCost();
+            bool hasMoney = GameManager.GameStateManager.Currency > _currentUpgrade.GetCost(GetAvailablePurchaseCount());
+            upgradeButton.interactable = hasMoney;
             bool hasPurchasesLeft = _currentUpgrade.numberPurchased < _currentUpgrade.maxPurchases || _currentUpgrade.maxPurchases == 0;
-            upgradeButton.interactable = hasMoney && hasPurchasesLeft;
+            upgradeButton.gameObject.SetActive(hasPurchasesLeft);
+        }
+
+        private int GetAvailablePurchaseCount()
+        {
+            int purchaseCount = GameManager.SettingsManager.UpgradePurchaseCount;
+
+            int purchasesToMax = _currentUpgrade.maxPurchases - _currentUpgrade.numberPurchased;
+
+            purchaseCount = Mathf.Min(purchaseCount, purchasesToMax);
+
+            return purchaseCount;
         }
     }
 }

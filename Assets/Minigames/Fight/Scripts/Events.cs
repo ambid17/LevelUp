@@ -52,4 +52,6 @@ namespace Minigames.Fight
             Upgrade = upgrade;
         }
     }
+    
+    public class PurchaseCountChangedEvent { }
 }

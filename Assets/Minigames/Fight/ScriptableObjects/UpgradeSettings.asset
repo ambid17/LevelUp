@@ -43,7 +43,7 @@ MonoBehaviour:
     tier: 0
     icon: {fileID: -444801428, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 15
-    costScalar: 0.5
+    costScalar: 1.1
     costType: 1
     upgradeType: 2
   - name: Life steal
@@ -66,7 +66,7 @@ MonoBehaviour:
     tier: 0
     icon: {fileID: -1669430404, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 10
-    costScalar: 0.04
+    costScalar: 1.04
     costType: 1
     upgradeType: 0
   - name: Damage
@@ -77,7 +77,7 @@ MonoBehaviour:
     tier: 0
     icon: {fileID: -1669430404, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 10
-    costScalar: 0.04
+    costScalar: 1.04
     costType: 1
     upgradeType: 1
   - name: Crit Chance
@@ -99,7 +99,7 @@ MonoBehaviour:
     tier: 1
     icon: {fileID: -1669430404, guid: 1e19346974a0e88448a387adba543d81, type: 3}
     baseCost: 100
-    costScalar: 0.5
+    costScalar: 1.5
     costType: 1
     upgradeType: 3
   - name: Projectile Count

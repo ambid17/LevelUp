@@ -94,14 +94,14 @@ namespace Minigames.Fight
             return upgradeCountText;
         }
 
-        public virtual float GetCost()
+        public virtual float GetCost(int purchaseCount)
         {
             switch (costType)
             {
                 case UpgradeCostType.Additive:
-                    return GetAdditiveCost();
+                    return GetAdditiveCost(purchaseCount);
                 case UpgradeCostType.Exponential:
-                    return GetExponentialCost();
+                    return GetExponentialCost(purchaseCount);
                 default:
                     return float.MaxValue;
             }
@@ -120,17 +120,29 @@ namespace Minigames.Fight
         // example:
         // base cost = 10, scalar = 1
         // 10, 11, 12, 13, 14
-        private float GetAdditiveCost()
+        private float GetAdditiveCost(int purchaseCount)
         {
-            return baseCost + (costScalar * numberPurchased);
+            float totalCost = 0;
+            for (int currentNumPurchased = numberPurchased; currentNumPurchased < numberPurchased + purchaseCount; currentNumPurchased++)
+            {
+                totalCost += baseCost + (costScalar * currentNumPurchased);
+            }
+            
+            return totalCost;
         }
 
         // example:
         // base cost = 100, scalar (percentage) = 0.5;
         // 100, 150, 225
-        private float GetExponentialCost()
+        private float GetExponentialCost(int purchaseCount)
         {
-            return baseCost * Mathf.Pow(costScalar, numberPurchased);
+            float totalCost = 0;
+            for (int currentNumPurchased = numberPurchased; currentNumPurchased < numberPurchased + purchaseCount; currentNumPurchased++)
+            {
+                totalCost += baseCost * Mathf.Pow(costScalar, currentNumPurchased);
+            }
+            
+            return totalCost;
         }
     }
 
