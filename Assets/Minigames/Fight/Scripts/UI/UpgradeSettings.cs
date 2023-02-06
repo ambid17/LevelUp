@@ -173,7 +173,7 @@ namespace Minigames.Fight
                     break;
             }
             
-            desc = desc.Replace("{0}",value);
+            desc = string.Format(desc, value);
             return desc;
         }
         
@@ -199,7 +199,7 @@ namespace Minigames.Fight
                     break;
             }
             
-            description = description.Replace("{0}",value);
+            description = string.Format(description, value);
             return description;
         }
     }
