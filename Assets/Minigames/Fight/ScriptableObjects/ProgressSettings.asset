@@ -60,6 +60,7 @@ MonoBehaviour:
         goldValue: 1
         fireRate: 0.5
         moveSpeed: 1
+        acceleration: 5
         maxHp: 10
         weaponDamage: 1
         projectileSpeed: 0
@@ -70,6 +71,7 @@ MonoBehaviour:
         goldValue: 2
         fireRate: 1
         moveSpeed: 1.5
+        acceleration: 5
         maxHp: 25
         weaponDamage: 2
         projectileSpeed: 4
@@ -80,6 +82,7 @@ MonoBehaviour:
         goldValue: 10
         fireRate: 1.5
         moveSpeed: 0.5
+        acceleration: 5
         maxHp: 100
         weaponDamage: 5
         projectileSpeed: 3
@@ -129,6 +132,7 @@ MonoBehaviour:
         goldValue: 10
         fireRate: 0.5
         moveSpeed: 1
+        acceleration: 5
         maxHp: 100
         weaponDamage: 5
         projectileSpeed: 1
@@ -139,6 +143,7 @@ MonoBehaviour:
         goldValue: 20
         fireRate: 1
         moveSpeed: 1
+        acceleration: 5
         maxHp: 150
         weaponDamage: 5
         projectileSpeed: 4
@@ -149,6 +154,7 @@ MonoBehaviour:
         goldValue: 50
         fireRate: 1.5
         moveSpeed: 1
+        acceleration: 5
         maxHp: 250
         weaponDamage: 10
         projectileSpeed: 1
@@ -198,6 +204,7 @@ MonoBehaviour:
         goldValue: 10
         fireRate: 1
         moveSpeed: 1
+        acceleration: 5
         maxHp: 1
         weaponDamage: 5
         projectileSpeed: 0
@@ -208,6 +215,7 @@ MonoBehaviour:
         goldValue: 20
         fireRate: 1
         moveSpeed: 1
+        acceleration: 5
         maxHp: 1
         weaponDamage: 5
         projectileSpeed: 2
@@ -218,6 +226,7 @@ MonoBehaviour:
         goldValue: 50
         fireRate: 1
         moveSpeed: 1
+        acceleration: 5
         maxHp: 1
         weaponDamage: 10
         projectileSpeed: 5
