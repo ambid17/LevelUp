@@ -73,7 +73,7 @@ namespace Minigames.Fight
             foreach (var weapon in GameManager.SettingsManager.weaponSettings.equippedWeapons)
             {
                 var tab = Instantiate(weaponTabPrefab, weaponTabContainer);
-                tab.Weapon = weapon;
+                tab.Setup(weapon);
             }
             
             _weaponUpgradeItems = new List<UpgradeTreeItem>();

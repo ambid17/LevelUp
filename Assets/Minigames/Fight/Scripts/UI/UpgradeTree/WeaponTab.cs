@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Minigames.Fight
 {
@@ -8,12 +9,12 @@ namespace Minigames.Fight
     {
         public Weapon Weapon;
 
-        void Start()
-        {
-        }
+        [SerializeField] private Image iconImage;
 
-        void Update()
+        public void Setup(Weapon weapon)
         {
+            Weapon = weapon;
+            iconImage.sprite = weapon.Icon;
         }
     }
 }

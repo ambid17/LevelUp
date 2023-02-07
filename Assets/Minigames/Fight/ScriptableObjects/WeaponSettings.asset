@@ -12,15 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a539bc5a6c0c7224db191ab26a771916, type: 3}
   m_Name: WeaponSettings
   m_EditorClassIdentifier: 
-  baseFireRate: 0.5
-  fireRateScalar: 0.1
-  baseDamage: 10
-  damageScalar: 0.05
-  baseCritChance: 0
-  critChanceScalar: 0.1
-  baseCritDamage: 2
-  critDamageScalar: 0.05
-  baseProjectileCount: 1
-  projectileCountScalar: 1
-  baseProjectilePenetration: 0
-  projectilePenetrationScalar: 1
+  allWeapons:
+  - WeaponType: 0
+    Prefab: {fileID: 4202762006180929252, guid: d7880d8e0ff0697459f32c863eb216fb, type: 3}
+    Icon: {fileID: 1672852154, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
+    AllSynergies: []
+    UnlockedSynergies: []
+    Stats:
+      baseFireRate: 0.5
+      fireRateScalar: 0.5
+      baseDamage: 0.5
+      damageScalar: 0.5
+      baseCritChance: 0
+      critChanceScalar: 0.5
+      baseCritDamage: 0
+      critDamageScalar: 0.5
+      baseProjectileCount: 1
+      projectileCountScalar: 1
+      baseProjectilePenetration: 1
+      projectilePenetrationScalar: 1
+  - WeaponType: 1
+    Prefab: {fileID: 4202762006180929252, guid: f944e6a0de37eb04383179959434dcd5, type: 3}
+    Icon: {fileID: -1229482091, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
+    AllSynergies: []
+    UnlockedSynergies: []
+    Stats:
+      baseFireRate: 0.2
+      fireRateScalar: 0.5
+      baseDamage: 0.5
+      damageScalar: 0.5
+      baseCritChance: 0
+      critChanceScalar: 0.5
+      baseCritDamage: 0
+      critDamageScalar: 0.5
+      baseProjectileCount: 1
+      projectileCountScalar: 1
+      baseProjectilePenetration: 1
+      projectilePenetrationScalar: 1
+  equippedWeapons: []

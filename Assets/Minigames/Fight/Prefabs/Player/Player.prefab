@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4274406417404922724}
   - component: {fileID: 4274406417404922725}
-  - component: {fileID: 5589054606432594642}
+  - component: {fileID: 5910809042353514728}
   - component: {fileID: 4274406417404922746}
   - component: {fileID: 4274406417404922747}
   - component: {fileID: 4274406417404922744}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultMaterial: {fileID: 2100000, guid: 5979c24746a0a5b41957e5a641ebc154, type: 2}
   _flashMaterial: {fileID: 2100000, guid: aee2fe79d70ff104ba3bc7e0bc7ff8c4, type: 2}
---- !u!114 &5589054606432594642
+--- !u!114 &5910809042353514728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,10 +61,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4274406417404922745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7abe4e7d83e2424d91f384aa9a5ed33, type: 3}
+  m_Script: {fileID: 11500000, guid: 87b5666651528114ea8ebbda1d0f13be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5246368891887457513, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
 --- !u!212 &4274406417404922746
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ namespace Minigames.Fight
         [Header("Set at Runtime")]
         public List<Weapon> equippedWeapons;
 
+        private const WeaponType defaultWeaponType = WeaponType.Pistol;
+
         public void EquipWeapon(Weapon weapon)
         {
             if (!equippedWeapons.Contains(weapon))
@@ -39,6 +41,16 @@ namespace Minigames.Fight
 
         public void Init()
         {
+            if (equippedWeapons == null)
+            {
+                equippedWeapons = new List<Weapon>();
+            }
+            
+            if (equippedWeapons.Count == 0)
+            {
+                equippedWeapons.Add(allWeapons.FirstOrDefault(wep => wep.WeaponType == defaultWeaponType));
+            }
+            
             foreach (var equippedWeapon in equippedWeapons)
             {
                 equippedWeapon.Stats.Init();
@@ -52,9 +64,17 @@ namespace Minigames.Fight
         }
     }
 
+    public enum WeaponType
+    {
+        Pistol, RocketLauncher, Katana
+    }
+    
+    [Serializable]
     public class Weapon
     {
+        public WeaponType WeaponType;
         public GameObject Prefab;
+        public Sprite Icon;
         public List<Synergy> AllSynergies;
         public List<Synergy> UnlockedSynergies;
         public WeaponStats Stats;
@@ -93,17 +113,20 @@ namespace Minigames.Fight
         }
     }
 
+    [Serializable]
     public class ProjectileWeapon : Weapon
     {
         public PlayerProjectile ProjectilePrefab;
         public float ProjectileSpread = 0.15f;
     }
 
+    [Serializable]
     public class Synergy
     {
         public int SpawnWeight;
     }
 
+    [Serializable]
     public class WeaponStats
     {
         public float baseFireRate;
