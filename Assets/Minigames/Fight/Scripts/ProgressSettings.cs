@@ -254,6 +254,7 @@ namespace Minigames.Fight
         public float goldValue;
         public float fireRate;
         public float moveSpeed;
+        public float acceleration;
         public float maxHp = 100;
         public float weaponDamage;
         public float projectileSpeed;

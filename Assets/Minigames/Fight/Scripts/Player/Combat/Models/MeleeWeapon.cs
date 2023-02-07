@@ -10,5 +10,7 @@ namespace Minigames.Fight
     public class MeleeWeapon : Weapon
     {
         public float animationLength;
+        public float stunDuration;
+        public float knockbackDistance;
     }
 }

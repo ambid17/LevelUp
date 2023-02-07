@@ -6,6 +6,13 @@ namespace Minigames.Fight
 {
     public class MeleeWeaponController : WeaponController
     {
+        [SerializeField] private MeleeWeapon overridenWeapon;
+
+        private void Start()
+        {
+            overridenWeapon = _weapon as MeleeWeapon;
+        }
+        
         void Update()
         {
             if (GameManager.GameStateManager.IsDead)
@@ -35,6 +42,10 @@ namespace Minigames.Fight
                 {
                     EnemyController enemy = hit.transform.gameObject.GetComponent<EnemyController>();
                     enemy.TakeDamage(damage);
+
+                    Vector2 knockback = enemy.transform.position.AsVector2() - transform.position.AsVector2();
+                    knockback = knockback.normalized * overridenWeapon.knockbackDistance;
+                    enemy.Knockback(knockback);
                     
                     if (GameManager.SettingsManager.playerSettings.LifeSteal > 0)
                     {

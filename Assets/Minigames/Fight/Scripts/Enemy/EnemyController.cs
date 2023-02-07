@@ -72,17 +72,21 @@ namespace Minigames.Fight
 
         protected virtual void TryMove()
         {
-            Vector2 velocity = Vector2.zero;
+            Vector2 velocity = _rigidbody2D.velocity;
             Vector2 offset = playerTransform.position - transform.position;
+
+            Vector2 targetVelocity;
 
             if (offset.magnitude > idealDistanceFromPlayer)
             {
-                velocity = offset.normalized * settings.MoveSpeed;
+                targetVelocity = offset.normalized * settings.MoveSpeed;
             }
             else
             {
-                velocity = Vector2.zero;
+                targetVelocity = Vector2.zero;
             }
+
+            velocity = Vector2.MoveTowards(velocity, targetVelocity, settings.acceleration * Time.deltaTime);
         
             _rigidbody2D.velocity = velocity;
 
@@ -114,6 +118,11 @@ namespace Minigames.Fight
             {
                 Die();
             }
+        }
+
+        public void Knockback(Vector2 force)
+        {
+            _rigidbody2D.velocity = force;
         }
 
         private void CheckFlash()
