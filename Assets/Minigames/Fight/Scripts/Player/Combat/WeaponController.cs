@@ -55,6 +55,8 @@ namespace Minigames.Fight
             {
                 effect.Execute(damageWorksheet);
             }
+            
+            damageWorksheet.ApplyDamage();
         }
     }
 
@@ -73,7 +75,7 @@ namespace Minigames.Fight
         public Entity target;
         
         // Base damage * [weaponMult] + [effectDamage * effectMult]... - (armor * penetration)
-        public void ApplyDamage(Entity target)
+        public void ApplyDamage()
         {
             float baseDmg = baseDamage;
 
@@ -86,7 +88,7 @@ namespace Minigames.Fight
 
             float finalDamage = baseDmg + effectDmg;
 
-            //target.TakeDamage(finalDamage);
+            target.TakeDamage(finalDamage);
         }
     }
 }

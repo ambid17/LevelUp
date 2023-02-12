@@ -3,18 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using Minigames.Fight;
 using UnityEngine;
+using Utils;
 
-public class Entity : MonoBehaviour
+namespace Minigames.Fight
 {
-    public WeaponController WeaponController;
-    public MovementController MovementController;
-    public OrderedList<StatusEffectTracker> StatusEffects = new();
-
-    private void Update()
+    public class Entity : MonoBehaviour
     {
-        foreach (var statusEffect in StatusEffects)
+        public WeaponController WeaponController;
+        public MovementController MovementController;
+
+        public OrderedList<StatusEffectTracker> StatusEffects = new();
+
+        private float Hp;
+
+        protected EventService eventService;
+
+        protected virtual void Awake()
         {
-            statusEffect.OnTick(Time.deltaTime);
+            eventService = GameManager.EventService;
+        }
+
+        private void Update()
+        {
+            foreach (var statusEffect in StatusEffects)
+            {
+                statusEffect.OnTick(Time.deltaTime);
+            }
+        }
+
+        public void TakeDamage(float damage)
+        {
         }
     }
 }

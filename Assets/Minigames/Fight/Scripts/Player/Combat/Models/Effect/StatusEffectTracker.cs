@@ -1,43 +1,45 @@
-public class StatusEffectTracker
+namespace Minigames.Fight
 {
-    public Entity source;
-    public Entity target;
-    public float remainingTime;
-    public IStatusEffect effect;
-
-    public StatusEffectTracker(Entity source, Entity target, IStatusEffect effect, float remainingTime = -1f)
+    public class StatusEffectTracker
     {
-        this.source = source;
-        this.target = target;
-        this.remainingTime = remainingTime;
-        this.effect = effect;
-        
-        target.StatusEffects.Add(this);
-        effect.OnAdd(target);
-    }
+        public Entity source;
+        public Entity target;
+        public float remainingTime;
+        public IStatusEffect effect;
 
-    public void OnTick(float delta)
-    {
-        if (effect is IStatusEffectTick mrTicky)
+        public StatusEffectTracker(Entity source, Entity target, IStatusEffect effect, float remainingTime = -1f)
         {
-            mrTicky.Tick(delta, this);
+            this.source = source;
+            this.target = target;
+            this.remainingTime = remainingTime;
+            this.effect = effect;
         }
-        
-        if (remainingTime > -1)
-        {
-            OnTickEffect(delta);
-            remainingTime -= delta;
 
-            if (remainingTime <= 0)
+        public static void AddTracker(Entity source, Entity target, IStatusEffect effect, float remainingTime = -1f)
+        {
+            StatusEffectTracker tracker = new StatusEffectTracker(source, target, effect, remainingTime);
+            target.StatusEffects.Add(tracker);
+            effect.OnAdd(target);
+        }
+
+        public void OnTick(float delta)
+        {
+            if (remainingTime > -1)
             {
-                effect.OnRemove(target);
-                target.StatusEffects.Remove(this);
+                OnTickEffect(delta);
+                remainingTime -= delta;
+
+                if (remainingTime <= 0)
+                {
+                    effect.OnRemove(target);
+                    target.StatusEffects.Remove(this);
+                }
             }
         }
-    }
 
-    private void OnTickEffect(float delta)
-    {
-        
+        private void OnTickEffect(float delta)
+        {
+
+        }
     }
 }

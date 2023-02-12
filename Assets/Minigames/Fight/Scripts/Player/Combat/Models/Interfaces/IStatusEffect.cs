@@ -1,8 +1,9 @@
-using Minigames.Fight;
-
-public interface IStatusEffect
+namespace Minigames.Fight
 {
-    public void TryAdd(DamageWorksheet worksheet);
-    public void OnRemove(Entity target);
-    void OnAdd(Entity target);
+    public interface IStatusEffect
+    {
+        public void TryAdd(DamageWorksheet worksheet);
+        public void OnRemove(Entity target);
+        void OnAdd(Entity target);
+    }
 }

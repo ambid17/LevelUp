@@ -2,16 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Minigames.Fight;
 
-public class MultiEffect : Effect, IExecuteEffect
+namespace Minigames.Fight
 {
-    public List<Effect> effects;
-
-    public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-    public void Execute(DamageWorksheet worksheet)
+    public class MultiEffect : Effect, IExecuteEffect
     {
-        foreach (var effect in effects.OfType<IExecuteEffect>())
+        public List<Effect> effects;
+
+        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
+
+        public void Execute(DamageWorksheet worksheet)
         {
-            effect.Execute(worksheet);
+            foreach (var effect in effects.OfType<IExecuteEffect>())
+            {
+                effect.Execute(worksheet);
+            }
         }
     }
 }

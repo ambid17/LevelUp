@@ -4,69 +4,71 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EffectSettings", menuName = "ScriptableObjects/Fight/EffectSettings", order = 1)]
-[Serializable]
-public class EffectSettings : ScriptableObject
+namespace Minigames.Fight
 {
-    [Header("Set in Editor")]
-    public List<Effect> AllEffects;
-    
-    public OrderedList<Effect> UnlockedEffects = new();
-    
-    public void SetDefaults()
+    [CreateAssetMenu(fileName = "EffectSettings", menuName = "ScriptableObjects/Fight/EffectSettings", order = 1)]
+    [Serializable]
+    public class EffectSettings : ScriptableObject
     {
-        UnlockedEffects = null;
-    }
+        [Header("Set in Editor")] public List<Effect> AllEffects;
 
-    public void UnlockAllEffects()
-    {
-        foreach (var effect in AllEffects)
-        {
-            UnlockedEffects.Add(effect);
-        }
-    }
-    
-    public void UnlockEffect(Effect effect)
-    {
-        if (!UnlockedEffects.Contains(effect))
-        {
-            UnlockedEffects.Add(effect);
-        }
-        else
-        {
-            Effect toUpgrade = UnlockedEffects.FirstOrDefault(eff => eff.Name == effect.Name);
+        public OrderedList<Effect> UnlockedEffects = new();
 
-            if (toUpgrade != null)
+        public void SetDefaults()
+        {
+            UnlockedEffects = null;
+        }
+
+        public void UnlockAllEffects()
+        {
+            foreach (var effect in AllEffects)
             {
-                toUpgrade.AmountOwned++;
+                UnlockedEffects.Add(effect);
+            }
+        }
+
+        public void UnlockEffect(Effect effect)
+        {
+            if (!UnlockedEffects.Contains(effect))
+            {
+                UnlockedEffects.Add(effect);
             }
             else
             {
-                Debug.LogError($"No effect found with name: {effect.Name}");
+                Effect toUpgrade = UnlockedEffects.FirstOrDefault(eff => eff.Name == effect.Name);
+
+                if (toUpgrade != null)
+                {
+                    toUpgrade.AmountOwned++;
+                }
+                else
+                {
+                    Debug.LogError($"No effect found with name: {effect.Name}");
+                }
             }
         }
-    }
 
 
-    [NonSerialized] private int _weightTotal;
+        [NonSerialized] private int _weightTotal;
 
-    public Effect GetRandomEffect()
-    {
-        if (_weightTotal == 0)
+        public Effect GetRandomEffect()
         {
-            _weightTotal = AllEffects.Sum(e => e.SpawnWeight);
-        }
-
-        int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
-        foreach (var effect in AllEffects)
-        {
-            randomWeight -= effect.SpawnWeight;
-            if (randomWeight < 0)
+            if (_weightTotal == 0)
             {
-                return effect;
+                _weightTotal = AllEffects.Sum(e => e.SpawnWeight);
             }
-        }
 
-        return AllEffects[0];
+            int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
+            foreach (var effect in AllEffects)
+            {
+                randomWeight -= effect.SpawnWeight;
+                if (randomWeight < 0)
+                {
+                    return effect;
+                }
+            }
+
+            return AllEffects[0];
+        }
     }
 }

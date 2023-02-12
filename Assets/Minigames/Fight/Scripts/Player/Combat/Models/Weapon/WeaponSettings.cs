@@ -6,8 +6,6 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    
-
     [CreateAssetMenu(fileName = "WeaponSettings", menuName = "ScriptableObjects/Fight/WeaponSettings", order = 1)]
     [Serializable]
     public class WeaponSettings : ScriptableObject
