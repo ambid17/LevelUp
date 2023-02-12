@@ -3,6 +3,14 @@ using System.Collections;
 using Minigames.Fight;
 using UnityEngine;
 
+public enum EffectTriggerType
+{
+    OnHit,
+    OnKill,
+    OnDeath,
+    OnTakeDamage
+}
+
 [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]
 [Serializable]
 public abstract class Effect : ScriptableObject, IComparable<Effect>

@@ -1,6 +1,11 @@
 using System;
 using Minigames.Fight;
 
+public enum DamageType
+{
+    Physical, Magic
+}
+
 public class DamageEffect : Effect, IExecuteEffect
 {
     public DamageType DamageType;
