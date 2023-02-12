@@ -8,12 +8,10 @@ namespace Minigames.Fight
     {
         void Start()
         {
-            foreach (var weapon in GameManager.SettingsManager.weaponSettings.equippedWeapons)
-            {
-                var weaponGO = Instantiate(weapon.Prefab, transform);
-                var weaponController = weaponGO.GetComponent<WeaponController>();
-                weaponController.Setup(weapon);
-            }
+            Weapon equippedWeapon = GameManager.SettingsManager.weaponSettings.equippedWeapon;
+            var weaponGO = Instantiate(equippedWeapon.Prefab, transform);
+            var weaponController = weaponGO.GetComponent<WeaponController>();
+            weaponController.Setup(equippedWeapon);
         }
     }
 }

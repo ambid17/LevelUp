@@ -10,7 +10,11 @@ namespace Minigames.Fight
     {
         Pistol,
         RocketLauncher,
-        Katana
+        Shotgun,
+        MachineGun,
+        Katana,
+        Hammer,
+        Shield
     }
 
     [Serializable]
@@ -19,49 +23,7 @@ namespace Minigames.Fight
         public WeaponType WeaponType;
         public GameObject Prefab;
         public Sprite Icon;
-        public List<Synergy> AllSynergies;
-        public List<Synergy> UnlockedSynergies;
         public WeaponStats Stats;
-
-        public void UnlockSynergy(Synergy synergy)
-        {
-            if (!UnlockedSynergies.Contains(synergy))
-            {
-                UnlockedSynergies.Add(synergy);
-            }
-            else
-            {
-                Debug.LogError("synergy already unlocked");
-            }
-        }
-
-        [NonSerialized] private int _weightTotal;
-
-        public Synergy GetRandomSynergy()
-        {
-            if (_weightTotal == 0)
-            {
-                _weightTotal = AllSynergies.Sum(e => e.SpawnWeight);
-            }
-
-            int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
-            foreach (var synergy in AllSynergies)
-            {
-                randomWeight -= synergy.SpawnWeight;
-                if (randomWeight < 0)
-                {
-                    return synergy;
-                }
-            }
-
-            return AllSynergies[0];
-        }
-    }
-    
-    [Serializable]
-    public class Synergy
-    {
-        public int SpawnWeight;
     }
     
     public enum WeaponUpgradeType

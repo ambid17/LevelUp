@@ -1,12 +1,16 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using Utils;
+using DG.Tweening;
 
 namespace Minigames.Fight
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MovementController
     {
         [SerializeField] private Material _defaultMaterial;
         [SerializeField] private Material _flashMaterial;
+        [SerializeField] private TextMeshPro _damageText;
         [SerializeField] protected EnemyProjectile projectilePrefab;
         protected Rigidbody2D _rigidbody2D;
         protected SpriteRenderer _spriteRenderer;
@@ -26,24 +30,26 @@ namespace Minigames.Fight
         private float _flashTime = 0.1f;
         private bool _isFlashing;
         private Color _defaultColor;
-        
-        private EventService _eventService;
+        protected EventService eventService;
+        protected float moveSpeed;
         
         void Start()
         {
-            _eventService = GameManager.EventService;
-            _eventService.Add<PlayerDiedEvent>(Cull);
+            eventService = GameManager.EventService;
+            eventService.Add<PlayerDiedEvent>(Cull);
             
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             playerTransform = GameManager.Player.transform;
             _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
+            _damageText.enabled = false;
         }
 
         public void Setup(EnemyInstanceSettings settings)
         {
             this.settings = settings;
             currentHp = settings.MaxHp;
+            moveSpeed = settings.MoveSpeed;
         }
 
         protected virtual void Update()
@@ -69,6 +75,16 @@ namespace Minigames.Fight
                 projectile.Setup(settings, direction);
             }
         }
+        
+        public override void ApplyMoveEffect(float speedRatio)
+        {
+            moveSpeed *= speedRatio;
+        }
+
+        public override void RemoveMoveEffect(float speedRatio)
+        {
+            moveSpeed /= speedRatio;
+        }
 
         protected virtual void TryMove()
         {
@@ -79,7 +95,7 @@ namespace Minigames.Fight
 
             if (offset.magnitude > idealDistanceFromPlayer)
             {
-                targetVelocity = offset.normalized * settings.MoveSpeed;
+                targetVelocity = offset.normalized * moveSpeed;
             }
             else
             {
@@ -114,10 +130,21 @@ namespace Minigames.Fight
             _isFlashing = true;
             currentHp -= damage;
 
+            StartCoroutine(ShowDamage(damage));
+            
             if (currentHp <= 0)
             {
                 Die();
             }
+        }
+
+        private IEnumerator ShowDamage(float damage)
+        {
+            _damageText.enabled = true;
+            _damageText.text = damage.ToString();
+            Sequence sequence = _damageText.transform.DOJump(transform.position, 0.5f, 1, 1);
+            yield return sequence.WaitForCompletion();
+            _damageText.enabled = false;
         }
 
         public void Knockback(Vector2 force)

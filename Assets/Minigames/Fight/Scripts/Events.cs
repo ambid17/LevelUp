@@ -54,4 +54,45 @@ namespace Minigames.Fight
     }
     
     public class PurchaseCountChangedEvent { }
+
+
+    public class OnHitEvent : IEvent
+    {
+        public Entity Target;
+
+        public OnHitEvent(Entity target)
+        {
+            Target = target;
+        }
+    }
+    
+    public class OnKillEvent
+    {
+    }
+    public class OnDeathEvent
+    {
+    }
+    public class OnTakeDamageEvent
+    {
+    }
+
+    public class OnLifestealEvent : IEvent
+    {
+        public float Damage;
+
+        public OnLifestealEvent(float damage)
+        {
+            Damage = damage;
+        }
+    }
+
+    public class OnPlayerDamageEvent : IEvent
+    {
+        public float Damage;
+
+        public OnPlayerDamageEvent(float damage)
+        {
+            Damage = damage;
+        }
+    }
 }

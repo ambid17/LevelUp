@@ -1714,6 +1714,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 1191475633}
   settingsManager: {fileID: 1191475634}
   gameStateManager: {fileID: 1191475635}
+  playerStatusController: {fileID: 1601147382}
 --- !u!4 &1191475632
 Transform:
   m_ObjectHideFlags: 0
@@ -1756,6 +1757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSettings: {fileID: 11400000, guid: 9bddfe638d36abc488c374dfec22eb28, type: 2}
   weaponSettings: {fileID: 11400000, guid: b1949bc218afc0d4b8081f45c40fa767, type: 2}
+  effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
   upgradeSettings: {fileID: 11400000, guid: a5b376cfe0b89344c85aec9b6b733b52, type: 2}
   progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
   enemySpawnerSettings: {fileID: 11400000, guid: 0932afc41d8717c4cb75fb6d14ee8fba, type: 2}
@@ -3981,6 +3983,42 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4274406417404922745, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
   m_PrefabInstance: {fileID: 4274406416964258997}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1601147380 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4274406417404922725, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
+  m_PrefabInstance: {fileID: 4274406416964258997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601147374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2d7c04c68f3884f893f7d880ead9d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1601147382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6029713609566106194, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
+  m_PrefabInstance: {fileID: 4274406416964258997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601147374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e534a4f2e9f70fd4b8439f4dddab580e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1601147383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601147374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecd4ef3f58c48942a45f6f512090034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponController: {fileID: 0}
+  MovementController: {fileID: 1601147380}
 --- !u!1 &1651449243
 GameObject:
   m_ObjectHideFlags: 0

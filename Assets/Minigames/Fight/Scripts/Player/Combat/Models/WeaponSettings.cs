@@ -17,42 +17,32 @@ namespace Minigames.Fight
         public List<Weapon> allWeapons;
 
         [Header("Set at Runtime")]
-        public List<Weapon> equippedWeapons;
+        public Weapon equippedWeapon;
+
+        public void SetDefaults()
+        {
+            equippedWeapon = null;
+        }
 
         public void EquipWeapon(Weapon weapon)
         {
-            if (!equippedWeapons.Contains(weapon))
-            {
-                equippedWeapons.Add(weapon);
-            }
-            else
-            {
-                Debug.LogError("weapon already equipped");
-            }
+            equippedWeapon = weapon;
         }
 
         public void Init()
         {
-            if (equippedWeapons == null)
+            if (equippedWeapon == null)
             {
-                equippedWeapons = new List<Weapon>();
+                equippedWeapon = allWeapons.FirstOrDefault(wep => wep.WeaponType == defaultWeaponType);
+                
             }
             
-            if (equippedWeapons.Count == 0)
-            {
-                equippedWeapons.Add(allWeapons.FirstOrDefault(wep => wep.WeaponType == defaultWeaponType));
-            }
-            
-            foreach (var equippedWeapon in equippedWeapons)
-            {
-                equippedWeapon.Stats.Init();
-            }
+            equippedWeapon.Stats.Init();
         }
 
         public void ApplyUpgrade(WeaponUpgrade upgrade)
         {
-            var weapon = equippedWeapons.FirstOrDefault(w => w == upgrade.weapon);
-            weapon.Stats.ApplyUpgrade(upgrade);
+            equippedWeapon.Stats.ApplyUpgrade(upgrade);
         }
     }
 }

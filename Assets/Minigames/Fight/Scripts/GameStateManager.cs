@@ -5,7 +5,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class GameStateManager : MonoBehaviour
+    public class GameStateManager : FightBehavior
     {
         [SerializeField] private NotificationPanel _notificationPanel;
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
@@ -15,7 +15,7 @@ namespace Minigames.Fight
             set
             {
                 _progressSettings.Currency = value;
-                _eventService.Dispatch<CurrencyUpdatedEvent>();
+                eventService.Dispatch<CurrencyUpdatedEvent>();
             }
         }
         public float CurrencyPerMinute
@@ -24,53 +24,26 @@ namespace Minigames.Fight
             set
             {
                 _progressSettings.CurrentWorld.CurrencyPerMinute = value;
-                _eventService.Dispatch<CpmUpdatedEvent>();
+                eventService.Dispatch<CpmUpdatedEvent>();
             }
         }
 
-        private float _currentPlayerHp;
-        public float CurrentPlayerHP
-        {
-            get => _currentPlayerHp;
-            set
-            {
-                float newHp = value;
-                // if adding to player hp, clamp it to max
-                newHp = Mathf.Clamp(newHp, 0, GameManager.SettingsManager.playerSettings.MaxHp);
-                _currentPlayerHp = newHp;
-                
-                float hpPercent = _currentPlayerHp / GameManager.SettingsManager.playerSettings.MaxHp;
-                _eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
-            }
-        }
-
-        private EventService _eventService;
-        private float _deathTimer;
-        private bool _isDead;
-        public bool IsDead => _isDead;
-    
         private float _gpmTimer; // GPM: gold per minute
         private readonly float _gpmInterval = 5;
         private float _currencyAcquiredThisInterval;
 
-        private void Awake()
-        {
-            _eventService = GameManager.EventService;
+        protected override void Awake()
+        { 
+            base.Awake();
             AwardAwayCurrency();
         }
 
         void Start()
         {
-            CurrentPlayerHP = GameManager.SettingsManager.playerSettings.MaxHp;
         }
 
         void Update()
         {
-            if (_isDead)
-            {
-                WaitForRevive();
-            }
-
             UpdateGPM();
         }
 
@@ -92,7 +65,7 @@ namespace Minigames.Fight
             float award = clampedMinutesAway * currencyPerMinuteScaled;
 
             Currency += award;
-            _eventService.Dispatch(new CurrencyRewardEvent(clampedMinutesAway, award));
+            eventService.Dispatch(new CurrencyRewardEvent(clampedMinutesAway, award));
             // This can't be an event as this happens in the Awake() of gameStateManager
             _notificationPanel.AwardCurrency(clampedMinutesAway, award);
         }
@@ -130,7 +103,7 @@ namespace Minigames.Fight
             Currency += gold;
             _currencyAcquiredThisInterval += gold;
             _progressSettings.AddKill();
-            _eventService.Dispatch<EnemyKilledEvent>();
+            eventService.Dispatch<EnemyKilledEvent>();
         }
 
         public bool TrySpendCurrency(float currencyToSpend)
@@ -142,31 +115,6 @@ namespace Minigames.Fight
         
             Currency -= currencyToSpend;
             return true;
-        }
-
-        public void TakeDamage(float damage)
-        {
-            CurrentPlayerHP -= damage;
-            _eventService.Dispatch<PlayerDamagedEvent>();
-
-            if (CurrentPlayerHP <= 0)
-            {
-                _deathTimer = 0;
-                _isDead = true;
-                _eventService.Dispatch<PlayerDiedEvent>();
-            }
-        }
-    
-        private void WaitForRevive()
-        {
-            _deathTimer += Time.deltaTime;
-
-            if (_deathTimer > GameManager.SettingsManager.incomeSettings.DeathTimer)
-            {
-                _isDead = false;
-                CurrentPlayerHP = GameManager.SettingsManager.playerSettings.MaxHp;
-                _eventService.Dispatch<PlayerRevivedEvent>();
-            }
         }
     }
 }

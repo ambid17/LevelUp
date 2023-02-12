@@ -59,17 +59,19 @@ namespace Minigames.Fight
             }
             else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
-                EnemyController enemy = col.gameObject.GetComponent<EnemyController>();
-                enemy.TakeDamage(_damage);
+                Entity entity = col.gameObject.GetComponent<Entity>();
+                _eventService.Dispatch(new OnHitEvent(entity));
+                // EnemyController enemy = col.gameObject.GetComponent<EnemyController>();
+                // enemy.TakeDamage(_damage);
+                //
+                // if (GameManager.SettingsManager.playerSettings.LifeSteal > 0)
+                // {
+                //     _eventService.Dispatch(new OnLifestealEvent(_damage));
+                // }
             
                 if (_penetrationsLeft <= 0)
                 {
                     Die();
-                }
-
-                if (GameManager.SettingsManager.playerSettings.LifeSteal > 0)
-                {
-                    GameManager.GameStateManager.CurrentPlayerHP += _damage;
                 }
             
                 _penetrationsLeft--;

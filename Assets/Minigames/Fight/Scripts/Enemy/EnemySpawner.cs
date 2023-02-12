@@ -22,7 +22,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (GameManager.GameStateManager.IsDead)
+            if (GameManager.PlayerStatusController.IsDead)
             {
                 return;
             }

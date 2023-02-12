@@ -57,7 +57,7 @@ namespace Minigames.Fight
             }
             else if (col.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                GameManager.GameStateManager.TakeDamage(_enemySettings.WeaponDamage);
+                _eventService.Dispatch(new OnPlayerDamageEvent(_enemySettings.WeaponDamage));
                 Die();
             }
         }

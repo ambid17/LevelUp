@@ -15,7 +15,7 @@ namespace Minigames.Fight
         
         void Update()
         {
-            if (GameManager.GameStateManager.IsDead)
+            if (GameManager.PlayerStatusController.IsDead)
             {
                 return;
             }
@@ -49,7 +49,7 @@ namespace Minigames.Fight
                     
                     if (GameManager.SettingsManager.playerSettings.LifeSteal > 0)
                     {
-                        GameManager.GameStateManager.CurrentPlayerHP += damage * GameManager.SettingsManager.playerSettings.LifeSteal;
+                        _eventService.Dispatch(new OnLifestealEvent(damage));
                     }
                 }
             }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class RusherEnemyController : EnemyController
+    public class MeleeEnemyController : EnemyController
     {
         bool touchingPlayer = false;
 
@@ -14,7 +14,7 @@ namespace Minigames.Fight
                 if (shotTimer > settings.fireRate)
                 {
                     shotTimer = 0;   
-                    GameManager.GameStateManager.TakeDamage(settings.weaponDamage);
+                    eventService.Dispatch(new OnPlayerDamageEvent(settings.weaponDamage));
                 }
             }
         }

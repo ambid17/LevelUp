@@ -9,11 +9,13 @@ namespace Minigames.Fight
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private SettingsManager settingsManager;
         [SerializeField] private GameStateManager gameStateManager;
+        [SerializeField] private PlayerStatusController playerStatusController;
     
         public static GameObject Player => Instance.player;
         public static EnemySpawner EnemySpawner => Instance.enemySpawner;
         public static SettingsManager SettingsManager => Instance.settingsManager;
         public static GameStateManager GameStateManager => Instance.gameStateManager;
+        public static PlayerStatusController PlayerStatusController => Instance.playerStatusController;
 
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;

@@ -3,7 +3,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : MovementController
     {
         [SerializeField] private Material _defaultMaterial;
         [SerializeField] private Material _flashMaterial;
@@ -34,7 +34,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (GameManager.GameStateManager.IsDead)
+            if (GameManager.PlayerStatusController.IsDead)
             {
                 _rigidbody2D.velocity = Vector2.zero;
                 return;

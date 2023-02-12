@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1dde72dbf87827439e676a28db5507d, type: 3}
-  m_Name: MeleeWeapon
+  m_Name: Katana
   m_EditorClassIdentifier: 
-  WeaponType: 2
+  WeaponType: 4
   Prefab: {fileID: 4202762006180929252, guid: f944e6a0de37eb04383179959434dcd5, type: 3}
   Icon: {fileID: -1229482091, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
-  AllSynergies: []
-  UnlockedSynergies: []
   Stats:
     baseFireRate: 1
     fireRateScalar: 1

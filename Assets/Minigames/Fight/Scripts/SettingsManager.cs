@@ -8,6 +8,7 @@ namespace Minigames.Fight
     {
         public PlayerSettings playerSettings;
         public WeaponSettings weaponSettings;
+        public EffectSettings effectSettings;
         public UpgradeSettings upgradeSettings;
         public ProgressSettings progressSettings;
         public EnemySpawnerSettings enemySpawnerSettings;
@@ -29,6 +30,8 @@ namespace Minigames.Fight
         {
             upgradeSettings.SetDefaults();
             progressSettings.SetDefaults();
+            weaponSettings.SetDefaults();
+            effectSettings.SetDefaults();
         }
 
         /// <summary>
@@ -41,6 +44,7 @@ namespace Minigames.Fight
             progressSettings.Init();
             enemySpawnerSettings.Init();
             incomeSettings.Init();
+            effectSettings.UnlockAllEffects();
         }
 
         private void OnUpgradePurchased(UpgradePurchasedEvent eventType)
