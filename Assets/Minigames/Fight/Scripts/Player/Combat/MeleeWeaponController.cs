@@ -12,24 +12,8 @@ namespace Minigames.Fight
         {
             overridenWeapon = _weapon as MeleeWeapon;
         }
-        
-        void Update()
-        {
-            if (GameManager.PlayerStatusController.IsDead)
-            {
-                return;
-            }
-        
-            _shotTimer += Time.deltaTime;
-
-            if (Input.GetMouseButton(0) && _shotTimer > _weapon.Stats.FireRate)
-            {
-                _shotTimer = 0;
-                Shoot();
-            }
-        }
     
-        private void Shoot()
+        protected override void Shoot()
         {
             Vector2 position = transform.position.AsVector2();
             Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -40,7 +24,7 @@ namespace Minigames.Fight
             {
                 if (hit.transform.gameObject.layer == PhysicsUtils.EnemyLayer)
                 {
-                    EnemyController enemy = hit.transform.gameObject.GetComponent<EnemyController>();
+                    EnemyMovementController enemy = hit.transform.gameObject.GetComponent<EnemyMovementController>();
                     enemy.TakeDamage(damage);
 
                     Vector2 knockback = enemy.transform.position.AsVector2() - transform.position.AsVector2();

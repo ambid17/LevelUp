@@ -6,17 +6,15 @@ using DG.Tweening;
 
 namespace Minigames.Fight
 {
-    public class EnemyController : MovementController
+    public class EnemyMovementController : MovementController
     {
         [SerializeField] private Material _defaultMaterial;
         [SerializeField] private Material _flashMaterial;
         [SerializeField] private TextMeshPro _damageText;
-        [SerializeField] protected EnemyProjectile projectilePrefab;
+        [SerializeField] protected Transform targetTransform;
         protected Rigidbody2D _rigidbody2D;
         protected SpriteRenderer _spriteRenderer;
-        protected Transform playerTransform;
     
-        protected float shotTimer;
         protected float currentHp;
         [SerializeField] protected EnemyInstanceSettings settings;
 
@@ -40,42 +38,25 @@ namespace Minigames.Fight
             
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            playerTransform = GameManager.Player.transform;
             _spriteRenderer.color = GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
             _damageText.enabled = false;
         }
 
-        public void Setup(EnemyInstanceSettings settings)
+        public void Setup(EnemyInstanceSettings settings, Transform targetTransform)
         {
             this.settings = settings;
             currentHp = settings.MaxHp;
             moveSpeed = settings.MoveSpeed;
+            this.targetTransform = targetTransform;
         }
 
         protected virtual void Update()
         {
-            TryShoot();
             TryMove();
             TryCull();
             CheckFlash();
         }
 
-        protected virtual void TryShoot()
-        {
-            shotTimer += Time.deltaTime;
-            if (shotTimer > settings.FireRate)
-            {
-                shotTimer = 0;
-            
-                EnemyProjectile projectile = Instantiate(projectilePrefab);
-                projectile.transform.position = transform.position;
-            
-                Vector2 direction = playerTransform.position - transform.position;
-
-                projectile.Setup(settings, direction);
-            }
-        }
-        
         public override void ApplyMoveEffect(float speedRatio)
         {
             moveSpeed *= speedRatio;
@@ -89,7 +70,7 @@ namespace Minigames.Fight
         protected virtual void TryMove()
         {
             Vector2 velocity = _rigidbody2D.velocity;
-            Vector2 offset = playerTransform.position - transform.position;
+            Vector2 offset = targetTransform.position - transform.position;
 
             Vector2 targetVelocity;
 
@@ -112,7 +93,7 @@ namespace Minigames.Fight
         // If the player runs too far from the enemy, kill it off
         private void TryCull()
         {
-            Vector2 offsetFromPlayer = playerTransform.position - transform.position;
+            Vector2 offsetFromPlayer = targetTransform.position - transform.position;
             if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
             {
                 Cull();

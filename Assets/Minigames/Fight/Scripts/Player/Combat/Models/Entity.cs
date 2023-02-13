@@ -14,13 +14,16 @@ namespace Minigames.Fight
 
         public OrderedList<StatusEffectTracker> StatusEffects = new();
 
-        private float Hp;
+        private float _currentHp;
+        private float _maxHp;
 
         protected EventService eventService;
 
         protected virtual void Awake()
         {
             eventService = GameManager.EventService;
+            WeaponController = GetComponent<WeaponController>();
+            MovementController = GetComponent<MovementController>();
         }
 
         private void Update()

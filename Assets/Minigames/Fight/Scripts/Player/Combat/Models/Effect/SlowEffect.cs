@@ -26,7 +26,7 @@ namespace Minigames.Fight
             doesSlow = true;
             if (doesSlow)
             {
-                StatusEffectTracker.AddTracker(worksheet.source, worksheet.target, this, duration);
+                StatusEffectTracker.AddTracker(worksheet.Source, worksheet.Target, this, duration);
             }
         }
 

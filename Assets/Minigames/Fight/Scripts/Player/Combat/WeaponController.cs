@@ -7,15 +7,21 @@ namespace Minigames.Fight
 {
     public class WeaponController : MonoBehaviour
     {
-        protected Weapon _weapon;
+        [SerializeField] protected Weapon _weapon;
         protected float _shotTimer = 0;
         protected Camera _camera;
         protected EventService _eventService;
-        public Entity player;
+        public Entity myEntity;
 
         void Awake()
         {
             _camera = Camera.main;
+
+            if (myEntity == null)
+            {
+                myEntity = GetComponentInParent<Entity>();
+            }
+
             _eventService = GameManager.EventService;
             _eventService.Add<OnHitEvent>(OnHit);
         }
@@ -25,7 +31,37 @@ namespace Minigames.Fight
             _weapon = weapon;
         }
 
-        protected float CalculateDamage()
+        void Update()
+        {
+            if (ShouldPreventUpdate())
+            {
+                return;
+            }
+
+            _shotTimer += Time.deltaTime;
+
+            if (CanShoot())
+            {
+                _shotTimer = 0;
+                Shoot();
+            }
+        }
+
+        protected virtual bool ShouldPreventUpdate()
+        {
+            return GameManager.PlayerStatusController.IsDead || _weapon == null;
+        }
+        
+        protected virtual bool CanShoot()
+        {
+            return Input.GetMouseButton(0) && _shotTimer > _weapon.Stats.FireRate;
+        }
+
+        protected virtual void Shoot()
+        {
+        }
+
+        protected virtual float CalculateDamage()
         {
             float damage = _weapon.Stats.Damage;
 
@@ -43,11 +79,10 @@ namespace Minigames.Fight
             return damage;
         }
 
-        private void OnHit(OnHitEvent eventType)
+        protected virtual void OnHit(OnHitEvent eventType)
         {
-            DamageWorksheet damageWorksheet = new DamageWorksheet();
-            damageWorksheet.source = player;
-            damageWorksheet.target = eventType.Target;
+            DamageWorksheet damageWorksheet = new DamageWorksheet(myEntity, eventType.Target);
+            damageWorksheet.BaseDamage = CalculateDamage();
             
             foreach (var effect in GameManager.SettingsManager.effectSettings.UnlockedEffects
                          .OfType<IExecuteEffect>()
@@ -62,33 +97,46 @@ namespace Minigames.Fight
 
     public class DamageWorksheet
     {
-        public float baseDamage;
-        public List<float> weaponMultipliers;
+        public float BaseDamage;
+        public List<float> DamageMultipliers;
 
-        public float effectDamage;
-        public List<float> effectMultipliers;
+        public float EffectDamage;
+        public List<float> EffectMultipliers;
 
-        public int resistance;
-        public float penetration;
+        public float TargetResistance;
+        public float SourcePenetration;
 
-        public Entity source;
-        public Entity target;
+        public Entity Source;
+        public Entity Target;
+
+        public DamageWorksheet(Entity source, Entity target)
+        {
+            DamageMultipliers = new();
+            EffectMultipliers = new();
+        }
         
         // Base damage * [weaponMult] + [effectDamage * effectMult]... - (armor * penetration)
         public void ApplyDamage()
         {
-            float baseDmg = baseDamage;
+            float baseDmg = BaseDamage;
 
-            foreach (var mult in weaponMultipliers)
+            foreach (var mult in DamageMultipliers)
             {
                 baseDmg *= mult;
             }
 
-            float effectDmg = effectDamage;
+            float effectDmg = EffectDamage;
+            foreach (var mult in EffectMultipliers)
+            {
+                effectDmg *= mult;
+            }
 
-            float finalDamage = baseDmg + effectDmg;
+            float damageToDeal = baseDmg + effectDmg;
 
-            target.TakeDamage(finalDamage);
+            float damageResist = TargetResistance - SourcePenetration;
+
+            float finalDamage = damageToDeal - damageResist;
+            Target.TakeDamage(finalDamage);
         }
     }
 }

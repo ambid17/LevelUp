@@ -61,8 +61,8 @@ namespace Minigames.Fight
             GameObject instance = Instantiate(enemyToSpawn.Prefab);
             instance.transform.position = GetRandomInDonut(_spawnerSettings.MinSpawnRadius, _spawnerSettings.MaxSpawnRadius);
 
-            EnemyController controller = instance.GetComponent<EnemyController>();
-            controller.Setup(enemyToSpawn.Settings);
+            EnemyMovementController controller = instance.GetComponent<EnemyMovementController>();
+            controller.Setup(enemyToSpawn.Settings, GameManager.Player.transform);
             _enemyCount++;
         }
     

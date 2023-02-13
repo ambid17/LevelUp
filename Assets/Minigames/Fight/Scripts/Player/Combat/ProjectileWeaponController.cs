@@ -15,23 +15,9 @@ namespace Minigames.Fight
             overridenWeapon = _weapon as ProjectileWeapon;
         }
 
-        void Update()
-        {
-            if (GameManager.PlayerStatusController.IsDead)
-            {
-                return;
-            }
         
-            _shotTimer += Time.deltaTime;
-
-            if (Input.GetMouseButton(0) && _shotTimer > _weapon.Stats.FireRate)
-            {
-                _shotTimer = 0;
-                Shoot();
-            }
-        }
         
-        private void Shoot()
+        protected override void Shoot()
         {
             int projectileCount = overridenWeapon.Stats.ProjectileCount;
             for (int i = 0; i < projectileCount; i++)
