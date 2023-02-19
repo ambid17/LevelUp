@@ -7,14 +7,15 @@ namespace Minigames.Fight
 {
     public class HitData
     {
+        public Entity Source;
+        public Entity Target;
+
         public float BaseDamage;
         public List<IExecuteEffect> Effects;
+        
         public List<float> BaseDamageAdditions;
         public List<float> BaseDamageMultipliers;
         public List<float> EffectDamages; 
-
-        public Entity Source;
-        public Entity Target;
 
         public HitData(Entity source, Entity target)
         {
@@ -23,13 +24,15 @@ namespace Minigames.Fight
 
             BaseDamageAdditions = new();
             BaseDamageMultipliers = new();
+            EffectDamages = new();
         }
 
         // Base damage * [weaponMult] + [effectDamage * effectMult]... - (armor * penetration)
-        public void GetDamage()
+        public float CalculateDamage()
         {
             foreach (var effect in Effects)
             {
+                // populates the list of damages/multipliers
                 effect.Execute(this);
             }
 
@@ -47,7 +50,13 @@ namespace Minigames.Fight
                 totalDamage *= dmgMultiplier;
             }
             
-            Target.TakeDamage(totalDamage);
+            // ex: +10 lightning damage on hit
+            foreach (var effectDmg in EffectDamages)
+            {
+                totalDamage += effectDmg;
+            }
+
+            return totalDamage;
         }
     }
 }

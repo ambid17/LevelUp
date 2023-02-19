@@ -12,6 +12,8 @@ namespace Minigames.Fight
         private int _penetrationsLeft;
         private bool _isMarkedForDeath;
 
+        private Entity _sourceEntity;
+
         private EventService _eventService;
     
         void Start()
@@ -38,8 +40,9 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(Vector2 direction, int penetration)
+        public void Setup(Entity sourceEntity, Vector2 direction, int penetration)
         {
+            _sourceEntity = sourceEntity;
             _shootDirection = direction.normalized;
             _penetrationsLeft = penetration;
         }
@@ -57,8 +60,8 @@ namespace Minigames.Fight
             }
             else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
-                Entity entity = col.gameObject.GetComponent<Entity>();
-                _eventService.Dispatch(new OnHitEvent(entity));
+                Entity enemyEntity = col.gameObject.GetComponent<Entity>();
+                _sourceEntity.OnHitEnemy(enemyEntity);
             
                 if (_penetrationsLeft <= 0)
                 {

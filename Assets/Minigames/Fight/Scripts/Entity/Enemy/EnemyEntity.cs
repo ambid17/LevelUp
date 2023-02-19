@@ -6,18 +6,13 @@ namespace Minigames.Fight
 {
     public class EnemyEntity : Entity
     {
-        public EnemyStats EnemyStats;
+        public EnemyStats enemyStats;
         public Transform target;
-        protected bool isMarkedForDeath;
-        
-        void Start()
-        {
-            
-        }
+        private bool _isMarkedForDeath;
 
-        void Update()
+        protected override void Setup()
         {
-
+            target = GameManager.PlayerEntity.transform;
         }
         
         protected override void Die()
@@ -25,15 +20,15 @@ namespace Minigames.Fight
             // Since we are shooting so many projectiles...
             // OnTriggerEnter() gets called in Projectile multiple times before we get destroyed
             // This prevents duplicate deaths
-            if (isMarkedForDeath)
+            if (_isMarkedForDeath)
             {
                 return;
             }
         
-            isMarkedForDeath = true;
+            _isMarkedForDeath = true;
         
             GameManager.EnemySpawnManager.EnemyCount--;
-            GameManager.CurrencyManager.EnemyKilled(EnemyStats.GoldValue);
+            GameManager.CurrencyManager.EnemyKilled(enemyStats.GoldValue);
         
             Destroy(gameObject);
         }

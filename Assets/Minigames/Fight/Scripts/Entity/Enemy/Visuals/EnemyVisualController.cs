@@ -11,7 +11,7 @@ namespace Minigames.Fight
     {
         [SerializeField] private TextMeshPro _damageText; // TODO: move to object pool
 
-        private EnemyMovementController _movementController;
+        private EnemyEntity _enemyEntity;
         
         private const float MaxDistanceFromPlayer = 100;
         private bool isMarkedForDeath;
@@ -19,27 +19,18 @@ namespace Minigames.Fight
         protected override void Start()
         {
             base.Start();
+            _enemyEntity = MyEntity as EnemyEntity;
             _defaultColor =
                 GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
             _damageText.enabled = false;
             
-            eventService.Add<PlayerDiedEvent>(Cull);
+            EventService.Add<PlayerDiedEvent>(Cull);
         }
 
         protected override void Update()
         {
             base.Update();
-            FlipSprite();
             TryCull();
-        }
-
-        protected void  FlipSprite()
-        {
-            //Flip the sprite based on velocity
-            if(_movementController.myRigidbody.velocity.x < 0) 
-                spriteRenderer.flipX = true;
-            else 
-                spriteRenderer.flipX = false;
         }
         
         public override void StartDamageFx(float damage)
@@ -60,7 +51,7 @@ namespace Minigames.Fight
         // If the player runs too far from the enemy, kill it off
         private void TryCull()
         {
-            Vector2 offsetFromPlayer = _movementController.target.position - transform.position;
+            Vector2 offsetFromPlayer = _enemyEntity.target.position - transform.position;
             if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
             {
                 Cull();

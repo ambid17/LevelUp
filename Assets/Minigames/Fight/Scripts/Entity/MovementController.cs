@@ -1,23 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour
+
+namespace Minigames.Fight
 {
-    protected float CurrentMoveSpeed;
-
-    protected virtual void SetStartingMoveSpeed(float moveSpeed)
+    public class MovementController : MonoBehaviour
     {
-        CurrentMoveSpeed = moveSpeed;
-    }
+        protected float CurrentMoveSpeed;
+        [NonSerialized]
+        public Rigidbody2D MyRigidbody2D;
+        protected Entity MyEntity;
 
-    public virtual void ApplyMoveEffect(float speedRatio)
-    {
-        CurrentMoveSpeed *= speedRatio;
-    }
+        private void Awake()
+        {
+            MyRigidbody2D = GetComponent<Rigidbody2D>();
+            MyEntity = GetComponent<Entity>();
+        }
 
-    public virtual void RemoveMoveEffect(float speedRatio)
-    {
-        CurrentMoveSpeed /= speedRatio;
+        protected virtual void SetStartingMoveSpeed(float moveSpeed)
+        {
+            CurrentMoveSpeed = moveSpeed;
+        }
+
+        public virtual void ApplyMoveEffect(float speedRatio)
+        {
+            CurrentMoveSpeed *= speedRatio;
+        }
+
+        public virtual void RemoveMoveEffect(float speedRatio)
+        {
+            CurrentMoveSpeed /= speedRatio;
+        }
     }
 }

@@ -5,17 +5,11 @@ namespace Minigames.Fight
 {
     public class PlayerMovementController : MovementController
     {
-        private Rigidbody2D _rigidbody2D;
-    
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
-        
-        private VisualController _visualController;
     
         void Start()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-            _visualController = GameManager.PlayerEntity.VisualController;
             SetStartingMoveSpeed(GameManager.SettingsManager.playerSettings.MoveSpeed);
         }
 
@@ -23,7 +17,7 @@ namespace Minigames.Fight
         {
             if (GameManager.PlayerEntity.IsDead)
             {
-                _rigidbody2D.velocity = Vector2.zero;
+                MyRigidbody2D.velocity = Vector2.zero;
                 return;
             }
         
@@ -59,22 +53,22 @@ namespace Minigames.Fight
     
         private void Move()
         {
-            _rigidbody2D.velocity = _movementToApply;
+            MyRigidbody2D.velocity = _movementToApply;
 
-            if (_rigidbody2D.velocity.magnitude == 0)
+            if (MyRigidbody2D.velocity.magnitude == 0)
             {
-                _visualController.animator.SetBool("IsMoving", false);
+                MyEntity.VisualController.Animator.SetBool("IsMoving", false);
             }
             else
             {
-                _visualController.animator.SetBool("IsMoving", true);
+                MyEntity.VisualController.Animator.SetBool("IsMoving", true);
             }
         
             //Flip the sprite based on velocity
-            if(_rigidbody2D.velocity.x < -0.1f) 
-                _visualController.spriteRenderer.flipX = false;
+            if(MyRigidbody2D.velocity.x < -0.1f) 
+                MyEntity.VisualController.SpriteRenderer.flipX = false;
             else 
-                _visualController.spriteRenderer.flipX = true;
+                MyEntity.VisualController.SpriteRenderer.flipX = true;
         }
     
         private void FixedUpdate()

@@ -35,7 +35,7 @@ namespace Minigames.Fight
             
             Vector2 direction = overridenEntity.target.position - myTransform.position;
 
-            projectile.Setup(overridenEntity.EnemyStats, direction);
+            projectile.Setup(overridenEntity.enemyStats, direction);
         }
     }
 }

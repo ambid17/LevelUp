@@ -24,13 +24,14 @@ namespace Minigames.Fight
             WeaponController = GetComponent<WeaponController>();
             MovementController = GetComponent<MovementController>();
             VisualController = GetComponent<VisualController>();
+            Setup();
         }
 
-        public void AssignStats(EntityStats stats)
+        protected virtual void Setup()
         {
-            Stats = stats;
+            
         }
-
+        
         protected virtual void Update()
         {
             TickStatuses();
@@ -44,13 +45,18 @@ namespace Minigames.Fight
             }
         }
 
-        public virtual void TakeHit(HitData hit)
+        // Called when this entity hits another
+        public virtual void OnHitEnemy(Entity enemyEntity)
         {
-            
+            HitData hitData = new HitData(this, enemyEntity);
+            hitData.BaseDamage = WeaponController.Weapon.Stats.Damage;
+            hitData.Effects = Stats.OnHitEffects;
+            enemyEntity.TakeHit(hitData);
         }
 
-        public virtual void TakeDamage(float damage)
+        public virtual void TakeHit(HitData hit)
         {
+            float damage = hit.CalculateDamage();
             Stats.currentHp -= damage;
             VisualController.StartDamageFx(damage);
 

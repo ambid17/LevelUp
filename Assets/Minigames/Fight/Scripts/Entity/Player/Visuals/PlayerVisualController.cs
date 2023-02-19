@@ -7,30 +7,21 @@ namespace Minigames.Fight
 {
     public class PlayerVisualController : VisualController
     {
-        void Start()
+        protected override void Start()
         {
-            eventService.Add<PlayerDiedEvent>(Die);
-            eventService.Add<PlayerRevivedEvent>(Revive);
-            eventService.Add<PlayerDamagedEvent>(StartPlayerDamageFx);
-        }
-
-        void Update()
-        {
+            base.Start();
+            EventService.Add<PlayerDiedEvent>(Die);
+            EventService.Add<PlayerRevivedEvent>(Revive);
         }
 
         private void Revive()
         {
-            spriteRenderer.color = Color.white;
+            SpriteRenderer.color = Color.white;
         }
 
         private void Die()
         {
-            spriteRenderer.color = Color.black;
-        }
-
-        private void StartPlayerDamageFx(PlayerDamagedEvent e)
-        {
-            base.StartDamageFx(0);
+            SpriteRenderer.color = Color.black;
         }
     }
 }

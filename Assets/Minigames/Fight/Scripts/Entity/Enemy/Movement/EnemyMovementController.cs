@@ -8,7 +8,6 @@ namespace Minigames.Fight
 {
     public class EnemyMovementController : MovementController
     {
-        public Transform target;
         public Rigidbody2D myRigidbody;
         public EnemyEntity myEntity;
     
@@ -17,9 +16,9 @@ namespace Minigames.Fight
         
         void Start()
         {
+            myEntity = GetComponent<EnemyEntity>();
             myRigidbody = GetComponent<Rigidbody2D>();
-            SetStartingMoveSpeed(myEntity.EnemyStats.moveSpeed);
-            target = GameManager.PlayerEntity.transform;
+            SetStartingMoveSpeed(myEntity.enemyStats.moveSpeed);
         }
 
         protected virtual void Update()
@@ -30,20 +29,20 @@ namespace Minigames.Fight
         protected virtual void TryMove()
         {
             Vector2 velocity = myRigidbody.velocity;
-            Vector2 offset = target.position - transform.position;
+            Vector2 toPlayer = myEntity.target.position - transform.position;
 
             Vector2 targetVelocity;
 
-            if (offset.magnitude > idealDistanceFromPlayer)
+            if (toPlayer.magnitude > idealDistanceFromPlayer)
             {
-                targetVelocity = offset.normalized * CurrentMoveSpeed;
+                targetVelocity = toPlayer.normalized * CurrentMoveSpeed;
             }
             else
             {
                 targetVelocity = Vector2.zero;
             }
 
-            velocity = Vector2.MoveTowards(velocity, targetVelocity, myEntity.EnemyStats.acceleration * Time.deltaTime);
+            velocity = Vector2.MoveTowards(velocity, targetVelocity, myEntity.enemyStats.acceleration * Time.deltaTime);
         
             myRigidbody.velocity = velocity;
         }

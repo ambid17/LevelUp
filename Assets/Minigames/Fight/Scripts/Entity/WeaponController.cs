@@ -8,6 +8,7 @@ namespace Minigames.Fight
     public class WeaponController : MonoBehaviour
     {
         [SerializeField] protected Weapon _weapon;
+        public Weapon Weapon => _weapon;
         protected float _shotTimer = 0;
         protected Camera _camera;
         protected EventService _eventService;
@@ -23,7 +24,6 @@ namespace Minigames.Fight
             }
 
             _eventService = GameManager.EventService;
-            _eventService.Add<OnHitEvent>(OnHit);
         }
 
         public void Setup(Weapon weapon)
@@ -59,23 +59,6 @@ namespace Minigames.Fight
 
         protected virtual void Shoot()
         {
-        }
-
-        // called when this weapon hits an enemy
-        protected virtual void OnHit(OnHitEvent eventType)
-        {
-            Entity enemyEntity = eventType.Target;
-            HitData hitData = new HitData(myEntity, enemyEntity);
-
-            foreach (var effect in GameManager.SettingsManager.effectSettings.UnlockedEffects
-                         .OfType<IExecuteEffect>()
-                         .Where(e => e.TriggerType == EffectTriggerType.OnHit))
-            {
-                hitData.Effects.Add(effect);
-            }
-            
-            enemyEntity.TakeHit(hitData);
-
         }
     }
 }

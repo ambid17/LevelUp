@@ -10,7 +10,8 @@ namespace Minigames.Fight
         OnHit,
         OnKill,
         OnDeath,
-        OnTakeDamage
+        OnTakeDamage,
+        OnPurchase
     }
 
     [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]

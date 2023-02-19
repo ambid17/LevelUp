@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,32 +14,46 @@ namespace Minigames.Fight
         [SerializeField] protected Color _flashColor;
 
 
-        public SpriteRenderer spriteRenderer;
-        public Animator animator;
+        [NonSerialized]
+        public SpriteRenderer SpriteRenderer;
+        [NonSerialized]
+        public Animator Animator;
 
-        protected EventService eventService;
+        protected EventService EventService;
+        protected Entity MyEntity;
 
         private float _flashTimer;
-        private readonly float FlashTime = 0.1f;
+        private const float FlashTime = 0.1f;
         private bool _isFlashing;
+
 
         protected virtual void Start()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            animator = GetComponent<Animator>();
+            SpriteRenderer = GetComponent<SpriteRenderer>();
+            Animator = GetComponent<Animator>();
 
-            eventService = GameManager.EventService;
+            EventService = GameManager.EventService;
         }
 
         protected virtual void Update()
         {
+            FlipSprite();
             TryStopDamageFx();
+        }
+        
+        protected void  FlipSprite()
+        {
+            //Flip the sprite based on velocity
+            if(MyEntity.MovementController.MyRigidbody2D.velocity.x < 0) 
+                SpriteRenderer.flipX = true;
+            else 
+                SpriteRenderer.flipX = false;
         }
 
         public virtual void StartDamageFx(float damage)
         {
-            spriteRenderer.material = _flashMaterial;
-            spriteRenderer.color = _flashColor;
+            SpriteRenderer.material = _flashMaterial;
+            SpriteRenderer.color = _flashColor;
             _isFlashing = true;
         }
 
@@ -50,8 +65,8 @@ namespace Minigames.Fight
 
                 if (_flashTimer > FlashTime)
                 {
-                    spriteRenderer.material = _defaultMaterial;
-                    spriteRenderer.color = _defaultColor;
+                    SpriteRenderer.material = _defaultMaterial;
+                    SpriteRenderer.color = _defaultColor;
                     _flashTimer = 0;
                     _isFlashing = false;
                 }
