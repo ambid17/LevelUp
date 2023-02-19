@@ -100,7 +100,7 @@ namespace Minigames.Fight
             }
         }
 
-        public void TakeDamage(float damage)
+        public void ShowDamageFx(float damage)
         {
             _spriteRenderer.material = _flashMaterial;
             if (!_isFlashing)
@@ -171,7 +171,7 @@ namespace Minigames.Fight
             isMarkedForDeath = true;
         
             GameManager.EnemySpawner.EnemyCount--;
-            GameManager.GameStateManager.EnemyKilled(settings);
+            GameManager.CurrencyManager.EnemyKilled(settings);
         
             Destroy(gameObject);
         }

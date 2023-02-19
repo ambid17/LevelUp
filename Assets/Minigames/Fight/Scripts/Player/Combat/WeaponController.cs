@@ -49,7 +49,7 @@ namespace Minigames.Fight
 
         protected virtual bool ShouldPreventUpdate()
         {
-            return GameManager.PlayerStatusController.IsDead || _weapon == null;
+            return GameManager.PlayerEntity.IsDead || _weapon == null;
         }
         
         protected virtual bool CanShoot()
@@ -79,6 +79,7 @@ namespace Minigames.Fight
             return damage;
         }
 
+        // called when this weapon hits an enemy
         protected virtual void OnHit(OnHitEvent eventType)
         {
             DamageWorksheet damageWorksheet = new DamageWorksheet(myEntity, eventType.Target);
@@ -111,6 +112,8 @@ namespace Minigames.Fight
 
         public DamageWorksheet(Entity source, Entity target)
         {
+            Source = source;
+            Target = target;
             DamageMultipliers = new();
             EffectMultipliers = new();
         }

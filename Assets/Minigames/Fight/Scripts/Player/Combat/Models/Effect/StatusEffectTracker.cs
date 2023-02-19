@@ -18,28 +18,20 @@ namespace Minigames.Fight
         public static void AddTracker(Entity source, Entity target, IStatusEffect effect, float remainingTime = -1f)
         {
             StatusEffectTracker tracker = new StatusEffectTracker(source, target, effect, remainingTime);
-            target.StatusEffects.Add(tracker);
+            target.Stats.StatusEffects.Add(tracker);
             effect.OnAdd(target);
         }
 
         public void OnTick(float delta)
         {
-            if (remainingTime > -1)
+            effect.OnTick();
+            remainingTime -= delta;
+
+            if (remainingTime <= 0)
             {
-                OnTickEffect(delta);
-                remainingTime -= delta;
-
-                if (remainingTime <= 0)
-                {
-                    effect.OnRemove(target);
-                    target.StatusEffects.Remove(this);
-                }
+                effect.OnRemove(target);
+                target.Stats.StatusEffects.Remove(this);
             }
-        }
-
-        private void OnTickEffect(float delta)
-        {
-
         }
     }
 }

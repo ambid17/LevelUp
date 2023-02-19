@@ -1,70 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
+using Minigames.Fight;
 using UnityEngine;
 
 namespace Minigames.Fight
 {
-
-    public class PlayerStatusController : FightBehavior
+    public class PlayerEntity : Entity
     {
-        [SerializeField]
-        private float _currentPlayerHp;
-
-        public float CurrentPlayerHp
+        private float _deathTimer;
+        
+        public float CurrentHp
         {
-            get => _currentPlayerHp;
+            get => Stats.currentHp;
             set
             {
                 float newHp = value;
                 // if adding to player hp, clamp it to max
                 newHp = Mathf.Clamp(newHp, 0, GameManager.SettingsManager.playerSettings.MaxHp);
-                _currentPlayerHp = newHp;
+                Stats.currentHp = newHp;
 
-                float hpPercent = _currentPlayerHp / GameManager.SettingsManager.playerSettings.MaxHp;
+                float hpPercent = Stats.currentHp / GameManager.SettingsManager.playerSettings.MaxHp;
                 eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
             }
         }
-
-        private float _deathTimer;
-        private bool _isDead;
-        public bool IsDead => _isDead;
-
+        
         void Start()
         {
-            CurrentPlayerHp = GameManager.SettingsManager.playerSettings.MaxHp;
+            Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
             eventService.Add<OnPlayerDamageEvent>(TakeDamage);
         }
 
-        void Update()
+        protected override void Update()
         {
-            if (_isDead)
+            base.Update();
+            if (IsDead)
             {
                 WaitForRevive();
             }
         }
-
+        
         public void TakeDamage(OnPlayerDamageEvent eventType)
         {
             // TODO: calculate based on resistances
-            CurrentPlayerHp -= eventType.Damage;
+            CurrentHp -= eventType.Damage;
             eventService.Dispatch<PlayerDamagedEvent>();
 
-            if (CurrentPlayerHp <= 0)
+            if (IsDead)
             {
                 _deathTimer = 0;
-                _isDead = true;
                 eventService.Dispatch<PlayerDiedEvent>();
             }
         }
-
+        
         private void WaitForRevive()
         {
             _deathTimer += Time.deltaTime;
 
             if (_deathTimer > GameManager.SettingsManager.incomeSettings.DeathTimer)
             {
-                _isDead = false;
-                CurrentPlayerHp = GameManager.SettingsManager.playerSettings.MaxHp;
+                CurrentHp = GameManager.SettingsManager.playerSettings.MaxHp;
                 eventService.Dispatch<PlayerRevivedEvent>();
             }
         }

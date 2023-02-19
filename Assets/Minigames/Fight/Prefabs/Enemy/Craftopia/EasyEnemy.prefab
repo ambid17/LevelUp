@@ -221,20 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
-  _flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
-  _damageText: {fileID: 1398335833243062241}
-  projectilePrefab: {fileID: 0}
-  settings:
-    goldValue: 0
-    fireRate: 0
-    moveSpeed: 0
-    acceleration: 0
-    maxHp: 100
-    weaponDamage: 0
-    projectileSpeed: 0
-    projectileLifeTime: 0
-  idealDistanceFromPlayer: 0
+  _weapon: {fileID: 0}
+  myEntity: {fileID: 0}
 --- !u!212 &8510735526301981991
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -346,5 +334,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecd4ef3f58c48942a45f6f512090034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponController: {fileID: 0}
-  MovementController: {fileID: 8789358854941681159}
+  WeaponController: {fileID: 8789358854941681159}
+  MovementController: {fileID: 0}

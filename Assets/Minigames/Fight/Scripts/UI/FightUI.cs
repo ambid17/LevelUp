@@ -53,12 +53,12 @@ namespace Minigames.Fight
 
         private void SetGoldText()
         {
-            _goldText.text = GameManager.GameStateManager.Currency.ToCurrencyString();
+            _goldText.text = GameManager.CurrencyManager.Currency.ToCurrencyString();
         }
     
         private void SetGoldPerMinuteText()
         {
-            string value = GameManager.GameStateManager.CurrencyPerMinute.ToCurrencyString();
+            string value = GameManager.CurrencyManager.CurrencyPerMinute.ToCurrencyString();
             _goldPerMinuteText.text = $"({value}/min)";
         }
 

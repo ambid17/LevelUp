@@ -11,11 +11,10 @@ namespace Minigames.Fight
     {
         public WeaponController WeaponController;
         public MovementController MovementController;
-
-        public OrderedList<StatusEffectTracker> StatusEffects = new();
-
-        private float _currentHp;
-        private float _maxHp;
+        public VisualController VisualController;
+        public EntityStats Stats;
+        
+        public bool IsDead => Stats.currentHp <= 0;
 
         protected EventService eventService;
 
@@ -24,18 +23,30 @@ namespace Minigames.Fight
             eventService = GameManager.EventService;
             WeaponController = GetComponent<WeaponController>();
             MovementController = GetComponent<MovementController>();
+            VisualController = GetComponent<VisualController>();
         }
 
-        private void Update()
+        public void AssignStats(EntityStats stats)
         {
-            foreach (var statusEffect in StatusEffects)
+            Stats = stats;
+        }
+
+        protected virtual void Update()
+        {
+            TickStatuses();
+        }
+
+        protected void TickStatuses()
+        {
+            foreach (var statusEffect in Stats.StatusEffects)
             {
                 statusEffect.OnTick(Time.deltaTime);
             }
         }
 
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
+            Stats.currentHp -= damage;
         }
     }
 }

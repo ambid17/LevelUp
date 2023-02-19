@@ -5,7 +5,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class GameStateManager : FightBehavior
+    public class CurrencyManager : FightBehavior
     {
         [SerializeField] private NotificationPanel _notificationPanel;
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;

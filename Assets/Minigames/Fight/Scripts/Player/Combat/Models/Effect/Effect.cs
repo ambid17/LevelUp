@@ -23,7 +23,7 @@ namespace Minigames.Fight
         public int AmountOwned;
         public int ExecutionOrder;
         public abstract EffectTriggerType TriggerType { get; }
-        public int SpawnWeight = 1;
+        public int DropWeight = 1;
 
         public int CompareTo(Effect other)
         {

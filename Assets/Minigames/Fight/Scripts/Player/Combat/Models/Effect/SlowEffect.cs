@@ -39,5 +39,10 @@ namespace Minigames.Fight
         {
             target.MovementController.RemoveMoveEffect(slowAmount);
         }
+
+        public void OnTick()
+        {
+            
+        }
     }
 }

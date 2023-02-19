@@ -5,36 +5,22 @@ namespace Minigames.Fight
 {
     public class PlayerMovementController : MovementController
     {
-        [SerializeField] private Material _defaultMaterial;
-        [SerializeField] private Material _flashMaterial;
         private Rigidbody2D _rigidbody2D;
-        private SpriteRenderer _spriteRenderer;
-        private Animator _animator;
     
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
         
-        private EventService _eventService;
-        
-        private float _flashTimer;
-        private float _flashTime = 0.1f;
-        private bool _isFlashing;
+        private VisualController _visualController;
     
         void Start()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
-        
-            _eventService = GameManager.EventService;
-            _eventService.Add<PlayerDiedEvent>(Die);
-            _eventService.Add<PlayerRevivedEvent>(Revive);
-            _eventService.Add<PlayerDamagedEvent>(StartDamageFx);
+            _visualController = GameManager.PlayerEntity.VisualController;
         }
 
         void Update()
         {
-            if (GameManager.PlayerStatusController.IsDead)
+            if (GameManager.PlayerEntity.IsDead)
             {
                 _rigidbody2D.velocity = Vector2.zero;
                 return;
@@ -42,7 +28,6 @@ namespace Minigames.Fight
         
             GetMovementInput();
             Move();
-            CheckDamageFx();
         }
 
         private void GetMovementInput()
@@ -77,18 +62,18 @@ namespace Minigames.Fight
 
             if (_rigidbody2D.velocity.magnitude == 0)
             {
-                _animator.SetBool("IsMoving", false);
+                _visualController.animator.SetBool("IsMoving", false);
             }
             else
             {
-                _animator.SetBool("IsMoving", true);
+                _visualController.animator.SetBool("IsMoving", true);
             }
         
             //Flip the sprite based on velocity
             if(_rigidbody2D.velocity.x < -0.1f) 
-                _spriteRenderer.flipX = false;
+                _visualController.spriteRenderer.flipX = false;
             else 
-                _spriteRenderer.flipX = true;
+                _visualController.spriteRenderer.flipX = true;
         }
     
         private void FixedUpdate()
@@ -101,38 +86,6 @@ namespace Minigames.Fight
             float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.fixedDeltaTime;
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
-        }
-
-        private void Revive()
-        {
-            _spriteRenderer.color = Color.white;
-        }
-        private void Die()
-        {
-            _spriteRenderer.color = Color.black;
-        }
-
-        private void StartDamageFx()
-        {
-            _spriteRenderer.material = _flashMaterial;
-            _spriteRenderer.color = Color.white;
-            _isFlashing = true;
-        }
-        
-        private void CheckDamageFx()
-        {
-            if (_isFlashing)
-            {
-                _flashTimer += Time.deltaTime;
-
-                if (_flashTimer > _flashTime)
-                {
-                    _spriteRenderer.material = _defaultMaterial;
-                    _spriteRenderer.color = Color.white;
-                    _flashTimer = 0;
-                    _isFlashing = false;
-                }
-            }
         }
     }
 }

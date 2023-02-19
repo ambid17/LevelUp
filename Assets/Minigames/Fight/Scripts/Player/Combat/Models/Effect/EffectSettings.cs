@@ -55,13 +55,13 @@ namespace Minigames.Fight
         {
             if (_weightTotal == 0)
             {
-                _weightTotal = AllEffects.Sum(e => e.SpawnWeight);
+                _weightTotal = AllEffects.Sum(e => e.DropWeight);
             }
 
             int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
             foreach (var effect in AllEffects)
             {
-                randomWeight -= effect.SpawnWeight;
+                randomWeight -= effect.DropWeight;
                 if (randomWeight < 0)
                 {
                     return effect;

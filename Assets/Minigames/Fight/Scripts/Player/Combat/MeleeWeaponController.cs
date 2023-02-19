@@ -25,7 +25,7 @@ namespace Minigames.Fight
                 if (hit.transform.gameObject.layer == PhysicsUtils.EnemyLayer)
                 {
                     EnemyMovementController enemy = hit.transform.gameObject.GetComponent<EnemyMovementController>();
-                    enemy.TakeDamage(damage);
+                    enemy.ShowDamageFx(damage);
 
                     Vector2 knockback = enemy.transform.position.AsVector2() - transform.position.AsVector2();
                     knockback = knockback.normalized * overridenWeapon.knockbackDistance;

@@ -22,7 +22,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (GameManager.PlayerStatusController.IsDead)
+            if (GameManager.PlayerEntity.IsDead)
             {
                 return;
             }
@@ -62,7 +62,7 @@ namespace Minigames.Fight
             instance.transform.position = GetRandomInDonut(_spawnerSettings.MinSpawnRadius, _spawnerSettings.MaxSpawnRadius);
 
             EnemyMovementController controller = instance.GetComponent<EnemyMovementController>();
-            controller.Setup(enemyToSpawn.Settings, GameManager.Player.transform);
+            controller.Setup(enemyToSpawn.Settings, GameManager.PlayerEntity.transform);
             _enemyCount++;
         }
     

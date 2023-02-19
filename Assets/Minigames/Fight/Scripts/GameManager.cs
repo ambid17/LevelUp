@@ -5,17 +5,16 @@ namespace Minigames.Fight
 {
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField] private GameObject player;
+        [SerializeField] private PlayerEntity playerPrefab;
+        [SerializeField] private PlayerEntity playerEntity;
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private SettingsManager settingsManager;
-        [SerializeField] private GameStateManager gameStateManager;
-        [SerializeField] private PlayerStatusController playerStatusController;
+        [SerializeField] private CurrencyManager currencyManager;
     
-        public static GameObject Player => Instance.player;
+        public static PlayerEntity PlayerEntity => Instance.playerEntity;
         public static EnemySpawner EnemySpawner => Instance.enemySpawner;
         public static SettingsManager SettingsManager => Instance.settingsManager;
-        public static GameStateManager GameStateManager => Instance.gameStateManager;
-        public static PlayerStatusController PlayerStatusController => Instance.playerStatusController;
+        public static CurrencyManager CurrencyManager => Instance.currencyManager;
 
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;
@@ -37,6 +36,12 @@ namespace Minigames.Fight
         public override void Initialize()
         {
             SettingsManager.Init();
+            SetupPlayer();
+        }
+
+        private void SetupPlayer()
+        {
+            playerEntity = Instantiate(playerPrefab);
         }
 
         private void Update()

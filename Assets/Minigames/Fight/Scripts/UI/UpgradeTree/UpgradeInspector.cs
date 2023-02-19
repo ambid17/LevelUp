@@ -53,7 +53,7 @@ namespace Minigames.Fight
         {
             int purchaseCount = GetAvailablePurchaseCount();
 
-            if (GameManager.GameStateManager.TrySpendCurrency(_currentUpgrade.GetCost(purchaseCount)))
+            if (GameManager.CurrencyManager.TrySpendCurrency(_currentUpgrade.GetCost(purchaseCount)))
             {
                 _currentUpgrade.numberPurchased += purchaseCount;
                 _eventService.Dispatch(new UpgradePurchasedEvent(_currentUpgrade));
@@ -76,7 +76,7 @@ namespace Minigames.Fight
 
         private void SetInteractability()
         {
-            bool hasMoney = GameManager.GameStateManager.Currency > _currentUpgrade.GetCost(GetAvailablePurchaseCount());
+            bool hasMoney = GameManager.CurrencyManager.Currency > _currentUpgrade.GetCost(GetAvailablePurchaseCount());
             upgradeButton.interactable = hasMoney;
             bool hasPurchasesLeft = _currentUpgrade.numberPurchased < _currentUpgrade.maxPurchases || _currentUpgrade.maxPurchases == 0;
             upgradeButton.gameObject.SetActive(hasPurchasesLeft);
