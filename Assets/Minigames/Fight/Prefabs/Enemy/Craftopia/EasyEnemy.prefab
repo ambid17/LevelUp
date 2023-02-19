@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
   - component: {fileID: 2009908225796347555}
-  - component: {fileID: -3626138900183024708}
+  - component: {fileID: -7786698165613059924}
   m_Layer: 9
   m_Name: EasyEnemy
   m_TagString: Untagged
@@ -322,7 +322,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28, y: 0.36}
   m_EdgeRadius: 0
---- !u!114 &-3626138900183024708
+--- !u!114 &-7786698165613059924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,8 +331,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8510735526301981988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecd4ef3f58c48942a45f6f512090034, type: 3}
+  m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponController: {fileID: 8789358854941681159}
+  WeaponController: {fileID: 0}
   MovementController: {fileID: 0}
+  VisualController: {fileID: 0}
