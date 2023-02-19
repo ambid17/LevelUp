@@ -61,24 +61,6 @@ namespace Minigames.Fight
         {
         }
 
-        protected virtual float CalculateDamage()
-        {
-            float damage = _weapon.Stats.Damage;
-
-            if (_weapon.Stats.CritChance > 0)
-            {
-                float randomValue = Random.Range(0f, 1f);
-                bool shouldCrit = randomValue < _weapon.Stats.CritChance;
-
-                if (shouldCrit)
-                {
-                    damage *= _weapon.Stats.CritDamage;
-                }
-            }
-
-            return damage;
-        }
-
         // called when this weapon hits an enemy
         protected virtual void OnHit(OnHitEvent eventType)
         {

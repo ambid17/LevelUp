@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Minigames.Fight;
@@ -8,13 +9,13 @@ namespace Minigames.Fight
     public class EnemyProjectileWeaponController : WeaponController
     {
         [SerializeField] protected EnemyProjectile projectilePrefab;
-        [SerializeField] protected Transform targetTransform;
-        [SerializeField] protected EnemyStats stats;
-        
-        protected void Setup(EnemyStats stats, Transform targetTransform)
+        [SerializeField] protected Transform myTransform;
+        [SerializeField] protected EnemyEntity overridenEntity;
+
+        private void Start()
         {
-            this.stats = stats;
-            this.targetTransform = targetTransform;
+            overridenEntity = myEntity as EnemyEntity;
+            myTransform = transform; // cache our transform for performance
         }
         
         protected override bool ShouldPreventUpdate()
@@ -32,9 +33,9 @@ namespace Minigames.Fight
             EnemyProjectile projectile = Instantiate(projectilePrefab);
             projectile.transform.position = transform.position;
             
-            Vector2 direction = targetTransform.position - transform.position;
+            Vector2 direction = overridenEntity.target.position - myTransform.position;
 
-            projectile.Setup(stats, direction);
+            projectile.Setup(overridenEntity.EnemyStats, direction);
         }
     }
 }

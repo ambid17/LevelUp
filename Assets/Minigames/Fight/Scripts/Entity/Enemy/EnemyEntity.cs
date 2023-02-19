@@ -7,10 +7,12 @@ namespace Minigames.Fight
     public class EnemyEntity : Entity
     {
         public EnemyStats EnemyStats;
+        public Transform target;
         protected bool isMarkedForDeath;
+        
         void Start()
         {
-
+            
         }
 
         void Update()

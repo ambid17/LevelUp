@@ -7,7 +7,6 @@ namespace Minigames.Fight
     {
         [SerializeField] private float timeToLive = 5;
         [SerializeField] private float moveSpeed = 5;
-        private float _damage;
         private float _deathTimer = 0;
         private Vector2 _shootDirection;
         private int _penetrationsLeft;
@@ -39,9 +38,8 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(float damage, Vector2 direction, int penetration)
+        public void Setup(Vector2 direction, int penetration)
         {
-            _damage = damage;
             _shootDirection = direction.normalized;
             _penetrationsLeft = penetration;
         }

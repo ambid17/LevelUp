@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [SerializeField]
+    [Serializable]
     public class EnemyStats
     {
         public float goldValue;
@@ -15,6 +16,7 @@ namespace Minigames.Fight
         public float weaponDamage;
         public float projectileSpeed;
         public float projectileLifeTime;
+        public List<Effect> effects;
 
         public float GoldValue =>
             goldValue * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar *

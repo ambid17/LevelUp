@@ -7,13 +7,6 @@ namespace Minigames.Fight
     public class EntityStats
     {
         public float currentHp;
-        public float maxHp;
-
-        public float armor;
-        public float magicResist;
-
-        
-
         public OrderedList<StatusEffectInstance> StatusEffects = new();
     }
 }

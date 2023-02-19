@@ -19,7 +19,6 @@ namespace Minigames.Fight
             Vector2 direction = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, 4);
 
-            float damage = CalculateDamage();
             foreach (var hit in hits)
             {
                 if (hit.transform.gameObject.layer == PhysicsUtils.EnemyLayer)
@@ -29,15 +28,6 @@ namespace Minigames.Fight
                     HitData hitData = new HitData(myEntity, enemyEntity);
 
                     enemyEntity.TakeHit(hitData);
-
-                    // Vector2 knockback = enemyEntity.transform.position.AsVector2() - transform.position.AsVector2();
-                    // knockback = knockback.normalized * overridenWeapon.knockbackDistance;
-                    // enemyEntity.Knockback(knockback);
-                    //
-                    // if (GameManager.SettingsManager.playerSettings.LifeSteal > 0)
-                    // {
-                    //     _eventService.Dispatch(new OnLifestealEvent(damage));
-                    // }
                 }
             }
         

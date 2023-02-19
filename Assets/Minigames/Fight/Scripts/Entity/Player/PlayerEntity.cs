@@ -23,6 +23,17 @@ namespace Minigames.Fight
                 eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
             }
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            Weapon equippedWeapon = GameManager.SettingsManager.weaponSettings.equippedWeapon;
+            var weaponGO = Instantiate(equippedWeapon.Prefab, transform);
+            var weaponController = weaponGO.GetComponent<WeaponController>();
+            weaponController.Setup(equippedWeapon);
+            WeaponController = weaponController;
+        }
         
         void Start()
         {

@@ -10,7 +10,7 @@ namespace Minigames.Fight
     {
         public Transform target;
         public Rigidbody2D myRigidbody;
-        public EnemyEntity entity;
+        public EnemyEntity myEntity;
     
         [SerializeField] private float idealDistanceFromPlayer;
 
@@ -18,7 +18,7 @@ namespace Minigames.Fight
         void Start()
         {
             myRigidbody = GetComponent<Rigidbody2D>();
-            SetStartingMoveSpeed(entity.EnemyStats.moveSpeed);
+            SetStartingMoveSpeed(myEntity.EnemyStats.moveSpeed);
             target = GameManager.PlayerEntity.transform;
         }
 
@@ -43,7 +43,7 @@ namespace Minigames.Fight
                 targetVelocity = Vector2.zero;
             }
 
-            velocity = Vector2.MoveTowards(velocity, targetVelocity, entity.EnemyStats.acceleration * Time.deltaTime);
+            velocity = Vector2.MoveTowards(velocity, targetVelocity, myEntity.EnemyStats.acceleration * Time.deltaTime);
         
             myRigidbody.velocity = velocity;
         }

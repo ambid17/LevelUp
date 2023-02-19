@@ -181,11 +181,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510735526301981977}
+  - component: {fileID: -7786698165613059924}
   - component: {fileID: 8789358854941681159}
+  - component: {fileID: -698485910662565092}
+  - component: {fileID: 1047883154001853991}
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
   - component: {fileID: 2009908225796347555}
-  - component: {fileID: -7786698165613059924}
   m_Layer: 9
   m_Name: EasyEnemy
   m_TagString: Untagged
@@ -209,6 +211,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7786698165613059924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponController: {fileID: 8789358854941681159}
+  MovementController: {fileID: -698485910662565092}
+  VisualController: {fileID: 1047883154001853991}
+  EnemyStats:
+    goldValue: 0
+    fireRate: 0
+    moveSpeed: 0
+    acceleration: 0
+    maxHp: 100
+    weaponDamage: 0
+    projectileSpeed: 0
+    projectileLifeTime: 0
+    effects: []
+  target: {fileID: 0}
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +251,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weapon: {fileID: 0}
   myEntity: {fileID: 0}
+--- !u!114 &-698485910662565092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2286d01694b30d4fb543d6400174a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  myEntity: {fileID: 0}
+  idealDistanceFromPlayer: 0
+--- !u!114 &1047883154001853991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78366a1a0561e0546bfaabe3e0e70786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultMaterial: {fileID: 0}
+  _flashMaterial: {fileID: 0}
+  _defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  _flashColor: {r: 0, g: 0, b: 0, a: 0}
+  spriteRenderer: {fileID: 0}
+  animator: {fileID: 0}
+  _damageText: {fileID: 0}
 --- !u!212 &8510735526301981991
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -322,18 +385,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28, y: 0.36}
   m_EdgeRadius: 0
---- !u!114 &-7786698165613059924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponController: {fileID: 0}
-  MovementController: {fileID: 0}
-  VisualController: {fileID: 0}

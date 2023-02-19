@@ -30,9 +30,7 @@ namespace Minigames.Fight
             
                 projectile.transform.position = transform.position.AsVector2() + offset;
 
-                float damage = CalculateDamage();
-            
-                projectile.Setup(damage, direction, overridenWeapon.Stats.ProjectilePenetration);
+                projectile.Setup(direction, overridenWeapon.Stats.ProjectilePenetration);
             }
         }
     }
