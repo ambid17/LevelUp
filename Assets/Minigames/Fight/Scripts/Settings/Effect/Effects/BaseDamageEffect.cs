@@ -1,22 +1,19 @@
 using System;
 using Minigames.Fight;
+using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public enum DamageType
-    {
-        Physical,
-        Magic
-    }
-
+    [CreateAssetMenu(fileName = "BaseDamageEffect", menuName = "ScriptableObjects/Fight/Effects/BaseDamageEffect", order = 1)]
+    [Serializable]
     public class BaseDamageEffect : Effect, IExecuteEffect
     {
-        public DamageType DamageType;
         public float baseDamagePerStack;
 
         private float Total => baseDamagePerStack * AmountOwned;
 
-        public override EffectTriggerType TriggerType { get; }
+        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
+        public int Order => ExecutionOrder;
 
         public void Execute(HitData hit)
         {

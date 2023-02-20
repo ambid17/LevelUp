@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -16,7 +17,7 @@ namespace Minigames.Fight
         {
             base.Setup();
             Target = GameManager.PlayerEntity.transform;
-            Stats.currentHp = enemyStats.MaxHp;
+            Stats.SetupFromEnemy(enemyStats);
         }
         
         protected override void Die()

@@ -16,7 +16,7 @@ namespace Minigames.Fight
 
     [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]
     [Serializable]
-    public abstract class Effect : ScriptableObject, IComparable<Effect>
+    public abstract class Effect : ScriptableObject, IEquatable<Effect>
     {
         public string Name;
         public string Description;
@@ -26,9 +26,15 @@ namespace Minigames.Fight
         public abstract EffectTriggerType TriggerType { get; }
         public int DropWeight = 1;
 
-        public int CompareTo(Effect other)
+        public bool Equals(Effect other)
         {
-            return ExecutionOrder.CompareTo(other.ExecutionOrder);
+            if (other == null) return false;
+            return Name.Equals(other.Name);
+        }
+
+        public virtual void Execute(HitData hit)
+        {
+            
         }
     }
 }

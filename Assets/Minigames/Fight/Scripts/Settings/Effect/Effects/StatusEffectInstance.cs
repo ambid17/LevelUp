@@ -1,6 +1,8 @@
+using System;
+
 namespace Minigames.Fight
 {
-    public class StatusEffectInstance
+    public class StatusEffectInstance : IEquatable<StatusEffectInstance>
     {
         public Entity source;
         public Entity target;
@@ -38,6 +40,11 @@ namespace Minigames.Fight
             }
 
             return false;
+        }
+
+        public bool Equals(StatusEffectInstance other)
+        {
+            return effect.Equals(other.effect);
         }
     }
 }

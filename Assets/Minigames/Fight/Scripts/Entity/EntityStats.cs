@@ -8,9 +8,10 @@ namespace Minigames.Fight
     public class EntityStats
     {
         public float currentHp;
+        public float maxHp;
         public float armor;
         public float magicResistance;
-        public OrderedList<StatusEffectInstance> StatusEffects = new();
+        public List<StatusEffectInstance> StatusEffects = new();
         public List<StatusEffectInstance> StatusEffectsToRemove = new();
 
         public bool AddStatusEffect(StatusEffectInstance instance)
@@ -27,6 +28,15 @@ namespace Minigames.Fight
             }
         }
         
-        public OrderedList<IExecuteEffect> OnHitEffects = new();
+        public List<IExecuteEffect> OnHitEffects = new();
+
+
+        public void SetupFromEnemy(EnemyStats enemyStats)
+        {
+            currentHp = enemyStats.MaxHp;
+            maxHp = enemyStats.MaxHp;
+            armor = enemyStats.Armor;
+            magicResistance = enemyStats.MagicResist;
+        }
     }
 }

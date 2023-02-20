@@ -12,8 +12,8 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<Effect> AllEffects;
 
-        public OrderedList<Effect> UnlockedEffects = new();
-        public OrderedList<IExecuteEffect> OnHitEffects = new();
+        public List<Effect> UnlockedEffects = new();
+        public List<IExecuteEffect> OnHitEffects = new();
 
         public void SetDefaults()
         {
@@ -32,6 +32,7 @@ namespace Minigames.Fight
         {
             if (!UnlockedEffects.Contains(effect))
             {
+                effect.AmountOwned = 1;
                 UnlockedEffects.Add(effect);
 
                 if (effect.TriggerType == EffectTriggerType.OnHit)

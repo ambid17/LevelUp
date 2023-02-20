@@ -231,10 +231,12 @@ MonoBehaviour:
     fireRate: 1
     moveSpeed: 1
     acceleration: 5
-    maxHp: 1000
+    maxHp: 5
     weaponDamage: 1
     projectileSpeed: 1
     projectileLifeTime: 5
+    armor: 0
+    magicResistance: 0
     effects: []
 --- !u!114 &8789358854941681159
 MonoBehaviour:

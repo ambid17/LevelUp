@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Minigames.Fight;
 using UnityEngine;
 using Utils;
@@ -71,7 +72,7 @@ namespace Minigames.Fight
         {
             HitData hitData = new HitData(this, otherEntity);
             hitData.BaseDamage = WeaponController.Weapon.Stats.Damage;
-            hitData.Effects = Stats.OnHitEffects;
+            hitData.Effects = Stats.OnHitEffects.OrderBy(e => e.Order);
             otherEntity.TakeHit(hitData);
         }
 

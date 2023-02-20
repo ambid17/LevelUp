@@ -24,6 +24,10 @@ namespace Minigames.Fight
         private float projectileSpeed;
         [SerializeField]
         private float projectileLifeTime;
+        [SerializeField]
+        private float armor;
+        [SerializeField]
+        private float magicResistance;
         public List<Effect> effects;
 
         public float GoldValue =>
@@ -45,5 +49,8 @@ namespace Minigames.Fight
         public float ProjectileSpeed => projectileSpeed;
 
         public float ProjectileLifeTime => projectileLifeTime;
+
+        public float Armor => armor;
+        public float MagicResist => magicResistance;
     }
 }
