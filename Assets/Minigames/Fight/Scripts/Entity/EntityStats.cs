@@ -8,6 +8,6 @@ namespace Minigames.Fight
     {
         public float currentHp;
         public OrderedList<StatusEffectInstance> StatusEffects = new();
-        public List<IExecuteEffect> OnHitEffects = new();
+        public OrderedList<IExecuteEffect> OnHitEffects = new();
     }
 }

@@ -9,8 +9,10 @@ namespace Minigames.Fight
     [Serializable]
     public class MeleeWeapon : Weapon
     {
+        public float attackRange;
         public float animationLength;
+        // TODO: use effects on the weapon instead
         public float stunDuration;
-        public float knockbackDistance;
+        public float knockBackDistance;
     }
 }

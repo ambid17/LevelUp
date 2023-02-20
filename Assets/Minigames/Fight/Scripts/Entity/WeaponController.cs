@@ -7,28 +7,22 @@ namespace Minigames.Fight
 {
     public class WeaponController : MonoBehaviour
     {
-        [SerializeField] protected Weapon _weapon;
-        public Weapon Weapon => _weapon;
-        protected float _shotTimer = 0;
-        protected Camera _camera;
-        protected EventService _eventService;
-        public Entity myEntity;
+        [SerializeField] protected Weapon weapon;
+        public Weapon Weapon => weapon;
+        protected float ShotTimer;
+        protected EventService EventService;
+        protected Entity MyEntity;
 
         void Awake()
         {
-            _camera = Camera.main;
+            MyEntity = GetComponentInParent<Entity>();
 
-            if (myEntity == null)
-            {
-                myEntity = GetComponentInParent<Entity>();
-            }
-
-            _eventService = GameManager.EventService;
+            EventService = GameManager.EventService;
         }
 
         public void Setup(Weapon weapon)
         {
-            _weapon = weapon;
+            this.weapon = weapon;
         }
 
         void Update()
@@ -38,23 +32,23 @@ namespace Minigames.Fight
                 return;
             }
 
-            _shotTimer += Time.deltaTime;
+            ShotTimer += Time.deltaTime;
 
             if (CanShoot())
             {
-                _shotTimer = 0;
+                ShotTimer = 0;
                 Shoot();
             }
         }
 
         protected virtual bool ShouldPreventUpdate()
         {
-            return GameManager.PlayerEntity.IsDead || _weapon == null;
+            return GameManager.PlayerEntity.IsDead || weapon == null;
         }
         
         protected virtual bool CanShoot()
         {
-            return Input.GetMouseButton(0) && _shotTimer > _weapon.Stats.FireRate;
+            return Input.GetMouseButton(0) && ShotTimer > weapon.Stats.FireRate;
         }
 
         protected virtual void Shoot()

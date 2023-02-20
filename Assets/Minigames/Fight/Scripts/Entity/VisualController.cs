@@ -8,10 +8,10 @@ namespace Minigames.Fight
 {
     public class VisualController : MonoBehaviour
     {
-        [SerializeField] private Material _defaultMaterial;
-        [SerializeField] private Material _flashMaterial;
-        [SerializeField] protected Color _defaultColor;
-        [SerializeField] protected Color _flashColor;
+        [SerializeField] private Material defaultMaterial;
+        [SerializeField] private Material flashMaterial;
+        [SerializeField] protected Color defaultColor;
+        [SerializeField] protected Color flashColor;
 
 
         [NonSerialized]
@@ -26,13 +26,18 @@ namespace Minigames.Fight
         private const float FlashTime = 0.1f;
         private bool _isFlashing;
 
+        private void Awake()
+        {
+            MyEntity = GetComponent<Entity>();
+            SpriteRenderer = GetComponent<SpriteRenderer>();
+            Animator = GetComponent<Animator>();
+            EventService = GameManager.EventService;
+        }
+
 
         protected virtual void Start()
         {
-            SpriteRenderer = GetComponent<SpriteRenderer>();
-            Animator = GetComponent<Animator>();
-
-            EventService = GameManager.EventService;
+            
         }
 
         protected virtual void Update()
@@ -52,8 +57,8 @@ namespace Minigames.Fight
 
         public virtual void StartDamageFx(float damage)
         {
-            SpriteRenderer.material = _flashMaterial;
-            SpriteRenderer.color = _flashColor;
+            SpriteRenderer.material = flashMaterial;
+            SpriteRenderer.color = flashColor;
             _isFlashing = true;
         }
 
@@ -65,8 +70,8 @@ namespace Minigames.Fight
 
                 if (_flashTimer > FlashTime)
                 {
-                    SpriteRenderer.material = _defaultMaterial;
-                    SpriteRenderer.color = _defaultColor;
+                    SpriteRenderer.material = defaultMaterial;
+                    SpriteRenderer.color = defaultColor;
                     _flashTimer = 0;
                     _isFlashing = false;
                 }

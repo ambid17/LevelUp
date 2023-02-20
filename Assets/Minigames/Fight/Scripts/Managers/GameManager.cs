@@ -6,12 +6,12 @@ namespace Minigames.Fight
     public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private PlayerEntity playerPrefab;
-        [SerializeField] private PlayerEntity playerEntity;
+        private PlayerEntity _playerEntity;
         [SerializeField] private EnemySpawnManager enemySpawnManager;
         [SerializeField] private SettingsManager settingsManager;
         [SerializeField] private CurrencyManager currencyManager;
     
-        public static PlayerEntity PlayerEntity => Instance.playerEntity;
+        public static PlayerEntity PlayerEntity => Instance._playerEntity;
         public static EnemySpawnManager EnemySpawnManager => Instance.enemySpawnManager;
         public static SettingsManager SettingsManager => Instance.settingsManager;
         public static CurrencyManager CurrencyManager => Instance.currencyManager;
@@ -41,7 +41,7 @@ namespace Minigames.Fight
 
         private void SetupPlayer()
         {
-            playerEntity = Instantiate(playerPrefab);
+            _playerEntity = Instantiate(playerPrefab);
         }
 
         private void Update()

@@ -9,10 +9,14 @@ namespace Minigames.Fight
     public class ProjectileWeaponController : WeaponController
     {
         [SerializeField] private ProjectileWeapon overridenWeapon;
-
+        private Camera _camera;
+        private Transform _myTransform;
+        
         private void Start()
         {
-            overridenWeapon = _weapon as ProjectileWeapon;
+            overridenWeapon = weapon as ProjectileWeapon;
+            _camera = Camera.main;
+            _myTransform = transform;
         }
         
         protected override void Shoot()
@@ -28,9 +32,9 @@ namespace Minigames.Fight
                 float indexOffset = (float)i - i/2;
                 Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * overridenWeapon.ProjectileSpread;
             
-                projectile.transform.position = transform.position.AsVector2() + offset;
+                projectile.transform.position = _myTransform.position.AsVector2() + offset;
 
-                projectile.Setup(myEntity, direction, overridenWeapon.Stats.ProjectilePenetration);
+                projectile.Setup(MyEntity, direction, overridenWeapon.Stats.ProjectilePenetration);
             }
         }
     }

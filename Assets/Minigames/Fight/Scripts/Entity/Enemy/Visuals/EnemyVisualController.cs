@@ -9,20 +9,20 @@ namespace Minigames.Fight
 {
     public class EnemyVisualController : VisualController
     {
-        [SerializeField] private TextMeshPro _damageText; // TODO: move to object pool
+        [SerializeField] private TextMeshPro damageText; // TODO: move to object pool
 
         private EnemyEntity _enemyEntity;
         
         private const float MaxDistanceFromPlayer = 100;
-        private bool isMarkedForDeath;
+        private bool _isMarkedForDeath;
 
         protected override void Start()
         {
             base.Start();
             _enemyEntity = MyEntity as EnemyEntity;
-            _defaultColor =
+            defaultColor =
                 GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
-            _damageText.enabled = false;
+            damageText.enabled = false;
             
             EventService.Add<PlayerDiedEvent>(Cull);
         }
@@ -41,17 +41,17 @@ namespace Minigames.Fight
 
         private IEnumerator ShowDamage(float damage)
         {
-            _damageText.enabled = true;
-            _damageText.text = damage.ToString();
-            Sequence sequence = _damageText.transform.DOJump(transform.position, 0.5f, 1, 1);
+            damageText.enabled = true;
+            damageText.text = damage.ToString();
+            Sequence sequence = damageText.transform.DOJump(transform.position, 0.5f, 1, 1);
             yield return sequence.WaitForCompletion();
-            _damageText.enabled = false;
+            damageText.enabled = false;
         }
 
         // If the player runs too far from the enemy, kill it off
         private void TryCull()
         {
-            Vector2 offsetFromPlayer = _enemyEntity.target.position - transform.position;
+            Vector2 offsetFromPlayer = _enemyEntity.Target.position - transform.position;
             if (offsetFromPlayer.magnitude > MaxDistanceFromPlayer)
             {
                 Cull();
@@ -60,12 +60,12 @@ namespace Minigames.Fight
 
         private void Cull()
         {
-            if (isMarkedForDeath)
+            if (_isMarkedForDeath)
             {
                 return;
             }
         
-            isMarkedForDeath = true;
+            _isMarkedForDeath = true;
         
             GameManager.EnemySpawnManager.EnemyCount--;
 

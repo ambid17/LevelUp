@@ -4,28 +4,28 @@ namespace Minigames.Fight
 {
     public class MeleeEnemyWeaponController : WeaponController
     {
-        bool isTouchingPlayer = false;
+        private bool _isTouchingPlayer = false;
         
         protected override bool CanShoot()
         {
-            return _shotTimer > _weapon.Stats.FireRate && isTouchingPlayer;
+            return ShotTimer > weapon.Stats.FireRate && _isTouchingPlayer;
         }
 
         protected override void Shoot()
         {
-            _eventService.Dispatch(new OnPlayerDamageEvent(_weapon.Stats.Damage));
+            EventService.Dispatch(new OnPlayerDamageEvent(weapon.Stats.Damage));
         }
         
         void OnTriggerEnter2D(Collider2D col)
         {
             if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
-                isTouchingPlayer = true;
+                _isTouchingPlayer = true;
         }
 
         void OnTriggerExit2D(Collider2D col)
         {
             if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
-                isTouchingPlayer = false;
+                _isTouchingPlayer = false;
         }
     }
 }

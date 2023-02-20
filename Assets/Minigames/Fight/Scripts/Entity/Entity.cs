@@ -29,12 +29,15 @@ namespace Minigames.Fight
 
         protected virtual void Setup()
         {
-            
+            Stats = new EntityStats();
         }
         
         protected virtual void Update()
         {
-            TickStatuses();
+            if (Stats.StatusEffects.Count > 0)
+            {
+                TickStatuses();
+            }
         }
 
         protected void TickStatuses()

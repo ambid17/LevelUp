@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,14 @@ namespace Minigames.Fight
     public class EnemyEntity : Entity
     {
         public EnemyStats enemyStats;
-        public Transform target;
+        [NonSerialized]
+        public Transform Target;
         private bool _isMarkedForDeath;
 
         protected override void Setup()
         {
-            target = GameManager.PlayerEntity.transform;
+            base.Setup();
+            Target = GameManager.PlayerEntity.transform;
         }
         
         protected override void Die()

@@ -226,17 +226,16 @@ MonoBehaviour:
   WeaponController: {fileID: 8789358854941681159}
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
-  EnemyStats:
-    goldValue: 0
-    fireRate: 0
-    moveSpeed: 0
-    acceleration: 0
-    maxHp: 100
-    weaponDamage: 0
-    projectileSpeed: 0
-    projectileLifeTime: 0
+  enemyStats:
+    goldValue: 1
+    fireRate: 1
+    moveSpeed: 1
+    acceleration: 5
+    maxHp: 10
+    weaponDamage: 1
+    projectileSpeed: 1
+    projectileLifeTime: 5
     effects: []
-  target: {fileID: 0}
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,8 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 0}
-  myEntity: {fileID: 0}
+  weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
 --- !u!114 &-698485910662565092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,9 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2286d01694b30d4fb543d6400174a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  myEntity: {fileID: 0}
   idealDistanceFromPlayer: 0
 --- !u!114 &1047883154001853991
 MonoBehaviour:
@@ -279,13 +274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78366a1a0561e0546bfaabe3e0e70786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultMaterial: {fileID: 0}
-  _flashMaterial: {fileID: 0}
-  _defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  _flashColor: {r: 0, g: 0, b: 0, a: 0}
-  spriteRenderer: {fileID: 0}
-  animator: {fileID: 0}
-  _damageText: {fileID: 0}
+  defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
+  flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  flashColor: {r: 0, g: 0, b: 0, a: 0}
+  damageText: {fileID: 1398335833243062241}
 --- !u!212 &8510735526301981991
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -306,7 +299,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

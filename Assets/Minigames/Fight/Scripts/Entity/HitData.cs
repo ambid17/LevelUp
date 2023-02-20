@@ -11,7 +11,7 @@ namespace Minigames.Fight
         public Entity Target;
 
         public float BaseDamage;
-        public List<IExecuteEffect> Effects;
+        public OrderedList<IExecuteEffect> Effects;
         
         public List<float> BaseDamageAdditions;
         public List<float> BaseDamageMultipliers;

@@ -29,15 +29,17 @@ namespace Minigames.Fight
             base.Awake();
             
             Weapon equippedWeapon = GameManager.SettingsManager.weaponSettings.equippedWeapon;
-            var weaponGO = Instantiate(equippedWeapon.Prefab, transform);
-            var weaponController = weaponGO.GetComponent<WeaponController>();
+            var weaponGo = Instantiate(equippedWeapon.Prefab, transform);
+            var weaponController = weaponGo.GetComponent<WeaponController>();
             weaponController.Setup(equippedWeapon);
             WeaponController = weaponController;
         }
         
-        void Start()
+        protected override void Setup()
         {
+            base.Setup();
             Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
+            Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects;
             eventService.Add<OnPlayerDamageEvent>(TakeDamage);
         }
 
