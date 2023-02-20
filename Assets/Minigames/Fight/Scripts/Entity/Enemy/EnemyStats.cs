@@ -8,14 +8,22 @@ namespace Minigames.Fight
     [Serializable]
     public class EnemyStats
     {
-        public float goldValue;
-        public float fireRate;
-        public float moveSpeed;
-        public float acceleration;
-        public float maxHp = 100;
-        public float weaponDamage;
-        public float projectileSpeed;
-        public float projectileLifeTime;
+        [SerializeField]
+        private float goldValue;
+        [SerializeField]
+        private float fireRate;
+        [SerializeField]
+        private float moveSpeed;
+        [SerializeField]
+        private float acceleration;
+        [SerializeField]
+        private float maxHp = 100;
+        [SerializeField]
+        private float weaponDamage;
+        [SerializeField]
+        private float projectileSpeed;
+        [SerializeField]
+        private float projectileLifeTime;
         public List<Effect> effects;
 
         public float GoldValue =>
@@ -24,6 +32,7 @@ namespace Minigames.Fight
 
         public float FireRate => fireRate * GameManager.SettingsManager.enemySpawnerSettings.FireRate;
         public float MoveSpeed => moveSpeed;
+        public float Acceleration => acceleration;
 
         public float MaxHp =>
             maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar *

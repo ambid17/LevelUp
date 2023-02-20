@@ -10,6 +10,8 @@ namespace Minigames.Fight
     public class MovementController : MonoBehaviour
     {
         protected float CurrentMoveSpeed;
+        private float BaseMoveSpeed;
+        private Dictionary<string,float> moveEffects;
         [NonSerialized]
         public Rigidbody2D MyRigidbody2D;
         protected Entity MyEntity;
@@ -18,21 +20,46 @@ namespace Minigames.Fight
         {
             MyRigidbody2D = GetComponent<Rigidbody2D>();
             MyEntity = GetComponent<Entity>();
+            moveEffects = new();
         }
 
         protected virtual void SetStartingMoveSpeed(float moveSpeed)
         {
+            BaseMoveSpeed = moveSpeed;
             CurrentMoveSpeed = moveSpeed;
         }
 
-        public virtual void ApplyMoveEffect(float speedRatio)
+        public virtual void ApplyMoveEffect(Effect effect)
         {
-            CurrentMoveSpeed *= speedRatio;
+            switch (effect)
+            {
+                case SlowEffect slow:
+                    moveEffects.Add(slow.Name, slow.slowAmount);
+                    break;
+            }
+
+            RecalculateMoveSpeed();
         }
 
-        public virtual void RemoveMoveEffect(float speedRatio)
+        public virtual void RemoveMoveEffect(Effect effect)
         {
-            CurrentMoveSpeed /= speedRatio;
+            switch (effect)
+            {
+                case SlowEffect slow:
+                    moveEffects.Remove(slow.Name);
+                    break;
+            }
+
+            RecalculateMoveSpeed();
+        }
+
+        private void RecalculateMoveSpeed()
+        {
+            CurrentMoveSpeed = BaseMoveSpeed;
+            foreach (var kvp in moveEffects)
+            {
+                CurrentMoveSpeed *= kvp.Value;
+            }
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Minigames.Fight
             else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 Entity enemyEntity = col.gameObject.GetComponent<Entity>();
-                _sourceEntity.OnHitEnemy(enemyEntity);
+                _sourceEntity.OnHitOther(enemyEntity);
             
                 if (_penetrationsLeft <= 0)
                 {

@@ -16,7 +16,7 @@ namespace Minigames.Fight
         void Start()
         {
             _overriddenEntity = MyEntity as EnemyEntity;
-            SetStartingMoveSpeed(_overriddenEntity.enemyStats.moveSpeed);
+            SetStartingMoveSpeed(_overriddenEntity.enemyStats.MoveSpeed);
         }
 
         protected virtual void Update()
@@ -40,7 +40,7 @@ namespace Minigames.Fight
                 targetVelocity = Vector2.zero;
             }
 
-            velocity = Vector2.MoveTowards(velocity, targetVelocity, _overriddenEntity.enemyStats.acceleration * Time.deltaTime);
+            velocity = Vector2.MoveTowards(velocity, targetVelocity, _overriddenEntity.enemyStats.Acceleration * Time.deltaTime);
         
             MyRigidbody2D.velocity = velocity;
         }

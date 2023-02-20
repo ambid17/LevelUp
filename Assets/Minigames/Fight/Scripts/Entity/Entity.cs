@@ -38,23 +38,41 @@ namespace Minigames.Fight
             {
                 TickStatuses();
             }
+
+            if (Stats.StatusEffectsToRemove.Count > 0)
+            {
+                RemoveStatuses();
+            }
         }
 
         protected void TickStatuses()
         {
             foreach (var statusEffect in Stats.StatusEffects)
             {
-                statusEffect.OnTick(Time.deltaTime);
+                if (statusEffect.OnTick(Time.deltaTime))
+                {
+                    Stats.StatusEffectsToRemove.Add(statusEffect);
+                }
             }
         }
 
-        // Called when this entity hits another
-        public virtual void OnHitEnemy(Entity enemyEntity)
+        private void RemoveStatuses()
         {
-            HitData hitData = new HitData(this, enemyEntity);
+            foreach (var statusEffect in Stats.StatusEffectsToRemove)
+            {
+                statusEffect.effect.OnRemove(this);
+                Stats.StatusEffects.Remove(statusEffect);
+            }
+            Stats.StatusEffectsToRemove.Clear();
+        }
+
+        // Called when this entity hits another
+        public virtual void OnHitOther(Entity otherEntity)
+        {
+            HitData hitData = new HitData(this, otherEntity);
             hitData.BaseDamage = WeaponController.Weapon.Stats.Damage;
             hitData.Effects = Stats.OnHitEffects;
-            enemyEntity.TakeHit(hitData);
+            otherEntity.TakeHit(hitData);
         }
 
         public virtual void TakeHit(HitData hit)

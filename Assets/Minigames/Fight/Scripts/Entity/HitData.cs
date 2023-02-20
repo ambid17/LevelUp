@@ -36,26 +36,33 @@ namespace Minigames.Fight
                 effect.Execute(this);
             }
 
-            float totalDamage = BaseDamage;
+            float physicalDamage = BaseDamage;
 
             // ex: +5 damage
             foreach (var baseDmgAddtion in BaseDamageAdditions)
             {
-                totalDamage += baseDmgAddtion;
+                physicalDamage += baseDmgAddtion;
             }
             
-            // ex: +10% damage, +50% damage if enemy <50% hp
+            // ex: +10% physical damage, +50% physical damage if enemy <50% hp
             foreach (var dmgMultiplier in BaseDamageMultipliers)
             {
-                totalDamage *= dmgMultiplier;
+                physicalDamage *= dmgMultiplier;
             }
-            
+
+            physicalDamage -= Target.Stats.armor;
+
+            float magicDamage = 0;
             // ex: +10 lightning damage on hit
             foreach (var effectDmg in EffectDamages)
             {
-                totalDamage += effectDmg;
+                magicDamage += effectDmg;
             }
 
+            magicDamage -= Target.Stats.magicResistance;
+
+            float totalDamage = physicalDamage + magicDamage;
+            
             return totalDamage;
         }
     }

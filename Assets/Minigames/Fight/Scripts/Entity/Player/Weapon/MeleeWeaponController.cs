@@ -26,7 +26,7 @@ namespace Minigames.Fight
                 if (hit.transform.gameObject.layer == PhysicsUtils.EnemyLayer)
                 {
                     EnemyEntity enemyEntity = hit.transform.gameObject.GetComponent<EnemyEntity>();
-                    MyEntity.OnHitEnemy(enemyEntity);
+                    MyEntity.OnHitOther(enemyEntity);
                 }
             }
         

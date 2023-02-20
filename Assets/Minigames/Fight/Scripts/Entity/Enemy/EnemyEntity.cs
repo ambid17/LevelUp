@@ -16,6 +16,7 @@ namespace Minigames.Fight
         {
             base.Setup();
             Target = GameManager.PlayerEntity.transform;
+            Stats.currentHp = enemyStats.MaxHp;
         }
         
         protected override void Die()

@@ -24,7 +24,7 @@ namespace Minigames.Fight
         {
             foreach (var effect in AllEffects)
             {
-                UnlockedEffects.Add(effect);
+                UnlockEffect(effect);
             }
         }
 

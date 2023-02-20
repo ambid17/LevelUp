@@ -32,12 +32,12 @@ namespace Minigames.Fight
 
         public void OnAdd(Entity target)
         {
-            target.MovementController.ApplyMoveEffect(slowAmount);
+            target.MovementController.ApplyMoveEffect(this);
         }
 
         public void OnRemove(Entity target)
         {
-            target.MovementController.RemoveMoveEffect(slowAmount);
+            target.MovementController.RemoveMoveEffect(this);
         }
 
         public void OnTick()
