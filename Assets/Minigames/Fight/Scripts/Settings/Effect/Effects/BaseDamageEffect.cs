@@ -6,7 +6,7 @@ namespace Minigames.Fight
 {
     [CreateAssetMenu(fileName = "BaseDamageEffect", menuName = "ScriptableObjects/Fight/Effects/BaseDamageEffect", order = 1)]
     [Serializable]
-    public class BaseDamageEffect : Effect, IExecuteEffect
+    public class BaseDamageEffect : Effect
     {
         public float baseDamagePerStack;
 
@@ -15,7 +15,7 @@ namespace Minigames.Fight
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public int Order => ExecutionOrder;
 
-        public void Execute(HitData hit)
+        public override void Execute(HitData hit)
         {
             hit.BaseDamageAdditions.Add(Total);
         }

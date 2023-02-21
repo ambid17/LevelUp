@@ -28,7 +28,7 @@ namespace Minigames.Fight
             }
         }
         
-        public List<IExecuteEffect> OnHitEffects = new();
+        public List<Effect> OnHitEffects = new();
 
 
         public void SetupFromEnemy(EnemyStats enemyStats)

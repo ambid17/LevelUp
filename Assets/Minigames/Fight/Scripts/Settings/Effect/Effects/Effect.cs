@@ -11,7 +11,8 @@ namespace Minigames.Fight
         OnKill,
         OnDeath,
         OnTakeDamage,
-        OnPurchase
+        OnPurchase, // Typically used to unlock something
+        OnTimer
     }
 
     [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]

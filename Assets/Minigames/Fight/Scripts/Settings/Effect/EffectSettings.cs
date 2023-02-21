@@ -13,7 +13,7 @@ namespace Minigames.Fight
         [Header("Set in Editor")] public List<Effect> AllEffects;
 
         public List<Effect> UnlockedEffects = new();
-        public List<IExecuteEffect> OnHitEffects = new();
+        public List<Effect> OnHitEffects = new();
 
         public void SetDefaults()
         {
@@ -37,7 +37,7 @@ namespace Minigames.Fight
 
                 if (effect.TriggerType == EffectTriggerType.OnHit)
                 {
-                    OnHitEffects.Add(effect as IExecuteEffect);
+                    OnHitEffects.Add(effect);
                 }
             }
             else

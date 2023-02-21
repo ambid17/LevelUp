@@ -18,7 +18,7 @@ namespace Minigames.Fight
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public int Order => ExecutionOrder;
 
-        public void Execute(HitData hit)
+        public override void Execute(HitData hit)
         {
             TryAdd(hit);
         }
