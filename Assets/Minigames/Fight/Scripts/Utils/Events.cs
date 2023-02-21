@@ -52,6 +52,16 @@ namespace Minigames.Fight
         }
     }
     
+    public class EffectSelectedEvent : IEvent
+    {
+        public Effect Effect;
+
+        public EffectSelectedEvent(Effect effect)
+        {
+            Effect = effect;
+        }
+    }
+    
     public class PurchaseCountChangedEvent { }
 
 
