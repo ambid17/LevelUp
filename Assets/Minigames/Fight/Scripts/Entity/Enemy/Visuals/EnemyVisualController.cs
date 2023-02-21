@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -22,9 +23,17 @@ namespace Minigames.Fight
             _enemyEntity = MyEntity as EnemyEntity;
             defaultColor =
                 GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
+            SpriteRenderer.color = defaultColor;
+            flashColor = Color.white;
+
             damageText.enabled = false;
             
             EventService.Add<PlayerDiedEvent>(Cull);
+        }
+
+        private void OnDestroy()
+        {
+            EventService.Remove<PlayerDiedEvent>(Cull);
         }
 
         protected override void Update()

@@ -105,6 +105,14 @@ namespace Minigames.Fight
         {
             CurrentWorld.CurrentCountry.EnemyKillCount += GameManager.SettingsManager.incomeSettings.KillsPerKill;
         }
+
+        public void ResetOnDeath()
+        {
+            if (!CurrentWorld.CurrentCountry.IsConquered)
+            {
+                CurrentWorld.CurrentCountry.EnemyKillCount = 0;
+            }
+        }
     }
 
     public enum WorldType

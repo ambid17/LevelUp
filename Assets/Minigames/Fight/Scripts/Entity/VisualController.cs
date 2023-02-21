@@ -8,7 +8,7 @@ namespace Minigames.Fight
 {
     public class VisualController : MonoBehaviour
     {
-        [SerializeField] private Material defaultMaterial;
+        [SerializeField] protected Material defaultMaterial;
         [SerializeField] private Material flashMaterial;
         [SerializeField] protected Color defaultColor;
         [SerializeField] protected Color flashColor;
@@ -24,7 +24,7 @@ namespace Minigames.Fight
 
         private float _flashTimer;
         private const float FlashTime = 0.1f;
-        private bool _isFlashing;
+        protected bool IsFlashing;
 
         private void Awake()
         {
@@ -37,7 +37,6 @@ namespace Minigames.Fight
 
         protected virtual void Start()
         {
-            
         }
 
         protected virtual void Update()
@@ -59,12 +58,12 @@ namespace Minigames.Fight
         {
             SpriteRenderer.material = flashMaterial;
             SpriteRenderer.color = flashColor;
-            _isFlashing = true;
+            IsFlashing = true;
         }
 
         private void TryStopDamageFx()
         {
-            if (_isFlashing)
+            if (IsFlashing)
             {
                 _flashTimer += Time.deltaTime;
 
@@ -73,7 +72,7 @@ namespace Minigames.Fight
                     SpriteRenderer.material = defaultMaterial;
                     SpriteRenderer.color = defaultColor;
                     _flashTimer = 0;
-                    _isFlashing = false;
+                    IsFlashing = false;
                 }
             }
         }

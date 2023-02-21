@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -5,7 +6,12 @@ namespace Minigames.Fight
     public class MeleeEnemyWeaponController : WeaponController
     {
         private bool _isTouchingPlayer = false;
-        
+
+        private void Start()
+        {
+            weapon.Stats.InitForEnemy();
+        }
+
         protected override bool CanShoot()
         {
             return ShotTimer > weapon.Stats.FireRate && _isTouchingPlayer;
@@ -13,7 +19,7 @@ namespace Minigames.Fight
 
         protected override void Shoot()
         {
-            EventService.Dispatch(new OnPlayerDamageEvent(weapon.Stats.Damage));
+            MyEntity.OnHitOther(GameManager.PlayerEntity);
         }
         
         void OnTriggerEnter2D(Collider2D col)

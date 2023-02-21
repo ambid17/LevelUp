@@ -9,7 +9,6 @@ namespace Minigames.Fight
     public class CpmUpdatedEvent { }
     public class PlayerDiedEvent { }
     public class PlayerRevivedEvent { }
-    public class PlayerDamagedEvent : IEvent { }
     public class PlayerHpUpdatedEvent : IEvent
     {
         public float PercentHp;
@@ -81,16 +80,6 @@ namespace Minigames.Fight
         public float Damage;
 
         public OnLifestealEvent(float damage)
-        {
-            Damage = damage;
-        }
-    }
-
-    public class OnPlayerDamageEvent : IEvent
-    {
-        public float Damage;
-
-        public OnPlayerDamageEvent(float damage)
         {
             Damage = damage;
         }

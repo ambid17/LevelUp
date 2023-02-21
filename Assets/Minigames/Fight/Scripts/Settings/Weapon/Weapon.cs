@@ -132,5 +132,15 @@ namespace Minigames.Fight
             SetProjectileCount(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.ProjectileCount).numberPurchased);
             SetProjectilePenetration(GameManager.SettingsManager.upgradeSettings.GetWeaponUpgrade(WeaponUpgradeType.ProjectilePenetration).numberPurchased);
         }
+
+        public void InitForEnemy()
+        {
+            SetFireRate(0);
+            SetDamage(0);
+            SetCritChance(0);
+            SetCritDamage(0);
+            SetProjectileCount(0);
+            SetProjectilePenetration(0);
+        }
     }
 }

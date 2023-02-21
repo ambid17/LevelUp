@@ -41,7 +41,6 @@ namespace Minigames.Fight
             base.Setup();
             Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
             Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
-            eventService.Add<OnPlayerDamageEvent>(TakeDamage);
         }
 
         protected override void Update()
@@ -53,17 +52,23 @@ namespace Minigames.Fight
             }
         }
         
-        public void TakeDamage(OnPlayerDamageEvent eventType)
+        public override void TakeHit(HitData hit)
         {
-            // TODO: calculate based on resistances
-            CurrentHp -= eventType.Damage;
-            eventService.Dispatch<PlayerDamagedEvent>();
+            float damage = hit.CalculateDamage();
+            CurrentHp -= damage;
+            VisualController.StartDamageFx(damage);
 
             if (IsDead)
             {
-                _deathTimer = 0;
-                eventService.Dispatch<PlayerDiedEvent>();
+                Die();
             }
+        }
+        
+        protected override void Die()
+        {
+            _deathTimer = 0;
+            GameManager.SettingsManager.progressSettings.ResetOnDeath();
+            eventService.Dispatch<PlayerDiedEvent>();
         }
         
         private void WaitForRevive()

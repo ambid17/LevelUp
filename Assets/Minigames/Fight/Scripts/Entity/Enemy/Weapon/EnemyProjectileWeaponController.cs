@@ -16,6 +16,7 @@ namespace Minigames.Fight
         {
             _overridenEntity = MyEntity as EnemyEntity;
             _myTransform = transform; // cache our transform for performance
+            weapon.Stats.InitForEnemy();
         }
         
         protected override bool ShouldPreventUpdate()
@@ -35,7 +36,7 @@ namespace Minigames.Fight
             
             Vector2 direction = _overridenEntity.Target.position - _myTransform.position;
 
-            projectile.Setup(_overridenEntity.enemyStats, direction);
+            projectile.Setup(_overridenEntity, direction);
         }
     }
 }

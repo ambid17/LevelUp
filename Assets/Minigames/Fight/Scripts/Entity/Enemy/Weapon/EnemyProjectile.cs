@@ -7,7 +7,7 @@ namespace Minigames.Fight
 {
     public class EnemyProjectile : MonoBehaviour
     {
-        private EnemyStats _stats;
+        private EnemyEntity _myEntity;
         private float _deathTimer = 0;
         private Vector2 _shootDirection;
         private bool _isMarkedForDeath;
@@ -24,7 +24,7 @@ namespace Minigames.Fight
         {
             _deathTimer += Time.deltaTime;
 
-            if (_deathTimer > _stats.ProjectileLifeTime)
+            if (_deathTimer > _myEntity.enemyStats.ProjectileLifeTime)
             {
                 Die();
             }
@@ -34,13 +34,13 @@ namespace Minigames.Fight
 
         private void Move()
         {
-            Vector2 delta = _shootDirection * _stats.ProjectileSpeed * Time.deltaTime;
+            Vector2 delta = _shootDirection * _myEntity.enemyStats.ProjectileSpeed * Time.deltaTime;
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(EnemyStats stats, Vector2 direction)
+        public void Setup(EnemyEntity myEntity, Vector2 direction)
         {
-            _stats = stats;
+            _myEntity = myEntity;
             _shootDirection = direction.normalized;
         }
 
@@ -57,7 +57,7 @@ namespace Minigames.Fight
             }
             else if (col.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                _eventService.Dispatch(new OnPlayerDamageEvent(_stats.WeaponDamage));
+                _myEntity.OnHitOther(GameManager.PlayerEntity);
                 Die();
             }
         }

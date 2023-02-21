@@ -21,6 +21,10 @@ namespace Minigames.Fight
 
         private void Die()
         {
+            // since the player takes damage as they are dying
+            // we need to stop the flash effect from overriding the death fx
+            IsFlashing = false;
+            SpriteRenderer.material = defaultMaterial;
             SpriteRenderer.color = Color.black;
         }
     }
