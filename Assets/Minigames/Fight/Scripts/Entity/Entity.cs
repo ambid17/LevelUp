@@ -52,6 +52,8 @@ namespace Minigames.Fight
             {
                 if (statusEffect.OnTick(Time.deltaTime))
                 {
+                    // Add this effect to our list to remove
+                    // we can't remove during the for loop as that breaks the list enumeration
                     Stats.StatusEffectsToRemove.Add(statusEffect);
                 }
             }

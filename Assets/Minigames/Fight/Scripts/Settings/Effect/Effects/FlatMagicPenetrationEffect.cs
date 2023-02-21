@@ -13,7 +13,6 @@ namespace Minigames.Fight
         private float Total => flatPenPerStack * AmountOwned;
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public int Order => ExecutionOrder;
 
         public override void Execute(HitData hit)
         {

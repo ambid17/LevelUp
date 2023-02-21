@@ -33,9 +33,6 @@ namespace Minigames.Fight
             return Name.Equals(other.Name);
         }
 
-        public virtual void Execute(HitData hit)
-        {
-            
-        }
+        public abstract void Execute(HitData hit);
     }
 }

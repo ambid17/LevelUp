@@ -17,6 +17,10 @@ namespace Minigames.Fight
             this.effect = effect;
         }
 
+        /// <summary>
+        /// Creates a class instance to track the remaining time of an affect
+        /// This is stored in the entity's stats
+        /// </summary>
         public static void Create(Entity source, Entity target, IStatusEffect effect, float remainingTime = -1f)
         {
             StatusEffectInstance instance = new StatusEffectInstance(source, target, effect, remainingTime);
@@ -32,18 +36,12 @@ namespace Minigames.Fight
             effect.OnTick();
             remainingTime -= delta;
 
-            if (remainingTime <= 0)
-            {
-                return true;
-                effect.OnRemove(target);
-                target.Stats.StatusEffects.Remove(this);
-            }
-
-            return false;
+            return remainingTime <= 0;
         }
 
         public bool Equals(StatusEffectInstance other)
         {
+            if (other == null) return false;
             return effect.Equals(other.effect);
         }
     }
