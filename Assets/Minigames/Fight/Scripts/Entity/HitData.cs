@@ -15,6 +15,8 @@ namespace Minigames.Fight
         
         public List<float> BaseDamageAdditions;
         public List<float> BaseDamageMultipliers;
+        public float FlatArmorPenetration;
+        public float FlatMagicPenetration;
         public List<float> EffectDamages; 
 
         public HitData(Entity source, Entity target)
@@ -50,7 +52,7 @@ namespace Minigames.Fight
                 physicalDamage *= dmgMultiplier;
             }
 
-            physicalDamage -= Target.Stats.armor;
+            physicalDamage -= (Target.Stats.armor - FlatArmorPenetration);
 
             float magicDamage = 0;
             // ex: +10 lightning damage on hit
@@ -59,7 +61,7 @@ namespace Minigames.Fight
                 magicDamage += effectDmg;
             }
 
-            magicDamage -= Target.Stats.magicResistance;
+            magicDamage -= (Target.Stats.magicResistance - FlatMagicPenetration);
 
             float totalDamage = physicalDamage + magicDamage;
             
