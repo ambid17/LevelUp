@@ -16,14 +16,13 @@ namespace Minigames.Fight
         public float SlowChance => slowChance * AmountOwned;
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public int Order => ExecutionOrder;
 
         public override void Execute(HitData hit)
         {
-            TryAdd(hit);
+            TryApplyEffect(hit);
         }
 
-        public void TryAdd(HitData hit)
+        public void TryApplyEffect(HitData hit)
         {
             bool doesSlow = Random.value < SlowChance;
             doesSlow = true;
@@ -33,12 +32,12 @@ namespace Minigames.Fight
             }
         }
 
-        public void OnAdd(Entity target)
+        public void ApplyEffect(Entity target)
         {
             target.MovementController.ApplyMoveEffect(this);
         }
 
-        public void OnRemove(Entity target)
+        public void RemoveEffect(Entity target)
         {
             target.MovementController.RemoveMoveEffect(this);
         }

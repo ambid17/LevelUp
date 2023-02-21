@@ -63,7 +63,7 @@ namespace Minigames.Fight
         {
             foreach (var statusEffect in Stats.StatusEffectsToRemove)
             {
-                statusEffect.effect.OnRemove(this);
+                statusEffect.effect.RemoveEffect(this);
                 Stats.StatusEffects.Remove(statusEffect);
             }
             Stats.StatusEffectsToRemove.Clear();

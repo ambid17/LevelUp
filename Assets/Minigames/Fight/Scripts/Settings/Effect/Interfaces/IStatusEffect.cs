@@ -2,9 +2,9 @@ namespace Minigames.Fight
 {
     public interface IStatusEffect
     {
-        public void TryAdd(HitData hit);
-        public void OnRemove(Entity target);
-        void OnAdd(Entity target);
+        public void TryApplyEffect(HitData hit);
+        public void RemoveEffect(Entity target);
+        void ApplyEffect(Entity target);
         void OnTick();
     }
 }

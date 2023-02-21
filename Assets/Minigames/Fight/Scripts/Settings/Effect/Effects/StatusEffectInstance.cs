@@ -27,7 +27,7 @@ namespace Minigames.Fight
             bool success = target.Stats.AddStatusEffect(instance);
             if (success)
             {
-                effect.OnAdd(target);
+                effect.ApplyEffect(target);
             }
         }
 
