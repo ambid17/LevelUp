@@ -12,7 +12,9 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<Effect> AllEffects;
 
+        [NonSerialized]
         public List<Effect> UnlockedEffects = new();
+        [NonSerialized]
         public List<Effect> OnHitEffects = new();
 
         public void SetDefaults()

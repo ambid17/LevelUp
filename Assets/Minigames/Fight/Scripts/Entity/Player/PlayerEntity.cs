@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Minigames.Fight;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ namespace Minigames.Fight
         {
             base.Setup();
             Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
-            Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects;
+            Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
             eventService.Add<OnPlayerDamageEvent>(TakeDamage);
         }
 

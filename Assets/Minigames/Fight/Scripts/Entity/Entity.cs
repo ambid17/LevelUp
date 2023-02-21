@@ -72,7 +72,7 @@ namespace Minigames.Fight
         {
             HitData hitData = new HitData(this, otherEntity);
             hitData.BaseDamage = WeaponController.Weapon.Stats.Damage;
-            hitData.Effects = Stats.OnHitEffects.OrderBy(e => e.ExecutionOrder);
+            hitData.Effects = Stats.OnHitEffects;
             otherEntity.TakeHit(hitData);
         }
 
