@@ -35,12 +35,12 @@ namespace Minigames.Fight
                 
             }
             
-            equippedWeapon.stats.Init();
+            equippedWeapon.Init();
         }
 
         public void ApplyUpgrade(WeaponUpgrade upgrade)
         {
-            equippedWeapon.stats.ApplyUpgrade(upgrade);
+            equippedWeapon.ApplyUpgrade(upgrade);
         }
     }
 }

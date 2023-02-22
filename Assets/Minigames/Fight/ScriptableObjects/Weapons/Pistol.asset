@@ -12,23 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040ceb1b8a8bc04448d7ed98f77b99bd, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  WeaponType: 0
-  Prefab: {fileID: 4202762006180929252, guid: d7880d8e0ff0697459f32c863eb216fb, type: 3}
-  Icon: {fileID: 1672852154, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
-  AllSynergies: []
-  UnlockedSynergies: []
-  Stats:
-    baseFireRate: 1
-    fireRateScalar: 1
-    baseDamage: 1
-    damageScalar: 1
-    baseCritChance: 1
-    critChanceScalar: 1
-    baseCritDamage: 1
-    critDamageScalar: 1
-    baseProjectileCount: 1
-    projectileCountScalar: 1
-    baseProjectilePenetration: 1
-    projectilePenetrationScalar: 1
-  ProjectilePrefab: {fileID: 5246368891887457513, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
-  ProjectileSpread: 0.15
+  weaponType: 0
+  icon: {fileID: 0}
+  abilityCooldown: 4
+  fireRate: 0.7
+  damage: 1
+  projectilePrefab: {fileID: 5246368891887457513, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
+  magazineSize: 6
+  bulletsInMagazine: 6
+  reloadTime: 2
+  projectileCount: 1

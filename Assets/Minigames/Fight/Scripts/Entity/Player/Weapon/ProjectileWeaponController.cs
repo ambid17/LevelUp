@@ -15,9 +15,10 @@ namespace Minigames.Fight
         protected bool IsReloading;
 
 
-        private void Start()
+        protected virtual void Start()
         {
             overridenWeapon = weapon as ProjectileWeapon;
+            overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
             Camera = Camera.main;
             MyTransform = transform;
         }
@@ -35,7 +36,7 @@ namespace Minigames.Fight
             if (IsReloading)
             {
                 ReloadTimer += Time.deltaTime;
-                Reload();
+                TryReload();
             }
             else if(CanShoot())
             {
@@ -50,33 +51,34 @@ namespace Minigames.Fight
             }
         }
         
-        protected virtual void Reload()
+        protected virtual void TryReload()
         {
-            overridenWeapon.BulletsInMagazine = overridenWeapon.MagazineSize;
+            if (ReloadTimer < overridenWeapon.reloadTime)
+            {
+                return;
+            }
+            overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
             IsReloading = false;
         }
         
         protected override void Shoot()
         {
-            int projectileCount = overridenWeapon.stats.ProjectileCount;
-            for (int i = 0; i < projectileCount; i++)
-            {
-                PlayerProjectile projectile = Instantiate(overridenWeapon.ProjectilePrefab);
-            
-                Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
+        
+            Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-                // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
-                float indexOffset = (float)i - i/2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * overridenWeapon.ProjectileSpread;
-            
-                projectile.transform.position = MyTransform.position.AsVector2() + offset;
+            projectile.transform.position = MyTransform.position.AsVector2();
 
-                projectile.Setup(MyEntity, direction, overridenWeapon.stats.ProjectilePenetration);
-            }
+            projectile.Setup(MyEntity, direction);
 
-            overridenWeapon.BulletsInMagazine--;
+            CheckReload();
+        }
 
-            if (overridenWeapon.BulletsInMagazine <= 0)
+        protected virtual void CheckReload()
+        {
+            overridenWeapon.bulletsInMagazine--;
+
+            if (overridenWeapon.bulletsInMagazine <= 0)
             {
                 ReloadTimer = 0;
                 IsReloading = true;

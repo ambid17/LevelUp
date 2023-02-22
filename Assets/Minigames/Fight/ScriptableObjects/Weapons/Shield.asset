@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1dde72dbf87827439e676a28db5507d, type: 3}
-  m_Name: Katana
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  weaponType: 4
+  weaponType: 6
   icon: {fileID: 0}
-  abilityCooldown: 4
-  fireRate: 0.5
-  damage: 1
-  attackRange: 2
+  abilityCooldown: 15
+  fireRate: 1.5
+  damage: 5
+  attackRange: 5
   animationLength: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Minigames.Fight;
+using UnityEditor;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -24,6 +25,8 @@ namespace Minigames.Fight
                 eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
             }
         }
+
+        public bool CanMove = true;
 
         protected override void Awake()
         {

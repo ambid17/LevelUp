@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 040ceb1b8a8bc04448d7ed98f77b99bd, type: 3}
-  m_Name: Shotgun
+  m_Name: RocketLauncher
   m_EditorClassIdentifier: 
-  weaponType: 2
+  weaponType: 1
   icon: {fileID: 0}
-  abilityCooldown: 3
-  fireRate: 0.5
-  damage: 4
-  projectilePrefab: {fileID: 5246368891887457513, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
+  abilityCooldown: 8
+  fireRate: 1
+  damage: 5
+  projectilePrefab: {fileID: 5246368891887457513, guid: 0692cf85a10b8d041be5675e02f8c8e5, type: 3}
   magazineSize: 2
   bulletsInMagazine: 2
   reloadTime: 2
-  projectileCount: 4
+  projectileCount: 1

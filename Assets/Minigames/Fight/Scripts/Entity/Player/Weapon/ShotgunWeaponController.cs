@@ -6,47 +6,43 @@ namespace Minigames.Fight
 {
     public class ShotgunWeaponController : ProjectileWeaponController
     {
-        float startAngle = 45;
-        float endAngle = 135;
+        // TODO: scale the angle with the number of projectiles
+        float startAngle = -30;
+        float endAngle = 30;
 
         protected override void Shoot()
         {
-            int projectileCount = overridenWeapon.stats.ProjectileCount;
-            float angleStep = (endAngle - startAngle) / projectileCount;
+            int projectileCount = 4;
+            float angleStep = (endAngle - startAngle) / (projectileCount - 1);
             float angle = startAngle;
             
             for (int i = 0; i < projectileCount; i++)
             {
-                PlayerProjectile projectile = Instantiate(overridenWeapon.ProjectilePrefab);
+                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
                 projectile.transform.position = MyTransform.position.AsVector2();
 
                 Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                direction.x *= Mathf.Cos(angle * Mathf.Deg2Rad);
-                direction.y *= Mathf.Sin(angle * Mathf.Deg2Rad);
+                direction = direction.Rotate(angle);
                 
 
-                projectile.Setup(MyEntity, direction, overridenWeapon.stats.ProjectilePenetration);
+                projectile.Setup(MyEntity, direction);
 
                 angle += angleStep;
             }
 
-            overridenWeapon.BulletsInMagazine--;
-
-            if (overridenWeapon.BulletsInMagazine <= 0)
-            {
-                ReloadTimer = 0;
-                IsReloading = true;
-            }
+            CheckReload();
         }
+        
+        
         
         protected override void UseWeaponAbility()
         {
-            PlayerProjectile projectile = Instantiate(overridenWeapon.ProjectilePrefab);
+            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
             projectile.transform.position = MyTransform.position.AsVector2();
 
             Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             
-            projectile.Setup(MyEntity, direction, overridenWeapon.stats.ProjectilePenetration);
+            projectile.Setup(MyEntity, direction);
         }
     }
 }

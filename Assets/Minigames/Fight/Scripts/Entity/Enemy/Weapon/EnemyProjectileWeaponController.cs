@@ -16,7 +16,6 @@ namespace Minigames.Fight
         {
             _overridenEntity = MyEntity as EnemyEntity;
             _myTransform = transform; // cache our transform for performance
-            weapon.stats.InitForEnemy();
         }
         
         protected override bool ShouldPreventUpdate()
@@ -26,7 +25,7 @@ namespace Minigames.Fight
         
         protected override bool CanShoot()
         {
-            return ShotTimer > weapon.stats.FireRate;
+            return ShotTimer > weapon.fireRate;
         }
         
         protected override void Shoot()

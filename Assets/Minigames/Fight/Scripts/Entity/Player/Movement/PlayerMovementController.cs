@@ -15,7 +15,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (GameManager.PlayerEntity.IsDead)
+            if (GameManager.PlayerEntity.IsDead || !GameManager.PlayerEntity.CanMove)
             {
                 MyRigidbody2D.velocity = Vector2.zero;
                 return;

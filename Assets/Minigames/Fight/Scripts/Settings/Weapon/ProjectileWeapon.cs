@@ -10,10 +10,10 @@ namespace Minigames.Fight
     [Serializable]
     public class ProjectileWeapon : Weapon
     {
-        public PlayerProjectile ProjectilePrefab;
-        public float ProjectileSpread = 0.15f;
-        public int MagazineSize;
-        public int BulletsInMagazine;
-        public float ReloadTime;
+        public PlayerProjectile projectilePrefab;
+        public int magazineSize;
+        public int bulletsInMagazine;
+        public float reloadTime;
+        public int projectileCount;
     }
 }

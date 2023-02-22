@@ -79,7 +79,11 @@ namespace Minigames.Fight
     {
         public WeaponUpgradeType weaponUpgradeType;
     }
-    
+
+    public enum WeaponUpgradeType
+    {
+    }
+
     [Serializable]
     public class EnemyUpgradeModel : UpgradeModel
     {

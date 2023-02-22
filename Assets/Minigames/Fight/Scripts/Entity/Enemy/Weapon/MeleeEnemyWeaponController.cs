@@ -7,14 +7,10 @@ namespace Minigames.Fight
     {
         private bool _isTouchingPlayer = false;
 
-        private void Start()
-        {
-            weapon.stats.InitForEnemy();
-        }
 
         protected override bool CanShoot()
         {
-            return ShotTimer > weapon.stats.FireRate && _isTouchingPlayer;
+            return ShotTimer > weapon.fireRate && _isTouchingPlayer;
         }
 
         protected override void Shoot()

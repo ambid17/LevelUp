@@ -40,11 +40,12 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(Entity sourceEntity, Vector2 direction, int penetration)
+        public void Setup(Entity sourceEntity, Vector2 direction)
         {
             _sourceEntity = sourceEntity;
             _shootDirection = direction.normalized;
-            _penetrationsLeft = penetration;
+            // TODO: look at effects for this
+            _penetrationsLeft = 1;
         }
 
         private void OnTriggerEnter2D(Collider2D col)

@@ -56,7 +56,7 @@ namespace Minigames.Fight
         
         protected virtual bool CanShoot()
         {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.stats.FireRate;
+            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate;
         }
 
         protected virtual void Shoot()
