@@ -22,6 +22,8 @@ namespace Minigames.Fight
     {
         public WeaponType weaponType;
         public Sprite icon;
+        public Sprite ammoIcon;
+        public Sprite abilityIcon;
         public float abilityCooldown;
         public float fireRate;
         public float damage;

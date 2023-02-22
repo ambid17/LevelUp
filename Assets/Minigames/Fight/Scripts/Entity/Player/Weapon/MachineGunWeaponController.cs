@@ -41,7 +41,8 @@ namespace Minigames.Fight
                 ReloadTimer += Time.deltaTime;
                 TryReload();
             }
-            else if(CanShoot())
+            
+            if(CanShoot())
             {
                 ShotTimer = 0;
                 Shoot();
@@ -50,8 +51,14 @@ namespace Minigames.Fight
             if (CanUseWeaponAbility())
             {
                 WeaponAbilityTimer = 0;
+                EventService.Dispatch<PlayerUsedAbilityEvent>();
                 UseWeaponAbility();
             }
+        }
+        
+        protected override bool CanShoot()
+        {
+            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate && (!IsReloading || _isUsingAbility);
         }
         
 

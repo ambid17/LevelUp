@@ -65,33 +65,19 @@ namespace Minigames.Fight
     public class PurchaseCountChangedEvent { }
 
 
-    public class OnHitEvent : IEvent
+    public class PlayerUsedAmmoEvent : IEvent
     {
-        public Entity Target;
+        public int CurrentAmmo;
+        public int MaxAmmo;
 
-        public OnHitEvent(Entity target)
+        public PlayerUsedAmmoEvent(int currentAmmo, int maxAmmo)
         {
-            Target = target;
+            CurrentAmmo = currentAmmo;
+            MaxAmmo = maxAmmo;
         }
     }
     
-    public class OnKillEvent
+    public class PlayerUsedAbilityEvent
     {
-    }
-    public class OnDeathEvent
-    {
-    }
-    public class OnTakeDamageEvent
-    {
-    }
-
-    public class OnLifestealEvent : IEvent
-    {
-        public float Damage;
-
-        public OnLifestealEvent(float damage)
-        {
-            Damage = damage;
-        }
     }
 }

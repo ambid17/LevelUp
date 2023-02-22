@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 3
   icon: {fileID: 0}
+  ammoIcon: {fileID: 168911716, guid: 83c34ec08a785344d85918d4b5530bce, type: 3}
+  abilityIcon: {fileID: -1804074492, guid: 83c34ec08a785344d85918d4b5530bce, type: 3}
   abilityCooldown: 10
   fireRate: 0.25
   damage: 0.5
   projectilePrefab: {fileID: 5246368891887457513, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
   magazineSize: 30
-  bulletsInMagazine: 30
+  bulletsInMagazine: 23
   reloadTime: 3
   projectileCount: 1

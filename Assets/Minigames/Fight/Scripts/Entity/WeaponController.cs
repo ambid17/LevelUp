@@ -24,6 +24,7 @@ namespace Minigames.Fight
         public void Setup(Weapon weapon)
         {
             this.weapon = weapon;
+            WeaponAbilityTimer = weapon.abilityCooldown;
         }
 
         protected virtual void Update()
@@ -45,6 +46,7 @@ namespace Minigames.Fight
             if (CanUseWeaponAbility())
             {
                 WeaponAbilityTimer = 0;
+                EventService.Dispatch<PlayerUsedAbilityEvent>();
                 UseWeaponAbility();
             }
         }
