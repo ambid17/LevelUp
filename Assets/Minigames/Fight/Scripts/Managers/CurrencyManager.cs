@@ -102,7 +102,17 @@ namespace Minigames.Fight
             float gold = baseGoldValue;
             Currency += gold;
             _currencyAcquiredThisInterval += gold;
-            _progressSettings.AddKill();
+            CompletionType completionType = _progressSettings.AddKill();
+
+            if (completionType == CompletionType.Country)
+            {
+                eventService.Dispatch<CountryCompletedEvent>();
+            }
+            else if (completionType == CompletionType.World)
+            {
+                eventService.Dispatch<WorldCompletedEvent>();
+            }
+            
             eventService.Dispatch<EnemyKilledEvent>();
         }
 

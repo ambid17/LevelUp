@@ -80,4 +80,12 @@ namespace Minigames.Fight
     public class PlayerUsedAbilityEvent
     {
     }
+
+    public class CountryCompletedEvent
+    {
+    }
+
+    public class WorldCompletedEvent
+    {
+    }
 }

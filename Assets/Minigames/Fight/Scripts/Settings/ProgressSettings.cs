@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 namespace Minigames.Fight
 {
+    public enum CompletionType
+    {
+        None,
+        World,
+        Country
+    }
+    
     [CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
     [Serializable]
     public class ProgressSettings : ScriptableObject
@@ -101,9 +108,17 @@ namespace Minigames.Fight
             return worldData;
         }
 
-        public void AddKill()
+        public CompletionType AddKill()
         {
-            CurrentWorld.CurrentCountry.EnemyKillCount += GameManager.SettingsManager.incomeSettings.KillsPerKill;
+            bool worldWasConquered = CurrentWorld.IsConquered();
+            CompletionType completionType = CurrentWorld.CurrentCountry.AddKills(GameManager.SettingsManager.incomeSettings.KillsPerKill);
+
+            if (CurrentWorld.IsConquered() && !worldWasConquered)
+            {
+                completionType = CompletionType.World;
+            }
+
+            return completionType;
         }
 
         public void ResetOnDeath()
@@ -241,6 +256,18 @@ namespace Minigames.Fight
 
         public bool IsConquered => EnemyKillCount >= EnemyKillsToComplete;
         public float ConquerPercent => (float)EnemyKillCount / EnemyKillsToComplete;
+
+        /// <summary>
+        /// Adds kills and returns whether those kills completed the country 
+        /// </summary>
+        public CompletionType AddKills(float kills)
+        {
+            bool wasConquered = IsConquered;
+
+            EnemyKillCount += kills;
+
+            return IsConquered && !wasConquered ? CompletionType.Country : CompletionType.None;
+        }
 
         public void SetDefaults()
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -18,6 +19,7 @@ namespace Minigames.Fight
         [SerializeField] private Transform itemParent;
         [SerializeField] private GameObject visualContainer;
         [SerializeField] private Button selectButton;
+        [SerializeField] private TMP_Text titleText;
 
         private Effect selectedEffect;
         private EventService _eventService;
@@ -27,7 +29,8 @@ namespace Minigames.Fight
         void Awake()
         {
             _eventService = GameManager.EventService;
-            _eventService.Add<EnemyKilledEvent>(OnEnemyKilled);
+            _eventService.Add<CountryCompletedEvent>(OnCountryCompleted);
+            _eventService.Add<WorldCompletedEvent>(OnWorldCompleted);
             visualContainer.SetActive(false);
             selectButton.interactable = false;
             selectButton.onClick.AddListener(TryAcceptReward);
@@ -51,20 +54,26 @@ namespace Minigames.Fight
             visualContainer.SetActive(false);
         }
 
-        private void OnEnemyKilled()
+        private void OnCountryCompleted()
         {
-            if (GameManager.SettingsManager.progressSettings.CurrentWorld.IsConquered())
-            {
-                ShowReward(RewardType.World);
-            }
-            else if (GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.IsConquered)
-            {
-                ShowReward(RewardType.Country);
-            }
+            ShowReward(RewardType.Country);
+        }
+
+        private void OnWorldCompleted()
+        {
+            ShowReward(RewardType.World);
         }
 
         void ShowReward(RewardType rewardType)
         {
+            if (rewardType == RewardType.Country)
+            {
+                titleText.text = $"You completed country {GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.Index + 1} of {GameManager.SettingsManager.progressSettings.CurrentWorld.Countries.Count} in {GameManager.SettingsManager.progressSettings.CurrentWorld.Name}";
+            }else if (rewardType == RewardType.World)
+            {
+                titleText.text = $"You completed {GameManager.SettingsManager.progressSettings.CurrentWorld.Name}!";
+            }
+            
             visualContainer.SetActive(true);
             
             List<Effect> randomEffects = GameManager.SettingsManager.effectSettings.GetRandomEffects(_rewardItemCount);
