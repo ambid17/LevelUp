@@ -79,5 +79,21 @@ namespace Minigames.Fight
 
             return AllEffects[0];
         }
+
+        public List<Effect> GetRandomEffects(int count)
+        {
+            List<Effect> toReturn = new();
+
+            while (toReturn.Count < count)
+            {
+                Effect random = GetRandomEffect();
+                if (!toReturn.Contains(random))
+                {
+                    toReturn.Add(random);
+                }
+            }
+
+            return toReturn;
+        }
     }
 }

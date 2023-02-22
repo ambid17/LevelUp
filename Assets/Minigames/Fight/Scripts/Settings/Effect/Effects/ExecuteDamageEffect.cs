@@ -13,9 +13,10 @@ namespace Minigames.Fight
         public float executePercent;
 
         private float Total => 1 + (percentDamagePerStack * AmountOwned);
+        private readonly string _description = "Deal {0}% more damage to enemies <{1}% hp";
+        public override string Description => string.Format(_description, percentDamagePerStack * 100, executePercent * 100);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public int Order => ExecutionOrder;
 
         public override void Execute(HitData hit)
         {

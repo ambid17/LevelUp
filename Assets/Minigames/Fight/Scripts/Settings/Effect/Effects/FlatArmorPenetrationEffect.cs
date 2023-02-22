@@ -11,6 +11,9 @@ namespace Minigames.Fight
     {
         public float flatPenPerStack;
         private float Total => flatPenPerStack * AmountOwned;
+        
+        private readonly string _description = "Grants +{0} armor penetration";
+        public override string Description => string.Format(_description, flatPenPerStack);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
 

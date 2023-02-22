@@ -20,7 +20,7 @@ namespace Minigames.Fight
     public abstract class Effect : ScriptableObject, IEquatable<Effect>
     {
         public string Name;
-        public string Description;
+        public abstract string Description { get; }
         public Sprite Icon;
         public int AmountOwned;
         public int ExecutionOrder;
@@ -34,5 +34,6 @@ namespace Minigames.Fight
         }
 
         public abstract void Execute(HitData hit);
+
     }
 }

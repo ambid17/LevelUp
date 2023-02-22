@@ -21,6 +21,8 @@ namespace Minigames.Fight
 
         private Effect selectedEffect;
         private EventService _eventService;
+        private List<RewardItem> _rewardItems;
+        private int _rewardItemCount = 3; // TODO: look at settings for this
         
         void Awake()
         {
@@ -29,6 +31,18 @@ namespace Minigames.Fight
             visualContainer.SetActive(false);
             selectButton.interactable = false;
             selectButton.onClick.AddListener(TryAcceptReward);
+            CreateRewardItems();
+        }
+
+        private void CreateRewardItems()
+        {
+            _rewardItems = new();
+
+            for (int i = 0; i < _rewardItemCount; i++)
+            {
+                RewardItem newItem = Instantiate(rewardItemPrefab, itemParent);
+                _rewardItems.Add(newItem);
+            }
         }
 
         private void TryAcceptReward()
@@ -52,14 +66,12 @@ namespace Minigames.Fight
         void ShowReward(RewardType rewardType)
         {
             visualContainer.SetActive(true);
+            
+            List<Effect> randomEffects = GameManager.SettingsManager.effectSettings.GetRandomEffects(_rewardItemCount);
 
-            int rewardCount = 3;
-
-            for (int i = 0; i < rewardCount; i++)
+            for(int i = 0; i < _rewardItems.Count; i++)
             {
-                Effect randomEffect = GameManager.SettingsManager.effectSettings.GetRandomEffect();
-                RewardItem newItem = Instantiate(rewardItemPrefab, itemParent);
-                newItem.Setup(randomEffect, SelectEffect);
+                _rewardItems[i].Setup(randomEffects[i], SelectEffect);
             }
         }
 

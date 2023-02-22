@@ -12,8 +12,9 @@ namespace Minigames.Fight
 
         private float Total => baseDamagePerStack * AmountOwned;
 
+        private readonly string _description = "+{0} base damage";
+        public override string Description => string.Format(_description, baseDamagePerStack);
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public int Order => ExecutionOrder;
 
         public override void Execute(HitData hit)
         {

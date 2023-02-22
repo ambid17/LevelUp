@@ -14,6 +14,9 @@ namespace Minigames.Fight
         public float slowAmount = 0.01f;
 
         public float SlowChance => slowChance * AmountOwned;
+        
+        private readonly string _description = "{0}% to slow enemies by {1}% for {2} seconds";
+        public override string Description => string.Format(_description, slowChance * 100, slowAmount * 100, duration);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
 
