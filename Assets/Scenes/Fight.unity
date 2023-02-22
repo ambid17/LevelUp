@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191475630}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3daa1e2b5cab27c4ea0e0c4c5d7b8d8b, type: 3}
   m_Name: 
@@ -16517,6 +16517,10 @@ PrefabInstance:
     - target: {fileID: 269033493564200761, guid: 6c8125bcbdcd9f74f99ae2281a402b03, type: 3}
       propertyPath: m_Name
       value: CountryCompletePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 269033493564200761, guid: 6c8125bcbdcd9f74f99ae2281a402b03, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 394031450098325669, guid: 6c8125bcbdcd9f74f99ae2281a402b03, type: 3}
       propertyPath: m_AnchorMax.y

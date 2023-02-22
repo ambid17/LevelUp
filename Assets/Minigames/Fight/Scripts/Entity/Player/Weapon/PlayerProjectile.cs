@@ -10,9 +10,9 @@ namespace Minigames.Fight
         private float _deathTimer = 0;
         private Vector2 _shootDirection;
         private int _penetrationsLeft;
-        private bool _isMarkedForDeath;
+        protected bool _isMarkedForDeath;
 
-        private Entity _sourceEntity;
+        protected Entity _sourceEntity;
 
         private EventService _eventService;
     
@@ -48,7 +48,7 @@ namespace Minigames.Fight
             _penetrationsLeft = 1;
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        protected virtual void OnTriggerEnter2D(Collider2D col)
         {
             if (_isMarkedForDeath)
             {
@@ -73,7 +73,7 @@ namespace Minigames.Fight
             }
         }
 
-        private void Die()
+        protected virtual void Die()
         {  
             if(_isMarkedForDeath) return;
             
