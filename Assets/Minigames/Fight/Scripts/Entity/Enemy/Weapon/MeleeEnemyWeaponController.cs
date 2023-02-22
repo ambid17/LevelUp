@@ -9,12 +9,12 @@ namespace Minigames.Fight
 
         private void Start()
         {
-            weapon.Stats.InitForEnemy();
+            weapon.stats.InitForEnemy();
         }
 
         protected override bool CanShoot()
         {
-            return ShotTimer > weapon.Stats.FireRate && _isTouchingPlayer;
+            return ShotTimer > weapon.stats.FireRate && _isTouchingPlayer;
         }
 
         protected override void Shoot()

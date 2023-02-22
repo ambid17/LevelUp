@@ -10,12 +10,13 @@ namespace Minigames.Fight
         [SerializeField] protected Weapon weapon;
         public Weapon Weapon => weapon;
         protected float ShotTimer;
+        protected float WeaponAbilityTimer;
         protected EventService EventService;
         protected Entity MyEntity;
 
         void Awake()
         {
-            MyEntity = GetComponentInParent<Entity>();
+            MyEntity = GetComponent<Entity>();
 
             EventService = GameManager.EventService;
         }
@@ -25,7 +26,7 @@ namespace Minigames.Fight
             this.weapon = weapon;
         }
 
-        void Update()
+        protected virtual void Update()
         {
             if (ShouldPreventUpdate())
             {
@@ -33,11 +34,18 @@ namespace Minigames.Fight
             }
 
             ShotTimer += Time.deltaTime;
+            WeaponAbilityTimer += Time.deltaTime;
 
-            if (CanShoot())
+            if(CanShoot())
             {
                 ShotTimer = 0;
                 Shoot();
+            }
+
+            if (CanUseWeaponAbility())
+            {
+                WeaponAbilityTimer = 0;
+                UseWeaponAbility();
             }
         }
 
@@ -48,10 +56,19 @@ namespace Minigames.Fight
         
         protected virtual bool CanShoot()
         {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.Stats.FireRate;
+            return Input.GetMouseButton(0) && ShotTimer > weapon.stats.FireRate;
         }
 
         protected virtual void Shoot()
+        {
+        }
+        
+        protected virtual bool CanUseWeaponAbility()
+        {
+            return Input.GetMouseButton(1) && WeaponAbilityTimer > weapon.abilityCooldown;
+        }
+
+        protected virtual void UseWeaponAbility()
         {
         }
     }

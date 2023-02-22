@@ -31,16 +31,16 @@ namespace Minigames.Fight
         {
             if (equippedWeapon == null)
             {
-                equippedWeapon = allWeapons.FirstOrDefault(wep => wep.WeaponType == defaultWeaponType);
+                equippedWeapon = allWeapons.FirstOrDefault(wep => wep.weaponType == defaultWeaponType);
                 
             }
             
-            equippedWeapon.Stats.Init();
+            equippedWeapon.stats.Init();
         }
 
         public void ApplyUpgrade(WeaponUpgrade upgrade)
         {
-            equippedWeapon.Stats.ApplyUpgrade(upgrade);
+            equippedWeapon.stats.ApplyUpgrade(upgrade);
         }
     }
 }

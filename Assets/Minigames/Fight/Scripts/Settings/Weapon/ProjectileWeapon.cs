@@ -12,5 +12,8 @@ namespace Minigames.Fight
     {
         public PlayerProjectile ProjectilePrefab;
         public float ProjectileSpread = 0.15f;
+        public int MagazineSize;
+        public int BulletsInMagazine;
+        public float ReloadTime;
     }
 }

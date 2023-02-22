@@ -20,10 +20,10 @@ namespace Minigames.Fight
     [Serializable]
     public class Weapon : ScriptableObject
     {
-        public WeaponType WeaponType;
-        public GameObject Prefab;
-        public Sprite Icon;
-        public WeaponStats Stats;
+        public WeaponType weaponType;
+        public Sprite icon;
+        public WeaponStats stats;
+        public float abilityCooldown;
     }
     
     public enum WeaponUpgradeType

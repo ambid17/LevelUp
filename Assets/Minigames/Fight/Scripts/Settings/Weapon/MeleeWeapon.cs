@@ -11,8 +11,5 @@ namespace Minigames.Fight
     {
         public float attackRange;
         public float animationLength;
-        // TODO: use effects on the weapon instead
-        public float stunDuration;
-        public float knockBackDistance;
     }
 }

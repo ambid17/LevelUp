@@ -28,10 +28,43 @@ namespace Minigames.Fight
         protected override void Awake()
         {
             base.Awake();
-            
+
+            SetupWeaponController();
+        }
+
+        private void SetupWeaponController()
+        {
             Weapon equippedWeapon = GameManager.SettingsManager.weaponSettings.equippedWeapon;
-            var weaponGo = Instantiate(equippedWeapon.Prefab, transform);
-            var weaponController = weaponGo.GetComponent<WeaponController>();
+
+            WeaponController weaponController;
+            switch (equippedWeapon.weaponType)
+            {
+                case WeaponType.Pistol:
+                    weaponController = gameObject.AddComponent<PistolWeaponController>();
+                    break;
+                case WeaponType.RocketLauncher:
+                    weaponController = gameObject.AddComponent<RocketLauncherWeaponController>();
+                    break;
+                case WeaponType.Shotgun:
+                    weaponController = gameObject.AddComponent<ShotgunWeaponController>();
+                    break;
+                case WeaponType.MachineGun:
+                    weaponController = gameObject.AddComponent<MachineGunWeaponController>();
+                    break;
+                case WeaponType.Katana:
+                    weaponController = gameObject.AddComponent<KatanaWeaponController>();
+                    break;
+                case WeaponType.Hammer:
+                    weaponController = gameObject.AddComponent<HammerWeaponController>();
+                    break;
+                case WeaponType.Shield:
+                    weaponController = gameObject.AddComponent<ShieldWeaponController>();
+                    break;
+                default:
+                    weaponController = gameObject.AddComponent<PistolWeaponController>();
+                    break;
+            }
+            
             weaponController.Setup(equippedWeapon);
             WeaponController = weaponController;
         }

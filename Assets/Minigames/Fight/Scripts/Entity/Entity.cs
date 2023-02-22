@@ -73,7 +73,7 @@ namespace Minigames.Fight
         public virtual void OnHitOther(Entity otherEntity)
         {
             HitData hitData = new HitData(this, otherEntity);
-            hitData.BaseDamage = WeaponController.Weapon.Stats.Damage;
+            hitData.BaseDamage = WeaponController.Weapon.stats.Damage;
             hitData.Effects = Stats.OnHitEffects;
             otherEntity.TakeHit(hitData);
         }

@@ -14,7 +14,7 @@ namespace Minigames.Fight
         public void Setup(Weapon weapon)
         {
             Weapon = weapon;
-            iconImage.sprite = weapon.Icon;
+            iconImage.sprite = weapon.icon;
         }
     }
 }
