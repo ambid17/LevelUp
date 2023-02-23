@@ -21,5 +21,10 @@ namespace Minigames.Fight
         {
             hit.FlatMagicPenetration += Total;
         }
+        
+        public override void Unlock()
+        {
+            
+        }
     }
 }

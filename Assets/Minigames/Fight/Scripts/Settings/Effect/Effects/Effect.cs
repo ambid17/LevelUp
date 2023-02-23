@@ -35,5 +35,7 @@ namespace Minigames.Fight
 
         public abstract void Execute(HitData hit);
 
+        public abstract void Unlock();
+
     }
 }

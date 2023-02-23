@@ -20,5 +20,10 @@ namespace Minigames.Fight
         {
             hit.BaseDamageAdditions.Add(Total);
         }
+        
+        public override void Unlock()
+        {
+            
+        }
     }
 }

@@ -25,5 +25,10 @@ namespace Minigames.Fight
                 hit.BaseDamageMultipliers.Add(Total);
             }
         }
+
+        public override void Unlock()
+        {
+            
+        }
     }
 }

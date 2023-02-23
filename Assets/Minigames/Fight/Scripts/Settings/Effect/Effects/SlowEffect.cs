@@ -49,5 +49,19 @@ namespace Minigames.Fight
         {
             
         }
+        
+        public override void Unlock()
+        {
+            if (!GameManager.SettingsManager.effectSettings.UnlockedEffects.Contains(this))
+            {
+                AmountOwned = 1;
+                GameManager.SettingsManager.effectSettings.UnlockedEffects.Add(this);
+                GameManager.SettingsManager.effectSettings.OnHitEffects.Add(this);
+            }
+            else
+            {
+                AmountOwned++;
+            }
+        }
     }
 }

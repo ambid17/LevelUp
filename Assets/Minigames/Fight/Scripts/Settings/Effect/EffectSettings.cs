@@ -61,8 +61,16 @@ namespace Minigames.Fight
         {
             Type effectType = effectModel.Type;
             var effectToUnlock = AllEffects.Where(e => e.GetType() == effectType).FirstOrDefault();
-            effectToUnlock.AmountOwned = effectModel.AmountOwned;
-            UnlockEffect(effectToUnlock);
+
+            if (effectToUnlock != null)
+            {
+                effectToUnlock.AmountOwned = effectModel.AmountOwned;
+                effectToUnlock.Unlock();
+            }
+            else
+            {
+                Debug.LogError($"No effect found of type: {effectType}");
+            }
         }
 
 
