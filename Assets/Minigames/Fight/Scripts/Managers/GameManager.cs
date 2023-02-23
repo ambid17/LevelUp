@@ -70,6 +70,7 @@ namespace Minigames.Fight
         {
             ProgressDataManager.Save();
             UpgradeDataManager.Save();
+            EffectDataManager.Save();
         }
     }
 }

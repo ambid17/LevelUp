@@ -11,6 +11,7 @@ public class FightDataLoader : MonoBehaviour
 {
     public ProgressSettings progressSettings;
     public UpgradeSettings upgradeSettings;
+    public EffectSettings effectSettings;
     public static int targetSceneIndex;
 
 
@@ -28,6 +29,19 @@ public class FightDataLoader : MonoBehaviour
     {
         LoadUpgradeData();
         LoadProgressData();
+        LoadEffectData();
+    }
+
+    private void LoadEffectData()
+    {
+        var effectContainer = EffectDataManager.Load();
+        if (effectContainer != null)
+        {
+            foreach (var effect in effectContainer.effects)
+            {
+                effectSettings.LoadSavedEffect(effect);
+            }
+        }
     }
     
     public void LoadUpgradeData()

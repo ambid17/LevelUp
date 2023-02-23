@@ -44,7 +44,7 @@ namespace Minigames.Fight
             progressSettings.Init();
             enemySpawnerSettings.Init();
             incomeSettings.Init();
-            effectSettings.UnlockAllEffects();
+            //effectSettings.UnlockAllEffects();
         }
 
         private void OnUpgradePurchased(UpgradePurchasedEvent eventType)
@@ -80,6 +80,11 @@ namespace Minigames.Fight
             toReturn.AddRange(upgradeSettings.IncomeUpgrades);
 
             return toReturn;
+        }
+
+        public List<Effect> GetAllEffects()
+        {
+            return effectSettings.UnlockedEffects;
         }
 
         public ProgressModel GetProgressForSerialization()

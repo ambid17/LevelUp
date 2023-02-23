@@ -57,6 +57,14 @@ namespace Minigames.Fight
             }
         }
 
+        public void LoadSavedEffect(EffectModel effectModel)
+        {
+            Type effectType = effectModel.Type;
+            var effectToUnlock = AllEffects.Where(e => e.GetType() == effectType).FirstOrDefault();
+            effectToUnlock.AmountOwned = effectModel.AmountOwned;
+            UnlockEffect(effectToUnlock);
+        }
+
 
         [NonSerialized] private int _weightTotal;
 

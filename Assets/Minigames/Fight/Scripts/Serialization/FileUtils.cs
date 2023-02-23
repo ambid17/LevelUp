@@ -13,7 +13,6 @@ namespace Minigames.Fight
                 var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
                 T toReturn = JsonConvert.DeserializeObject<T>(fileData, settings);
-                //T toReturn = JsonUtility.FromJson<T>(fileData);
                 return toReturn;
             }
 
@@ -26,7 +25,6 @@ namespace Minigames.Fight
 
             string fileContent = JsonConvert.SerializeObject(objectToSerialize, settings);
 
-            //string fileContent = JsonUtility.ToJson(objectToSerialize);
             File.WriteAllText(filePath, fileContent);
         }
     }
