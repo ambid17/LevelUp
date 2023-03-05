@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Utils;
 
@@ -20,6 +21,11 @@ namespace Minigames.Fight
         {
             _eventService = GameManager.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
+        }
+
+        private void OnDestroy()
+        {
+            _eventService.Remove<PlayerDiedEvent>(Die);
         }
 
         void Update()
