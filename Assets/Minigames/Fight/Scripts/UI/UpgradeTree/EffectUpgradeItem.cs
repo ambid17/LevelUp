@@ -13,29 +13,29 @@ namespace Minigames.Fight
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text text;
         [SerializeField] private Image lineImagePrefab;
-        private EffectUpgradeItem effectItemPrefab;
+        private EffectUpgradeItem _effectItemPrefab;
 
         public EffectNode effectNode;
 
-        public void Setup(EffectNode effectNode, EffectUpgradeItem effectItemPrefab)
+        public void Setup(EffectNode node, EffectUpgradeItem prefab)
         {
-            this.effectNode = effectNode;
-            this.effectItemPrefab = effectItemPrefab;
+            effectNode = node;
+            _effectItemPrefab = prefab;
 
             icon.gameObject.SetActive(false);
             text.gameObject.SetActive(false);
             gameObject.name = effectNode.Name;
 
-            // if (effectNode.Effect == null)
-            // {
+            if (effectNode.Effect == null)
+            {
                 text.gameObject.SetActive(true);
                 text.text = effectNode.Name;
-            // }
-            // else
-            // {
-            //     icon.gameObject.SetActive(transform);
-            //     icon.sprite = effectNode.Effect.Icon;
-            // }
+            }
+            else
+            {
+                icon.gameObject.SetActive(transform);
+                icon.sprite = effectNode.Effect.Icon;
+            }
 
             button.onClick.AddListener(SelectLayoutItem);
 
@@ -49,9 +49,9 @@ namespace Minigames.Fight
             for (int i = 0; i < effectNode.Children.Count; i++)
             {
                 // positioning
-                var effectItem = Instantiate(effectItemPrefab, transform);
+                var effectItem = Instantiate(_effectItemPrefab, transform);
                 EffectNode newNode = effectNode.Children[i];
-                effectItem.Setup(newNode, effectItemPrefab);
+                effectItem.Setup(newNode, _effectItemPrefab);
                 float angle = angleInterval * i * Mathf.Deg2Rad;
                 effectItem.transform.localPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
 
