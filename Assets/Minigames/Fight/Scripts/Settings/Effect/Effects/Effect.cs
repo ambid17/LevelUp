@@ -26,6 +26,7 @@ namespace Minigames.Fight
         public int ExecutionOrder;
         public abstract EffectTriggerType TriggerType { get; }
         public int DropWeight = 1;
+        public abstract string UpgradePath { get; }
 
         public bool Equals(Effect other)
         {

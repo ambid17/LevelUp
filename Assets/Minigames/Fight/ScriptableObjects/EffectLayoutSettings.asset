@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b24c00ad7b91478537f34c4c7de32, type: 3}
+  m_Name: EffectLayoutSettings
+  m_EditorClassIdentifier: 
+  rootItems:
+  - tierName: Upgrades
+    effect: {fileID: 0}
+    children:
+    - tierName: Player
+      effect: {fileID: 0}
+      children: []
+    - tierName: Weapon
+      effect: {fileID: 0}
+      children: []
+    - tierName: Loot
+      effect: {fileID: 0}
+      children: []
+    - tierName: Effect
+      effect: {fileID: 0}
+      children:
+      - tierName: Ice
+        effect: {fileID: 0}
+        children:
+        - tierName: 
+          effect: {fileID: 11400000, guid: 1a0ed725bda3a054c8ee911f87eb1a3e, type: 2}
+          children: []
+      - tierName: Fire
+        effect: {fileID: 0}
+        children: []
+      - tierName: Electric
+        effect: {fileID: 0}
+        children: []

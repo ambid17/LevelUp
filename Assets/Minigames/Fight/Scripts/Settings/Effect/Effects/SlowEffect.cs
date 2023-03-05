@@ -19,6 +19,7 @@ namespace Minigames.Fight
         public override string Description => string.Format(_description, slowChance * 100, slowAmount * 100, duration);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
+        public override string UpgradePath => "upgrades/effect/ice/slow";
 
         public override void Execute(HitData hit)
         {

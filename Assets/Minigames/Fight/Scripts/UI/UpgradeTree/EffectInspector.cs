@@ -9,7 +9,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class UpgradeInspector : MonoBehaviour
+    public class EffectInspector : MonoBehaviour
     {
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text nameText;

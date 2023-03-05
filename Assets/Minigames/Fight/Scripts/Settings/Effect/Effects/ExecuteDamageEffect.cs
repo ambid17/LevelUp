@@ -17,6 +17,7 @@ namespace Minigames.Fight
         public override string Description => string.Format(_description, percentDamagePerStack * 100, executePercent * 100);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
+        public override string UpgradePath => "";
 
         public override void Execute(HitData hit)
         {

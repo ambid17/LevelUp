@@ -62,6 +62,16 @@ namespace Minigames.Fight
         }
     }
     
+    public class EffectLayoutUiItemSelectedEvent : IEvent
+    {
+        public EffectUpgradeItem LayoutItem;
+
+        public EffectLayoutUiItemSelectedEvent(EffectUpgradeItem layoutItem)
+        {
+            LayoutItem = layoutItem;
+        }
+    }
+
     public class PurchaseCountChangedEvent { }
 
 

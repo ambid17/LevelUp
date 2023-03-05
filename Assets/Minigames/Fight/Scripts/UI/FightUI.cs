@@ -18,7 +18,7 @@ namespace Minigames.Fight
         [SerializeField] private Image _abilityCooldownImage;
         [SerializeField] private Image _abilityCooldownImageMask;
     
-        [SerializeField] private GameObject _upgradePanel;
+        [SerializeField] private EffectTreeUI effectTreeUI;
         [SerializeField] private GameObject _pausePanel;
         
         private EventService _eventService;
@@ -70,7 +70,7 @@ namespace Minigames.Fight
         
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (_upgradePanel.activeInHierarchy)
+                if (effectTreeUI.IsActive)
                 {
                     CloseUpgrades();
                 }
@@ -122,12 +122,12 @@ namespace Minigames.Fight
 
         private void OpenUpgrades()
         {
-            _upgradePanel.SetActive(true);
+            effectTreeUI.ToggleActive(true);
         }
 
         private void CloseUpgrades()
         {
-            _upgradePanel.SetActive(false);
+            effectTreeUI.ToggleActive(false);
         }
     }
 }
