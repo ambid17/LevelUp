@@ -22,7 +22,7 @@ namespace Minigames.Fight
             hit.FlatMagicPenetration += Total;
         }
         
-        public override void Unlock()
+        public override void Unlock(EffectSettings settings)
         {
             
         }

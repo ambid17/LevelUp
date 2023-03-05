@@ -30,7 +30,7 @@ namespace Minigames.Fight
             }
         }
         
-        public override void Unlock()
+        public override void Unlock(EffectSettings settings)
         {
             
         }

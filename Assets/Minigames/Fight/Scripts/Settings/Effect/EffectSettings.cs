@@ -26,46 +26,20 @@ namespace Minigames.Fight
         {
             foreach (var effect in AllEffects)
             {
-                UnlockEffect(effect);
-            }
-        }
+                effect.Unlock(this);
 
-        public void UnlockEffect(Effect effect)
-        {
-            if (!UnlockedEffects.Contains(effect))
-            {
-                effect.AmountOwned = 1;
-                UnlockedEffects.Add(effect);
-
-                if (effect.TriggerType == EffectTriggerType.OnHit)
-                {
-                    OnHitEffects.Add(effect);
-                }
-            }
-            else
-            {
-                Effect toUpgrade = UnlockedEffects.FirstOrDefault(eff => eff.Name == effect.Name);
-
-                if (toUpgrade != null)
-                {
-                    toUpgrade.AmountOwned++;
-                }
-                else
-                {
-                    Debug.LogError($"No effect found with name: {effect.Name}");
-                }
             }
         }
 
         public void LoadSavedEffect(EffectModel effectModel)
         {
             Type effectType = effectModel.Type;
-            var effectToUnlock = AllEffects.Where(e => e.GetType() == effectType).FirstOrDefault();
+            var effectToUnlock = AllEffects.FirstOrDefault(e => e.GetType() == effectType);
 
             if (effectToUnlock != null)
             {
                 effectToUnlock.AmountOwned = effectModel.AmountOwned;
-                effectToUnlock.Unlock();
+                effectToUnlock.Unlock(this);
             }
             else
             {

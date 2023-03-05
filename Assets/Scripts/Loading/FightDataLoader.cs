@@ -35,7 +35,7 @@ public class FightDataLoader : MonoBehaviour
     private void LoadEffectData()
     {
         var effectContainer = EffectDataManager.Load();
-        if (effectContainer != null)
+        if (effectContainer != null && effectContainer.effects != null)
         {
             foreach (var effect in effectContainer.effects)
             {

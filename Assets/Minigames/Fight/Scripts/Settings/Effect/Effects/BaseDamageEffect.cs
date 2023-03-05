@@ -21,7 +21,7 @@ namespace Minigames.Fight
             hit.BaseDamageAdditions.Add(Total);
         }
         
-        public override void Unlock()
+        public override void Unlock(EffectSettings settings)
         {
             
         }

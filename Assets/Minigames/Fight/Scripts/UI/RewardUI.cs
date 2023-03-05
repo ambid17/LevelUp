@@ -50,7 +50,7 @@ namespace Minigames.Fight
 
         private void TryAcceptReward()
         {
-            GameManager.SettingsManager.effectSettings.UnlockEffect(selectedEffect);
+            selectedEffect.Unlock(GameManager.SettingsManager.effectSettings);
             visualContainer.SetActive(false);
         }
 

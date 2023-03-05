@@ -35,7 +35,7 @@ namespace Minigames.Fight
 
         public abstract void Execute(HitData hit);
 
-        public abstract void Unlock();
+        public abstract void Unlock(EffectSettings settings);
 
     }
 }
