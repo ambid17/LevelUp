@@ -15,7 +15,7 @@ namespace Minigames.Fight
         private readonly string _description = "+{0} base damage";
         public override string Description => string.Format(_description, baseDamagePerStack);
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "";
+        public override string UpgradePath => "upgrades/weapon/baseDamage";
         public override void Execute(HitData hit)
         {
             hit.BaseDamageAdditions.Add(Total);

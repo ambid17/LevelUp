@@ -9,7 +9,6 @@ namespace Minigames.Fight
     public class EffectTreeUI : MonoBehaviour
     {
         [SerializeField] private EffectUpgradeItem effectItemPrefab;
-        [SerializeField] private EffectParentItem effectParentItemPrefab;
 
         [SerializeField] private Transform treeContainer;
         [SerializeField] private EffectInspector inspector;
@@ -25,6 +24,7 @@ namespace Minigames.Fight
         {
             closeButton.onClick.AddListener(Close);
             BuildTree();
+            GenerateUi();
             GameManager.EventService.Add<EffectLayoutUiItemSelectedEvent>(OnLayoutItemSelected);
             //ToggleActive(false);
         }
@@ -50,10 +50,13 @@ namespace Minigames.Fight
             foreach (var effect in GameManager.SettingsManager.effectSettings.AllEffects)
             {
                 _effectTree.Add(effect);
-                // var effectItem = Instantiate(effectItemPrefab, treeContainer);
-                // effectItem.Setup(effect);
             }
         }
-    
+
+        private void GenerateUi()
+        {
+            var effectItem = Instantiate(effectItemPrefab, treeContainer);
+            effectItem.Setup(_effectTree.RootNode, effectItemPrefab);
+        }
     }
 }
