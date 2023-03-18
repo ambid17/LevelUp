@@ -16,7 +16,7 @@ namespace Minigames.Fight
         public override string Description => string.Format(_description, flatPenPerStack);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "";
+        public override string UpgradePath => "upgrades/weapon/flatMagicPen";
 
         public override void Execute(HitData hit)
         {

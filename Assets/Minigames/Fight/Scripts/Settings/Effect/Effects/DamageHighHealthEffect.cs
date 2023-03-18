@@ -21,7 +21,7 @@ namespace Minigames.Fight
         public override string Description => string.Format(_description, percentDamagePerStack * 100, minHpPercent * 100);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "";//"upgrades/weapon/highHp";
+        public override string UpgradePath => "upgrades/weapon/highHp";
 
         public override void Execute(HitData hit)
         {

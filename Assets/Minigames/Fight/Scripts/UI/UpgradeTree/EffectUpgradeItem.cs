@@ -44,16 +44,13 @@ namespace Minigames.Fight
 
         private void GenerateChildren()
         {
-            float angleInterval = 360f / effectNode.Children.Count;
-            float radius = 150;
             for (int i = 0; i < effectNode.Children.Count; i++)
             {
                 // positioning
                 var effectItem = Instantiate(_effectItemPrefab, transform);
                 EffectNode newNode = effectNode.Children[i];
                 effectItem.Setup(newNode, _effectItemPrefab);
-                float angle = angleInterval * i * Mathf.Deg2Rad;
-                effectItem.transform.localPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+                effectItem.transform.localPosition = new Vector3(i*150, -150,0);
 
                 // create line
                 var image = Instantiate(lineImagePrefab, transform);
