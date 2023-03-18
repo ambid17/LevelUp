@@ -19,7 +19,7 @@ namespace Minigames.Fight
         
         private readonly string _description = "Deal {0}% more damage to enemies >{1}% hp";
         public override string Description => string.Format(_description, percentDamagePerStack * 100, minHpPercent * 100);
-
+        public override string NextUpgradeDescription => "";
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public override string UpgradePath => "upgrades/weapon/highHp";
 
@@ -34,6 +34,11 @@ namespace Minigames.Fight
         public override void Unlock(EffectSettings settings)
         {
             
+        }
+        
+        public override float GetCost(int purchaseCount)
+        {
+            return 1;
         }
     }
 }

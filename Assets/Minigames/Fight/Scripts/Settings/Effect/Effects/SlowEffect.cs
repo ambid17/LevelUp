@@ -17,6 +17,7 @@ namespace Minigames.Fight
         
         private readonly string _description = "{0}% to slow enemies by {1}% for {2} seconds";
         public override string Description => string.Format(_description, slowChance * 100, slowAmount * 100, duration);
+        public override string NextUpgradeDescription => string.Format(_description, slowChance * 100, slowAmount * 100, duration);
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public override string UpgradePath => "upgrades/effect/ice/slow";
@@ -63,6 +64,11 @@ namespace Minigames.Fight
             {
                 AmountOwned++;
             }
+        }
+        
+        public override float GetCost(int purchaseCount)
+        {
+            return 1;
         }
     }
 }

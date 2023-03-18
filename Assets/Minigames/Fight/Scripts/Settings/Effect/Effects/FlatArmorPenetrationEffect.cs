@@ -14,7 +14,7 @@ namespace Minigames.Fight
         
         private readonly string _description = "Grants +{0} armor penetration";
         public override string Description => string.Format(_description, flatPenPerStack);
-
+        public override string NextUpgradeDescription => "";
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public override string UpgradePath => "upgrades/weapon/flatArmorPen";
 
@@ -26,6 +26,11 @@ namespace Minigames.Fight
         public override void Unlock(EffectSettings settings)
         {
             
+        }
+        
+        public override float GetCost(int purchaseCount)
+        {
+            return 1;
         }
     }
 }

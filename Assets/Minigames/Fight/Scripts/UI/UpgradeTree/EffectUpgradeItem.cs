@@ -67,7 +67,7 @@ namespace Minigames.Fight
 
         private void SelectLayoutItem()
         {
-            GameManager.EventService.Dispatch(new EffectLayoutUiItemSelectedEvent(this));
+            GameManager.EventService.Dispatch(new EffectUpgradeItemSelectedEvent(this));
         }
     }
 }

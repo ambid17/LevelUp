@@ -15,7 +15,7 @@ namespace Minigames.Fight
         private float Total => 1 + (percentDamagePerStack * AmountOwned);
         private readonly string _description = "Deal {0}% more damage to enemies <{1}% hp";
         public override string Description => string.Format(_description, percentDamagePerStack * 100, executePercent * 100);
-
+        public override string NextUpgradeDescription => "";
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public override string UpgradePath => "upgrades/effect/ice/execute";
 
@@ -30,6 +30,11 @@ namespace Minigames.Fight
         public override void Unlock(EffectSettings settings)
         {
             
+        }
+        
+        public override float GetCost(int purchaseCount)
+        {
+            return 1;
         }
     }
 }

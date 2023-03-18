@@ -21,8 +21,10 @@ namespace Minigames.Fight
     {
         public string Name;
         public abstract string Description { get; }
+        public abstract string NextUpgradeDescription { get; }
         public Sprite Icon;
         public int AmountOwned;
+        public int MaxAmountOwned;
         public int ExecutionOrder;
         public abstract EffectTriggerType TriggerType { get; }
         public int DropWeight = 1;
@@ -37,6 +39,21 @@ namespace Minigames.Fight
         public abstract void Execute(HitData hit);
 
         public abstract void Unlock(EffectSettings settings);
+        
+        public string GetUpgradeCountText()
+        {
+            string upgradeCountText = $"{AmountOwned}";
+
+            if (MaxAmountOwned > 0)
+            {
+                upgradeCountText += $" / {MaxAmountOwned}";
+            }
+            
+            return $"({upgradeCountText})";
+        }
+
+        public abstract float GetCost(int purchaseCount);
+
 
     }
 }

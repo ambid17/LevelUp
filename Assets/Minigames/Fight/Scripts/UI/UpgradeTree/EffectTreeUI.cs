@@ -25,11 +25,11 @@ namespace Minigames.Fight
             closeButton.onClick.AddListener(Close);
             BuildTree();
             GenerateUi();
-            GameManager.EventService.Add<EffectLayoutUiItemSelectedEvent>(OnLayoutItemSelected);
+            GameManager.EventService.Add<EffectUpgradeItemSelectedEvent>(OnLayoutItemSelected);
             //ToggleActive(false);
         }
 
-        private void OnLayoutItemSelected(EffectLayoutUiItemSelectedEvent e)
+        private void OnLayoutItemSelected(EffectUpgradeItemSelectedEvent e)
         {
         }
 

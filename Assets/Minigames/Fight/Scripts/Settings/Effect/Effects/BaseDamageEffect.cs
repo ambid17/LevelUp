@@ -14,6 +14,7 @@ namespace Minigames.Fight
 
         private readonly string _description = "+{0} base damage";
         public override string Description => string.Format(_description, baseDamagePerStack);
+        public override string NextUpgradeDescription => "";
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public override string UpgradePath => "upgrades/weapon/baseDamage";
         public override void Execute(HitData hit)
@@ -24,6 +25,11 @@ namespace Minigames.Fight
         public override void Unlock(EffectSettings settings)
         {
             
+        }
+
+        public override float GetCost(int purchaseCount)
+        {
+            return 1;
         }
     }
 }

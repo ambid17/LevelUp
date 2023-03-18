@@ -20,7 +20,7 @@ namespace Minigames.Fight
         void Start()
         {
             _eventService = GameManager.EventService;
-            _eventService.Add<UpgradePurchasedEvent>(OnUpgradePurchased);
+            //_eventService.Add<EffectPurchasedEvent>(OnUpgradePurchased);
         }
 
         /// <summary>
@@ -47,28 +47,28 @@ namespace Minigames.Fight
             //effectSettings.UnlockAllEffects();
         }
 
-        private void OnUpgradePurchased(UpgradePurchasedEvent eventType)
-        {
-            Upgrade upgrade = eventType.Upgrade;
-            switch (upgrade)
-            {
-                case PlayerUpgrade playerUpgrade:
-                    playerSettings.ApplyUpgrade(playerUpgrade);
-                    break;
-                case WeaponUpgrade weaponUpgrade:
-                    weaponSettings.ApplyUpgrade(weaponUpgrade);
-                    break;
-                case EnemyUpgrade enemyUpgrade:
-                    enemySpawnerSettings.ApplyUpgrade(enemyUpgrade);
-                    break;
-                case IncomeUpgrade incomeUpgrade:
-                    incomeSettings.ApplyUpgrade(incomeUpgrade);
-                    break;
-                default:
-                    Debug.LogError($"Invalid upgrade type: {upgrade.name}");
-                    break;
-            }
-        }
+        // private void OnUpgradePurchased(EffectPurchasedEvent eventType)
+        // {
+        //     Upgrade upgrade = eventType.Upgrade;
+        //     switch (upgrade)
+        //     {
+        //         case PlayerUpgrade playerUpgrade:
+        //             playerSettings.ApplyUpgrade(playerUpgrade);
+        //             break;
+        //         case WeaponUpgrade weaponUpgrade:
+        //             weaponSettings.ApplyUpgrade(weaponUpgrade);
+        //             break;
+        //         case EnemyUpgrade enemyUpgrade:
+        //             enemySpawnerSettings.ApplyUpgrade(enemyUpgrade);
+        //             break;
+        //         case IncomeUpgrade incomeUpgrade:
+        //             incomeSettings.ApplyUpgrade(incomeUpgrade);
+        //             break;
+        //         default:
+        //             Debug.LogError($"Invalid upgrade type: {upgrade.name}");
+        //             break;
+        //     }
+        // }
 
         public List<Upgrade> GetAllUpgrades()
         {
