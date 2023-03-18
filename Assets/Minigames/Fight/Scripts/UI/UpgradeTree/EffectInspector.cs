@@ -22,13 +22,25 @@ namespace Minigames.Fight
 
         private EventService _eventService;
 
-        private void Start()
+        private void Awake()
         {
             _eventService = GameManager.EventService;
+            
+            upgradeButton.onClick.AddListener(() => BuyUpgrade());
+        }
+
+        private void OnEnable()
+        {
             _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
             _eventService.Add<UpgradeSelectedEvent>(OnUpgradeSelected);
             _eventService.Add<PurchaseCountChangedEvent>(OnUpgradeUpdated);
-            upgradeButton.onClick.AddListener(() => BuyUpgrade());
+        }
+
+        private void OnDisable()
+        {
+            _eventService.Remove<CurrencyUpdatedEvent>(OnCurrencyUpdated);
+            _eventService.Remove<UpgradeSelectedEvent>(OnUpgradeSelected);
+            _eventService.Remove<PurchaseCountChangedEvent>(OnUpgradeUpdated);
         }
 
         public void ManuallySelectUpgrade(Upgrade upgrade)
@@ -76,6 +88,10 @@ namespace Minigames.Fight
 
         private void SetInteractability()
         {
+            if (_currentUpgrade == null)
+            {
+                return;
+            }
             bool hasMoney = GameManager.CurrencyManager.Currency > _currentUpgrade.GetCost(GetAvailablePurchaseCount());
             upgradeButton.interactable = hasMoney;
             bool hasPurchasesLeft = _currentUpgrade.numberPurchased < _currentUpgrade.maxPurchases || _currentUpgrade.maxPurchases == 0;

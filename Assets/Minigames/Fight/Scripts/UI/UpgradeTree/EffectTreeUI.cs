@@ -40,7 +40,7 @@ namespace Minigames.Fight
 
         private void Close()
         {
-            gameObject.SetActive(false);
+            container.SetActive(false);
         }
 
         private void BuildTree()
