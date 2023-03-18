@@ -67,12 +67,12 @@ namespace Minigames.Fight
     public class PurchaseCountChangedEvent { }
 
 
-    public class PlayerUsedAmmoEvent : IEvent
+    public class PlayerAmmoUpdatedEvent : IEvent
     {
         public int CurrentAmmo;
         public int MaxAmmo;
 
-        public PlayerUsedAmmoEvent(int currentAmmo, int maxAmmo)
+        public PlayerAmmoUpdatedEvent(int currentAmmo, int maxAmmo)
         {
             CurrentAmmo = currentAmmo;
             MaxAmmo = maxAmmo;

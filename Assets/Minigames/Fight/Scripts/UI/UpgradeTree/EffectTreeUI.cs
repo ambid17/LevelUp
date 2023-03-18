@@ -6,41 +6,34 @@ using UnityEngine.UI;
 
 namespace Minigames.Fight
 {
-    public class EffectTreeUI : MonoBehaviour
+    public class EffectTreeUI : UIPanel
     {
         [SerializeField] private EffectUpgradeItem effectItemPrefab;
 
         [SerializeField] private Transform treeContainer;
         [SerializeField] private EffectInspector inspector;
-        [SerializeField] private GameObject container;
 
         [SerializeField] private Button closeButton;
 
         private EffectTree _effectTree;
 
-        public bool IsActive => container.activeInHierarchy;
-    
         void Start()
         {
             closeButton.onClick.AddListener(Close);
             BuildTree();
             GenerateUi();
             GameManager.EventService.Add<EffectUpgradeItemSelectedEvent>(OnLayoutItemSelected);
-            //ToggleActive(false);
         }
 
         private void OnLayoutItemSelected(EffectUpgradeItemSelectedEvent e)
         {
-        }
-
-        public void ToggleActive(bool shouldBeActive)
-        {
-            container.SetActive(shouldBeActive);
+            // TODO: reposition the UI to center on the item?
+            // TODO: disable/enable the proper tiers of items - this isn't necessary if they are spaced properly
         }
 
         private void Close()
         {
-            container.SetActive(false);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Effects, false);
         }
 
         private void BuildTree()

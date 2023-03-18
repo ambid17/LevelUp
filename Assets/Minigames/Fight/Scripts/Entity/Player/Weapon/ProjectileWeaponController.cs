@@ -66,6 +66,7 @@ namespace Minigames.Fight
             }
             overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
             IsReloading = false;
+            EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
         }
         
         protected override void Shoot()
@@ -84,7 +85,7 @@ namespace Minigames.Fight
         protected virtual void CheckReload()
         {
             overridenWeapon.bulletsInMagazine--;
-            EventService.Dispatch(new PlayerUsedAmmoEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
+            EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
 
             if (overridenWeapon.bulletsInMagazine <= 0)
             {

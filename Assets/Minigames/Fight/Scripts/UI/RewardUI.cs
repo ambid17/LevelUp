@@ -13,11 +13,10 @@ namespace Minigames.Fight
         World
     }
 
-    public class RewardUI : MonoBehaviour
+    public class RewardUI : UIPanel
     {
         [SerializeField] private RewardItem rewardItemPrefab;
         [SerializeField] private Transform itemParent;
-        [SerializeField] private GameObject visualContainer;
         [SerializeField] private Button selectButton;
         [SerializeField] private TMP_Text titleText;
 
@@ -31,7 +30,6 @@ namespace Minigames.Fight
             _eventService = GameManager.EventService;
             _eventService.Add<CountryCompletedEvent>(OnCountryCompleted);
             _eventService.Add<WorldCompletedEvent>(OnWorldCompleted);
-            visualContainer.SetActive(false);
             selectButton.interactable = false;
             selectButton.onClick.AddListener(TryAcceptReward);
             CreateRewardItems();
@@ -57,20 +55,23 @@ namespace Minigames.Fight
             {
                 GameManager.EventService.Dispatch<OnHitEffectUnlockedEvent>();
             }
-            visualContainer.SetActive(false);
+            
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Reward, false);
         }
 
         private void OnCountryCompleted()
         {
-            ShowReward(RewardType.Country);
+            SetupReward(RewardType.Country);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Reward, true);
         }
 
         private void OnWorldCompleted()
         {
-            ShowReward(RewardType.World);
+            SetupReward(RewardType.World);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Reward, true);
         }
 
-        void ShowReward(RewardType rewardType)
+        void SetupReward(RewardType rewardType)
         {
             if (rewardType == RewardType.Country)
             {
@@ -79,8 +80,6 @@ namespace Minigames.Fight
             {
                 titleText.text = $"You completed {GameManager.SettingsManager.progressSettings.CurrentWorld.Name}!";
             }
-            
-            visualContainer.SetActive(true);
             
             List<Effect> randomEffects = GameManager.SettingsManager.effectSettings.GetRandomEffects(_rewardItemCount);
 

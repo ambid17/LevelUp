@@ -11,6 +11,7 @@ namespace Minigames.Fight
         public Weapon Weapon => weapon;
         protected float ShotTimer;
         protected float WeaponAbilityTimer;
+        public float AbilityTimer => WeaponAbilityTimer;
         protected EventService EventService;
         protected Entity MyEntity;
 

@@ -5,7 +5,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class NotificationPanel : MonoBehaviour
+    public class NotificationPopup : MonoBehaviour
     {
         [SerializeField] private GameObject container;
         [SerializeField] private TMP_Text awayText;

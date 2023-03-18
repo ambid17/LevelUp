@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +8,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class FightUI : MonoBehaviour
+    public class HudUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _goldText;
         [SerializeField] private TMP_Text _goldPerMinuteText;
@@ -15,32 +17,46 @@ namespace Minigames.Fight
         [SerializeField] private GameObject _ammoContainer;
         [SerializeField] private Image _bulletTypeImage;
         [SerializeField] private TMP_Text _remainingAmmoText;
+
+
         [SerializeField] private Image _abilityCooldownImage;
         [SerializeField] private Image _abilityCooldownImageMask;
-    
-        [SerializeField] private EffectTreeUI effectTreeUI;
-        [SerializeField] private GameObject _pausePanel;
-        
-        private EventService _eventService;
 
         private bool isUpdatingAbility;
-        private float abilityCooldownTimer;
-        private float currentAbilityCooldown;
+
+        private EventService _eventService;
+
         void Start()
         {
             _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(SetGoldText);
             _eventService.Add<CpmUpdatedEvent>(SetGoldPerMinuteText);
             _eventService.Add<PlayerHpUpdatedEvent>(SetHpSlider);
-            _eventService.Add<PlayerUsedAmmoEvent>(SetAmmo);
+            _eventService.Add<PlayerAmmoUpdatedEvent>(SetAmmo);
             _eventService.Add<PlayerUsedAbilityEvent>(StartUseAbility);
             _upgradeButton.onClick.AddListener(OpenUpgrades);
-            CloseUpgrades();
         
             SetGoldText();
             SetGoldPerMinuteText();
             SetHpSlider(new PlayerHpUpdatedEvent(1));
             SetupAmmoAndAbility();
+        }
+
+        private void Update()
+        {
+            if (isUpdatingAbility)
+            {
+                _abilityCooldownImageMask.fillAmount = GameManager.PlayerEntity.WeaponController.AbilityTimer / GameManager.PlayerEntity.WeaponController.Weapon.abilityCooldown;
+                if (_abilityCooldownImageMask.fillAmount >= 1)
+                {
+                    isUpdatingAbility = false;
+                }
+            }
+        }
+
+        private void OpenUpgrades()
+        {
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Effects, true);
         }
 
         private void SetupAmmoAndAbility()
@@ -60,37 +76,7 @@ namespace Minigames.Fight
             _abilityCooldownImage.sprite = GameManager.SettingsManager.weaponSettings.equippedWeapon.abilityIcon;
             _abilityCooldownImageMask.sprite = GameManager.SettingsManager.weaponSettings.equippedWeapon.abilityIcon;
         }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                OpenUpgrades();
-            }
         
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (effectTreeUI.IsActive)
-                {
-                    CloseUpgrades();
-                }
-                else
-                {
-                    _pausePanel.SetActive(!_pausePanel.activeInHierarchy);
-                }
-            }
-
-            if (isUpdatingAbility)
-            {
-                abilityCooldownTimer += Time.deltaTime;
-                _abilityCooldownImageMask.fillAmount = abilityCooldownTimer / currentAbilityCooldown;
-                if (abilityCooldownTimer > currentAbilityCooldown)
-                {
-                    isUpdatingAbility = false;
-                }
-            }
-        }
-
         private void SetGoldText()
         {
             _goldText.text = GameManager.CurrencyManager.Currency.ToCurrencyString();
@@ -107,7 +93,7 @@ namespace Minigames.Fight
             _hpSlider.value = eventType.PercentHp;
         }
 
-        private void SetAmmo(PlayerUsedAmmoEvent e)
+        private void SetAmmo(PlayerAmmoUpdatedEvent e)
         {
             _remainingAmmoText.text = $"{e.CurrentAmmo} / {e.MaxAmmo}";
         }
@@ -115,19 +101,6 @@ namespace Minigames.Fight
         private void StartUseAbility()
         {
             isUpdatingAbility = true;
-            abilityCooldownTimer = 0;
-            currentAbilityCooldown = GameManager.SettingsManager.weaponSettings.equippedWeapon
-                .abilityCooldown;
-        }
-
-        private void OpenUpgrades()
-        {
-            effectTreeUI.ToggleActive(true);
-        }
-
-        private void CloseUpgrades()
-        {
-            effectTreeUI.ToggleActive(false);
         }
     }
 }

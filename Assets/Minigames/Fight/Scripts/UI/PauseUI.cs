@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Minigames.Fight
 {
-    public class PauseUI : MonoBehaviour
+    public class PauseUI : UIPanel
     {
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button homeButton;
@@ -19,7 +19,7 @@ namespace Minigames.Fight
 
         private void Resume()
         {
-            gameObject.SetActive(false);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Pause, false);
         }
 
         public void Home()

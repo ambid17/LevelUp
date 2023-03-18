@@ -7,7 +7,7 @@ namespace Minigames.Fight
 {
     public class CurrencyManager : FightBehavior
     {
-        [SerializeField] private NotificationPanel _notificationPanel;
+        [SerializeField] private NotificationPopup notificationPopup;
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
         public float Currency
         {
@@ -67,7 +67,7 @@ namespace Minigames.Fight
             Currency += award;
             eventService.Dispatch(new CurrencyRewardEvent(clampedMinutesAway, award));
             // This can't be an event as this happens in the Awake() of gameStateManager
-            _notificationPanel.AwardCurrency(clampedMinutesAway, award);
+            notificationPopup.AwardCurrency(clampedMinutesAway, award);
         }
 
         private void UpdateGPM()
