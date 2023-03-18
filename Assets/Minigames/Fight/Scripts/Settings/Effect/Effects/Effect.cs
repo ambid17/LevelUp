@@ -64,7 +64,7 @@ namespace Minigames.Fight
                 switch (TriggerType)
                 {
                     case EffectTriggerType.OnHit:
-                        settings.AddOnHitEffect(this);
+                        settings.OnHitEffects.Add(this);
                         break;
                 }
             }

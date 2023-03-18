@@ -51,6 +51,12 @@ namespace Minigames.Fight
         private void TryAcceptReward()
         {
             selectedEffect.Unlock(GameManager.SettingsManager.effectSettings);
+
+            // Update the player entity's managed list of on-hit effects
+            if (selectedEffect.TriggerType == EffectTriggerType.OnHit)
+            {
+                GameManager.EventService.Dispatch<OnHitEffectUnlockedEvent>();
+            }
             visualContainer.SetActive(false);
         }
 

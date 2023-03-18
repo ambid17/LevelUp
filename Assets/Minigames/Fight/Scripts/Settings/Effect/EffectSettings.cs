@@ -88,11 +88,5 @@ namespace Minigames.Fight
 
             return toReturn;
         }
-
-        public void AddOnHitEffect(Effect effect)
-        {
-            OnHitEffects.Add(effect);
-            GameManager.EventService.Dispatch<OnHitEffectUnlockedEvent>();
-        }
     }
 }
