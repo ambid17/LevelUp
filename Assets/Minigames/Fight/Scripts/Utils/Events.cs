@@ -29,6 +29,8 @@ namespace Minigames.Fight
             Effect = effect;
         }
     }
+    
+    public class OnHitEffectUnlockedEvent { }
 
     public class CurrencyRewardEvent: IEvent
     {
@@ -39,16 +41,6 @@ namespace Minigames.Fight
         {
             MinutesAway = minutesAway;
             Award = award;
-        }
-    }
-    
-    public class UpgradeSelectedEvent : IEvent
-    {
-        public Upgrade Upgrade;
-
-        public UpgradeSelectedEvent(Upgrade upgrade)
-        {
-            Upgrade = upgrade;
         }
     }
     

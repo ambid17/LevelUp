@@ -106,14 +106,17 @@ namespace Minigames.Fight
             upgradeButton.gameObject.SetActive(hasPurchasesLeft);
         }
 
+        /// <summary>
+        /// Used to figure out how many of an effect you can purchase.
+        /// If you want to purchase 100, but the effect maxes out after 5, you should only be able to purchase 5
+        /// </summary>
         private int GetAvailablePurchaseCount()
         {
             int purchaseCount = GameManager.SettingsManager.UpgradePurchaseCount;
 
-            int purchasesToMax = 1;
             if (_currentEffect.MaxAmountOwned > 0)
             {
-                purchasesToMax = _currentEffect.MaxAmountOwned - _currentEffect.AmountOwned;
+                int purchasesToMax = _currentEffect.MaxAmountOwned - _currentEffect.AmountOwned;
                 purchaseCount = Mathf.Min(purchaseCount, purchasesToMax);
             }
 

@@ -21,7 +21,7 @@ public class AnySceneLaunch : MonoBehaviour
         DeleteRootGameObjects();
 
         SceneManager.LoadScene(ANY_SCENE_LAUNCH_INDEX);
-        FightDataLoader.targetSceneIndex = targetSceneIndex;
+        FightDataLoader.TargetSceneIndex = targetSceneIndex;
     }
 
     private static void DeleteRootGameObjects()

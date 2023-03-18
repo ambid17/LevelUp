@@ -37,10 +37,5 @@ namespace Minigames.Fight
             
             equippedWeapon.Init();
         }
-
-        public void ApplyUpgrade(WeaponUpgrade upgrade)
-        {
-            equippedWeapon.ApplyUpgrade(upgrade);
-        }
     }
 }

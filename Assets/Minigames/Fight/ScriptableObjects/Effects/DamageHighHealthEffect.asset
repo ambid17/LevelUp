@@ -15,6 +15,10 @@ MonoBehaviour:
   Name: High HP execute
   Icon: {fileID: 399623949, guid: 0eee1ed7d60a8a9479afe74c21f6fcef, type: 3}
   AmountOwned: 0
+  MaxAmountOwned: 0
+  BaseCost: 15
+  CostScalar: 1.1
+  CostType: 1
   ExecutionOrder: 0
   DropWeight: 1
   percentDamagePerStack: 0.5

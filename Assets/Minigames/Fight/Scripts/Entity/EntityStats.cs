@@ -13,6 +13,7 @@ namespace Minigames.Fight
         public float magicResistance;
         public List<StatusEffectInstance> StatusEffects = new();
         public List<StatusEffectInstance> StatusEffectsToRemove = new();
+        public List<Effect> OnHitEffects = new();
 
         public bool AddStatusEffect(StatusEffectInstance instance)
         {
@@ -27,9 +28,6 @@ namespace Minigames.Fight
                 return true;
             }
         }
-        
-        public List<Effect> OnHitEffects = new();
-
 
         public void SetupFromEnemy(EnemyStats enemyStats)
         {

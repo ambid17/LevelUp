@@ -17,7 +17,7 @@ namespace Minigames.Fight
         public static void Save()
         {
             // grab values from settings
-            List<Effect> upgrades = GameManager.SettingsManager.GetAllEffects();
+            List<Effect> upgrades = GameManager.SettingsManager.GetUnlockedEffects();
             EffectContainer data = new EffectContainer(upgrades);
         
             // write to file

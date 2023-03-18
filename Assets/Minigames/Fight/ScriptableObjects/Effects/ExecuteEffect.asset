@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: ExecuteEffect
   m_EditorClassIdentifier: 
   Name: Baby Execute
-  Description: Deal {0}% more damage to enemy <{1}% hp
   Icon: {fileID: 0}
-  AmountOwned: 1
+  AmountOwned: 0
+  MaxAmountOwned: 0
+  BaseCost: 15
+  CostScalar: 1.1
+  CostType: 1
   ExecutionOrder: 0
   DropWeight: 1
   percentDamagePerStack: 0.1

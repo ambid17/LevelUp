@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Base Damage
   Icon: {fileID: 21300000, guid: daf2ab606d4db0d4f9ecf4c02137d2a8, type: 3}
-  AmountOwned: 1
+  AmountOwned: 0
+  MaxAmountOwned: 0
+  BaseCost: 10
+  CostScalar: 10
+  CostType: 0
   ExecutionOrder: 0
   DropWeight: 1
   baseDamagePerStack: 1

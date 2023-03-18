@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: FlatArmorPenetrationEffect
   m_EditorClassIdentifier: 
   Name: armor pen
-  Description: +{0} armor penetration
   Icon: {fileID: 0}
   AmountOwned: 0
+  MaxAmountOwned: 0
+  BaseCost: 15
+  CostScalar: 1.2
+  CostType: 1
   ExecutionOrder: 0
   DropWeight: 1
   flatPenPerStack: 1

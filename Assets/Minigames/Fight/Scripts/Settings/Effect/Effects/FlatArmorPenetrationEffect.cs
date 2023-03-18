@@ -22,15 +22,5 @@ namespace Minigames.Fight
         {
             hit.FlatArmorPenetration += Total;
         }
-        
-        public override void Unlock(EffectSettings settings)
-        {
-            
-        }
-        
-        public override float GetCost(int purchaseCount)
-        {
-            return 1;
-        }
     }
 }

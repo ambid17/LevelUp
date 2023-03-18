@@ -14,9 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Chilling touch
   Icon: {fileID: -751835216, guid: 0eee1ed7d60a8a9479afe74c21f6fcef, type: 3}
-  AmountOwned: 1
+  AmountOwned: 0
+  MaxAmountOwned: 0
+  BaseCost: 5
+  CostScalar: 1.05
+  CostType: 1
   ExecutionOrder: 0
   DropWeight: 1
-  slowChance: 1
+  slowChance: 0.1
   duration: 2
   slowAmount: 0.2
+  chanceScalar: 0.01

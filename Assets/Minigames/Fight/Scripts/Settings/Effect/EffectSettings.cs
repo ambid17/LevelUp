@@ -12,14 +12,18 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<Effect> AllEffects;
 
-        [NonSerialized]
         public List<Effect> UnlockedEffects = new();
-        [NonSerialized]
         public List<Effect> OnHitEffects = new();
 
         public void SetDefaults()
         {
             UnlockedEffects = null;
+            foreach (var effect in AllEffects)
+            {
+                effect.AmountOwned = 0;
+            }
+
+            OnHitEffects = null;
         }
 
         public void UnlockAllEffects()
@@ -27,7 +31,6 @@ namespace Minigames.Fight
             foreach (var effect in AllEffects)
             {
                 effect.Unlock(this);
-
             }
         }
 
@@ -84,6 +87,12 @@ namespace Minigames.Fight
             }
 
             return toReturn;
+        }
+
+        public void AddOnHitEffect(Effect effect)
+        {
+            OnHitEffects.Add(effect);
+            GameManager.EventService.Dispatch<OnHitEffectUnlockedEvent>();
         }
     }
 }

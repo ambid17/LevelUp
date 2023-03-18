@@ -32,10 +32,5 @@ namespace Minigames.Fight
         {
             
         }
-
-        public void ApplyUpgrade(WeaponUpgrade upgrade)
-        {
-            
-        }
     }
 }

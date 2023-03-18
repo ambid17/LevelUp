@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
+    public enum EffectCostType{
+        Additive,
+        Exponential
+    }
     public enum EffectTriggerType
     {
         OnHit,
@@ -22,11 +26,18 @@ namespace Minigames.Fight
         public string Name;
         public abstract string Description { get; }
         public abstract string NextUpgradeDescription { get; }
+        
         public Sprite Icon;
+        
         public int AmountOwned;
         public int MaxAmountOwned;
+        public float BaseCost;
+        public float CostScalar;
+        public EffectCostType CostType;
+        
         public int ExecutionOrder;
         public abstract EffectTriggerType TriggerType { get; }
+        
         public int DropWeight = 1;
         public abstract string UpgradePath { get; }
 
@@ -38,7 +49,30 @@ namespace Minigames.Fight
 
         public abstract void Execute(HitData hit);
 
-        public abstract void Unlock(EffectSettings settings);
+        /// <summary>
+        /// Effects are unlocked during end of country/world rewards
+        /// You can get new effects which should unlock them.
+        /// If you get an effect you already own, it grants a free purchase of it
+        /// </summary>
+        /// <param name="settings"></param>
+        public virtual void Unlock(EffectSettings settings)
+        {
+            if (!settings.UnlockedEffects.Contains(this))
+            {
+                AmountOwned = 1;
+                settings.UnlockedEffects.Add(this);
+                switch (TriggerType)
+                {
+                    case EffectTriggerType.OnHit:
+                        settings.AddOnHitEffect(this);
+                        break;
+                }
+            }
+            else
+            {
+                AmountOwned++;
+            }
+        }
         
         public string GetUpgradeCountText()
         {
@@ -52,8 +86,51 @@ namespace Minigames.Fight
             return $"({upgradeCountText})";
         }
 
-        public abstract float GetCost(int purchaseCount);
+        public virtual float GetCost(int purchaseCount)
+        {
+            switch (CostType)
+            {
+                case EffectCostType.Additive:
+                    return GetAdditiveCost(purchaseCount);
+                case EffectCostType.Exponential:
+                    return GetExponentialCost(purchaseCount);
+                default:
+                    return float.MaxValue;
+            }
+        }
+        
+        // example:
+        // base cost = 10, scalar = 1
+        // 10, 11, 12, 13, 14
+        private float GetAdditiveCost(int purchaseCount)
+        {
+            float totalCost = 0;
+            for (int currentNumPurchased = AmountOwned; currentNumPurchased < AmountOwned + purchaseCount; currentNumPurchased++)
+            {
+                totalCost += BaseCost + (CostScalar * currentNumPurchased);
+            }
+            
+            return totalCost;
+        }
 
+        // example:
+        // base cost = 100, scalar (percentage) = 0.5;
+        // 100, 150, 225
+        private float GetExponentialCost(int purchaseCount)
+        {
+            float totalCost = 0;
+            for (int currentNumPurchased = AmountOwned; currentNumPurchased < AmountOwned + purchaseCount; currentNumPurchased++)
+            {
+                totalCost += BaseCost * Mathf.Pow(CostScalar, currentNumPurchased);
+            }
+            
+            return totalCost;
+        }
+        
+        public virtual void Purchase(int purchaseCount)
+        {
+            AmountOwned += purchaseCount;
+        }
 
     }
 }

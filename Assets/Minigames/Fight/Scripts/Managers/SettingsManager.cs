@@ -9,7 +9,6 @@ namespace Minigames.Fight
         public PlayerSettings playerSettings;
         public WeaponSettings weaponSettings;
         public EffectSettings effectSettings;
-        public UpgradeSettings upgradeSettings;
         public ProgressSettings progressSettings;
         public EnemySpawnerSettings enemySpawnerSettings;
         public IncomeSettings incomeSettings;
@@ -28,7 +27,6 @@ namespace Minigames.Fight
         /// </summary>
         public void SetDefaults()
         {
-            upgradeSettings.SetDefaults();
             progressSettings.SetDefaults();
             weaponSettings.SetDefaults();
             effectSettings.SetDefaults();
@@ -47,42 +45,7 @@ namespace Minigames.Fight
             //effectSettings.UnlockAllEffects();
         }
 
-        // private void OnUpgradePurchased(EffectPurchasedEvent eventType)
-        // {
-        //     Upgrade upgrade = eventType.Upgrade;
-        //     switch (upgrade)
-        //     {
-        //         case PlayerUpgrade playerUpgrade:
-        //             playerSettings.ApplyUpgrade(playerUpgrade);
-        //             break;
-        //         case WeaponUpgrade weaponUpgrade:
-        //             weaponSettings.ApplyUpgrade(weaponUpgrade);
-        //             break;
-        //         case EnemyUpgrade enemyUpgrade:
-        //             enemySpawnerSettings.ApplyUpgrade(enemyUpgrade);
-        //             break;
-        //         case IncomeUpgrade incomeUpgrade:
-        //             incomeSettings.ApplyUpgrade(incomeUpgrade);
-        //             break;
-        //         default:
-        //             Debug.LogError($"Invalid upgrade type: {upgrade.name}");
-        //             break;
-        //     }
-        // }
-
-        public List<Upgrade> GetAllUpgrades()
-        {
-            List<Upgrade> toReturn = new List<Upgrade>();
-
-            toReturn.AddRange(upgradeSettings.PlayerUpgrades);
-            toReturn.AddRange(upgradeSettings.WeaponUpgrades);
-            toReturn.AddRange(upgradeSettings.EnemyUpgrades);
-            toReturn.AddRange(upgradeSettings.IncomeUpgrades);
-
-            return toReturn;
-        }
-
-        public List<Effect> GetAllEffects()
+        public List<Effect> GetUnlockedEffects()
         {
             return effectSettings.UnlockedEffects;
         }

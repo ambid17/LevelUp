@@ -4,15 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Minigames.Fight;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class FightDataLoader : MonoBehaviour
 {
     public ProgressSettings progressSettings;
-    public UpgradeSettings upgradeSettings;
     public EffectSettings effectSettings;
-    public static int targetSceneIndex;
+    public static int TargetSceneIndex;
 
 
     private void Awake()
@@ -21,13 +19,12 @@ public class FightDataLoader : MonoBehaviour
         if (current.buildIndex == AnySceneLaunch.ANY_SCENE_LAUNCH_INDEX)
         {
             Load();
-            SceneManager.LoadScene(targetSceneIndex);
+            SceneManager.LoadScene(TargetSceneIndex);
         }
     }
 
     public void Load()
     {
-        LoadUpgradeData();
         LoadProgressData();
         LoadEffectData();
     }
@@ -42,66 +39,6 @@ public class FightDataLoader : MonoBehaviour
                 effectSettings.LoadSavedEffect(effect);
             }
         }
-    }
-    
-    public void LoadUpgradeData()
-    {
-        UpgradeData data = UpgradeDataManager.Load();
-        if (data != null)
-        {
-            LoadSerializedUpgrades(data);
-        }
-    }
-    
-    public void LoadSerializedUpgrades(UpgradeData container)
-    {
-        if (container == null || container.upgrades == null)
-        {
-            return;
-        }
-        
-        foreach (var upgrade in container.upgrades)
-        {
-            switch (upgrade)
-            {
-                case PlayerUpgradeModel model:
-                    UpdatePlayerUpgrades(model);
-                    break;
-                case WeaponUpgradeModel model:
-                    UpdateWeaponUpgrades(model);
-                    break;
-                case EnemyUpgradeModel model:
-                    UpdateEnemyUpgrades(model);
-                    break;
-                case IncomeUpgradeModel model:
-                    UpdateIncomeUpgrades(model);
-                    break;
-            }
-        }
-    }
-
-    private void UpdatePlayerUpgrades(PlayerUpgradeModel model)
-    {
-        PlayerUpgrade upgrade = upgradeSettings.PlayerUpgrades.First(u => u.upgradeType == model.playerUpgradeType);
-        upgrade.numberPurchased = model.numberPurchased;
-    }
-    
-    private void UpdateWeaponUpgrades(WeaponUpgradeModel model)
-    {
-        WeaponUpgrade upgrade = upgradeSettings.WeaponUpgrades.First(u => u.upgradeType == model.weaponUpgradeType);
-        upgrade.numberPurchased = model.numberPurchased;
-    }
-    
-    private void UpdateEnemyUpgrades(EnemyUpgradeModel model)
-    {
-        EnemyUpgrade upgrade = upgradeSettings.EnemyUpgrades.First(u => u.upgradeType == model.enemyUpgradeType);
-        upgrade.numberPurchased = model.numberPurchased;
-    }
-    
-    private void UpdateIncomeUpgrades(IncomeUpgradeModel model)
-    {
-        IncomeUpgrade upgrade = upgradeSettings.IncomeUpgrades.First(u => u.upgradeType == model.incomeUpgradeType);
-        upgrade.numberPurchased = model.numberPurchased;
     }
     
     public void LoadProgressData()
@@ -129,6 +66,4 @@ public class FightDataLoader : MonoBehaviour
             }
         }
     }
-    
-    
 }

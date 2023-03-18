@@ -38,7 +38,6 @@ namespace Minigames.Fight
 
 
         public float GoldPerMinute { get; private set; }
-        public float GoldPerMinuteScalarPercent => goldPerMinScalar * 100;
 
         private void SetGoldPerMinute(int upgradeLevel)
         {
@@ -55,8 +54,6 @@ namespace Minigames.Fight
         }
 
         public float IdleGoldRatio { get; private set; }
-        public float IdleGoldRatioPercent => IdleGoldRatio * 100;
-        public float IdleGoldScalarPercent => idleGoldPercentScalar * 100;
 
         private void SetIdleGoldPercent(int upgradeLevel)
         {
@@ -78,8 +75,6 @@ namespace Minigames.Fight
         }
 
         public float GoldPerKill { get; private set; }
-        public float GoldPerKillPercent => GoldPerKill * 100;
-        public float GoldPerKillScalarPercent => goldPerKillScalar * 100;
 
         private void SetGoldPerKill(int upgradeLevel)
         {
@@ -87,58 +82,21 @@ namespace Minigames.Fight
         }
 
         public float DeathTimer { get; private set; }
-        public float DeathTimeScalarPercent => deathTimerScalar * 100;
 
         private void SetDeathTimer(int upgradeLevel)
         {
             DeathTimer = baseDeathTimer * (1 - (deathTimerScalar * upgradeLevel));
         }
 
-
-        public void ApplyUpgrade(IncomeUpgrade upgrade)
-        {
-            switch (upgrade.upgradeType)
-            {
-                case IncomeUpgradeType.IdleGoldPerMin:
-                    SetGoldPerMinute(upgrade.numberPurchased);
-                    break;
-                case IncomeUpgradeType.IdleTime:
-                    SetIdleTime(upgrade.numberPurchased);
-                    break;
-                case IncomeUpgradeType.IdleGoldPercent:
-                    SetIdleGoldPercent(upgrade.numberPurchased);
-                    break;
-                case IncomeUpgradeType.KillsPerKill:
-                    SetKillsPerKill(upgrade.numberPurchased);
-                    break;
-                case IncomeUpgradeType.SaveHighestGold:
-                    SetSaveHighestGold(upgrade.numberPurchased);
-                    break;
-                case IncomeUpgradeType.GoldPerKill:
-                    SetGoldPerKill(upgrade.numberPurchased);
-                    break;
-                case IncomeUpgradeType.DeathTimer:
-                    SetDeathTimer(upgrade.numberPurchased);
-                    break;
-            }
-        }
-
         public void Init()
         {
-            SetGoldPerMinute(GameManager.SettingsManager.upgradeSettings
-                .GetIncomeUpgrade(IncomeUpgradeType.IdleGoldPerMin).numberPurchased);
-            SetIdleTime(GameManager.SettingsManager.upgradeSettings.GetIncomeUpgrade(IncomeUpgradeType.IdleTime)
-                .numberPurchased);
-            SetIdleGoldPercent(GameManager.SettingsManager.upgradeSettings
-                .GetIncomeUpgrade(IncomeUpgradeType.IdleGoldPercent).numberPurchased);
-            SetKillsPerKill(GameManager.SettingsManager.upgradeSettings.GetIncomeUpgrade(IncomeUpgradeType.KillsPerKill)
-                .numberPurchased);
-            SetSaveHighestGold(GameManager.SettingsManager.upgradeSettings
-                .GetIncomeUpgrade(IncomeUpgradeType.SaveHighestGold).numberPurchased);
-            SetGoldPerKill(GameManager.SettingsManager.upgradeSettings.GetIncomeUpgrade(IncomeUpgradeType.GoldPerKill)
-                .numberPurchased);
-            SetDeathTimer(GameManager.SettingsManager.upgradeSettings.GetIncomeUpgrade(IncomeUpgradeType.DeathTimer)
-                .numberPurchased);
+            SetGoldPerMinute(0);
+            SetIdleTime(0);
+            SetIdleGoldPercent(0);
+            SetKillsPerKill(0);
+            SetSaveHighestGold(0);
+            SetGoldPerKill(0);
+            SetDeathTimer(0);
         }
     }
 }

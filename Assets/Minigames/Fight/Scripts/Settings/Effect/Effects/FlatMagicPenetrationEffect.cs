@@ -22,15 +22,5 @@ namespace Minigames.Fight
         {
             hit.FlatMagicPenetration += Total;
         }
-        
-        public override void Unlock(EffectSettings settings)
-        {
-            
-        }
-        
-        public override float GetCost(int purchaseCount)
-        {
-            return 1;
-        }
     }
 }

@@ -76,6 +76,12 @@ namespace Minigames.Fight
         {
             base.Setup();
             Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
+            eventService.Add<OnHitEffectUnlockedEvent>(SetupOnHitEffects);
+            SetupOnHitEffects(); // go ahead and query the onHit effects that were populated on load
+        }
+
+        private void SetupOnHitEffects()
+        {
             Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
         }
 
