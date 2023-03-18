@@ -8,10 +8,10 @@ namespace Minigames.Fight
 {
     public enum UIPanelType
     {
+        None,
         Effects,
         Pause,
         Reward,
-        None
     }
     
     public class UIManager : MonoBehaviour
@@ -22,8 +22,8 @@ namespace Minigames.Fight
         
         public bool isPaused;
 
-        private UIPanel currentPanel;
-        private UIPanelType currentPanelType;
+        [Header("Set at runtime")]
+        [SerializeField] private UIPanelType currentPanelType;
         
 
         void Start()
@@ -36,7 +36,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && currentPanelType == UIPanelType.None)
             {
                 ToggleUiPanel(UIPanelType.Effects, true);
             }
@@ -52,9 +52,7 @@ namespace Minigames.Fight
                 // Don't allow closing the reward panel
                 else if (currentPanelType == UIPanelType.Effects || currentPanelType == UIPanelType.Pause)
                 {
-                    Time.timeScale = 1;
-                    isPaused = false;
-                    currentPanel.Toggle(false);
+                    ToggleUiPanel(currentPanelType, false);
                 }
             }
         }
@@ -63,6 +61,8 @@ namespace Minigames.Fight
         {
             Time.timeScale = isActive ? 0 : 1;
             isPaused = isActive;
+
+             currentPanelType = isActive ? panelType : UIPanelType.None;
             
             switch (panelType)
             {
