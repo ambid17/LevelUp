@@ -24,8 +24,8 @@ namespace Minigames.Fight
     public abstract class Effect : ScriptableObject, IEquatable<Effect>
     {
         public string Name;
-        public abstract string Description { get; }
-        public abstract string NextUpgradeDescription { get; }
+        public abstract string GetDescription();
+        public abstract string GetNextUpgradeDescription(int purchaseCount);
         
         public Sprite Icon;
         

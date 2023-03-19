@@ -5,37 +5,36 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "SlowEffect", menuName = "ScriptableObjects/Fight/SlowEffect", order = 1)]
+    [CreateAssetMenu(fileName = "StunEffect", menuName = "ScriptableObjects/Fight/StunEffect", order = 1)]
     [Serializable]
-    public class SlowEffect : Effect, IStatusEffect
+    public class StunEffect : Effect, IStatusEffect
     {
-        public float slowChance = 0.1f;
+        public float stunChance = 0.1f;
         public float duration = 2f;
-        public float slowAmount = 0.01f;
         public float chanceScalar = 0.01f;
 
-        public float SlowChance => slowChance + (chanceScalar * AmountOwned);
+        public float StunChance => stunChance + (chanceScalar * AmountOwned);
         
-        private readonly string _description = "{0}% to slow enemies by {1}% for {2} seconds";
+        private readonly string _description = "{0}% to stun enemies for {1} seconds";
 
         public override string GetDescription()
         {
-            return string.Format(_description, SlowChance * 100, slowAmount * 100, duration);
-        } 
-
+            return string.Format(_description, StunChance * 100, duration);
+        }
+        
         public override string GetNextUpgradeDescription(int purchaseCount)
         {
-            return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, slowAmount * 100, duration);
+            return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, duration);
         } 
 
         private float NextUpgradeChance(int purchaseCount)
         {
             int newAmountOwned = AmountOwned + purchaseCount;
-            return slowChance + (chanceScalar * newAmountOwned);
+            return stunChance + (chanceScalar * newAmountOwned);
         }
 
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "upgrades/effect/ice/slow";
+        public override string UpgradePath => "upgrades/effect/ice/stun";
 
         public override void Execute(HitData hit)
         {
@@ -44,7 +43,7 @@ namespace Minigames.Fight
 
         public void TryApplyEffect(HitData hit)
         {
-            bool doesSlow = Random.value < SlowChance;
+            bool doesSlow = Random.value < StunChance;
             doesSlow = true;
             if (doesSlow)
             {

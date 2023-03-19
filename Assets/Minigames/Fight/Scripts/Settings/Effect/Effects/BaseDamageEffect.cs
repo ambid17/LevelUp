@@ -13,8 +13,20 @@ namespace Minigames.Fight
         private float Total => baseDamagePerStack * AmountOwned;
 
         private readonly string _description = "+{0} base damage";
-        public override string Description => string.Format(_description, baseDamagePerStack);
-        public override string NextUpgradeDescription => "";
+        public override string GetDescription()
+        {
+            return string.Format(_description, baseDamagePerStack);
+        }
+        public override string GetNextUpgradeDescription(int purchaseCount)
+        {
+            return string.Format(_description, NextUpgradeChance(purchaseCount));
+        } 
+
+        private float NextUpgradeChance(int purchaseCount)
+        {
+            int newAmountOwned = AmountOwned + purchaseCount;
+            return baseDamagePerStack * newAmountOwned;
+        }
         public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
         public override string UpgradePath => "upgrades/weapon/baseDamage";
         public override void Execute(HitData hit)

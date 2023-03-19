@@ -200,10 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2526da69949fa4783ad84de2217c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  container: {fileID: 8445980578507806558}
   effectItemPrefab: {fileID: 7700211639986506262, guid: b7b039ee5a0a517439b1b049e832ffb3, type: 3}
   treeContainer: {fileID: 6836920561678038903}
+  tree: {fileID: 6836920561678038903}
   inspector: {fileID: 6836920560230905773}
-  container: {fileID: 8445980578507806558}
   closeButton: {fileID: 6836920560229783963}
 --- !u!1 &6836920560229783961
 GameObject:
@@ -238,11 +239,11 @@ RectTransform:
   m_Children:
   - {fileID: 6836920560559649990}
   m_Father: {fileID: 7467935109453961026}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30, y: -30}
+  m_AnchoredPosition: {x: -45, y: -45}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6836920560229783909
@@ -364,11 +365,11 @@ RectTransform:
   - {fileID: 6836920560584103073}
   - {fileID: 6836920560473910874}
   - {fileID: 8391921285172051324}
-  m_Father: {fileID: 6836920560860017208}
+  m_Father: {fileID: 7467935109453961026}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7, y: 0.05}
-  m_AnchorMax: {x: 0.99, y: 0.95}
+  m_AnchorMin: {x: 0.7, y: 0.1}
+  m_AnchorMax: {x: 0.95, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -968,7 +969,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6836920561678038903}
-  - {fileID: 6836920560230905761}
   m_Father: {fileID: 7467935109453961026}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1473,7 +1473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 170, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6836920561498399442
@@ -1728,6 +1728,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6836920560860017208}
+  - {fileID: 6836920560230905761}
   - {fileID: 6836920560229783962}
   m_Father: {fileID: 6836920559873080933}
   m_RootOrder: 0

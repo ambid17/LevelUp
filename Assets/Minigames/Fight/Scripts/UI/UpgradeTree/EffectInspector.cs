@@ -63,7 +63,7 @@ namespace Minigames.Fight
             }
 
             icon.sprite = _currentEffect.Icon;
-            descriptionText.text = _currentEffect.Description;
+            descriptionText.text = _currentEffect.GetDescription();
             OnUpgradeUpdated();
         }
 
@@ -84,7 +84,7 @@ namespace Minigames.Fight
             SetInteractability();
             nameText.text = $"{_currentEffect.Name}\n{_currentEffect.GetUpgradeCountText()}";
             upgradeButtonText.text = _currentEffect.GetCost(GetAvailablePurchaseCount()).ToCurrencyString();
-            bonusText.text = _currentEffect.NextUpgradeDescription;
+            bonusText.text = _currentEffect.GetNextUpgradeDescription(GetAvailablePurchaseCount());
         }
 
         private void OnCurrencyUpdated()

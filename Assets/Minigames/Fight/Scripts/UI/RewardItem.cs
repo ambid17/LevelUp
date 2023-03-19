@@ -32,7 +32,7 @@ namespace Minigames.Fight
         {
             _myEffect = effect;
             nameText.text = effect.Name;
-            descriptionText.text = effect.Description;
+            descriptionText.text = effect.GetDescription();
             rewardImage.sprite = effect.Icon;
             selectButton.onClick.AddListener(() => callback(_myEffect));
         }
