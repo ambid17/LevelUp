@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fba2ba86462ac428b154b76b863462, type: 3}
+  m_Name: DamageHighHealthEffect
+  m_EditorClassIdentifier: 
+  Name: High HP execute
+  Icon: {fileID: 399623949, guid: 0eee1ed7d60a8a9479afe74c21f6fcef, type: 3}
+  AmountOwned: 0
+  MaxAmountOwned: 0
+  BaseCost: 15
+  CostScalar: 1.1
+  CostType: 1
+  ExecutionOrder: 0
+  DropWeight: 1
+  percentDamagePerStack: 0.5
+  minHpPercent: 0.5

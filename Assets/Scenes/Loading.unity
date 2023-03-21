@@ -419,11 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
   upgradeSettings: {fileID: 11400000, guid: a5b376cfe0b89344c85aec9b6b733b52, type: 2}
-  playerSettings: {fileID: 11400000, guid: 9bddfe638d36abc488c374dfec22eb28, type: 2}
-  weaponSettings: {fileID: 11400000, guid: b1949bc218afc0d4b8081f45c40fa767, type: 2}
-  onDataLoaded:
-    m_PersistentCalls:
-      m_Calls: []
+  effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
 --- !u!1 &682330822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,7 +5262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
-  _fightDataLoader: {fileID: 574285732}
 --- !u!4 &956922838
 Transform:
   m_ObjectHideFlags: 0

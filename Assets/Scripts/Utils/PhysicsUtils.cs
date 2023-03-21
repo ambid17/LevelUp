@@ -28,4 +28,16 @@ public static class PhysicsUtils
             Random.Range(bounds.min.y, bounds.max.y)
         );
     }
+
+    public static Vector2 Rotate(this Vector2 point, float degrees)
+    {
+        float radians = degrees * Mathf.Deg2Rad;
+        float sin = Mathf.Sin(radians);
+        float cos = Mathf.Cos(radians);
+
+        float x = point.x;
+        float y = point.y;
+
+        return new Vector2((cos * x) - (sin * y), (sin * x) + (cos * y));
+    }
 }

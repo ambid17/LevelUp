@@ -22,13 +22,13 @@ MonoBehaviour:
       EnemyStatScalar: 1
       SpritePixels: []
       EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
-      EnemyKillCount: 36
+      EnemyKillCount: 0
     - Index: 1
       EnemyKillsToComplete: 10
       EnemyStatScalar: 1.1
       SpritePixels: []
       EnemyTierColor: {r: 0.21765637, g: 1, b: 0, a: 1}
-      EnemyKillCount: 166
+      EnemyKillCount: 0
     - Index: 2
       EnemyKillsToComplete: 15
       EnemyStatScalar: 1.5
@@ -54,38 +54,9 @@ MonoBehaviour:
       EnemyTierColor: {r: 0.038573265, g: 0, b: 1, a: 1}
       EnemyKillCount: 0
     Enemies:
-    - Prefab: {fileID: 8510735526301981988, guid: 180c465e3088ff14eaca2eac7ad3ba31, type: 3}
-      SpawnWeight: 90
-      Settings:
-        goldValue: 1
-        fireRate: 0.5
-        moveSpeed: 1
-        maxHp: 10
-        weaponDamage: 1
-        projectileSpeed: 0
-        projectileLifeTime: 0
-    - Prefab: {fileID: 8510735526301981988, guid: 20ea7b6e46f2d024998cf66b6ad16ad8, type: 3}
-      SpawnWeight: 6
-      Settings:
-        goldValue: 2
-        fireRate: 1
-        moveSpeed: 1.5
-        maxHp: 25
-        weaponDamage: 2
-        projectileSpeed: 4
-        projectileLifeTime: 5
-    - Prefab: {fileID: 8510735526301981988, guid: 4e2dec209d1847144a9df6bf90e303b1, type: 3}
-      SpawnWeight: 3
-      Settings:
-        goldValue: 10
-        fireRate: 1.5
-        moveSpeed: 0.5
-        maxHp: 100
-        weaponDamage: 5
-        projectileSpeed: 3
-        projectileLifeTime: 2
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
     WorldType: 1
-    CurrencyPerMinute: 14349027
+    CurrencyPerMinute: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -123,38 +94,11 @@ MonoBehaviour:
       EnemyTierColor: {r: 1, g: 0.17356366, b: 0, a: 1}
       EnemyKillCount: 0
     Enemies:
-    - Prefab: {fileID: 8510735526301981988, guid: 458e4066e4f0eb146ad71db93e8a3ef1, type: 3}
-      SpawnWeight: 80
-      Settings:
-        goldValue: 10
-        fireRate: 0.5
-        moveSpeed: 1
-        maxHp: 100
-        weaponDamage: 5
-        projectileSpeed: 1
-        projectileLifeTime: 0
-    - Prefab: {fileID: 8510735526301981988, guid: ed5ce95c0aee1704b90308f25eb1ac3d, type: 3}
-      SpawnWeight: 6
-      Settings:
-        goldValue: 20
-        fireRate: 1
-        moveSpeed: 1
-        maxHp: 150
-        weaponDamage: 5
-        projectileSpeed: 4
-        projectileLifeTime: 2
-    - Prefab: {fileID: 8510735526301981988, guid: 0f4dfd9ec6923e4479ab256810aa8330, type: 3}
-      SpawnWeight: 3
-      Settings:
-        goldValue: 50
-        fireRate: 1.5
-        moveSpeed: 1
-        maxHp: 250
-        weaponDamage: 10
-        projectileSpeed: 1
-        projectileLifeTime: 10
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
+    - {fileID: 11400000, guid: c68a765ef6d529341ad81f5387644704, type: 2}
+    - {fileID: 11400000, guid: 38e2d5bd9d8dc5f40925e260b2643356, type: 2}
     WorldType: 3
-    CurrencyPerMinute: 14374107
+    CurrencyPerMinute: 0
     CurrentCountry:
       Index: 0
       EnemyKillsToComplete: 0
@@ -192,36 +136,9 @@ MonoBehaviour:
       EnemyTierColor: {r: 1, g: 0, b: 0, a: 1}
       EnemyKillCount: 0
     Enemies:
-    - Prefab: {fileID: 8510735526301981988, guid: 458e4066e4f0eb146ad71db93e8a3ef1, type: 3}
-      SpawnWeight: 80
-      Settings:
-        goldValue: 10
-        fireRate: 1
-        moveSpeed: 1
-        maxHp: 1
-        weaponDamage: 5
-        projectileSpeed: 0
-        projectileLifeTime: 0
-    - Prefab: {fileID: 8510735526301981988, guid: ed5ce95c0aee1704b90308f25eb1ac3d, type: 3}
-      SpawnWeight: 6
-      Settings:
-        goldValue: 20
-        fireRate: 1
-        moveSpeed: 1
-        maxHp: 1
-        weaponDamage: 5
-        projectileSpeed: 2
-        projectileLifeTime: 5
-    - Prefab: {fileID: 8510735526301981988, guid: 0f4dfd9ec6923e4479ab256810aa8330, type: 3}
-      SpawnWeight: 3
-      Settings:
-        goldValue: 50
-        fireRate: 1
-        moveSpeed: 1
-        maxHp: 1
-        weaponDamage: 10
-        projectileSpeed: 5
-        projectileLifeTime: 3
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
+    - {fileID: 11400000, guid: c68a765ef6d529341ad81f5387644704, type: 2}
+    - {fileID: 11400000, guid: 38e2d5bd9d8dc5f40925e260b2643356, type: 2}
     WorldType: 4
     CurrencyPerMinute: 0
     CurrentCountry:
@@ -232,4 +149,4 @@ MonoBehaviour:
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
     IsFighting: 0
-  Currency: 183047600
+  Currency: 0

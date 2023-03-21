@@ -4,24 +4,35 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    protected Singleton() { }
+    protected Singleton()
+    {
+    }
 
     protected static T _instance;
 
-    public static T Instance => _instance;
+    public static T Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GetInstance();
+            }
+
+            return _instance;
+        }
+    }
 
     public static T GetInstance()
     {
+        _instance = FindObjectOfType<T>();
         if (_instance == null)
         {
-            _instance = FindObjectOfType<T>();
-            if (_instance == null)
-            {
-                GameObject singleton = new GameObject();
-                _instance = singleton.AddComponent<T>();
-                singleton.name = "[singleton] " + typeof(T).ToString();
-            }
+            GameObject singleton = new GameObject();
+            _instance = singleton.AddComponent<T>();
+            singleton.name = "[singleton] " + typeof(T).ToString();
         }
+
         return _instance;
     }
 
@@ -35,11 +46,14 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             _instance = (T)(object)this;
         }
+
         Initialize();
     }
+
     /// <summary>
     /// Initialization override
     /// </summary>
-    public virtual void Initialize() { }
-
+    public virtual void Initialize()
+    {
+    }
 }
