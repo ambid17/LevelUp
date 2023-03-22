@@ -9,7 +9,7 @@ namespace Minigames.Fight
 {
     public class EffectTreeUI : UIPanel
     {
-        [SerializeField] private EffectUpgradeItem effectItemPrefab;
+        [SerializeField] private EffectItem effectItemPrefab;
 
         [SerializeField] private Transform treeContainer;
         [SerializeField] private Transform tree;
@@ -28,7 +28,7 @@ namespace Minigames.Fight
             closeButton.onClick.AddListener(Close);
             BuildTree();
             GenerateUi();
-            GameManager.EventService.Add<EffectUpgradeItemSelectedEvent>(OnLayoutItemSelected);
+            GameManager.EventService.Add<EffectItemSelectedEvent>(OnLayoutItemSelected);
         }
 
         private void Update()
@@ -59,7 +59,7 @@ namespace Minigames.Fight
             }
         }
 
-        private void OnLayoutItemSelected(EffectUpgradeItemSelectedEvent e)
+        private void OnLayoutItemSelected(EffectItemSelectedEvent e)
         {
             // TODO: reposition the UI to center on the item?
             // TODO: disable/enable the proper tiers of items - this isn't necessary if they are spaced properly

@@ -26,7 +26,7 @@ namespace Minigames.Fight
         private void Awake()
         {
             _eventService = GameManager.EventService;
-            _eventService.Add<EffectUpgradeItemSelectedEvent>(OnEffectSelected);
+            _eventService.Add<EffectItemSelectedEvent>(OnEffectSelected);
             _eventService.Add<PurchaseCountChangedEvent>(OnUpgradeUpdated);
             upgradeButton.onClick.AddListener(() => BuyUpgrade());
         }
@@ -34,16 +34,16 @@ namespace Minigames.Fight
         private void OnEnable()
         {
             // Update the UI in case the currently inspected effect has been changed (i.e.: due to rewardUI)
-            OnEffectSelected(new EffectUpgradeItemSelectedEvent(_currentEffect));
+            OnEffectSelected(new EffectItemSelectedEvent(_currentEffect));
         }
 
         private void OnDestroy()
         {
-            _eventService.Remove<EffectUpgradeItemSelectedEvent>(OnEffectSelected);
+            _eventService.Remove<EffectItemSelectedEvent>(OnEffectSelected);
             _eventService.Remove<PurchaseCountChangedEvent>(OnUpgradeUpdated);
         }
 
-        public void OnEffectSelected(EffectUpgradeItemSelectedEvent e)
+        public void OnEffectSelected(EffectItemSelectedEvent e)
         {
             _currentEffect = e.Effect;
 
@@ -70,26 +70,39 @@ namespace Minigames.Fight
 
         private void OnUpgradeUpdated()
         {
-            SetInteractability();
+            if (_currentEffect == null)
+            {
+                return;
+            }
+            
             icon.sprite = _currentEffect.Icon;
             nameText.text = $"{_currentEffect.Name}\n{_currentEffect.GetUpgradeCountText()}";
             upgradeButtonText.text = _currentEffect.GetCost(GetAvailablePurchaseCount()).ToCurrencyString();
             descriptionText.text = _currentEffect.GetDescription();
             bonusText.text = _currentEffect.GetNextUpgradeDescription(GetAvailablePurchaseCount());
-        }
-
-        private void SetInteractability()
-        {
-            if (_currentEffect == null)
+            
+            if (!_currentEffect.IsUnlocked)
             {
-                return;
+                upgradeButtonText.text = "LOCKED";
+                upgradeButton.interactable = false;
             }
+            else
+            {
+                bool hasPurchasesLeft = _currentEffect.AmountOwned < _currentEffect.MaxAmountOwned ||
+                                        _currentEffect.MaxAmountOwned == 0;
+                bool canAfford = GameManager.CurrencyManager.Currency > _currentEffect.GetCost(GetAvailablePurchaseCount());
+                upgradeButton.interactable = canAfford && hasPurchasesLeft;
 
-            bool hasMoney = GameManager.CurrencyManager.Currency > _currentEffect.GetCost(GetAvailablePurchaseCount());
-            upgradeButton.interactable = hasMoney;
-            bool hasPurchasesLeft = _currentEffect.AmountOwned < _currentEffect.MaxAmountOwned ||
-                                    _currentEffect.MaxAmountOwned == 0;
-            upgradeButton.gameObject.SetActive(hasPurchasesLeft);
+                if (!hasPurchasesLeft)
+                {
+                    upgradeButtonText.text = "MAXED";
+                }
+
+                if (!canAfford)
+                {
+                    upgradeButtonText.text = "TOO POOR";
+                }
+            }
         }
 
         /// <summary>

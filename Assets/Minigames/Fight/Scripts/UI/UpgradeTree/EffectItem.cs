@@ -7,33 +7,22 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    public class EffectUpgradeItem : MonoBehaviour
+    public class EffectItem : MonoBehaviour
     {
         [SerializeField] private Button button;
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text text;
         [SerializeField] private Image lineImagePrefab;
-        private EffectUpgradeItem _effectItemPrefab;
+        private EffectItem _effectItemPrefab;
 
         public EffectNode effectNode;
 
-        private void OnEnable()
-        {
-            if (effectNode != null && effectNode.Effect != null)
-            {
-                button.interactable = effectNode.Effect.IsUnlocked;
-            }
-            else
-            {
-                button.interactable = false;
-            }
-        }
-
-        public void Setup(EffectNode node, EffectUpgradeItem prefab)
+        public void Setup(EffectNode node, EffectItem prefab)
         {
             effectNode = node;
             _effectItemPrefab = prefab;
 
+            button.interactable = node.Effect != null;
             icon.gameObject.SetActive(false);
             text.gameObject.SetActive(false);
             gameObject.name = effectNode.Name;
@@ -80,7 +69,7 @@ namespace Minigames.Fight
 
         private void SelectLayoutItem()
         {
-            GameManager.EventService.Dispatch(new EffectUpgradeItemSelectedEvent(effectNode.Effect));
+            GameManager.EventService.Dispatch(new EffectItemSelectedEvent(effectNode.Effect));
         }
     }
 }

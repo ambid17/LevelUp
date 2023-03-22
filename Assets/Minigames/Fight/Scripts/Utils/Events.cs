@@ -54,11 +54,11 @@ namespace Minigames.Fight
         }
     }
     
-    public class EffectUpgradeItemSelectedEvent : IEvent
+    public class EffectItemSelectedEvent : IEvent
     {
         public Effect Effect;
 
-        public EffectUpgradeItemSelectedEvent(Effect effect)
+        public EffectItemSelectedEvent(Effect effect)
         {
             Effect = effect;
         }
