@@ -42,12 +42,6 @@ namespace Minigames.Fight
             progressSettings.Init();
             enemySpawnerSettings.Init();
             incomeSettings.Init();
-            //effectSettings.UnlockAllEffects();
-        }
-
-        public List<Effect> GetUnlockedEffects()
-        {
-            return effectSettings.UnlockedEffects;
         }
 
         public ProgressModel GetProgressForSerialization()

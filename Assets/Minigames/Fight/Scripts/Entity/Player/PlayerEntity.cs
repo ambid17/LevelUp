@@ -94,18 +94,6 @@ namespace Minigames.Fight
             }
         }
         
-        public override void TakeHit(HitData hit)
-        {
-            float damage = hit.CalculateDamage();
-            CurrentHp -= damage;
-            VisualController.StartDamageFx(damage);
-
-            if (IsDead)
-            {
-                Die();
-            }
-        }
-        
         protected override void Die()
         {
             _deathTimer = 0;

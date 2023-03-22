@@ -45,7 +45,6 @@ namespace Minigames.Fight
         public void TryApplyEffect(HitData hit)
         {
             bool doesSlow = Random.value < SlowChance;
-            doesSlow = true;
             if (doesSlow)
             {
                 StatusEffectInstance.Create(hit.Source, hit.Target, this, duration);

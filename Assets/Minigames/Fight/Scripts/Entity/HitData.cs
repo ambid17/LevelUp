@@ -22,6 +22,9 @@ namespace Minigames.Fight
         public HitData(Entity source, Entity target)
         {
             Source = source;
+            BaseDamage = Source.WeaponController.Weapon.damage;
+            Effects = Source.Stats.OnHitEffects;
+            
             Target = target;
 
             BaseDamageAdditions = new();

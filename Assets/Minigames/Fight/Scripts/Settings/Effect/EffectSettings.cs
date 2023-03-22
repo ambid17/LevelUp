@@ -12,15 +12,14 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<Effect> AllEffects;
 
-        public List<Effect> UnlockedEffects = new();
         public List<Effect> OnHitEffects = new();
 
         public void SetDefaults()
         {
-            UnlockedEffects = null;
             foreach (var effect in AllEffects)
             {
                 effect.AmountOwned = 0;
+                effect.IsUnlocked = false;
             }
 
             OnHitEffects = null;

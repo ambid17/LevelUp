@@ -15,7 +15,7 @@ namespace Minigames.Fight
         private readonly string _description = "+{0} base damage";
         public override string GetDescription()
         {
-            return string.Format(_description, baseDamagePerStack);
+            return string.Format(_description, Total);
         }
         public override string GetNextUpgradeDescription(int purchaseCount)
         {

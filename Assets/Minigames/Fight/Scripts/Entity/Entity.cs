@@ -72,9 +72,8 @@ namespace Minigames.Fight
         // Called when this entity hits another
         public virtual void OnHitOther(Entity otherEntity)
         {
+            // TODO: performance optimization is to create this once and update it only when the stats are updated
             HitData hitData = new HitData(this, otherEntity);
-            hitData.BaseDamage = WeaponController.Weapon.damage;
-            hitData.Effects = Stats.OnHitEffects;
             otherEntity.TakeHit(hitData);
         }
 

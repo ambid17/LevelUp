@@ -84,6 +84,7 @@ namespace Minigames.Fight
             SetInteractability();
             nameText.text = $"{_currentEffect.Name}\n{_currentEffect.GetUpgradeCountText()}";
             upgradeButtonText.text = _currentEffect.GetCost(GetAvailablePurchaseCount()).ToCurrencyString();
+            descriptionText.text = _currentEffect.GetDescription();
             bonusText.text = _currentEffect.GetNextUpgradeDescription(GetAvailablePurchaseCount());
         }
 
