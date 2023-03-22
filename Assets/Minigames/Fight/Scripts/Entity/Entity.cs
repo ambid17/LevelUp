@@ -39,34 +39,14 @@ namespace Minigames.Fight
             {
                 TickStatuses();
             }
-
-            if (Stats.StatusEffectsToRemove.Count > 0)
-            {
-                RemoveStatuses();
-            }
         }
 
         protected void TickStatuses()
         {
             foreach (var statusEffect in Stats.StatusEffects)
             {
-                if (statusEffect.OnTick(Time.deltaTime))
-                {
-                    // Add this effect to our list to remove
-                    // we can't remove during the for loop as that breaks the list enumeration
-                    Stats.StatusEffectsToRemove.Add(statusEffect);
-                }
+                statusEffect.OnTick(Time.deltaTime);
             }
-        }
-
-        private void RemoveStatuses()
-        {
-            foreach (var statusEffect in Stats.StatusEffectsToRemove)
-            {
-                statusEffect.effect.RemoveEffect(this);
-                Stats.StatusEffects.Remove(statusEffect);
-            }
-            Stats.StatusEffectsToRemove.Clear();
         }
 
         // Called when this entity hits another
@@ -80,6 +60,11 @@ namespace Minigames.Fight
         public virtual void TakeHit(HitData hit)
         {
             float damage = hit.CalculateDamage();
+            TakeDamage(damage);
+        }
+
+        public virtual void TakeDamage(float damage)
+        {
             Stats.currentHp -= damage;
             VisualController.StartDamageFx(damage);
 

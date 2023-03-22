@@ -12,7 +12,6 @@ namespace Minigames.Fight
         public float armor;
         public float magicResistance;
         public List<StatusEffectInstance> StatusEffects = new();
-        public List<StatusEffectInstance> StatusEffectsToRemove = new();
         public List<Effect> OnHitEffects = new();
 
         public bool AddStatusEffect(StatusEffectInstance instance)

@@ -11,7 +11,9 @@ namespace Minigames.Fight
     {
         public float stunChance = 0.1f;
         public float duration = 2f;
+        public float Duration => duration;
         public float chanceScalar = 0.01f;
+        public float TickRate => 0;
 
         public float StunChance => stunChance + (chanceScalar * AmountOwned);
         
@@ -47,7 +49,7 @@ namespace Minigames.Fight
             doesSlow = true;
             if (doesSlow)
             {
-                StatusEffectInstance.Create(hit.Source, hit.Target, this, duration);
+                StatusEffectInstance.Create(hit.Source, hit.Target, this);
             }
         }
 
@@ -61,7 +63,7 @@ namespace Minigames.Fight
             target.MovementController.RemoveMoveEffect(this);
         }
 
-        public void OnTick()
+        public void OnTick(Entity target)
         {
             
         }
