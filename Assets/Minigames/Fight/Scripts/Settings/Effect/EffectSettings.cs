@@ -36,12 +36,15 @@ namespace Minigames.Fight
         public void LoadSavedEffect(EffectModel effectModel)
         {
             Type effectType = effectModel.Type;
-            var effectToUnlock = AllEffects.FirstOrDefault(e => e.GetType() == effectType);
+            var effectToLoad = AllEffects.FirstOrDefault(e => e.GetType() == effectType);
 
-            if (effectToUnlock != null)
+            if (effectToLoad != null)
             {
-                effectToUnlock.AmountOwned = effectModel.AmountOwned;
-                effectToUnlock.Unlock(this);
+                if (effectModel.IsUnlocked)
+                {
+                    effectToLoad.Unlock(this);
+                }
+                effectToLoad.AmountOwned = effectModel.AmountOwned;
             }
             else
             {

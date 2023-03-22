@@ -17,6 +17,18 @@ namespace Minigames.Fight
 
         public EffectNode effectNode;
 
+        private void OnEnable()
+        {
+            if (effectNode != null && effectNode.Effect != null)
+            {
+                button.interactable = effectNode.Effect.IsUnlocked;
+            }
+            else
+            {
+                button.interactable = false;
+            }
+        }
+
         public void Setup(EffectNode node, EffectUpgradeItem prefab)
         {
             effectNode = node;
@@ -26,7 +38,8 @@ namespace Minigames.Fight
             text.gameObject.SetActive(false);
             gameObject.name = effectNode.Name;
 
-            if (effectNode.Effect == null)
+            
+            if (effectNode.Effect == null || effectNode.Effect.Icon == null)
             {
                 text.gameObject.SetActive(true);
                 text.text = effectNode.Name;
@@ -67,7 +80,7 @@ namespace Minigames.Fight
 
         private void SelectLayoutItem()
         {
-            GameManager.EventService.Dispatch(new EffectUpgradeItemSelectedEvent(this));
+            GameManager.EventService.Dispatch(new EffectUpgradeItemSelectedEvent(effectNode.Effect));
         }
     }
 }

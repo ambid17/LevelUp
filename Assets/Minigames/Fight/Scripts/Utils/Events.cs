@@ -56,11 +56,11 @@ namespace Minigames.Fight
     
     public class EffectUpgradeItemSelectedEvent : IEvent
     {
-        public EffectUpgradeItem LayoutItem;
+        public Effect Effect;
 
-        public EffectUpgradeItemSelectedEvent(EffectUpgradeItem layoutItem)
+        public EffectUpgradeItemSelectedEvent(Effect effect)
         {
-            LayoutItem = layoutItem;
+            Effect = effect;
         }
     }
 

@@ -60,7 +60,6 @@ namespace Minigames.Fight
         {
             if (!IsUnlocked)
             {
-                AmountOwned = 1;
                 IsUnlocked = true;
                 switch (TriggerType)
                 {
