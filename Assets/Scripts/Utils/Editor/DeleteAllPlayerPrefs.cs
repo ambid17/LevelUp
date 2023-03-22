@@ -6,7 +6,7 @@ using System.IO;
 
 public class DeleteAllPlayerPrefs : MonoBehaviour
 {
-    [MenuItem("Tools/Caos Creations/Delete save data")]
+    [MenuItem("Caos Creations/Delete save data")]
     static void DeletePlayerPrefs()
     {
         var paths = Directory.EnumerateFiles(Application.persistentDataPath);
