@@ -22,6 +22,7 @@ namespace Minigames.Fight
         [Header("Run-time Values")] 
         public float Currency;
         public TutorialState TutorialState;
+        
 
         [SerializeField]
         private World currentWorld;

@@ -26,7 +26,7 @@ public class WeaponSelectUI : MonoBehaviour
     private void PopulateWeaponList()
     {
         bool isFirstWeapon = true;
-        foreach (var weapon in GameManager.WeaponSettings.allWeapons)
+        foreach (var weapon in Platform.WeaponSettings.allWeapons)
         {
             WeaponButton button = Instantiate(weaponButtonPrefab, weaponButtonParent);
             button.Setup(weapon);
@@ -48,7 +48,7 @@ public class WeaponSelectUI : MonoBehaviour
 
     private void EquipWeapon()
     {
-        GameManager.WeaponSettings.equippedWeapon = selectedWeapon;
+        Platform.WeaponSettings.equippedWeapon = selectedWeapon;
         gameObject.SetActive(false);
     }
 }

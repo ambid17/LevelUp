@@ -72,6 +72,7 @@ namespace Minigames.Fight
         {
             ProgressDataManager.Save(SettingsManager.progressSettings);
             EffectDataManager.Save();
+            WeaponDataManager.Save(SettingsManager.weaponSettings);
         }
     }
 }

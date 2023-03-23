@@ -64,7 +64,8 @@ MonoBehaviour:
       SpritePixels: []
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
-    IsFighting: 1
+    IsFighting: 0
+    IsUnlocked: 0
   - Name: Minington
     SkillingSceneIndex: 4
     WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
@@ -106,7 +107,8 @@ MonoBehaviour:
       SpritePixels: []
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
-    IsFighting: 1
+    IsFighting: 0
+    IsUnlocked: 0
   - Name: Craftoptia
     SkillingSceneIndex: 5
     WorldSprite: {fileID: -600369647, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
@@ -149,4 +151,23 @@ MonoBehaviour:
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
     IsFighting: 0
+    IsUnlocked: 0
   Currency: 0
+  TutorialState: 0
+  currentWorld:
+    Name: 
+    SkillingSceneIndex: 0
+    WorldSprite: {fileID: 0}
+    Countries: []
+    Enemies: []
+    WorldType: 0
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 0
+    IsUnlocked: 0

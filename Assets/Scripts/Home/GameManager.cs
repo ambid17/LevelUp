@@ -10,10 +10,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private FightDataLoader _fightDataLoader;
     [SerializeField] private Texture2D _cursorTexture;
     [SerializeField] private UIManager _uiManager;
-    [SerializeField] private ProgressSettings _progressSettings;
-    [SerializeField] private WeaponSettings _weaponSettings;
-    public static ProgressSettings ProgressSettings => Instance._progressSettings;
-    public static WeaponSettings WeaponSettings => Instance._weaponSettings;
     
     private EventService _eventService;
     public static EventService EventService
@@ -43,22 +39,20 @@ public class GameManager : Singleton<GameManager>
         Cursor.SetCursor(_cursorTexture, cursorOffset, CursorMode.Auto);
     }
 
-    private void OnDestroy()
-    {
-        Save();
-    }
-
     private void OnApplicationQuit()
     {
+        Save();
+
         // Only clear progress on quit. If done on destroy it will delete loaded progress when loading into a game
 #if UNITY_EDITOR
-        _progressSettings.SetDefaults();
-        _weaponSettings.SetDefaults();
+        Platform.ProgressSettings.SetDefaults();
+        Platform.WeaponSettings.SetDefaults();
 #endif
     }
 
     private void Save()
     {
-        ProgressDataManager.Save(_progressSettings);
+        ProgressDataManager.Save(Platform.ProgressSettings);
+        WeaponDataManager.Save(Platform.WeaponSettings);
     }
 }

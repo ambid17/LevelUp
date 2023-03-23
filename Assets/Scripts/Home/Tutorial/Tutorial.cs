@@ -12,12 +12,12 @@ public static class Tutorial
 {
     public static TutorialState GetState()
     {
-        return GameManager.ProgressSettings.TutorialState;
+        return Platform.ProgressSettings.TutorialState;
     }
 
     public static void SetState(TutorialState newState)
     {
-        GameManager.ProgressSettings.TutorialState = newState;
+        Platform.ProgressSettings.TutorialState = newState;
     }
     
     public static void CompleteState(TutorialState currentState)
@@ -27,7 +27,7 @@ public static class Tutorial
         if (current == currentState)
         {
             Debug.Log($"[Tutorial] completed: {currentState} next: {currentState + 1}");
-            GameManager.ProgressSettings.TutorialState = currentState + 1;
+            Platform.ProgressSettings.TutorialState = currentState + 1;
         }
         else
         {

@@ -55,7 +55,7 @@ public class HomeController : MonoBehaviour
 
     private void CreatePlanetButtons()
     {
-        foreach (var world in GameManager.ProgressSettings.Worlds)
+        foreach (var world in Platform.ProgressSettings.Worlds)
         {
             WorldButton worldButton = Instantiate(_buttonPrefab, _worldContainer);
             worldButton.SetForWorld(world);
