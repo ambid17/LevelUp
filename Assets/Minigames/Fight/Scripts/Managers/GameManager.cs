@@ -35,7 +35,7 @@ namespace Minigames.Fight
             }
         }
 
-        public override void Initialize()
+        protected override void Initialize()
         {
             SettingsManager.Init();
             SetupPlayer();

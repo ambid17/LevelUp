@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
 
     public static bool IsLoadingScene = false;
     
-    public override void Initialize()
+    protected override void Initialize()
     {
         SetCrosshair();
         _fightDataLoader.Load();
