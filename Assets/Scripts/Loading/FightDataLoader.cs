@@ -56,6 +56,8 @@ public class FightDataLoader : MonoBehaviour
     public void LoadSerializedProgress(ProgressModel progressModel)
     {
         progressSettings.Currency = progressModel.Currency;
+        progressSettings.TutorialState = progressModel.TutorialState;
+        Tutorial.SetState(progressSettings.TutorialState);
         
         for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
         {

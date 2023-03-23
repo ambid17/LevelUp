@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   weaponType: 0
+  readableName: Pistol
+  description: Shoots slowly with mediocre damage. Its ability empties the magazine
+    with each bullet having double the chance to trigger on-hit effects.
   icon: {fileID: 0}
   ammoIcon: {fileID: -365878349, guid: 83c34ec08a785344d85918d4b5530bce, type: 3}
   abilityIcon: {fileID: -95529813, guid: 83c34ec08a785344d85918d4b5530bce, type: 3}

@@ -9,6 +9,7 @@ namespace Minigames.Fight
     {
         public List<WorldData> WorldData;
         public float Currency;
+        public TutorialState TutorialState;
     }
 
     public class WorldData

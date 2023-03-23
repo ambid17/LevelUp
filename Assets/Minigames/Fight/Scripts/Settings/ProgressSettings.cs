@@ -19,7 +19,9 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<World> Worlds;
 
-        [Header("Run-time Values")] public float Currency;
+        [Header("Run-time Values")] 
+        public float Currency;
+        public TutorialState TutorialState;
 
         private World _currentWorld;
 

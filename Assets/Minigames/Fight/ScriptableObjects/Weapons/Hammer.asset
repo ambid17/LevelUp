@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   weaponType: 5
-  icon: {fileID: 0}
+  readableName: Hammer
+  description: Smash your way through enemies. The weapon's ability is to slam the
+    ground and knock down enemies in a cone
+  icon: {fileID: 2016557821, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
+  ammoIcon: {fileID: 0}
+  abilityIcon: {fileID: 0}
   abilityCooldown: 4
   fireRate: 1
   damage: 2

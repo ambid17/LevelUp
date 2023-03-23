@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Katana
   m_EditorClassIdentifier: 
   weaponType: 4
-  icon: {fileID: 0}
+  readableName: Katana
+  description: The katana is meant to assassinate your prey. It's ability dashes
+    between enemies, making you invincible temporarily.
+  icon: {fileID: -1427842370, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
+  ammoIcon: {fileID: 0}
+  abilityIcon: {fileID: 0}
   abilityCooldown: 4
   fireRate: 0.5
   damage: 1

@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class HomeController : MonoBehaviour
 {
-    [SerializeField] private ProgressSettings _progressSettings;
     [SerializeField] private WorldButton _buttonPrefab;
     [SerializeField] private Transform _worldContainer;
     [SerializeField] private WorldInspector _worldInspector;
@@ -56,7 +55,7 @@ public class HomeController : MonoBehaviour
 
     private void CreatePlanetButtons()
     {
-        foreach (var world in _progressSettings.Worlds)
+        foreach (var world in GameManager.ProgressSettings.Worlds)
         {
             WorldButton worldButton = Instantiate(_buttonPrefab, _worldContainer);
             worldButton.SetForWorld(world);

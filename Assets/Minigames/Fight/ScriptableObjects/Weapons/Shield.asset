@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   weaponType: 6
-  icon: {fileID: 0}
+  readableName: Shield
+  description: The shield specializes in Traumatic Brain Injuries. It's special ability
+    soaks up damage and reflects it.
+  icon: {fileID: 405260909, guid: 93bc2ff4816850b4da9d8f33983b6651, type: 3}
+  ammoIcon: {fileID: 0}
+  abilityIcon: {fileID: 0}
   abilityCooldown: 15
   fireRate: 1.5
   damage: 5

@@ -50,6 +50,7 @@ namespace Minigames.Fight
 
             toReturn.WorldData = progressSettings.GetWorldData();
             toReturn.Currency = progressSettings.Currency;
+            toReturn.TutorialState = progressSettings.TutorialState;
 
             return toReturn;
         }
