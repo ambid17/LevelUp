@@ -128,6 +128,16 @@ namespace Minigames.Fight
                 CurrentWorld.CurrentCountry.EnemyKillCount = 0;
             }
         }
+
+        public void UnlockWorlds()
+        {
+            int conquered = WorldsConquered;
+
+            for (int i = 0; i < Worlds.Count; i++)
+            {
+                Worlds[i].IsUnlocked = conquered >= i;
+            }
+        }
     }
 
     public enum WorldType
@@ -142,17 +152,20 @@ namespace Minigames.Fight
     [Serializable]
     public class World
     {
-        [Header("Set in Editor")] public string Name;
+        [Header("Set in Editor")] 
+        public string Name;
         public int SkillingSceneIndex;
         public Sprite WorldSprite;
         public List<Country> Countries;
         public List<Enemy> Enemies;
         public WorldType WorldType;
 
-        [Header("Run-time Values")] public float CurrencyPerMinute;
+        [Header("Run-time Values")] 
+        public float CurrencyPerMinute;
         public DateTime LastTimeVisited;
         public Country CurrentCountry;
         public bool IsFighting;
+        public bool IsUnlocked;
 
 
         public void SetDefaults()
@@ -160,6 +173,8 @@ namespace Minigames.Fight
             CurrencyPerMinute = 0;
             LastTimeVisited = DateTime.Now;
             CurrentCountry = null;
+            IsFighting = false;
+            IsUnlocked = false;
 
             foreach (var country in Countries)
             {

@@ -41,6 +41,7 @@ public class WorldInspector : MonoBehaviour
         conquerButton.onClick.AddListener(ConquerPlanet);
         travelButton.onClick.AddListener(TravelToPlanet);
 
+        conquerButton.interactable = world.IsUnlocked;
         travelButton.interactable = world.IsConquered();
     }
 

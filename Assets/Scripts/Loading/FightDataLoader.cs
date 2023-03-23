@@ -49,6 +49,8 @@ public class FightDataLoader : MonoBehaviour
         {
             LoadSerializedProgress(data);
         }
+        
+        progressSettings.UnlockWorlds();
     }
     
     public void LoadSerializedProgress(ProgressModel progressModel)
