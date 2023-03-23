@@ -64,7 +64,15 @@ namespace Minigames.Fight
         }
     }
 
-    public class PurchaseCountChangedEvent { }
+    public class PurchaseCountChangedEvent : IEvent
+    {
+        public int PurchaseCount;
+
+        public PurchaseCountChangedEvent(int purchaseCount)
+        {
+            PurchaseCount = purchaseCount;
+        }
+    }
 
 
     public class PlayerAmmoUpdatedEvent : IEvent

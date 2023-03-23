@@ -23,12 +23,14 @@ namespace Minigames.Fight
 
         private EventService _eventService;
 
+        private int _purchaseCount = 1;
+
         private void Awake()
         {
             _eventService = GameManager.EventService;
             _eventService.Add<EffectItemSelectedEvent>(OnEffectSelected);
-            _eventService.Add<PurchaseCountChangedEvent>(OnUpgradeUpdated);
-            upgradeButton.onClick.AddListener(() => BuyUpgrade());
+            _eventService.Add<PurchaseCountChangedEvent>(OnPurchaseCountChanged);
+            upgradeButton.onClick.AddListener(BuyUpgrade);
         }
 
         private void OnEnable()
@@ -40,7 +42,7 @@ namespace Minigames.Fight
         private void OnDestroy()
         {
             _eventService.Remove<EffectItemSelectedEvent>(OnEffectSelected);
-            _eventService.Remove<PurchaseCountChangedEvent>(OnUpgradeUpdated);
+            _eventService.Remove<PurchaseCountChangedEvent>(OnPurchaseCountChanged);
         }
 
         public void OnEffectSelected(EffectItemSelectedEvent e)
@@ -53,6 +55,12 @@ namespace Minigames.Fight
                 return;
             }
 
+            OnUpgradeUpdated();
+        }
+
+        private void OnPurchaseCountChanged(PurchaseCountChangedEvent e)
+        {
+            _purchaseCount = e.PurchaseCount;
             OnUpgradeUpdated();
         }
 
@@ -97,11 +105,6 @@ namespace Minigames.Fight
                 {
                     upgradeButtonText.text = "MAXED";
                 }
-
-                if (!canAfford)
-                {
-                    upgradeButtonText.text = "TOO POOR";
-                }
             }
         }
 
@@ -111,7 +114,7 @@ namespace Minigames.Fight
         /// </summary>
         private int GetAvailablePurchaseCount()
         {
-            int purchaseCount = GameManager.SettingsManager.UpgradePurchaseCount;
+            int purchaseCount = _purchaseCount;
 
             if (_currentEffect.MaxAmountOwned > 0)
             {
