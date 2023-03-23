@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BehaviorDesigner.Runtime.Tasks.Movement.AstarPathfindingProject
@@ -10,6 +11,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.AstarPathfindingProject
     {
         [Tooltip("The distance to search for cover")]
         public SharedFloat maxCoverDistance = 1000;
+        [Tooltip("The distance behind a piece of cover that the raycast will be fired from")]
+        public SharedFloat maxCoverThickness = 10;
         [Tooltip("The layermask of the available cover positions")]
         public LayerMask availableLayerCovers;
         [Tooltip("The maximum number of raycasts that should be fired before the agent gives up looking for an agent to find cover behind")]
@@ -32,26 +35,64 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.AstarPathfindingProject
         public override void OnStart()
         {
             RaycastHit hit;
+            RaycastHit2D hit2D;
             int raycastCount = 0;
-            var direction = transform.forward;
+            var direction = use2DMovement ? transform.up : transform.forward;
             float step = 0;
+            float coverDistance = Mathf.Infinity;
             var coverTarget = transform.position;
-            // Keep firing a ray until too many rays have been fired
-            while (raycastCount < maxRaycasts.Value) {
-                var ray = new Ray(transform.position, direction);
-                if (Physics.Raycast(ray, out hit, maxCoverDistance.Value, availableLayerCovers.value)) {
-                    // A suitable agent has been found. Find the opposite side of that agent by shooting a ray in the opposite direction from a point far away
-                    if (hit.collider.Raycast(new Ray(hit.point - hit.normal * maxCoverDistance.Value, hit.normal), out hit, Mathf.Infinity)) {
-                        coverPoint = hit.point;
-                        coverTarget = hit.point + hit.normal * coverOffset.Value;
-                        foundCover = true;
-                        break;
+            if (use2DMovement)
+            {
+                // Keep firing a ray until too many rays have been fired
+                while (raycastCount < maxRaycasts.Value)
+                {
+                    hit2D = Physics2D.Raycast(transform.position, direction, maxCoverDistance.Value, availableLayerCovers.value);
+                    if (hit2D)
+                    {
+                        // A suitable agent has been found. Find the opposite side of that agent by shooting a ray in the opposite direction from a point far away
+                        hit2D = Physics2D.Raycast(hit2D.point - hit2D.normal * maxCoverThickness.Value, hit2D.normal, Mathf.Infinity);
+                        if (hit2D)
+                        {
+                            if (Vector2.Distance(transform.position, hit2D.point) < coverDistance)
+                            {
+                                coverDistance = Vector2.Distance(transform.position, hit2D.point);
+                                coverPoint = hit2D.point;
+                                coverTarget = hit2D.point + hit2D.normal * coverOffset.Value;
+                                foundCover = true;
+                            }
+                        }
                     }
+                    // Keep sweeiping along the y axis
+                    step += rayStep.Value;
+                    direction = Quaternion.Euler(0, 0, transform.eulerAngles.z + step) * Vector2.up;
+                    raycastCount++;
                 }
-                // Keep sweeiping along the y axis
-                step += rayStep.Value;
-                direction = Quaternion.Euler(0, transform.eulerAngles.y + step, 0) * Vector3.forward;
-                raycastCount++;
+            }
+            else
+            {
+                // Keep firing a ray until too many rays have been fired
+                while (raycastCount < maxRaycasts.Value)
+                {
+                    var ray = new Ray(transform.position, direction);
+                    if (Physics.Raycast(ray, out hit, maxCoverDistance.Value, availableLayerCovers.value))
+                    {
+                        // A suitable agent has been found. Find the opposite side of that agent by shooting a ray in the opposite direction from a point far away
+                        if (hit.collider.Raycast(new Ray(hit.point - hit.normal * maxCoverThickness.Value, hit.normal), out hit, Mathf.Infinity))
+                        {
+                            if (Vector3.Distance(transform.position, hit.point) < coverDistance)
+                            {
+                                coverDistance = Vector3.Distance(transform.position, hit.point);
+                                coverPoint = hit.point;
+                                coverTarget = hit.point + hit.normal * coverOffset.Value;
+                                foundCover = true;
+                            }
+                        }
+                    }
+                    // Keep sweeiping along the y axis
+                    step += rayStep.Value;
+                    direction = Quaternion.Euler(0, transform.eulerAngles.y + step, 0) * Vector3.forward;
+                    raycastCount++;
+                }
             }
 
             if (foundCover) {

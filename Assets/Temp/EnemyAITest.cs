@@ -10,6 +10,7 @@ public class EnemyAITest : MonoBehaviour
     private float _Speed = 5;
     public float speed => _Speed;
     public float health => _Health;
+    public Vector2 enemyPos => transform.position;
 
     private void Update()
     {

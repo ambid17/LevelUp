@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerManagerTest : Singleton<PlayerManagerTest>
 {
     [SerializeField]
-    private GameObject _PlayerPos;
+    private GameObject _PlayerObj;
 
-    public GameObject playerPos => _PlayerPos;
+    public GameObject playerObj => _PlayerObj;
+    public Vector2 playerPos => transform.position;
 }
