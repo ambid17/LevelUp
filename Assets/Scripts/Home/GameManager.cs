@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Minigames.Fight;
@@ -38,5 +39,24 @@ public class GameManager : Singleton<GameManager>
     {
         Vector2 cursorOffset = new Vector2(_cursorTexture.width/2, _cursorTexture.height/2);
         Cursor.SetCursor(_cursorTexture, cursorOffset, CursorMode.Auto);
+    }
+
+    private void OnDestroy()
+    {
+        Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        // Only clear progress on quit. If done on destroy it will delete loaded progress when loading into a game
+#if UNITY_EDITOR
+        _progressSettings.SetDefaults();
+        _weaponSettings.SetDefaults();
+#endif
+    }
+
+    private void Save()
+    {
+        ProgressDataManager.Save(_progressSettings);
     }
 }

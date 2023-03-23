@@ -6,10 +6,10 @@ namespace Minigames.Fight
 {
     public class SettingsManager : MonoBehaviour
     {
-        public PlayerSettings playerSettings;
+        public ProgressSettings progressSettings;
         public WeaponSettings weaponSettings;
         public EffectSettings effectSettings;
-        public ProgressSettings progressSettings;
+        public PlayerSettings playerSettings;
         public EnemySpawnerSettings enemySpawnerSettings;
         public IncomeSettings incomeSettings;
 
@@ -42,17 +42,6 @@ namespace Minigames.Fight
             progressSettings.Init();
             enemySpawnerSettings.Init();
             incomeSettings.Init();
-        }
-
-        public ProgressModel GetProgressForSerialization()
-        {
-            ProgressModel toReturn = new ProgressModel();
-
-            toReturn.WorldData = progressSettings.GetWorldData();
-            toReturn.Currency = progressSettings.Currency;
-            toReturn.TutorialState = progressSettings.TutorialState;
-
-            return toReturn;
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Minigames.Fight
             return data;
         }
 
-        public static void Save()
+        public static void Save(ProgressSettings progressSettings)
         {
-            ProgressModel data = GameManager.SettingsManager.GetProgressForSerialization();
+            ProgressModel data = progressSettings.GetProgressForSerialization();
             FileUtils.SaveFile(FileLocation, data);
         }
     }

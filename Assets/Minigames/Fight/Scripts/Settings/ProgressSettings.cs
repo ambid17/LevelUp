@@ -23,7 +23,8 @@ namespace Minigames.Fight
         public float Currency;
         public TutorialState TutorialState;
 
-        private World _currentWorld;
+        [SerializeField]
+        private World currentWorld;
 
         public World CurrentWorld
         {
@@ -31,21 +32,21 @@ namespace Minigames.Fight
             {
 #if UNITY_EDITOR
                 // Allow the game scenes to be played not from the main menu
-                if (string.IsNullOrEmpty(_currentWorld.Name))
+                if (string.IsNullOrEmpty(currentWorld.Name))
                 {
                     int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
                     
-                    _currentWorld = Worlds.FirstOrDefault(world => world.SkillingSceneIndex == currentBuildIndex);
+                    currentWorld = Worlds.FirstOrDefault(world => world.SkillingSceneIndex == currentBuildIndex);
 
-                    if (_currentWorld == null)
+                    if (currentWorld == null)
                     {
-                        _currentWorld = Worlds[0];
+                        currentWorld = Worlds[0];
                     }
                 }
 #endif
-                return _currentWorld;
+                return currentWorld;
             }
-            set { _currentWorld = value; }
+            set { currentWorld = value; }
         }
 
         public int WorldsConquered
@@ -68,6 +69,7 @@ namespace Minigames.Fight
         {
             CurrentWorld = null;
             Currency = 0;
+            TutorialState = TutorialState.None;
 
             foreach (var world in Worlds)
             {
@@ -89,6 +91,17 @@ namespace Minigames.Fight
             }
 
             CurrentWorld.CurrentCountry = highestCountry;
+        }
+        
+        public ProgressModel GetProgressForSerialization()
+        {
+            ProgressModel toReturn = new ProgressModel();
+
+            toReturn.WorldData = GetWorldData();
+            toReturn.Currency = Currency;
+            toReturn.TutorialState = TutorialState;
+
+            return toReturn;
         }
 
         public List<WorldData> GetWorldData()

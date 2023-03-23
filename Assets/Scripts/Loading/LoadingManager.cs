@@ -13,25 +13,26 @@ public class LoadingManager : MonoBehaviour
     
     void Start()
     {
-        //_gameDataLoader.onDataLoaded.AddListener(DataLoaderCompleted);
-        DataLoaderCompleted();
         StartCoroutine(LoadScene());
         LoadData();
-    }
-    
-    private void DataLoaderCompleted()
-    {
-        isDataLoaded = true;
     }
 
     private void LoadData()
     {
-        switch (_progressSettings.CurrentWorld.WorldType)
+        if (_progressSettings.CurrentWorld.IsFighting)
         {
-            case WorldType.Fighting:
-                //_gameDataLoader.Load();
-                break;
+            isDataLoaded = true;
+            return;
         }
+        
+        // TODO: Load data for each game
+        // switch (_progressSettings.CurrentWorld.WorldType)
+        // {
+        //     case WorldType.Crafting:
+        //         _gameDataLoader.Load();
+        //         isDataLoaded = true;
+        //         break;
+        // }
     }
 
     private IEnumerator LoadScene()
