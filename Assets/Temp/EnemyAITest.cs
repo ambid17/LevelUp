@@ -5,14 +5,17 @@ using UnityEngine;
 public class EnemyAITest : MonoBehaviour
 {
     [SerializeField]
-    private float m_Health;
-    public float health => m_Health;
+    private float _Health;
+    [SerializeField]
+    private float _Speed = 5;
+    public float speed => _Speed;
+    public float health => _Health;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            m_Health -= 10;
+            _Health -= 10;
             Debug.Log(health);
         }
     }
