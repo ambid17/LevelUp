@@ -35,6 +35,12 @@ public class TooltipButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        // The OnPointerExit triggers when leaving the scene
+        // This asks for the EventService which can be destroyed, so if we are loading a scene don't do anything
+        if (GameManager.IsLoadingScene)
+        {
+            return;
+        }
         GameManager.EventService.Dispatch<TooltipHideEvent>();
     }
 }

@@ -28,6 +28,8 @@ public class GameManager : Singleton<GameManager>
             return Instance._eventService;
         }
     }
+
+    public static bool IsLoadingScene = false;
     
     public override void Initialize()
     {

@@ -30,6 +30,10 @@ namespace Minigames.Fight
         {
             get
             {
+                if (currentWorld == null)
+                {
+                    return null;
+                }
 #if UNITY_EDITOR
                 // Allow the game scenes to be played not from the main menu
                 if (string.IsNullOrEmpty(currentWorld.Name))

@@ -51,6 +51,7 @@ public class WorldInspector : MonoBehaviour
     
     private void ConquerPlanet()
     {
+        GameManager.IsLoadingScene = true;
         GameManager.ProgressSettings.CurrentWorld = _world;
         GameManager.ProgressSettings.CurrentWorld.IsFighting = true;
         SceneManager.LoadScene(loadingSceneName);
@@ -58,6 +59,7 @@ public class WorldInspector : MonoBehaviour
     
     private void TravelToPlanet()
     {
+        GameManager.IsLoadingScene = true;
         GameManager.ProgressSettings.CurrentWorld = _world;
         GameManager.ProgressSettings.CurrentWorld.IsFighting = false;
         SceneManager.LoadScene(loadingSceneName);
