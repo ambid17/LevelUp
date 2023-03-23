@@ -19,7 +19,6 @@ namespace Minigames.Fight
         void Start()
         {
             _eventService = GameManager.EventService;
-            //_eventService.Add<EffectPurchasedEvent>(OnUpgradePurchased);
         }
 
         /// <summary>
