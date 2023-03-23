@@ -49,5 +49,6 @@ public class WeaponSelectUI : MonoBehaviour
     private void EquipWeapon()
     {
         GameManager.WeaponSettings.equippedWeapon = selectedWeapon;
+        gameObject.SetActive(false);
     }
 }

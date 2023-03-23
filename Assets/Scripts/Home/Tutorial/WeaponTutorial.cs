@@ -14,8 +14,6 @@ public class WeaponTutorial : MonoBehaviour
 
         yield return new WaitForButtonClick(weaponSelectButton);
         
-        weaponSelectContainer.SetActive(false);
-        
         Tutorial.CompleteState(TutorialState.ChooseWeapon);
     }
 }
