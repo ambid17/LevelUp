@@ -2,7 +2,7 @@ using CustomPathfinding;
 using Pathfinding;
 using UnityEngine;
 
-namespace BehaviorDesigner.Runtime.Tasks.Movement.AstarPathfindingProject
+namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
 {
     public abstract class CustomAIMovement : Movement
     {
@@ -31,6 +31,14 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.AstarPathfindingProject
         {
             agent.target = target;
             return !agent.path.error;
+        }
+        protected override Vector3 Velocity()
+        {
+            return agent.rb.velocity;
+        }
+        protected override void UpdateRotation(bool update)
+        {
+            //inhereted but not needed
         }
         protected override bool HasPath()
         {

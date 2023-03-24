@@ -8,7 +8,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 {
     // A* project script
     private Seeker seeker;
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
 
     private float _Speed;
     private bool _RotateTowardsDestination;
@@ -31,11 +31,12 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
     public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
     public Path path => _Path;
+    public Rigidbody2D rb => _rb;
 
     private void Awake()
     {
         seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
     private void Start()
     {
