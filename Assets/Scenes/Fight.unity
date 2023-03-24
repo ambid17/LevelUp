@@ -801,7 +801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836920561498399440, guid: 021008401969db0468a79623f97d0cf5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 6836920561498399440, guid: 021008401969db0468a79623f97d0cf5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1144,7 +1144,6 @@ MonoBehaviour:
   playerSettings: {fileID: 11400000, guid: 9bddfe638d36abc488c374dfec22eb28, type: 2}
   enemySpawnerSettings: {fileID: 11400000, guid: 0932afc41d8717c4cb75fb6d14ee8fba, type: 2}
   incomeSettings: {fileID: 11400000, guid: 7632685d0406e4745acfd25bc667368d, type: 2}
-  UpgradePurchaseCount: 0
 --- !u!114 &1191475635
 MonoBehaviour:
   m_ObjectHideFlags: 0

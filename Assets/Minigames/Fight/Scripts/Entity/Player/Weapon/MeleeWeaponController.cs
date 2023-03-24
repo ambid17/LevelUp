@@ -6,12 +6,14 @@ namespace Minigames.Fight
 {
     public class MeleeWeaponController : WeaponController
     { 
-        [SerializeField] private MeleeWeapon overridenWeapon;
+        [SerializeField] protected MeleeWeapon overridenWeapon;
+        [SerializeField] protected MeleeWeaponInstance meleeWeaponInstance;
         private Camera _camera;
         
-        private void Start()
+        protected override void Start()
         {
             overridenWeapon = weapon as MeleeWeapon;
+            meleeWeaponInstance = Instantiate(overridenWeapon.weaponPrefab, transform);
             _camera = Camera.main;
         }
         

@@ -65,7 +65,7 @@ MonoBehaviour:
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
     IsFighting: 0
-    IsUnlocked: 0
+    IsUnlocked: 1
   - Name: Minington
     SkillingSceneIndex: 4
     WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
@@ -155,12 +155,49 @@ MonoBehaviour:
   Currency: 0
   TutorialState: 0
   currentWorld:
-    Name: 
-    SkillingSceneIndex: 0
-    WorldSprite: {fileID: 0}
-    Countries: []
-    Enemies: []
-    WorldType: 0
+    Name: Fishing Camp
+    SkillingSceneIndex: 3
+    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 5
+      EnemyStatScalar: 1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 1.1
+      SpritePixels: []
+      EnemyTierColor: {r: 0.21765637, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 15
+      EnemyStatScalar: 1.5
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.8564266, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 3
+      EnemyKillsToComplete: 15
+      EnemyStatScalar: 2
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.09787713, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 4
+      EnemyKillsToComplete: 5
+      EnemyStatScalar: 3
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0.76815224, a: 1}
+      EnemyKillCount: 0
+    - Index: 5
+      EnemyKillsToComplete: 20
+      EnemyStatScalar: 5
+      SpritePixels: []
+      EnemyTierColor: {r: 0.038573265, g: 0, b: 1, a: 1}
+      EnemyKillCount: 0
+    Enemies:
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
+    WorldType: 1
     CurrencyPerMinute: 0
     CurrentCountry:
       Index: 0
@@ -170,4 +207,4 @@ MonoBehaviour:
       EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
       EnemyKillCount: 0
     IsFighting: 0
-    IsUnlocked: 0
+    IsUnlocked: 1

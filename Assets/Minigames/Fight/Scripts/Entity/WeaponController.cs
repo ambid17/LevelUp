@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,6 +21,11 @@ namespace Minigames.Fight
             MyEntity = GetComponent<Entity>();
 
             EventService = GameManager.EventService;
+        }
+
+        protected virtual void Start()
+        {
+            
         }
 
         public void Setup(Weapon weapon)

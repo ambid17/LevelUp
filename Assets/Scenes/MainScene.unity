@@ -2311,7 +2311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca270ea179297fb4c922ca2911dff1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
   effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
 --- !u!114 &1268436966
 MonoBehaviour:
@@ -2328,8 +2327,6 @@ MonoBehaviour:
   _fightDataLoader: {fileID: 1268436965}
   _cursorTexture: {fileID: 2800000, guid: 70b41f5dddb4b82429fcadd41e9d1c5f, type: 3}
   _uiManager: {fileID: 78399861}
-  _progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
-  _weaponSettings: {fileID: 11400000, guid: b1949bc218afc0d4b8081f45c40fa767, type: 2}
 --- !u!4 &1268436967
 Transform:
   m_ObjectHideFlags: 0
