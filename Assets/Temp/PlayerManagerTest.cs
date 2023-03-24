@@ -8,5 +8,5 @@ public class PlayerManagerTest : Singleton<PlayerManagerTest>
     private GameObject _PlayerObj;
 
     public GameObject playerObj => _PlayerObj;
-    public Vector2 playerPos => transform.position;
+    public Vector2 playerPos => Instance.playerObj.transform.position;
 }

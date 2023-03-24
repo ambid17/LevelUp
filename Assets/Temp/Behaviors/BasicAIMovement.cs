@@ -1,0 +1,86 @@
+using CustomPathfinding;
+using Pathfinding;
+using UnityEngine;
+
+[RequireComponent(typeof(Seeker))]
+[RequireComponent(typeof(Rigidbody2D))]
+public class BasicAIMovement : MonoBehaviour, IPathFinder
+{
+    // A* project script
+    private Seeker seeker;
+    private Rigidbody2D rb;
+
+    private float _Speed;
+    private bool _RotateTowardsDestination;
+    private const string updatePath = "UpdatePath";
+
+    //track where we are in the waypoint array
+    private int currentWaypoint;
+
+    //A* project data type
+    private Path path;
+    private float _StopDistance;
+    private Vector2 _Target;
+
+    public float speed { get => _Speed;  set => _Speed = value;  }
+    public bool rotateTowardsDestination { get => _RotateTowardsDestination;  set => _RotateTowardsDestination = value; }
+    public float stopDistance { get => _StopDistance; set => _StopDistance = value; }
+    public Vector2 target { get => _Target; set => _Target = value; }
+
+    // waypoint the agent is currently trying to reach
+    public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
+    public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
+
+    private void Awake()
+    {
+        seeker = GetComponent<Seeker>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+    private void Start()
+    {
+        // idiot proofing
+        rb.gravityScale = 0;
+        // by default calculate a new path ever .5 seconds to adapt to target moving (causes slightly delayed pathing for fast moving objects but checking every frame causes jittering)
+        InvokeRepeating(updatePath, 0, 0.5f);
+    }
+    private void Update()
+    {
+        //make sure this works
+        if (rotateTowardsDestination)
+        {
+            transform.LookAt(nextWaypoint * Time.deltaTime, Vector2.up);
+        }
+    }
+    private void FixedUpdate()
+    {
+        Vector2 move = nextWaypoint - (Vector2)transform.position;
+        rb.velocity = move.normalized * speed;
+        float distance = Vector2.Distance(transform.position, nextWaypoint);
+        if (distance < stopDistance)
+        {
+            if (currentWaypoint >= path.vectorPath.Count - 1)
+            {
+                UpdatePath();
+                return;
+            }
+            currentWaypoint++;
+        }
+    }
+    public void UpdatePath()
+    {
+        // once seeker has finished calculating a path generate the path data
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(transform.position, target, OnPathComplete);
+        }
+    }
+    private void OnPathComplete(Path p)
+    {
+        // if path does not contain errors reset our current waypoint and store the path data
+        if (!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
+        }
+    }
+}
