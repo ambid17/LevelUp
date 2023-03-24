@@ -19,6 +19,7 @@ namespace Minigames.Fight
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TMP_Text upgradeButtonText;
 
+        private EffectItem _currentEffectItem;
         private Effect _currentEffect;
 
         private EventService _eventService;
@@ -36,7 +37,7 @@ namespace Minigames.Fight
         private void OnEnable()
         {
             // Update the UI in case the currently inspected effect has been changed (i.e.: due to rewardUI)
-            OnEffectSelected(new EffectItemSelectedEvent(_currentEffect));
+            OnEffectSelected(new EffectItemSelectedEvent(_currentEffectItem));
         }
 
         private void OnDestroy()
@@ -47,7 +48,13 @@ namespace Minigames.Fight
 
         public void OnEffectSelected(EffectItemSelectedEvent e)
         {
-            _currentEffect = e.Effect;
+            _currentEffectItem = e.EffectItem;
+
+            if (_currentEffectItem == null)
+            {
+                return;
+            }
+            _currentEffect = _currentEffectItem.effectNode.Effect;
 
             container.SetActive(_currentEffect != null);
             if (_currentEffect == null)

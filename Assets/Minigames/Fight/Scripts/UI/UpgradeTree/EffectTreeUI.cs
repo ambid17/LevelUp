@@ -60,11 +60,26 @@ namespace Minigames.Fight
                 newScale = newScale.Clamp(Vector3.one * 0.4f, Vector3.one * 2f);
                 tree.transform.localScale = newScale;
             }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (_currentParent.parent == null)
+                {
+                    return;
+                }
+                _currentParent.Toggle(false);
+                _currentParent.ToggleChildren(false);
+                _currentParent = _currentParent.parent;
+                _currentParent.Toggle(true);
+                _currentParent.ToggleChildren(true);
+                GameManager.EventService.Dispatch(new EffectItemSelectedEvent(_currentParent));
+            }
         }
 
         private void OnLayoutItemSelected(EffectItemSelectedEvent e)
         {
-            
+            EffectItem selected = e.EffectItem;
+            _currentParent = selected;
             // TODO: reposition the UI to center on the item?
             // TODO: disable/enable the proper tiers of items - this isn't necessary if they are spaced properly
         }
@@ -89,6 +104,7 @@ namespace Minigames.Fight
             var effectItem = Instantiate(effectItemPrefab, treeContainer);
             effectItem.Setup(_effectTree.RootNode, effectItemPrefab);
             effectItem.SetupRoot();
+            _currentParent = effectItem;
         }
     }
 }

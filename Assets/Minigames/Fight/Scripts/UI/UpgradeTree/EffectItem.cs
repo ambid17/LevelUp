@@ -24,7 +24,7 @@ namespace Minigames.Fight
         [SerializeField]
         private Image lineToParent;
         [SerializeField]
-        private EffectItem _parent;
+        public EffectItem parent;
 
         public void Setup(EffectNode node, EffectItem prefab, EffectItem parent = null)
         {
@@ -51,7 +51,7 @@ namespace Minigames.Fight
 
             if (parent != null)
             {
-                _parent = parent;
+                this.parent = parent;
                 // create line
                 lineToParent = Instantiate(lineImagePrefab, transform);
                 lineToParent.transform.position = Vector3.Lerp(transform.position, parent.transform.position, 0.5f);
@@ -87,11 +87,15 @@ namespace Minigames.Fight
 
         private void SelectLayoutItem()
         {
-            GameManager.EventService.Dispatch(new EffectItemSelectedEvent(effectNode.Effect));
+            if (parent == null)
+            {
+                return;
+            }
+            GameManager.EventService.Dispatch(new EffectItemSelectedEvent(this));
             ToggleChildren(true);
             if (children.Count > 0)
             {
-                _parent.ToggleChildrenExcept(false, this);
+                parent.ToggleChildrenExcept(false, this);
             }
         }
 
@@ -141,6 +145,11 @@ namespace Minigames.Fight
                 child.Toggle(shouldBeActive);
                 child.ToggleChildrenRecursively(shouldBeActive);
             }
+        }
+
+        public override string ToString()
+        {
+            return effectNode.Name;
         }
     }
 }
