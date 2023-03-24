@@ -18,7 +18,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     private int currentWaypoint;
 
     //A* project data type
-    private Path path;
+    private Path _Path;
     private float _StopDistance;
     private Vector2 _Target;
 
@@ -30,6 +30,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     // waypoint the agent is currently trying to reach
     public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
     public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
+    public Path path => _Path;
 
     private void Awake()
     {
@@ -79,8 +80,14 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         // if path does not contain errors reset our current waypoint and store the path data
         if (!p.error)
         {
-            path = p;
+            _Path = p;
             currentWaypoint = 0;
         }
+    }
+
+    public void Stop()
+    {
+        target = transform.position;
+        rb.velocity = Vector2.zero;
     }
 }
