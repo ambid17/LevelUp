@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,16 +14,23 @@ namespace Minigames.Fight
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text text;
         [SerializeField] private Image lineImagePrefab;
+        [SerializeField] private GameObject container;
         private EffectItem _effectItemPrefab;
 
         public EffectNode effectNode;
 
-        public void Setup(EffectNode node, EffectItem prefab)
+        [SerializeField]
+        private List<EffectItem> children;
+        [SerializeField]
+        private Image lineToParent;
+        [SerializeField]
+        private EffectItem _parent;
+
+        public void Setup(EffectNode node, EffectItem prefab, EffectItem parent = null)
         {
             effectNode = node;
             _effectItemPrefab = prefab;
 
-            button.interactable = node.Effect != null;
             icon.gameObject.SetActive(false);
             text.gameObject.SetActive(false);
             gameObject.name = effectNode.Name;
@@ -41,35 +49,98 @@ namespace Minigames.Fight
 
             button.onClick.AddListener(SelectLayoutItem);
 
+            if (parent != null)
+            {
+                _parent = parent;
+                // create line
+                lineToParent = Instantiate(lineImagePrefab, transform);
+                lineToParent.transform.position = Vector3.Lerp(transform.position, parent.transform.position, 0.5f);
+                float width = Vector2.Distance(transform.position, parent.transform.position);
+                lineToParent.rectTransform.sizeDelta = new Vector2(width, 1);
+                
+                // rotate line
+                Vector2 offset = (transform.position - parent.transform.position).AsVector2();
+                float rotation = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+                lineToParent.transform.rotation = Quaternion.Euler(0,0,rotation);
+            }
+
             GenerateChildren();
         }
 
         private void GenerateChildren()
         {
+            float angleInterval = 360f / effectNode.Children.Count;
+            float angle = 315;
             for (int i = 0; i < effectNode.Children.Count; i++)
             {
                 // positioning
                 var effectItem = Instantiate(_effectItemPrefab, transform);
                 EffectNode newNode = effectNode.Children[i];
-                effectItem.Setup(newNode, _effectItemPrefab);
-                effectItem.transform.localPosition = new Vector3(i*150, -150,0);
+                effectItem.transform.localPosition = new Vector2(150, 0).Rotate(angle);
 
-                // create line
-                var image = Instantiate(lineImagePrefab, transform);
-                image.transform.position = Vector3.Lerp(transform.position, effectItem.transform.position, 0.5f);
-                float width = Vector2.Distance(transform.position, effectItem.transform.position);
-                image.rectTransform.sizeDelta = new Vector2(width, 1);
-                
-                // rotate line
-                Vector2 offset = (transform.position - effectItem.transform.position).AsVector2();
-                float rotation = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-                image.transform.rotation = Quaternion.Euler(0,0,rotation);
+                effectItem.Setup(newNode, _effectItemPrefab, this);
+                children.Add(effectItem);
+
+                angle = (angle + angleInterval) % 360;
             }
         }
 
         private void SelectLayoutItem()
         {
             GameManager.EventService.Dispatch(new EffectItemSelectedEvent(effectNode.Effect));
+            ToggleChildren(true);
+            if (children.Count > 0)
+            {
+                _parent.ToggleChildrenExcept(false, this);
+            }
+        }
+
+        public void ToggleChildren(bool shouldBeActive)
+        {
+            foreach (var child in children)
+            {
+                child.Toggle(shouldBeActive);
+            }
+        }
+
+        public void ToggleChildrenExcept(bool shouldBeActive, EffectItem itemToIgnore)
+        {
+            Toggle(shouldBeActive);
+            
+            foreach (var child in children)
+            {
+                if (child == itemToIgnore)
+                {
+                    continue;
+                }
+                child.Toggle(shouldBeActive);
+            }
+        }
+
+        public void Toggle(bool shouldBeActive)
+        {
+            container.SetActive(shouldBeActive);
+            if (lineToParent != null)
+            {
+                lineToParent.gameObject.SetActive(shouldBeActive);
+            }
+        }
+        
+        public void SetupRoot()
+        {
+            foreach (var child in children)
+            {
+                child.ToggleChildrenRecursively(false);
+            }
+        }
+
+        public void ToggleChildrenRecursively(bool shouldBeActive)
+        {
+            foreach (var child in children)
+            {
+                child.Toggle(shouldBeActive);
+                child.ToggleChildrenRecursively(shouldBeActive);
+            }
         }
     }
 }
