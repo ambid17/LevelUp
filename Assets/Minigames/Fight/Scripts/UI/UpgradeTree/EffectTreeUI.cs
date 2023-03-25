@@ -20,6 +20,7 @@ namespace Minigames.Fight
 
         private bool _isDragging;
         private Vector3 _lastMousePos;
+        [SerializeField]
         private EffectItem _currentParent;
         
         void Start()
@@ -79,6 +80,11 @@ namespace Minigames.Fight
         private void OnLayoutItemSelected(EffectItemSelectedEvent e)
         {
             EffectItem selected = e.EffectItem;
+
+            if (selected == null)
+            {
+                return;
+            }
             _currentParent = selected;
             // TODO: reposition the UI to center on the item?
             // TODO: disable/enable the proper tiers of items - this isn't necessary if they are spaced properly
