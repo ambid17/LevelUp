@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-    public Vector3 newPos => new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), 0);
+    public Vector2 newPos => new Vector2(Random.Range(-100, 100), Random.Range(-100, 100));
 }

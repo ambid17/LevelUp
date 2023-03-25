@@ -12,10 +12,9 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         [Tooltip("If target is null then use the target position")]
         public SharedVector2 targetPosition;
 
-        public override void OnStart()
+        public override void OnAwake()
         {
-            base.OnStart();
-
+            base.OnAwake();
             SetDestination(Target());
         }
 
@@ -27,21 +26,17 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             {
                 return TaskStatus.Success;
             }
-
-            if (!SetDestination(Target()))
-            {
-                return TaskStatus.Failure;
-            }
+            SetDestination(Target());
 
             return TaskStatus.Running;
         }
 
         // Return targetPosition if target is null
-        private Vector3 Target()
+        private Vector2 Target()
         {
             if (target.Value != null)
             {
-                return target.Value.transform.position;
+                return target.Value.position;
             }
             return targetPosition.Value;
         }

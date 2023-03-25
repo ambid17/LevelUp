@@ -29,8 +29,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         }
         protected override bool SetDestination(Vector3 target)
         {
-            agent.target = target;
-            return !agent.path.error;
+            agent.target = (Vector2)target;
+            return true;
         }
         protected override Vector3 Velocity()
         {

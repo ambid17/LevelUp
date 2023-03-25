@@ -55,6 +55,10 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     }
     private void FixedUpdate()
     {
+        if (path == null)
+        {
+            return;
+        }
         Vector2 move = nextWaypoint - (Vector2)transform.position;
         rb.velocity = move.normalized * speed;
         float distance = Vector2.Distance(transform.position, nextWaypoint);

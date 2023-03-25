@@ -14,5 +14,6 @@ namespace CustomPathfinding
         public Path path {get;}
         public Rigidbody2D rb { get; }
         public void Stop();
+        public void UpdatePath();
     }
 }
