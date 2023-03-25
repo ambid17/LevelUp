@@ -27,6 +27,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                 return TaskStatus.Success;
             }
             SetDestination(Target());
+            
+            if (agent.path.error)
+            {
+                return TaskStatus.Failure;
+            }
 
             return TaskStatus.Running;
         }
