@@ -58,8 +58,6 @@ namespace Minigames.Fight
 
                 projectile.Setup(MyEntity, direction);
             }
-
-            CheckReload();
         }
         
         // TODO: handle this in the projectile using physics2d.overlapCirlce()
