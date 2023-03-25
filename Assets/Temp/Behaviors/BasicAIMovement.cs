@@ -45,14 +45,6 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         // by default calculate a new path ever .5 seconds to adapt to target moving (causes slightly delayed pathing for fast moving objects but checking every frame causes jittering)
         InvokeRepeating(updatePath, 0, 0.5f);
     }
-    private void Update()
-    {
-        //make sure this works
-        if (rotateTowardsDestination)
-        {
-            transform.LookAt(nextWaypoint * Time.deltaTime, Vector2.up);
-        }
-    }
     private void FixedUpdate()
     {
         if (path == null)
@@ -70,6 +62,10 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
                 return;
             }
             currentWaypoint++;
+        }
+        if (rotateTowardsDestination)
+        {
+            //TODO rotation math
         }
     }
     public void UpdatePath()
