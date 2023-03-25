@@ -55,10 +55,10 @@ namespace Minigames.Fight
         
         protected override void Shoot()
         {
-            if (_comboState == ComboState.Slash1)
-            {
-                meleeWeaponInstance.TriggerAnimation("Slash1");
-            }
+            // if (_comboState == ComboState.Slash1)
+            // {
+                meleeWeaponInstance.TriggerAnimation("Attack");
+            // }
         }
         
         protected override void UseWeaponAbility()
