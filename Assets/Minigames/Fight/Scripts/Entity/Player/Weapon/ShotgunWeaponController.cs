@@ -42,7 +42,7 @@ namespace Minigames.Fight
 
             Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             
-            projectile.Setup(MyEntity, direction);
+            projectile.Setup(MyEntity, direction, true);
         }
     }
 }

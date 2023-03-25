@@ -11,6 +11,7 @@ namespace Minigames.Fight
         private float _deathTimer = 0;
         private Vector2 _shootDirection;
         private int _penetrationsLeft;
+        private bool _canPenetrateIndefinitely;
         protected bool _isMarkedForDeath;
 
         protected Entity _sourceEntity;
@@ -46,11 +47,12 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(Entity sourceEntity, Vector2 direction)
+        public void Setup(Entity sourceEntity, Vector2 direction, bool canPenetrateIndefinitely = false)
         {
             _sourceEntity = sourceEntity;
             _shootDirection = direction.normalized;
             // TODO: look at effects for this
+            _canPenetrateIndefinitely = canPenetrateIndefinitely;
             _penetrationsLeft = 1;
         }
 
@@ -69,6 +71,11 @@ namespace Minigames.Fight
             {
                 Entity enemyEntity = col.gameObject.GetComponent<Entity>();
                 _sourceEntity.OnHitOther(enemyEntity);
+
+                if (_canPenetrateIndefinitely)
+                {
+                    return;
+                }
             
                 if (_penetrationsLeft <= 0)
                 {
