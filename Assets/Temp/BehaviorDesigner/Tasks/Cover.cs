@@ -118,6 +118,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                 // Return success if the agent isn't going to look at the cover point or it has completely rotated to look at the cover point
                 if (!lookAtCoverPoint.Value || Quaternion.Angle(transform.rotation, rotation) < rotationEpsilon.Value)
                 {
+                    if (stopOnTaskEnd.Value)
+                    {
+                        Stop();
+                    }
                     return TaskStatus.Success;
                 }
                 else

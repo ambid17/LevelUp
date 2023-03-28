@@ -29,7 +29,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 
     // waypoint the agent is currently trying to reach
     public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
-    public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
+    public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count-1]) < stopDistance;
     public Path path => _Path;
     public Rigidbody2D rb => _rb;
 
@@ -90,5 +90,6 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     {
         target = transform.position;
         rb.velocity = Vector2.zero;
+        speed = 0;
     }
 }

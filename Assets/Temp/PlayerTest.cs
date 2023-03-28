@@ -4,5 +4,18 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-    public Vector2 newPos => new Vector2(Random.Range(-50, 50), Random.Range(-50, 50));
+    Rigidbody2D rb;
+
+    private float speed = 5;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+    private void FixedUpdate()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        Vector2 move = new Vector2(x, y);
+        rb.velocity = move.normalized * speed;
+    }
 }

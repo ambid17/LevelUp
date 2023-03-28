@@ -25,6 +25,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             SetDestination(Target());
             if (HasArrived())
             {
+                if (stopOnTaskEnd.Value)
+                {
+                    Stop();
+                }
                 return TaskStatus.Success;
             }
             
