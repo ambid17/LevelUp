@@ -12,6 +12,11 @@ public class EnemyAITest : MonoBehaviour
     public float health => _Health;
     public Vector2 enemyPos => transform.position;
 
+    [SerializeField]
+    float offset;
+    [SerializeField]
+    LayerMask layerMask;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
