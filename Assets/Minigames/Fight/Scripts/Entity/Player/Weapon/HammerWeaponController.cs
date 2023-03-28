@@ -57,7 +57,7 @@ namespace Minigames.Fight
         {
             // if (_comboState == ComboState.Slash1)
             // {
-                meleeWeaponInstance.TriggerAnimation("Attack");
+                meleeWeaponInstance.TriggerAnimation("Swing");
             // }
         }
         
