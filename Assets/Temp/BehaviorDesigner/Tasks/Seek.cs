@@ -24,6 +24,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         {
             if (agent.path != null && agent.pathInvalid)
             {
+                Stop();
                 return TaskStatus.Failure;
             }
             SetDestination(Target());

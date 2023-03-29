@@ -27,10 +27,12 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     public float stopDistance { get => _StopDistance; set => _StopDistance = value; }
     public Vector2 target { get => _Target; set => _Target = value; }
 
-    // waypoint the agent is currently trying to reach
+    // Waypoint the agent is currently trying to reach
     public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
+    // Destination has been reached if agent is within stopping distance of the final waypoint
     public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count-1]) < stopDistance;
-    public bool pathInvalid => Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance || path.error;
+    // Path is invalid if the final waypoint is not within stopping distance of target
+    public bool pathInvalid => path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
     public Path path => _Path;
     public Rigidbody2D rb => _rb;
 
