@@ -29,8 +29,10 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 
     // Waypoint the agent is currently trying to reach
     public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
+
     // Destination has been reached if agent is within stopping distance of the final waypoint
     public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count-1]) < stopDistance;
+
     // Path is invalid if the final waypoint is not within stopping distance of target
     public bool pathInvalid => path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
     public Path path => _Path;
@@ -50,6 +52,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     }
     private void FixedUpdate()
     {
+        // If we don't have a path moving is bad
         if (path == null)
         {
             return;
@@ -57,6 +60,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         Vector2 move = nextWaypoint - (Vector2)transform.position;
         rb.velocity = move.normalized * speed;
         float distance = Vector2.Distance(transform.position, nextWaypoint);
+        // If waypoint has been reached then agent heads towards next waypoint on the list, if no other waypoints exist then agent recalculates the path
         if (distance < stopDistance)
         {
             if (currentWaypoint >= path.vectorPath.Count - 1)

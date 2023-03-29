@@ -45,9 +45,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             RaycastHit2D hit2D;
             int raycastCount = 0;
 
-            //offset the direction by 45 degrees so that the first colliders found are in a vision cone in front of the player
+            // Offset the direction by 45 degrees so that the first colliders found are in a vision cone in front of the player
             var direction = Quaternion.Euler(0, 0, transform.eulerAngles.z + 45) * Vector2.up;
             float step = 0;
+            // Value to add to the max distance of each iteration
             float checkIncrement = maxCoverDistance.Value / maxCoverChecks.Value;
             float distance = checkIncrement;
             var coverTarget = transform.position;
@@ -70,6 +71,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                         {
                             // Calculate actual destination using normal and offset
                             coverTarget = hit2D.point + hit2D.normal * coverOffset.Value;
+
+                            // If we have not begun adding to the list or the position is not already in the list add it
                             if (coverPoints.Count == 0 || IsValid(coverTarget))
                             {
                                 coverPoint = hit2D.point;
@@ -85,11 +88,12 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                             }
                         }
                     }
-                    // Keep sweeiping along the z axis
+                    // Keep sweeping along the z axis
                     step += rayStep.Value;
                     direction = Quaternion.Euler(0, 0, transform.eulerAngles.z + 45 - step) * Vector2.up;
                     raycastCount++;
                 }
+                //reset raycasts and increase max distance by increment
                 raycastCount = 0;
                 distance += checkIncrement;
             }
@@ -98,7 +102,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             {
                 //select a random cover point from the list and pass it into the pathfinding script
                 int i = Random.Range(0, coverPoints.Count);
-                Vector2 pos = coverPoints[i];
                 SetDestination(coverPoints[i]);
             }
 
@@ -108,6 +111,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         // Seek to the cover point. Return success as soon as the location is reached or the agent is looking at the cover point
         public override TaskStatus OnUpdate()
         {
+            // Fails if no cover point reached
             if (!foundCover)
             {
                 return TaskStatus.Failure;
