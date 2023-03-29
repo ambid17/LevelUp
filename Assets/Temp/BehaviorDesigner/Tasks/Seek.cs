@@ -22,6 +22,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         // Return running if the agent hasn't reached the destination yet
         public override TaskStatus OnUpdate()
         {
+            if (agent.path != null && agent.pathInvalid)
+            {
+                return TaskStatus.Failure;
+            }
             SetDestination(Target());
             if (HasArrived())
             {
@@ -30,11 +34,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                     Stop();
                 }
                 return TaskStatus.Success;
-            }
-            
-            if (agent.path != null && agent.path.error)
-            {
-                return TaskStatus.Failure;
             }
 
             return TaskStatus.Running;

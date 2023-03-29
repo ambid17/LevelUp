@@ -13,6 +13,7 @@ namespace CustomPathfinding
         public Vector2 target { get; set; }
         public Path path {get;}
         public Rigidbody2D rb { get; }
+        public bool pathInvalid { get; }
         public void Stop();
         public void UpdatePath();
     }
