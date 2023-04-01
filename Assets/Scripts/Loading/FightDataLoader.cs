@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class FightDataLoader : MonoBehaviour
 {
-    public ProgressSettings progressSettings;
     public EffectSettings effectSettings;
     public static int TargetSceneIndex;
 
@@ -27,6 +26,7 @@ public class FightDataLoader : MonoBehaviour
     {
         LoadProgressData();
         LoadEffectData();
+        LoadWeaponData();
     }
 
     private void LoadEffectData()
@@ -49,21 +49,33 @@ public class FightDataLoader : MonoBehaviour
         {
             LoadSerializedProgress(data);
         }
+        
+        Platform.ProgressSettings.UnlockWorlds();
     }
     
     public void LoadSerializedProgress(ProgressModel progressModel)
     {
-        progressSettings.Currency = progressModel.Currency;
+        Platform.ProgressSettings.Currency = progressModel.Currency;
+        Platform.ProgressSettings.TutorialState = progressModel.TutorialState;
         
         for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
         {
-            progressSettings.Worlds[worldIndex].CurrencyPerMinute = progressModel.WorldData[worldIndex].CurrencyPerMinute;
-            progressSettings.Worlds[worldIndex].LastTimeVisited = progressModel.WorldData[worldIndex].LastTimeVisited;
+            Platform.ProgressSettings.Worlds[worldIndex].CurrencyPerMinute = progressModel.WorldData[worldIndex].CurrencyPerMinute;
+            Platform.ProgressSettings.Worlds[worldIndex].LastTimeVisited = progressModel.WorldData[worldIndex].LastTimeVisited;
             for (int countryIndex = 0; countryIndex < progressModel.WorldData[worldIndex].CountryData.Count; countryIndex++)
             {
-                progressSettings.Worlds[worldIndex].Countries[countryIndex].EnemyKillCount =
+                Platform.ProgressSettings.Worlds[worldIndex].Countries[countryIndex].EnemyKillCount =
                     progressModel.WorldData[worldIndex].CountryData[countryIndex].Kills;
             }
+        }
+    }
+    
+    private void LoadWeaponData()
+    {
+        var weaponModel = WeaponDataManager.Load();
+        if (weaponModel != null)
+        {
+            Platform.WeaponSettings.FromModel(weaponModel);
         }
     }
 }

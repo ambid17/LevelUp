@@ -22,20 +22,26 @@ namespace Minigames.Fight
             equippedWeapon = null;
         }
 
-        public void EquipWeapon(Weapon weapon)
-        {
-            equippedWeapon = weapon;
-        }
-
         public void Init()
         {
             if (equippedWeapon == null)
             {
                 equippedWeapon = allWeapons.FirstOrDefault(wep => wep.weaponType == defaultWeaponType);
-                
             }
             
             equippedWeapon.Init();
+        }
+
+        public WeaponModel ToModel()
+        {
+            WeaponModel model = new WeaponModel();
+            model.equippedWeaponType = equippedWeapon.weaponType;
+            return model;
+        }
+
+        public void FromModel(WeaponModel model)
+        {
+            equippedWeapon = allWeapons.FirstOrDefault(w => w.weaponType == model.equippedWeaponType);
         }
     }
 }

@@ -6,20 +6,17 @@ namespace Minigames.Fight
 {
     public class SettingsManager : MonoBehaviour
     {
-        public PlayerSettings playerSettings;
+        public ProgressSettings progressSettings;
         public WeaponSettings weaponSettings;
         public EffectSettings effectSettings;
-        public ProgressSettings progressSettings;
+        public PlayerSettings playerSettings;
         public EnemySpawnerSettings enemySpawnerSettings;
         public IncomeSettings incomeSettings;
-
-        public int UpgradePurchaseCount;
 
         private EventService _eventService;
         void Start()
         {
             _eventService = GameManager.EventService;
-            //_eventService.Add<EffectPurchasedEvent>(OnUpgradePurchased);
         }
 
         /// <summary>
@@ -42,22 +39,6 @@ namespace Minigames.Fight
             progressSettings.Init();
             enemySpawnerSettings.Init();
             incomeSettings.Init();
-            //effectSettings.UnlockAllEffects();
-        }
-
-        public List<Effect> GetUnlockedEffects()
-        {
-            return effectSettings.UnlockedEffects;
-        }
-
-        public ProgressModel GetProgressForSerialization()
-        {
-            ProgressModel toReturn = new ProgressModel();
-
-            toReturn.WorldData = progressSettings.GetWorldData();
-            toReturn.Currency = progressSettings.Currency;
-
-            return toReturn;
         }
     }
 }

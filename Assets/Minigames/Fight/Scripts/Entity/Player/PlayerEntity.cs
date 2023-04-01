@@ -84,6 +84,17 @@ namespace Minigames.Fight
         {
             Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
         }
+        
+        public override void TakeDamage(float damage)
+        {
+            CurrentHp -= damage;
+            VisualController.StartDamageFx(damage);
+
+            if (IsDead)
+            {
+                Die();
+            }
+        }
 
         protected override void Update()
         {
@@ -91,18 +102,6 @@ namespace Minigames.Fight
             if (IsDead)
             {
                 WaitForRevive();
-            }
-        }
-        
-        public override void TakeHit(HitData hit)
-        {
-            float damage = hit.CalculateDamage();
-            CurrentHp -= damage;
-            VisualController.StartDamageFx(damage);
-
-            if (IsDead)
-            {
-                Die();
             }
         }
         

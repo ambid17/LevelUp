@@ -16,8 +16,6 @@ public class WorldInspector : MonoBehaviour
     [SerializeField] private Button travelButton;
     [SerializeField] private GameObject container;
     
-    [SerializeField] private ProgressSettings _progressSettings;
-
     private const string loadingSceneName = "Loading";
 
     private World _world;
@@ -41,6 +39,7 @@ public class WorldInspector : MonoBehaviour
         conquerButton.onClick.AddListener(ConquerPlanet);
         travelButton.onClick.AddListener(TravelToPlanet);
 
+        conquerButton.interactable = world.IsUnlocked;
         travelButton.interactable = world.IsConquered();
     }
 
@@ -52,15 +51,17 @@ public class WorldInspector : MonoBehaviour
     
     private void ConquerPlanet()
     {
-        _progressSettings.CurrentWorld = _world;
-        _progressSettings.CurrentWorld.IsFighting = true;
+        GameManager.IsLoadingScene = true;
+        Platform.ProgressSettings.CurrentWorld = _world;
+        Platform.ProgressSettings.CurrentWorld.IsFighting = true;
         SceneManager.LoadScene(loadingSceneName);
     }
     
     private void TravelToPlanet()
     {
-        _progressSettings.CurrentWorld = _world;
-        _progressSettings.CurrentWorld.IsFighting = false;
+        GameManager.IsLoadingScene = true;
+        Platform.ProgressSettings.CurrentWorld = _world;
+        Platform.ProgressSettings.CurrentWorld.IsFighting = false;
         SceneManager.LoadScene(loadingSceneName);
     }
 

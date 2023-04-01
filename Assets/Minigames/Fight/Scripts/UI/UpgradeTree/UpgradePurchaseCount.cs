@@ -24,7 +24,6 @@ namespace Minigames.Fight
 
             purchaseCountIndex = 0;
             int purchaseCount = purchaseCounts[purchaseCountIndex];
-            GameManager.SettingsManager.UpgradePurchaseCount = purchaseCount;
             countText.text = $"{purchaseCount}x";
         }
 
@@ -32,10 +31,9 @@ namespace Minigames.Fight
         {
             purchaseCountIndex = ++purchaseCountIndex % purchaseCounts.Count;
             int purchaseCount = purchaseCounts[purchaseCountIndex];
-            GameManager.SettingsManager.UpgradePurchaseCount = purchaseCount;
             countText.text = $"{purchaseCount}x";
 
-            _eventService.Dispatch<PurchaseCountChangedEvent>();
+            _eventService.Dispatch(new PurchaseCountChangedEvent(purchaseCount));
         }
     }
 }

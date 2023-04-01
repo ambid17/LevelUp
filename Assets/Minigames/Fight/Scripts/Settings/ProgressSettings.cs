@@ -19,31 +19,39 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<World> Worlds;
 
-        [Header("Run-time Values")] public float Currency;
+        [Header("Run-time Values")] 
+        public float Currency;
+        public TutorialState TutorialState;
+        
 
-        private World _currentWorld;
+        [SerializeField]
+        private World currentWorld;
 
         public World CurrentWorld
         {
             get
             {
+                if (currentWorld == null)
+                {
+                    return null;
+                }
 #if UNITY_EDITOR
                 // Allow the game scenes to be played not from the main menu
-                if (string.IsNullOrEmpty(_currentWorld.Name))
+                if (string.IsNullOrEmpty(currentWorld.Name))
                 {
                     int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
                     
-                    _currentWorld = Worlds.FirstOrDefault(world => world.SkillingSceneIndex == currentBuildIndex);
+                    currentWorld = Worlds.FirstOrDefault(world => world.SkillingSceneIndex == currentBuildIndex);
 
-                    if (_currentWorld == null)
+                    if (currentWorld == null)
                     {
-                        _currentWorld = Worlds[0];
+                        currentWorld = Worlds[0];
                     }
                 }
 #endif
-                return _currentWorld;
+                return currentWorld;
             }
-            set { _currentWorld = value; }
+            set { currentWorld = value; }
         }
 
         public int WorldsConquered
@@ -66,6 +74,7 @@ namespace Minigames.Fight
         {
             CurrentWorld = null;
             Currency = 0;
+            TutorialState = TutorialState.None;
 
             foreach (var world in Worlds)
             {
@@ -87,6 +96,17 @@ namespace Minigames.Fight
             }
 
             CurrentWorld.CurrentCountry = highestCountry;
+        }
+        
+        public ProgressModel GetProgressForSerialization()
+        {
+            ProgressModel toReturn = new ProgressModel();
+
+            toReturn.WorldData = GetWorldData();
+            toReturn.Currency = Currency;
+            toReturn.TutorialState = TutorialState;
+
+            return toReturn;
         }
 
         public List<WorldData> GetWorldData()
@@ -128,6 +148,16 @@ namespace Minigames.Fight
                 CurrentWorld.CurrentCountry.EnemyKillCount = 0;
             }
         }
+
+        public void UnlockWorlds()
+        {
+            int conquered = WorldsConquered;
+
+            for (int i = 0; i < Worlds.Count; i++)
+            {
+                Worlds[i].IsUnlocked = conquered >= i;
+            }
+        }
     }
 
     public enum WorldType
@@ -142,17 +172,20 @@ namespace Minigames.Fight
     [Serializable]
     public class World
     {
-        [Header("Set in Editor")] public string Name;
+        [Header("Set in Editor")] 
+        public string Name;
         public int SkillingSceneIndex;
         public Sprite WorldSprite;
         public List<Country> Countries;
         public List<Enemy> Enemies;
         public WorldType WorldType;
 
-        [Header("Run-time Values")] public float CurrencyPerMinute;
+        [Header("Run-time Values")] 
+        public float CurrencyPerMinute;
         public DateTime LastTimeVisited;
         public Country CurrentCountry;
         public bool IsFighting;
+        public bool IsUnlocked;
 
 
         public void SetDefaults()
@@ -160,6 +193,8 @@ namespace Minigames.Fight
             CurrencyPerMinute = 0;
             LastTimeVisited = DateTime.Now;
             CurrentCountry = null;
+            IsFighting = false;
+            IsUnlocked = false;
 
             foreach (var country in Countries)
             {

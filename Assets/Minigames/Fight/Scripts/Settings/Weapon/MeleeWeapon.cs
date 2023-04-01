@@ -9,6 +9,7 @@ namespace Minigames.Fight
     [Serializable]
     public class MeleeWeapon : Weapon
     {
+        public MeleeWeaponInstance weaponPrefab;
         public float attackRange;
         public float animationLength;
     }

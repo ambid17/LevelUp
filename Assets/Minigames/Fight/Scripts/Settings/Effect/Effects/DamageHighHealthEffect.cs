@@ -20,7 +20,7 @@ namespace Minigames.Fight
         private readonly string _description = "Deal {0}% more damage to enemies >{1}% hp";
         public override string GetDescription()
         {
-            return string.Format(_description, percentDamagePerStack * 100, minHpPercent * 100);
+            return string.Format(_description, Total * 100, minHpPercent * 100);
         }
         public override string GetNextUpgradeDescription(int purchaseCount)
         {

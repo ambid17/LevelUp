@@ -11,12 +11,15 @@ namespace Minigames.Fight
     {
         public float slowChance = 0.1f;
         public float duration = 2f;
+        public float Duration => duration;
         public float slowAmount = 0.01f;
         public float chanceScalar = 0.01f;
+        public float TickRate => 0;
 
         public float SlowChance => slowChance + (chanceScalar * AmountOwned);
         
         private readonly string _description = "{0}% to slow enemies by {1}% for {2} seconds";
+        
 
         public override string GetDescription()
         {
@@ -45,10 +48,9 @@ namespace Minigames.Fight
         public void TryApplyEffect(HitData hit)
         {
             bool doesSlow = Random.value < SlowChance;
-            doesSlow = true;
             if (doesSlow)
             {
-                StatusEffectInstance.Create(hit.Source, hit.Target, this, duration);
+                StatusEffectInstance.Create(hit.Source, hit.Target, this);
             }
         }
 
@@ -62,7 +64,7 @@ namespace Minigames.Fight
             target.MovementController.RemoveMoveEffect(this);
         }
 
-        public void OnTick()
+        public void OnTick(Entity target)
         {
             
         }

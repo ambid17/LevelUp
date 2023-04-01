@@ -10,5 +10,6 @@ namespace Minigames.Fight
         public Type Type;
         public string Name;
         public int AmountOwned;
+        public bool IsUnlocked;
     }
 }

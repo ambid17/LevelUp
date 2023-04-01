@@ -17,7 +17,7 @@ namespace Minigames.Fight
 
         public override string GetDescription()
         {
-            return string.Format(_description, percentDamagePerStack * 100, executePercent * 100);
+            return string.Format(_description, Total * 100, executePercent * 100);
         }
         public override string GetNextUpgradeDescription(int purchaseCount)
         {

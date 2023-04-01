@@ -53,7 +53,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// <summary>
     /// Initialization override
     /// </summary>
-    public virtual void Initialize()
+    protected virtual void Initialize()
     {
     }
 }

@@ -33,7 +33,8 @@ namespace Minigames.Fight
             {
                 Type = effect.GetType(),
                 Name = effect.Name,
-                AmountOwned = effect.AmountOwned
+                AmountOwned = effect.AmountOwned,
+                IsUnlocked = effect.IsUnlocked
             };
 
             effects.Add(newEffect);

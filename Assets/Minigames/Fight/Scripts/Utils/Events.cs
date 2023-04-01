@@ -54,17 +54,25 @@ namespace Minigames.Fight
         }
     }
     
-    public class EffectUpgradeItemSelectedEvent : IEvent
+    public class EffectItemSelectedEvent : IEvent
     {
-        public EffectUpgradeItem LayoutItem;
+        public EffectItem EffectItem;
 
-        public EffectUpgradeItemSelectedEvent(EffectUpgradeItem layoutItem)
+        public EffectItemSelectedEvent(EffectItem effectItem)
         {
-            LayoutItem = layoutItem;
+            EffectItem = effectItem;
         }
     }
 
-    public class PurchaseCountChangedEvent { }
+    public class PurchaseCountChangedEvent : IEvent
+    {
+        public int PurchaseCount;
+
+        public PurchaseCountChangedEvent(int purchaseCount)
+        {
+            PurchaseCount = purchaseCount;
+        }
+    }
 
 
     public class PlayerAmmoUpdatedEvent : IEvent

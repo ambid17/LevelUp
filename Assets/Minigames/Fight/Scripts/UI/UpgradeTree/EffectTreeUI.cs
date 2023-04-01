@@ -9,26 +9,26 @@ namespace Minigames.Fight
 {
     public class EffectTreeUI : UIPanel
     {
-        [SerializeField] private EffectUpgradeItem effectItemPrefab;
+        [SerializeField] private EffectItem effectItemPrefab;
 
         [SerializeField] private Transform treeContainer;
         [SerializeField] private Transform tree;
-        [SerializeField] private EffectInspector inspector;
 
         [SerializeField] private Button closeButton;
 
         private EffectTree _effectTree;
 
-        private Camera _mainCamera;
         private bool _isDragging;
         private Vector3 _lastMousePos;
+        [SerializeField]
+        private EffectItem _currentParent;
+        
         void Start()
         {
-            _mainCamera = Camera.main;
             closeButton.onClick.AddListener(Close);
             BuildTree();
             GenerateUi();
-            GameManager.EventService.Add<EffectUpgradeItemSelectedEvent>(OnLayoutItemSelected);
+            GameManager.EventService.Add<EffectItemSelectedEvent>(OnLayoutItemSelected);
         }
 
         private void Update()
@@ -36,7 +36,6 @@ namespace Minigames.Fight
             if (Input.GetMouseButtonDown(0))
             {
                 _isDragging = true;
-                //_lastMousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 _lastMousePos = Input.mousePosition;
             }
         
@@ -55,12 +54,38 @@ namespace Minigames.Fight
             
             if (Input.mouseScrollDelta.magnitude != 0)
             {
-                tree.transform.localScale += new Vector3(Input.mouseScrollDelta.y, Input.mouseScrollDelta.y) * 0.5f;
+                Vector3 newScale = tree.transform.localScale +
+                                   new Vector3(Input.mouseScrollDelta.y, Input.mouseScrollDelta.y) * 0.2f;
+
+                // Clamp the zoom to reasonable values
+                newScale = newScale.Clamp(Vector3.one * 0.4f, Vector3.one * 2f);
+                tree.transform.localScale = newScale;
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (_currentParent.parent == null)
+                {
+                    return;
+                }
+                _currentParent.Toggle(false);
+                _currentParent.ToggleChildren(false);
+                _currentParent = _currentParent.parent;
+                _currentParent.Toggle(true);
+                _currentParent.ToggleChildren(true);
+                GameManager.EventService.Dispatch(new EffectItemSelectedEvent(_currentParent));
             }
         }
 
-        private void OnLayoutItemSelected(EffectUpgradeItemSelectedEvent e)
+        private void OnLayoutItemSelected(EffectItemSelectedEvent e)
         {
+            EffectItem selected = e.EffectItem;
+
+            if (selected == null)
+            {
+                return;
+            }
+            _currentParent = selected;
             // TODO: reposition the UI to center on the item?
             // TODO: disable/enable the proper tiers of items - this isn't necessary if they are spaced properly
         }
@@ -84,6 +109,8 @@ namespace Minigames.Fight
         {
             var effectItem = Instantiate(effectItemPrefab, treeContainer);
             effectItem.Setup(_effectTree.RootNode, effectItemPrefab);
+            effectItem.SetupRoot();
+            _currentParent = effectItem;
         }
     }
 }

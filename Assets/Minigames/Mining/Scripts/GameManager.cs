@@ -50,7 +50,7 @@ namespace Minigames.Mining
                 Instance._eventService.Dispatch<OnCurrencyUpdatedEvent>();
             }
         }
-        public override void Initialize()
+        protected override void Initialize()
         {
             _eventService = GameManager.EventService;
         }

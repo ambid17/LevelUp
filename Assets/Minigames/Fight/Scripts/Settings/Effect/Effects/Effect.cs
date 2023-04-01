@@ -28,7 +28,8 @@ namespace Minigames.Fight
         public abstract string GetNextUpgradeDescription(int purchaseCount);
         
         public Sprite Icon;
-        
+
+        public bool IsUnlocked;
         public int AmountOwned;
         public int MaxAmountOwned;
         public float BaseCost;
@@ -57,10 +58,9 @@ namespace Minigames.Fight
         /// <param name="settings"></param>
         public virtual void Unlock(EffectSettings settings)
         {
-            if (!settings.UnlockedEffects.Contains(this))
+            if (!IsUnlocked)
             {
-                AmountOwned = 1;
-                settings.UnlockedEffects.Add(this);
+                IsUnlocked = true;
                 switch (TriggerType)
                 {
                     case EffectTriggerType.OnHit:

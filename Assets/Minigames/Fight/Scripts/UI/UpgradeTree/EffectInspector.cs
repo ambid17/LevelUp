@@ -11,6 +11,7 @@ namespace Minigames.Fight
 {
     public class EffectInspector : MonoBehaviour
     {
+        [SerializeField] private GameObject container;
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text descriptionText;
@@ -18,52 +19,55 @@ namespace Minigames.Fight
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TMP_Text upgradeButtonText;
 
+        private EffectItem _currentEffectItem;
         private Effect _currentEffect;
 
         private EventService _eventService;
 
+        private int _purchaseCount = 1;
+
         private void Awake()
         {
             _eventService = GameManager.EventService;
-
-            upgradeButton.onClick.AddListener(() => BuyUpgrade());
+            _eventService.Add<EffectItemSelectedEvent>(OnEffectSelected);
+            _eventService.Add<PurchaseCountChangedEvent>(OnPurchaseCountChanged);
+            upgradeButton.onClick.AddListener(BuyUpgrade);
         }
 
         private void OnEnable()
         {
-            _eventService.Add<CurrencyUpdatedEvent>(OnCurrencyUpdated);
-            _eventService.Add<EffectUpgradeItemSelectedEvent>(OnEffectSelected);
-            _eventService.Add<PurchaseCountChangedEvent>(OnUpgradeUpdated);
+            // Update the UI in case the currently inspected effect has been changed (i.e.: due to rewardUI)
+            OnEffectSelected(new EffectItemSelectedEvent(_currentEffectItem));
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _eventService.Remove<CurrencyUpdatedEvent>(OnCurrencyUpdated);
-            _eventService.Remove<EffectUpgradeItemSelectedEvent>(OnEffectSelected);
-            _eventService.Remove<PurchaseCountChangedEvent>(OnUpgradeUpdated);
+            _eventService.Remove<EffectItemSelectedEvent>(OnEffectSelected);
+            _eventService.Remove<PurchaseCountChangedEvent>(OnPurchaseCountChanged);
         }
 
-        // public void ManuallySelectUpgrade(Upgrade upgrade)
-        // {
-        //     _currentEffect = upgrade;
-        //     icon.sprite = upgrade.icon;
-        //     descriptionText.text = upgrade.GetDescription();
-        //     OnUpgradeUpdated();
-        // }
-
-        public void OnEffectSelected(EffectUpgradeItemSelectedEvent e)
+        public void OnEffectSelected(EffectItemSelectedEvent e)
         {
-            EffectUpgradeItem layoutItem = e.LayoutItem;
+            _currentEffectItem = e.EffectItem;
 
-            _currentEffect = layoutItem.effectNode.Effect;
+            if (_currentEffectItem == null)
+            {
+                return;
+            }
+            _currentEffect = _currentEffectItem.effectNode.Effect;
 
+            container.SetActive(_currentEffect != null);
             if (_currentEffect == null)
             {
                 return;
             }
 
-            icon.sprite = _currentEffect.Icon;
-            descriptionText.text = _currentEffect.GetDescription();
+            OnUpgradeUpdated();
+        }
+
+        private void OnPurchaseCountChanged(PurchaseCountChangedEvent e)
+        {
+            _purchaseCount = e.PurchaseCount;
             OnUpgradeUpdated();
         }
 
@@ -81,29 +85,34 @@ namespace Minigames.Fight
 
         private void OnUpgradeUpdated()
         {
-            SetInteractability();
-            nameText.text = $"{_currentEffect.Name}\n{_currentEffect.GetUpgradeCountText()}";
-            upgradeButtonText.text = _currentEffect.GetCost(GetAvailablePurchaseCount()).ToCurrencyString();
-            bonusText.text = _currentEffect.GetNextUpgradeDescription(GetAvailablePurchaseCount());
-        }
-
-        private void OnCurrencyUpdated()
-        {
-            SetInteractability();
-        }
-
-        private void SetInteractability()
-        {
             if (_currentEffect == null)
             {
                 return;
             }
+            
+            icon.sprite = _currentEffect.Icon;
+            nameText.text = $"{_currentEffect.Name}\n{_currentEffect.GetUpgradeCountText()}";
+            upgradeButtonText.text = _currentEffect.GetCost(GetAvailablePurchaseCount()).ToCurrencyString();
+            descriptionText.text = _currentEffect.GetDescription();
+            bonusText.text = _currentEffect.GetNextUpgradeDescription(GetAvailablePurchaseCount());
+            
+            if (!_currentEffect.IsUnlocked)
+            {
+                upgradeButtonText.text = "LOCKED";
+                upgradeButton.interactable = false;
+            }
+            else
+            {
+                bool hasPurchasesLeft = _currentEffect.AmountOwned < _currentEffect.MaxAmountOwned ||
+                                        _currentEffect.MaxAmountOwned == 0;
+                bool canAfford = GameManager.CurrencyManager.Currency > _currentEffect.GetCost(GetAvailablePurchaseCount());
+                upgradeButton.interactable = canAfford && hasPurchasesLeft;
 
-            bool hasMoney = GameManager.CurrencyManager.Currency > _currentEffect.GetCost(GetAvailablePurchaseCount());
-            upgradeButton.interactable = hasMoney;
-            bool hasPurchasesLeft = _currentEffect.AmountOwned < _currentEffect.MaxAmountOwned ||
-                                    _currentEffect.MaxAmountOwned == 0;
-            upgradeButton.gameObject.SetActive(hasPurchasesLeft);
+                if (!hasPurchasesLeft)
+                {
+                    upgradeButtonText.text = "MAXED";
+                }
+            }
         }
 
         /// <summary>
@@ -112,7 +121,7 @@ namespace Minigames.Fight
         /// </summary>
         private int GetAvailablePurchaseCount()
         {
-            int purchaseCount = GameManager.SettingsManager.UpgradePurchaseCount;
+            int purchaseCount = _purchaseCount;
 
             if (_currentEffect.MaxAmountOwned > 0)
             {

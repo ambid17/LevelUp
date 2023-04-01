@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class AnySceneLaunch : MonoBehaviour
 {
     public static readonly int ANY_SCENE_LAUNCH_INDEX = 6;
+    public static readonly int MAIN_SCENE_INDEX = 0;
     private static int targetSceneIndex = -1;
 
 
@@ -18,6 +19,11 @@ public class AnySceneLaunch : MonoBehaviour
     {
         targetSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
+        if (targetSceneIndex == MAIN_SCENE_INDEX)
+        {
+            return;
+        }
+        
         DeleteRootGameObjects();
 
         SceneManager.LoadScene(ANY_SCENE_LAUNCH_INDEX);

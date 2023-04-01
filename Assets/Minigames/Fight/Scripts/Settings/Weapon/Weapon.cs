@@ -21,6 +21,8 @@ namespace Minigames.Fight
     public class Weapon : ScriptableObject
     {
         public WeaponType weaponType;
+        public string readableName;
+        public string description;
         public Sprite icon;
         public Sprite ammoIcon;
         public Sprite abilityIcon;

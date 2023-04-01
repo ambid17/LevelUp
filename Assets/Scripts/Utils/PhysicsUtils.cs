@@ -40,4 +40,13 @@ public static class PhysicsUtils
 
         return new Vector2((cos * x) - (sin * y), (sin * x) + (cos * y));
     }
+
+    public static Vector3 Clamp(this Vector3 toClamp, Vector3 min, Vector3 max)
+    {
+        Vector3 toReturn = toClamp;
+        toReturn.x = Mathf.Clamp(toReturn.x, min.x, max.x);
+        toReturn.y = Mathf.Clamp(toReturn.y, min.y, max.y);
+        toReturn.z = Mathf.Clamp(toReturn.z, min.z, max.z);
+        return toReturn;
+    }
 }
