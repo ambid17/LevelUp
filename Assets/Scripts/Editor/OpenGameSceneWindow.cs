@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
-namespace NMEditor {
+namespace Editor {
     // Workflow tool providing quick access to game scenes
     public class OpenGameSceneWindow : EditorWindow {
         [MenuItem("Caos Creations/Open Game Scene _F1")]
