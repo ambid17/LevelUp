@@ -49,4 +49,15 @@ public static class PhysicsUtils
         toReturn.z = Mathf.Clamp(toReturn.z, min.z, max.z);
         return toReturn;
     }
+    public static Quaternion LookAt(Quaternion rotation, Vector3 myPosition, Vector3 targetPosition, float lerpFactor = 1)
+    {
+        Vector3 direction = (targetPosition - myPosition);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion finalRotation = Quaternion.Euler(new Vector3(0,0,angle));
+        Vector3 angles = finalRotation.eulerAngles;
+        //var toReturn = Quaternion.Slerp(rotation, finalRotation, lerpFactor);
+        var toReturn = finalRotation;
+        Vector3 toReturnAngles = toReturn.eulerAngles;
+        return toReturn;
+    }
 }

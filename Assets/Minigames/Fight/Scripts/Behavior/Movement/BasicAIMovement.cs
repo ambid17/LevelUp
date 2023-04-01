@@ -1,5 +1,6 @@
 using CustomPathfinding;
 using Pathfinding;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
@@ -12,7 +13,9 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 
     private float _Speed;
     private bool _RotateTowardsDestination;
+    private float _rotationSpeed;
     private const string updatePath = "UpdatePath";
+    private bool _lastCalculatedPathInvalid;
 
     //track where we are in the waypoint array
     private int currentWaypoint;
@@ -24,6 +27,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 
     public float speed { get => _Speed;  set => _Speed = value;  }
     public bool rotateTowardsDestination { get => _RotateTowardsDestination;  set => _RotateTowardsDestination = value; }
+    public float rotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
     public float stopDistance { get => _StopDistance; set => _StopDistance = value; }
     public Vector2 target { get => _Target; set => _Target = value; }
 
@@ -34,7 +38,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count-1]) < stopDistance;
 
     // Path is invalid if the final waypoint is not within stopping distance of target
-    public bool pathInvalid => path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
+    public bool pathInvalid => _lastCalculatedPathInvalid;
     public Path path => _Path;
     public Rigidbody2D rb => _rb;
 
@@ -47,8 +51,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     {
         // idiot proofing
         rb.gravityScale = 0;
-        // by default calculate a new path ever .5 seconds to adapt to target moving (causes slightly delayed pathing for fast moving objects but checking every frame causes jittering)
-        InvokeRepeating(updatePath, 0, 0.5f);
+        StartCoroutine(RepeatUpdatePath());
+    }
+    private IEnumerator RepeatUpdatePath()
+    {
+        while (true)
+        {
+            UpdatePath();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
     private void FixedUpdate()
     {
@@ -72,15 +83,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         }
         if (rotateTowardsDestination)
         {
-            //TODO rotation math
-        }
-    }
-    public void UpdatePath()
-    {
-        // once seeker has finished calculating a path generate the path data
-        if (seeker.IsDone())
-        {
-            seeker.StartPath(transform.position, target, OnPathComplete);
+            transform.rotation = PhysicsUtils.LookAt(transform.rotation,transform.position, nextWaypoint, rotationSpeed * Time.deltaTime);
         }
     }
     private void OnPathComplete(Path p)
@@ -90,6 +93,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         {
             _Path = p;
             currentWaypoint = 0;
+            _lastCalculatedPathInvalid = path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
+        }
+    }
+    private void UpdatePath()
+    {
+        // once seeker has finished calculating a path generate the path data
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(transform.position, target, OnPathComplete);
         }
     }
 
