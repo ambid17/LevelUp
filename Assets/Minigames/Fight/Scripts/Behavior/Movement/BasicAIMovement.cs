@@ -71,19 +71,23 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         Vector2 move = nextWaypoint - (Vector2)transform.position;
         rb.velocity = move.normalized * speed;
         float distance = Vector2.Distance(transform.position, nextWaypoint);
-        // If waypoint has been reached then agent heads towards next waypoint on the list, if no other waypoints exist then agent recalculates the path
+        // If waypoint has been reached then agent heads towards next waypoint on the list
+        // If no other waypoints exist then agent recalculates the path
         if (distance < stopDistance)
         {
             if (currentWaypoint >= path.vectorPath.Count - 1)
             {
+                // TODO from sabien: delete? this seems incorrect
                 UpdatePath();
+                // Kill off our velocity while we are waiting
+                rb.velocity = Vector2.zero;
                 return;
             }
             currentWaypoint++;
         }
         if (rotateTowardsDestination)
         {
-            transform.rotation = PhysicsUtils.LookAt(transform.rotation,transform.position, nextWaypoint, rotationSpeed * Time.deltaTime);
+            transform.rotation = PhysicsUtils.LookAt(transform, nextWaypoint, rotationSpeed * Time.deltaTime);
         }
     }
     private void OnPathComplete(Path p)
