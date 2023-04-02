@@ -88,7 +88,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         {
             MovementUtility.DrawLineOfSight(Owner.transform, offset.Value, fieldOfViewAngle.Value, angleOffset2D.Value, viewDistance.Value, true);
             
-            if (returnedObject.Value != null)
+            if (drawDebugRay.Value && returnedObject.Value != null)
             {
                 Debug.DrawLine(transform.position, returnedObject.Value.transform.position, Color.yellow);
             }
