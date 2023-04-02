@@ -52,12 +52,9 @@ public static class PhysicsUtils
     public static Quaternion LookAt(Quaternion rotation, Vector3 myPosition, Vector3 targetPosition, float lerpFactor = 1)
     {
         Vector3 direction = (targetPosition - myPosition);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // have to subtract 90 degrees. This assumes that 0 degrees is the x axis, whereas the art assumes its the y axis.
+        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - 90;
         Quaternion finalRotation = Quaternion.Euler(new Vector3(0,0,angle));
-        Vector3 angles = finalRotation.eulerAngles;
-        //var toReturn = Quaternion.Slerp(rotation, finalRotation, lerpFactor);
-        var toReturn = finalRotation;
-        Vector3 toReturnAngles = toReturn.eulerAngles;
-        return toReturn;
+        return Quaternion.Slerp(rotation, finalRotation, lerpFactor);
     }
 }
