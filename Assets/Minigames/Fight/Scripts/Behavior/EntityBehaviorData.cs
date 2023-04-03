@@ -10,8 +10,10 @@ namespace Minigames.Fight
         private EnemyEntity entity;
 
         public float MoveSpeed => entity.enemyStats.MoveSpeed;
-        public GameObject playerGo => entity.Target.gameObject;
-        public Transform player => entity.Target;
+        public GameObject PlayerGo => entity.Target.gameObject;
+        public Transform Player => entity.Target;
         public List<Transform> Waypoints => GameManager.EnemySpawnManager.Waypoints;
+        public float CurrentHealth => entity.Stats.currentHp;
+        public float DamageTaken => entity.enemyStats.MaxHp - entity.Stats.currentHp;
     }
 }
