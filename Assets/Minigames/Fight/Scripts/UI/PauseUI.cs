@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,12 +10,14 @@ namespace Minigames.Fight
     {
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button homeButton;
+        [SerializeField] private Button deleteButton;
         [SerializeField] private Button quitButton;
     
         void Start()
         {
             resumeButton.onClick.AddListener(Resume);
             homeButton.onClick.AddListener(Home);
+            deleteButton.onClick.AddListener(DeleteSave);
             quitButton.onClick.AddListener(Quit);
         }
 
@@ -27,9 +31,30 @@ namespace Minigames.Fight
             SceneManager.LoadScene(0);
         }
 
+        public void DeleteSave()
+        {
+            try
+            {
+                var paths = Directory.EnumerateFiles(Application.persistentDataPath);
+                foreach (var path in paths)
+                {
+                    File.Delete(path);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"could not delete save data: {e.Message}\n{e.StackTrace}");
+            }
+            
+
+            Platform.ShouldSave = false;
+            Application.Quit();
+        }
+        
         public void Quit()
         {
             Application.Quit();
         }
+
     }
 }
