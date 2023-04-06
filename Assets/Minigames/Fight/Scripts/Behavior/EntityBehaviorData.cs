@@ -27,6 +27,7 @@ namespace Minigames.Fight
         public float SmellRadius => _smellRadius;
         public Vector2 RandomAroundPlayer => new Vector2(Random.Range(PlayerVector.x - SmellRadius, PlayerVector.x + SmellRadius), Random.Range(PlayerVector.y - SmellRadius, PlayerVector.y + SmellRadius));
         public bool Alerted { get => _alerted; set => _alerted = value; }
+        public List<Transform> SoldierWaypoints => GameManager.EnemySpawnManager.SoldierWaypoints;
         #endregion
     }
 }

@@ -6,6 +6,7 @@ namespace Minigames.Fight
     public class EnemySpawnManager : MonoBehaviour
     {
         public List<Transform> Waypoints;
+        public List<Transform> SoldierWaypoints;
         private EnemySpawnerSettings _spawnerSettings => GameManager.SettingsManager.enemySpawnerSettings;
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
 
