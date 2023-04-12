@@ -11,8 +11,12 @@ namespace BehaviorDesigner.Runtime.Tasks
         public SharedFloat projectilSpeed;
         [Tooltip("The velocity the target is moving")]
         public SharedVector2 targetVelocity;
+        [Tooltip("Value for random offset to prevent AI from being too accurate, scaled with distance")]
+        public SharedFloat randomOffset;
 
         private ShootTest shootTest;
+
+        private Vector2 prediction;
         public override void OnAwake()
         {
             base.OnAwake();
@@ -43,11 +47,22 @@ namespace BehaviorDesigner.Runtime.Tasks
             float delta = Mathf.Sqrt((b * b) - (4 * a * c));
             float t = -(b + delta) / (2 * a);
 
-            Vector2 prediction = (Vector2)target.Value.position + (targetVelocity.Value * t);
-            Vector2 difference = prediction - (Vector2)transform.position;
+            prediction = (Vector2)target.Value.position + (targetVelocity.Value * t);
+            Vector2 difference = RandomOffset() - (Vector2)transform.position;
             float angleToShoot = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             Quaternion rot = Quaternion.AngleAxis(angleToShoot - 90, Vector3.forward);
             return rot;
         }
+        private Vector2 RandomOffset()
+        {
+            float distance = (prediction - (Vector2)transform.position).magnitude;
+            float randomFactor = distance * randomOffset.Value;
+
+            float x = Random.Range(prediction.x - randomFactor, prediction.x + randomFactor);
+            float y = Random.Range(prediction.y - randomFactor, prediction.y + randomFactor);
+
+            return new Vector2(x, y);
+        }
+
     }
 }
