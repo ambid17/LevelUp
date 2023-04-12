@@ -29,5 +29,9 @@ namespace Minigames.Fight
         public bool Alerted { get => _alerted; set => _alerted = value; }
         public List<Transform> SoldierWaypoints => GameManager.EnemySpawnManager.SoldierWaypoints;
         #endregion
+        #region SpiderData
+        public Vector2 PlayerVelocity => GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;
+
+        #endregion
     }
 }
