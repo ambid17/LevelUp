@@ -45,18 +45,20 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
 
         private void FindNewVantagePoint()
         {
-            List<GraphNode> vantagePoints = PathUtilities.GetReachableNodesWithinRadius(target.Value.position, radius.Value);
+            List<GraphNode> oldVantagePoints = PathUtilities.GetReachableNodesWithinRadius(target.Value.position, radius.Value);
+
+            List<GraphNode> newVantagePoints = new List<GraphNode>();
 
             // If line of sight is required remove any nodes that don't have line of sight to the target.
             if (requireLineOfSight.Value)
             {
-                foreach (GraphNode vantagePoint in vantagePoints)
+                foreach (GraphNode vantagePoint in oldVantagePoints)
                 {
                     Vector2 direction = target.Value.position - (Vector3)vantagePoint.position;
-                    RaycastHit2D hit = Physics2D.Raycast((Vector3)vantagePoint.position, direction.normalized, radius.Value, obstacleLayerMask.Value);
-                    if (hit)
+                    RaycastHit2D hit = Physics2D.Raycast((Vector3)vantagePoint.position, direction, radius.Value, obstacleLayerMask.Value);
+                    if (!hit)
                     {
-                        vantagePoints.Remove(vantagePoint);
+                        newVantagePoints.Add(vantagePoint);
                     }
                 }
             }
@@ -64,7 +66,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             // Find the node that is closest to the agent.
             float minDistance = Mathf.Infinity;
             Vector2 targetPos = transform.position;
-            foreach (GraphNode vantagePoint in vantagePoints)
+            foreach (GraphNode vantagePoint in newVantagePoints)
             {
                 if (Vector2.Distance(transform.position, (Vector3)vantagePoint.position) < minDistance)
                 {
