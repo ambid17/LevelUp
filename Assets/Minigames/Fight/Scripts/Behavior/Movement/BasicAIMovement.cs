@@ -37,8 +37,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     // Destination has been reached if agent is within stopping distance of the final waypoint
     public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count-1]) < stopDistance;
 
-    // Path is invalid if the final waypoint is not within stopping distance of target
-    public bool pathInvalid => _lastCalculatedPathInvalid;
+    public bool pathInvalid
+    {
+        get
+        {
+            GraphNode node1 = AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
+            GraphNode node2 = AstarPath.active.GetNearest(target, NNConstraint.Default).node;
+            return !PathUtilities.IsPathPossible(node1, node2);
+        }
+    }
     public Path path => _Path;
     public Rigidbody2D rb => _rb;
 
@@ -73,7 +80,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         float distance = Vector2.Distance(transform.position, nextWaypoint);
         // If waypoint has been reached then agent heads towards next waypoint on the list
         // If no other waypoints exist then agent recalculates the path
-        if (distance < stopDistance)
+        if (distance <= stopDistance)
         {
             if (currentWaypoint >= path.vectorPath.Count - 1)
             {
