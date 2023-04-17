@@ -96,6 +96,10 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         {
             transform.rotation = PhysicsUtils.LookAt(transform, nextWaypoint, rotationSpeed * Time.deltaTime);
         }
+        else
+        {
+            transform.rotation = PhysicsUtils.LookAt(transform, target, rotationSpeed * Time.deltaTime);
+        }
     }
     private void OnPathComplete(Path p)
     {
