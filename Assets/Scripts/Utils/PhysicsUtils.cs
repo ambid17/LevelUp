@@ -67,7 +67,7 @@ public static class PhysicsUtils
     /// <returns></returns>
     public static GameObject HasLineOfSight(Transform source, Transform target, float distance, float fieldOfView, LayerMask layerMask)
     {
-        Vector3 toTarget = target.position - source.position;
+        Vector2 toTarget = target.position.AsVector2() - source.position.AsVector2();
         // Check if target is in range
         if (toTarget.magnitude > distance)
         {
@@ -76,8 +76,8 @@ public static class PhysicsUtils
 
         RaycastHit2D hit = Physics2D.Linecast(source.position, target.position, layerMask);
 
-        // Check we have line of sight
-        if(hit.collider == null)
+        // Check we have line of sight of the correct target
+        if(hit.collider.gameObject.GetInstanceID() != target.gameObject.GetInstanceID())
         {
             return null;
         }
