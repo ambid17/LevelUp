@@ -39,6 +39,19 @@ namespace Minigames.Fight
             {
                 TickStatuses();
             }
+
+            UpdateDps();
+        }
+
+        private void UpdateDps()
+        {
+            Stats.dpsTimer += Time.deltaTime;
+
+            if (Stats.dpsTimer > 1)
+            {
+                Stats.dpsTimer = 0;
+                Stats.damageTakenThisSecond = 0;
+            }
         }
 
         protected void TickStatuses()
@@ -65,7 +78,7 @@ namespace Minigames.Fight
 
         public virtual void TakeDamage(float damage)
         {
-            Stats.currentHp -= damage;
+            Stats.TakeDamage(damage);
             VisualController.StartDamageFx(damage);
 
             if (IsDead)

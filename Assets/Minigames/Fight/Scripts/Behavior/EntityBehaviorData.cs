@@ -17,6 +17,7 @@ namespace Minigames.Fight
         public List<Transform> Waypoints => GameManager.EnemySpawnManager.Waypoints;
         public float CurrentHealth => entity.Stats.currentHp;
         public float DamageTaken => entity.enemyStats.MaxHp - entity.Stats.currentHp;
+        public float DpsTaken => entity.Stats.damageTakenThisSecond;
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerVector);
         #endregion
         #region AntData
