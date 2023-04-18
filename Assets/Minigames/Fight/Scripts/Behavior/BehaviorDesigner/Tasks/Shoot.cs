@@ -1,3 +1,4 @@
+using Minigames.Fight;
 using UnityEngine;
 
 namespace BehaviorDesigner.Runtime.Tasks
@@ -16,11 +17,16 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         private ShootTest shootTest;
 
+        private Entity entity;
+
         private Vector2 prediction;
         public override void OnAwake()
         {
             base.OnAwake();
+
             shootTest = gameObject.GetComponent<ShootTest>();
+            entity = gameObject.GetComponent<Entity>();
+
             projectilSpeed = shootTest.bullet.bulletSpeed;
 
             if (shootTest.canShoot())
