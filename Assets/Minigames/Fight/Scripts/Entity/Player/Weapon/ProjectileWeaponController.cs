@@ -71,7 +71,7 @@ namespace Minigames.Fight
         
         protected override void Shoot()
         {
-            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
+            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
         
             Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 

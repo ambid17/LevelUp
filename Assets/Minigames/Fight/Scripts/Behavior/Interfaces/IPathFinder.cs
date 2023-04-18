@@ -6,6 +6,7 @@ namespace CustomPathfinding
     public interface IPathFinder
     {
         public float speed { get; set; }
+        public float rotationSpeed { get; set; }
         public bool rotateTowardsDestination { get; set; }
         public float stopDistance { get; set; }
         public Vector2 nextWaypoint { get; }
@@ -15,6 +16,5 @@ namespace CustomPathfinding
         public Rigidbody2D rb { get; }
         public bool pathInvalid { get; }
         public void Stop();
-        public void UpdatePath();
     }
 }

@@ -9,10 +9,18 @@ namespace Minigames.Fight
     {
         public float currentHp;
         public float maxHp;
+        public float damageTakenThisSecond;
+        public float dpsTimer;
         public float armor;
         public float magicResistance;
         public List<StatusEffectInstance> StatusEffects = new();
         public List<Effect> OnHitEffects = new();
+
+        public void TakeDamage(float damage)
+        {
+            currentHp -= damage;
+            damageTakenThisSecond += damage;
+        }
 
         public bool AddStatusEffect(StatusEffectInstance instance)
         {

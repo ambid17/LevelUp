@@ -5,46 +5,28 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class EnemyProjectile : MonoBehaviour
+    public class EnemyProjectile : ProjectileController
     {
-        private EnemyEntity _myEntity;
-        private float _deathTimer = 0;
-        private Vector2 _shootDirection;
-        private bool _isMarkedForDeath;
+        private EnemyEntity _overriddenEntity;
 
-        private EventService _eventService;
-
-        void Start()
+        protected override void Start()
         {
-            _eventService = GameManager.EventService;
-            _eventService.Add<PlayerDiedEvent>(Die);
+            base.Start();
+            _overriddenEntity = _myEntity as EnemyEntity;
         }
 
-        void Update()
+        protected override bool ShouldDie()
         {
-            _deathTimer += Time.deltaTime;
-
-            if (_deathTimer > _myEntity.enemyStats.ProjectileLifeTime)
-            {
-                Die();
-            }
-
-            Move();
+            return _deathTimer > _overriddenEntity.enemyStats.ProjectileLifeTime;
         }
 
-        private void Move()
+        protected override void Move()
         {
-            Vector2 delta = _shootDirection * _myEntity.enemyStats.ProjectileSpeed * Time.deltaTime;
+            Vector2 delta = _shootDirection * _overriddenEntity.enemyStats.ProjectileSpeed * Time.deltaTime;
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(EnemyEntity myEntity, Vector2 direction)
-        {
-            _myEntity = myEntity;
-            _shootDirection = direction.normalized;
-        }
-
-        private void OnTriggerEnter2D(Collider2D col)
+        protected override void OnTriggerEnter2D(Collider2D col)
         {
             if (_isMarkedForDeath)
             {
@@ -60,15 +42,6 @@ namespace Minigames.Fight
                 _myEntity.OnHitOther(GameManager.PlayerEntity);
                 Die();
             }
-        }
-
-        private void Die()
-        {
-            if (_isMarkedForDeath) return;
-
-            _isMarkedForDeath = true;
-
-            Destroy(gameObject);
         }
     }
 }

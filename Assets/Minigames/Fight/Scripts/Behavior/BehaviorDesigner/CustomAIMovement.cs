@@ -12,8 +12,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         public SharedBool stopOnTaskEnd = false;
         [Tooltip("distance the agent must come within to have reached it's destination")]
         public SharedFloat stopDistance = 1;
-        [Tooltip("should the agent rotate towards it's next waypoint")]
+        [Tooltip("should the agent rotate towards it's next waypoint OR rotate to face its target")]
         public SharedBool rotateTowardsDestination = true;
+        [Tooltip("speed of agent rotation smoothing")]
+        public SharedFloat rotationSpeed = 1;
 
         protected IPathFinder agent;
 
@@ -25,6 +27,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         {
             agent.speed = speed.Value;
             agent.rotateTowardsDestination = rotateTowardsDestination.Value;
+            agent.rotationSpeed = rotationSpeed.Value;
             agent.stopDistance = stopDistance.Value;
         }
         protected override bool SetDestination(Vector3 target)

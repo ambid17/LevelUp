@@ -150,6 +150,27 @@ namespace Pathfinding {
 			return reachable;
 		}
 
+		// Returns a list of reachable nodes within a specified distance of the target node.
+		public static List<GraphNode> GetReachableNodesWithinRadius(Vector3 startPoint, float maxDistance)
+        {
+			// Get the nearest walkable node to the target point.
+			GraphNode nearestWalkableNode = AstarPath.active.GetNearest(startPoint, NNConstraint.Default).node;
+
+			// Get all reachable nodes and generate a new list to store nodes within radius.
+			List<GraphNode> reachableNodes = GetReachableNodes(nearestWalkableNode);
+			List<GraphNode> nodesWithinRadius = new List<GraphNode>();
+
+			// If a node is less than or equal to maxDistance, add it to withinDistance list.
+			foreach (GraphNode reachableNode in reachableNodes)
+            {
+				if (Vector3.Distance((Vector3)reachableNode.position, startPoint) <= maxDistance)
+                {
+					nodesWithinRadius.Add(reachableNode);
+                }
+            }
+			return nodesWithinRadius;
+		}
+
 		static Queue<GraphNode> BFSQueue;
 		static Dictionary<GraphNode, int> BFSMap;
 

@@ -1,5 +1,6 @@
 using CustomPathfinding;
 using Pathfinding;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
@@ -12,7 +13,9 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 
     private float _Speed;
     private bool _RotateTowardsDestination;
+    private float _rotationSpeed;
     private const string updatePath = "UpdatePath";
+    private bool _lastCalculatedPathInvalid;
 
     //track where we are in the waypoint array
     private int currentWaypoint;
@@ -24,6 +27,7 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
 
     public float speed { get => _Speed;  set => _Speed = value;  }
     public bool rotateTowardsDestination { get => _RotateTowardsDestination;  set => _RotateTowardsDestination = value; }
+    public float rotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
     public float stopDistance { get => _StopDistance; set => _StopDistance = value; }
     public Vector2 target { get => _Target; set => _Target = value; }
 
@@ -33,8 +37,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     // Destination has been reached if agent is within stopping distance of the final waypoint
     public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count-1]) < stopDistance;
 
-    // Path is invalid if the final waypoint is not within stopping distance of target
-    public bool pathInvalid => path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
+    public bool pathInvalid
+    {
+        get
+        {
+            GraphNode node1 = AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
+            GraphNode node2 = AstarPath.active.GetNearest(target, NNConstraint.Default).node;
+            return !PathUtilities.IsPathPossible(node1, node2);
+        }
+    }
     public Path path => _Path;
     public Rigidbody2D rb => _rb;
 
@@ -47,8 +58,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     {
         // idiot proofing
         rb.gravityScale = 0;
-        // by default calculate a new path ever .5 seconds to adapt to target moving (causes slightly delayed pathing for fast moving objects but checking every frame causes jittering)
-        InvokeRepeating(updatePath, 0, 0.5f);
+        StartCoroutine(RepeatUpdatePath());
+    }
+    private IEnumerator RepeatUpdatePath()
+    {
+        while (true)
+        {
+            UpdatePath();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
     private void FixedUpdate()
     {
@@ -60,27 +78,27 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         Vector2 move = nextWaypoint - (Vector2)transform.position;
         rb.velocity = move.normalized * speed;
         float distance = Vector2.Distance(transform.position, nextWaypoint);
-        // If waypoint has been reached then agent heads towards next waypoint on the list, if no other waypoints exist then agent recalculates the path
-        if (distance < stopDistance)
+        // If waypoint has been reached then agent heads towards next waypoint on the list
+        // If no other waypoints exist then agent recalculates the path
+        if (distance <= stopDistance)
         {
             if (currentWaypoint >= path.vectorPath.Count - 1)
             {
+                // TODO from sabien: delete? this seems incorrect
                 UpdatePath();
+                // Kill off our velocity while we are waiting
+                rb.velocity = Vector2.zero;
                 return;
             }
             currentWaypoint++;
         }
         if (rotateTowardsDestination)
         {
-            //TODO rotation math
+            transform.rotation = PhysicsUtils.LookAt(transform, nextWaypoint, rotationSpeed * Time.deltaTime);
         }
-    }
-    public void UpdatePath()
-    {
-        // once seeker has finished calculating a path generate the path data
-        if (seeker.IsDone())
+        else
         {
-            seeker.StartPath(transform.position, target, OnPathComplete);
+            transform.rotation = PhysicsUtils.LookAt(transform, target, rotationSpeed * Time.deltaTime);
         }
     }
     private void OnPathComplete(Path p)
@@ -90,6 +108,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         {
             _Path = p;
             currentWaypoint = 0;
+            _lastCalculatedPathInvalid = path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
+        }
+    }
+    private void UpdatePath()
+    {
+        // once seeker has finished calculating a path generate the path data
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(transform.position, target, OnPathComplete);
         }
     }
 

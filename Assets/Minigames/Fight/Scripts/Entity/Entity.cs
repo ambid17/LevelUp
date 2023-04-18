@@ -19,6 +19,9 @@ namespace Minigames.Fight
 
         protected EventService eventService;
 
+        [SerializeField]
+        private bool tickDamageDownPerSecond;
+
         protected virtual void Awake()
         {
             eventService = GameManager.EventService;
@@ -38,6 +41,26 @@ namespace Minigames.Fight
             if (Stats.StatusEffects.Count > 0)
             {
                 TickStatuses();
+            }
+
+            UpdateDps();
+        }
+
+        private void UpdateDps()
+        {
+            Stats.dpsTimer += Time.deltaTime;
+
+            if (Stats.dpsTimer > 1)
+            {
+                Stats.dpsTimer = 0;
+
+                // Option to reduce damage per second over time instead of resetting it entirely.
+                if (tickDamageDownPerSecond && Stats.damageTakenThisSecond > 0)
+                {
+                    Stats.damageTakenThisSecond -= 1;
+                    return;
+                }
+                Stats.damageTakenThisSecond = 0;
             }
         }
 
@@ -65,7 +88,7 @@ namespace Minigames.Fight
 
         public virtual void TakeDamage(float damage)
         {
-            Stats.currentHp -= damage;
+            Stats.TakeDamage(damage);
             VisualController.StartDamageFx(damage);
 
             if (IsDead)

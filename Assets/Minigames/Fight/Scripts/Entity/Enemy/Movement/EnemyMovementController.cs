@@ -21,7 +21,7 @@ namespace Minigames.Fight
 
         protected virtual void Update()
         {
-            TryMove();
+            //TryMove();
         }
 
         protected virtual void TryMove()

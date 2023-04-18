@@ -1,14 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Minigames.Fight
 {
     public class EnemySpawnManager : MonoBehaviour
     {
+        public List<Transform> Waypoints;
+        public List<Transform> SoldierWaypoints;
         private EnemySpawnerSettings _spawnerSettings => GameManager.SettingsManager.enemySpawnerSettings;
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
 
         private float waveTimer;
         [SerializeField] private int _enemyCount;
+        [SerializeField] private List<Transform> SpawnPoints;
 
         public int EnemyCount
         {
@@ -18,6 +22,7 @@ namespace Minigames.Fight
 
         void Start()
         {
+            SpawnEnemy();
         }
 
         void Update()
@@ -27,7 +32,7 @@ namespace Minigames.Fight
                 return;
             }
         
-            TrySpawnWave();
+           // TrySpawnWave();
         }
 
         private void TrySpawnWave()
@@ -59,8 +64,14 @@ namespace Minigames.Fight
         {
             Enemy enemyToSpawn = _progressSettings.CurrentWorld.GetRandomEnemy();
             GameObject instance = Instantiate(enemyToSpawn.Prefab);
-            instance.transform.position = GetRandomInDonut(_spawnerSettings.MinSpawnRadius, _spawnerSettings.MaxSpawnRadius);
+          //  instance.transform.position = GetRandomInDonut(_spawnerSettings.MinSpawnRadius, _spawnerSettings.MaxSpawnRadius);
+            instance.transform.position = GetSpawnPosition();
             _enemyCount++;
+        }
+        public Vector2 GetSpawnPosition()
+        {
+            int i = Random.Range(0, SpawnPoints.Count);
+            return SpawnPoints[i].position;
         }
     
         public Vector2 GetRandomInDonut(float minDistance, float maxDistance)

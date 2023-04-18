@@ -52,5 +52,8 @@ namespace Minigames.Fight
 
         public float Armor => armor;
         public float MagicResist => magicResistance;
+        public bool canShootTarget = false;
+        public float randomProjectileOffset;
+        public bool predictTargetPosition;
     }
 }
