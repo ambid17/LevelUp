@@ -14,7 +14,7 @@ namespace Minigames.Fight
             int projectileCount = 1;
             for (int i = 0; i < projectileCount; i++)
             {
-                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
+                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
             
                 Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
@@ -44,7 +44,7 @@ namespace Minigames.Fight
             
                 for (int j = 0; j < projectileCount; j++)
                 {
-                    PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
+                    PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
                     projectile.transform.position = MyTransform.position.AsVector2();
 
                     Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;

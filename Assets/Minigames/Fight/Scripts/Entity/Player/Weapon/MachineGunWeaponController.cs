@@ -70,7 +70,7 @@ namespace Minigames.Fight
             {
                 float angle = Random.Range(_startAngle, _endAngle);
 
-                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab);
+                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
                 projectile.transform.position = MyTransform.position.AsVector2();
 
                 Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;

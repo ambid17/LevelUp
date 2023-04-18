@@ -4,44 +4,21 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class PlayerProjectile : MonoBehaviour
+    public class PlayerProjectile : ProjectileController
     {
         [SerializeField] private float timeToLive = 5;
         [SerializeField] private float moveSpeed = 5;
-        private float _deathTimer = 0;
-        private Vector2 _shootDirection;
+
         private int _penetrationsLeft;
         private bool _canPenetrateIndefinitely;
-        protected bool _isMarkedForDeath;
 
         protected Entity _sourceEntity;
 
-        private EventService _eventService;
-    
-        void Start()
+        protected override bool ShouldDie()
         {
-            _eventService = GameManager.EventService;
-            _eventService.Add<PlayerDiedEvent>(Die);
+            return _deathTimer > timeToLive;
         }
-
-        private void OnDestroy()
-        {
-            _eventService.Remove<PlayerDiedEvent>(Die);
-        }
-
-        void Update()
-        {
-            _deathTimer += Time.deltaTime;
-
-            if (_deathTimer > timeToLive)
-            {
-                Destroy(gameObject);
-            }
-
-            Move();
-        }
-
-        private void Move()
+        protected override void Move()
         {
             Vector2 delta = _shootDirection * moveSpeed * Time.deltaTime;
             transform.position += new Vector3(delta.x, delta.y, 0);
@@ -56,13 +33,13 @@ namespace Minigames.Fight
             _penetrationsLeft = 1;
         }
 
-        protected virtual void OnTriggerEnter2D(Collider2D col)
+        protected override void OnTriggerEnter2D(Collider2D col)
         {
             if (_isMarkedForDeath)
             {
                 return;
             }
-        
+
             if (col.gameObject.layer == PhysicsUtils.GroundLayer)
             {
                 Die();
@@ -76,23 +53,14 @@ namespace Minigames.Fight
                 {
                     return;
                 }
-            
+
                 if (_penetrationsLeft <= 0)
                 {
                     Die();
                 }
-            
+
                 _penetrationsLeft--;
             }
-        }
-
-        protected virtual void Die()
-        {  
-            if(_isMarkedForDeath) return;
-            
-            _isMarkedForDeath = true;
-            
-            Destroy(gameObject);
         }
     }
 }

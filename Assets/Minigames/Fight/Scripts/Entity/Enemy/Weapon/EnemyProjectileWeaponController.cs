@@ -9,13 +9,14 @@ namespace Minigames.Fight
 {
     public class EnemyProjectileWeaponController : WeaponController
     {
-        [SerializeField] private EnemyProjectile projectilePrefab;
         private Transform _myTransform;
         private EnemyEntity _overridenEntity;
+        private ProjectileWeapon _overridenWeapon;
 
         private void Start()
         {
             _overridenEntity = MyEntity as EnemyEntity;
+            _overridenWeapon = weapon as ProjectileWeapon;
             _myTransform = transform; // cache our transform for performance
         }
         
@@ -31,7 +32,7 @@ namespace Minigames.Fight
         
         protected override void Shoot()
         {
-            EnemyProjectile projectile = Instantiate(projectilePrefab);
+            EnemyProjectile projectile = Instantiate(_overridenWeapon.projectilePrefab) as EnemyProjectile;
             projectile.transform.position = transform.position;
             
             Vector2 direction = _overridenEntity.Target.position - _myTransform.position;
