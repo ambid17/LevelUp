@@ -12,6 +12,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         public SharedTransform target;
         [Tooltip("The radius around the target to seek.")]
         public SharedFloat radius = 10f;
+        [Tooltip("How far past the target the agent should offset to ensure line of sight")]
+        public SharedFloat offset = .1f;
         [Tooltip("Should the agent require vantage point to have line of sight?")]
         public SharedBool requireLineOfSight = true;
         [Tooltip("Layermask for line of sight check.")]
@@ -20,6 +22,9 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
 
         // Store the node the target is nearest to so we can determine when it enters another node.
         private GraphNode _currentTargetNode;
+
+        // Store the position after calculating offset.
+        private Vector2 offsetTarget;
 
         public override void OnAwake()
         {
@@ -38,8 +43,9 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             }
             if (HasArrived())
             {
-                return TaskStatus.Success;
+                return HasReachedOffset();
             }
+            OffsetTarget();
             return TaskStatus.Running;
         }
 
@@ -77,6 +83,20 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             }
 
             SetDestination(targetPos);
+        }
+
+        // Calculate offset to ensure Line of Sight.
+        private void OffsetTarget()
+        {
+            Vector2 difference = (Vector3)_currentTargetNode.position - transform.position;
+            float distance = difference.magnitude;
+            Vector2 direction = difference.normalized;
+
+            offsetTarget = direction * (distance + offset.Value);
+        }
+        private TaskStatus HasReachedOffset()
+        {
+            return Vector2.Distance(transform.position, offsetTarget) < stopDistance.Value ? TaskStatus.Running : TaskStatus.Success;
         }
         public override void OnReset()
         {
