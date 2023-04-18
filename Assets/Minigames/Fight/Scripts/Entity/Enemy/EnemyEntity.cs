@@ -32,7 +32,7 @@ namespace Minigames.Fight
         
             _isMarkedForDeath = true;
         
-            GameManager.EnemySpawnManager.EnemyCount--;
+           // GameManager.EnemySpawnManager.EnemyCount--;
             GameManager.CurrencyManager.EnemyKilled(enemyStats.GoldValue);
         
             Destroy(gameObject);
