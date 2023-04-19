@@ -1,11 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 namespace Minigames.Fight
 {
 
     public class EntityBehaviorData : MonoBehaviour
     {
         #region GeneralData
+        [NonSerialized]
+        public RoomController roomController;
+
         [SerializeField]
         private EnemyEntity entity;
 
@@ -14,7 +20,7 @@ namespace Minigames.Fight
         public Transform Player => entity.Target;
         public Vector2 PlayerVector => entity.Target.position;
         public Vector2 MyVector => transform.position;
-       // public List<Transform> Waypoints => GameManager.EnemySpawnManager.Waypoints;
+        public List<Transform> FlowerWaypoints => roomController.FlowerWaypoints;
         public float CurrentHealth => entity.Stats.currentHp;
         public float DamageTaken => entity.enemyStats.MaxHp - entity.Stats.currentHp;
         public float DpsTaken => entity.Stats.damageTakenThisSecond;
@@ -27,7 +33,8 @@ namespace Minigames.Fight
         public float SmellRadius => _smellRadius;
         public Vector2 RandomAroundPlayer => new Vector2(Random.Range(PlayerVector.x - SmellRadius, PlayerVector.x + SmellRadius), Random.Range(PlayerVector.y - SmellRadius, PlayerVector.y + SmellRadius));
         public bool Alerted { get; set; }
-       // public List<Transform> SoldierWaypoints => GameManager.EnemySpawnManager.SoldierWaypoints;
+        public List<Transform> SoldierWaypoints => roomController.FlowerWaypoints;
+        public List<Transform> WorkerWaypoints => roomController.WorkerWaypoints;
         #endregion
         #region SpiderData
         public Vector2 PlayerVelocity => GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;

@@ -57,6 +57,7 @@ MonoBehaviour:
   WeaponController: {fileID: 8789358854941681159}
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
+  tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
     fireRate: 1
@@ -69,6 +70,9 @@ MonoBehaviour:
     armor: 0
     magicResistance: 0
     effects: []
+    canShootTarget: 0
+    randomProjectileOffset: 0
+    predictTargetPosition: 0
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +154,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 216851781
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 447288642, guid: 6d5176e2241ee5341b7884e33e055a45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -334,4 +338,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: -7786698165613059924}
   _smellRadius: 10
-  _alerted: 0

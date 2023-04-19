@@ -35,11 +35,9 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
 
             if (returnedObject.Value != null) {
                 // Return success if an object was founddw
-                Debug.Log("can see");
                 return TaskStatus.Success;
             }
             // An object is not within sight so return failure
-            Debug.Log("cant see");
             return TaskStatus.Failure;
         }
 
