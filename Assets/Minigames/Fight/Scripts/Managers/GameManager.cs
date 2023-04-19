@@ -12,6 +12,7 @@ namespace Minigames.Fight
         [SerializeField] private CurrencyManager currencyManager;
         [SerializeField] private UIManager uiManager;
         [SerializeField] private DamageTextPool damageTextPool;
+        [SerializeField] private RoomManager roomManager;
     
         public static PlayerEntity PlayerEntity => Instance._playerEntity;
         // public static EnemySpawnManager EnemySpawnManager => Instance.enemySpawnManager;
@@ -19,6 +20,7 @@ namespace Minigames.Fight
         public static CurrencyManager CurrencyManager => Instance.currencyManager;
         public static UIManager UIManager => Instance.uiManager;
         public static DamageTextPool DamageTextPool => Instance.damageTextPool;
+        public static RoomManager RoomManager => Instance.roomManager;
 
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;
