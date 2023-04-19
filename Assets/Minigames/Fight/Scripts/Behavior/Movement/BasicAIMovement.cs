@@ -80,7 +80,14 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         float distance = Vector2.Distance(transform.position, nextWaypoint);
         // If waypoint has been reached then agent heads towards next waypoint on the list
         // If no other waypoints exist then agent recalculates the path
-        if (distance <= stopDistance)
+
+        // If stopDistance is set to 0 then update waypoint at 0.01 instead so that agent can still move.
+        float distanceToUpdateWaypoint = stopDistance;
+        if (distanceToUpdateWaypoint == 0)
+        {
+            distanceToUpdateWaypoint = 0.01f;
+        }
+        if (distance <= distanceToUpdateWaypoint)
         {
             if (currentWaypoint >= path.vectorPath.Count - 1)
             {
