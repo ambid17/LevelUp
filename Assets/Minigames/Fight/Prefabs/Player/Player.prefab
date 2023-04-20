@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4274406417404922747}
   - component: {fileID: 4274406417404922744}
   - component: {fileID: 1822334565586454507}
+  - component: {fileID: 6393267105660024771}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -54,6 +55,7 @@ MonoBehaviour:
   WeaponController: {fileID: 0}
   MovementController: {fileID: 4274406417404922725}
   VisualController: {fileID: 2348364804456420384}
+  animationController: {fileID: 6393267105660024771}
   tickDamageDownPerSecond: 0
   CanMove: 1
 --- !u!114 &4274406417404922725
@@ -203,6 +205,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &6393267105660024771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274406417404922745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd04a91a453a3b64b97fe0b953d8f056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1822334565586454507}
+  idleAnimation:
+    Name: 
+    CurrentIndex: 0
+  moveAnimation:
+    Name: 
+    CurrentIndex: 0
+  attackAnimation:
+    Name: 
+    CurrentIndex: 0
+  dieAnimation:
+    Name: 
+    CurrentIndex: 0
+  onHitAnimation:
+    Name: 
+    CurrentIndex: 0
 --- !u!1 &4274406417751090705
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +294,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.956762
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

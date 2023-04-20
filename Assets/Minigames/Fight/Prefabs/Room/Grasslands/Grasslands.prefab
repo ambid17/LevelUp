@@ -6247,7 +6247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2996369232213062856}
+  - {fileID: 4881681057489713698}
   - {fileID: 6777965646017647646}
   - {fileID: 149699535393142881}
   - {fileID: 3992655853492446560}
@@ -6314,7 +6314,7 @@ MonoBehaviour:
   - {fileID: 7757626426232234689}
   - {fileID: 8503698632420875995}
   - {fileID: 3514016167806988375}
-  cam: {fileID: 2996369232213062857}
+  cam: {fileID: 4881681057489713699}
   zoomSpeed: 2
   zoomSize: 1
   spawnPoints:
@@ -17543,7 +17543,7 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1611155690993245561
+--- !u!1001 &8967215990065927059
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -17594,25 +17594,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4597828188242471347, guid: 23d8c23dc7a179643a50f1355be6054e, type: 3}
-      propertyPath: m_BoundingShape2D
-      value: 
-      objectReference: {fileID: 6777965647452085417}
     - target: {fileID: 4597828188242471350, guid: 23d8c23dc7a179643a50f1355be6054e, type: 3}
       propertyPath: m_Name
       value: RoomVcam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d8c23dc7a179643a50f1355be6054e, type: 3}
---- !u!4 &2996369232213062856 stripped
+--- !u!4 &4881681057489713698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4597828188242471345, guid: 23d8c23dc7a179643a50f1355be6054e, type: 3}
-  m_PrefabInstance: {fileID: 1611155690993245561}
+  m_PrefabInstance: {fileID: 8967215990065927059}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2996369232213062857 stripped
+--- !u!114 &4881681057489713699 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4597828188242471344, guid: 23d8c23dc7a179643a50f1355be6054e, type: 3}
-  m_PrefabInstance: {fileID: 1611155690993245561}
+  m_PrefabInstance: {fileID: 8967215990065927059}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

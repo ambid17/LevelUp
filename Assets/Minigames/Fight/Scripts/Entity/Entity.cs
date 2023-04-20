@@ -13,6 +13,7 @@ namespace Minigames.Fight
         public WeaponController WeaponController;
         public MovementController MovementController;
         public VisualController VisualController;
+        public EntityAnimationController animationController;
         public EntityStats Stats;
         
         public bool IsDead => Stats.currentHp <= 0;
@@ -28,6 +29,7 @@ namespace Minigames.Fight
             WeaponController = GetComponent<WeaponController>();
             MovementController = GetComponent<MovementController>();
             VisualController = GetComponent<VisualController>();
+            animationController = GetComponent<EntityAnimationController>();
             Setup();
         }
 
@@ -82,6 +84,8 @@ namespace Minigames.Fight
 
         public virtual void TakeHit(HitData hit)
         {
+            animationController.PlayTakeHitAnim();
+
             float damage = hit.CalculateDamage();
             TakeDamage(damage);
         }
@@ -99,7 +103,7 @@ namespace Minigames.Fight
 
         protected virtual void Die()
         {
-            
+            animationController.PlayDieAnim();
         }
     }
 }

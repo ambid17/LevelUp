@@ -1,4 +1,5 @@
 using CustomPathfinding;
+using Minigames.Fight;
 using Pathfinding;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BasicAIMovement : MonoBehaviour, IPathFinder
 {
+    [SerializeField]
+    private Entity entity;
+
     // A* project script
     private Seeker seeker;
     private Rigidbody2D _rb;
@@ -14,8 +18,6 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
     private float _Speed;
     private bool _RotateTowardsDestination;
     private float _rotationSpeed;
-    private const string updatePath = "UpdatePath";
-    private bool _lastCalculatedPathInvalid;
 
     //track where we are in the waypoint array
     private int currentWaypoint;
@@ -73,7 +75,15 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         // If we don't have a path moving is bad
         if (path == null)
         {
+            if (entity.animationController.IsAnimFinished)
+            {
+                entity.animationController.PlayIdleAnim();
+            }
             return;
+        }
+        if (entity.animationController.IsAnimFinished)
+        {
+            entity.animationController.PlayMoveAnim();
         }
         Vector2 move = nextWaypoint - (Vector2)transform.position;
         rb.velocity = move.normalized * speed;
@@ -115,7 +125,6 @@ public class BasicAIMovement : MonoBehaviour, IPathFinder
         {
             _Path = p;
             currentWaypoint = 0;
-            _lastCalculatedPathInvalid = path != null && Vector2.Distance(path.vectorPath[path.vectorPath.Count - 1], target) > stopDistance;
         }
     }
     private void UpdatePath()

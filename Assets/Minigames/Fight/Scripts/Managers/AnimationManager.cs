@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class AnimationManager : MonoBehaviour
 {
-    protected bool IsAnimFinished => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
+    public bool IsAnimFinished => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
 
     [SerializeField]
     protected Animator anim;
@@ -10,5 +10,13 @@ public abstract class AnimationManager : MonoBehaviour
     protected bool IsAnimPlaying(AnimationName name)
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
+    }
+    public void PlayAnimation(AnimationName name)
+    {
+        if (IsAnimPlaying(name))
+        {
+            return;
+        }
+        anim.Play(name.Name);
     }
 }

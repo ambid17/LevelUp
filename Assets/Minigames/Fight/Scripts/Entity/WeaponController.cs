@@ -46,6 +46,7 @@ namespace Minigames.Fight
 
             if(CanShoot())
             {
+                MyEntity.animationController.PlayAttackAnim();
                 ShotTimer = 0;
                 Shoot();
             }
