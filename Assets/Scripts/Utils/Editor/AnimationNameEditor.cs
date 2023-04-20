@@ -9,6 +9,8 @@ public class AnimationNameEditor : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        position = EditorGUI.IndentedRect(position);
+        position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
         SerializedProperty nameproperty = property.FindPropertyRelative("Name");
         SerializedProperty indexProperty = property.FindPropertyRelative("CurrentIndex");
 

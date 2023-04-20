@@ -1,15 +1,35 @@
 using UnityEngine;
 
-public class EnemyAnimationController : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class EnemyAnimationController : AnimationManager
 {
+
     [SerializeField]
-    private AnimationName animationName;
+    private AnimationName idleAnimation;
+    [SerializeField]
+    private AnimationName moveAnimation;
+    [SerializeField]
+    private AnimationName attackAnimation;
+    [SerializeField]
+    private AnimationName dieAnimation;
 
-    private Animator anim;
-
-    private void Start()
+    public void PlayIdleAnim()
     {
-        anim = GetComponent<Animator>();
-        anim.Play(animationName.Name);
+        anim.Play(idleAnimation.Name);
+    }
+
+    public void PlayMoveAnim()
+    {
+        anim.Play(moveAnimation.Name);
+    }
+
+    public void PlayAttackAnim()
+    {
+        anim.Play(attackAnimation.Name);
+    }
+
+    public void PlayDieAnim()
+    {
+        anim.Play(dieAnimation.Name);
     }
 }

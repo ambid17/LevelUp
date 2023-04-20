@@ -403,7 +403,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd04a91a453a3b64b97fe0b953d8f056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName:
-    _name: 
-    Name: _Anim3
-    CurrentIndex: 2
+  anim: {fileID: 4602063734888168953}
+  idleAnimation:
+    Name: 
+    CurrentIndex: 0
+  moveAnimation:
+    Name: 
+    CurrentIndex: 0
+  attackAnimation:
+    Name: 
+    CurrentIndex: 0
+  dieAnimation:
+    Name: 
+    CurrentIndex: 0
