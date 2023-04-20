@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 1087665331962127016}
   - component: {fileID: -1506387986271205772}
   - component: {fileID: 2083538932749553234}
+  - component: {fileID: 4602063734888168953}
+  - component: {fileID: -45781910839438843}
   m_Layer: 9
   m_Name: Bee
   m_TagString: Untagged
@@ -369,3 +371,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: -7786698165613059924}
   _smellRadius: 0
+--- !u!95 &4602063734888168953
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0bef0c1ca4498b54cb61f28c4fe18b5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &-45781910839438843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd04a91a453a3b64b97fe0b953d8f056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName:
+    _name: 
+    Name: _Anim3
+    CurrentIndex: 2
