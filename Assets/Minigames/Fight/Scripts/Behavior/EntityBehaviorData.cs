@@ -5,6 +5,12 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
+    public enum SpecialEnemyType
+    {
+        None,
+        Bee,
+        Ant,
+    }
 
     public class EntityBehaviorData : MonoBehaviour
     {
@@ -14,6 +20,9 @@ namespace Minigames.Fight
 
         [SerializeField]
         private EnemyEntity entity;
+
+        [SerializeField]
+        private SpecialEnemyType enemyType;
 
         public float MoveSpeed => entity.enemyStats.MoveSpeed;
         public GameObject PlayerGo => entity.Target.gameObject;
@@ -25,6 +34,7 @@ namespace Minigames.Fight
         public float DamageTaken => entity.enemyStats.MaxHp - entity.Stats.currentHp;
         public float DpsTaken => entity.Stats.damageTakenThisSecond;
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerVector);
+        public SpecialEnemyType EnemyType => enemyType;
         #endregion
         #region AntData
         [SerializeField]
