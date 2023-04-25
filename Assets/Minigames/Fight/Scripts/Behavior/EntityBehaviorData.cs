@@ -36,6 +36,11 @@ namespace Minigames.Fight
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerVector);
         public SpecialEnemyType EnemyType => enemyType;
         #endregion
+        #region BeeData
+
+        public float TotalDamageTaken => roomController.TotalBeeDamageTaken;
+
+        #endregion
         #region AntData
         [SerializeField]
         private float _smellRadius;

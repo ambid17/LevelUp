@@ -13,6 +13,22 @@ namespace Minigames.Fight
         public List<Transform> WorkerWaypoints;
         public List<Transform> PatrolWaypoints;
 
+        public float TotalBeeDamageTaken
+        {
+            get
+            {
+                float totalCurrentHealth = 0;
+                foreach (EntityBehaviorData behavior in beesInRoom)
+                {
+                    if (behavior != null)
+                    {
+                        totalCurrentHealth += behavior.CurrentHealth;
+                    }
+                }
+                return beeHealthSum - totalCurrentHealth;
+            }
+        }
+
         [SerializeField]
         private CinemachineVirtualCamera cam;
 
@@ -28,6 +44,11 @@ namespace Minigames.Fight
         private List<EnemyToSpawn> enemiesToSpawn;
 
         private float startSize;
+
+        private float beeHealthSum;
+        private float maxBeeHealth;
+
+        private List<EntityBehaviorData> beesInRoom = new List<EntityBehaviorData>();
 
         private void Start()
         {
@@ -46,6 +67,12 @@ namespace Minigames.Fight
                     int randomInt = Random.Range(0, spawnPoints.Count);
                     EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
                     behavior.roomController = this;
+                    if (behavior.EnemyType == SpecialEnemyType.Bee)
+                    {
+                        maxBeeHealth = behavior.CurrentHealth;
+                        beeHealthSum += maxBeeHealth;
+                        beesInRoom.Add(behavior);
+                    }
                     spawnPoints.Remove(spawnPoints[randomInt]);
                 }
             }
