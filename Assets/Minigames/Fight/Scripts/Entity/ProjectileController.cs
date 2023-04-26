@@ -12,6 +12,8 @@ namespace Minigames.Fight
 
         private EventService _eventService;
 
+        public Entity MyEntity => _myEntity;
+
         protected virtual void Start()
         {
             _eventService = GameManager.EventService;

@@ -9,6 +9,7 @@ namespace Minigames.Fight
     {
         private EnemyEntity _overriddenEntity;
 
+
         protected override void Start()
         {
             base.Start();

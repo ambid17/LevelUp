@@ -42,6 +42,7 @@ namespace Minigames.Fight
             maxHp = enemyStats.MaxHp;
             armor = enemyStats.Armor;
             magicResistance = enemyStats.MagicResist;
+            OnHitEffects = enemyStats.effects;
         }
     }
 }

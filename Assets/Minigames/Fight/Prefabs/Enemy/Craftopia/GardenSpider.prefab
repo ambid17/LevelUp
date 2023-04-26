@@ -72,7 +72,8 @@ MonoBehaviour:
     projectileLifeTime: 5
     armor: 0
     magicResistance: 0
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: 0e76fc0c77b3e1e459bb8b14807c96af, type: 2}
     canShootTarget: 0
     randomProjectileOffset: 0
     predictTargetPosition: 1
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 3d88f5d8abe1a70429881f229c085d29, type: 2}
+  destroyOnReachTarget: 1
 --- !u!114 &2926861443713235242
 MonoBehaviour:
   m_ObjectHideFlags: 0

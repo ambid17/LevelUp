@@ -541,6 +541,10 @@ PrefabInstance:
       propertyPath: m_Lens.OrthographicSize
       value: 1.000496
       objectReference: {fileID: 0}
+    - target: {fileID: 4881681057489713699, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 4.436409
+      objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085416, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -587,12 +591,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: enemiesToSpawn.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0].EnemyPrefab
       value: 
-      objectReference: {fileID: 2083538932749553234, guid: 397fcdc02bde49141ab2b41163364880, type: 3}
+      objectReference: {fileID: 2083538932749553234, guid: bc5b618f9bfbf3a4eb3526d039db9a2b, type: 3}
     - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: enemiesToSpawn.Array.data[1].EnemyPrefab
       value: 
@@ -607,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 2083538932749553234, guid: bc5b618f9bfbf3a4eb3526d039db9a2b, type: 3}
     - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0].numberToSpawn
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: enemiesToSpawn.Array.data[1].numberToSpawn
