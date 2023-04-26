@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 1087665331962127016}
   - component: {fileID: 7898162689922971567}
   - component: {fileID: 2083538932749553234}
+  - component: {fileID: 368501983372723143}
+  - component: {fileID: 6236229955009904633}
   m_Layer: 9
   m_Name: SoldierAnt
   m_TagString: Untagged
@@ -58,7 +60,7 @@ MonoBehaviour:
   WeaponController: {fileID: 8789358854941681159}
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
-  animationController: {fileID: 0}
+  animationController: {fileID: 6236229955009904633}
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
@@ -256,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609a3520990b3ff4caadae37b6c85bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
+  entity: {fileID: -7786698165613059924}
 --- !u!114 &7898162689922971567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +344,54 @@ MonoBehaviour:
   entity: {fileID: -7786698165613059924}
   enemyType: 2
   _smellRadius: 10
+--- !u!95 &368501983372723143
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02f56e2a9ba70064cab6168b3ff331d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &6236229955009904633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd04a91a453a3b64b97fe0b953d8f056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 368501983372723143}
+  idleAnimation:
+    Name: 
+    CurrentIndex: 0
+  moveAnimation:
+    Name: Soldier_Ant_Walk
+    CurrentIndex: 1
+  attackAnimation:
+    Name: 
+    CurrentIndex: 0
+  dieAnimation:
+    Name: Ant_Die
+    CurrentIndex: 2
+  onHitAnimation:
+    Name: 
+    CurrentIndex: 0
 --- !u!1001 &4408156319551635337
 PrefabInstance:
   m_ObjectHideFlags: 0
