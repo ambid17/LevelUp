@@ -48,7 +48,7 @@ namespace Minigames.Fight
 
         public float ProjectileSpeed => projectileSpeed;
 
-        public float ProjectileLifeTime => projectileLifeTime;
+        public float ProjectileLifeTime { get => projectileLifeTime; set => projectileLifeTime = value; }
 
         public float Armor => armor;
         public float MagicResist => magicResistance;

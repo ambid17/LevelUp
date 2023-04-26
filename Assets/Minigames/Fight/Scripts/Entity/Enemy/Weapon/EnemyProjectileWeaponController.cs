@@ -12,6 +12,7 @@ namespace Minigames.Fight
         private Transform _myTransform;
         private EnemyEntity _overridenEntity;
         private ProjectileWeapon _overridenWeapon;
+        private float timeToReachTarget;
 
         private void Start()
         {
@@ -42,7 +43,13 @@ namespace Minigames.Fight
                 direction = PredictProjectileDirection();
             }
 
+            if (destroyOnReachTarget)
+            {
+                _overridenEntity.enemyStats.ProjectileLifeTime = timeToReachTarget;
+            }
+
             projectile.Setup(_overridenEntity, direction);
+
         }
         private Vector2 PredictProjectileDirection()
         {
@@ -55,9 +62,9 @@ namespace Minigames.Fight
             float b = -2 * Mathf.Cos(theta * Mathf.Deg2Rad) * relativePosition.magnitude * targetVelocity.magnitude;
             float c = relativePosition.magnitude * relativePosition.magnitude;
             float delta = Mathf.Sqrt((b * b) - (4 * a * c));
-            float t = -(b + delta) / (2 * a);
+            timeToReachTarget = -(b + delta) / (2 * a);
 
-            Vector2 prediction = (Vector2)_overridenEntity.Target.position + (targetVelocity * t);
+            Vector2 prediction = (Vector2)_overridenEntity.Target.position + (targetVelocity * timeToReachTarget);
             Vector2 difference = RandomOffset(prediction) - (Vector2)transform.position;
 
             return difference.normalized;
