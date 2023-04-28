@@ -5,6 +5,11 @@ namespace Minigames.Fight
 {
     public class ProjectileController : MonoBehaviour
     {
+        [SerializeField]
+        private bool spawnAoeOnDeath;
+        [SerializeField]
+        private AOEController aoePrefab; 
+
         protected Entity _myEntity;
         protected float _deathTimer = 0;
         protected Vector2 _shootDirection;
@@ -22,6 +27,11 @@ namespace Minigames.Fight
 
         private void OnDestroy()
         {
+            if (spawnAoeOnDeath)
+            {
+                AOEController aOEController = Instantiate(aoePrefab, transform.position, new Quaternion(0, 0, 0, 0));
+                aOEController.SetUp(_myEntity);
+            }
             _eventService.Remove<PlayerDiedEvent>(Die);
         }
 

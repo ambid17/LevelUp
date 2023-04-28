@@ -68,7 +68,7 @@ namespace Minigames.Fight
 
         protected void TickStatuses()
         {
-            foreach (var statusEffect in Stats.StatusEffects)
+            foreach (var statusEffect in Stats.StatusEffects.ToList())
             {
                 statusEffect.OnTick(Time.deltaTime);
             }

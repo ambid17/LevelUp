@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -54,7 +55,20 @@ namespace Minigames.Fight
         #region SpiderData
         public Vector2 PlayerVelocity => GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;
         public bool CanShoot { get => entity.enemyStats.canShootTarget; set => entity.enemyStats.canShootTarget = value; }
-
+        public bool IsTargetSlowed
+        {
+            get
+            {
+                foreach (StatusEffectInstance effectInstance in GameManager.PlayerEntity.Stats.StatusEffects)
+                {
+                    if (effectInstance.effect is SlowEffect)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
         #endregion
     }
 }
