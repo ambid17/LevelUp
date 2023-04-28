@@ -8,90 +8,22 @@ namespace Minigames.Fight
 {
     public class ProjectileWeaponController : WeaponController
     {
+        public bool SpawnAoeOnDeath => _spawnAoeOnDeath;
+        public AOEController AoePrefab => _aoePrefab;
+
+        [SerializeField] protected bool destroyOnReachTarget;
         [SerializeField] protected ProjectileWeapon overridenWeapon;
-        protected Camera Camera;
+
+        [SerializeField] private bool _spawnAoeOnDeath;
+        [SerializeField] private AOEController _aoePrefab;
+
         protected Transform MyTransform;
-        protected float ReloadTimer;
-        protected bool IsReloading;
 
 
-        protected virtual void Start()
+        protected override void Start()
         {
             overridenWeapon = weapon as ProjectileWeapon;
-            overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
-            Camera = Camera.main;
             MyTransform = transform;
-        }
-        
-        protected override void Update()
-        {
-            if (ShouldPreventUpdate())
-            {
-                return;
-            }
-
-            ShotTimer += Time.deltaTime;
-            WeaponAbilityTimer += Time.deltaTime;
-
-            if (IsReloading)
-            {
-                ReloadTimer += Time.deltaTime;
-                TryReload();
-            }
-            
-            if(CanShoot())
-            {
-                ShotTimer = 0;
-                Shoot();
-            }
-
-            if (CanUseWeaponAbility())
-            {
-                WeaponAbilityTimer = 0;
-                EventService.Dispatch<PlayerUsedAbilityEvent>();
-                UseWeaponAbility();
-            }
-        }
-        
-        protected override bool CanShoot()
-        {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate && !IsReloading;
-        }
-        
-        protected virtual void TryReload()
-        {
-            if (ReloadTimer < overridenWeapon.reloadTime)
-            {
-                return;
-            }
-            overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
-            IsReloading = false;
-            EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
-        }
-        
-        protected override void Shoot()
-        {
-            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
-        
-            Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-            projectile.transform.position = MyTransform.position.AsVector2();
-
-            projectile.Setup(MyEntity, direction);
-
-            CheckReload();
-        }
-
-        protected virtual void CheckReload()
-        {
-            overridenWeapon.bulletsInMagazine--;
-            EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
-
-            if (overridenWeapon.bulletsInMagazine <= 0)
-            {
-                ReloadTimer = 0;
-                IsReloading = true;
-            }
         }
     }
 }

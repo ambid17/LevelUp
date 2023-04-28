@@ -7,18 +7,15 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    public class EnemyProjectileWeaponController : WeaponController
+    public class EnemyProjectileWeaponController : ProjectileWeaponController
     {
-        private Transform _myTransform;
         private EnemyEntity _overridenEntity;
-        private ProjectileWeapon _overridenWeapon;
         private float timeToReachTarget;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             _overridenEntity = MyEntity as EnemyEntity;
-            _overridenWeapon = weapon as ProjectileWeapon;
-            _myTransform = transform; // cache our transform for performance
         }
         
         protected override bool ShouldPreventUpdate()
@@ -33,10 +30,10 @@ namespace Minigames.Fight
         
         protected override void Shoot()
         {
-            EnemyProjectile projectile = Instantiate(_overridenWeapon.projectilePrefab) as EnemyProjectile;
+            EnemyProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as EnemyProjectile;
             projectile.transform.position = transform.position;
             
-            Vector2 direction = _overridenEntity.Target.position - _myTransform.position;
+            Vector2 direction = _overridenEntity.Target.position - MyTransform.position;
 
             if (_overridenEntity.enemyStats.predictTargetPosition)
             {

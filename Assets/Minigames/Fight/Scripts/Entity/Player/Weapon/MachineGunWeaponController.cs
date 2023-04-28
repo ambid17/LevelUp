@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class MachineGunWeaponController : ProjectileWeaponController
+    public class MachineGunWeaponController : PlayerProjectileWeaponController
     {
         private readonly float _startAngle = -15;
         private readonly float _endAngle = 15;

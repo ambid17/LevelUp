@@ -5,10 +5,8 @@ namespace Minigames.Fight
 {
     public class ProjectileController : MonoBehaviour
     {
-        [SerializeField]
-        private bool spawnAoeOnDeath;
-        [SerializeField]
-        private AOEController aoePrefab; 
+        protected bool spawnAoeOnDeath;
+        protected AOEController aoePrefab; 
 
         protected Entity _myEntity;
         protected float _deathTimer = 0;
@@ -61,6 +59,9 @@ namespace Minigames.Fight
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
+            ProjectileWeaponController controller = _myEntity.WeaponController as ProjectileWeaponController;
+            spawnAoeOnDeath = controller.SpawnAoeOnDeath;
+            aoePrefab = controller.AoePrefab;
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D col)

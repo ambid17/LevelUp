@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class PistolWeaponController : ProjectileWeaponController
+    public class PistolWeaponController : PlayerProjectileWeaponController
     {
         private float projectileSpreadOffset = 0.15f;
         

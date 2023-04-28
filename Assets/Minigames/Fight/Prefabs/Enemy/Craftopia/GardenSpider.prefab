@@ -261,6 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 3d88f5d8abe1a70429881f229c085d29, type: 2}
   destroyOnReachTarget: 1
+  overridenWeapon: {fileID: 0}
+  _spawnAoeOnDeath: 1
+  _aoePrefab: {fileID: 4353102549835907066, guid: a1ca224e137e2dd40b78ecd2c13e7052, type: 3}
 --- !u!114 &2926861443713235242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,4 +448,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
-  destroyOnReachTarget: 0

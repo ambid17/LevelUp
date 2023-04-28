@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class ShotgunWeaponController : ProjectileWeaponController
+    public class ShotgunWeaponController : PlayerProjectileWeaponController
     {
         // TODO: scale the angle with the number of projectiles
         float startAngle = -30;
