@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &428041517705326441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 220165215838367659}
+  - component: {fileID: 7577988821698759749}
+  m_Layer: 0
+  m_Name: PheromoneAOE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &220165215838367659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428041517705326441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1091129, y: -0.05325085, z: 0.08572339}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6130315206565789419}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7577988821698759749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428041517705326441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a0e0f300734c242afca9421410f2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5
+  effectInterval: 1
+  overrideEffectDamage: 1
+  damageOverrideValue: 0
+  overrideStatusEffects: 1
+  statusEffectOverrides:
+  - {fileID: 11400000, guid: 796cafcaaa0cd0f428eb75f741f99749, type: 2}
+--- !u!1001 &2379656669911674247
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 220165215838367659}
+    m_Modifications:
+    - target: {fileID: 2920916548768849266, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_Name
+      value: AntFog
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1091129
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05325085
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.08572339
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+--- !u!4 &6130315206565789419 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+  m_PrefabInstance: {fileID: 2379656669911674247}
+  m_PrefabAsset: {fileID: 0}
