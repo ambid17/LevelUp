@@ -23,14 +23,14 @@ namespace Minigames.Fight
         [SerializeField]
         protected List<Effect> statusEffectOverrides;
 
-        protected List<HitData> hits;
+        protected List<HitData> hits = new();
 
         protected bool isCollidingWithTarget;
         protected Entity storedEntity;
 
         private float localEffectInterval;
 
-        private void Start()
+        protected virtual void Start()
         {
             Destroy(gameObject, lifeTime);
         }

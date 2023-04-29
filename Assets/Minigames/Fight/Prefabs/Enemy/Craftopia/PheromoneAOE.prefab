@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 220165215838367659}
   - component: {fileID: 7577988821698759749}
-  m_Layer: 0
+  - component: {fileID: 9067149623340341741}
+  m_Layer: 11
   m_Name: PheromoneAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428041517705326441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1091129, y: -0.05325085, z: 0.08572339}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,6 +53,22 @@ MonoBehaviour:
   overrideStatusEffects: 1
   statusEffectOverrides:
   - {fileID: 11400000, guid: 796cafcaaa0cd0f428eb75f741f99749, type: 2}
+--- !u!58 &9067149623340341741
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428041517705326441}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.35
 --- !u!1001 &2379656669911674247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,9 +76,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 220165215838367659}
     m_Modifications:
+    - target: {fileID: 1758596682054894318, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2920916548768849266, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
       propertyPath: m_Name
       value: AntFog
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920916548768849266, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
       propertyPath: m_RootOrder
@@ -69,15 +94,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1091129
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05325085
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.08572339
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8364728297413546860, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -107,7 +132,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7559097018975347967, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3c3c57efae5addd49b0bdff4e0b9b6e0, type: 3}
 --- !u!4 &6130315206565789419 stripped
 Transform:

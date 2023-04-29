@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 2083538932749553234}
   - component: {fileID: 368501983372723143}
   - component: {fileID: 6236229955009904633}
+  - component: {fileID: 7583564898686471954}
   m_Layer: 9
   m_Name: SoldierAnt
   m_TagString: Untagged
@@ -392,6 +393,21 @@ MonoBehaviour:
   onHitAnimation:
     Name: 
     CurrentIndex: 0
+--- !u!114 &7583564898686471954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71edf828c4d76c84da3841986011d37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviorData: {fileID: 2083538932749553234}
+  dropFrequency: 1
+  prefab: {fileID: 428041517705326441, guid: 17ff855d42cc5d942a162ffee6d463da, type: 3}
 --- !u!1001 &4408156319551635337
 PrefabInstance:
   m_ObjectHideFlags: 0
