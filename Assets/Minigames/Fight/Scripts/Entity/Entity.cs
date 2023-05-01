@@ -93,7 +93,12 @@ namespace Minigames.Fight
         public virtual void TakeDamage(float damage)
         {
             Stats.TakeDamage(damage);
-            VisualController.StartDamageFx(damage);
+
+            // Damage FX are confusing if a hit only applies status effects.
+            if (damage > 0)
+            {
+                VisualController.StartDamageFx(damage);
+            }
 
             if (IsDead)
             {
