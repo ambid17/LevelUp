@@ -7,6 +7,8 @@ namespace Minigames.Fight
     {
         [SerializeField] private PlayerEntity playerPrefab;
         private PlayerEntity _playerEntity;
+        [SerializeField] private CameraLerp cameraLerp;
+        private CameraLerp _cameraLerp;
        // [SerializeField] private EnemySpawnManager enemySpawnManager;
         [SerializeField] private SettingsManager settingsManager;
         [SerializeField] private CurrencyManager currencyManager;
@@ -15,6 +17,7 @@ namespace Minigames.Fight
         [SerializeField] private RoomManager roomManager;
     
         public static PlayerEntity PlayerEntity => Instance._playerEntity;
+        public static CameraLerp CameraLerp => Instance._cameraLerp;
         // public static EnemySpawnManager EnemySpawnManager => Instance.enemySpawnManager;
         public static SettingsManager SettingsManager => Instance.settingsManager;
         public static CurrencyManager CurrencyManager => Instance.currencyManager;
@@ -48,6 +51,7 @@ namespace Minigames.Fight
         private void SetupPlayer()
         {
             _playerEntity = Instantiate(playerPrefab);
+            _cameraLerp = Instantiate(cameraLerp);
         }
 
         private void Update()

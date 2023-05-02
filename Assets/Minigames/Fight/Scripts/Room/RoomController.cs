@@ -54,7 +54,7 @@ namespace Minigames.Fight
 
         private void Start()
         {
-            cam.Follow = GameManager.PlayerEntity.transform;
+            cam.Follow = GameManager.CameraLerp.transform;
             cam.Priority = 0;
             cam.m_Lens.OrthographicSize = startSize;
         }

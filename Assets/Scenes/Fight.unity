@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4881681057489713699, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 4.999995
+      value: 4.999999
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085416, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_RootOrder
@@ -1640,6 +1640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8595262085980706986, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
+  cameraLerp: {fileID: 1933035113926318739, guid: dd0fc8ed64241c641af0bd12543c27a6, type: 3}
   settingsManager: {fileID: 1191475634}
   currencyManager: {fileID: 1191475635}
   uiManager: {fileID: 530616376}
@@ -1743,7 +1744,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2996369232213062857, guid: 301304e63e50bf842b09bf44c0821fbc, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 4.999995
+      value: 4.999999
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647017403626, guid: 301304e63e50bf842b09bf44c0821fbc, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.size
