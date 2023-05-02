@@ -63,10 +63,10 @@ MonoBehaviour:
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
-    fireRate: 1
-    moveSpeed: 1
+    fireRate: 0.75
+    moveSpeed: 3
     acceleration: 5
-    maxHp: 10
+    maxHp: 5
     weaponDamage: 1
     projectileSpeed: 1
     projectileLifeTime: 5
@@ -76,7 +76,7 @@ MonoBehaviour:
     canShootTarget: 0
     randomProjectileOffset: 0
     predictTargetPosition: 0
-    isPassive: 0
+    isPassive: 1
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0
