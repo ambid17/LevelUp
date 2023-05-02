@@ -37,7 +37,7 @@ namespace Minigames.Fight
         [SerializeField]
         private float zoomSize;
         [SerializeField]
-        private float startSize;
+        private float startSize = 5;
 
         [SerializeField]
         private List<Transform> spawnPoints;
