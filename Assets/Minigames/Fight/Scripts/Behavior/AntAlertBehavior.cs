@@ -31,11 +31,10 @@ namespace Minigames.Fight
                 return;
             }
 
-            // If one is alerted and the other isn't set both to alerted.
-            if (otherBehavior.Alerted != behavior.Alerted)
+            // If other ant is alerted we become alerted
+            if (otherBehavior.Alerted)
             {
                 behavior.Alerted = true;
-                otherBehavior.Alerted = true;
             }
         }
     }

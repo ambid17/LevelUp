@@ -46,7 +46,21 @@ namespace Minigames.Fight
         [SerializeField]
         private float _smellRadius;
 
-        public float SmellRadius => _smellRadius;
+        public float SmellRadius
+        {
+            get
+            {
+                bool playerHasPheromones = false;
+                foreach (StatusEffectInstance effectInstance in GameManager.PlayerEntity.Stats.StatusEffects)
+                {
+                    if (effectInstance.effect is PheromoneEffect)
+                    {
+                        playerHasPheromones = true;
+                    }
+                }
+                return playerHasPheromones ? _smellRadius * 1.5f : _smellRadius;
+            }
+        }
         public Vector2 RandomAroundPlayer => new Vector2(Random.Range(PlayerVector.x - SmellRadius, PlayerVector.x + SmellRadius), Random.Range(PlayerVector.y - SmellRadius, PlayerVector.y + SmellRadius));
         public bool Alerted { get; set; }
         public List<Transform> SoldierWaypoints => roomController.FlowerWaypoints;
