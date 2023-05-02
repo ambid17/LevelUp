@@ -36,6 +36,8 @@ namespace Minigames.Fight
         private float zoomSpeed;
         [SerializeField]
         private float zoomSize;
+        [SerializeField]
+        private float startSize;
 
         [SerializeField]
         private List<Transform> spawnPoints;
@@ -43,10 +45,10 @@ namespace Minigames.Fight
         [SerializeField]
         private List<EnemyToSpawn> enemiesToSpawn;
 
-        private float startSize;
-
         private float beeHealthSum;
         private float maxBeeHealth;
+
+        private bool hasInitialized;
 
         private List<EntityBehaviorData> beesInRoom = new List<EntityBehaviorData>();
 
@@ -54,8 +56,7 @@ namespace Minigames.Fight
         {
             cam.Follow = GameManager.PlayerEntity.transform;
             cam.Priority = 0;
-            startSize = cam.m_Lens.OrthographicSize;
-            SpawnEnemies();
+            cam.m_Lens.OrthographicSize = startSize;
         }
 
         private void SpawnEnemies()
@@ -82,6 +83,12 @@ namespace Minigames.Fight
         {
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
+                // Spawn enemies when player first enters the room instead of on start.
+                if (!hasInitialized)
+                {
+                    SpawnEnemies();
+                    hasInitialized = true;
+                }
                 if (GameManager.RoomManager.CurrentCam != null)
                 {
                     GameManager.RoomManager.CurrentCam.Priority = 0;
