@@ -55,5 +55,6 @@ namespace Minigames.Fight
         public bool canShootTarget = false;
         public float randomProjectileOffset;
         public bool predictTargetPosition;
+        public bool isPassive;
     }
 }
