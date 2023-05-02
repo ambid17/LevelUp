@@ -36,23 +36,10 @@ namespace Minigames.Fight
                 TryStopUsingAbility();
             }
 
-            if (IsReloading)
-            {
-                ReloadTimer += Time.deltaTime;
-                TryReload();
-            }
-            
             if(CanShoot())
             {
                 ShotTimer = 0;
                 Shoot();
-            }
-
-            if (CanUseWeaponAbility())
-            {
-                WeaponAbilityTimer = 0;
-                EventService.Dispatch<PlayerUsedAbilityEvent>();
-                UseWeaponAbility();
             }
         }
         

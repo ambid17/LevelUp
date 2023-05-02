@@ -18,6 +18,25 @@ namespace Minigames.Fight
             Camera = Camera.main;
         }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            if (IsReloading)
+            {
+                ReloadTimer += Time.deltaTime;
+                TryReload();
+            }
+
+            if (CanUseWeaponAbility())
+            {
+                WeaponAbilityTimer = 0;
+                EventService.Dispatch<PlayerUsedAbilityEvent>();
+                UseWeaponAbility();
+            }
+
+        }
+
         protected override bool CanShoot()
         {
             return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate && !IsReloading;

@@ -50,13 +50,6 @@ namespace Minigames.Fight
                 ShotTimer = 0;
                 Shoot();
             }
-
-            if (CanUseWeaponAbility())
-            {
-                WeaponAbilityTimer = 0;
-                EventService.Dispatch<PlayerUsedAbilityEvent>();
-                UseWeaponAbility();
-            }
         }
 
         protected virtual bool ShouldPreventUpdate()
