@@ -61,7 +61,7 @@ namespace Minigames.Fight
 
             projectile.transform.position = MyTransform.position.AsVector2();
 
-            projectile.Setup(MyEntity, direction);
+            projectile.Setup(MyEntity, direction, this);
 
             CheckReload();
         }

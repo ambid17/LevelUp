@@ -38,7 +38,7 @@ namespace Minigames.Fight
 
         public void TryApplyEffect(HitData hit)
         {
-            StatusEffectInstance.Create(hit.Source, hit.Target, this);
+            StatusEffectInstance.Create(hit, this);
         }
 
         public void ApplyEffect(Entity target)

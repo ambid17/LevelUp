@@ -12,10 +12,8 @@ namespace Minigames.Fight
             if (collision.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 Entity entity = collision.GetComponent<Entity>();
-                HitData hitToAdd = storedHitData;
-                hitToAdd.Target = entity;
 
-                hits.Add(hitToAdd);
+                effectedEntities.Add(entity);
             }
         }
         protected override void OnTriggerExit2D(Collider2D collision)
@@ -24,11 +22,11 @@ namespace Minigames.Fight
             if (collision.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 Entity entity = collision.GetComponent<Entity>();
-                foreach (HitData hit in hits)
+                foreach (Entity effectedEntity in effectedEntities)
                 {
-                    if (hit.Target == entity)
+                    if (effectedEntity == entity)
                     {
-                        hits.Remove(hit);
+                        effectedEntities.Remove(effectedEntity);
                     }
                 }
             }
@@ -38,9 +36,9 @@ namespace Minigames.Fight
             base.Update();
             if (canTriggerEffect)
             {
-                foreach (HitData hit in hits)
+                foreach (Entity effectedEntity in effectedEntities)
                 {
-                    hit.Target.TakeHit(hit);
+                    effectedEntity.TakeHit(storedHitData);
                 }
             }
         }

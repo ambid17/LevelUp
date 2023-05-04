@@ -22,6 +22,7 @@ namespace Minigames.Fight
 
         protected override void Start()
         {
+            base.Start();
             overridenWeapon = weapon as ProjectileWeapon;
             MyTransform = transform;
         }

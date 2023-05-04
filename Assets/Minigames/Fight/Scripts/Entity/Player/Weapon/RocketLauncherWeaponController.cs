@@ -26,7 +26,7 @@ namespace Minigames.Fight
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, direction, this);
             }
 
             CheckReload();
@@ -56,7 +56,7 @@ namespace Minigames.Fight
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, direction, this);
             }
         }
         

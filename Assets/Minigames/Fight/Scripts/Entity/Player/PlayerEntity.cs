@@ -9,6 +9,8 @@ namespace Minigames.Fight
 {
     public class PlayerEntity : Entity
     {
+        public WeaponController WeaponController => _weaponController;
+        private WeaponController _weaponController;
         private float _deathTimer;
         
         public float CurrentHp
@@ -69,7 +71,7 @@ namespace Minigames.Fight
             }
             
             weaponController.Setup(equippedWeapon);
-            WeaponController = weaponController;
+            _weaponController = weaponController;
         }
         
         protected override void Setup()
@@ -84,11 +86,17 @@ namespace Minigames.Fight
         {
             Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
         }
-        
+
         public override void TakeDamage(float damage)
         {
+
             CurrentHp -= damage;
-            VisualController.StartDamageFx(damage);
+
+            // Damage FX are confusing if a hit only applies status effects.
+            if (damage > 0)
+            {
+                VisualController.StartDamageFx(damage);
+            }
 
             if (IsDead)
             {

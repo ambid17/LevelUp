@@ -65,10 +65,11 @@ MonoBehaviour:
   enemyStats:
     goldValue: 1
     fireRate: 0.5
-    moveSpeed: 1.5
+    moveSpeed: 1.75
     acceleration: 5
     maxHp: 10
-    weaponDamage: 1
+    meleeWeaponDamage: 0
+    projectileWeaponDamage: 0
     projectileSpeed: 10
     projectileLifeTime: 5
     armor: 0

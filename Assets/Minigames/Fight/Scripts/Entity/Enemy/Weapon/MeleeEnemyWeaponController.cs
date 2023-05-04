@@ -24,7 +24,7 @@ namespace Minigames.Fight
 
         protected override void Shoot()
         {
-            MyEntity.OnHitOther(GameManager.PlayerEntity);
+            GameManager.PlayerEntity.TakeHit(Hit);
         }
         
         void OnTriggerEnter2D(Collider2D col)

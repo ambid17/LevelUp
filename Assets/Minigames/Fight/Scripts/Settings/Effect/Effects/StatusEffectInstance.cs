@@ -10,10 +10,10 @@ namespace Minigames.Fight
         public float timeSinceLastExecution;
         public IStatusEffect effect;
 
-        public StatusEffectInstance(Entity source, Entity target, IStatusEffect effect)
+        public StatusEffectInstance(HitData hit, IStatusEffect effect)
         {
-            this.source = source;
-            this.target = target;
+            this.source = hit.Source;
+            this.target = hit.Target;
             remainingTime = effect.Duration;
             this.effect = effect;
         }
@@ -22,14 +22,14 @@ namespace Minigames.Fight
         /// Creates a class instance to track the remaining time of an affect
         /// This is stored in the entity's stats
         /// </summary>
-        public static void Create(Entity source, Entity target, IStatusEffect effect)
+        public static void Create(HitData hit, IStatusEffect effect)
         {
-            StatusEffectInstance instance = new StatusEffectInstance(source, target, effect);
+            StatusEffectInstance instance = new StatusEffectInstance(hit, effect);
             // Only apply the affect if it isn't already applied
-            bool canApply = target.Stats.AddStatusEffect(instance);
+            bool canApply = hit.Target.Stats.AddStatusEffect(instance);
             if (canApply)
             {
-                effect.ApplyEffect(target);
+                effect.ApplyEffect(hit.Target);
             }
         }
 

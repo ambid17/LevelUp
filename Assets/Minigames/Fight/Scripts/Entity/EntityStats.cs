@@ -13,6 +13,7 @@ namespace Minigames.Fight
         public float dpsTimer;
         public float armor;
         public float magicResistance;
+        public float damage;
         public List<StatusEffectInstance> StatusEffects = new();
         public List<Effect> OnHitEffects = new();
 

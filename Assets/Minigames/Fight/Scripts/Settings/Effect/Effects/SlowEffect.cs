@@ -50,7 +50,7 @@ namespace Minigames.Fight
             bool doesSlow = Random.value < SlowChance;
             if (doesSlow)
             {
-                StatusEffectInstance.Create(hit.Source, hit.Target, this);
+                StatusEffectInstance.Create(hit, this);
             }
         }
 

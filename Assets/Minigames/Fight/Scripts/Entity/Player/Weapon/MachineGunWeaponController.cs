@@ -64,7 +64,7 @@ namespace Minigames.Fight
                 direction = direction.Rotate(angle);
                 
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, direction, this);
 
             }
 

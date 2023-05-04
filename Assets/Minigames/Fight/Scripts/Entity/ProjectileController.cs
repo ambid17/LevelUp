@@ -13,6 +13,8 @@ namespace Minigames.Fight
         protected Vector2 _shootDirection;
         protected bool _isMarkedForDeath;
 
+        protected HitData hit;
+
         private EventService _eventService;
 
         public Entity MyEntity => _myEntity;
@@ -55,13 +57,16 @@ namespace Minigames.Fight
             
         }
 
-        public void Setup(Entity myEntity, Vector2 direction)
+        public virtual void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
-            ProjectileWeaponController controller = _myEntity.WeaponController as ProjectileWeaponController;
-            spawnAoeOnDeath = controller.SpawnAoeOnDeath;
-            aoePrefab = controller.AoePrefab;
+
+            hit = controller.Hit;
+
+            ProjectileWeaponController projectileController = controller as ProjectileWeaponController;
+            spawnAoeOnDeath = projectileController.SpawnAoeOnDeath;
+            aoePrefab = projectileController.AoePrefab;
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D col)

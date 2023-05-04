@@ -24,7 +24,7 @@ namespace Minigames.Fight
             
                 projectile.transform.position = MyTransform.position.AsVector2() + offset;
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, direction, this);
             }
 
             CheckReload();
@@ -54,7 +54,7 @@ namespace Minigames.Fight
                     Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
                     projectile.transform.position = MyTransform.position.AsVector2() + offset;
 
-                    projectile.Setup(MyEntity, direction);
+                    projectile.Setup(MyEntity, direction, this);
                 }
             }
             

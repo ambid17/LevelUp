@@ -25,7 +25,7 @@ namespace Minigames.Fight
                 direction = direction.Rotate(angle);
                 
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, direction, this);
 
                 angle += angleStep;
             }
@@ -42,7 +42,7 @@ namespace Minigames.Fight
 
             Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             
-            projectile.Setup(MyEntity, direction, true);
+            projectile.Setup(MyEntity, direction, this);
         }
     }
 }

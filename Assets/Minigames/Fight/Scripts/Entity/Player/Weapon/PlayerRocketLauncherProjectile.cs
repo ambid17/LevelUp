@@ -37,7 +37,7 @@ namespace Minigames.Fight
             foreach (var hit in hits)
             {
                 Entity enemyEntity = hit.gameObject.GetComponent<Entity>();
-                _sourceEntity.OnHitOther(enemyEntity);
+                enemyEntity.TakeHit(this.hit);
             }
 
             Destroy(gameObject);

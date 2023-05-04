@@ -12,6 +12,7 @@ namespace Minigames.Fight
         
         protected override void Start()
         {
+            base.Start();
             overridenWeapon = weapon as MeleeWeapon;
             meleeWeaponInstance = Instantiate(overridenWeapon.weaponPrefab, transform);
             _camera = Camera.main;
@@ -28,7 +29,7 @@ namespace Minigames.Fight
                 if (hit.transform.gameObject.layer == PhysicsUtils.EnemyLayer)
                 {
                     EnemyEntity enemyEntity = hit.transform.gameObject.GetComponent<EnemyEntity>();
-                    MyEntity.OnHitOther(enemyEntity);
+                    enemyEntity.TakeHit(Hit);
                 }
             }
         

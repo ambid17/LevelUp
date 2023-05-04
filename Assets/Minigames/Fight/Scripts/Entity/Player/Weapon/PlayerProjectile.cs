@@ -12,8 +12,6 @@ namespace Minigames.Fight
         private int _penetrationsLeft;
         private bool _canPenetrateIndefinitely;
 
-        protected Entity _sourceEntity;
-
         protected override bool ShouldDie()
         {
             return _deathTimer > timeToLive;
@@ -24,12 +22,13 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public void Setup(Entity sourceEntity, Vector2 direction, bool canPenetrateIndefinitely = false)
+        public override void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
         {
-            _sourceEntity = sourceEntity;
+            base.Setup(myEntity, direction, controller);
+        
             _shootDirection = direction.normalized;
-            // TODO: look at effects for this
-            _canPenetrateIndefinitely = canPenetrateIndefinitely;
+            //// TODO: look at effects for this
+            //_canPenetrateIndefinitely = canPenetrateIndefinitely;
             _penetrationsLeft = 1;
         }
 
@@ -47,7 +46,7 @@ namespace Minigames.Fight
             else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 Entity enemyEntity = col.gameObject.GetComponent<Entity>();
-                _sourceEntity.OnHitOther(enemyEntity);
+                enemyEntity.TakeHit(hit);
 
                 if (_canPenetrateIndefinitely)
                 {

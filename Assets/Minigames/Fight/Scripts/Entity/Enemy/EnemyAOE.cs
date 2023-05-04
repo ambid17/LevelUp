@@ -23,7 +23,7 @@ namespace Minigames.Fight
             base.Update();
             if (canTriggerEffect)
             {
-                storedHitData.Target.TakeHit(storedHitData);
+                GameManager.PlayerEntity.TakeHit(storedHitData);
             }
         }
     }

@@ -45,7 +45,7 @@ namespace Minigames.Fight
                 _overridenEntity.enemyStats.ProjectileLifeTime = timeToReachTarget;
             }
 
-            projectile.Setup(_overridenEntity, direction);
+            projectile.Setup(_overridenEntity, direction, this);
 
         }
         private Vector2 PredictProjectileDirection()

@@ -23,10 +23,9 @@ namespace Minigames.Fight
         [SerializeField]
         protected List<Effect> statusEffectOverrides;
 
-        protected List<HitData> hits = new();
+        protected List<Entity> effectedEntities = new();
 
         protected bool isCollidingWithTarget;
-        protected Entity storedEntity;
 
         private float localEffectInterval;
 
@@ -44,12 +43,12 @@ namespace Minigames.Fight
         }
         public virtual void SetUp(Entity entity)
         {
-            storedEntity = entity;
-            storedHitData = new HitData(entity, GameManager.PlayerEntity);
+            float damage = entity.Stats.damage;
             if (overrideEffectDamage)
             {
-                storedHitData.BaseDamage = damageOverrideValue;
+                damage = damageOverrideValue;
             }
+            storedHitData = new HitData(entity, damage);
             if (overrideStatusEffects)
             {
                 storedHitData.Effects = statusEffectOverrides;

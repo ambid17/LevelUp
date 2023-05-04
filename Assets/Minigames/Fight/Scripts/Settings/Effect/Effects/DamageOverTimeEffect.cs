@@ -50,7 +50,7 @@ namespace Minigames.Fight
             bool doesApply = Random.value < chance;
             if (doesApply)
             {
-                StatusEffectInstance.Create(hit.Source, hit.Target, this);
+                StatusEffectInstance.Create(hit, this);
             }
         }
 

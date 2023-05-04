@@ -19,7 +19,9 @@ namespace Minigames.Fight
         [SerializeField]
         private float maxHp = 100;
         [SerializeField]
-        private float weaponDamage;
+        private float meleeWeaponDamage;
+        [SerializeField]
+        private float projectileWeaponDamage;
         [SerializeField]
         private float projectileSpeed;
         [SerializeField]
@@ -42,7 +44,10 @@ namespace Minigames.Fight
             maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar *
             GameManager.SettingsManager.enemySpawnerSettings.Hp;
 
-        public float WeaponDamage => weaponDamage *
+        public float MeleeWeaponDamage => meleeWeaponDamage *
+                                     GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
+                                         .EnemyStatScalar;
+        public float ProjectileWeaponDamage => projectileWeaponDamage *
                                      GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
                                          .EnemyStatScalar;
 

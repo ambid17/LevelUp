@@ -49,7 +49,7 @@ namespace Minigames.Fight
             doesSlow = true;
             if (doesSlow)
             {
-                StatusEffectInstance.Create(hit.Source, hit.Target, this);
+                StatusEffectInstance.Create(hit, this);
             }
         }
 

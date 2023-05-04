@@ -10,11 +10,13 @@ namespace Minigames.Fight
     {
         [SerializeField] protected Weapon weapon;
         public Weapon Weapon => weapon;
+        public HitData Hit => hit;
         protected float ShotTimer;
         protected float WeaponAbilityTimer;
         public float AbilityTimer => WeaponAbilityTimer;
         protected EventService EventService;
         protected Entity MyEntity;
+        protected HitData hit;
 
         void Awake()
         {
@@ -25,7 +27,12 @@ namespace Minigames.Fight
 
         protected virtual void Start()
         {
-            
+            CalculateHitData();
+        }
+
+        public void CalculateHitData()
+        {
+            hit = new HitData(MyEntity, weapon.damage);
         }
 
         public void Setup(Weapon weapon)

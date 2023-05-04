@@ -40,7 +40,7 @@ namespace Minigames.Fight
             }
             else if (col.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                _myEntity.OnHitOther(GameManager.PlayerEntity);
+                GameManager.PlayerEntity.TakeHit(hit);
                 Die();
             }
         }

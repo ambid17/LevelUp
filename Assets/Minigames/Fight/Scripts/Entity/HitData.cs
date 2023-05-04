@@ -19,13 +19,12 @@ namespace Minigames.Fight
         public float FlatMagicPenetration;
         public List<float> EffectDamages; 
 
-        public HitData(Entity source, Entity target)
+        public HitData(Entity source, float damage)
         {
             Source = source;
-            BaseDamage = Source.WeaponController.Weapon.damage;
+
+            BaseDamage = damage;
             Effects = Source.Stats.OnHitEffects;
-            
-            Target = target;
 
             BaseDamageAdditions = new();
             BaseDamageMultipliers = new();
@@ -33,8 +32,9 @@ namespace Minigames.Fight
         }
 
         // Base damage * [weaponMult] + [effectDamage * effectMult]... - (armor * penetration)
-        public float CalculateDamage()
+        public float CalculateDamage(Entity target)
         {
+            Target = target;
             foreach (var effect in Effects)
             {
                 // populates the list of damages/multipliers
