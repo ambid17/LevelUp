@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8510735526301981977}
   - component: {fileID: -7786698165613059924}
-  - component: {fileID: 8789358854941681159}
   - component: {fileID: -698485910662565092}
   - component: {fileID: 1047883154001853991}
   - component: {fileID: 8510735526301981991}
@@ -58,7 +57,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponController: {fileID: 8789358854941681159}
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
   animationController: {fileID: 1243321662217999411}
@@ -66,10 +64,11 @@ MonoBehaviour:
   enemyStats:
     goldValue: 1
     fireRate: 1
-    moveSpeed: 0.8
+    moveSpeed: 0.5
     acceleration: 5
-    maxHp: 12
-    weaponDamage: 0
+    maxHp: 8
+    meleeWeaponDamage: 0
+    projectileWeaponDamage: 0
     projectileSpeed: 1
     projectileLifeTime: 5
     armor: 0
@@ -79,19 +78,6 @@ MonoBehaviour:
     randomProjectileOffset: 0
     predictTargetPosition: 0
     isPassive: 0
---- !u!114 &8789358854941681159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
 --- !u!114 &-698485910662565092
 MonoBehaviour:
   m_ObjectHideFlags: 0

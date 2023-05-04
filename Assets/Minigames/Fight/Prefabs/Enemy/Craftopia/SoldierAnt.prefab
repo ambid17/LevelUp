@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponController: {fileID: 8789358854941681159}
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
   animationController: {fileID: 6236229955009904633}
@@ -68,8 +67,9 @@ MonoBehaviour:
     fireRate: 1
     moveSpeed: 1.5
     acceleration: 5
-    maxHp: 15
-    weaponDamage: 1.5
+    maxHp: 10
+    meleeWeaponDamage: 0
+    projectileWeaponDamage: 0
     projectileSpeed: 1
     projectileLifeTime: 5
     armor: 0

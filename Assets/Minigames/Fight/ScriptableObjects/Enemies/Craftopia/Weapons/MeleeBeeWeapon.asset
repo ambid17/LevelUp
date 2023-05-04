@@ -9,20 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 040ceb1b8a8bc04448d7ed98f77b99bd, type: 3}
-  m_Name: SpiderProjectileWeapon
+  m_Script: {fileID: 11500000, guid: e1dde72dbf87827439e676a28db5507d, type: 3}
+  m_Name: MeleeBeeWeapon
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 4
   readableName: 
   description: 
   icon: {fileID: 0}
   ammoIcon: {fileID: 0}
   abilityIcon: {fileID: 0}
   abilityCooldown: 0
-  fireRate: 1
-  damage: 0.25
-  projectilePrefab: {fileID: 3866094613508053641, guid: 4db1821d7cd4b2843bc06ba1bff6d532, type: 3}
-  magazineSize: 0
-  bulletsInMagazine: 0
-  reloadTime: 0
-  projectileCount: 1
+  fireRate: 0.5
+  damage: 1
+  weaponPrefab: {fileID: 0}
+  attackRange: 2
+  animationLength: 0

@@ -56,7 +56,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponController: {fileID: 8789358854941681159}
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
   animationController: {fileID: 2103626537702839327}
@@ -64,10 +63,11 @@ MonoBehaviour:
   enemyStats:
     goldValue: 1
     fireRate: 0.75
-    moveSpeed: 3
+    moveSpeed: 3.5
     acceleration: 5
-    maxHp: 5
-    weaponDamage: 1
+    maxHp: 3
+    meleeWeaponDamage: 0
+    projectileWeaponDamage: 0
     projectileSpeed: 1
     projectileLifeTime: 5
     armor: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
+  weapon: {fileID: 11400000, guid: 086c15e3a1bbd0f4eb41b64853538c86, type: 2}
 --- !u!114 &-698485910662565092
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ namespace Minigames.Fight
             if (collision.gameObject.layer == PhysicsUtils.EnemyLayer || collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
                 Entity entity = collision.GetComponent<Entity>();
-                foreach (Entity effectedEntity in effectedEntities)
+                foreach (Entity effectedEntity in effectedEntities.ToList())
                 {
                     if (effectedEntity == entity)
                     {
