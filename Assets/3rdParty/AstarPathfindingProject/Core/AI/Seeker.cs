@@ -98,7 +98,6 @@ namespace Pathfinding {
 		///
 		/// See: multiple-agent-types (view in online documentation for working links)
 		/// </summary>
-		[HideInInspector]
 		public GraphMask graphMask = GraphMask.everything;
 
 		/// <summary>Used for serialization backwards compatibility</summary>
