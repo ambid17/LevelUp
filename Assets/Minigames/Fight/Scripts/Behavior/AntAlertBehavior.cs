@@ -22,11 +22,7 @@ namespace Minigames.Fight
                 return;
             }
             EntityBehaviorData otherBehavior = collision.GetComponent<EntityBehaviorData>();
-            if (otherBehavior == null)
-            {
-                return;
-            }
-            if (otherBehavior.EnemyType != SpecialEnemyType.Ant)
+            if (otherBehavior == null || otherBehavior.EnemyType != SpecialEnemyType.Ant)
             {
                 return;
             }

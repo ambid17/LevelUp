@@ -63,8 +63,6 @@ namespace Minigames.Fight
             }
         
             _isMarkedForDeath = true;
-        
-           // GameManager.EnemySpawnManager.EnemyCount--;
 
             Destroy(gameObject);
         }
