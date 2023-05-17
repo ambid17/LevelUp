@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 namespace Minigames.Fight
 {
@@ -12,6 +14,8 @@ namespace Minigames.Fight
         public List<Transform> FlowerWaypoints;
         public List<Transform> WorkerWaypoints;
         public List<Transform> PatrolWaypoints;
+        public PolygonCollider2D col;
+        public Tilemap Tilemap;
 
         public float TotalBeeDamageTaken
         {
@@ -108,6 +112,20 @@ namespace Minigames.Fight
             {
                 cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, startSize, zoomSpeed *Time.deltaTime);
             }
+        }
+
+        public void CloseExits(Vector2 pathDirection)
+        {
+
+        }
+
+        [ContextMenu("getcomponents")]
+        public void GetComponents()
+        {
+            col = GetComponent<PolygonCollider2D>();
+            Tilemap = GetComponentsInChildren<Tilemap>().FirstOrDefault(t => t.gameObject.layer == PhysicsUtils.wallLayer);
+            Tilemap.CompressBounds();
+            UnityEditor.EditorUtility.SetDirty(this);
         }
     }
     [Serializable]
