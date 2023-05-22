@@ -17,7 +17,6 @@ namespace Minigames.Fight
 
             int roomCount = Random.Range(_roomSettings.minRooms, _roomSettings.maxRooms + 1);
             Vector2 direction = Vector2.zero;
-            direction = GetRandomCardinalDirection();
             for (int i = 0; i < roomCount; i++)
             {
                 // Pick direction(s).
@@ -25,20 +24,20 @@ namespace Minigames.Fight
                 var room = startRoom;
                 
                 Vector2 center = Vector2.zero;
+                direction = GetRandomCardinalDirection();
 
                 while (!valid)
                 {
+                    direction = GetRandomCardinalDirection();
                     room = _roomSettings.GetRandomRoom();
                     float x = (lastRoom.col.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
                     float y = (lastRoom.col.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
-                    var test = lastRoom.col.bounds.size;
                     center = lastRoom.col.bounds.center.AsVector2() + new Vector2(x, y);
 
-                    if (!Physics2D.OverlapBox(center, room.Tilemap.cellBounds.AsVector2(), 0))
+                    if (!Physics2D.OverlapBox(center, room.Tilemap.cellBounds.AsVector2() * 0.99f, 0))
                     {
                         valid = true;
                     }
-                    valid = true;
                 }
 
                 // Instantiate room in direction.
