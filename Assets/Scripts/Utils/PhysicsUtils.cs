@@ -105,4 +105,8 @@ public static class PhysicsUtils
     {
         return new Vector2(boundsInt.xMax - boundsInt.xMin, boundsInt.yMax - boundsInt.yMin);
     }
+    public static Vector2 AsVector2(this Vector3Int vector3Int)
+    {
+        return new Vector2(vector3Int.x, vector3Int.y);
+    }
 }
