@@ -1,4 +1,5 @@
 using Cinemachine;
+using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ namespace Minigames.Fight
     public class RoomManager : Singleton<RoomManager>
     {
         public CinemachineVirtualCamera CurrentCam { get; set; }
+
+        [SerializeField]
+        private AstarPath pathFinderPrefab;
 
         private RoomSettings _roomSettings;
         protected override void Initialize()
@@ -87,9 +91,44 @@ namespace Minigames.Fight
             }
 
             // Set pathfinding grid bounds.
+            Vector2 max = Vector2.negativeInfinity;
+            Vector2 min = Vector2.positiveInfinity;
+            Vector2 size = Vector2.zero;
 
+            foreach (RoomController room in availableRooms)
+            {
+                Vector2 roomMin = room.Tilemap.CellToWorld(room.Tilemap.origin);
+                Vector2 roomMax = room.Tilemap.CellToWorld(room.Tilemap.origin + room.Tilemap.cellBounds.size);
+
+                size += room.Tilemap.cellBounds.size.AsVector2();
+                if (roomMax.x > max.x)
+                {
+                    max.x = roomMax.x;
+                }
+                if (roomMax.y > max.y)
+                {
+                    max.y = roomMax.y;
+                }
+                if (roomMin.x < min.x)
+                {
+                    min.x = roomMin.x;
+                }
+                if (roomMin.y < min.y)
+                {
+                    min.y = roomMin.y;
+                }
+            }
+
+            AstarPath path = Instantiate(pathFinderPrefab);
+            foreach (NavGraph navGraph in path.graphs)
+            {
+                GridGraph graph = navGraph as GridGraph;
+                graph.center = (min + max) / 2;
+                graph.SetDimensions((int)max.x - (int)min.x, (int)max.y - (int)min.y, 1);
+            }
 
             // Rescan pathfinding.
+            path.Scan();
         }
         private Vector2 GetRandomCardinalDirection()
         {
