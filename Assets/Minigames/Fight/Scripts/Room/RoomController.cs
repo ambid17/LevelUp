@@ -118,13 +118,18 @@ namespace Minigames.Fight
             }
         }
 
-        public void CloseExits()
+        public void CloseExits(Tile tileToPlace)
         {
-
-        }
-        public void CheckValidConnections()
-        {
-
+            foreach (RoomConnection connection in roomConnections)
+            {
+                if (!connection.HasConnection)
+                {
+                    foreach (Vector3Int tilePos in connection.TilePositions)
+                    {
+                        Tilemap.SetTile(tilePos, tileToPlace);
+                    }
+                }
+            }
         }
 
         [ContextMenu("getcomponents")]
@@ -225,6 +230,7 @@ namespace Minigames.Fight
 
                 roomConnections.Add(connection);
             }
+            UnityEditor.EditorUtility.SetDirty(this);
         }
     }
     [Serializable]

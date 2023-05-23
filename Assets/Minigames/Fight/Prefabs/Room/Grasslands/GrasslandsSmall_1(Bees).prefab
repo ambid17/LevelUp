@@ -3285,6 +3285,44 @@ MonoBehaviour:
   - {fileID: 4742843424223434496}
   col: {fileID: 6777965647452085417}
   Tilemap: {fileID: 7335862982721619231}
+  roomConnections:
+  - Label: Right
+    Location: {x: 32, y: 1}
+    Direction: {x: 1, y: 0}
+    TilePositions:
+    - {x: 31, y: 1, z: 0}
+    - {x: 31, y: 0, z: 0}
+    - {x: 30, y: 1, z: 0}
+    - {x: 30, y: 0, z: 0}
+    HasConnection: 0
+  - Label: Up
+    Location: {x: 15, y: 18}
+    Direction: {x: 0, y: 1}
+    TilePositions:
+    - {x: 15, y: 17, z: 0}
+    - {x: 14, y: 17, z: 0}
+    - {x: 15, y: 16, z: 0}
+    - {x: 14, y: 16, z: 0}
+    HasConnection: 0
+  - Label: Left
+    Location: {x: -2, y: 1}
+    Direction: {x: -1, y: 0}
+    TilePositions:
+    - {x: -2, y: 1, z: 0}
+    - {x: -2, y: 0, z: 0}
+    - {x: -1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    HasConnection: 0
+  - Label: Down
+    Location: {x: 15, y: -16}
+    Direction: {x: 0, y: -1}
+    TilePositions:
+    - {x: 15, y: -16, z: 0}
+    - {x: 14, y: -16, z: 0}
+    - {x: 15, y: -15, z: 0}
+    - {x: 14, y: -15, z: 0}
+    HasConnection: 0
+  tilesPerConnection: 4
   cam: {fileID: 4881681057489713699}
   zoomSpeed: 2
   zoomSize: 1

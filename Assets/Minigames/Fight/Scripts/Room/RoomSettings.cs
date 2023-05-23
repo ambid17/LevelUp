@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
@@ -13,6 +14,7 @@ namespace Minigames.Fight
         public int maxRooms;
         public RoomController startRoom;
         public List<RoomController> rooms;
+        public Tile wallTile;
 
         public RoomController GetRandomRoom()
         {
