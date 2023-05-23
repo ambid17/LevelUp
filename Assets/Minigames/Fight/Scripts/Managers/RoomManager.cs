@@ -21,37 +21,51 @@ namespace Minigames.Fight
 
             // Instantiate start room.
             var startRoom = Instantiate(_roomSettings.startRoom);
-            availableRooms.Add(startRoom);
-            var lastRoom = startRoom;
 
+            // Add start room to our list of rooms to branch from.
+            availableRooms.Add(startRoom);
+            var targetRoom = startRoom;
+
+            // Deterimine how many rooms we'll spawn.
             int roomCount = Random.Range(_roomSettings.minRooms, _roomSettings.maxRooms + 1);
+
+
             List<RoomController> roomsToInstantiate = new();
             Vector2 direction = Vector2.zero;
+
+            // Populate our rooms to instantiate list with the determined number of random rooms
             for (int i = 0; i < roomCount; i++)
             {
                 roomsToInstantiate.Add(_roomSettings.GetRandomRoom());
             }
+
+            // Generate the map
             foreach (RoomController roomToInstantiate in roomsToInstantiate)
             {
-                // Pick direction(s).
                 bool valid = false;
                 var room = roomToInstantiate;
 
                 Vector2 center = Vector2.zero;
 
+                // Repeat until valid placement has been found
                 while (!valid)
                 {
+                    // Select a random room to branch off of.
                     int roomToBranchOffOf = Random.Range(0, availableRooms.Count);
-                    lastRoom = availableRooms[roomToBranchOffOf];
+                    targetRoom = availableRooms[roomToBranchOffOf];
+
+                    // Select random direction to branch in.
                     direction = GetRandomCardinalDirection();
-                    float x = (lastRoom.col.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
-                    float y = (lastRoom.col.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
-                    center = lastRoom.col.bounds.center.AsVector2() + new Vector2(x, y);
+
+                    // Calculate the location the new room will spawn in.
+                    float x = (targetRoom.col.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
+                    float y = (targetRoom.col.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
+                    center = targetRoom.col.bounds.center.AsVector2() + new Vector2(x, y);
 
 
-                    // Abort before doing the overlap check if the chosen direction has already been used.
+                    // Abort before doing the overlap check if the chosen direction has already been used (slight performance boost).
                     RoomConnection roomConnection = null;
-                    foreach (RoomConnection connection in lastRoom.roomConnections)
+                    foreach (RoomConnection connection in targetRoom.roomConnections)
                     {
                         if (connection.Direction == direction)
                         {
@@ -63,9 +77,12 @@ namespace Minigames.Fight
                         }
                     }
 
+                    // Check perposed room location to ensure it won't overlap with an existing room
                     if (!Physics2D.OverlapBox(center, room.Tilemap.cellBounds.AsVector2() * 0.99f, 0))
                     {
                         valid = true;
+
+                        // Once room has spawned mark the old rooms connection as having been used.
                         roomConnection.HasConnection = true;
                     }
                 }
@@ -73,6 +90,7 @@ namespace Minigames.Fight
                 // Instantiate room in direction.
                 var roomInstance = Instantiate(room, center - room.Tilemap.cellBounds.center.AsVector2(), Quaternion.identity);
 
+                // Mark the new rooms connection with the old room.
                 foreach (RoomConnection connection in roomInstance.roomConnections)
                 {
                     if (connection.Direction == -direction)
@@ -81,6 +99,7 @@ namespace Minigames.Fight
                     }
                 }
 
+                // Add to available rooms so it too can be branched off of.
                 availableRooms.Add(roomInstance);
             }
 
@@ -90,17 +109,15 @@ namespace Minigames.Fight
                 room.CloseExits(_roomSettings.wallTile);
             }
 
-            // Set pathfinding grid bounds.
+            // Determine total min and max of the full level
             Vector2 max = Vector2.negativeInfinity;
             Vector2 min = Vector2.positiveInfinity;
-            Vector2 size = Vector2.zero;
 
             foreach (RoomController room in availableRooms)
             {
                 Vector2 roomMin = room.Tilemap.CellToWorld(room.Tilemap.origin);
                 Vector2 roomMax = room.Tilemap.CellToWorld(room.Tilemap.origin + room.Tilemap.cellBounds.size);
 
-                size += room.Tilemap.cellBounds.size.AsVector2();
                 if (roomMax.x > max.x)
                 {
                     max.x = roomMax.x;
@@ -119,7 +136,10 @@ namespace Minigames.Fight
                 }
             }
 
+            // Generate the AStar Pathfinder.
             AstarPath path = Instantiate(pathFinderPrefab);
+
+            // Set the center and size for all grid graphs in the pathfinder.
             foreach (NavGraph navGraph in path.graphs)
             {
                 GridGraph graph = navGraph as GridGraph;

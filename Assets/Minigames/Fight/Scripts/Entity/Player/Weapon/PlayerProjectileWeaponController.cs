@@ -6,7 +6,6 @@ namespace Minigames.Fight
 {
     public class PlayerProjectileWeaponController : ProjectileWeaponController
 {
-        protected Camera Camera;
         protected float ReloadTimer;
         protected bool IsReloading;
 
@@ -15,7 +14,6 @@ namespace Minigames.Fight
         {
             base.Start();
             overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
-            Camera = Camera.main;
         }
 
         protected override void Update()
@@ -57,7 +55,7 @@ namespace Minigames.Fight
         {
             PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
 
-            Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
             projectile.transform.position = MyTransform.position.AsVector2();
 

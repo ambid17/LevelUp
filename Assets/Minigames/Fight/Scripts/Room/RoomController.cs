@@ -118,6 +118,7 @@ namespace Minigames.Fight
             }
         }
 
+        // If a connection is not being used close it off.
         public void CloseExits(Tile tileToPlace)
         {
             foreach (RoomConnection connection in roomConnections)
