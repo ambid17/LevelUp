@@ -20,11 +20,7 @@ namespace Minigames.Fight
         {
             base.Update();
 
-            if (IsReloading)
-            {
-                ReloadTimer += Time.deltaTime;
-                TryReload();
-            }
+            TryReload();
 
             if (CanUseWeaponAbility())
             {
@@ -42,13 +38,14 @@ namespace Minigames.Fight
 
         protected virtual void TryReload()
         {
-            if (ReloadTimer < overridenWeapon.reloadTime)
+            if (ReloadTimer < overridenWeapon.reloadTime || overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
             {
+                ReloadTimer += Time.deltaTime;
                 return;
             }
-            overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
-            IsReloading = false;
+            overridenWeapon.bulletsInMagazine++;
             EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
+            ReloadTimer = 0;
         }
 
         protected override void Shoot()
@@ -68,12 +65,7 @@ namespace Minigames.Fight
         {
             overridenWeapon.bulletsInMagazine--;
             EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
-
-            if (overridenWeapon.bulletsInMagazine <= 0)
-            {
-                ReloadTimer = 0;
-                IsReloading = true;
-            }
+            ReloadTimer = 0;
         }
     }
 }

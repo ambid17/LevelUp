@@ -60,7 +60,6 @@ namespace Minigames.Fight
             
             overridenWeapon.bulletsInMagazine = 0;
             ReloadTimer = 0;
-            IsReloading = true;
         }
     }
 }
