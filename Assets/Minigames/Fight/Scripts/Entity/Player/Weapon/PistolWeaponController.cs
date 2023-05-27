@@ -59,6 +59,7 @@ namespace Minigames.Fight
             }
             
             overridenWeapon.bulletsInMagazine = 0;
+            EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
             ReloadTimer = 0;
         }
     }

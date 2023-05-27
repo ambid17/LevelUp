@@ -9,13 +9,13 @@ namespace Minigames.Fight
 {
     public class PlayerEntity : Entity
     {
-        public WeaponController WeaponController => _weaponController;
+        public WeaponController WeaponController => _equippedWeaponController;
         public Camera PlayerCamera => playerCamera;
 
         [SerializeField]
         private Camera playerCamera;
 
-        private WeaponController _weaponController;
+        private WeaponController _equippedWeaponController;
         private float _deathTimer;
         
         public float CurrentHp
@@ -76,7 +76,7 @@ namespace Minigames.Fight
             }
             
             weaponController.Setup(equippedWeapon);
-            _weaponController = weaponController;
+            _equippedWeaponController = weaponController;
         }
         
         protected override void Setup()
