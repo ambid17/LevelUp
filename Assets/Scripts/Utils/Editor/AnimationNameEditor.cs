@@ -1,7 +1,8 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-[CustomPropertyDrawer(typeof(AnimationName))]
+[CustomPropertyDrawer(typeof(AnimationName), true)]
 public class AnimationNameEditor : PropertyDrawer
 {
     private string[] availableAnimations;
@@ -13,6 +14,7 @@ public class AnimationNameEditor : PropertyDrawer
         position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
         SerializedProperty nameproperty = property.FindPropertyRelative("Name");
         SerializedProperty indexProperty = property.FindPropertyRelative("CurrentIndex");
+        SerializedProperty overrideAnimationProperty = property.FindPropertyRelative("CanBeCancelled");
 
         // Set index to stored value to prevent name from being overwritten.
         animIndex = indexProperty.intValue;
@@ -48,10 +50,11 @@ public class AnimationNameEditor : PropertyDrawer
 
         // Begin checking for GUI changes.
         EditorGUI.BeginChangeCheck();
-
+        VisualElement container = new VisualElement();
         // Serialize the index as a dropdown of available animation names.
-        animIndex = EditorGUI.Popup(position, animIndex, availableAnimations);
+        animIndex = EditorGUI.Popup(new Rect(position.x, position.y, position.width, position.height/2), animIndex, availableAnimations);
 
+        EditorGUI.PropertyField(new Rect(position.x, position.y +15, position.width, position.height/2), overrideAnimationProperty);
         // Once check is complete set the name property to the selected animation name.
         if (EditorGUI.EndChangeCheck())
         {
@@ -69,5 +72,10 @@ public class AnimationNameEditor : PropertyDrawer
 
         // Mark the object the AnimationName has been added to as dirty.
         EditorUtility.SetDirty(property.serializedObject.targetObject);
+    }
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        float extraHeight = 30f;
+        return base.GetPropertyHeight(property, label) + extraHeight;
     }
 }
