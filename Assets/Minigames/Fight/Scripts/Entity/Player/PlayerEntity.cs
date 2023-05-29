@@ -17,6 +17,7 @@ namespace Minigames.Fight
 
         private WeaponController _equippedWeaponController;
         private float _deathTimer;
+        private PlayerProjectileWeaponController _projectileWeaponController;
         
         public float CurrentHp
         {
@@ -44,39 +45,7 @@ namespace Minigames.Fight
 
         private void SetupWeaponController()
         {
-            Weapon equippedWeapon = GameManager.SettingsManager.weaponSettings.equippedWeapon;
-
-            WeaponController weaponController;
-            //switch (equippedWeapon.weaponType)
-            //{
-            //    case WeaponType.Pistol:
-            //        weaponController = gameObject.AddComponent<PistolWeaponController>();
-            //        break;
-            //    case WeaponType.RocketLauncher:
-            //        weaponController = gameObject.AddComponent<RocketLauncherWeaponController>();
-            //        break;
-            //    case WeaponType.Shotgun:
-            //        weaponController = gameObject.AddComponent<ShotgunWeaponController>();
-            //        break;
-            //    case WeaponType.MachineGun:
-            //        weaponController = gameObject.AddComponent<MachineGunWeaponController>();
-            //        break;
-            //    case WeaponType.Katana:
-            //        weaponController = gameObject.AddComponent<KatanaWeaponController>();
-            //        break;
-            //    case WeaponType.Hammer:
-            //        weaponController = gameObject.AddComponent<HammerWeaponController>();
-            //        break;
-            //    case WeaponType.Shield:
-            //        weaponController = gameObject.AddComponent<ShieldWeaponController>();
-            //        break;
-            //    default:
-            //        weaponController = gameObject.AddComponent<PistolWeaponController>();
-            //        break;
-            //}
             
-            //weaponController.Setup(equippedWeapon);
-            //_equippedWeaponController = weaponController;
         }
         
         protected override void Setup()

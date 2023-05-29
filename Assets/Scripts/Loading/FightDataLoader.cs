@@ -26,7 +26,6 @@ public class FightDataLoader : MonoBehaviour
     {
         LoadProgressData();
         LoadEffectData();
-        LoadWeaponData();
     }
 
     private void LoadEffectData()
@@ -70,12 +69,4 @@ public class FightDataLoader : MonoBehaviour
         }
     }
     
-    private void LoadWeaponData()
-    {
-        var weaponModel = WeaponDataManager.Load();
-        if (weaponModel != null)
-        {
-            Platform.WeaponSettings.FromModel(weaponModel);
-        }
-    }
 }

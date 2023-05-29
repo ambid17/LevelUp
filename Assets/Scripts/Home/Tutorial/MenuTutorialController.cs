@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MenuTutorialController : MonoBehaviour
 {
-    [SerializeField] private WeaponTutorial _weaponTutorial;
     
     void Start()
     {
@@ -12,8 +11,7 @@ public class MenuTutorialController : MonoBehaviour
 
         if (state == TutorialState.None)
         {
-            Tutorial.SetState(TutorialState.ChooseWeapon);
-            StartCoroutine(_weaponTutorial.Run());
+            Tutorial.SetState(TutorialState.Complete);
         }
     }
 

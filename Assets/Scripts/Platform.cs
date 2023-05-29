@@ -7,9 +7,7 @@ using UnityEngine;
 public class Platform : Singleton<Platform>
 {
     [SerializeField] private ProgressSettings progressSettings;
-    [SerializeField] private WeaponSettings weaponSettings;
     public static ProgressSettings ProgressSettings => Instance.progressSettings;
-    public static WeaponSettings WeaponSettings => Instance.weaponSettings;
     
     public static bool ShouldSave = true;
 
@@ -38,13 +36,11 @@ public class Platform : Singleton<Platform>
         // Only clear progress on quit. If done on destroy it will delete loaded progress when loading into a game
 #if UNITY_EDITOR
         ProgressSettings.SetDefaults();
-        WeaponSettings.SetDefaults();
 #endif
     }
 
     private void Save()
     {
         ProgressDataManager.Save(ProgressSettings);
-        WeaponDataManager.Save(WeaponSettings);
     }
 }

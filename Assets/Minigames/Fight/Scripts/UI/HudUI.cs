@@ -61,20 +61,7 @@ namespace Minigames.Fight
 
         private void SetupAmmoAndAbility()
         {
-            Weapon currentWeapon = GameManager.SettingsManager.weaponSettings.equippedWeapon;
-            if (currentWeapon is ProjectileWeapon projectileWeapon)
-            {
-                _ammoContainer.SetActive(true);
-                _bulletTypeImage.sprite = projectileWeapon.ammoIcon;
-                _remainingAmmoText.text = $"{projectileWeapon.magazineSize} / {projectileWeapon.magazineSize}";
-            }
-            else
-            {
-                _ammoContainer.SetActive(false);
-            }
-            
-            _abilityCooldownImage.sprite = GameManager.SettingsManager.weaponSettings.equippedWeapon.abilityIcon;
-            _abilityCooldownImageMask.sprite = GameManager.SettingsManager.weaponSettings.equippedWeapon.abilityIcon;
+            // TODO rework this with current weapon system and set up an event for weapon switch
         }
         
         private void SetGoldText()

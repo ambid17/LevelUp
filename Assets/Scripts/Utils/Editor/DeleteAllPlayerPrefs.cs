@@ -25,10 +25,6 @@ public class DeleteAllPlayerPrefs : MonoBehaviour
         progress.SetDefaults();
         EditorUtility.SetDirty(progress);
         
-        var weaponSettings = AssetDatabase.LoadAssetAtPath<WeaponSettings>("Assets/Minigames/Fight/ScriptableObjects/WeaponSettings.asset");
-        weaponSettings.SetDefaults();
-        EditorUtility.SetDirty(weaponSettings);
-        
         var effectSettings = AssetDatabase.LoadAssetAtPath<EffectSettings>("Assets/Minigames/Fight/ScriptableObjects/EffectSettings.asset");
         effectSettings.SetDefaults();
         EditorUtility.SetDirty(effectSettings);
