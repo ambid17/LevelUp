@@ -35,7 +35,7 @@ namespace Minigames.Fight
             hit = new HitData(MyEntity, weapon.damage);
         }
 
-        public void Setup(Weapon weapon)
+        public virtual void Setup(Weapon weapon)
         {
             this.weapon = weapon;
             WeaponAbilityTimer = weapon.abilityCooldown;

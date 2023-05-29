@@ -9,6 +9,7 @@ namespace Minigames.Fight
         protected float ReloadTimer;
         protected bool IsReloading;
 
+        private float projectileSpreadOffset;
 
         protected override void Start()
         {
@@ -30,7 +31,11 @@ namespace Minigames.Fight
             }
 
         }
-
+        public override void Setup(Weapon weapon)
+        {
+            base.Setup(weapon);
+            // Calculate effect stuff.
+        }
         protected override bool CanShoot()
         {
             return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate && !IsReloading;
@@ -50,13 +55,22 @@ namespace Minigames.Fight
 
         protected override void Shoot()
         {
-            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
+            // TODO: look at effects for this
+            int projectileCount = 1;
+            for (int i = 0; i < projectileCount; i++)
+            {
+                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
 
-            Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-            projectile.transform.position = MyTransform.position.AsVector2();
+                // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
+                float indexOffset = (float)i - i / 2;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
 
-            projectile.Setup(MyEntity, direction, this);
+                projectile.transform.position = MyTransform.position.AsVector2() + offset;
+
+                projectile.Setup(MyEntity, direction, this);
+            }
 
             CheckReload();
         }
