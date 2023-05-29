@@ -430,23 +430,27 @@ MonoBehaviour:
   maxBufferPercent: 0.8
   idleAnimation:
     Name: Spider_Idle
-    CanBeOveridden: 0
+    CanBeCancelled: 1
     CurrentIndex: 0
   moveAnimation:
     Name: Spider_Walk
-    CanBeOveridden: 0
+    CanBeCancelled: 1
     CurrentIndex: 1
-  attackAnimation:
+  meleeAttackAnimation:
     Name: Spider_Attack
-    CanBeOveridden: 0
+    CanBeCancelled: 1
+    CurrentIndex: 2
+  projectileAttackAnimation:
+    Name: Spider_Attack
+    CanBeCancelled: 1
     CurrentIndex: 2
   dieAnimation:
     Name: Spider_Die
-    CanBeOveridden: 0
+    CanBeCancelled: 0
     CurrentIndex: 3
   onHitAnimation:
     Name: Spider_Idle
-    CanBeOveridden: 0
+    CanBeCancelled: 0
     CurrentIndex: 0
 --- !u!114 &5536586052788864798
 MonoBehaviour:

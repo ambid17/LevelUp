@@ -54,6 +54,7 @@ public abstract class AnimationManager : MonoBehaviour
     }
     private IEnumerator PlayQuedAnimation(AnimationName name, float remainingTime)
     {
+        bufferedAnimation = name;
         yield return new WaitForSeconds(remainingTime);
         bufferedAnimation = null;
         PlayAnimation(name);

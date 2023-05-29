@@ -379,20 +379,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 368501983372723143}
+  maxBufferPercent: 0.8
   idleAnimation:
-    Name: 
+    Name: Soldier_Ant_Idle
+    CanBeCancelled: 1
     CurrentIndex: 0
   moveAnimation:
     Name: Soldier_Ant_Walk
+    CanBeCancelled: 1
     CurrentIndex: 1
-  attackAnimation:
-    Name: 
+  meleeAttackAnimation:
+    Name: Soldier_Ant_Idle
+    CanBeCancelled: 1
+    CurrentIndex: 0
+  projectileAttackAnimation:
+    Name: Soldier_Ant_Idle
+    CanBeCancelled: 1
     CurrentIndex: 0
   dieAnimation:
     Name: Ant_Die
+    CanBeCancelled: 0
     CurrentIndex: 2
   onHitAnimation:
     Name: 
+    CanBeCancelled: 0
     CurrentIndex: 0
 --- !u!114 &7583564898686471954
 MonoBehaviour:

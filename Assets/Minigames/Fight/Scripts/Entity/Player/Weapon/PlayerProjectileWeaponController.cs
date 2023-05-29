@@ -53,7 +53,7 @@ namespace Minigames.Fight
             ReloadTimer = 0;
         }
 
-        protected override void Shoot()
+        public override void Shoot()
         {
             // TODO: look at effects for this
             int projectileCount = 1;
