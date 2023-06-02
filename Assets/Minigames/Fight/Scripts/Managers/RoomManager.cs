@@ -1,6 +1,7 @@
 using Cinemachine;
 using Pathfinding;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -58,23 +59,16 @@ namespace Minigames.Fight
                     direction = GetRandomCardinalDirection();
 
                     // Calculate the location the new room will spawn in.
-                    float x = (targetRoom.col.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
-                    float y = (targetRoom.col.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
-                    center = targetRoom.col.bounds.center.AsVector2() + new Vector2(x, y);
+                    float x = (targetRoom.myPolygonCollider.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
+                    float y = (targetRoom.myPolygonCollider.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
+                    center = targetRoom.myPolygonCollider.bounds.center.AsVector2() + new Vector2(x, y);
 
 
                     // Abort before doing the overlap check if the chosen direction has already been used (slight performance boost).
-                    RoomConnection roomConnection = null;
-                    foreach (RoomConnection connection in targetRoom.roomConnections)
+                    RoomConnection roomConnection = targetRoom.roomConnections.First(r => r.Direction == direction);
+                    if (roomConnection.HasConnection)
                     {
-                        if (connection.Direction == direction)
-                        {
-                            if (connection.HasConnection)
-                            {
-                                continue;
-                            }
-                            roomConnection = connection;
-                        }
+                        continue;
                     }
 
                     // Check perposed room location to ensure it won't overlap with an existing room
@@ -91,13 +85,8 @@ namespace Minigames.Fight
                 var roomInstance = Instantiate(room, center - room.Tilemap.cellBounds.center.AsVector2(), Quaternion.identity);
 
                 // Mark the new rooms connection with the old room.
-                foreach (RoomConnection connection in roomInstance.roomConnections)
-                {
-                    if (connection.Direction == -direction)
-                    {
-                        connection.HasConnection = true;
-                    }
-                }
+                RoomConnection connectionInstance = roomInstance.roomConnections.First(r => r.Direction == -direction);
+                connectionInstance.HasConnection = true;
 
                 // Add to available rooms so it too can be branched off of.
                 availableRooms.Add(roomInstance);
