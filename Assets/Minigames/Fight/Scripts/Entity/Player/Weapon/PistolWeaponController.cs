@@ -16,7 +16,7 @@ namespace Minigames.Fight
             {
                 PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
             
-                Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i/2;
@@ -47,7 +47,7 @@ namespace Minigames.Fight
                     PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
                     projectile.transform.position = MyTransform.position.AsVector2();
 
-                    Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                    Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                     direction = direction.Rotate(angle);
                     
                     float indexOffset = j - (float)j/2;

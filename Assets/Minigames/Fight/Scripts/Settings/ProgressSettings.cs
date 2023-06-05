@@ -179,6 +179,7 @@ namespace Minigames.Fight
         public List<Country> Countries;
         public List<Enemy> Enemies;
         public WorldType WorldType;
+        public RoomSettings RoomSettings;
 
         [Header("Run-time Values")] 
         public float CurrencyPerMinute;

@@ -8,15 +8,10 @@ namespace Minigames.Fight
     {
         [SerializeField]
         private float lerpFactor;
-
-        private Camera cam;
-        private void Start()
-        {
-            cam = Camera.main;
-        }
+        
         private void Update()
         {
-            Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerPos = GameManager.PlayerEntity.transform.position;
 
             transform.position = Vector2.Lerp(playerPos, mousePos, lerpFactor);

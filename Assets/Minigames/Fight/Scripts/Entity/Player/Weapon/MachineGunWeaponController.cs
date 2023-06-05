@@ -60,7 +60,7 @@ namespace Minigames.Fight
                 PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
                 projectile.transform.position = MyTransform.position.AsVector2();
 
-                Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 direction = direction.Rotate(angle);
                 
 

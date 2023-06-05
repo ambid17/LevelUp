@@ -10,6 +10,11 @@ namespace Minigames.Fight
     public class PlayerEntity : Entity
     {
         public WeaponController WeaponController => _weaponController;
+        public Camera PlayerCamera => playerCamera;
+
+        [SerializeField]
+        private Camera playerCamera;
+
         private WeaponController _weaponController;
         private float _deathTimer;
         

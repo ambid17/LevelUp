@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 namespace Minigames.Fight
 {
@@ -12,6 +14,12 @@ namespace Minigames.Fight
         public List<Transform> FlowerWaypoints;
         public List<Transform> WorkerWaypoints;
         public List<Transform> PatrolWaypoints;
+        public PolygonCollider2D myPolygonCollider;
+        public Tilemap Tilemap;
+        public List<RoomConnection> roomConnections;
+
+        [SerializeField]
+        private int tilesPerConnection = 4;
 
         public float TotalBeeDamageTaken
         {
@@ -109,7 +117,124 @@ namespace Minigames.Fight
                 cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, startSize, zoomSpeed *Time.deltaTime);
             }
         }
+
+        // If a connection is not being used close it off.
+        public void CloseExits(Tile tileToPlace)
+        {
+            foreach (RoomConnection connection in roomConnections)
+            {
+                if (!connection.HasConnection)
+                {
+                    foreach (Vector3Int tilePos in connection.TilePositions)
+                    {
+                        Tilemap.SetTile(tilePos, tileToPlace);
+                    }
+                }
+            }
+        }
+
+        [ContextMenu("getcomponents")]
+        public void GetComponents()
+        {
+            myPolygonCollider = GetComponent<PolygonCollider2D>();
+            Tilemap = GetComponentsInChildren<Tilemap>().FirstOrDefault(t => t.gameObject.layer == PhysicsUtils.wallLayer);
+            Tilemap.CompressBounds();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+        [ContextMenu("Generate Connections")]
+        public void GenerateConnections()
+        {
+            // Clear list before regenerating.
+            roomConnections.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                RoomConnection connection = new();
+
+                // Label for easy reference and set directions.
+                switch (i)
+                {
+                    case 0:
+                        connection.Direction = Vector2.right;
+                        connection.Label = "Right";
+                        break;
+                    case 1:
+                        connection.Direction = Vector2.up;
+                        connection.Label = "Up";
+                        break;
+                    case 2:
+                        connection.Direction = Vector2.left;
+                        connection.Label = "Left";
+                        break;
+                    case 3:
+                        connection.Direction = Vector2.down;
+                        connection.Label = "Down";
+                        break;
+                }
+
+                // Set location of connection to the correct edge of the tilemap.
+                Vector2 location = Vector2.zero;
+                Vector2 max = Tilemap.origin.AsVector2() + Tilemap.cellBounds.size.AsVector2();
+                Vector2 min = Tilemap.origin.AsVector2();
+                Vector2 center = Tilemap.cellBounds.center.AsVector2();
+                switch (connection.Label)
+                {
+                    case "Right":
+                        location = new Vector2(max.x, center.y);
+                        break;
+                    case "Up":
+                        location = new Vector2(center.x, max.y);
+                        break;
+                    case "Left":
+                        location = new Vector2(min.x, center.y);
+                        break;
+                    case "Down":
+                        location = new Vector2(center.x, min.y);
+                        break;
+                }
+                connection.Location = location;
+
+                // Generate a list of empty tiles by checking every coordinate for a tile and adding it to the list if it returns null
+                // Yes this is the most effecient way to do this other than setting them manually, Unity be dumb.
+                TileBase[] allTiles = Tilemap.GetTilesBlock(Tilemap.cellBounds);
+                List<Vector3Int> emptyTiles = new();
+                
+                for (int x = Tilemap.origin.x; x < Tilemap.origin.x + Tilemap.cellBounds.size.x; x++)
+                {
+                    for (int y = Tilemap.origin.y; y < Tilemap.origin.y + Tilemap.cellBounds.size.y; y++)
+                    {
+                        Vector3Int tilePos = new Vector3Int(x, y, 0);
+                        TileBase tile = Tilemap.GetTile(tilePos);
+                        if (tile == null)
+                        {
+                            emptyTiles.Add(tilePos);
+                        }
+                    }
+                }
+
+                for (int tilesToAdd = 0; tilesToAdd < tilesPerConnection; tilesToAdd++)
+                {
+                    float distance = Mathf.Infinity;
+                    Vector3Int nearest = Vector3Int.zero;
+
+                    foreach (Vector3Int tilePosition in emptyTiles.ToList())
+                    {
+                        float newDistance = Vector2.Distance(tilePosition.AsVector2(), connection.Location);
+                        if (newDistance < distance)
+                        {
+                            distance = newDistance;
+                            nearest = tilePosition;
+                        }
+                    }
+                    emptyTiles.Remove(nearest);
+                    connection.TilePositions.Add(nearest);
+                }
+
+                roomConnections.Add(connection);
+            }
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
     }
+
     [Serializable]
     public class EnemyToSpawn
     {
