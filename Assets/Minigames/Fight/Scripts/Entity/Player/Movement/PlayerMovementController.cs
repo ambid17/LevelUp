@@ -54,15 +54,6 @@ namespace Minigames.Fight
         private void Move()
         {
             MyRigidbody2D.velocity = _movementToApply;
-
-            if (MyRigidbody2D.velocity.magnitude == 0)
-            {
-                MyEntity.VisualController.Animator.SetBool("IsMoving", false);
-            }
-            else
-            {
-                MyEntity.VisualController.Animator.SetBool("IsMoving", true);
-            }
         
             //Flip the sprite based on velocity
             if(MyRigidbody2D.velocity.x < -0.1f) 
