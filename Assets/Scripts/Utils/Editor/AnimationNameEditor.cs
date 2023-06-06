@@ -15,6 +15,8 @@ public class AnimationNameEditor : PropertyDrawer
         SerializedProperty nameproperty = property.FindPropertyRelative("Name");
         SerializedProperty indexProperty = property.FindPropertyRelative("CurrentIndex");
         SerializedProperty overrideAnimationProperty = property.FindPropertyRelative("CanBeCancelled");
+        SerializedProperty maxBufferPercentageProperty = property.FindPropertyRelative("MaxBufferPercentage");
+        SerializedProperty acceptableOverrideTimeProperty = property.FindPropertyRelative("AcceptableOverrideTime");
 
         // Set index to stored value to prevent name from being overwritten.
         animIndex = indexProperty.intValue;
@@ -50,11 +52,13 @@ public class AnimationNameEditor : PropertyDrawer
 
         // Begin checking for GUI changes.
         EditorGUI.BeginChangeCheck();
-        VisualElement container = new VisualElement();
         // Serialize the index as a dropdown of available animation names.
         animIndex = EditorGUI.Popup(new Rect(position.x, position.y, position.width, position.height/2), animIndex, availableAnimations);
 
-        EditorGUI.PropertyField(new Rect(position.x, position.y +15, position.width, position.height/2), overrideAnimationProperty);
+        EditorGUI.PropertyField(new Rect(position.x, position.y + 15, position.width, position.height / 2), overrideAnimationProperty);
+        EditorGUI.PropertyField(new Rect(position.x, position.y + 30, position.width, position.height / 2), maxBufferPercentageProperty);
+        EditorGUI.PropertyField(new Rect(position.x, position.y + 45, position.width, position.height / 2), acceptableOverrideTimeProperty);
+
         // Once check is complete set the name property to the selected animation name.
         if (EditorGUI.EndChangeCheck())
         {
@@ -75,7 +79,7 @@ public class AnimationNameEditor : PropertyDrawer
     }
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        float extraHeight = 30f;
+        float extraHeight = 90f;
         return base.GetPropertyHeight(property, label) + extraHeight;
     }
 }

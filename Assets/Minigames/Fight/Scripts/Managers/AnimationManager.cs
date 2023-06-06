@@ -3,12 +3,11 @@ using UnityEngine;
 
 public abstract class AnimationManager : MonoBehaviour
 {
-    public bool IsAnimFinished => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
+    public bool IsAnimFinished => CurrentAnimationNomralizedTime >= 1;
+    public float CurrentAnimationNomralizedTime => anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
     [SerializeField]
     protected Animator anim;
-    [SerializeField]
-    protected float maxBufferPercent = .8f;
 
     private AnimationName bufferedAnimation;
 
@@ -17,6 +16,12 @@ public abstract class AnimationManager : MonoBehaviour
     protected bool IsAnimPlaying(AnimationName name)
     {
         return name == currentAnimation;
+    }
+
+    // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.
+    protected bool IsCurrentAnimLoopFinished(float acceptableDifference)
+    {
+        return (Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime) <= acceptableDifference;
     }
     public void PlayAnimation(AnimationName name)
     {
@@ -32,6 +37,15 @@ public abstract class AnimationManager : MonoBehaviour
         anim.Play(name.Name);
         currentAnimation = name;
     }
+    public void OverrideAnimation(AnimationName name)
+    {
+        if (IsAnimPlaying(name))
+        {
+            return;
+        }
+        anim.Play(name.Name);
+        currentAnimation = name;
+    }
     public void QueAnimation(AnimationName name)
     {
         if (bufferedAnimation != null)
@@ -42,20 +56,25 @@ public abstract class AnimationManager : MonoBehaviour
         {
             return;
         }
-        if (!IsAnimFinished)
+        if (!IsCurrentAnimLoopFinished(name.AcceptableOverrideTime))
         {
-            float remainingTime = Mathf.Ceil(anim.GetCurrentAnimatorStateInfo(0).normalizedTime) - anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (remainingTime >= maxBufferPercent)
+            float remainingTime = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
+            if (remainingTime >= name.MaxBufferPercentage)
             {
                 return;
             }
-            StartCoroutine(PlayQuedAnimation(name, remainingTime));
+            StartCoroutine(PlayQuedAnimation(name));
         }
+        OverrideAnimation(name);
     }
-    private IEnumerator PlayQuedAnimation(AnimationName name, float remainingTime)
+    private IEnumerator PlayQuedAnimation(AnimationName name)
     {
         bufferedAnimation = name;
-        yield return new WaitForSeconds(remainingTime);
+        while (!IsCurrentAnimLoopFinished(name.AcceptableOverrideTime))
+        {
+            yield return null;
+        }
+        OverrideAnimation(name);
         bufferedAnimation = null;
         PlayAnimation(name);
     }
