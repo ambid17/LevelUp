@@ -14,7 +14,7 @@ namespace Minigames.Fight
         public List<Transform> FlowerWaypoints;
         public List<Transform> WorkerWaypoints;
         public List<Transform> PatrolWaypoints;
-        public PolygonCollider2D col;
+        public PolygonCollider2D myPolygonCollider;
         public Tilemap Tilemap;
         public List<RoomConnection> roomConnections;
 
@@ -136,7 +136,7 @@ namespace Minigames.Fight
         [ContextMenu("getcomponents")]
         public void GetComponents()
         {
-            col = GetComponent<PolygonCollider2D>();
+            myPolygonCollider = GetComponent<PolygonCollider2D>();
             Tilemap = GetComponentsInChildren<Tilemap>().FirstOrDefault(t => t.gameObject.layer == PhysicsUtils.wallLayer);
             Tilemap.CompressBounds();
             UnityEditor.EditorUtility.SetDirty(this);
@@ -233,15 +233,6 @@ namespace Minigames.Fight
             }
             UnityEditor.EditorUtility.SetDirty(this);
         }
-    }
-    [Serializable]
-    public class RoomConnection
-    {
-        public string Label;
-        public Vector2 Location;
-        public Vector2 Direction;
-        public List<Vector3Int> TilePositions = new();
-        public bool HasConnection;
     }
 
     [Serializable]
