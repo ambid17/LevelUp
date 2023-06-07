@@ -7,10 +7,18 @@ namespace Minigames.Fight
     {
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
+
+        private EventService _eventService;
+
+        private float idleSpeed = .1f;
+
+        PlayerEntity _myEntity;
     
         void Start()
         {
             SetStartingMoveSpeed(GameManager.SettingsManager.playerSettings.MoveSpeed);
+            _eventService = GameManager.EventService;
+            _myEntity = MyEntity as PlayerEntity;
         }
 
         void Update()
@@ -28,38 +36,44 @@ namespace Minigames.Fight
         private void GetMovementInput()
         {
             Vector2 input = Vector2.zero;
-            if (Input.GetKey(KeyCode.D))
-            {
-                input.x += 1;
-            }
-        
-            if (Input.GetKey(KeyCode.A))
-            {
-                input.x -= 1;
-            }
         
             if (Input.GetKey(KeyCode.W))
             {
                 input.y += 1;
+                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Up));
             }
         
             if (Input.GetKey(KeyCode.S))
             {
                 input.y -= 1;
+                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Down));
             }
-        
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                input.x += 1;
+                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Right));
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                input.x -= 1;
+                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Left));
+            }
+
             _currentInput = input.normalized * CurrentMoveSpeed;
         }
     
         private void Move()
         {
             MyRigidbody2D.velocity = _movementToApply;
-        
-            //Flip the sprite based on velocity
-            if(MyRigidbody2D.velocity.x < -0.1f) 
-                MyEntity.VisualController.SpriteRenderer.flipX = false;
-            else 
-                MyEntity.VisualController.SpriteRenderer.flipX = true;
+
+            if (MyRigidbody2D.velocity.sqrMagnitude <= idleSpeed)
+            {
+                _myEntity.AnimationController.PlayIdleAnimation();
+                return;
+            }
+            _myEntity.AnimationController.PlayRunAnimation();
         }
     
         private void FixedUpdate()

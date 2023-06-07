@@ -98,4 +98,12 @@ namespace Minigames.Fight
     public class WorldCompletedEvent
     {
     }
+    public class PlayerChangedDirectionEvent : IEvent
+    {
+        public Direction NewDirection;
+        public PlayerChangedDirectionEvent(Direction direction)
+        {
+            NewDirection = direction;
+        }
+    }
 }

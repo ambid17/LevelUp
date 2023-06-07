@@ -21,31 +21,31 @@ namespace Minigames.Fight
 
         public void PlayIdleAnim()
         {
-            PlayAnimation(idleAnimation);
+            PlayAnimation(idleAnimation, 0);
         }
 
         public void PlayMoveAnim()
         {
-            PlayAnimation(moveAnimation);
+            PlayAnimation(moveAnimation, 0);
         }
 
         public void PlayMeleeAttackAnimation()
         {
-            PlayAnimation(meleeAttackAnimation);
+            PlayAnimation(meleeAttackAnimation, 0);
         }
 
         public void PlayProjectileAttackAnimation()
         {
-            PlayAnimation(projectileAttackAnimation);
+            PlayAnimation(projectileAttackAnimation, 0);
         }
 
         public void PlayDieAnim()
         {
-            PlayAnimation(dieAnimation);
+            PlayAnimation(dieAnimation, 0);
         }
         public void PlayTakeHitAnim()
         {
-            PlayAnimation(onHitAnimation);
+            PlayAnimation(onHitAnimation, 0);
         }
     }
 

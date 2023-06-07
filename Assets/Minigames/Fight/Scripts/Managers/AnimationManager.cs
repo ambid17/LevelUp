@@ -23,7 +23,7 @@ public abstract class AnimationManager : MonoBehaviour
     {
         return (Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime) <= acceptableDifference;
     }
-    public void PlayAnimation(AnimationName name)
+    public void PlayAnimation(AnimationName name, float time)
     {
         if (IsAnimPlaying(name))
         {
@@ -34,16 +34,16 @@ public abstract class AnimationManager : MonoBehaviour
             QueAnimation(name);
             return;
         }
-        anim.Play(name.Name);
+        anim.Play(name.Name, 0, time);
         currentAnimation = name;
     }
-    public void OverrideAnimation(AnimationName name)
+    public void OverrideAnimation(AnimationName name, float normalizedTime)
     {
         if (IsAnimPlaying(name))
         {
             return;
         }
-        anim.Play(name.Name);
+        anim.Play(name.Name, 0, normalizedTime);
         currentAnimation = name;
     }
     public void QueAnimation(AnimationName name)
@@ -65,7 +65,7 @@ public abstract class AnimationManager : MonoBehaviour
             }
             StartCoroutine(PlayQuedAnimation(name));
         }
-        OverrideAnimation(name);
+        OverrideAnimation(name, 0);
     }
     private IEnumerator PlayQuedAnimation(AnimationName name)
     {
@@ -74,8 +74,8 @@ public abstract class AnimationManager : MonoBehaviour
         {
             yield return null;
         }
-        OverrideAnimation(name);
+        OverrideAnimation(name, 0);
         bufferedAnimation = null;
-        PlayAnimation(name);
+        PlayAnimation(name, 0);
     }
 }

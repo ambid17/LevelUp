@@ -53,11 +53,16 @@ public class AnimationNameEditor : PropertyDrawer
         // Begin checking for GUI changes.
         EditorGUI.BeginChangeCheck();
         // Serialize the index as a dropdown of available animation names.
-        animIndex = EditorGUI.Popup(new Rect(position.x, position.y, position.width, position.height/2), animIndex, availableAnimations);
-
-        EditorGUI.PropertyField(new Rect(position.x, position.y + 15, position.width, position.height / 2), overrideAnimationProperty);
-        EditorGUI.PropertyField(new Rect(position.x, position.y + 30, position.width, position.height / 2), maxBufferPercentageProperty);
-        EditorGUI.PropertyField(new Rect(position.x, position.y + 45, position.width, position.height / 2), acceptableOverrideTimeProperty);
+        animIndex = EditorGUI.Popup(new Rect(position.x, position.y, position.width, position.height/5), animIndex, availableAnimations);
+        float increment = 25;
+        float yPosition = position.y;
+        yPosition += increment;
+        EditorGUI.PropertyField(new Rect(position.x, yPosition, position.width, position.height / 5), overrideAnimationProperty);
+        yPosition += increment;
+        EditorGUI.PropertyField(new Rect(position.x, yPosition, position.width, position.height / 5), maxBufferPercentageProperty);
+        yPosition += increment;
+        EditorGUI.PropertyField(new Rect(position.x, yPosition, position.width, position.height / 5), acceptableOverrideTimeProperty);
+        yPosition += increment;
 
         // Once check is complete set the name property to the selected animation name.
         if (EditorGUI.EndChangeCheck())

@@ -10,6 +10,7 @@ namespace Minigames.Fight
     public class PlayerEntity : Entity
     {
         public WeaponController WeaponController => _equippedWeaponController;
+        public PlayerAnimationController AnimationController => _animationControllerOverride;
         public Camera PlayerCamera => playerCamera;
 
         [SerializeField]
@@ -18,6 +19,7 @@ namespace Minigames.Fight
         private WeaponController _equippedWeaponController;
         private float _deathTimer;
         private PlayerProjectileWeaponController _projectileWeaponController;
+        private PlayerAnimationController _animationControllerOverride;
         
         public float CurrentHp
         {
@@ -54,6 +56,7 @@ namespace Minigames.Fight
             Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
             eventService.Add<OnHitEffectUnlockedEvent>(SetupOnHitEffects);
             SetupOnHitEffects(); // go ahead and query the onHit effects that were populated on load
+            _animationControllerOverride = animationController as PlayerAnimationController;
         }
 
         private void SetupOnHitEffects()

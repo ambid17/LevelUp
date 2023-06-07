@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 4274406417404922747}
   - component: {fileID: 4274406417404922744}
   - component: {fileID: 1822334565586454507}
-  - component: {fileID: 6393267105660024771}
+  - component: {fileID: -3757534261666763716}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementController: {fileID: 4274406417404922725}
   VisualController: {fileID: 2348364804456420384}
-  animationController: {fileID: 6393267105660024771}
+  animationController: {fileID: -3757534261666763716}
   tickDamageDownPerSecond: 0
   playerCamera: {fileID: 4274406417751090707}
   CanMove: 1
@@ -367,7 +367,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &6393267105660024771
+--- !u!114 &-3757534261666763716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,35 +376,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 4274406417404922745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd04a91a453a3b64b97fe0b953d8f056, type: 3}
+  m_Script: {fileID: 11500000, guid: d1a7e6f72515bf94087932c4f2a99801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1822334565586454507}
-  maxBufferPercent: 0.8
-  idleAnimation:
-    Name: 
-    CanBeCancelled: 0
+  currentDirection: 0
+  idleDown:
+    Name: Idle_Down
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 0
-  moveAnimation:
-    Name: 
+  runDown:
+    Name: Run_Down
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 1
+  takeHitDown:
+    Name: Take_Hit_Down
     CanBeCancelled: 0
-    CurrentIndex: 0
-  meleeAttackAnimation:
-    Name: 
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.1
+    CurrentIndex: 2
+  dieDown:
+    Name: Die_Down
     CanBeCancelled: 0
-    CurrentIndex: 0
-  projectileAttackAnimation:
-    Name: 
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 3
+  idleLeft:
+    Name: Idle_Left
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 4
+  runLeft:
+    Name: Run_Left
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 5
+  takeHitLeft:
+    Name: Take_Hit_Left
     CanBeCancelled: 0
-    CurrentIndex: 0
-  dieAnimation:
-    Name: 
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 6
+  dieLeft:
+    Name: Die_Left
     CanBeCancelled: 0
-    CurrentIndex: 0
-  onHitAnimation:
-    Name: 
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 7
+  idleRight:
+    Name: Idle_Right
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 8
+  runRight:
+    Name: Run_Right
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 9
+  takeHitRight:
+    Name: Take_Hit_Right
     CanBeCancelled: 0
-    CurrentIndex: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 10
+  dieRight:
+    Name: Die_Right
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 11
+  idleUp:
+    Name: Idle_Up
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 12
+  runUp:
+    Name: Run_Up
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 13
+  takeHitUp:
+    Name: Take_Hit_Up
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 14
+  dieUp:
+    Name: Die_Up
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 15
 --- !u!1 &4274406417751090705
 GameObject:
   m_ObjectHideFlags: 0
