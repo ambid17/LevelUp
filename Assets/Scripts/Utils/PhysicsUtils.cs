@@ -53,12 +53,12 @@ public static class PhysicsUtils
         toReturn.z = Mathf.Clamp(toReturn.z, min.z, max.z);
         return toReturn;
     }
-    public static Quaternion LookAt(Transform transform, Vector3 targetPosition, float lerpFactor = 1)
+    public static Quaternion LookAt(Transform transform, Vector3 targetPosition, float startAngle, float lerpFactor = 1)
     {
         Vector3 direction = (targetPosition - transform.position);
         // have to subtract 90 degrees.
         // This assumes that 0 degrees pointing right, in unity it is pointing up
-        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - 90;
+        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - startAngle;
         Quaternion finalRotation = Quaternion.Euler(new Vector3(0,0,angle));
         return Quaternion.Slerp(transform.rotation, finalRotation, lerpFactor);
     }
