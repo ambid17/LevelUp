@@ -106,4 +106,12 @@ namespace Minigames.Fight
             NewDirection = direction;
         }
     }
+    public class PlayerChangedWeaponEvent : IEvent
+    {
+        public WeaponMode WeaponMode;
+        public PlayerChangedWeaponEvent(WeaponMode weaponMode)
+        {
+            WeaponMode = weaponMode;
+        }
+    }
 }

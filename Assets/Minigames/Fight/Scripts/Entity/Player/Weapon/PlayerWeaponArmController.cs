@@ -4,12 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public enum WeaponMode
-    {
-        Melee,
-        Projectile,
-    }
-
+    
     public class PlayerWeaponArmController : MonoBehaviour
     {
         private void Update()
