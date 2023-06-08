@@ -65,7 +65,7 @@ namespace Minigames.Fight
             }
 
             // No need to dispatch the event unless our direction has changed.
-            if (_lastInput != input)
+            if (_lastInput != input && input != Vector2.zero)
             {
                 _eventService.Dispatch(new PlayerChangedDirectionEvent(direction));
             }

@@ -41,12 +41,12 @@ namespace Minigames.Fight
                     rightSortingOrder = -1;
                     break;
                 case Direction.Left:
-                    leftSortingOrder = 1;
-                    rightSortingOrder = -1;
-                    break;
-                case Direction.Right:
                     leftSortingOrder = -1;
                     rightSortingOrder = 1;
+                    break;
+                case Direction.Right:
+                    leftSortingOrder = 1;
+                    rightSortingOrder = -1;
                     break;
             }
             leftArm.MySpriteRenderer.sortingOrder = leftSortingOrder;
