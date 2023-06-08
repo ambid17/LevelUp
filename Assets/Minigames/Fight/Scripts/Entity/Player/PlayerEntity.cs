@@ -16,9 +16,10 @@ namespace Minigames.Fight
         [SerializeField]
         private Camera playerCamera;
 
-        private WeaponController _equippedWeaponController;
+        private PlayerWeaponController _equippedWeaponController;
         private float _deathTimer;
         private PlayerProjectileWeaponController _projectileWeaponController;
+        private PlayerMeleeWeaponController _meleeWeaponController;
         private PlayerAnimationController _animationControllerOverride;
         
         public float CurrentHp
@@ -47,7 +48,10 @@ namespace Minigames.Fight
 
         private void SetupWeaponController()
         {
-            
+            _projectileWeaponController = GetComponent<PlayerProjectileWeaponController>();
+            _meleeWeaponController = GetComponent<PlayerMeleeWeaponController>();
+            _equippedWeaponController = _projectileWeaponController;
+            _equippedWeaponController.IsEquipped = true;
         }
         
         protected override void Setup()
@@ -88,6 +92,23 @@ namespace Minigames.Fight
             {
                 WaitForRevive();
             }
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                _equippedWeaponController.IsEquipped = false;
+                _equippedWeaponController = SwitchWeapon();
+                _equippedWeaponController.IsEquipped = true;
+            }
+        }
+
+        private PlayerWeaponController SwitchWeapon()
+        {
+            if (_equippedWeaponController == _projectileWeaponController)
+            {
+                Debug.Log("equipped melee");
+                return _meleeWeaponController;
+            }
+            Debug.Log("equipped projectile");
+            return _projectileWeaponController;
         }
         
         protected override void Die()

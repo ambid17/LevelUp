@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class PlayerProjectileWeaponController : ProjectileWeaponController
+    public class PlayerProjectileWeaponController : PlayerWeaponController
 {
         protected float ReloadTimer;
         protected bool IsReloading;
@@ -23,6 +23,11 @@ namespace Minigames.Fight
 
             TryReload();
 
+            if (CanShoot())
+            {
+                Shoot();
+            }
+
             if (CanUseWeaponAbility())
             {
                 WeaponAbilityTimer = 0;
@@ -38,7 +43,7 @@ namespace Minigames.Fight
         }
         protected override bool CanShoot()
         {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate && !IsReloading;
+            return Input.GetKey(KeyCode.Mouse0) && IsEquipped/* && ShotTimer > weapon.fireRate && !IsReloading*/;
         }
 
         protected virtual void TryReload()
@@ -56,23 +61,24 @@ namespace Minigames.Fight
         public override void Shoot()
         {
             // TODO: look at effects for this
-            int projectileCount = 1;
-            for (int i = 0; i < projectileCount; i++)
-            {
-                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
+            //int projectileCount = 1;
+            //for (int i = 0; i < projectileCount; i++)
+            //{
+            //    PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
 
-                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            //    Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-                // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
-                float indexOffset = (float)i - i / 2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
+            //    // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
+            //    float indexOffset = (float)i - i / 2;
+            //    Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
 
-                projectile.transform.position = MyTransform.position.AsVector2() + offset;
+            //    projectile.transform.position = MyTransform.position.AsVector2() + offset;
 
-                projectile.Setup(MyEntity, direction, this);
-            }
+            //    projectile.Setup(MyEntity, direction, this);
+            //}
 
-            CheckReload();
+            //CheckReload();
+            Debug.Log("projectile shot");
         }
 
         protected virtual void CheckReload()
