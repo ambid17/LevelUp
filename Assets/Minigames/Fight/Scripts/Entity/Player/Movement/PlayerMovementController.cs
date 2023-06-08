@@ -13,6 +13,8 @@ namespace Minigames.Fight
         private float idleSpeed = .1f;
 
         PlayerEntity _myEntity;
+
+        private Vector2 _lastInput;
     
         void Start()
         {
@@ -36,31 +38,39 @@ namespace Minigames.Fight
         private void GetMovementInput()
         {
             Vector2 input = Vector2.zero;
+            Direction direction = Direction.Down;
         
             if (Input.GetKey(KeyCode.W))
             {
                 input.y += 1;
-                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Up));
+                direction = Direction.Up;
             }
         
             if (Input.GetKey(KeyCode.S))
             {
                 input.y -= 1;
-                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Down));
+                direction = Direction.Down;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
                 input.x += 1;
-                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Right));
+                direction = Direction.Right;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
                 input.x -= 1;
-                _eventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Left));
+                direction = Direction.Left;
             }
 
+            // No need to dispatch the event unless our direction has changed.
+            if (_lastInput != input)
+            {
+                _eventService.Dispatch(new PlayerChangedDirectionEvent(direction));
+            }
+
+            _lastInput = input;
             _currentInput = input.normalized * CurrentMoveSpeed;
         }
     
