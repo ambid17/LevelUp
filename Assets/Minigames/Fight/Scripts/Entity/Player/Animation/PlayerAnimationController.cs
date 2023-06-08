@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Minigames.Fight
 {
@@ -56,10 +57,12 @@ namespace Minigames.Fight
         private AnimationName dieUp;
 
         private float storedNormalizedTime;
+        private EventService _eventService;
 
         private void Start()
         {
-            GameManager.EventService.Add<PlayerChangedDirectionEvent>(ChangeDirection);
+            _eventService = GameManager.EventService;
+            _eventService.Add<PlayerChangedDirectionEvent>(ChangeDirection);
         }
 
         public void ChangeDirection(PlayerChangedDirectionEvent e)
