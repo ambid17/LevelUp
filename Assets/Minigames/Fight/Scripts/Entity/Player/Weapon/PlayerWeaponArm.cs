@@ -2,26 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeaponArm : MonoBehaviour
+namespace Minigames.Fight
 {
-    public SpriteRenderer MySpriteRenderer;
-    public float StartRotation;
-    public float MinRotation;
-    public float MaxRotation;
-
-    [SerializeField]
-    private float returnToIdleSpeed = 2;
-
-    public void ReturnToIdle()
+    public class PlayerWeaponArm : MonoBehaviour
     {
-        StartCoroutine(RotateTowardsZero());
-    }
-    IEnumerator RotateTowardsZero()
-    {
-        while (transform.eulerAngles.z != 0)
+        public PlayerWeaponController EquippedWeapon => _equippedWeaponController;
+
+        public SpriteRenderer MySpriteRenderer;
+        public float StartRotation;
+        public float MinRotation;
+        public float MaxRotation;
+        public WeaponArmAnimationController AnimationController;
+
+
+        [SerializeField]
+        private float returnToIdleSpeed = 2;
+
+        private PlayerWeaponController _equippedWeaponController;
+        private PlayerProjectileWeaponController _projectileWeaponController;
+        private PlayerMeleeWeaponController _meleeWeaponController;
+
+        private void Start()
         {
-            transform.rotation = PhysicsUtils.LookAt(transform, transform.position, 0, returnToIdleSpeed * Time.deltaTime);
-            yield return null;
+            SetupWeaponControllers();
+        }
+
+        private void SetupWeaponControllers()
+        {
+            _projectileWeaponController = GetComponent<PlayerProjectileWeaponController>();
+            _meleeWeaponController = GetComponent<PlayerMeleeWeaponController>();
+            _equippedWeaponController = _projectileWeaponController;
+            _equippedWeaponController.IsEquipped = true;
+        }
+
+        private void Update()
+        {
+            if (AnimationController.IsAnimFinished)
+            {
+                AnimationController.PlayIdleAnimation();
+            }
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                AnimationController.PlayEquipAnimation();
+            }
+        }
+        public void ReturnToIdle()
+        {
+            StartCoroutine(RotateTowardsZero());
+        }
+        IEnumerator RotateTowardsZero()
+        {
+            while (transform.eulerAngles.z != 0)
+            {
+                transform.rotation = PhysicsUtils.LookAt(transform, transform.position, 0, returnToIdleSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+        public void ChangeEquippedWeapon()
+        {
+            _equippedWeaponController.IsEquipped = false;
+            _equippedWeaponController = _equippedWeaponController == _projectileWeaponController ? _meleeWeaponController : _projectileWeaponController;
+            _equippedWeaponController.IsEquipped = true;
         }
     }
 }

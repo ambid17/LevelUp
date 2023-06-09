@@ -11,7 +11,7 @@ public abstract class AnimationManager : MonoBehaviour
 
     private AnimationName bufferedAnimation;
 
-    private AnimationName currentAnimation = new();
+    protected AnimationName currentAnimation;
 
     protected bool IsAnimPlaying(AnimationName name)
     {
@@ -21,10 +21,15 @@ public abstract class AnimationManager : MonoBehaviour
     // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.
     protected bool IsCurrentAnimLoopFinished(float acceptableDifference)
     {
-        return (Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime) <= acceptableDifference;
+        float difference = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
+        return  Mathf.Clamp(difference, 1 - acceptableDifference, 1 + acceptableDifference) == difference;
     }
     public void PlayAnimation(AnimationName name, float time)
     {
+        if (currentAnimation == null)
+        {
+            currentAnimation = name;
+        }
         if (IsAnimPlaying(name))
         {
             return;
@@ -64,6 +69,7 @@ public abstract class AnimationManager : MonoBehaviour
                 return;
             }
             StartCoroutine(PlayQuedAnimation(name));
+            return;
         }
         OverrideAnimation(name, 0);
     }
@@ -76,6 +82,5 @@ public abstract class AnimationManager : MonoBehaviour
         }
         OverrideAnimation(name, 0);
         bufferedAnimation = null;
-        PlayAnimation(name, 0);
     }
 }

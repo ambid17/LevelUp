@@ -16,7 +16,6 @@ namespace Minigames.Fight
 
         private PlayerWeaponArm _currentArm;
         private Camera _cam;
-        private Direction _currentDirection;
 
         private void Start()
         {
@@ -52,7 +51,7 @@ namespace Minigames.Fight
             leftArm.MySpriteRenderer.sortingOrder = leftSortingOrder;
             rightArm.MySpriteRenderer.sortingOrder = rightSortingOrder;
         }
-
+        
         private void Update()
         {
             float currentRotation = TransformUtils.GetInspectorRotation(_currentArm.transform).z;
@@ -73,6 +72,10 @@ namespace Minigames.Fight
                 return rightArm;
             }
             return leftArm;
+        }
+        public void Playshoot()
+        {
+            _currentArm.AnimationController.PlayShootAnimation();
         }
     }
 }

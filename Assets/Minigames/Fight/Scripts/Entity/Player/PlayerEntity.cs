@@ -9,17 +9,17 @@ namespace Minigames.Fight
 {
     public class PlayerEntity : Entity
     {
-        public WeaponController WeaponController => _equippedWeaponController;
         public PlayerAnimationController AnimationController => _animationControllerOverride;
         public Camera PlayerCamera => playerCamera;
+        public PlayerWeaponArmController WeaponArmController => weaponArmController;
 
         [SerializeField]
         private Camera playerCamera;
+        [SerializeField]
+        private PlayerWeaponArmController weaponArmController;
 
-        private PlayerWeaponController _equippedWeaponController;
         private float _deathTimer;
-        private PlayerProjectileWeaponController _projectileWeaponController;
-        private PlayerMeleeWeaponController _meleeWeaponController;
+
         private PlayerAnimationController _animationControllerOverride;
         
         public float CurrentHp
@@ -38,21 +38,6 @@ namespace Minigames.Fight
         }
 
         public bool CanMove = true;
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            SetupWeaponController();
-        }
-
-        private void SetupWeaponController()
-        {
-            _projectileWeaponController = GetComponent<PlayerProjectileWeaponController>();
-            _meleeWeaponController = GetComponent<PlayerMeleeWeaponController>();
-            _equippedWeaponController = _projectileWeaponController;
-            _equippedWeaponController.IsEquipped = true;
-        }
         
         protected override void Setup()
         {
@@ -92,23 +77,6 @@ namespace Minigames.Fight
             {
                 WaitForRevive();
             }
-            if (Input.mouseScrollDelta.y != 0)
-            {
-                _equippedWeaponController.IsEquipped = false;
-                _equippedWeaponController = SwitchWeapon();
-                _equippedWeaponController.IsEquipped = true;
-            }
-        }
-
-        private PlayerWeaponController SwitchWeapon()
-        {
-            if (_equippedWeaponController == _projectileWeaponController)
-            {
-                Debug.Log("equipped melee");
-                return _meleeWeaponController;
-            }
-            Debug.Log("equipped projectile");
-            return _projectileWeaponController;
         }
         
         protected override void Die()

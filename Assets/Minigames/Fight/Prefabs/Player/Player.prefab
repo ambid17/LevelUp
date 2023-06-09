@@ -177,8 +177,6 @@ GameObject:
   - component: {fileID: 4274406417404922744}
   - component: {fileID: 1822334565586454507}
   - component: {fileID: -3757534261666763716}
-  - component: {fileID: 8262081314616696747}
-  - component: {fileID: 6269562953166029082}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -222,6 +220,7 @@ MonoBehaviour:
   animationController: {fileID: -3757534261666763716}
   tickDamageDownPerSecond: 0
   playerCamera: {fileID: 4274406417751090707}
+  weaponArmController: {fileID: 6520759247579820641}
   CanMove: 1
 --- !u!114 &4274406417404922725
 MonoBehaviour:
@@ -480,32 +479,6 @@ MonoBehaviour:
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
     CurrentIndex: 15
---- !u!114 &8262081314616696747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4274406417404922745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 514ad8fa9268e7344868801c0c2cb8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: d3da10b320be47240bbbe0f410d7bdea, type: 2}
---- !u!114 &6269562953166029082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4274406417404922745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d65cbc4ca1d494384eac1f11215562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
 --- !u!1 &4274406417751090705
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274406417751090705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.56494844, y: 0.6892693, z: -10}
+  m_LocalPosition: {x: 0.027018562, y: 1.8181854, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -568,7 +541,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.0376396
+  orthographic size: 2.9999955
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

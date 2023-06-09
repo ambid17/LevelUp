@@ -46,7 +46,7 @@ namespace Minigames.Fight
         {
             if (isUpdatingAbility)
             {
-                _abilityCooldownImageMask.fillAmount = GameManager.PlayerEntity.WeaponController.AbilityTimer / GameManager.PlayerEntity.WeaponController.Weapon.abilityCooldown;
+                //_abilityCooldownImageMask.fillAmount = GameManager.PlayerEntity.WeaponController.AbilityTimer / GameManager.PlayerEntity.WeaponController.Weapon.abilityCooldown;
                 if (_abilityCooldownImageMask.fillAmount >= 1)
                 {
                     isUpdatingAbility = false;

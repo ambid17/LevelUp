@@ -16,12 +16,13 @@ namespace Minigames.Fight
             base.Update();
             if (CanShoot())
             {
-                Shoot();
+                Debug.Log("melee shot");
+                TryShoot();
             }
         }
         public override void Shoot()
         {
-            Debug.Log("melee shot");
+
         }
     }
 }

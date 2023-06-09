@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3604843486201351699}
   - component: {fileID: 8893232071970078634}
   - component: {fileID: 7392384324954230751}
+  - component: {fileID: 3539462954745644519}
+  - component: {fileID: 4429688076752172701}
   m_Layer: 0
   m_Name: PlayerWeaponArm
   m_TagString: Untagged
@@ -101,6 +103,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 8893232071970078634}
   CurrentWeaponMode: 1
+  projectileIdle:
+    Name: Projectile_Arm_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 2
+  projectileEquip:
+    Name: Projectile_Arm_Equip
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.95
+    AcceptableOverrideTime: 0.1
+    CurrentIndex: 4
+  projectileShoot:
+    Name: Projectile_Arm_Shoot
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.1
+    CurrentIndex: 5
+  meleeIdle:
+    Name: Melee_Arm_Idle
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 1
+  meleeEquip:
+    Name: Melee_Arm_Equip
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.95
+    AcceptableOverrideTime: 0.1
+    CurrentIndex: 3
+  meleeShoot:
+    Name: Melee_Arm_Swing
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.1
+    CurrentIndex: 0
+  arm: {fileID: 7392384324954230751}
 --- !u!95 &8893232071970078634
 Animator:
   serializedVersion: 5
@@ -137,4 +176,39 @@ MonoBehaviour:
   StartRotation: 0
   MinRotation: -90
   MaxRotation: 90
+  AnimationController: {fileID: 3604843486201351699}
   returnToIdleSpeed: 8
+--- !u!114 &3539462954745644519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911779753337637818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514ad8fa9268e7344868801c0c2cb8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: d3da10b320be47240bbbe0f410d7bdea, type: 2}
+  destroyOnReachTarget: 0
+  overridenWeapon: {fileID: 0}
+  _spawnAoeOnDeath: 0
+  _aoePrefab: {fileID: 0}
+--- !u!114 &4429688076752172701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911779753337637818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d65cbc4ca1d494384eac1f11215562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
+  destroyOnReachTarget: 0
+  overridenWeapon: {fileID: 0}
+  _spawnAoeOnDeath: 0
+  _aoePrefab: {fileID: 0}

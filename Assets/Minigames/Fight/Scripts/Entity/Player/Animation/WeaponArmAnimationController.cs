@@ -12,55 +12,67 @@ namespace Minigames.Fight
 
     public class WeaponArmAnimationController : AnimationManager
     {
+
         public WeaponMode CurrentWeaponMode = WeaponMode.Projectile;
 
         [Header("Projectile")]
-        AnimationName projectileIdle;
-        AnimationName projectileEquip;
-        AnimationName projectileShoot;
-
+        [SerializeField]
+        private AnimationName projectileIdle;
+        [SerializeField]
+        private AnimationName projectileEquip;
+        [SerializeField]
+        private AnimationName projectileShoot;
+        
         [Header("Melee")]
-        AnimationName meleeIdle;
-        AnimationName meleeEquip;
-        AnimationName meleeShoot;
+        [SerializeField]
+        private AnimationName meleeIdle;
+        [SerializeField]
+        private AnimationName meleeEquip;
+        [SerializeField]
+        private AnimationName meleeShoot;
 
-        private void Start()
-        {
-            GameManager.EventService.Add<PlayerChangedWeaponEvent>(SwitchWeapon);
-        }
+        [SerializeField]
+        private PlayerWeaponArm arm;
 
-        public void SwitchWeapon(PlayerChangedWeaponEvent e)
-        {
-            CurrentWeaponMode = e.WeaponMode;
-            PlayEquipAnimation();
-        }
+        private bool _isAttemptingEquip;
 
         public void PlayIdleAnimation()
         {
             if (CurrentWeaponMode == WeaponMode.Projectile)
             {
+                if (IsAnimPlaying(projectileIdle))
+                {
+                    return;
+                }
                 PlayAnimation(projectileIdle, 0);
             }
             else if (CurrentWeaponMode == WeaponMode.Melee)
             {
+                if (IsAnimPlaying(meleeIdle))
+                {
+                    return;
+                }
                 PlayAnimation(meleeIdle, 0);
             }
         }
 
         public void PlayEquipAnimation()
         {
-            if (CurrentWeaponMode == WeaponMode.Projectile)
+            AnimationName name = new();
+            if (CurrentWeaponMode == WeaponMode.Melee)
             {
-                PlayAnimation(projectileEquip, 0);
+                name = projectileEquip;
             }
-            else if (CurrentWeaponMode == WeaponMode.Melee)
+            else if (CurrentWeaponMode == WeaponMode.Projectile)
             {
-                PlayAnimation(meleeEquip, 0);
+                name = meleeEquip;
             }
+            StartCoroutine(ChangeWeapons(name));
         }
 
         public void PlayShootAnimation()
         {
+            AnimationName storedCurrentAnim = currentAnimation;
             if (CurrentWeaponMode == WeaponMode.Projectile)
             {
                 PlayAnimation(projectileShoot, 0);
@@ -69,6 +81,27 @@ namespace Minigames.Fight
             {
                 PlayAnimation(meleeShoot, 0);
             }
+            if (_isAttemptingEquip)
+            {
+                QueAnimation(storedCurrentAnim);
+            }
+        }
+
+        IEnumerator ChangeWeapons(AnimationName name)
+        {
+            _isAttemptingEquip = true;
+            PlayAnimation(name, 0);
+            while (!IsAnimPlaying(name))
+            {
+                yield return null;
+            }
+            while (CurrentAnimationNomralizedTime < projectileShoot.AcceptableOverrideTime)
+            {
+                yield return null;
+            }
+            CurrentWeaponMode = CurrentWeaponMode == WeaponMode.Projectile ? WeaponMode.Melee : WeaponMode.Projectile;
+            arm.ChangeEquippedWeapon();
+            _isAttemptingEquip = false;
         }
     }
 

@@ -108,10 +108,10 @@ namespace Minigames.Fight
     }
     public class PlayerChangedWeaponEvent : IEvent
     {
-        public WeaponMode WeaponMode;
-        public PlayerChangedWeaponEvent(WeaponMode weaponMode)
+        public PlayerEntity Entity;
+        public PlayerChangedWeaponEvent(PlayerEntity entity)
         {
-            WeaponMode = weaponMode;
+            Entity = entity;
         }
     }
 }
