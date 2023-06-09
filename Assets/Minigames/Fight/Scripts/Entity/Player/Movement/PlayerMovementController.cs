@@ -76,8 +76,6 @@ namespace Minigames.Fight
     
         private void Move()
         {
-            MyRigidbody2D.velocity = _movementToApply;
-
             if (MyRigidbody2D.velocity.sqrMagnitude <= idleSpeed)
             {
                 _myEntity.AnimationController.PlayIdleAnimation();
@@ -96,6 +94,7 @@ namespace Minigames.Fight
             float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.fixedDeltaTime;
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
+            MyRigidbody2D.velocity = _movementToApply;
         }
     }
 }
