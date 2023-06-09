@@ -9,20 +9,22 @@ namespace Minigames.Fight
         
         protected override bool CanShoot()
         {
-            return Input.GetKey(KeyCode.Mouse0) && IsEquipped;
+            return Input.GetKey(KeyCode.Mouse0) && IsEquipped && ShotTimer > weapon.fireRate;
         }
         protected override void Update()
         {
             base.Update();
             if (CanShoot())
             {
-                Debug.Log("melee shot");
                 TryShoot();
             }
         }
         public override void Shoot()
         {
-
+            PlayerMeleeAoE melee = Instantiate(overridenWeapon.projectilePrefab) as PlayerMeleeAoE;
+            melee.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2();
+            melee.Setup(MyEntity, Vector2.zero, this);
+            ShotTimer = 0;
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Minigames.Fight
         public float MaxRotation;
         public WeaponArmAnimationController AnimationController;
 
+        public Transform MeleeOrigin;
+        public Transform ProjectileOrigin;
+
 
         [SerializeField]
         private float returnToIdleSpeed = 2;
@@ -58,11 +61,21 @@ namespace Minigames.Fight
                 yield return null;
             }
         }
+
         public void ChangeEquippedWeapon()
         {
             _equippedWeaponController.IsEquipped = false;
             _equippedWeaponController = _equippedWeaponController == _projectileWeaponController ? _meleeWeaponController : _projectileWeaponController;
             _equippedWeaponController.IsEquipped = true;
+        }
+
+        public void MeleeShoot()
+        {
+            _meleeWeaponController.Shoot();
+        }
+        public void ProjectileShoot()
+        {
+            _projectileWeaponController.Shoot();
         }
     }
 }

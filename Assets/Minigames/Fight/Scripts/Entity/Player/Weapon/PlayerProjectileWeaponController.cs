@@ -72,7 +72,7 @@ namespace Minigames.Fight
                 float indexOffset = (float)i - i / 2;
                 Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
 
-                projectile.transform.position = MyTransform.position.AsVector2() + offset;
+                projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
                 projectile.Setup(MyEntity, direction, this);
             }

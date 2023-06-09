@@ -8,7 +8,7 @@ namespace Minigames.Fight
     {
         public bool IsEquipped { get; set; }
 
-        private PlayerEntity _overridenEntity;
+        protected PlayerEntity _overridenEntity;
 
         protected override void Start()
         {

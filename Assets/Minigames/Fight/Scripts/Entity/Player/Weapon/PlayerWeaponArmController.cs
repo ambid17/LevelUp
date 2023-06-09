@@ -9,6 +9,8 @@ namespace Minigames.Fight
     
     public class PlayerWeaponArmController : MonoBehaviour
     {
+        public PlayerWeaponArm CurrentArm => _currentArm;
+
         [SerializeField]
         private PlayerWeaponArm leftArm;
         [SerializeField]
