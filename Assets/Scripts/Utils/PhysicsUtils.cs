@@ -58,6 +58,8 @@ public static class PhysicsUtils
         Vector3 direction = (targetPosition - transform.position);
         // have to subtract 90 degrees.
         // This assumes that 0 degrees pointing right, in unity it is pointing up
+        // Had to change this to subtract a variable instead because the angle of a sprite
+        // at 0 degrees is dependant on the art.
         float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - startAngle;
         Quaternion finalRotation = Quaternion.Euler(new Vector3(0,0,angle));
         return Quaternion.Slerp(transform.rotation, finalRotation, lerpFactor);
