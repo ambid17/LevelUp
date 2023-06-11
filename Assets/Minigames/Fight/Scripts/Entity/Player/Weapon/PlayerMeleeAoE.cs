@@ -27,10 +27,6 @@ namespace Minigames.Fight
                 return;
             }
 
-            if (col.gameObject.layer == PhysicsUtils.GroundLayer)
-            {
-                Die();
-            }
             else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 Entity enemyEntity = col.gameObject.GetComponent<Entity>();

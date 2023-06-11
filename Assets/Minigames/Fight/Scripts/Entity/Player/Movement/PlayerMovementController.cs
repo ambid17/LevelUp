@@ -10,7 +10,7 @@ namespace Minigames.Fight
 
         private EventService _eventService;
 
-        private float idleSpeed = .1f;
+        private const float _idleSpeed = .1f;
 
         PlayerEntity _myEntity;
 
@@ -76,7 +76,7 @@ namespace Minigames.Fight
     
         private void Move()
         {
-            if (MyRigidbody2D.velocity.sqrMagnitude <= idleSpeed)
+            if (MyRigidbody2D.velocity.sqrMagnitude <= _idleSpeed)
             {
                 _myEntity.AnimationController.PlayIdleAnimation();
                 return;

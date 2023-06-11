@@ -24,7 +24,6 @@ namespace Minigames.Fight
 
             if (CanShoot())
             {
-                Debug.Log("prjectile shot");
                 TryShoot();
             }
 
