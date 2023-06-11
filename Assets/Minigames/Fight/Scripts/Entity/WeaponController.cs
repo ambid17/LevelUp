@@ -35,7 +35,7 @@ namespace Minigames.Fight
             hit = new HitData(MyEntity, weapon.damage);
         }
 
-        public void Setup(Weapon weapon)
+        public virtual void Setup(Weapon weapon)
         {
             this.weapon = weapon;
             WeaponAbilityTimer = weapon.abilityCooldown;
@@ -50,13 +50,6 @@ namespace Minigames.Fight
 
             ShotTimer += Time.deltaTime;
             WeaponAbilityTimer += Time.deltaTime;
-
-            if(CanShoot())
-            {
-                MyEntity.animationController.PlayAttackAnim();
-                ShotTimer = 0;
-                Shoot();
-            }
         }
 
         protected virtual bool ShouldPreventUpdate()
@@ -69,7 +62,7 @@ namespace Minigames.Fight
             return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate;
         }
 
-        protected virtual void Shoot()
+        public virtual void Shoot()
         {
         }
         

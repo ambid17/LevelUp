@@ -7,10 +7,20 @@ namespace Minigames.Fight
     {
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
+
+        private EventService _eventService;
+
+        private const float _idleSpeed = .1f;
+
+        PlayerEntity _myEntity;
+
+        private Vector2 _lastInput;
     
         void Start()
         {
             SetStartingMoveSpeed(GameManager.SettingsManager.playerSettings.MoveSpeed);
+            _eventService = GameManager.EventService;
+            _myEntity = MyEntity as PlayerEntity;
         }
 
         void Update()
@@ -28,47 +38,50 @@ namespace Minigames.Fight
         private void GetMovementInput()
         {
             Vector2 input = Vector2.zero;
-            if (Input.GetKey(KeyCode.D))
-            {
-                input.x += 1;
-            }
-        
-            if (Input.GetKey(KeyCode.A))
-            {
-                input.x -= 1;
-            }
+            Direction direction = Direction.Down;
         
             if (Input.GetKey(KeyCode.W))
             {
                 input.y += 1;
+                direction = Direction.Up;
             }
         
             if (Input.GetKey(KeyCode.S))
             {
                 input.y -= 1;
+                direction = Direction.Down;
             }
-        
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                input.x += 1;
+                direction = Direction.Right;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                input.x -= 1;
+                direction = Direction.Left;
+            }
+
+            // No need to dispatch the event unless our direction has changed.
+            if (_lastInput != input && input != Vector2.zero)
+            {
+                _eventService.Dispatch(new PlayerChangedDirectionEvent(direction));
+            }
+
+            _lastInput = input;
             _currentInput = input.normalized * CurrentMoveSpeed;
         }
     
         private void Move()
         {
-            MyRigidbody2D.velocity = _movementToApply;
-
-            if (MyRigidbody2D.velocity.magnitude == 0)
+            if (MyRigidbody2D.velocity.sqrMagnitude <= _idleSpeed)
             {
-                MyEntity.VisualController.Animator.SetBool("IsMoving", false);
+                _myEntity.AnimationController.PlayIdleAnimation();
+                return;
             }
-            else
-            {
-                MyEntity.VisualController.Animator.SetBool("IsMoving", true);
-            }
-        
-            //Flip the sprite based on velocity
-            if(MyRigidbody2D.velocity.x < -0.1f) 
-                MyEntity.VisualController.SpriteRenderer.flipX = false;
-            else 
-                MyEntity.VisualController.SpriteRenderer.flipX = true;
+            _myEntity.AnimationController.PlayRunAnimation();
         }
     
         private void FixedUpdate()
@@ -81,6 +94,7 @@ namespace Minigames.Fight
             float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.fixedDeltaTime;
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
+            MyRigidbody2D.velocity = _movementToApply;
         }
     }
 }

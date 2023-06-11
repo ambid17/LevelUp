@@ -41,17 +41,7 @@ namespace Minigames.Fight
 
         protected virtual void Update()
         {
-            FlipSprite();
             TryStopDamageFx();
-        }
-        
-        protected void  FlipSprite()
-        {
-            //Flip the sprite based on velocity
-            if(MyEntity.MovementController.MyRigidbody2D.velocity.x < 0) 
-                SpriteRenderer.flipX = true;
-            else 
-                SpriteRenderer.flipX = false;
         }
 
         public virtual void StartDamageFx(float damage)

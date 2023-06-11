@@ -17,12 +17,22 @@ namespace Minigames.Fight
                 _overridenEntity.enemyStats.canShootTarget = true;
             }
         }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (CanShoot())
+            {
+                _overridenEntity.OverriddenAnimationController.PlayMeleeAttackAnimation();
+            }
+        }
+
         protected override bool CanShoot()
         {
             return ShotTimer > weapon.fireRate && _isTouchingPlayer && _overridenEntity.enemyStats.canShootTarget;
         }
 
-        protected override void Shoot()
+        public override void Shoot()
         {
             GameManager.PlayerEntity.TakeHit(Hit);
         }

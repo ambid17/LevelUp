@@ -45,12 +45,13 @@ public class LoadingManager : MonoBehaviour
 
         if (_progressSettings.CurrentWorld.IsFighting)
         {
-            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Fight", LoadSceneMode.Additive);
-            while (!asyncOperation.isDone)
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Fight");
+            asyncOperation.allowSceneActivation = false;
+            while (asyncOperation.progress < 0.9f)
             {
                 yield return null;
             }
-            SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
+            asyncOperation.allowSceneActivation = true;
         }
         else
         {

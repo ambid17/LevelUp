@@ -1,7 +1,8 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-[CustomPropertyDrawer(typeof(AnimationName))]
+[CustomPropertyDrawer(typeof(AnimationName), true)]
 public class AnimationNameEditor : PropertyDrawer
 {
     private string[] availableAnimations;
@@ -13,6 +14,9 @@ public class AnimationNameEditor : PropertyDrawer
         position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
         SerializedProperty nameproperty = property.FindPropertyRelative("Name");
         SerializedProperty indexProperty = property.FindPropertyRelative("CurrentIndex");
+        SerializedProperty overrideAnimationProperty = property.FindPropertyRelative("CanBeCancelled");
+        SerializedProperty maxBufferPercentageProperty = property.FindPropertyRelative("MaxBufferPercentage");
+        SerializedProperty acceptableOverrideTimeProperty = property.FindPropertyRelative("AcceptableOverrideTime");
 
         // Set index to stored value to prevent name from being overwritten.
         animIndex = indexProperty.intValue;
@@ -48,9 +52,17 @@ public class AnimationNameEditor : PropertyDrawer
 
         // Begin checking for GUI changes.
         EditorGUI.BeginChangeCheck();
-
         // Serialize the index as a dropdown of available animation names.
-        animIndex = EditorGUI.Popup(position, animIndex, availableAnimations);
+        animIndex = EditorGUI.Popup(new Rect(position.x, position.y, position.width, position.height/5), animIndex, availableAnimations);
+        float increment = 25;
+        float yPosition = position.y;
+        yPosition += increment;
+        EditorGUI.PropertyField(new Rect(position.x, yPosition, position.width, position.height / 5), overrideAnimationProperty);
+        yPosition += increment;
+        EditorGUI.PropertyField(new Rect(position.x, yPosition, position.width, position.height / 5), maxBufferPercentageProperty);
+        yPosition += increment;
+        EditorGUI.PropertyField(new Rect(position.x, yPosition, position.width, position.height / 5), acceptableOverrideTimeProperty);
+        yPosition += increment;
 
         // Once check is complete set the name property to the selected animation name.
         if (EditorGUI.EndChangeCheck())
@@ -69,5 +81,10 @@ public class AnimationNameEditor : PropertyDrawer
 
         // Mark the object the AnimationName has been added to as dirty.
         EditorUtility.SetDirty(property.serializedObject.targetObject);
+    }
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        float extraHeight = 90f;
+        return base.GetPropertyHeight(property, label) + extraHeight;
     }
 }

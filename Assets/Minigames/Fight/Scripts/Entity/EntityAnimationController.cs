@@ -11,7 +11,9 @@ namespace Minigames.Fight
         [SerializeField]
         private AnimationName moveAnimation;
         [SerializeField]
-        private AnimationName attackAnimation;
+        private AnimationName meleeAttackAnimation;
+        [SerializeField]
+        private AnimationName projectileAttackAnimation;
         [SerializeField]
         private AnimationName dieAnimation;
         [SerializeField]
@@ -19,26 +21,31 @@ namespace Minigames.Fight
 
         public void PlayIdleAnim()
         {
-            PlayAnimation(idleAnimation);
+            PlayAnimation(idleAnimation, 0);
         }
 
         public void PlayMoveAnim()
         {
-            PlayAnimation(moveAnimation);
+            PlayAnimation(moveAnimation, 0);
         }
 
-        public void PlayAttackAnim()
+        public void PlayMeleeAttackAnimation()
         {
-            PlayAnimation(attackAnimation);
+            PlayAnimation(meleeAttackAnimation, 0);
+        }
+
+        public void PlayProjectileAttackAnimation()
+        {
+            PlayAnimation(projectileAttackAnimation, 0);
         }
 
         public void PlayDieAnim()
         {
-            PlayAnimation(dieAnimation);
+            PlayAnimation(dieAnimation, 0);
         }
         public void PlayTakeHitAnim()
         {
-            PlayAnimation(onHitAnimation);
+            PlayAnimation(onHitAnimation, 0);
         }
     }
 

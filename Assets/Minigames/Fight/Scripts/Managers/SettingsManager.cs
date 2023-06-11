@@ -7,7 +7,6 @@ namespace Minigames.Fight
     public class SettingsManager : MonoBehaviour
     {
         public ProgressSettings progressSettings;
-        public WeaponSettings weaponSettings;
         public EffectSettings effectSettings;
         public PlayerSettings playerSettings;
         public EnemySpawnerSettings enemySpawnerSettings;
@@ -25,7 +24,6 @@ namespace Minigames.Fight
         public void SetDefaults()
         {
             progressSettings.SetDefaults();
-            weaponSettings.SetDefaults();
             effectSettings.SetDefaults();
         }
 
@@ -35,7 +33,6 @@ namespace Minigames.Fight
         public void Init()
         {
             playerSettings.Init();
-            weaponSettings.Init();
             progressSettings.Init();
             enemySpawnerSettings.Init();
             incomeSettings.Init();

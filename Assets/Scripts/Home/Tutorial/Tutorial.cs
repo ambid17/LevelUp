@@ -5,7 +5,6 @@ using UnityEngine;
 public enum TutorialState
 {
     None,
-    ChooseWeapon,
     Complete
 }
 public static class Tutorial

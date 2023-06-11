@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class PlayerProjectileWeaponController : ProjectileWeaponController
+    public class PlayerProjectileWeaponController : PlayerWeaponController
 {
         protected float ReloadTimer;
-        protected bool IsReloading;
 
+        private float projectileSpreadOffset;
 
         protected override void Start()
         {
@@ -20,10 +20,11 @@ namespace Minigames.Fight
         {
             base.Update();
 
-            if (IsReloading)
+            TryReload();
+
+            if (CanShoot())
             {
-                ReloadTimer += Time.deltaTime;
-                TryReload();
+                TryShoot();
             }
 
             if (CanUseWeaponAbility())
@@ -34,46 +35,56 @@ namespace Minigames.Fight
             }
 
         }
-
+        public override void Setup(Weapon weapon)
+        {
+            base.Setup(weapon);
+            // Calculate effect stuff.
+        }
         protected override bool CanShoot()
         {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate && !IsReloading;
+            return Input.GetKey(KeyCode.Mouse0) && IsEquipped && ShotTimer > weapon.fireRate && overridenWeapon.bulletsInMagazine > 0;
         }
 
         protected virtual void TryReload()
         {
-            if (ReloadTimer < overridenWeapon.reloadTime)
+            if (ReloadTimer < overridenWeapon.reloadTime || overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
             {
+                ReloadTimer += Time.deltaTime;
                 return;
             }
-            overridenWeapon.bulletsInMagazine = overridenWeapon.magazineSize;
-            IsReloading = false;
+            overridenWeapon.bulletsInMagazine++;
             EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
+            ReloadTimer = 0;
         }
 
-        protected override void Shoot()
+        public override void Shoot()
         {
-            PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
+            // TODO: look at effects for this
+            int projectileCount = 1;
+            for (int i = 0; i < projectileCount; i++)
+            {
+                PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
 
-            Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-            projectile.transform.position = MyTransform.position.AsVector2();
+                // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
+                float indexOffset = (float)i - i / 2;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
 
-            projectile.Setup(MyEntity, direction, this);
+                projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
+
+                projectile.Setup(MyEntity, direction, this);
+            }
 
             CheckReload();
+            ShotTimer = 0;
         }
 
         protected virtual void CheckReload()
         {
             overridenWeapon.bulletsInMagazine--;
             EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
-
-            if (overridenWeapon.bulletsInMagazine <= 0)
-            {
-                ReloadTimer = 0;
-                IsReloading = true;
-            }
+            ReloadTimer = 0;
         }
     }
 }

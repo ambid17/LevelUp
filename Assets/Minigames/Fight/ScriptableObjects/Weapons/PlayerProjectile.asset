@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040ceb1b8a8bc04448d7ed98f77b99bd, type: 3}
+  m_Name: PlayerProjectile
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  readableName: Pistol
+  description: Shoots slowly with mediocre damage. Its ability empties the magazine
+    with each bullet having double the chance to trigger on-hit effects.
+  icon: {fileID: 0}
+  ammoIcon: {fileID: -365878349, guid: 83c34ec08a785344d85918d4b5530bce, type: 3}
+  abilityIcon: {fileID: -95529813, guid: 83c34ec08a785344d85918d4b5530bce, type: 3}
+  abilityCooldown: 4
+  fireRate: 0.7
+  damage: 1
+  projectilePrefab: {fileID: 5246368891887457513, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
+  magazineSize: 6
+  bulletsInMagazine: 6
+  reloadTime: 1
+  projectileCount: 1

@@ -22,13 +22,20 @@ namespace Minigames.Fight
         {
             return false;
         }
-        
+        protected override void Update()
+        {
+            base.Update();
+            if (CanShoot())
+            {
+                _overridenEntity.OverriddenAnimationController.PlayProjectileAttackAnimation();
+            }
+        }
         protected override bool CanShoot()
         {
             return ShotTimer > weapon.fireRate && _overridenEntity.enemyStats.canShootTarget;
         }
         
-        protected override void Shoot()
+        public override void Shoot()
         {
             EnemyProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as EnemyProjectile;
             projectile.transform.position = transform.position;

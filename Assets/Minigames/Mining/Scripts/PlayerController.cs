@@ -149,11 +149,6 @@ namespace Minigames.Mining
 
             _rb.velocity = velocity;
 
-            //Flip the sprite based on velocity
-            if (velocity.x < -.2f)
-                _spriteRenderer.flipX = true;
-            else if (velocity.x > .2f)
-                _spriteRenderer.flipX = false;
         }
 
         void OnTakeDamage()

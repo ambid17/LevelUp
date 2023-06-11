@@ -413,18 +413,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4602063734888168953}
+  maxBufferPercent: 0.8
   idleAnimation:
-    Name: 
+    Name: Bee_Idle
+    CanBeCancelled: 1
     CurrentIndex: 0
   moveAnimation:
     Name: Bee_Move
+    CanBeCancelled: 1
     CurrentIndex: 1
-  attackAnimation:
+  meleeAttackAnimation:
     Name: Bee_Attack
+    CanBeCancelled: 1
     CurrentIndex: 2
+  projectileAttackAnimation:
+    Name: Bee_Idle
+    CanBeCancelled: 1
+    CurrentIndex: 0
   dieAnimation:
     Name: Bee_Die
+    CanBeCancelled: 0
     CurrentIndex: 4
   onHitAnimation:
     Name: Bee_Take_Hit
+    CanBeCancelled: 0
     CurrentIndex: 3
