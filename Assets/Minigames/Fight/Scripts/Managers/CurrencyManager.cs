@@ -44,7 +44,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            UpdateGPM();
+            //UpdateGPM();
         }
 
         private void AwardAwayCurrency()
