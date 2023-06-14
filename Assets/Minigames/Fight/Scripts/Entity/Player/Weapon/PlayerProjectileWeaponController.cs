@@ -20,6 +20,10 @@ namespace Minigames.Fight
         {
             base.Update();
 
+            if (!isBeingUsed)
+            {
+                return;
+            }
             TryReload();
 
             if (CanShoot())
@@ -47,7 +51,11 @@ namespace Minigames.Fight
 
         protected virtual void TryReload()
         {
-            if (ReloadTimer < overridenWeapon.reloadTime || overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
+            if (overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
+            {
+                return;
+            }
+            if (ReloadTimer < overridenWeapon.reloadTime)
             {
                 ReloadTimer += Time.deltaTime;
                 return;

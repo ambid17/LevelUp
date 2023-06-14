@@ -8,6 +8,11 @@ namespace Minigames.Fight
     {
         public bool IsEquipped { get; set; }
 
+        protected bool isBeingUsed => myArm == _overridenEntity.WeaponArmController.CurrentArm;
+
+        [SerializeField]
+        private PlayerWeaponArm myArm;
+
         protected PlayerEntity _overridenEntity;
 
         protected override void Start()

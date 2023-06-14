@@ -13,6 +13,10 @@ namespace Minigames.Fight
         }
         protected override void Update()
         {
+            if (!isBeingUsed)
+            {
+                return;
+            }
             base.Update();
             if (CanShoot())
             {
