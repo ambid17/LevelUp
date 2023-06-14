@@ -71,9 +71,9 @@ namespace Minigames.Fight
                     break;
                 case UIPanelType.Pause:
                     pausePanel.Toggle(isActive);
-                    break;
-                case UIPanelType.Reward:
-                    rewardPanel.Toggle(isActive);
+                //    break;
+                //case UIPanelType.Reward:
+                //    rewardPanel.Toggle(isActive);
                     break;
             }
         }
