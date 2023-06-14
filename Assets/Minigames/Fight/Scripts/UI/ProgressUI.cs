@@ -33,7 +33,7 @@ namespace Minigames.Fight
             //_eventService.Add<PlayerDiedEvent>(UpdateProgress);
         
             SetWorld();
-            UpdateProgress();
+            //UpdateProgress();
         }
 
         public void SetWorld()
