@@ -30,12 +30,11 @@ namespace Minigames.Fight
 
         private float _gpmTimer; // GPM: gold per minute
         private readonly float _gpmInterval = 5;
-        private float _currencyAcquiredThisInterval;
 
         protected override void Awake()
         { 
             base.Awake();
-            AwardAwayCurrency();
+            //AwardAwayCurrency();
         }
 
         void Start()
@@ -70,50 +69,50 @@ namespace Minigames.Fight
             notificationPopup.AwardCurrency(clampedMinutesAway, award);
         }
 
-        private void UpdateGPM()
-        {
-            _gpmTimer += Time.deltaTime;
+        //private void UpdateGPM()
+        //{
+        //    _gpmTimer += Time.deltaTime;
 
-            if (_gpmTimer > _gpmInterval)
-            {
-                _gpmTimer = 0;
-                float currencyPerSecond = _currencyAcquiredThisInterval / _gpmInterval;
-                float newCurrencyPerMinute = currencyPerSecond * 60;
-                newCurrencyPerMinute += GameManager.SettingsManager.incomeSettings.GoldPerMinute;
-                // If the upgrade is unlocked, only save new GPM if it's higher than before
-                if (GameManager.SettingsManager.incomeSettings.SaveHighestGold)
-                {
-                    if (newCurrencyPerMinute > CurrencyPerMinute)
-                    {
-                        CurrencyPerMinute = newCurrencyPerMinute;
-                    }
-                }
-                else
-                {
-                    CurrencyPerMinute = newCurrencyPerMinute;
-                }
+        //    if (_gpmTimer > _gpmInterval)
+        //    {
+        //        _gpmTimer = 0;
+        //        float currencyPerSecond = _currencyAcquiredThisInterval / _gpmInterval;
+        //        float newCurrencyPerMinute = currencyPerSecond * 60;
+        //        newCurrencyPerMinute += GameManager.SettingsManager.incomeSettings.GoldPerMinute;
+        //        // If the upgrade is unlocked, only save new GPM if it's higher than before
+        //        if (GameManager.SettingsManager.incomeSettings.SaveHighestGold)
+        //        {
+        //            if (newCurrencyPerMinute > CurrencyPerMinute)
+        //            {
+        //                CurrencyPerMinute = newCurrencyPerMinute;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            CurrencyPerMinute = newCurrencyPerMinute;
+        //        }
                 
-                _currencyAcquiredThisInterval = 0;
-            }
-        }
+        //        _currencyAcquiredThisInterval = 0;
+        //    }
+        //}
 
         public void EnemyKilled(float baseGoldValue)
         {
             float gold = baseGoldValue;
             Currency += gold;
-            _currencyAcquiredThisInterval += gold;
-            CompletionType completionType = _progressSettings.AddKill();
 
-            if (completionType == CompletionType.Country)
-            {
-                eventService.Dispatch<CountryCompletedEvent>();
-            }
-            else if (completionType == CompletionType.World)
-            {
-                eventService.Dispatch<WorldCompletedEvent>();
-            }
+            //CompletionType completionType = _progressSettings.AddKill();
+
+            //if (completionType == CompletionType.Country)
+            //{
+            //    eventService.Dispatch<CountryCompletedEvent>();
+            //}
+            //else if (completionType == CompletionType.World)
+            //{
+            //    eventService.Dispatch<WorldCompletedEvent>();
+            //}
             
-            eventService.Dispatch<EnemyKilledEvent>();
+            //eventService.Dispatch<EnemyKilledEvent>();
         }
 
         public bool TrySpendCurrency(float currencyToSpend)

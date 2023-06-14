@@ -66,7 +66,10 @@ namespace Minigames.Fight
         
         private void SetGoldText()
         {
-            _goldText.text = GameManager.CurrencyManager.Currency.ToCurrencyString();
+            float goldEarned = GameManager.CurrencyManager.Currency;
+            float multipliedGold = Mathf.Pow(goldEarned, 1.1f);
+            float difference = multipliedGold - goldEarned;
+            _goldText.text = goldEarned.ToCurrencyString() + " + " + difference.ToCurrencyString();
         }
     
         private void SetGoldPerMinuteText()
