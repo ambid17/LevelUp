@@ -25,7 +25,7 @@ namespace Minigames.Fight
         }
         public override void Shoot()
         {
-            PlayerMeleeAoE melee = Instantiate(overridenWeapon.projectilePrefab) as PlayerMeleeAoE;
+            PlayerMeleeAoE melee = Instantiate(overridenWeapon.projectilePrefab, GameManager.PlayerEntity.transform) as PlayerMeleeAoE;
             melee.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2();
             melee.Setup(MyEntity, Vector2.zero, this);
             ShotTimer = 0;
