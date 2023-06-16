@@ -20,6 +20,8 @@ namespace Minigames.Fight
         private float minSpeed = 5f;
         [SerializeField]
         private float maxSpeed = 10f;
+        [SerializeField]
+        private float deceleration = 0.5f;
 
         private bool _hasStopped;
 
@@ -40,9 +42,9 @@ namespace Minigames.Fight
         {
             if (!_hasStopped)
             {
-                if (myRigidbody.velocity != Vector2.zero)
+                if (myRigidbody.velocity.magnitude > 0.1f)
                 {
-                    myRigidbody.velocity -= myRigidbody.velocity * Time.deltaTime;
+                    myRigidbody.velocity -= myRigidbody.velocity * deceleration * Time.deltaTime;
                     return;
                 }
                 _hasStopped = true;
@@ -50,11 +52,15 @@ namespace Minigames.Fight
             if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) < attractDistance)
             {
                 Vector2 direction = GameManager.PlayerEntity.transform.position - transform.position;
-                myRigidbody.velocity = direction.normalized;
+                myRigidbody.velocity = direction.normalized * attractSpeed;
             }
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (!_hasStopped)
+            {
+                return;
+            }
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
                 GameManager.CurrencyManager.AddResource(myResourceType, _myResourceValue);

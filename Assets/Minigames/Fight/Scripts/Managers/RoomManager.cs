@@ -1,5 +1,6 @@
 using Cinemachine;
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -146,16 +147,20 @@ namespace Minigames.Fight
                 graph.center = (min + max) / 2;
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
+            StartCoroutine(RecalculateGraph());
+        }
 
-            // Rescan pathfinding.
-            path.Scan();
+        private IEnumerator RecalculateGraph()
+        {
+            yield return new WaitForSeconds(1);
+            AstarPath.active.Scan();
 
-            foreach (NavGraph navGraph in path.graphs)
+            foreach (NavGraph navGraph in AstarPath.active.graphs)
             {
                 GridGraph graph = navGraph as GridGraph;
                 if (graph.name == groundGraph)
                 {
-                    SpawnResources(graph, startRoom.Tilemap.cellBounds.center);
+                    SpawnResources(graph, GameManager.PlayerEntity.transform.position);
                 }
             }
         }

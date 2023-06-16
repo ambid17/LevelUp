@@ -100,13 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e1b896a8dc0984590f6bdb39d88dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractDistance: 10
-  attractSpeed: 20
+  attractDistance: 30
+  attractSpeed: 10
   mySpriteRenderer: {fileID: 3158209486798102803}
   myResourceType: 0
   myRigidbody: {fileID: 3158209486798102801}
-  minSpeed: 5
-  maxSpeed: 10
+  minSpeed: 10
+  maxSpeed: 20
+  deceleration: 5
 --- !u!50 &3158209486798102801
 Rigidbody2D:
   serializedVersion: 4
