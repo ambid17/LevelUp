@@ -9,7 +9,7 @@ namespace Minigames.Fight
         [SerializeField]
         private ResourceUI resourceUIPrefab;
         [SerializeField]
-        private Dictionary<ResourceType, Sprite> resourceSpriteDictionary;
+        ResourceTypeSpriteDictionary resourceSpriteDictionary;
 
         private Dictionary<ResourceType, ResourceUI> _resourceUIDictionary = new();
 
@@ -26,7 +26,7 @@ namespace Minigames.Fight
                 return;
             }
             ResourceUI resourceUI = Instantiate(resourceUIPrefab, transform);
-            resourceUI.MySpriteRenderer.sprite = resourceSpriteDictionary[e.ResourceType];
+            resourceUI.MyImage.sprite = resourceSpriteDictionary[e.ResourceType];
             resourceUI.UpdateValue(e.Number);
             _resourceUIDictionary.Add(e.ResourceType, resourceUI);
         }
