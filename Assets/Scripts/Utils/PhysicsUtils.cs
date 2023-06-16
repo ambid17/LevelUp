@@ -1,3 +1,5 @@
+using Pathfinding;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class PhysicsUtils

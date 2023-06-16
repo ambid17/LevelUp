@@ -16,6 +16,8 @@ namespace Minigames.Fight
     
     public class UIManager : MonoBehaviour
     {
+        public ResourceTypeSpriteDictionary ResourceSpriteDictionary;
+
         [SerializeField] private UIPanel effectPanel;
         [SerializeField] private UIPanel pausePanel;
         [SerializeField] private UIPanel rewardPanel;

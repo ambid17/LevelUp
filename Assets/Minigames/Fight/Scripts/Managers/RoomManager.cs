@@ -11,9 +11,18 @@ namespace Minigames.Fight
         public CinemachineVirtualCamera CurrentCam { get; set; }
 
         [SerializeField]
+        private int minCaches = 5;
+        [SerializeField]
+        private int maxCaches = 10;
+        [SerializeField]
         private AstarPath pathFinderPrefab;
+        [SerializeField]
+        private GameObject resourceCachePrefab;
 
         private RoomSettings _roomSettings;
+
+        private const string groundGraph = "GroundGraph";
+
         protected override void Initialize()
         {
             _roomSettings = GameManager.SettingsManager.progressSettings.CurrentWorld.RoomSettings;
@@ -138,6 +147,35 @@ namespace Minigames.Fight
 
             // Rescan pathfinding.
             path.Scan();
+
+            foreach (NavGraph navGraph in path.graphs)
+            {
+                GridGraph graph = navGraph as GridGraph;
+                if (graph.name == groundGraph)
+                {
+                    SpawnResources(graph);
+                }
+            }
+        }
+        private void SpawnResources(GridGraph graph)
+        {
+            List<GraphNode> nodes = new();
+            foreach (GraphNode node in graph.nodes)
+            {
+                if (node.Walkable)
+                {
+                    nodes.Add(node);
+                }
+            }
+            int numberToSpawn = Random.Range(minCaches, maxCaches);
+
+            for (int i = 0; i > numberToSpawn; i++)
+            {
+                int randomNode = Random.Range(0, nodes.Count);
+
+                Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
+            }
+
         }
         private Vector2 GetRandomCardinalDirection()
         {
