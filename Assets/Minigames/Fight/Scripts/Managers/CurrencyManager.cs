@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Utils;
@@ -27,7 +28,14 @@ namespace Minigames.Fight
                 eventService.Dispatch<CpmUpdatedEvent>();
             }
         }
-
+        public Dictionary<ResourceType, float> PhysicalResources
+        {
+            get => _progressSettings.PhysicalResources;
+            set
+            {
+                _progressSettings.PhysicalResources = value;
+            }
+        }
         private float _gpmTimer; // GPM: gold per minute
         private readonly float _gpmInterval = 5;
 

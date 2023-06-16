@@ -12,7 +12,13 @@ namespace Minigames.Fight
         World,
         Country
     }
-    
+
+    public enum ResourceType
+    {
+        Dirt,
+        Grass,
+    }
+
     [CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
     [Serializable]
     public class ProgressSettings : ScriptableObject
@@ -22,7 +28,7 @@ namespace Minigames.Fight
         [Header("Run-time Values")] 
         public float Currency;
         public TutorialState TutorialState;
-        
+        public Dictionary<ResourceType, float> PhysicalResources = new();
 
         [SerializeField]
         private World currentWorld;
