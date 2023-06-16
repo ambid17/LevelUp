@@ -136,7 +136,14 @@ namespace Minigames.Fight
 
         public void AddResource(ResourceType type, float amount)
         {
-            PhysicalResources[type] += amount;
+            if (PhysicalResources.ContainsKey(type))
+            {
+                PhysicalResources[type] += amount;
+            }
+            else
+            {
+                PhysicalResources.Add(type, amount);
+            }
             eventService.Dispatch(new PlayerResourceUpdateEvent(type, amount));
         }
     }

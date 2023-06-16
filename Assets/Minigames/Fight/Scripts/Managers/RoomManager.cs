@@ -18,6 +18,8 @@ namespace Minigames.Fight
         private AstarPath pathFinderPrefab;
         [SerializeField]
         private ResourceCache resourceCachePrefab;
+        [SerializeField]
+        ResourceTypeSpriteDictionary cacheSpriteDictionary;
 
         private RoomSettings _roomSettings;
 
@@ -142,7 +144,7 @@ namespace Minigames.Fight
             {
                 GridGraph graph = navGraph as GridGraph;
                 graph.center = (min + max) / 2;
-                graph.SetDimensions((int)max.x - (int)min.x, (int)max.y - (int)min.y, 1);
+                graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
 
             // Rescan pathfinding.
@@ -153,28 +155,28 @@ namespace Minigames.Fight
                 GridGraph graph = navGraph as GridGraph;
                 if (graph.name == groundGraph)
                 {
-                    SpawnResources(graph);
+                    SpawnResources(graph, startRoom.Tilemap.cellBounds.center);
                 }
             }
         }
 
-        private void SpawnResources(GridGraph graph)
+        private void SpawnResources(GridGraph graph, Vector3 start)
         {
-            List<GraphNode> nodes = new();
-            foreach (GraphNode node in graph.nodes)
-            {
-                if (node.Walkable)
-                {
-                    nodes.Add(node);
-                }
-            }
+            List<GraphNode> nodes = PathUtilities.GetReachableNodes(AstarPath.active.GetNearest(start, NNConstraint.Default).node);
             int numberToSpawn = Random.Range(minCaches, maxCaches);
 
             for (int i = 0; i < numberToSpawn; i++)
             {
                 int randomNode = Random.Range(0, nodes.Count);
 
-                Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
+                ResourceCache cache = Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
+
+
+                // TODO set up scalable type randomization with weight.
+                int type = Random.Range(0, 2);
+                ResourceType resourceType = type == 1 ? ResourceType.Dirt : ResourceType.Grass;
+
+                cache.Setup(cacheSpriteDictionary[resourceType], resourceType);
             }
         }
 

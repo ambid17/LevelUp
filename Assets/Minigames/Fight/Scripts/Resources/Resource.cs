@@ -42,6 +42,7 @@ namespace Minigames.Fight
             {
                 if (myRigidbody.velocity != Vector2.zero)
                 {
+                    myRigidbody.velocity -= myRigidbody.velocity * Time.deltaTime;
                     return;
                 }
                 _hasStopped = true;

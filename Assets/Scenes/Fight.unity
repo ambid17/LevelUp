@@ -983,7 +983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4881681057489713699, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 2.999998
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085416, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_RootOrder
@@ -2091,8 +2091,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minCaches: 5
   maxCaches: 10
-  pathFinderPrefab: {fileID: 3255914206634529706, guid: 8dfc742d56700254a8d4ab18d13b6157, type: 3}
+  pathFinderPrefab: {fileID: 5540842416144370237, guid: 8dfc742d56700254a8d4ab18d13b6157, type: 3}
   resourceCachePrefab: {fileID: 8911795038111677234, guid: 8d323e7dac0642b40bfb89f00761146b, type: 3}
+  cacheSpriteDictionary:
+    m_keys: 0000000001000000
+    m_values:
+    - {fileID: 21300000, guid: 203598e04a97aef4196b393a8570d98f, type: 3}
+    - {fileID: 21300000, guid: ab43715cf00b94a4a939696d69fc331a, type: 3}
 --- !u!1 &1198760028
 GameObject:
   m_ObjectHideFlags: 0
