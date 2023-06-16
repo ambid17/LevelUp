@@ -133,5 +133,11 @@ namespace Minigames.Fight
             Currency -= currencyToSpend;
             return true;
         }
+
+        public void AddResource(ResourceType type, float amount)
+        {
+            PhysicalResources[type] += amount;
+            eventService.Dispatch(new PlayerResourceUpdateEvent(type, amount));
+        }
     }
 }

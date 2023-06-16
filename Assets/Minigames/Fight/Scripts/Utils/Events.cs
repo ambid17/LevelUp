@@ -114,4 +114,14 @@ namespace Minigames.Fight
             Entity = entity;
         }
     }
+    public class PlayerResourceUpdateEvent : IEvent
+    {
+        public ResourceType ResourceType;
+        public float Number;
+        public PlayerResourceUpdateEvent(ResourceType resourceType, float number)
+        {
+            ResourceType = resourceType;
+            Number = number;
+        }
+    }
 }
