@@ -17,7 +17,7 @@ namespace Minigames.Fight
         [SerializeField]
         private AstarPath pathFinderPrefab;
         [SerializeField]
-        private GameObject resourceCachePrefab;
+        private ResourceCache resourceCachePrefab;
 
         private RoomSettings _roomSettings;
 
@@ -157,6 +157,7 @@ namespace Minigames.Fight
                 }
             }
         }
+
         private void SpawnResources(GridGraph graph)
         {
             List<GraphNode> nodes = new();
@@ -169,14 +170,14 @@ namespace Minigames.Fight
             }
             int numberToSpawn = Random.Range(minCaches, maxCaches);
 
-            for (int i = 0; i > numberToSpawn; i++)
+            for (int i = 0; i < numberToSpawn; i++)
             {
                 int randomNode = Random.Range(0, nodes.Count);
 
                 Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
             }
-
         }
+
         private Vector2 GetRandomCardinalDirection()
         {
             int direction = Random.Range(0, 4);

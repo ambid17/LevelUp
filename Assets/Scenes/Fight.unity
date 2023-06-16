@@ -1662,7 +1662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836920561498399440, guid: 021008401969db0468a79623f97d0cf5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 6836920561498399440, guid: 021008401969db0468a79623f97d0cf5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2089,7 +2089,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d61b1e79f2d4c45a4741947cb647e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minCaches: 5
+  maxCaches: 10
   pathFinderPrefab: {fileID: 3255914206634529706, guid: 8dfc742d56700254a8d4ab18d13b6157, type: 3}
+  resourceCachePrefab: {fileID: 8911795038111677234, guid: 8d323e7dac0642b40bfb89f00761146b, type: 3}
 --- !u!1 &1198760028
 GameObject:
   m_ObjectHideFlags: 0
