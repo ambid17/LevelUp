@@ -12,6 +12,8 @@ namespace Minigames.Fight
         public CinemachineVirtualCamera CurrentCam { get; set; }
 
         [SerializeField]
+        private ProgressSettings progressSettings;
+        [SerializeField]
         private int minCaches = 5;
         [SerializeField]
         private int maxCaches = 10;
@@ -152,8 +154,9 @@ namespace Minigames.Fight
 
         private IEnumerator RecalculateGraph()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0);
             AstarPath.active.Scan();
+            yield return new WaitForSeconds(5);
 
             foreach (NavGraph navGraph in AstarPath.active.graphs)
             {
@@ -163,6 +166,7 @@ namespace Minigames.Fight
                     SpawnResources(graph, GameManager.PlayerEntity.transform.position);
                 }
             }
+            progressSettings.IsDoneScanning = true;
         }
 
         private void SpawnResources(GridGraph graph, Vector3 start)

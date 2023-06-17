@@ -47,7 +47,7 @@ public class LoadingManager : MonoBehaviour
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Fight");
             asyncOperation.allowSceneActivation = false;
-            while (asyncOperation.progress < 0.9f)
+            while (asyncOperation.progress < 0.9f || !_progressSettings.IsDoneScanning)
             {
                 yield return null;
             }

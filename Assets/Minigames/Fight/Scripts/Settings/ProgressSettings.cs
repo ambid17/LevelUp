@@ -23,6 +23,8 @@ namespace Minigames.Fight
     [Serializable]
     public class ProgressSettings : ScriptableObject
     {
+        public bool IsDoneScanning;
+
         [Header("Set in Editor")] public List<World> Worlds;
 
         [Header("Run-time Values")] 
