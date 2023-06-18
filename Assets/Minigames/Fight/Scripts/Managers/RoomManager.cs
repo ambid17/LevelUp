@@ -10,6 +10,7 @@ namespace Minigames.Fight
     public class RoomManager : Singleton<RoomManager>
     {
         public CinemachineVirtualCamera CurrentCam { get; set; }
+        public RoomController StartRoom => _startRoom;
 
         [SerializeField]
         private ProgressSettings progressSettings;
@@ -25,6 +26,7 @@ namespace Minigames.Fight
         ResourceTypeSpriteDictionary cacheSpriteDictionary;
 
         private RoomSettings _roomSettings;
+        private RoomController _startRoom;
 
         private const string groundGraph = "GroundGraph";
 
@@ -35,11 +37,11 @@ namespace Minigames.Fight
             List<RoomController> availableRooms = new();
 
             // Instantiate start room.
-            var startRoom = Instantiate(_roomSettings.startRoom);
+            _startRoom = Instantiate(_roomSettings.startRoom);
 
             // Add start room to our list of rooms to branch from.
-            availableRooms.Add(startRoom);
-            var targetRoom = startRoom;
+            availableRooms.Add(_startRoom);
+            var targetRoom = _startRoom;
 
             // Deterimine how many rooms we'll spawn.
             int roomCount = Random.Range(_roomSettings.minRooms, _roomSettings.maxRooms + 1);
@@ -150,6 +152,7 @@ namespace Minigames.Fight
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
             StartCoroutine(RecalculateGraph());
+            GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
         }
 
         private IEnumerator RecalculateGraph()

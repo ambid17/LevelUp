@@ -103,6 +103,7 @@ namespace Minigames.Fight
             eventService.Dispatch<PlayerRevivedEvent>();
             _animationControllerOverride.ResetAnimations();
             _animationControllerOverride.PlayRunAnimation();
+            transform.position = GameManager.RoomManager.StartRoom.Tilemap.cellBounds.center;
         }
     }
 }
