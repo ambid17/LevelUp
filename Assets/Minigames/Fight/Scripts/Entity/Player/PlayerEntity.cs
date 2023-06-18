@@ -91,14 +91,16 @@ namespace Minigames.Fight
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
             GameManager.CurrencyManager.Currency = 0;
-            foreach (KeyValuePair<ResourceType, float> keyValuePair in GameManager.CurrencyManager.PhysicalResources)
+            Dictionary<ResourceType, float> localDictionary = GameManager.CurrencyManager.PhysicalResources;
+            List<ResourceType> keys = new(localDictionary.Keys);
+            foreach (ResourceType resourceType in keys)
             {
-                for (int i = 0; i < keyValuePair.Value; i++)
+                for (int i = 0; i < localDictionary[resourceType]; i++)
                 {
                     Resource newResource = Instantiate(resourcePrefab, transform.position, transform.rotation);
-                    newResource.Setup(GameManager.UIManager.ResourceSpriteDictionary[keyValuePair.Key], keyValuePair.Key);
+                    newResource.Setup(GameManager.UIManager.ResourceSpriteDictionary[resourceType], resourceType);
                 }
-                GameManager.CurrencyManager.PhysicalResources[keyValuePair.Key] = 0;
+                GameManager.CurrencyManager.AddResource(resourceType,-localDictionary[resourceType]);
             }
         }
         

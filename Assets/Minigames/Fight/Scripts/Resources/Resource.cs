@@ -56,6 +56,10 @@ namespace Minigames.Fight
                 }
                 _hasStopped = true;
             }
+            if (GameManager.PlayerEntity.IsDead)
+            {
+                return;
+            }
             if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) < attractDistance)
             {
                 Vector2 direction = GameManager.PlayerEntity.transform.position - transform.position;
@@ -73,6 +77,10 @@ namespace Minigames.Fight
                 GameManager.CurrencyManager.AddResource(myResourceType, _myResourceValue);
                 Destroy(gameObject);
             }
+        }
+        private void OnDestroy()
+        {
+            GameManager.EventService.Remove<PlayerDiedEvent>(Die);
         }
     }
 }

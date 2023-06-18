@@ -16,6 +16,6 @@ public class ResourceUI : MonoBehaviour
     public void UpdateValue(float value)
     {
         _myValue += value;
-        _myText.text = _myValue.ToString();
+        _myText.text = _myValue.ToCurrencyString();
     }
 }

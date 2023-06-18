@@ -149,7 +149,7 @@ namespace Minigames.Fight
             {
                 GridGraph graph = navGraph as GridGraph;
                 graph.center = (min + max) / 2;
-                graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
+                graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), 1f);
             }
             StartCoroutine(RecalculateGraph());
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
