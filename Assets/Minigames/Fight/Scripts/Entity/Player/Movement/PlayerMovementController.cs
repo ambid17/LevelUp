@@ -27,10 +27,8 @@ namespace Minigames.Fight
         {
             if (GameManager.PlayerEntity.IsDead || !GameManager.PlayerEntity.CanMove)
             {
-                MyRigidbody2D.velocity = Vector2.zero;
                 return;
             }
-        
             GetMovementInput();
             Move();
         }
@@ -86,6 +84,11 @@ namespace Minigames.Fight
     
         private void FixedUpdate()
         {
+            if (GameManager.PlayerEntity.IsDead || !GameManager.PlayerEntity.CanMove)
+            {
+                MyRigidbody2D.velocity = Vector2.zero;
+                return;
+            }
             ApplyAcceleration();
         }
     

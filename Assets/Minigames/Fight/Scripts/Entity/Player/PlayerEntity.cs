@@ -21,6 +21,8 @@ namespace Minigames.Fight
         private float _deathTimer;
 
         private PlayerAnimationController _animationControllerOverride;
+
+        private bool debugDead;
         
         public float CurrentHp
         {
@@ -67,34 +69,38 @@ namespace Minigames.Fight
             if (IsDead)
             {
                 Die();
+                StartCoroutine(WaitForRevive());
             }
         }
 
         protected override void Update()
         {
             base.Update();
-            if (IsDead)
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                WaitForRevive();
+                TakeDamage(GameManager.SettingsManager.playerSettings.MaxHp);
             }
         }
         
         protected override void Die()
         {
             _deathTimer = 0;
-            GameManager.SettingsManager.progressSettings.ResetOnDeath();
+            //GameManager.SettingsManager.progressSettings.ResetOnDeath();
+            _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
         }
         
-        private void WaitForRevive()
+        private IEnumerator WaitForRevive()
         {
-            _deathTimer += Time.deltaTime;
-
-            if (_deathTimer > GameManager.SettingsManager.incomeSettings.DeathTimer)
+            while (!_animationControllerOverride.IsAnimFinished)
             {
-                CurrentHp = GameManager.SettingsManager.playerSettings.MaxHp;
-                eventService.Dispatch<PlayerRevivedEvent>();
+                yield return null;
             }
+
+            yield return new WaitForSeconds(GameManager.SettingsManager.incomeSettings.DeathTimer);
+
+            CurrentHp = GameManager.SettingsManager.playerSettings.MaxHp;
+            eventService.Dispatch<PlayerRevivedEvent>();
         }
     }
 }

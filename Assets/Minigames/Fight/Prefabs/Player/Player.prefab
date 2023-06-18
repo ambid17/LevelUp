@@ -379,8 +379,8 @@ MonoBehaviour:
   dieDown:
     Name: Die_Down
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 3
   idleLeft:
     Name: Idle_Left
@@ -403,8 +403,8 @@ MonoBehaviour:
   dieLeft:
     Name: Die_Left
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 7
   idleRight:
     Name: Idle_Right
@@ -427,8 +427,8 @@ MonoBehaviour:
   dieRight:
     Name: Die_Right
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 11
   idleUp:
     Name: Idle_Up
@@ -451,8 +451,8 @@ MonoBehaviour:
   dieUp:
     Name: Die_Up
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 15
 --- !u!70 &477293702911122595
 CapsuleCollider2D:

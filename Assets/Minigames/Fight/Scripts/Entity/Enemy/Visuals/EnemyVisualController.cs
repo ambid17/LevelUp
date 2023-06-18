@@ -24,18 +24,18 @@ namespace Minigames.Fight
             SpriteRenderer.color = defaultColor;
             flashColor = Color.white;
             
-            EventService.Add<PlayerDiedEvent>(Cull);
+            //EventService.Add<PlayerDiedEvent>(Cull);
         }
 
         private void OnDestroy()
         {
-            EventService.Remove<PlayerDiedEvent>(Cull);
+            //EventService.Remove<PlayerDiedEvent>(Cull);
         }
 
         protected override void Update()
         {
             base.Update();
-            TryCull();
+            //TryCull();
         }
         
         public override void StartDamageFx(float damage)
