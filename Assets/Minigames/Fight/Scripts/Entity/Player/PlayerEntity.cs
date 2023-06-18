@@ -17,6 +17,8 @@ namespace Minigames.Fight
         private Camera playerCamera;
         [SerializeField]
         private PlayerWeaponArmController weaponArmController;
+        [SerializeField]
+        private Resource resourcePrefab;
 
         private float _deathTimer;
 
@@ -88,6 +90,16 @@ namespace Minigames.Fight
             //GameManager.SettingsManager.progressSettings.ResetOnDeath();
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
+            GameManager.CurrencyManager.Currency = 0;
+            foreach (KeyValuePair<ResourceType, float> keyValuePair in GameManager.CurrencyManager.PhysicalResources)
+            {
+                for (int i = 0; i < keyValuePair.Value; i++)
+                {
+                    Resource newResource = Instantiate(resourcePrefab, transform.position, transform.rotation);
+                    newResource.Setup(GameManager.UIManager.ResourceSpriteDictionary[keyValuePair.Key], keyValuePair.Key);
+                }
+                GameManager.CurrencyManager.PhysicalResources[keyValuePair.Key] = 0;
+            }
         }
         
         private IEnumerator WaitForRevive()

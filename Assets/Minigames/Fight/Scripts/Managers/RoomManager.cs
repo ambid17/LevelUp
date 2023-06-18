@@ -157,9 +157,8 @@ namespace Minigames.Fight
 
         private IEnumerator RecalculateGraph()
         {
-            yield return new WaitForSeconds(0);
+            yield return new WaitForSeconds(1);
             AstarPath.active.Scan();
-            yield return new WaitForSeconds(5);
 
             foreach (NavGraph navGraph in AstarPath.active.graphs)
             {
