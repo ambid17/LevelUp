@@ -101,6 +101,8 @@ namespace Minigames.Fight
 
             CurrentHp = GameManager.SettingsManager.playerSettings.MaxHp;
             eventService.Dispatch<PlayerRevivedEvent>();
+            _animationControllerOverride.ResetAnimations();
+            _animationControllerOverride.PlayRunAnimation();
         }
     }
 }

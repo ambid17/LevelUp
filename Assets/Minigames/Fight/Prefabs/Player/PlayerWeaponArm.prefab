@@ -154,6 +154,18 @@ MonoBehaviour:
     MaxBufferPercentage: 1
     AcceptableOverrideTime: 0.1
     CurrentIndex: 5
+  projectileDie:
+    Name: Projectil_Arm_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
+    CurrentIndex: 6
+  projectileRevive:
+    Name: Projectile_Arm_Revive
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
+    CurrentIndex: 9
   meleeIdle:
     Name: Melee_Arm_Idle
     CanBeCancelled: 1
@@ -172,6 +184,18 @@ MonoBehaviour:
     MaxBufferPercentage: 1
     AcceptableOverrideTime: 0.1
     CurrentIndex: 0
+  meleeDie:
+    Name: Melee_Arm_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
+    CurrentIndex: 7
+  meleeRevive:
+    Name: Melee_Arm_Revive
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
+    CurrentIndex: 8
   arm: {fileID: 7392384324954230751}
 --- !u!95 &8893232071970078634
 Animator:

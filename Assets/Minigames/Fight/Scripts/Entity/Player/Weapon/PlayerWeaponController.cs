@@ -23,6 +23,10 @@ namespace Minigames.Fight
         }
         protected void TryShoot()
         {
+            if (_overridenEntity.IsDead)
+            {
+                return;
+            }
             _overridenEntity.WeaponArmController.Playshoot();
         }
     }
