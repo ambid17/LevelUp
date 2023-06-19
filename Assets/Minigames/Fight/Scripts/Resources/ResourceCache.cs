@@ -17,6 +17,8 @@ namespace Minigames.Fight
         [SerializeField]
         private ResourceType myResourceType;
 
+        private bool _isMarkedForDeath;
+
         public void Setup(Sprite sprite, ResourceType resourceType)
         {
             spriteRenderer.sprite = sprite;
@@ -25,13 +27,18 @@ namespace Minigames.Fight
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (_isMarkedForDeath)
+            {
+                return;
+            }
+            _isMarkedForDeath = true;
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
                 int randomSpawn = Random.Range(minSpawn, maxSpawn);
                 for (int i = 0; i < randomSpawn; i++)
                 {
                     Resource resource = Instantiate(resourcePrefab, transform.position, transform.rotation);
-                    resource.Setup(GameManager.UIManager.ResourceSpriteDictionary[myResourceType], myResourceType);
+                    resource.Setup(GameManager.UIManager.ResourceSpriteDictionary[myResourceType], myResourceType, GameManager.CurrencyManager.ResourceValue);
                 }
                 Destroy(gameObject);
             }

@@ -31,6 +31,7 @@ namespace Minigames.Fight
         public float Currency;
         public TutorialState TutorialState;
         public Dictionary<ResourceType, float> PhysicalResources = new();
+        public float BaseResourceValue;
 
         [SerializeField]
         private World currentWorld;
@@ -82,6 +83,7 @@ namespace Minigames.Fight
         {
             CurrentWorld = null;
             Currency = 0;
+            BaseResourceValue = 1;
             TutorialState = TutorialState.None;
 
             foreach (var world in Worlds)

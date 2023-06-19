@@ -36,6 +36,10 @@ namespace Minigames.Fight
                 _progressSettings.PhysicalResources = value;
             }
         }
+
+        // TODO set up effects for this.
+        public float ResourceValue { get => _progressSettings.BaseResourceValue; set => _progressSettings.BaseResourceValue = value; }
+
         private float _gpmTimer; // GPM: gold per minute
         private readonly float _gpmInterval = 5;
 

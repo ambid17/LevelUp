@@ -6,6 +6,7 @@ namespace Minigames.Fight
 {
     public class Resource : MonoBehaviour
     {
+
         [SerializeField]
         private float attractDistance = 10f;
         [SerializeField]
@@ -25,17 +26,22 @@ namespace Minigames.Fight
 
         private bool _hasStopped;
 
-        private float _myResourceValue = 1;
+        private bool _isColliding;
 
-        public void Setup(Sprite sprite, ResourceType resourceType)
+        private bool _isMarkedForDeath;
+
+        private float _resourceValue;
+
+        public void Setup(Sprite sprite, ResourceType resourceType, float resourceValue)
         {
             mySpriteRenderer.sprite = sprite;
             myResourceType = resourceType;
+            _resourceValue = resourceValue;
 
-            float x = Random.Range(0f, 1f);
-            float y = Random.Range(0f, 1f);
+            float x = Random.Range(-1f, 1f);
+            float y = Random.Range(-1f, 1f);
             float speed = Random.Range(minSpeed, maxSpeed);
-            myRigidbody.AddForce(new Vector2(x, y) * speed, ForceMode2D.Impulse);
+            myRigidbody.AddForce(new Vector2(x, y).normalized * speed, ForceMode2D.Impulse);
 
             GameManager.EventService.Add<PlayerDiedEvent>(Die);
         }
@@ -43,6 +49,17 @@ namespace Minigames.Fight
         public void Die()
         {
             Destroy(gameObject);
+        }
+
+        private void TryDie()
+        {
+            if (_isMarkedForDeath)
+            {
+                return;
+            }
+            _isMarkedForDeath = true;
+            GameManager.CurrencyManager.AddResource(myResourceType, _resourceValue);
+            Die();
         }
 
         private void Update()
@@ -65,17 +82,23 @@ namespace Minigames.Fight
                 Vector2 direction = GameManager.PlayerEntity.transform.position - transform.position;
                 myRigidbody.velocity = direction.normalized * attractSpeed;
             }
+            if (_isColliding)
+            {
+                TryDie();
+            }
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!_hasStopped)
-            {
-                return;
-            }
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                GameManager.CurrencyManager.AddResource(myResourceType, _myResourceValue);
-                Destroy(gameObject);
+                _isColliding = true;
+            }
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
+            {
+                _isColliding = false;
             }
         }
         private void OnDestroy()
