@@ -56,10 +56,10 @@ namespace Minigames.Fight
         public EffectCostType CostType;
         
         public int ExecutionOrder;
-        public EffectTriggerType TriggerType { get; }
-        public UpgradeCategory UpgradeCategory { get; }
-        public EffectCategory EffectCategory { get; }
-        public TierCategory TierCategory { get; }
+        public EffectTriggerType TriggerType;
+        public UpgradeCategory UpgradeCategory;
+        public EffectCategory EffectCategory;
+        public TierCategory TierCategory;
         
         public int DropWeight = 1;
         public string UpgradePath => $"upgrades/{UpgradeCategory}/{EffectCategory}/{TierCategory}/{Name}";
