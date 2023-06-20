@@ -28,7 +28,7 @@ namespace Minigames.Fight
                 eventService.Dispatch<CpmUpdatedEvent>();
             }
         }
-        public Dictionary<ResourceType, float> PhysicalResources
+        public ResourceTypeFloatDictionary PhysicalResources
         {
             get => _progressSettings.PhysicalResources;
             set

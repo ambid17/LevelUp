@@ -30,7 +30,7 @@ namespace Minigames.Fight
         [Header("Run-time Values")] 
         public float Currency;
         public TutorialState TutorialState;
-        public Dictionary<ResourceType, float> PhysicalResources = new();
+        public ResourceTypeFloatDictionary PhysicalResources = new();
         public float BaseResourceValue;
 
         [SerializeField]

@@ -20,6 +20,9 @@ public class StringColorArrayDictionary : SerializableDictionary<string, Color[]
 public class ResourceTypeSpriteDictionary : SerializableDictionary<ResourceType, Sprite> {}
 
 [Serializable]
+public class ResourceTypeFloatDictionary : SerializableDictionary<ResourceType, float> {}
+
+[Serializable]
 public class MyClass
 {
     public int i;

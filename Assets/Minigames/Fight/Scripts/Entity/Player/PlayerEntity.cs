@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
+    public enum InteractionType
+    {
+        None, Upgrade, Unlock
+    }
     public class PlayerEntity : Entity
     {
         public PlayerAnimationController AnimationController => _animationControllerOverride;
@@ -44,12 +48,15 @@ namespace Minigames.Fight
         }
 
         public bool CanMove = true;
+
+        public InteractionType currentInteractionType = InteractionType.None; 
         
         protected override void Setup()
         {
             base.Setup();
             Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
             eventService.Add<OnHitEffectUnlockedEvent>(SetupOnHitEffects);
+            eventService.Add<OnCanInteractEvent>(OnCanInteract);
             SetupOnHitEffects(); // go ahead and query the onHit effects that were populated on load
             _animationControllerOverride = animationController as PlayerAnimationController;
         }
@@ -57,6 +64,11 @@ namespace Minigames.Fight
         private void SetupOnHitEffects()
         {
             Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
+        }
+
+        private void OnCanInteract(OnCanInteractEvent e)
+        {
+            currentInteractionType = e.InteractionType;
         }
 
         public override void TakeDamage(float damage)
@@ -79,11 +91,26 @@ namespace Minigames.Fight
 
         protected override void Update()
         {
+            if (GameManager.PlayerEntity.IsDead)
+            {
+                return;
+            }
             base.Update();
             if (Input.GetKeyDown(KeyCode.K))
             {
                 TakeDamage(GameManager.SettingsManager.playerSettings.MaxHp);
             }
+
+            if (Input.GetKeyDown(KeyCode.E) && currentInteractionType != InteractionType.None)
+            {
+                Interact();
+            }
+        }
+
+        private void Interact()
+        {
+            // TODO: play interact animation
+            eventService.Dispatch(new PlayerInteractedEvent(currentInteractionType));
         }
         
         protected override void Die()
@@ -93,13 +120,14 @@ namespace Minigames.Fight
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
             GameManager.CurrencyManager.Currency = 0;
+            Stats.StatusEffects.Clear();
             StartCoroutine(SpawnResources());
         }
 
         IEnumerator SpawnResources()
         {
             _canRevive = false;
-            Dictionary<ResourceType, float> localDictionary = GameManager.CurrencyManager.PhysicalResources;
+            ResourceTypeFloatDictionary localDictionary = GameManager.CurrencyManager.PhysicalResources;
             List<ResourceType> keys = new(localDictionary.Keys);
             int spawnCap = 10;
             int spawnNumber = 0;

@@ -31,9 +31,10 @@ namespace Minigames.Fight
             {
                 return;
             }
-            _isMarkedForDeath = true;
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
+                _isMarkedForDeath = true;
+
                 int randomSpawn = Random.Range(minSpawn, maxSpawn);
                 for (int i = 0; i < randomSpawn; i++)
                 {

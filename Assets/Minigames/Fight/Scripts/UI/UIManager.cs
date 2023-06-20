@@ -34,15 +34,19 @@ namespace Minigames.Fight
             ToggleUiPanel(UIPanelType.Effects, false);
             ToggleUiPanel(UIPanelType.Pause, false);
             ToggleUiPanel(UIPanelType.Reward, false);
+            GameManager.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
+        }
+
+        private void OnPlayerInteract(PlayerInteractedEvent e)
+        {
+            if (e.InteractionType == InteractionType.Unlock || e.InteractionType == InteractionType.Upgrade)
+            {
+                ToggleUiPanel(UIPanelType.Effects, true);
+            }
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E) && currentPanelType == UIPanelType.None)
-            {
-                ToggleUiPanel(UIPanelType.Effects, true);
-            }
-        
             // Close the current panel
             // If no panels are open, open the pause menu
             if (Input.GetKeyDown(KeyCode.Escape))
