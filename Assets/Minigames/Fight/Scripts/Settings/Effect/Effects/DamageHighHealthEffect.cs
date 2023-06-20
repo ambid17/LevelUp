@@ -32,8 +32,6 @@ namespace Minigames.Fight
             int newAmountOwned = AmountOwned + purchaseCount;
             return 1 + (percentDamagePerStack * newAmountOwned);
         }
-        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "upgrades/weapon/highHp";
 
         public override void Execute(HitData hit)
         {

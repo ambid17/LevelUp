@@ -27,8 +27,6 @@ namespace Minigames.Fight
             int newAmountOwned = AmountOwned + purchaseCount;
             return baseDamagePerStack * newAmountOwned;
         }
-        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "upgrades/weapon/baseDamage";
         public override void Execute(HitData hit)
         {
             hit.BaseDamageAdditions.Add(Total);

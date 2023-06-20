@@ -35,9 +35,6 @@ namespace Minigames.Fight
             return stunChance + (chanceScalar * newAmountOwned);
         }
 
-        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "upgrades/effect/ice/stun";
-
         public override void Execute(HitData hit)
         {
             TryApplyEffect(hit);

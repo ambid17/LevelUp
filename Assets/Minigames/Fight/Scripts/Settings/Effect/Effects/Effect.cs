@@ -15,8 +15,27 @@ namespace Minigames.Fight
         OnKill,
         OnDeath,
         OnTakeDamage,
-        OnPurchase, // Typically used to unlock something
+        OnPurchase, 
         OnTimer
+    }
+    
+    public enum UpgradeCategory
+    {
+        Melee, Range, Player
+    }
+    
+    public enum EffectCategory
+    {
+        AoE,
+        OnHit,
+        Physical
+    }
+
+    public enum TierCategory
+    {
+        Tier1,
+        Tier2,
+        Tier3
     }
 
     [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]
@@ -37,10 +56,13 @@ namespace Minigames.Fight
         public EffectCostType CostType;
         
         public int ExecutionOrder;
-        public abstract EffectTriggerType TriggerType { get; }
+        public EffectTriggerType TriggerType { get; }
+        public UpgradeCategory UpgradeCategory { get; }
+        public EffectCategory EffectCategory { get; }
+        public TierCategory TierCategory { get; }
         
         public int DropWeight = 1;
-        public abstract string UpgradePath { get; }
+        public string UpgradePath => $"upgrades/{UpgradeCategory}/{EffectCategory}/{TierCategory}/{Name}";
 
         public bool Equals(Effect other)
         {

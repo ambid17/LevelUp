@@ -37,9 +37,6 @@ namespace Minigames.Fight
             return baseDamage + (damageScalar * newAmountOwned);
         }
 
-        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => "upgrades/effect/fire/burn";
-
         public override void Execute(HitData hit)
         {
             TryApplyEffect(hit);

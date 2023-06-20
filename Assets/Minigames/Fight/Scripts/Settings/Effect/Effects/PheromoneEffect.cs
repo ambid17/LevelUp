@@ -28,9 +28,6 @@ namespace Minigames.Fight
             return string.Empty;
         }
 
-        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => string.Empty;
-
         public override void Execute(HitData hit)
         {
             TryApplyEffect(hit);
