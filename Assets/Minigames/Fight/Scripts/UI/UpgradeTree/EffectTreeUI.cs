@@ -9,6 +9,7 @@ namespace Minigames.Fight
 {
     public class EffectTreeUI : UIPanel
     {
+        [SerializeField] private bool showAllEffects;
         [SerializeField] private EffectItem effectItemPrefab;
 
         [SerializeField] private Transform treeContainer;
@@ -98,8 +99,15 @@ namespace Minigames.Fight
         private void BuildTree()
         {
             _effectTree = new EffectTree();
+
+            // For debug, allow showing all effects
+            var effectsList = GameManager.SettingsManager.effectSettings.AllEffects;
+            if (!showAllEffects)
+            {
+                effectsList = effectsList.Where(e => e.IsUnlocked).ToList();
+            }
             
-            foreach (var effect in GameManager.SettingsManager.effectSettings.AllEffects)
+            foreach (var effect in effectsList)
             {
                 _effectTree.Add(effect);
             }
