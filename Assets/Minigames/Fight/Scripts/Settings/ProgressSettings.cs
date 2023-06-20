@@ -16,7 +16,7 @@ namespace Minigames.Fight
     public enum ResourceType
     {
         Dirt,
-        Grass,
+        Grass, 
     }
 
     [CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
