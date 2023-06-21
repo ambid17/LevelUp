@@ -11,11 +11,8 @@ public class ResourceUI : MonoBehaviour
     [SerializeField]
     private TMP_Text _myText;
 
-    private float _myValue;
-
     public void UpdateValue(float value)
     {
-        _myValue += value;
-        _myText.text = _myValue.ToCurrencyString();
+        _myText.text = value.ToCurrencyString();
     }
 }

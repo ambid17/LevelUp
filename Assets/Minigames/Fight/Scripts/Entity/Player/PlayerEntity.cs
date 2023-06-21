@@ -116,10 +116,8 @@ namespace Minigames.Fight
         protected override void Die()
         {
             _deathTimer = 0;
-            //GameManager.SettingsManager.progressSettings.ResetOnDeath();
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
-            GameManager.CurrencyManager.Currency = 0;
             Stats.StatusEffects.Clear();
             StartCoroutine(SpawnResources());
         }
@@ -156,7 +154,7 @@ namespace Minigames.Fight
                         yield return null;
                     }
                 }
-                GameManager.CurrencyManager.AddResource(resourceType, -localDictionary[resourceType]);
+                GameManager.CurrencyManager.ResetResource(resourceType);
             }
             _canRevive = true;
         }

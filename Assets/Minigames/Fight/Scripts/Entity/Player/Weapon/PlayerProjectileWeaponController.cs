@@ -18,7 +18,7 @@ namespace Minigames.Fight
 
         protected override void Update()
         {
-            if (!isBeingUsed)
+            if (!isCurrentArm)
             {
                 return;
             }

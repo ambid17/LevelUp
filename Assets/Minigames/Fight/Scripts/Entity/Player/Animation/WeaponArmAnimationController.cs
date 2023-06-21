@@ -115,7 +115,7 @@ namespace Minigames.Fight
             }
             else if (CurrentWeaponMode == WeaponMode.Melee)
             {
-                OverrideAnimation(projectileRevive, 0);
+                OverrideAnimation(meleeRevive, 0);
             }
         }
 
