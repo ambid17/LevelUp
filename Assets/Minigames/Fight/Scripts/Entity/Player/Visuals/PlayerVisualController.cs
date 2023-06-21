@@ -25,7 +25,6 @@ namespace Minigames.Fight
             // we need to stop the flash effect from overriding the death fx
             IsFlashing = false;
             SpriteRenderer.material = defaultMaterial;
-            SpriteRenderer.color = Color.black;
         }
     }
 }

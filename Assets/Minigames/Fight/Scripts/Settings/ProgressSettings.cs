@@ -12,17 +12,26 @@ namespace Minigames.Fight
         World,
         Country
     }
-    
+
+    public enum ResourceType
+    {
+        Dirt,
+        Grass, 
+    }
+
     [CreateAssetMenu(fileName = "ProgressSettings", menuName = "ScriptableObjects/ProgressSettings", order = 1)]
     [Serializable]
     public class ProgressSettings : ScriptableObject
     {
+        public bool IsDoneScanning;
+
         [Header("Set in Editor")] public List<World> Worlds;
 
         [Header("Run-time Values")] 
         public float Currency;
         public TutorialState TutorialState;
-        
+        public ResourceTypeFloatDictionary PhysicalResources = new();
+        public float BaseResourceValue;
 
         [SerializeField]
         private World currentWorld;
@@ -74,6 +83,7 @@ namespace Minigames.Fight
         {
             CurrentWorld = null;
             Currency = 0;
+            BaseResourceValue = 1;
             TutorialState = TutorialState.None;
 
             foreach (var world in Worlds)

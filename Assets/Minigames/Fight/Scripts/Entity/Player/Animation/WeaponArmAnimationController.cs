@@ -22,6 +22,10 @@ namespace Minigames.Fight
         private AnimationName projectileEquip;
         [SerializeField]
         private AnimationName projectileShoot;
+        [SerializeField]
+        private AnimationName projectileDie;
+        [SerializeField]
+        private AnimationName projectileRevive;
         
         [Header("Melee")]
         [SerializeField]
@@ -30,6 +34,10 @@ namespace Minigames.Fight
         private AnimationName meleeEquip;
         [SerializeField]
         private AnimationName meleeShoot;
+        [SerializeField]
+        private AnimationName meleeDie;
+        [SerializeField]
+        private AnimationName meleeRevive;
 
         [SerializeField]
         private PlayerWeaponArm arm;
@@ -84,6 +92,30 @@ namespace Minigames.Fight
             if (_isAttemptingEquip)
             {
                 QueAnimation(storedCurrentAnim);
+            }
+        }
+
+        public void PlayDieAnimation()
+        {
+            if (CurrentWeaponMode == WeaponMode.Projectile)
+            {
+                OverrideAnimation(projectileDie, 0);
+            }
+            else if (CurrentWeaponMode == WeaponMode.Melee)
+            {
+                OverrideAnimation(meleeDie, 0);
+            }
+        }
+
+        public void PlayReviveAnimation()
+        {
+            if (CurrentWeaponMode == WeaponMode.Projectile)
+            {
+                OverrideAnimation(projectileRevive, 0);
+            }
+            else if (CurrentWeaponMode == WeaponMode.Melee)
+            {
+                OverrideAnimation(meleeRevive, 0);
             }
         }
 

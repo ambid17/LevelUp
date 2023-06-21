@@ -56,6 +56,10 @@ namespace Minigames.Fight
         
         private void Update()
         {
+            if (GameManager.PlayerEntity.IsDead)
+            {
+                return;
+            }
             float currentRotation = TransformUtils.GetInspectorRotation(_currentArm.transform).z;
             float withinRange = Mathf.Clamp(currentRotation, _currentArm.MinRotation, _currentArm.MaxRotation);
             if (withinRange != currentRotation)

@@ -8,6 +8,11 @@ namespace Minigames.Fight
     {
         public bool IsEquipped { get; set; }
 
+        protected bool isCurrentArm => myArm == _overridenEntity.WeaponArmController.CurrentArm;
+
+        [SerializeField]
+        private PlayerWeaponArm myArm;
+
         protected PlayerEntity _overridenEntity;
 
         protected override void Start()
@@ -18,6 +23,10 @@ namespace Minigames.Fight
         }
         protected void TryShoot()
         {
+            if (GameManager.PlayerEntity.IsDead)
+            {
+                return;
+            }
             _overridenEntity.WeaponArmController.Playshoot();
         }
     }

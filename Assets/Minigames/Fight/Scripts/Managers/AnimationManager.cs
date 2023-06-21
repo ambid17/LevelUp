@@ -24,6 +24,12 @@ public abstract class AnimationManager : MonoBehaviour
         float difference = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
         return  Mathf.Clamp(difference, 1 - acceptableDifference, 1 + acceptableDifference) == difference;
     }
+
+    public void ResetAnimations()
+    {
+        currentAnimation = null;
+    }
+
     public void PlayAnimation(AnimationName name, float time)
     {
         if (currentAnimation == null)
@@ -42,6 +48,8 @@ public abstract class AnimationManager : MonoBehaviour
         anim.Play(name.Name, 0, time);
         currentAnimation = name;
     }
+
+    // Force play an animation even if current can't be canceled.
     public void OverrideAnimation(AnimationName name, float normalizedTime)
     {
         if (IsAnimPlaying(name))
@@ -51,6 +59,7 @@ public abstract class AnimationManager : MonoBehaviour
         anim.Play(name.Name, 0, normalizedTime);
         currentAnimation = name;
     }
+
     public void QueAnimation(AnimationName name)
     {
         if (bufferedAnimation != null)

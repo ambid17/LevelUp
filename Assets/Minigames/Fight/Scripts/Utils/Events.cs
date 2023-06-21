@@ -32,6 +32,26 @@ namespace Minigames.Fight
     
     public class OnHitEffectUnlockedEvent { }
 
+    public class OnCanInteractEvent : IEvent
+    {
+        public InteractionType InteractionType;
+
+        public OnCanInteractEvent(InteractionType interactionType)
+        {
+            InteractionType = interactionType;
+        }
+    }
+    
+    public class PlayerInteractedEvent : IEvent
+    {
+        public InteractionType InteractionType;
+
+        public PlayerInteractedEvent(InteractionType interactionType)
+        {
+            InteractionType = interactionType;
+        }
+    }
+
     public class CurrencyRewardEvent: IEvent
     {
         public float MinutesAway;
@@ -112,6 +132,16 @@ namespace Minigames.Fight
         public PlayerChangedWeaponEvent(PlayerEntity entity)
         {
             Entity = entity;
+        }
+    }
+    public class PlayerResourceUpdateEvent : IEvent
+    {
+        public ResourceType ResourceType;
+        public float Number;
+        public PlayerResourceUpdateEvent(ResourceType resourceType, float number)
+        {
+            ResourceType = resourceType;
+            Number = number;
         }
     }
 }

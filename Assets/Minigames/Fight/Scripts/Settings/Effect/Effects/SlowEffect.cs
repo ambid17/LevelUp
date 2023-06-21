@@ -5,17 +5,6 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    public enum EffectCategory
-    {
-        Meta,
-        Weapon,
-    }
-    public enum WeaponCategory
-    {
-        Damage,
-        AoE,
-    }
-
     [CreateAssetMenu(fileName = "SlowEffect", menuName = "ScriptableObjects/Fight/SlowEffect", order = 1)]
     [Serializable]
     public class SlowEffect : Effect, IStatusEffect
@@ -47,9 +36,6 @@ namespace Minigames.Fight
             int newAmountOwned = AmountOwned + purchaseCount;
             return slowChance + (chanceScalar * newAmountOwned);
         }
-
-        public override EffectTriggerType TriggerType => EffectTriggerType.OnHit;
-        public override string UpgradePath => $"upgrades/{EffectCategory.Weapon}/ice/slow";
 
         public override void Execute(HitData hit)
         {

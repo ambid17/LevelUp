@@ -1,5 +1,6 @@
 using Cinemachine;
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,11 +10,26 @@ namespace Minigames.Fight
     public class RoomManager : Singleton<RoomManager>
     {
         public CinemachineVirtualCamera CurrentCam { get; set; }
+        public RoomController StartRoom => _startRoom;
 
         [SerializeField]
+        private ProgressSettings progressSettings;
+        [SerializeField]
+        private int minCaches = 5;
+        [SerializeField]
+        private int maxCaches = 10;
+        [SerializeField]
         private AstarPath pathFinderPrefab;
+        [SerializeField]
+        private ResourceCache resourceCachePrefab;
+        [SerializeField]
+        ResourceTypeSpriteDictionary cacheSpriteDictionary;
 
         private RoomSettings _roomSettings;
+        private RoomController _startRoom;
+
+        private const string groundGraph = "GroundGraph";
+
         protected override void Initialize()
         {
             _roomSettings = GameManager.SettingsManager.progressSettings.CurrentWorld.RoomSettings;
@@ -21,11 +37,11 @@ namespace Minigames.Fight
             List<RoomController> availableRooms = new();
 
             // Instantiate start room.
-            var startRoom = Instantiate(_roomSettings.startRoom);
+            _startRoom = Instantiate(_roomSettings.startRoom);
 
             // Add start room to our list of rooms to branch from.
-            availableRooms.Add(startRoom);
-            var targetRoom = startRoom;
+            availableRooms.Add(_startRoom);
+            var targetRoom = _startRoom;
 
             // Deterimine how many rooms we'll spawn.
             int roomCount = Random.Range(_roomSettings.minRooms, _roomSettings.maxRooms + 1);
@@ -133,12 +149,48 @@ namespace Minigames.Fight
             {
                 GridGraph graph = navGraph as GridGraph;
                 graph.center = (min + max) / 2;
-                graph.SetDimensions((int)max.x - (int)min.x, (int)max.y - (int)min.y, 1);
+                graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
-
-            // Rescan pathfinding.
-            path.Scan();
+            StartCoroutine(RecalculateGraph());
+            GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
         }
+
+        private IEnumerator RecalculateGraph()
+        {
+            yield return new WaitForSeconds(1);
+            AstarPath.active.Scan();
+
+            foreach (NavGraph navGraph in AstarPath.active.graphs)
+            {
+                GridGraph graph = navGraph as GridGraph;
+                if (graph.name == groundGraph)
+                {
+                    SpawnResources(graph, GameManager.PlayerEntity.transform.position);
+                }
+            }
+            progressSettings.IsDoneScanning = true;
+        }
+
+        private void SpawnResources(GridGraph graph, Vector3 start)
+        {
+            List<GraphNode> nodes = PathUtilities.GetReachableNodes(AstarPath.active.GetNearest(start, NNConstraint.Default).node);
+            int numberToSpawn = Random.Range(minCaches, maxCaches);
+
+            for (int i = 0; i < numberToSpawn; i++)
+            {
+                int randomNode = Random.Range(0, nodes.Count);
+
+                ResourceCache cache = Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
+
+
+                // TODO set up scalable type randomization with weight.
+                int type = Random.Range(0, 2);
+                ResourceType resourceType = type == 1 ? ResourceType.Dirt : ResourceType.Grass;
+
+                cache.Setup(cacheSpriteDictionary[resourceType], resourceType);
+            }
+        }
+
         private Vector2 GetRandomCardinalDirection()
         {
             int direction = Random.Range(0, 4);

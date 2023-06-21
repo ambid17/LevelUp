@@ -222,6 +222,8 @@ MonoBehaviour:
   tickDamageDownPerSecond: 0
   playerCamera: {fileID: 4274406417751090707}
   weaponArmController: {fileID: 6520759247579820641}
+  resourcePrefab: {fileID: 3158209486798102802, guid: 0fcb200ac0effec47b2cee04e7a34263, type: 3}
+  maxResourceSpawns: 100
   CanMove: 1
 --- !u!114 &4274406417404922725
 MonoBehaviour:
@@ -379,8 +381,8 @@ MonoBehaviour:
   dieDown:
     Name: Die_Down
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 3
   idleLeft:
     Name: Idle_Left
@@ -403,8 +405,8 @@ MonoBehaviour:
   dieLeft:
     Name: Die_Left
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 7
   idleRight:
     Name: Idle_Right
@@ -427,8 +429,8 @@ MonoBehaviour:
   dieRight:
     Name: Die_Right
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 11
   idleUp:
     Name: Idle_Up
@@ -451,8 +453,8 @@ MonoBehaviour:
   dieUp:
     Name: Die_Up
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 1
     CurrentIndex: 15
 --- !u!70 &477293702911122595
 CapsuleCollider2D:
@@ -514,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274406417751090705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5289382, y: 4.5689116, z: -10}
+  m_LocalPosition: {x: -4.6331573, y: 3.4673862, z: -36.60446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -548,7 +550,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.9999957
+  orthographic size: 2.999995
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

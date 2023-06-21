@@ -11,11 +11,6 @@ namespace Minigames.Fight
 
         public void Add(Effect effect)
         {
-            if (effect.UpgradePath == string.Empty)
-            {
-                Debug.LogWarning($"Not adding effect: {effect} to tree, path is blank");
-                return;
-            }
             var splitPath = effect.UpgradePath.Split('/');
 
             EffectNode parentNode = RootNode;
