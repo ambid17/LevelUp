@@ -8,12 +8,17 @@ namespace Minigames.Fight
     public class EffectTree
     {
         public EffectNode RootNode;
-        public bool DisplayLeaf;
+        public static Dictionary<Category, int> CategoryDepthMap = new()
+        {
+            { Category.UpgradeCategory, 1 },
+            { Category.EffectCategory, 2 },
+            { Category.TierCategory, 3 },
+            { Category.Name, 4 },
+        };
 
-        public EffectTree(string rootNode, bool displayLeaf)
+        public EffectTree(string rootNode)
         {
             RootNode = new(rootNode);
-            DisplayLeaf = displayLeaf;
         }
 
         public void Add(Effect effect)
@@ -23,11 +28,6 @@ namespace Minigames.Fight
             EffectNode parentNode = RootNode;
 
             var length = splitPath.Length;
-
-            if (!DisplayLeaf)
-            {
-                length -= 1;
-            }
 
             for (int depth = 1; depth < length; depth++)
             {
@@ -40,7 +40,11 @@ namespace Minigames.Fight
                     parentNode.Children.Add(newNode);
                     parentNode = newNode;
 
-                    if (depth == splitPath.Length - 1)
+                    if (depth == CategoryDepthMap[Category.TierCategory])
+                    {
+                        newNode.TierCategory = effect.TierCategory;
+                    }
+                    else if (depth == CategoryDepthMap[Category.Name])
                     {
                         newNode.Effect = effect;
                     }
@@ -58,11 +62,14 @@ namespace Minigames.Fight
         public string Name;
         public List<EffectNode> Children;
         public Effect Effect;
+        public TierCategory TierCategory;
+        public bool IsInteractable => Effect != null || TierCategory != TierCategory.None;
 
         public EffectNode(string name)
         {
             Name = name;
             Children = new List<EffectNode>();
+            TierCategory = TierCategory.None;
         }
 
         public override string ToString()

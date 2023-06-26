@@ -17,7 +17,6 @@ namespace Minigames.Fight
     public class EffectTreeUI : UIPanel
     {
         [SerializeField] private string rootNodeName;
-        [SerializeField] private bool displayLeaf;
         [SerializeField] private bool showAllEffects;
         [SerializeField] private EffectItem effectItemPrefab;
 
@@ -107,7 +106,7 @@ namespace Minigames.Fight
 
         private void BuildTree()
         {
-            _effectTree = new EffectTree(rootNodeName, displayLeaf);
+            _effectTree = new EffectTree(rootNodeName);
 
             // For debug, allow showing all effects
             var effectsList = GameManager.SettingsManager.effectSettings.AllEffects;

@@ -36,7 +36,7 @@ namespace Minigames.Fight
             gameObject.name = effectNode.Name;
 
             
-            if (effectNode.Effect == null || effectNode.Effect.Icon == null)
+            if (effectNode.IsInteractable)
             {
                 text.gameObject.SetActive(true);
                 text.text = effectNode.Name;
@@ -91,7 +91,14 @@ namespace Minigames.Fight
             {
                 return;
             }
-            GameManager.EventService.Dispatch(new EffectItemSelectedEvent(this));
+            if (effectNode.TierCategory != TierCategory.None)
+            {
+                // Dispatch tier event
+            }
+            else if (effectNode.Effect != null)
+            {
+                GameManager.EventService.Dispatch(new EffectItemSelectedEvent(this));
+            }
             ToggleChildren(true);
             if (children.Count > 0)
             {
