@@ -7,14 +7,29 @@ namespace Minigames.Fight
 {
     public class EffectTree
     {
-        public EffectNode RootNode = new ("upgrades");
+        public EffectNode RootNode;
+        public bool DisplayLeaf;
+
+        public EffectTree(string rootNode, bool displayLeaf)
+        {
+            RootNode = new(rootNode);
+            DisplayLeaf = displayLeaf;
+        }
 
         public void Add(Effect effect)
         {
             var splitPath = effect.UpgradePath.Split('/');
 
             EffectNode parentNode = RootNode;
-            for (int depth = 1; depth < splitPath.Length; depth++)
+
+            var length = splitPath.Length;
+
+            if (!DisplayLeaf)
+            {
+                length -= 1;
+            }
+
+            for (int depth = 1; depth < length; depth++)
             {
                 string nodeName = splitPath[depth];
 

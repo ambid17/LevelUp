@@ -9,7 +9,8 @@ namespace Minigames.Fight
     public enum UIPanelType
     {
         None,
-        Effects,
+        EffectsUpgrade,
+        EffectsUnlock,
         Pause,
         Reward,
     }
@@ -18,7 +19,8 @@ namespace Minigames.Fight
     {
         public ResourceTypeSpriteDictionary ResourceSpriteDictionary;
 
-        [SerializeField] private UIPanel effectPanel;
+        [SerializeField] private UIPanel effectUpgradePanel;
+        [SerializeField] private UIPanel effectUnlockPanel;
         [SerializeField] private UIPanel pausePanel;
         [SerializeField] private UIPanel rewardPanel;
         
@@ -31,7 +33,8 @@ namespace Minigames.Fight
         void Start()
         {
             // Make sure all UI is toggled off
-            ToggleUiPanel(UIPanelType.Effects, false);
+            ToggleUiPanel(UIPanelType.EffectsUpgrade, false);
+            ToggleUiPanel(UIPanelType.EffectsUnlock, false);
             ToggleUiPanel(UIPanelType.Pause, false);
             ToggleUiPanel(UIPanelType.Reward, false);
             GameManager.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
@@ -41,7 +44,7 @@ namespace Minigames.Fight
         {
             if (e.InteractionType == InteractionType.Unlock || e.InteractionType == InteractionType.Upgrade)
             {
-                ToggleUiPanel(UIPanelType.Effects, true);
+                ToggleUiPanel(UIPanelType.EffectsUpgrade, true);
             }
         }
 
@@ -56,7 +59,7 @@ namespace Minigames.Fight
                     ToggleUiPanel(UIPanelType.Pause, true);
                 }
                 // Don't allow closing the reward panel
-                else if (currentPanelType == UIPanelType.Effects || currentPanelType == UIPanelType.Pause)
+                else
                 {
                     ToggleUiPanel(currentPanelType, false);
                 }
@@ -72,11 +75,14 @@ namespace Minigames.Fight
             
             switch (panelType)
             {
-                case UIPanelType.Effects:
-                    effectPanel.Toggle(isActive);
+                case UIPanelType.EffectsUpgrade:
+                    effectUpgradePanel.Toggle(isActive);
                     break;
                 case UIPanelType.Pause:
                     pausePanel.Toggle(isActive);
+                    break;
+                case UIPanelType.EffectsUnlock:
+                    effectUnlockPanel.Toggle(isActive);
                 //    break;
                 //case UIPanelType.Reward:
                 //    rewardPanel.Toggle(isActive);

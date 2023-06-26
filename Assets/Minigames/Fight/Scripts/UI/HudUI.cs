@@ -56,7 +56,7 @@ namespace Minigames.Fight
 
         private void OpenUpgrades()
         {
-            GameManager.UIManager.ToggleUiPanel(UIPanelType.Effects, true);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.EffectsUpgrade, true);
         }
 
         private void SetupAmmoAndAbility()

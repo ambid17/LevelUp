@@ -225,6 +225,7 @@ MonoBehaviour:
   resourcePrefab: {fileID: 3158209486798102802, guid: 0fcb200ac0effec47b2cee04e7a34263, type: 3}
   maxResourceSpawns: 100
   CanMove: 1
+  currentInteractionType: 0
 --- !u!114 &4274406417404922725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274406417751090705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.6331573, y: 3.4673862, z: -36.60446}
+  m_LocalPosition: {x: -8.112247, y: 0.54037905, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -550,7 +551,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.999995
+  orthographic size: 2.9989128
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
