@@ -1017,7 +1017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b630c4aaf46ca4e86b464a659b6c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
   defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   interactableMaterial: {fileID: 2100000, guid: 8e81734951ded674599fa2335ac4064c, type: 2}
   InteractionType: 1
@@ -6467,7 +6466,7 @@ GameObject:
   - component: {fileID: 8709320008807028821}
   - component: {fileID: 8585813212711913768}
   m_Layer: 0
-  m_Name: UnlockTerminal
+  m_Name: Create Terminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6500,7 +6499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b630c4aaf46ca4e86b464a659b6c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
   defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   interactableMaterial: {fileID: 2100000, guid: 8e81734951ded674599fa2335ac4064c, type: 2}
   InteractionType: 2

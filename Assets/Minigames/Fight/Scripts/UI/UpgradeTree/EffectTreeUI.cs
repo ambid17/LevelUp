@@ -7,6 +7,13 @@ using UnityEngine.UI;
 
 namespace Minigames.Fight
 {
+    public enum EffectTreeType
+    {
+        Upgrade,
+        Unlock,
+        Create,
+    }
+
     public class EffectTreeUI : UIPanel
     {
         [SerializeField] private string rootNodeName;
@@ -95,7 +102,7 @@ namespace Minigames.Fight
 
         private void Close()
         {
-            GameManager.UIManager.ToggleUiPanel(UIPanelType.EffectsUpgrade, false);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.EffectUpgrade, false);
         }
 
         private void BuildTree()
