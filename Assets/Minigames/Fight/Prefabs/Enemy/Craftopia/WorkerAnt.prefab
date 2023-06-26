@@ -148,12 +148,12 @@ SpriteRenderer:
   m_SortingLayerID: 216851781
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 897257447, guid: ba808125d1aaebe46bc1c484c45c8064, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35e773b9bb872df4580056ad1e4ff491, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -197,8 +197,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.0666667}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -355,30 +355,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8061865754360134790}
-  maxBufferPercent: 0.8
   idleAnimation:
     Name: Worker_Ant_Idle
     CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 0
   moveAnimation:
     Name: Worker_Ant_Walk
     CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 1
   meleeAttackAnimation:
     Name: Worker_Ant_Idle
     CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 0
   projectileAttackAnimation:
     Name: Worker_Ant_Idle
     CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 0
   dieAnimation:
     Name: Worker_Ant_Die
     CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 2
   onHitAnimation:
     Name: 
     CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 0
 --- !u!114 &5873968864989093915
 MonoBehaviour:
