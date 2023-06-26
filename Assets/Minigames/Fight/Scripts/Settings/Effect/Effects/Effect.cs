@@ -18,18 +18,18 @@ namespace Minigames.Fight
         OnPurchase, 
         OnTimer
     }
-    
-    public enum UpgradeCategory
-    {
-        Melee, Range, Player
-    }
-    
+
     public enum Category
     {
         UpgradeCategory,
         EffectCategory,
         TierCategory,
         Name,
+    }
+
+    public enum UpgradeCategory
+    {
+        Melee, Range, Player
     }
 
     public enum EffectCategory

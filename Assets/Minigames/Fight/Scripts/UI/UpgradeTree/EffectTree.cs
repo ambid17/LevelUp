@@ -40,6 +40,9 @@ namespace Minigames.Fight
                     parentNode.Children.Add(newNode);
                     parentNode = newNode;
 
+                    newNode.EffectCategory = effect.EffectCategory;
+                    newNode.UpgradeCategory = effect.UpgradeCategory;
+
                     if (depth == CategoryDepthMap[Category.TierCategory])
                     {
                         newNode.TierCategory = effect.TierCategory;
@@ -62,8 +65,9 @@ namespace Minigames.Fight
         public string Name;
         public List<EffectNode> Children;
         public Effect Effect;
+        public UpgradeCategory UpgradeCategory;
+        public EffectCategory EffectCategory;
         public TierCategory TierCategory;
-        public bool IsInteractable => Effect != null || TierCategory != TierCategory.None;
 
         public EffectNode(string name)
         {
