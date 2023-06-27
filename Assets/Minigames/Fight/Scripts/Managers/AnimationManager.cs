@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class AnimationManager : MonoBehaviour
+public class AnimationManager : MonoBehaviour
 {
     public bool IsAnimFinished => CurrentAnimationNomralizedTime >= 1;
     public float CurrentAnimationNomralizedTime => anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
