@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Shatter
   Icon: {fileID: 0}
+  IsUnlocked: 0
   AmountOwned: 0
   MaxAmountOwned: 0
   BaseCost: 15
   CostScalar: 1.1
   CostType: 1
   ExecutionOrder: 0
+  TriggerType: 0
+  UpgradeCategory: 0
+  EffectCategory: 0
+  TierCategory: 1
   DropWeight: 1
   percentDamagePerStack: 0.1
   executePercent: 0.5

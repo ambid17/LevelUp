@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Minigames.Fight;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
@@ -23,6 +25,7 @@ namespace Minigames.Fight
         private TierCategory    _tierCategory;
 
         private EventService _eventService;
+
 
         private void Awake()
         {
@@ -69,22 +72,37 @@ namespace Minigames.Fight
         {
             float tierCost = GameManager.SettingsManager.progressSettings.UnlockCostMaps[_tierCategory];
 
+            List<Effect> allEffects = GameManager.SettingsManager.effectSettings.AllEffects;
+            List<Effect> availableEffects = allEffects.Where(r => r.UpgradeCategory == _upgradeCategory && r.EffectCategory == _effectCategory && r.TierCategory == _tierCategory && !r.IsUnlocked).ToList();
+
             if (GameManager.CurrencyManager.TrySpendCurrency(tierCost))
             {
-                // TODO unlock random effect in correct tree
+                int i = Random.Range(0, availableEffects.Count);
+                availableEffects[i].IsUnlocked = true;
                 OnUpgradeUpdated();
             }
         }
 
         private void OnUpgradeUpdated()
         {
-            nameText.text = $"Unlock";
+            List<Effect> allEffects = GameManager.SettingsManager.effectSettings.AllEffects;
+            List<Effect> availableEffects = allEffects.Where(r => r.UpgradeCategory == _upgradeCategory && r.EffectCategory == _effectCategory && r.TierCategory == _tierCategory && !r.IsUnlocked).ToList();
+
+            nameText.text = "Unlock";
             float tierCost = GameManager.SettingsManager.progressSettings.UnlockCostMaps[_tierCategory];
-            upgradeButtonText.text = tierCost.ToCurrencyString();
-            descriptionText.text = $"Unlock a random {_upgradeCategory} {_effectCategory} from {_tierCategory}";
+            if (availableEffects.Count > 0)
+            {
+                upgradeButtonText.text = tierCost.ToCurrencyString();
+                descriptionText.text = $"Unlock a random {_upgradeCategory} {_effectCategory} from {_tierCategory}";
+            }
+            else
+            {
+                upgradeButtonText.text = "";
+                descriptionText.text = $"All {_upgradeCategory} {_effectCategory} effects from {_tierCategory} are already unlocked";
+            }
 
             bool canAfford = GameManager.CurrencyManager.Currency > tierCost;
-            upgradeButton.interactable = canAfford; // TODO fail if all upgrades already owned.
+            upgradeButton.interactable = canAfford && availableEffects.Count > 0;
         }
     }
 }
