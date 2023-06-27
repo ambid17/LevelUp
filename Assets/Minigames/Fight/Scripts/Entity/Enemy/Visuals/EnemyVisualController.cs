@@ -14,6 +14,7 @@ namespace Minigames.Fight
         
         private const float MaxDistanceFromPlayer = 100;
         private bool _isMarkedForDeath;
+        private Vector2 _lastRecordedSpeed = new(-1, 0);
 
         protected override void Start()
         {
@@ -35,6 +36,12 @@ namespace Minigames.Fight
         protected override void Update()
         {
             base.Update();
+            Vector2 currentSpeed = _enemyEntity.MovementController.MyRigidbody2D.velocity;
+            if (currentSpeed.x != 0)
+            {
+                _lastRecordedSpeed = currentSpeed;
+            }
+            SpriteRenderer.flipX = _lastRecordedSpeed.x < 0 ? false : true;
             //TryCull();
         }
         

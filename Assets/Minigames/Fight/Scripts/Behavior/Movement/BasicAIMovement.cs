@@ -44,8 +44,10 @@ namespace Minigames.Fight
         {
             get
             {
-                GraphNode node1 = AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
-                GraphNode node2 = AstarPath.active.GetNearest(target, NNConstraint.Default).node;
+                NNConstraint myConstraint = NNConstraint.None;
+                myConstraint.graphMask = seeker.graphMask;
+                GraphNode node1 = AstarPath.active.GetNearest(transform.position, myConstraint).node;
+                GraphNode node2 = AstarPath.active.GetNearest(target, myConstraint).node;
                 return !PathUtilities.IsPathPossible(node1, node2);
             }
         }
@@ -101,14 +103,6 @@ namespace Minigames.Fight
                     return;
                 }
                 currentWaypoint++;
-            }
-            if (rotateTowardsDestination)
-            {
-                transform.rotation = PhysicsUtils.LookAt(transform, nextWaypoint, rotationSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.rotation = PhysicsUtils.LookAt(transform, target, rotationSpeed * Time.deltaTime);
             }
         }
         private void OnPathComplete(Path p)

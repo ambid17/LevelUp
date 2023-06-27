@@ -5,6 +5,7 @@ public class AnimationManager : MonoBehaviour
 {
     public bool IsAnimFinished => CurrentAnimationNomralizedTime >= 1;
     public float CurrentAnimationNomralizedTime => anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    public AnimationName CurrentAnimation => currentAnimation;
 
     [SerializeField]
     protected Animator anim;
@@ -19,7 +20,7 @@ public class AnimationManager : MonoBehaviour
     }
 
     // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.
-    protected bool IsCurrentAnimLoopFinished(float acceptableDifference)
+    public bool IsCurrentAnimLoopFinished(float acceptableDifference)
     {
         float difference = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
         return  Mathf.Clamp(difference, 1 - acceptableDifference, 1 + acceptableDifference) == difference;

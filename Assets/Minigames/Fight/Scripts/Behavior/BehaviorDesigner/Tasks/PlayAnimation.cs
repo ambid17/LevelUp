@@ -29,6 +29,10 @@ namespace BehaviorDesigner.Runtime.Tasks
         }
         public override TaskStatus OnUpdate()
         {
+            if (animationManager.CurrentAnimation != Animation.Value)
+            {
+                return TaskStatus.Failure;
+            }
             if (SuccessType == SuccessType.None)
             {
                 return TaskStatus.Running;
