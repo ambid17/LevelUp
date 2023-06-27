@@ -26,7 +26,12 @@ namespace Minigames.Fight
         public bool IsDoneScanning;
 
         [Header("Set in Editor")] public List<World> Worlds;
-
+        public Dictionary<TierCategory, float> UnlockCostMaps = new() 
+        {
+            {TierCategory.Tier1, 1},
+            {TierCategory.Tier2, 2},
+            {TierCategory.Tier3, 3},
+        };
         [Header("Run-time Values")] 
         public float Currency;
         public TutorialState TutorialState;

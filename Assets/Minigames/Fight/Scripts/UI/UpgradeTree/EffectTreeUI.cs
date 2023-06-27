@@ -7,10 +7,16 @@ using UnityEngine.UI;
 
 namespace Minigames.Fight
 {
+    public enum EffectTreeType
+    {
+        Upgrade,
+        Unlock,
+        Create,
+    }
+
     public class EffectTreeUI : UIPanel
     {
         [SerializeField] private string rootNodeName;
-        [SerializeField] private bool displayLeaf;
         [SerializeField] private bool showAllEffects;
         [SerializeField] private EffectItem effectItemPrefab;
 
@@ -95,12 +101,12 @@ namespace Minigames.Fight
 
         private void Close()
         {
-            GameManager.UIManager.ToggleUiPanel(UIPanelType.EffectsUpgrade, false);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.EffectUpgrade, false);
         }
 
         private void BuildTree()
         {
-            _effectTree = new EffectTree(rootNodeName, displayLeaf);
+            _effectTree = new EffectTree(rootNodeName);
 
             // For debug, allow showing all effects
             var effectsList = GameManager.SettingsManager.effectSettings.AllEffects;
