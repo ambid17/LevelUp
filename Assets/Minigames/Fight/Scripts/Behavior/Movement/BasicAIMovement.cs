@@ -28,8 +28,6 @@ namespace Minigames.Fight
         private float _StopDistance;
         private Vector2 _Target;
 
-        private EntityAnimationController _entityAnimationController;
-
         public float speed { get => _Speed; set => _Speed = value; }
         public bool rotateTowardsDestination { get => _RotateTowardsDestination; set => _RotateTowardsDestination = value; }
         public float rotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
@@ -64,7 +62,6 @@ namespace Minigames.Fight
             // idiot proofing
             rb.gravityScale = 0;
             StartCoroutine(RepeatUpdatePath());
-            _entityAnimationController = entity.animationController as EntityAnimationController;
         }
         private IEnumerator RepeatUpdatePath()
         {
@@ -79,10 +76,8 @@ namespace Minigames.Fight
             // If we don't have a path moving is bad
             if (path == null)
             {
-                _entityAnimationController.PlayIdleAnim();
                 return;
             }
-            _entityAnimationController.PlayMoveAnim();
             Vector2 move = nextWaypoint - (Vector2)transform.position;
             rb.velocity = move.normalized * speed;
             float distance = Vector2.Distance(transform.position, nextWaypoint);

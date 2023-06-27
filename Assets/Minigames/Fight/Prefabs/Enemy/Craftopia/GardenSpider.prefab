@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 2926861443713235242}
   - component: {fileID: 2083538932749553234}
   - component: {fileID: 5054155416519530242}
-  - component: {fileID: 7242798956664177336}
   - component: {fileID: 5536586052788864798}
   m_Layer: 9
   m_Name: GardenSpider
@@ -59,7 +58,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementController: {fileID: -698485910662565092}
   VisualController: {fileID: 1047883154001853991}
-  animationController: {fileID: 7242798956664177336}
+  animationController: {fileID: 0}
   tickDamageDownPerSecond: 1
   enemyStats:
     goldValue: 1
@@ -414,55 +413,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &7242798956664177336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd04a91a453a3b64b97fe0b953d8f056, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 5054155416519530242}
-  idleAnimation:
-    Name: Spider_Idle
-    CanBeCancelled: 1
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 0
-  moveAnimation:
-    Name: Spider_Walk
-    CanBeCancelled: 1
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 1
-  meleeAttackAnimation:
-    Name: Spider_Attack
-    CanBeCancelled: 1
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 2
-  projectileAttackAnimation:
-    Name: Spider_Attack
-    CanBeCancelled: 1
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 2
-  dieAnimation:
-    Name: Spider_Die
-    CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 3
-  onHitAnimation:
-    Name: Spider_Idle
-    CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 0
 --- !u!114 &5536586052788864798
 MonoBehaviour:
   m_ObjectHideFlags: 0

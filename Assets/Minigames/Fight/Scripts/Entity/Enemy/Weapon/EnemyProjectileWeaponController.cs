@@ -25,10 +25,6 @@ namespace Minigames.Fight
         protected override void Update()
         {
             base.Update();
-            if (CanShoot())
-            {
-                _overridenEntity.OverriddenAnimationController.PlayProjectileAttackAnimation();
-            }
         }
         protected override bool CanShoot()
         {
