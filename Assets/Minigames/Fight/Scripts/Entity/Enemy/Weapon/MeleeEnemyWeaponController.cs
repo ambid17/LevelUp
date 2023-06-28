@@ -5,44 +5,36 @@ namespace Minigames.Fight
 {
     public class MeleeEnemyWeaponController : WeaponController
     {
-        private bool _isTouchingPlayer = false;
         private EnemyEntity _overridenEntity;
+        private MeleeWeapon _overridenWeapon;
 
         protected override void Start()
         {
             base.Start();
             _overridenEntity = MyEntity as EnemyEntity;
-            if (!_overridenEntity.enemyStats.isPassive)
-            {
-                _overridenEntity.enemyStats.canShootTarget = true;
-            }
+            _overridenWeapon = weapon as MeleeWeapon;
         }
 
         protected override void Update()
         {
             base.Update();
+            _overridenEntity.enemyStats.canShootTarget = CanShoot();
         }
 
         protected override bool CanShoot()
         {
-            return ShotTimer > weapon.fireRate && _isTouchingPlayer && _overridenEntity.enemyStats.canShootTarget;
+            return ShotTimer > _overridenWeapon.fireRate;
         }
 
         public override void Shoot()
         {
+            ShotTimer = 0;
+            if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) > _overridenWeapon.attackRange)
+            {
+                return;
+            }
             GameManager.PlayerEntity.TakeHit(Hit);
         }
         
-        void OnTriggerEnter2D(Collider2D col)
-        {
-            if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
-                _isTouchingPlayer = true;
-        }
-
-        void OnTriggerExit2D(Collider2D col)
-        {
-            if(col.gameObject.layer == PhysicsUtils.PlayerLayer)
-                _isTouchingPlayer = false;
-        }
     }
 }
