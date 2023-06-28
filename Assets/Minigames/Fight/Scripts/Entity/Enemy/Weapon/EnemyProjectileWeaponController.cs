@@ -49,11 +49,11 @@ namespace Minigames.Fight
                 projectile.MySpriteRenderer.sprite = overridenWeapon.bulletSpriteOverride;
             }
 
-            Vector2 direction = _overridenEntity.Target.position - MyTransform.position;
+            Vector2 direction = _overridenEntity.Target.position - projectile.transform.position;
 
             if (_overridenEntity.enemyStats.predictTargetPosition)
             {
-                direction = PredictProjectileDirection();
+                direction = PredictProjectileDirection(projectile.transform);
             }
 
             if (destroyOnReachTarget)
@@ -64,11 +64,11 @@ namespace Minigames.Fight
             projectile.Setup(_overridenEntity, direction, this);
 
         }
-        private Vector2 PredictProjectileDirection()
+        private Vector2 PredictProjectileDirection(Transform origin)
         {
             Vector2 targetVelocity = GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;
 
-            Vector2 relativePosition = transform.position - _overridenEntity.Target.position;
+            Vector2 relativePosition = origin.position - _overridenEntity.Target.position;
             float theta = Vector2.Angle(relativePosition, targetVelocity);
 
             float a = (targetVelocity.magnitude * targetVelocity.magnitude) - (_overridenEntity.enemyStats.ProjectileSpeed * _overridenEntity.enemyStats.ProjectileSpeed) ;
