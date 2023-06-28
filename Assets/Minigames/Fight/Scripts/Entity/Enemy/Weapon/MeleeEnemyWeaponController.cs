@@ -18,7 +18,7 @@ namespace Minigames.Fight
         protected override void Update()
         {
             base.Update();
-            _overridenEntity.enemyStats.canShootTarget = CanShoot();
+            _overridenEntity.enemyStats.canMeleeTarget = CanShoot();
         }
 
         protected override bool CanShoot()

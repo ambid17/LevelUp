@@ -70,7 +70,8 @@ namespace Minigames.Fight
         #endregion
         #region SpiderData
         public Vector2 PlayerVelocity => GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;
-        public bool CanShoot { get => entity.enemyStats.canShootTarget; set => entity.enemyStats.canShootTarget = value; }
+        public bool CanShoot => entity.enemyStats.canShootTarget;
+        public bool CanMelee => entity.enemyStats.canMeleeTarget;
         public bool IsTargetSlowed
         {
             get

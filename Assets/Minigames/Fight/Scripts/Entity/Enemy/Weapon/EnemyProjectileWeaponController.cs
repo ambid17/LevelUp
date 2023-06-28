@@ -25,14 +25,16 @@ namespace Minigames.Fight
         protected override void Update()
         {
             base.Update();
+            _overridenEntity.enemyStats.canShootTarget = CanShoot();
         }
         protected override bool CanShoot()
         {
-            return ShotTimer > weapon.fireRate && _overridenEntity.enemyStats.canShootTarget;
+            return ShotTimer > weapon.fireRate;
         }
         
         public override void Shoot()
         {
+            ShotTimer = 0;
             EnemyProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as EnemyProjectile;
             projectile.transform.position = transform.position;
             
