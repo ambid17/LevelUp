@@ -26,5 +26,15 @@ namespace Minigames.Fight
             IsFlashing = false;
             SpriteRenderer.material = defaultMaterial;
         }
+        protected override IEnumerator DamageAnimation()
+        {
+            GameManager.PlayerEntity.Stunned = true;
+            GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
+            while (!GameManager.PlayerEntity.AnimationController.IsAnimFinished)
+            {
+                yield return null;
+            }
+            GameManager.PlayerEntity.Stunned = false;
+        }
     }
 }

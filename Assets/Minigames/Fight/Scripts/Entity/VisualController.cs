@@ -68,7 +68,7 @@ namespace Minigames.Fight
                 }
             }
         }
-        private IEnumerator DamageAnimation()
+        protected virtual IEnumerator DamageAnimation()
         {
             MyEntity.Stunned = true;
             MyEntity.animationController.OverrideAnimation(takeHitAnimation, 0);

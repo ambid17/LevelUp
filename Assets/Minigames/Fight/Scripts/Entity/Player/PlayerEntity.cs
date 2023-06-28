@@ -96,10 +96,6 @@ namespace Minigames.Fight
                 return;
             }
             base.Update();
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                TakeDamage(GameManager.SettingsManager.playerSettings.MaxHp);
-            }
 
             if (Input.GetKeyDown(KeyCode.E) && currentInteractionType != InteractionType.None)
             {

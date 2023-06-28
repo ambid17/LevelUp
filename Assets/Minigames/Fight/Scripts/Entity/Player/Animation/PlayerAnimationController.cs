@@ -130,7 +130,7 @@ namespace Minigames.Fight
                     animation = takeHitUp;
                     break;
             }
-            PlayAnimation(animation, 0);
+            OverrideAnimation(animation, 0);
         }
         public void PlayDieAnimation()
         {
