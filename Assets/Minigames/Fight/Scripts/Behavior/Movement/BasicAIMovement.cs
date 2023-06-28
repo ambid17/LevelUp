@@ -41,7 +41,7 @@ namespace Minigames.Fight
         public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
 
         // Destination has been reached if agent is within stopping distance of the final waypoint
-        public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count - 1]) < stopDistance;
+        public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
 
         public bool pathInvalid
         {
