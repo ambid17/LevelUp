@@ -46,6 +46,12 @@ namespace Minigames.Fight
             damageText.Setup(damage.ToString(), transform.position);
         }
 
+        public void FacePlayer()
+        {
+            float direction = GameManager.PlayerEntity.transform.position.x - transform.position.x;
+            _enemyEntity.VisualController.SpriteRenderer.flipX = direction < 0 ? false : true;
+        }
+
         // If the player runs too far from the enemy, kill it off
         private void TryCull()
         {
