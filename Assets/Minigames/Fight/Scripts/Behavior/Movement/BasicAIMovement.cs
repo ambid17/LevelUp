@@ -28,6 +28,8 @@ namespace Minigames.Fight
         private float _StopDistance;
         private Vector2 _Target;
 
+        private Vector2 _lastRecordedSpeed = new(-1, 0);
+
         public float speed { get => _Speed; set => _Speed = value; }
         public bool rotateTowardsDestination { get => _RotateTowardsDestination; set => _RotateTowardsDestination = value; }
         public float rotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
@@ -88,6 +90,14 @@ namespace Minigames.Fight
             Vector2 move = nextWaypoint - (Vector2)transform.position;
             rb.velocity = move.normalized * speed;
             float distance = Vector2.Distance(transform.position, nextWaypoint);
+
+            Vector2 currentSpeed = entity.MovementController.MyRigidbody2D.velocity;
+            if (currentSpeed.x != 0)
+            {
+                _lastRecordedSpeed = currentSpeed;
+            }
+            entity.VisualController.SpriteRenderer.flipX = _lastRecordedSpeed.x < 0 ? false : true;
+
             // If waypoint has been reached then agent heads towards next waypoint on the list
             // If no other waypoints exist then agent recalculates the path
 

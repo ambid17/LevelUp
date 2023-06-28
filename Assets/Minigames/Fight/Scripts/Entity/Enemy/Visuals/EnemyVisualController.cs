@@ -36,12 +36,6 @@ namespace Minigames.Fight
         protected override void Update()
         {
             base.Update();
-            Vector2 currentSpeed = _enemyEntity.MovementController.MyRigidbody2D.velocity;
-            if (currentSpeed.x != 0)
-            {
-                _lastRecordedSpeed = currentSpeed;
-            }
-            SpriteRenderer.flipX = _lastRecordedSpeed.x < 0 ? false : true;
             //TryCull();
         }
         

@@ -29,7 +29,14 @@ namespace Minigames.Fight
         protected override IEnumerator DamageAnimation()
         {
             GameManager.PlayerEntity.Stunned = true;
-            GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
+            takeHitAnimation = GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
+
+            while (GameManager.PlayerEntity.AnimationController.CurrentAnimation != takeHitAnimation)
+            {
+                takeHitAnimation = GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
+                yield return null;
+            }
+
             while (!GameManager.PlayerEntity.AnimationController.IsAnimFinished)
             {
                 yield return null;

@@ -27,6 +27,7 @@ namespace Minigames.Fight
         {
             if (GameManager.PlayerEntity.IsDead || !GameManager.PlayerEntity.CanMove || GameManager.PlayerEntity.Stunned)
             {
+                MyRigidbody2D.velocity = Vector2.zero;
                 return;
             }
             GetMovementInput();
