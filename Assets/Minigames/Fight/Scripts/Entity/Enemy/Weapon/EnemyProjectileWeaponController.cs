@@ -9,6 +9,11 @@ namespace Minigames.Fight
 {
     public class EnemyProjectileWeaponController : ProjectileWeaponController
     {
+        [SerializeField]
+        Transform leftShootOffset;
+        [SerializeField]
+        Transform rightShootOffset;
+
         private EnemyEntity _overridenEntity;
         private float timeToReachTarget;
 
@@ -36,8 +41,14 @@ namespace Minigames.Fight
         {
             ShotTimer = 0;
             EnemyProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as EnemyProjectile;
-            projectile.transform.position = transform.position;
+            Transform offset = !_overridenEntity.VisualController.SpriteRenderer.flipX ? leftShootOffset : rightShootOffset;
+            projectile.transform.position = offset.position;
             
+            if (overridenWeapon.bulletSpriteOverride != null)
+            {
+                projectile.MySpriteRenderer.sprite = overridenWeapon.bulletSpriteOverride;
+            }
+
             Vector2 direction = _overridenEntity.Target.position - MyTransform.position;
 
             if (_overridenEntity.enemyStats.predictTargetPosition)
