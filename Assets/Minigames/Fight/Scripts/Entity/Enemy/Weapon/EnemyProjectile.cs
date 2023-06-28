@@ -7,16 +7,18 @@ namespace Minigames.Fight
 {
     public class EnemyProjectile : ProjectileController
     {
-        public SpriteRenderer MySpriteRenderer => _mySpriteRenderer;
+        public SpriteRenderer MySpriteRenderer => mySpriteRenderer;
+
+        [SerializeField]
+        private SpriteRenderer mySpriteRenderer;
 
         private EnemyEntity _overriddenEntity;
-        private SpriteRenderer _mySpriteRenderer;
+
 
         protected override void Start()
         {
             base.Start();
             _overriddenEntity = _myEntity as EnemyEntity;
-            _mySpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         protected override bool ShouldDie()
