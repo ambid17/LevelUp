@@ -28,7 +28,8 @@ namespace Minigames.Fight
         private float _StopDistance;
         private Vector2 _Target;
 
-        private Vector2 _lastRecordedSpeed = new(-1, 0);
+        private float _lastKnownLookDirection;
+        int framesSinceLastDirectionChange;
 
         public float speed { get => _Speed; set => _Speed = value; }
         public bool rotateTowardsDestination { get => _RotateTowardsDestination; set => _RotateTowardsDestination = value; }
@@ -91,12 +92,25 @@ namespace Minigames.Fight
             rb.velocity = move.normalized * speed;
             float distance = Vector2.Distance(transform.position, nextWaypoint);
 
-            Vector2 currentSpeed = entity.MovementController.MyRigidbody2D.velocity;
-            if (currentSpeed.x != 0)
+            // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching
+            if (Mathf.Abs(move.x) > 0.01)
             {
-                _lastRecordedSpeed = currentSpeed;
+                if (Mathf.Sign(_lastKnownLookDirection) != Mathf.Sign(move.x))
+                {
+                    framesSinceLastDirectionChange++;
+                    if (framesSinceLastDirectionChange >= 5)
+                    {
+                        framesSinceLastDirectionChange = 0;
+                        _lastKnownLookDirection = move.x;
+                    }   
+                }
+                else
+                {
+                    framesSinceLastDirectionChange = 0;
+                }
             }
-            entity.VisualController.SpriteRenderer.flipX = _lastRecordedSpeed.x < 0 ? false : true;
+
+            entity.VisualController.SpriteRenderer.flipX = _lastKnownLookDirection < 0 ? false : true;
 
             // If waypoint has been reached then agent heads towards next waypoint on the list
             // If no other waypoints exist then agent recalculates the path
