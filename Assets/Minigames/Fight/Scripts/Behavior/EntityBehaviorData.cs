@@ -26,6 +26,7 @@ namespace Minigames.Fight
         private SpecialEnemyType enemyType;
 
         public bool Stunned => entity.Stunned;
+        public bool IsMoving => entity.MovementController.MyRigidbody2D.velocity != Vector2.zero;
         public float MoveSpeed => entity.enemyStats.MoveSpeed;
         public GameObject PlayerGo => entity.Target.gameObject;
         public Transform Player => entity.Target;
