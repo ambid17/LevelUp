@@ -25,6 +25,7 @@ namespace Minigames.Fight
         [SerializeField]
         private SpecialEnemyType enemyType;
 
+        public bool Stunned => entity.Stunned;
         public float MoveSpeed => entity.enemyStats.MoveSpeed;
         public GameObject PlayerGo => entity.Target.gameObject;
         public Transform Player => entity.Target;

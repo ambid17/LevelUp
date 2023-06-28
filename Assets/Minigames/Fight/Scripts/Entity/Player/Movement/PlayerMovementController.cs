@@ -25,7 +25,7 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (GameManager.PlayerEntity.IsDead || !GameManager.PlayerEntity.CanMove)
+            if (GameManager.PlayerEntity.IsDead || !GameManager.PlayerEntity.CanMove || GameManager.PlayerEntity.Stunned)
             {
                 return;
             }

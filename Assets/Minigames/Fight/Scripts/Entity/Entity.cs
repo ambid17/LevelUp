@@ -10,6 +10,7 @@ namespace Minigames.Fight
 {
     public class Entity : MonoBehaviour
     {
+        public bool Stunned { get; set; }
         public MovementController MovementController;
         public VisualController VisualController;
         public AnimationManager animationController;
