@@ -10,11 +10,13 @@ namespace Minigames.Fight
         public AnimationName MoveAnimation => moveAnimation;
         public AnimationName MeleeAttackAnimation => meleeAttackAnimation;
         public AnimationName RangedAttackAnimation => rangedAttackAnimation;
+        public AnimationName AlternateMoveAnimation => alternateMoveAnimation;
 
         [SerializeField] AnimationName idleAnimation;
         [SerializeField] AnimationName moveAnimation;
         [SerializeField] AnimationName meleeAttackAnimation;
         [SerializeField] AnimationName rangedAttackAnimation;
+        [SerializeField] AnimationName alternateMoveAnimation;
     }
 
 }

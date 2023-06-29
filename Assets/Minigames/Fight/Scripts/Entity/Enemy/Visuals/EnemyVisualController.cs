@@ -10,6 +10,8 @@ namespace Minigames.Fight
 {
     public class EnemyVisualController : VisualController
     {
+        public AnimationName TakeHitAnimation => takeHitAnimation;
+
         private EnemyEntity _enemyEntity;
         
         private const float MaxDistanceFromPlayer = 100;
