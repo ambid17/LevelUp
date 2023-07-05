@@ -16,7 +16,7 @@ public class AnimationManager : MonoBehaviour
 
     protected bool IsAnimPlaying(AnimationName name)
     {
-        return name == currentAnimation;
+        return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
     }
 
     // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.

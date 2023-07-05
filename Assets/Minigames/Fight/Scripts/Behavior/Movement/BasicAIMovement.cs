@@ -31,6 +31,9 @@ namespace Minigames.Fight
         private float _lastKnownLookDirection;
         int framesSinceLastDirectionChange;
 
+        [SerializeField]
+        private Vector2 move;
+
         public float speed { get => _Speed; set => _Speed = value; }
         public bool rotateTowardsDestination { get => _RotateTowardsDestination; set => _RotateTowardsDestination = value; }
         public float rotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
@@ -88,9 +91,13 @@ namespace Minigames.Fight
                 Stop();
                 return;
             }
-            Vector2 move = nextWaypoint - (Vector2)transform.position;
+            float distance = Mathf.Infinity;
+            if (seeker.IsDone())
+            {
+                move = nextWaypoint - (Vector2)transform.position;
+                distance = Vector2.Distance(transform.position, nextWaypoint);
+            }
             rb.velocity = move.normalized * speed;
-            float distance = Vector2.Distance(transform.position, nextWaypoint);
 
             // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching
             if (Mathf.Abs(move.x) > 0.01)

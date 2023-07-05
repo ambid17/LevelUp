@@ -196,7 +196,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: -7786698165613059924}
+  move: {x: 0, y: 0}
 --- !u!114 &-1506387986271205772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +472,12 @@ MonoBehaviour:
     AcceptableOverrideTime: 0.05
     CurrentIndex: 2
   rangedAttackAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  alternateMoveAnimation:
     Name: 
     CanBeCancelled: 0
     MaxBufferPercentage: 0.8
