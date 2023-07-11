@@ -28,6 +28,10 @@ namespace Minigames.Fight
         }
         protected override IEnumerator DamageAnimation()
         {
+            if (GameManager.PlayerEntity.IsDead)
+            {
+                return;
+            }
             GameManager.PlayerEntity.Stunned = true;
             takeHitAnimation = GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
 
