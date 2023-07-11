@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 1047883154001853991}
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
-  - component: {fileID: 2009908225796347555}
   - component: {fileID: 5468921551894925541}
   - component: {fileID: 1087665331962127016}
   - component: {fileID: 8118519002331892122}
@@ -87,6 +86,7 @@ GameObject:
   - component: {fileID: 2068693523010453336}
   - component: {fileID: 1287365799941292616}
   - component: {fileID: 6700159204235219801}
+  - component: {fileID: 2859698617523764856}
   m_Layer: 9
   m_Name: GardenSpider
   m_TagString: Untagged
@@ -254,32 +254,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2009908225796347555
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.28, y: 0.36}
-  m_EdgeRadius: 0
 --- !u!114 &5468921551894925541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,3 +581,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeWeapon: {fileID: 5536586052788864798}
   projectileWeapon: {fileID: 8118519002331892122}
+--- !u!70 &2859698617523764856
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06561103, y: -0.12502414}
+  m_Size: {x: 1.3342595, y: 0.8395331}
+  m_Direction: 1
