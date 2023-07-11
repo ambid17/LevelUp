@@ -30,7 +30,7 @@ namespace Minigames.Fight
         {
             if (GameManager.PlayerEntity.IsDead)
             {
-                return;
+                yield break;
             }
             GameManager.PlayerEntity.Stunned = true;
             takeHitAnimation = GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
