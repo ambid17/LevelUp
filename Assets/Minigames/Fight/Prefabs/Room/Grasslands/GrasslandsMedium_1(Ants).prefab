@@ -133,6 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3661826836118147044}
+  - component: {fileID: 8125796448790962936}
   m_Layer: 0
   m_Name: FlowerWaypoint (7)
   m_TagString: Untagged
@@ -155,6 +156,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8125796448790962936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315948223964287314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &408484157401268905
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9096378987094907411}
+  - component: {fileID: 9194216777709514937}
   m_Layer: 0
   m_Name: WorkerWaypoint (6)
   m_TagString: Untagged
@@ -318,6 +333,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9194216777709514937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746035365988403095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1794179280166521483
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6292521783460460770}
+  - component: {fileID: 1605646996941772600}
   m_Layer: 0
   m_Name: FlowerWaypoint (2)
   m_TagString: Untagged
@@ -590,13 +619,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3115384498786419379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.23, y: 2.25, z: 0}
+  m_LocalPosition: {x: -3.7, y: -6.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1605646996941772600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115384498786419379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &3198144951844315237
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 757034765055822612}
+  - component: {fileID: 7212684549923113742}
   m_Layer: 0
   m_Name: FlowerWaypoint (4)
   m_TagString: Untagged
@@ -659,6 +702,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7212684549923113742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498333910434003643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &3522659004285746146
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2612195313431716479}
+  - component: {fileID: 102037489425329238}
   m_Layer: 0
   m_Name: FlowerWaypoint (6)
   m_TagString: Untagged
@@ -783,6 +840,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102037489425329238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872511642402714617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &3950059918125305916
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5205879596492526148}
+  - component: {fileID: 5539004069326886382}
   m_Layer: 0
   m_Name: FlowerWaypoint (1)
   m_TagString: Untagged
@@ -845,6 +916,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5539004069326886382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102843268000449632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &4133763121838045788
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +1070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8875257470397396615}
+  - component: {fileID: 8207038619249990459}
   m_Layer: 0
   m_Name: WorkerWaypoint (4)
   m_TagString: Untagged
@@ -1008,6 +1093,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8207038619249990459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681950878764766324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4691100960075156582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8997302918557880490}
+  - component: {fileID: 6632481956463819608}
   m_Layer: 0
   m_Name: WorkerWaypoint (2)
   m_TagString: Untagged
@@ -1070,6 +1169,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6632481956463819608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692773094827251254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4735643935270829128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7343536875758334304}
+  - component: {fileID: 5464039293085030274}
   m_Layer: 0
   m_Name: WorkerWaypoint (1)
   m_TagString: Untagged
@@ -1101,6 +1214,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5464039293085030274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4735643935270829128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &5060736958019123604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3411473639142148026}
+  - component: {fileID: 8825109510863715225}
   m_Layer: 0
   m_Name: WorkerWaypoint (8)
   m_TagString: Untagged
@@ -1260,6 +1387,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8825109510863715225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610163855784960182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &5935519035141140355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7213398877423712233}
+  - component: {fileID: 7455775448576939862}
   m_Layer: 0
   m_Name: FlowerWaypoint (5)
   m_TagString: Untagged
@@ -1353,6 +1494,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7455775448576939862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6024627774390729791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &6068039948110198090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,6 +1516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8921517866449439426}
+  - component: {fileID: 6690030907001665970}
   m_Layer: 0
   m_Name: WorkerWaypoint (5)
   m_TagString: Untagged
@@ -1384,6 +1539,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6690030907001665970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6068039948110198090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6429093162934192393
 GameObject:
   m_ObjectHideFlags: 0
@@ -18448,6 +18616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4335774179777819216}
+  - component: {fileID: 1791946349576581419}
   m_Layer: 0
   m_Name: WorkerWaypoint (3)
   m_TagString: Untagged
@@ -18470,6 +18639,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1791946349576581419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965704912769919936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6969817765236978342
 GameObject:
   m_ObjectHideFlags: 0
@@ -26190,6 +26372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8014028509886993065}
+  - component: {fileID: 6730539935298102814}
   m_Layer: 0
   m_Name: WorkerWaypoint (7)
   m_TagString: Untagged
@@ -26212,6 +26395,19 @@ Transform:
   m_Father: {fileID: 4606951018625301639}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6730539935298102814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311546237698122757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8508416657168963607
 GameObject:
   m_ObjectHideFlags: 0
@@ -26343,6 +26539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6310006486941717463}
+  - component: {fileID: 6934413165245376646}
   m_Layer: 0
   m_Name: FlowerWaypoint
   m_TagString: Untagged
@@ -26365,6 +26562,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6934413165245376646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8915693110061477056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1 &8950178924603703263
 GameObject:
   m_ObjectHideFlags: 0
@@ -26405,6 +26615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7970894248381758215}
+  - component: {fileID: 8679713702972157989}
   m_Layer: 0
   m_Name: FlowerWaypoint (3)
   m_TagString: Untagged
@@ -26427,6 +26638,19 @@ Transform:
   m_Father: {fileID: 3992655853492446560}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8679713702972157989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8974857115122384378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f4320385dc79248a21281ae6c5e2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointColor: {r: 0, g: 0.3789742, b: 1, a: 1}
 --- !u!1001 &304976460243114158
 PrefabInstance:
   m_ObjectHideFlags: 0
