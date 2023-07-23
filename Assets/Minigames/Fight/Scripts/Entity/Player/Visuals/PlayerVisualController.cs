@@ -26,5 +26,26 @@ namespace Minigames.Fight
             IsFlashing = false;
             SpriteRenderer.material = defaultMaterial;
         }
+        protected override IEnumerator DamageAnimation()
+        {
+            if (GameManager.PlayerEntity.IsDead)
+            {
+                yield break;
+            }
+            GameManager.PlayerEntity.Stunned = true;
+            takeHitAnimation = GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
+
+            while (GameManager.PlayerEntity.AnimationController.CurrentAnimation != takeHitAnimation)
+            {
+                takeHitAnimation = GameManager.PlayerEntity.AnimationController.PlayTakeHitAnimation();
+                yield return null;
+            }
+
+            while (!GameManager.PlayerEntity.AnimationController.IsAnimFinished)
+            {
+                yield return null;
+            }
+            GameManager.PlayerEntity.Stunned = false;
+        }
     }
 }

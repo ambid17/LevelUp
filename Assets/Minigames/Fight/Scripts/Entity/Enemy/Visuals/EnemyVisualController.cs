@@ -10,10 +10,13 @@ namespace Minigames.Fight
 {
     public class EnemyVisualController : VisualController
     {
+        public AnimationName TakeHitAnimation => takeHitAnimation;
+
         private EnemyEntity _enemyEntity;
         
         private const float MaxDistanceFromPlayer = 100;
         private bool _isMarkedForDeath;
+        private Vector2 _lastRecordedSpeed = new(-1, 0);
 
         protected override void Start()
         {
@@ -43,6 +46,12 @@ namespace Minigames.Fight
             base.StartDamageFx(damage);
             DamageTextController damageText = GameManager.DamageTextPool.Get();
             damageText.Setup(damage.ToString(), transform.position);
+        }
+
+        public void FacePlayer()
+        {
+            float direction = GameManager.PlayerEntity.transform.position.x - transform.position.x;
+            _enemyEntity.VisualController.SpriteRenderer.flipX = direction < 0 ? false : true;
         }
 
         // If the player runs too far from the enemy, kill it off

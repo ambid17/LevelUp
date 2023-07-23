@@ -18,12 +18,20 @@ namespace Minigames.Fight
         OnPurchase, 
         OnTimer
     }
-    
+
+    public enum Category
+    {
+        UpgradeCategory,
+        EffectCategory,
+        TierCategory,
+        Name,
+    }
+
     public enum UpgradeCategory
     {
         Melee, Range, Player
     }
-    
+
     public enum EffectCategory
     {
         AoE,
@@ -33,6 +41,7 @@ namespace Minigames.Fight
 
     public enum TierCategory
     {
+        None,
         Tier1,
         Tier2,
         Tier3

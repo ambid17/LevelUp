@@ -28,7 +28,11 @@ namespace Minigames.Fight
         private float _StopDistance;
         private Vector2 _Target;
 
-        private EntityAnimationController _entityAnimationController;
+        private float _lastKnownLookDirection;
+        int framesSinceLastDirectionChange;
+
+        [SerializeField]
+        private Vector2 move;
 
         public float speed { get => _Speed; set => _Speed = value; }
         public bool rotateTowardsDestination { get => _RotateTowardsDestination; set => _RotateTowardsDestination = value; }
@@ -40,14 +44,16 @@ namespace Minigames.Fight
         public Vector2 nextWaypoint => path.vectorPath[currentWaypoint];
 
         // Destination has been reached if agent is within stopping distance of the final waypoint
-        public bool reachedDestination => Vector2.Distance(transform.position, path.vectorPath[path.vectorPath.Count - 1]) < stopDistance;
+        public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
 
         public bool pathInvalid
         {
             get
             {
-                GraphNode node1 = AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
-                GraphNode node2 = AstarPath.active.GetNearest(target, NNConstraint.Default).node;
+                NNConstraint myConstraint = NNConstraint.None;
+                myConstraint.graphMask = seeker.graphMask;
+                GraphNode node1 = AstarPath.active.GetNearest(transform.position, myConstraint).node;
+                GraphNode node2 = AstarPath.active.GetNearest(target, myConstraint).node;
                 return !PathUtilities.IsPathPossible(node1, node2);
             }
         }
@@ -64,7 +70,6 @@ namespace Minigames.Fight
             // idiot proofing
             rb.gravityScale = 0;
             StartCoroutine(RepeatUpdatePath());
-            _entityAnimationController = entity.animationController as EntityAnimationController;
         }
         private IEnumerator RepeatUpdatePath()
         {
@@ -79,13 +84,41 @@ namespace Minigames.Fight
             // If we don't have a path moving is bad
             if (path == null)
             {
-                _entityAnimationController.PlayIdleAnim();
                 return;
             }
-            _entityAnimationController.PlayMoveAnim();
-            Vector2 move = nextWaypoint - (Vector2)transform.position;
+            if (entity.Stunned)
+            {
+                Stop();
+                return;
+            }
+            float distance = Mathf.Infinity;
+            if (seeker.IsDone())
+            {
+                move = nextWaypoint - (Vector2)transform.position;
+                distance = Vector2.Distance(transform.position, nextWaypoint);
+            }
             rb.velocity = move.normalized * speed;
-            float distance = Vector2.Distance(transform.position, nextWaypoint);
+
+            // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching
+            if (Mathf.Abs(move.x) > 0.01)
+            {
+                if (Mathf.Sign(_lastKnownLookDirection) != Mathf.Sign(move.x))
+                {
+                    framesSinceLastDirectionChange++;
+                    if (framesSinceLastDirectionChange >= 5)
+                    {
+                        framesSinceLastDirectionChange = 0;
+                        _lastKnownLookDirection = move.x;
+                    }   
+                }
+                else
+                {
+                    framesSinceLastDirectionChange = 0;
+                }
+            }
+
+            entity.VisualController.SpriteRenderer.flipX = _lastKnownLookDirection < 0 ? false : true;
+
             // If waypoint has been reached then agent heads towards next waypoint on the list
             // If no other waypoints exist then agent recalculates the path
 
@@ -106,14 +139,6 @@ namespace Minigames.Fight
                     return;
                 }
                 currentWaypoint++;
-            }
-            if (rotateTowardsDestination)
-            {
-                transform.rotation = PhysicsUtils.LookAt(transform, nextWaypoint, rotationSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.rotation = PhysicsUtils.LookAt(transform, target, rotationSpeed * Time.deltaTime);
             }
         }
         private void OnPathComplete(Path p)

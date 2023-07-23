@@ -7,14 +7,29 @@ namespace Minigames.Fight
 {
     public class EffectTree
     {
-        public EffectNode RootNode = new ("upgrades");
+        public EffectNode RootNode;
+        public static Dictionary<Category, int> CategoryDepthMap = new()
+        {
+            { Category.UpgradeCategory, 1 },
+            { Category.EffectCategory, 2 },
+            { Category.TierCategory, 3 },
+            { Category.Name, 4 },
+        };
+
+        public EffectTree(string rootNode)
+        {
+            RootNode = new(rootNode);
+        }
 
         public void Add(Effect effect)
         {
             var splitPath = effect.UpgradePath.Split('/');
 
             EffectNode parentNode = RootNode;
-            for (int depth = 1; depth < splitPath.Length; depth++)
+
+            var length = splitPath.Length;
+
+            for (int depth = 1; depth < length; depth++)
             {
                 string nodeName = splitPath[depth];
 
@@ -25,7 +40,14 @@ namespace Minigames.Fight
                     parentNode.Children.Add(newNode);
                     parentNode = newNode;
 
-                    if (depth == splitPath.Length - 1)
+                    newNode.EffectCategory = effect.EffectCategory;
+                    newNode.UpgradeCategory = effect.UpgradeCategory;
+
+                    if (depth == CategoryDepthMap[Category.TierCategory])
+                    {
+                        newNode.TierCategory = effect.TierCategory;
+                    }
+                    else if (depth == CategoryDepthMap[Category.Name])
                     {
                         newNode.Effect = effect;
                     }
@@ -43,11 +65,15 @@ namespace Minigames.Fight
         public string Name;
         public List<EffectNode> Children;
         public Effect Effect;
+        public UpgradeCategory UpgradeCategory;
+        public EffectCategory EffectCategory;
+        public TierCategory TierCategory;
 
         public EffectNode(string name)
         {
             Name = name;
             Children = new List<EffectNode>();
+            TierCategory = TierCategory.None;
         }
 
         public override string ToString()

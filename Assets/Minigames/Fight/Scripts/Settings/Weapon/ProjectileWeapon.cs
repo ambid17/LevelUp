@@ -15,5 +15,6 @@ namespace Minigames.Fight
         public int bulletsInMagazine;
         public float reloadTime;
         public int projectileCount;
+        public Sprite bulletSpriteOverride;
     }
 }

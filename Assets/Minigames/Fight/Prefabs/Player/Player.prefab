@@ -225,6 +225,7 @@ MonoBehaviour:
   resourcePrefab: {fileID: 3158209486798102802, guid: 0fcb200ac0effec47b2cee04e7a34263, type: 3}
   maxResourceSpawns: 100
   CanMove: 1
+  currentInteractionType: 0
 --- !u!114 &4274406417404922725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +254,12 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: aee2fe79d70ff104ba3bc7e0bc7ff8c4, type: 2}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   flashColor: {r: 1, g: 1, b: 1, a: 1}
+  takeHitAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
 --- !u!212 &4274406417404922746
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -294,12 +301,12 @@ SpriteRenderer:
   m_SortingLayerID: 1162470409
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 276c633c03afb834c9320e909083112d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22b8ddb52b1208e49bc2739e4d90bdc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 2.34375, y: 2.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -516,7 +523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274406417751090705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.6331573, y: 3.4673862, z: -36.60446}
+  m_LocalPosition: {x: -8.112247, y: 0.54037905, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -550,7 +557,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.999995
+  orthographic size: 2.9989128
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

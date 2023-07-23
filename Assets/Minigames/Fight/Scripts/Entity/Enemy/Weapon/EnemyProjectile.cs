@@ -7,6 +7,11 @@ namespace Minigames.Fight
 {
     public class EnemyProjectile : ProjectileController
     {
+        public SpriteRenderer MySpriteRenderer => mySpriteRenderer;
+
+        [SerializeField]
+        private SpriteRenderer mySpriteRenderer;
+
         private EnemyEntity _overriddenEntity;
 
 

@@ -35,7 +35,6 @@ namespace Minigames.Fight
             text.gameObject.SetActive(false);
             gameObject.name = effectNode.Name;
 
-            
             if (effectNode.Effect == null || effectNode.Effect.Icon == null)
             {
                 text.gameObject.SetActive(true);
@@ -46,7 +45,6 @@ namespace Minigames.Fight
                 icon.gameObject.SetActive(transform);
                 icon.sprite = effectNode.Effect.Icon;
             }
-
             button.onClick.AddListener(SelectLayoutItem);
 
             if (parent != null)
@@ -91,7 +89,14 @@ namespace Minigames.Fight
             {
                 return;
             }
-            GameManager.EventService.Dispatch(new EffectItemSelectedEvent(this));
+            if (effectNode.TierCategory != TierCategory.None)
+            {
+                GameManager.EventService.Dispatch(new UnlockItemSelectedEvent(this));
+            }
+            else if (effectNode.Effect != null)
+            {
+                GameManager.EventService.Dispatch(new EffectItemSelectedEvent(this));
+            }
             ToggleChildren(true);
             if (children.Count > 0)
             {

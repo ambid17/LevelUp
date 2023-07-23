@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class AnimationManager : MonoBehaviour
+public class AnimationManager : MonoBehaviour
 {
     public bool IsAnimFinished => CurrentAnimationNomralizedTime >= 1;
     public float CurrentAnimationNomralizedTime => anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    public AnimationName CurrentAnimation => currentAnimation;
 
     [SerializeField]
     protected Animator anim;
@@ -15,11 +16,11 @@ public abstract class AnimationManager : MonoBehaviour
 
     protected bool IsAnimPlaying(AnimationName name)
     {
-        return name == currentAnimation;
+        return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
     }
 
     // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.
-    protected bool IsCurrentAnimLoopFinished(float acceptableDifference)
+    public bool IsCurrentAnimLoopFinished(float acceptableDifference)
     {
         float difference = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
         return  Mathf.Clamp(difference, 1 - acceptableDifference, 1 + acceptableDifference) == difference;

@@ -31,6 +31,7 @@ namespace Minigames.Fight
             _eventService = GameManager.EventService;
             _eventService.Add<EffectItemSelectedEvent>(OnEffectSelected);
             _eventService.Add<PurchaseCountChangedEvent>(OnPurchaseCountChanged);
+            _eventService.Add<UnlockItemSelectedEvent>(OnUnlockSelected);
             upgradeButton.onClick.AddListener(BuyUpgrade);
         }
 
@@ -44,6 +45,7 @@ namespace Minigames.Fight
         {
             _eventService.Remove<EffectItemSelectedEvent>(OnEffectSelected);
             _eventService.Remove<PurchaseCountChangedEvent>(OnPurchaseCountChanged);
+            _eventService.Remove<UnlockItemSelectedEvent>(OnUnlockSelected);
         }
 
         public void OnEffectSelected(EffectItemSelectedEvent e)
@@ -63,6 +65,11 @@ namespace Minigames.Fight
             }
 
             OnUpgradeUpdated();
+        }
+
+        public void OnUnlockSelected(UnlockItemSelectedEvent e)
+        {
+            container.SetActive(false);
         }
 
         private void OnPurchaseCountChanged(PurchaseCountChangedEvent e)

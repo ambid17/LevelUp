@@ -12,23 +12,18 @@ namespace Minigames.Fight
         [NonSerialized]
         public Transform Target;
 
-        public EntityAnimationController OverriddenAnimationController => _animationControllerOverride;
-
         private bool _isMarkedForDeath;
-        private EntityAnimationController _animationControllerOverride;
 
         protected override void Setup()
         {
             base.Setup();
             Target = GameManager.PlayerEntity.transform;
-            _animationControllerOverride = animationController as EntityAnimationController;
             Stats.SetupFromEnemy(enemyStats);
         }
 
         public override void TakeDamage(float damage)
         {
             base.TakeDamage(damage);
-            _animationControllerOverride.PlayTakeHitAnim();
         }
 
         protected override void Die()
@@ -44,8 +39,6 @@ namespace Minigames.Fight
             _isMarkedForDeath = true;
         
             GameManager.CurrencyManager.EnemyKilled(enemyStats.GoldValue);
-
-            _animationControllerOverride.PlayDieAnim();
         
             Destroy(gameObject);
         }
