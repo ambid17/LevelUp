@@ -88,7 +88,9 @@ namespace Minigames.Fight
                     }
 
                     // Check perposed room location to ensure it won't overlap with an existing room
-                    if (!Physics2D.OverlapBox(center, room.Tilemap.cellBounds.AsVector2() * 0.99f, 0))
+                    // Must subtract 1 and multiply by .99 to offset the fact that the colliders go beyond the tile bounds
+                    // Will need to be looked at in the future
+                    if (!Physics2D.OverlapBox(center, (room.Tilemap.cellBounds.AsVector2() - Vector2.one) * 0.99f, 0))
                     {
                         valid = true;
 
