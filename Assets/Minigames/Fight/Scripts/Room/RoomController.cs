@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using System.Linq;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace Minigames.Fight
 {
@@ -136,6 +138,14 @@ namespace Minigames.Fight
             myPolygonCollider = GetComponent<PolygonCollider2D>();
             Tilemap = GetComponentsInChildren<Tilemap>().FirstOrDefault(t => t.gameObject.layer == PhysicsUtils.wallLayer);
             Tilemap.CompressBounds();
+
+            var waypoints = GetComponentsInChildren<Waypoint>();
+
+            spawnPoints = waypoints.Where(w => w.waypointType == WaypointType.Spawn).Select(waypoint => waypoint.transform).ToList();
+            PatrolWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Patrol).Select(waypoint => waypoint.transform).ToList();
+            FlowerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Flower).Select(waypoint => waypoint.transform).ToList();
+            WorkerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Worker).Select(waypoint => waypoint.transform).ToList();
+            
             UnityEditor.EditorUtility.SetDirty(this);
         }
         [ContextMenu("Generate Connections")]
