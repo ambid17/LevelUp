@@ -173,62 +173,70 @@ namespace Minigames.Fight
                 Vector2 max = Tilemap.origin.AsVector2() + Tilemap.cellBounds.size.AsVector2();
                 Vector2 min = Tilemap.origin.AsVector2();
                 Vector2 center = Tilemap.cellBounds.center.AsVector2();
+
+                int horizontalLength = 0;
+                int verticalLength = 0;
+                int verticalOffset = 0;
+                int horizontalOffset = 0;
+                
                 switch (connection.Label)
                 {
                     case "Right":
                         location = new Vector2(max.x, center.y);
+                        horizontalLength = 2;
+                        verticalLength = 4;
+                        horizontalOffset = -1;
                         break;
                     case "Up":
                         location = new Vector2(center.x, max.y);
+                        horizontalLength = 4;
+                        verticalLength = 2;
+                        verticalOffset = -1;
                         break;
                     case "Left":
                         location = new Vector2(min.x, center.y);
+                        horizontalLength = 2;
+                        verticalLength = 4;
+                        horizontalOffset = 1;
                         break;
                     case "Down":
                         location = new Vector2(center.x, min.y);
+                        horizontalLength = 4;
+                        verticalLength = 2;
+                        verticalOffset = 1;
                         break;
                 }
                 connection.Location = location;
 
-                // Generate a list of empty tiles by checking every coordinate for a tile and adding it to the list if it returns null
-                // Yes this is the most effecient way to do this other than setting them manually, Unity be dumb.
-                TileBase[] allTiles = Tilemap.GetTilesBlock(Tilemap.cellBounds);
-                List<Vector3Int> emptyTiles = new();
-                
-                for (int x = Tilemap.origin.x; x < Tilemap.origin.x + Tilemap.cellBounds.size.x; x++)
+                for (int x = -horizontalLength / 2; x < horizontalLength / 2; x++)
                 {
-                    for (int y = Tilemap.origin.y; y < Tilemap.origin.y + Tilemap.cellBounds.size.y; y++)
+                    for (int y = -verticalLength / 2; y < verticalLength / 2; y++)
                     {
-                        Vector3Int tilePos = new Vector3Int(x, y, 0);
-                        TileBase tile = Tilemap.GetTile(tilePos);
-                        if (tile == null)
-                        {
-                            emptyTiles.Add(tilePos);
-                        }
+                        var tileCenter = Tilemap.WorldToCell(connection.Location);
+                        connection.TilePositions.Add(tileCenter + new Vector3Int(x + horizontalOffset, y + verticalOffset, 0));
                     }
-                }
-
-                for (int tilesToAdd = 0; tilesToAdd < GameManager.SettingsManager.progressSettings.CurrentWorld.RoomSettings.tilesToReplace; tilesToAdd++)
-                {
-                    float distance = Mathf.Infinity;
-                    Vector3Int nearest = Vector3Int.zero;
-
-                    foreach (Vector3Int tilePosition in emptyTiles.ToList())
-                    {
-                        float newDistance = Vector2.Distance(tilePosition.AsVector2(), connection.Location);
-                        if (newDistance < distance)
-                        {
-                            distance = newDistance;
-                            nearest = tilePosition;
-                        }
-                    }
-                    emptyTiles.Remove(nearest);
-                    connection.TilePositions.Add(nearest);
                 }
 
                 roomConnections.Add(connection);
             }
             UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        private void OnDrawGizmos()
+        {
+
+            foreach (var c in roomConnections)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(c.Location, 0.5f);
+                Gizmos.color = Color.blue;
+                foreach (var tilePosition in c.TilePositions)
+                {
+                    Gizmos.DrawCube(Tilemap.CellToWorld(tilePosition), Vector3.one);
+                }
+            }
+            
+            
         }
     }
 
