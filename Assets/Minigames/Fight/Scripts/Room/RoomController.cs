@@ -18,9 +18,6 @@ namespace Minigames.Fight
         public Tilemap Tilemap;
         public List<RoomConnection> roomConnections;
 
-        [SerializeField]
-        private int tilesPerConnection = 4;
-
         public float TotalBeeDamageTaken
         {
             get
@@ -211,7 +208,7 @@ namespace Minigames.Fight
                     }
                 }
 
-                for (int tilesToAdd = 0; tilesToAdd < tilesPerConnection; tilesToAdd++)
+                for (int tilesToAdd = 0; tilesToAdd < GameManager.SettingsManager.progressSettings.CurrentWorld.RoomSettings.tilesToReplace; tilesToAdd++)
                 {
                     float distance = Mathf.Infinity;
                     Vector3Int nearest = Vector3Int.zero;

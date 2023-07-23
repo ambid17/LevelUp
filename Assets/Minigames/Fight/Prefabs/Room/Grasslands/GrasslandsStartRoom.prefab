@@ -1073,8 +1073,12 @@ MonoBehaviour:
     TilePositions:
     - {x: 6, y: 0, z: 0}
     - {x: 6, y: -1, z: 0}
+    - {x: 6, y: 1, z: 0}
     - {x: 5, y: 0, z: 0}
     - {x: 5, y: -1, z: 0}
+    - {x: 5, y: 1, z: 0}
+    - {x: 6, y: -2, z: 0}
+    - {x: 5, y: -2, z: 0}
     HasConnection: 0
   - Label: Up
     Location: {x: -5, y: 12}
@@ -1082,8 +1086,12 @@ MonoBehaviour:
     TilePositions:
     - {x: -5, y: 11, z: 0}
     - {x: -6, y: 11, z: 0}
+    - {x: -4, y: 11, z: 0}
     - {x: -5, y: 10, z: 0}
+    - {x: -7, y: 11, z: 0}
     - {x: -6, y: 10, z: 0}
+    - {x: -4, y: 10, z: 0}
+    - {x: -7, y: 10, z: 0}
     HasConnection: 0
   - Label: Left
     Location: {x: -17, y: 0}
@@ -1091,8 +1099,12 @@ MonoBehaviour:
     TilePositions:
     - {x: -17, y: 0, z: 0}
     - {x: -17, y: -1, z: 0}
+    - {x: -17, y: 1, z: 0}
     - {x: -16, y: 0, z: 0}
     - {x: -16, y: -1, z: 0}
+    - {x: -16, y: 1, z: 0}
+    - {x: -17, y: -2, z: 0}
+    - {x: -15, y: 0, z: 0}
     HasConnection: 0
   - Label: Down
     Location: {x: -5, y: -12}
@@ -1101,9 +1113,12 @@ MonoBehaviour:
     - {x: -5, y: -12, z: 0}
     - {x: -6, y: -12, z: 0}
     - {x: -5, y: -11, z: 0}
+    - {x: -4, y: -12, z: 0}
     - {x: -6, y: -11, z: 0}
+    - {x: -4, y: -11, z: 0}
+    - {x: -7, y: -12, z: 0}
+    - {x: -5, y: -10, z: 0}
     HasConnection: 0
-  tilesPerConnection: 4
   cam: {fileID: 4881681057489713699}
   zoomSpeed: 2
   zoomSize: 1

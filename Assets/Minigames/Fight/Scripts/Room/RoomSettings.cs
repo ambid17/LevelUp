@@ -15,6 +15,7 @@ namespace Minigames.Fight
         public RoomController startRoom;
         public List<RoomController> rooms;
         public Tile wallTile;
+        public int tilesToReplace = 8;
 
         public RoomController GetRandomRoom()
         {
