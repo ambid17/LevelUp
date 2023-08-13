@@ -217,6 +217,67 @@ Transform:
   m_Father: {fileID: 6777965647452085416}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3802597119547773653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5360106145634268498}
+  - component: {fileID: 7333177026786542970}
+  m_Layer: 0
+  m_Name: PropGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5360106145634268498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802597119547773653}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.9133997, y: -2.7218938, z: -0.06970596}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6777965647452085416}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7333177026786542970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802597119547773653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5f6c870cafce44fa152a667a8d2362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propParent: {fileID: 169965177498006681}
+  obstacleParent: {fileID: 6394162433711561461}
+  tileMap: {fileID: 7335862982721619231}
+  propPrefab: {fileID: 3787918447072714006, guid: e5fbefb8574c7e34aa601a9b7e38e4dd, type: 3}
+  obstaclePrefab: {fileID: 3787918447072714006, guid: af1da569c14e8654280c1d61699da0a4, type: 3}
+  propType: 0
+  isCluster: 0
+  clusterOffset: 0.5
+  isObstacle: 0
+  colliderCheckRadius: 1
+  numberToSpawn: 5
+  maxFailuresBeforeAbort: 10
+  layersToCauseFailure:
+    serializedVersion: 2
+    m_Bits: 1024
+  propSpriteListDictionary:
+    m_keys: 
 --- !u!1 &6013991582918729398
 GameObject:
   m_ObjectHideFlags: 0
@@ -3294,6 +3355,7 @@ Transform:
   - {fileID: 748709626904309622}
   - {fileID: 169965177498006681}
   - {fileID: 6394162433711561461}
+  - {fileID: 5360106145634268498}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
