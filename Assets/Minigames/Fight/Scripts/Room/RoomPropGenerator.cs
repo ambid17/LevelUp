@@ -1,9 +1,11 @@
+using Minigames.Fight;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public enum PropType
 {
@@ -46,9 +48,13 @@ public class RoomPropGenerator : MonoBehaviour
     [SerializeField]
     private LayerMask layersToCauseFailure;
     [SerializeField]
-    private PropTypeSpriteListDictionary propSpriteListDictionary;
+    private RoomSpriteSettings roomSpriteSettings;
 
     private Vector2 _randomWithinTilemap => new Vector2(Random.Range(tileMap.cellBounds.min.x, tileMap.cellBounds.max.x), Random.Range(tileMap.cellBounds.min.y, tileMap.cellBounds.max.y));
+
+    [InspectorButton("GenerateProps")]
+    public bool generateProps;
+
 
     public void GenerateProps()
     {
@@ -64,35 +70,36 @@ public class RoomPropGenerator : MonoBehaviour
 
     private void GenerateCluster()
     {
-        List<Sprite> spritePool = propSpriteListDictionary[propType];
+        // List<Sprite> spritePool = propSpriteListDictionary[propType];
 
-        Vector2 initSpawn = _randomWithinTilemap;
-        int failures = 0;
-        while (Physics2D.OverlapCircle(initSpawn, colliderCheckRadius, layersToCauseFailure))
-        {
-            initSpawn = _randomWithinTilemap;
-            if (failures >= maxFailuresBeforeAbort)
-            {
-                throw new Exception("Could not find unobstructed location in " + failures.ToString() + " tries. Try reducing radius or increasing max tries");
-            }
-            failures++;
-            continue;
-        }
-        Transform parent = isObstacle ? obstacleParent : propParent;
-        SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
-
-        Vector2 newSpawn = initSpawn;
-        for (int i = 0; i < numberToSpawn; i++)
-        {
-            SpriteRenderer renderer = Instantiate(prefab, newSpawn, Quaternion.identity, parent);
-            renderer.sprite = spritePool[Random.Range(0, spritePool.Count)];
-            newSpawn = new Vector2(initSpawn.x + Random.Range(-clusterOffset, clusterOffset), initSpawn.y + Random.Range(-clusterOffset, clusterOffset));
-        }
+        // Vector2 initSpawn = _randomWithinTilemap;
+        // int failures = 0;
+        // while (Physics2D.OverlapCircle(initSpawn, colliderCheckRadius, layersToCauseFailure))
+        // {
+        //     initSpawn = _randomWithinTilemap;
+        //     if (failures >= maxFailuresBeforeAbort)
+        //     {
+        //         throw new Exception("Could not find unobstructed location in " + failures.ToString() + " tries. Try reducing radius or increasing max tries");
+        //     }
+        //     failures++;
+        //     continue;
+        // }
+        // Transform parent = isObstacle ? obstacleParent : propParent;
+        // SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
+        //
+        // Vector2 newSpawn = initSpawn;
+        // for (int i = 0; i < numberToSpawn; i++)
+        // {
+        //     SpriteRenderer renderer = Instantiate(prefab, newSpawn, Quaternion.identity, parent);
+        //     renderer.sprite = spritePool[Random.Range(0, spritePool.Count)];
+        //     newSpawn = new Vector2(initSpawn.x + Random.Range(-clusterOffset, clusterOffset), initSpawn.y + Random.Range(-clusterOffset, clusterOffset));
+        // }
     }
 
     private void GenerateIndividual()
     {
-        List<Sprite> spritePool = propSpriteListDictionary[propType];
+        //get all of the room sprites that have the correct prop type
+        List<Sprite> spritePool = roomSpriteSettings.RoomSprites.Where(rs => rs.propType == propType).Select(rs => rs.sprite).ToList();
 
         Transform parent = isObstacle ? obstacleParent : propParent;
         SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
