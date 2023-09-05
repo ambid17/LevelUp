@@ -93,13 +93,14 @@ public class RoomPropGenerator : MonoBehaviour
 
         while (colList.Count > 0)
         {
-            renderer = Instantiate(prefab, initSpawn, Quaternion.identity, parent);
             DestroyImmediate(renderer.gameObject);
             initSpawn = GetRandomInTilemap();
-            
+            renderer = Instantiate(prefab, initSpawn, Quaternion.identity, parent);
+
             // If there are no acceptable locations while loop will go on forever, this check prevents freezes.
             if (failures >= maxFailuresBeforeAbort)
             {
+                DestroyImmediate(renderer.gameObject);
                 throw new Exception("Could not find unobstructed location in " + failures.ToString() + " tries. Try reducing radius or increasing max tries");
             }
             failures++;
