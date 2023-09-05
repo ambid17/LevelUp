@@ -266,9 +266,10 @@ MonoBehaviour:
   tileMap: {fileID: 7335862982721619231}
   propPrefab: {fileID: 3787918447072714006, guid: e5fbefb8574c7e34aa601a9b7e38e4dd, type: 3}
   obstaclePrefab: {fileID: 3787918447072714006, guid: af1da569c14e8654280c1d61699da0a4, type: 3}
-  propType: 0
+  propType: 2
   isCluster: 0
   clusterOffset: 0.5
+  clusterSizeOffset: 0
   isObstacle: 0
   colliderCheckRadius: 1
   numberToSpawn: 5
@@ -276,8 +277,8 @@ MonoBehaviour:
   layersToCauseFailure:
     serializedVersion: 2
     m_Bits: 1024
-  propSpriteListDictionary:
-    m_keys: 
+  roomSpriteSettings: {fileID: 11400000, guid: f6c4a2afd2f86724d81a6ead4d333948, type: 2}
+  generateProps: 0
 --- !u!1 &6013991582918729398
 GameObject:
   m_ObjectHideFlags: 0
