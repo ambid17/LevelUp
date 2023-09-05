@@ -9,6 +9,7 @@ namespace Minigames.Fight
     [Serializable]
     public class RoomSpriteSettings : ScriptableObject
     {
+        public float WallThickness;
         [SerializeField]
         public List<RoomSprite> RoomSprites;
     }

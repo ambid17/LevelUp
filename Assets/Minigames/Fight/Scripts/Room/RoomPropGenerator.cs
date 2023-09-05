@@ -158,8 +158,8 @@ public class RoomPropGenerator : MonoBehaviour
     private Vector3 GetRandomInTilemap()
     {
         // Cast to float so it uses Random.Range(float, float). Otherwise they are snapped to the tilemap
-        float x = Random.Range((float)tileMap.cellBounds.min.x, tileMap.cellBounds.max.x);
-        float y = Random.Range((float)tileMap.cellBounds.min.y, tileMap.cellBounds.max.y);
+        float x = Random.Range((float)tileMap.cellBounds.min.x + roomSpriteSettings.WallThickness, tileMap.cellBounds.max.x - roomSpriteSettings.WallThickness);
+        float y = Random.Range((float)tileMap.cellBounds.min.y + roomSpriteSettings.WallThickness, tileMap.cellBounds.max.y - roomSpriteSettings.WallThickness);
 
         return new Vector3(x, y, 0);
     }
