@@ -38,6 +38,8 @@ public class RoomPropGenerator : MonoBehaviour
     [SerializeField]
     private float clusterOffset;
     [SerializeField]
+    private float clusterSizeOffset;
+    [SerializeField]
     private bool isObstacle;
     [SerializeField]
     private float colliderCheckRadius;
@@ -70,30 +72,34 @@ public class RoomPropGenerator : MonoBehaviour
 
     private void GenerateCluster()
     {
-        // List<Sprite> spritePool = propSpriteListDictionary[propType];
+        //get all of the room sprites that have the correct prop type
+        List<Sprite> spritePool = roomSpriteSettings.RoomSprites.Where(rs => rs.propType == propType).Select(rs => rs.sprite).ToList();
 
-        // Vector2 initSpawn = _randomWithinTilemap;
-        // int failures = 0;
-        // while (Physics2D.OverlapCircle(initSpawn, colliderCheckRadius, layersToCauseFailure))
-        // {
-        //     initSpawn = _randomWithinTilemap;
-        //     if (failures >= maxFailuresBeforeAbort)
-        //     {
-        //         throw new Exception("Could not find unobstructed location in " + failures.ToString() + " tries. Try reducing radius or increasing max tries");
-        //     }
-        //     failures++;
-        //     continue;
-        // }
-        // Transform parent = isObstacle ? obstacleParent : propParent;
-        // SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
-        //
-        // Vector2 newSpawn = initSpawn;
-        // for (int i = 0; i < numberToSpawn; i++)
-        // {
-        //     SpriteRenderer renderer = Instantiate(prefab, newSpawn, Quaternion.identity, parent);
-        //     renderer.sprite = spritePool[Random.Range(0, spritePool.Count)];
-        //     newSpawn = new Vector2(initSpawn.x + Random.Range(-clusterOffset, clusterOffset), initSpawn.y + Random.Range(-clusterOffset, clusterOffset));
-        // }
+        Vector2 initSpawn = _randomWithinTilemap;
+         int failures = 0;
+         while (Physics2D.OverlapCircle(initSpawn, colliderCheckRadius, layersToCauseFailure))
+         {
+             initSpawn = _randomWithinTilemap;
+             if (failures >= maxFailuresBeforeAbort)
+             {
+                 throw new Exception("Could not find unobstructed location in " + failures.ToString() + " tries. Try reducing radius or increasing max tries");
+             }
+             failures++;
+             continue;
+         }
+         Transform parent = isObstacle ? obstacleParent : propParent;
+         SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
+        
+         Vector2 newSpawn = initSpawn;
+         for (int i = 0; i < numberToSpawn; i++)
+         {
+            SpriteRenderer renderer = Instantiate(prefab, newSpawn, Quaternion.identity, parent);
+            renderer.sprite = spritePool[Random.Range(0, spritePool.Count)];
+            float randomSizeOffset = Random.Range(-clusterSizeOffset, clusterSizeOffset);
+            Vector3 sizeOffset = new(randomSizeOffset, randomSizeOffset);
+            renderer.transform.localScale += sizeOffset;
+            newSpawn = new Vector2(initSpawn.x + Random.Range(-clusterOffset, clusterOffset), initSpawn.y + Random.Range(-clusterOffset, clusterOffset));
+        }
     }
 
     private void GenerateIndividual()
