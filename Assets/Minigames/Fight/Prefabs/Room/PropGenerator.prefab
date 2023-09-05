@@ -54,11 +54,11 @@ MonoBehaviour:
   clusterOffset: 1
   clusterSizeOffset: 0.75
   isObstacle: 0
-  colliderCheckRadius: 1
+  colliderCheckRadius: 3
   numberToSpawn: 5
   maxFailuresBeforeAbort: 10
   layersToCauseFailure:
     serializedVersion: 2
-    m_Bits: 9216
+    m_Bits: 13312
   roomSpriteSettings: {fileID: 11400000, guid: f6c4a2afd2f86724d81a6ead4d333948, type: 2}
   generateProps: 0

@@ -77,9 +77,27 @@ public class RoomPropGenerator : MonoBehaviour
 
         Vector2 initSpawn = GetRandomInTilemap();
         int failures = 0;
-        while (Physics2D.OverlapCircle(initSpawn, colliderCheckRadius, layersToCauseFailure))
+
+        Transform parent = isObstacle ? obstacleParent : propParent;
+        SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
+
+        SpriteRenderer renderer = Instantiate(prefab, initSpawn, Quaternion.identity, parent);
+
+        var collider = renderer.GetComponent<Collider2D>();
+        var colList = new List<Collider2D>();
+        var filter = new ContactFilter2D();
+        filter.SetLayerMask(layersToCauseFailure);
+        filter.useTriggers = true;
+
+        collider.OverlapCollider(filter, colList);
+
+        while (colList.Count > 0)
         {
+            renderer = Instantiate(prefab, initSpawn, Quaternion.identity, parent);
+            DestroyImmediate(renderer.gameObject);
             initSpawn = GetRandomInTilemap();
+            
+            // If there are no acceptable locations while loop will go on forever, this check prevents freezes.
             if (failures >= maxFailuresBeforeAbort)
             {
                 throw new Exception("Could not find unobstructed location in " + failures.ToString() + " tries. Try reducing radius or increasing max tries");
@@ -87,17 +105,16 @@ public class RoomPropGenerator : MonoBehaviour
             failures++;
             continue;
         }
-        Transform parent = isObstacle ? obstacleParent : propParent;
-        SpriteRenderer prefab = isObstacle ? obstaclePrefab : propPrefab;
 
         Vector2 newSpawn = initSpawn;
         for (int i = 0; i < numberToSpawn; i++)
         {
-            SpriteRenderer renderer = Instantiate(prefab, newSpawn, Quaternion.identity, parent);
-            renderer.sprite = spritePool[Random.Range(0, spritePool.Count)];
+            // Make the entire cluster children of the first renderer to make it more readable in the editor.
+            SpriteRenderer rendererCluster = Instantiate(prefab, newSpawn, Quaternion.identity, renderer.transform);
+            rendererCluster.sprite = spritePool[Random.Range(0, spritePool.Count)];
             float randomSizeOffset = Random.Range(-clusterSizeOffset, clusterSizeOffset);
             Vector3 sizeOffset = new(randomSizeOffset, randomSizeOffset);
-            renderer.transform.localScale += sizeOffset;
+            rendererCluster.transform.localScale += sizeOffset;
             newSpawn = new Vector2(initSpawn.x + Random.Range(-clusterOffset, clusterOffset), initSpawn.y + Random.Range(-clusterOffset, clusterOffset));
         }
     }
@@ -113,7 +130,6 @@ public class RoomPropGenerator : MonoBehaviour
         for (int i = 0; i < numberToSpawn; i++)
         {
             Vector2 newSpawn = GetRandomInTilemap();
-            int failures = 0;
             var col = Physics2D.OverlapBox(newSpawn, new Vector2(colliderCheckRadius, colliderCheckRadius), layersToCauseFailure);
 
             SpriteRenderer renderer = Instantiate(prefab, newSpawn, Quaternion.identity, parent);
