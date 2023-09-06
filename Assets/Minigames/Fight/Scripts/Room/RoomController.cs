@@ -131,6 +131,7 @@ namespace Minigames.Fight
             }
         }
 
+#if UNITY_EDITOR
         [ContextMenu("getcomponents")]
         public void GetComponents()
         {
@@ -247,6 +248,8 @@ namespace Minigames.Fight
             
             
         }
+#endif
+
     }
 
     [Serializable]
