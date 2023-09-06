@@ -7,7 +7,6 @@ using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 
 namespace Minigames.Fight
 {
@@ -146,7 +145,7 @@ namespace Minigames.Fight
             FlowerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Flower).Select(waypoint => waypoint.transform).ToList();
             WorkerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Worker).Select(waypoint => waypoint.transform).ToList();
             
-            UnityEditor.EditorUtility.SetDirty(this);
+            EditorUtility.SetDirty(this);
         }
         [ContextMenu("Generate Connections")]
         public void GenerateConnections()
@@ -229,7 +228,7 @@ namespace Minigames.Fight
 
                 roomConnections.Add(connection);
             }
-            UnityEditor.EditorUtility.SetDirty(this);
+            EditorUtility.SetDirty(this);
         }
 
         private void OnDrawGizmos()
