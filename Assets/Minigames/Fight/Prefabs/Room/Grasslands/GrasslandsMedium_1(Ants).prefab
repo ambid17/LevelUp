@@ -2166,53 +2166,53 @@ MonoBehaviour:
     Location: {x: 16, y: 7}
     Direction: {x: 1, y: 0}
     TilePositions:
-    - {x: 14, y: 5, z: 0}
-    - {x: 14, y: 6, z: 0}
-    - {x: 14, y: 7, z: 0}
-    - {x: 14, y: 8, z: 0}
-    - {x: 15, y: 5, z: 0}
-    - {x: 15, y: 6, z: 0}
-    - {x: 15, y: 7, z: 0}
-    - {x: 15, y: 8, z: 0}
+    - {x: -2, y: -2, z: 0}
+    - {x: -2, y: -1, z: 0}
+    - {x: -2, y: 0, z: 0}
+    - {x: -2, y: 1, z: 0}
+    - {x: -1, y: -2, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: -1, y: 1, z: 0}
     HasConnection: 0
   - Label: Up
     Location: {x: -6, y: 29}
     Direction: {x: 0, y: 1}
     TilePositions:
-    - {x: -8, y: 27, z: 0}
-    - {x: -8, y: 28, z: 0}
-    - {x: -7, y: 27, z: 0}
-    - {x: -7, y: 28, z: 0}
-    - {x: -6, y: 27, z: 0}
-    - {x: -6, y: 28, z: 0}
-    - {x: -5, y: 27, z: 0}
-    - {x: -5, y: 28, z: 0}
+    - {x: -2, y: -2, z: 0}
+    - {x: -2, y: -1, z: 0}
+    - {x: -1, y: -2, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -2, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -2, z: 0}
+    - {x: 1, y: -1, z: 0}
     HasConnection: 0
   - Label: Left
     Location: {x: -28, y: 7}
     Direction: {x: -1, y: 0}
     TilePositions:
-    - {x: -27, y: 5, z: 0}
-    - {x: -27, y: 6, z: 0}
-    - {x: -27, y: 7, z: 0}
-    - {x: -27, y: 8, z: 0}
-    - {x: -26, y: 5, z: 0}
-    - {x: -26, y: 6, z: 0}
-    - {x: -26, y: 7, z: 0}
-    - {x: -26, y: 8, z: 0}
+    - {x: 0, y: -2, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: -2, z: 0}
+    - {x: 1, y: -1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 1, z: 0}
     HasConnection: 0
   - Label: Down
     Location: {x: -6, y: -15}
     Direction: {x: 0, y: -1}
     TilePositions:
-    - {x: -8, y: -14, z: 0}
-    - {x: -8, y: -13, z: 0}
-    - {x: -7, y: -14, z: 0}
-    - {x: -7, y: -13, z: 0}
-    - {x: -6, y: -14, z: 0}
-    - {x: -6, y: -13, z: 0}
-    - {x: -5, y: -14, z: 0}
-    - {x: -5, y: -13, z: 0}
+    - {x: -2, y: 0, z: 0}
+    - {x: -2, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 1, z: 0}
     HasConnection: 0
   cam: {fileID: 4881681057489713699}
   zoomSpeed: 2
