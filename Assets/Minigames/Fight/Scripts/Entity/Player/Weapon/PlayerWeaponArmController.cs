@@ -60,16 +60,16 @@ namespace Minigames.Fight
             {
                 return;
             }
-            //float currentRotation = TransformUtils.GetInspectorRotation(_currentArm.transform).z;
-            //float withinRange = Mathf.Clamp(currentRotation, _currentArm.MinRotation, _currentArm.MaxRotation);
-            //if (withinRange != currentRotation)
-            //{
-            //    _currentArm.ReturnToIdle();
-            //    _currentArm = SwitchArms();
-            //    _currentArm.StopAllCoroutines();
-            //}
+            float currentRotation = _currentArm.transform.rotation.eulerAngles.z;
+            Debug.Log(currentRotation);
+            if (currentRotation < _currentArm.MinRotation && currentRotation > _currentArm.MaxRotation)
+            {
+                _currentArm.ReturnToIdle();
+                _currentArm = SwitchArms();
+                _currentArm.StopAllCoroutines();
+            }
 
-            //_currentArm.transform.rotation = PhysicsUtils.LookAt(transform, _cam.ScreenToWorldPoint(Input.mousePosition), _currentArm.StartRotation);
+            _currentArm.transform.rotation = PhysicsUtils.LookAt(transform, _cam.ScreenToWorldPoint(Input.mousePosition), _currentArm.StartRotation);
         }
         private PlayerWeaponArm SwitchArms()
         {
