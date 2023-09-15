@@ -20945,40 +20945,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435ba727bdc536045b82803f830b2877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlowerWaypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  FlowerWaypoints: []
   WorkerWaypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4668520140799232829}
+  - {fileID: 1279279696886538466}
+  - {fileID: 6093442853227883895}
+  - {fileID: 7717961999789736530}
   PatrolWaypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8311968877322932316}
+  - {fileID: 8402694752177837669}
+  - {fileID: 7608034632912572669}
+  - {fileID: 421289884282977749}
+  - {fileID: 3336277828994358473}
+  - {fileID: 8671415983666810769}
+  - {fileID: 1872962906870673047}
+  - {fileID: 8663071979367007849}
+  - {fileID: 5913665117075121294}
   myPolygonCollider: {fileID: 6777965647452085417}
   Tilemap: {fileID: 7335862982721619231}
   roomConnections:
@@ -21039,13 +21021,28 @@ MonoBehaviour:
   zoomSize: 1
   startSize: 3
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4755762461815470132}
+  - {fileID: 5030854281304167610}
+  - {fileID: 4944105256300408709}
+  - {fileID: 949049114517411083}
+  - {fileID: 3960575250583019468}
+  - {fileID: 4385614043462746689}
+  - {fileID: 9151212502842141778}
+  - {fileID: 6115164792426052409}
+  - {fileID: 4963328651645310616}
+  - {fileID: 8134483326422734529}
+  - {fileID: 1940582648935790932}
+  - {fileID: 3453144002762521339}
+  - {fileID: 909848475167366051}
+  - {fileID: 384698614331717803}
+  - {fileID: 6455741415470167400}
+  - {fileID: 7738966330802313082}
+  - {fileID: 6884721615413048699}
+  - {fileID: 1809312267999225330}
+  - {fileID: 5180975922243193693}
+  - {fileID: 1428890505293786467}
+  - {fileID: 5622387832486346980}
+  - {fileID: 7996357399887492531}
   enemiesToSpawn:
   - EnemyPrefab: {fileID: 2083538932749553234, guid: e6cee23ed31a3004e82de48c9b44aa26, type: 3}
     numberToSpawn: 12
