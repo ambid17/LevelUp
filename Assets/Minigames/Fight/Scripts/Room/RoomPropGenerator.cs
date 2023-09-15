@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UnityEngine.Rendering;
 
 public enum PropType
 {
@@ -118,6 +119,11 @@ public class RoomPropGenerator : MonoBehaviour
             rendererCluster.transform.localScale += sizeOffset;
             newSpawn = new Vector2(initSpawn.x + Random.Range(-clusterOffset, clusterOffset), initSpawn.y + Random.Range(-clusterOffset, clusterOffset));
         }
+        PropClusterSorter sorter = renderer.gameObject.AddComponent<PropClusterSorter>();
+        sorter.SortProps();
+        SortingGroup sortingGroup = renderer.gameObject.AddComponent<SortingGroup>();
+        sortingGroup.sortingLayerName = "Props";
+        sortingGroup.sortingOrder = 100;
     }
 
     private void GenerateIndividual()
