@@ -53,10 +53,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         }
         protected override bool HasArrived()
         {
-            if (agent.path == null)
-            {
-                return false;
-            }
             return agent.reachedDestination;
         }
         public override void OnReset()

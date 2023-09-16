@@ -97,27 +97,6 @@ namespace Minigames.Fight
                 move = nextWaypoint - (Vector2)transform.position;
                 distance = Vector2.Distance(transform.position, nextWaypoint);
             }
-            rb.velocity = move.normalized * speed;
-
-            // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching
-            if (Mathf.Abs(move.x) > 0.01)
-            {
-                if (Mathf.Sign(_lastKnownLookDirection) != Mathf.Sign(move.x))
-                {
-                    framesSinceLastDirectionChange++;
-                    if (framesSinceLastDirectionChange >= 5)
-                    {
-                        framesSinceLastDirectionChange = 0;
-                        _lastKnownLookDirection = move.x;
-                    }   
-                }
-                else
-                {
-                    framesSinceLastDirectionChange = 0;
-                }
-            }
-
-            entity.VisualController.SpriteRenderer.flipX = _lastKnownLookDirection < 0 ? false : true;
 
             // If waypoint has been reached then agent heads towards next waypoint on the list
             // If no other waypoints exist then agent recalculates the path
@@ -140,6 +119,29 @@ namespace Minigames.Fight
                 }
                 currentWaypoint++;
             }
+            rb.velocity = move.normalized * speed;
+
+            // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching
+            if (Mathf.Abs(move.x) > 0.01)
+            {
+                if (Mathf.Sign(_lastKnownLookDirection) != Mathf.Sign(move.x))
+                {
+                    framesSinceLastDirectionChange++;
+                    if (framesSinceLastDirectionChange >= 5)
+                    {
+                        framesSinceLastDirectionChange = 0;
+                        _lastKnownLookDirection = move.x;
+                    }   
+                }
+                else
+                {
+                    framesSinceLastDirectionChange = 0;
+                }
+            }
+
+            entity.VisualController.SpriteRenderer.flipX = _lastKnownLookDirection < 0 ? false : true;
+
+            
         }
         private void OnPathComplete(Path p)
         {
@@ -147,11 +149,15 @@ namespace Minigames.Fight
             if (!p.error)
             {
                 _Path = p;
-                currentWaypoint = 0;
+                currentWaypoint = 1;
             }
         }
         private void UpdatePath()
         {
+            if (Vector2.Distance(transform.position, target) <= stopDistance)
+            {
+                return;
+            }
             // once seeker has finished calculating a path generate the path data
             if (seeker.IsDone())
             {
