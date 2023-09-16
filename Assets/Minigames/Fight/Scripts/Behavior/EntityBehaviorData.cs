@@ -65,7 +65,7 @@ namespace Minigames.Fight
         }
         public Vector2 RandomAroundPlayer => new Vector2(Random.Range(PlayerVector.x - SmellRadius, PlayerVector.x + SmellRadius), Random.Range(PlayerVector.y - SmellRadius, PlayerVector.y + SmellRadius));
         public bool Alerted { get; set; }
-        public List<Transform> SoldierWaypoints => roomController.FlowerWaypoints;
+        public List<Transform> SoldierWaypoints => roomController.PatrolWaypoints;
         public List<Transform> WorkerWaypoints => roomController.WorkerWaypoints;
         #endregion
         #region SpiderData
