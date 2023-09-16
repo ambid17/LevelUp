@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6892e9555da6d0f49a1a3459037409b2, type: 3}
   m_Name: TestRoomSettings
   m_EditorClassIdentifier: 
-  minRooms: 2
-  maxRooms: 4
-  startRoom: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+  minRooms: 0
+  maxRooms: 0
+  startRoom: {fileID: 5191084968124532279, guid: 81c06070475dae84487f585122d7e506, type: 3}
   rooms:
-  - {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+  - {fileID: 5191084968124532279, guid: 81c06070475dae84487f585122d7e506, type: 3}
+  wallTile: {fileID: 0}
+  tilesToReplace: 8
