@@ -9413,8 +9413,12 @@ MonoBehaviour:
   FlowerWaypoints:
   - {fileID: 2757789243892160013}
   - {fileID: 6944901390562592586}
-  WorkerWaypoints: []
-  PatrolWaypoints: []
+  WorkerWaypoints:
+  - {fileID: 2757789243892160013}
+  - {fileID: 6944901390562592586}
+  PatrolWaypoints:
+  - {fileID: 2757789243892160013}
+  - {fileID: 6944901390562592586}
   myPolygonCollider: {fileID: 5191084968124532276}
   Tilemap: {fileID: 8346404973714546562}
   roomConnections:
@@ -9477,7 +9481,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 6881596740048606994}
   enemiesToSpawn:
-  - EnemyPrefab: {fileID: 2083538932749553234, guid: 397fcdc02bde49141ab2b41163364880, type: 3}
+  - EnemyPrefab: {fileID: 2083538932749553234, guid: 2229283ea4df18246808070c8dbd7169, type: 3}
     numberToSpawn: 1
 --- !u!60 &5191084968124532276
 PolygonCollider2D:
