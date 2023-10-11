@@ -20,15 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 337c1a4fea0379a4b979b1c458d313dd, type: 3}
+      value: {fileID: 21300000, guid: 07bd2665a5610f4489017e081bec553c, type: 3}
     - time: 0.125
-      value: {fileID: 21300000, guid: db3c8cef1ace36d48be95c0abe16e1ad, type: 3}
+      value: {fileID: 21300000, guid: f8ede1605059a144c8dc7dae01a5e656, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 950497f2c386ea24285631c949187e68, type: 3}
+      value: {fileID: 21300000, guid: 09b588c22c523274ea3445bf758a235d, type: 3}
     - time: 0.375
-      value: {fileID: 21300000, guid: 7fa81cf5d5eb94646a0d0ebbbc5687a0, type: 3}
+      value: {fileID: 21300000, guid: 7be08f6f21122514fa5415517206e6d5, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: 8e469807c9ae3fc41b8f9b753e6b20a9, type: 3}
+      value: {fileID: 21300000, guid: 68292ca60391d7946bd4571d87cc62c6, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,11 +48,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 337c1a4fea0379a4b979b1c458d313dd, type: 3}
-    - {fileID: 21300000, guid: db3c8cef1ace36d48be95c0abe16e1ad, type: 3}
-    - {fileID: 21300000, guid: 950497f2c386ea24285631c949187e68, type: 3}
-    - {fileID: 21300000, guid: 7fa81cf5d5eb94646a0d0ebbbc5687a0, type: 3}
-    - {fileID: 21300000, guid: 8e469807c9ae3fc41b8f9b753e6b20a9, type: 3}
+    - {fileID: 21300000, guid: 07bd2665a5610f4489017e081bec553c, type: 3}
+    - {fileID: 21300000, guid: f8ede1605059a144c8dc7dae01a5e656, type: 3}
+    - {fileID: 21300000, guid: 09b588c22c523274ea3445bf758a235d, type: 3}
+    - {fileID: 21300000, guid: 7be08f6f21122514fa5415517206e6d5, type: 3}
+    - {fileID: 21300000, guid: 68292ca60391d7946bd4571d87cc62c6, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -85,7 +85,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.375
+  - time: 0.25
     functionName: ShootProjectile
     data: 
     objectReferenceParameter: {fileID: 0}
