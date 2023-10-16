@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8089606416502020419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4104601963353505160}
+  - component: {fileID: 940401603692349276}
+  m_Layer: 0
+  m_Name: PropGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4104601963353505160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8089606416502020419}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.461592, y: 1.0788808, z: 0.29405037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &940401603692349276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8089606416502020419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5f6c870cafce44fa152a667a8d2362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propParent: {fileID: 0}
+  obstacleParent: {fileID: 0}
+  tileMap: {fileID: 0}
+  propPrefab: {fileID: 3787918447072714006, guid: e5fbefb8574c7e34aa601a9b7e38e4dd, type: 3}
+  obstaclePrefab: {fileID: 3787918447072714006, guid: af1da569c14e8654280c1d61699da0a4, type: 3}
+  propType: 0
+  isCluster: 0
+  clusterOffset: 1
+  clusterSizeOffset: 0.75
+  isObstacle: 0
+  colliderCheckRadius: 3
+  numberToSpawn: 5
+  maxFailuresBeforeAbort: 10
+  layersToCauseFailure:
+    serializedVersion: 2
+    m_Bits: 13312
+  roomSpriteSettings: {fileID: 11400000, guid: f6c4a2afd2f86724d81a6ead4d333948, type: 2}
+  generateProps: 0

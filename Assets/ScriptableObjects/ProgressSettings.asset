@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f16366b4a76dd4391aa550b11c2bd9, type: 3}
+  m_Name: ProgressSettings
+  m_EditorClassIdentifier: 
+  IsDoneScanning: 1
+  Worlds:
+  - Name: Grasslands
+    SkillingSceneIndex: 3
+    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 5
+      EnemyStatScalar: 1
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 1.1
+      SpritePixels: []
+      EnemyTierColor: {r: 0.21765637, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 15
+      EnemyStatScalar: 1.5
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.8564266, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 3
+      EnemyKillsToComplete: 15
+      EnemyStatScalar: 2
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.09787713, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 4
+      EnemyKillsToComplete: 5
+      EnemyStatScalar: 3
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0.76815224, a: 1}
+      EnemyKillCount: 0
+    - Index: 5
+      EnemyKillsToComplete: 20
+      EnemyStatScalar: 5
+      SpritePixels: []
+      EnemyTierColor: {r: 0.038573265, g: 0, b: 1, a: 1}
+      EnemyKillCount: 0
+    Enemies:
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
+    WorldType: 1
+    RoomSettings: {fileID: 11400000, guid: 3b38d4d9143c3164788eb8af518b9a32, type: 2}
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 0
+    IsUnlocked: 0
+  - Name: Minington
+    SkillingSceneIndex: 4
+    WorldSprite: {fileID: -535124672, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 10
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 0
+    - Index: 1
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 15
+      SpritePixels: []
+      EnemyTierColor: {r: 0.24614811, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 2
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 20
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.913718, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 3
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 25
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.17356366, b: 0, a: 1}
+      EnemyKillCount: 0
+    Enemies:
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
+    - {fileID: 11400000, guid: c68a765ef6d529341ad81f5387644704, type: 2}
+    - {fileID: 11400000, guid: 38e2d5bd9d8dc5f40925e260b2643356, type: 2}
+    WorldType: 3
+    RoomSettings: {fileID: 0}
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 0
+    IsUnlocked: 0
+  - Name: Craftoptia
+    SkillingSceneIndex: 5
+    WorldSprite: {fileID: -600369647, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    Countries:
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 1000
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 1, b: 1, a: 1}
+      EnemyKillCount: 0
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 2000
+      SpritePixels: []
+      EnemyTierColor: {r: 0.09620416, g: 1, b: 0, a: 1}
+      EnemyKillCount: 0
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 4500
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0.88786775, b: 0.08018869, a: 1}
+      EnemyKillCount: 0
+    - Index: 0
+      EnemyKillsToComplete: 10
+      EnemyStatScalar: 6000
+      SpritePixels: []
+      EnemyTierColor: {r: 1, g: 0, b: 0, a: 1}
+      EnemyKillCount: 0
+    Enemies:
+    - {fileID: 11400000, guid: 1221b1698a79a9347b8a62cb751bd3de, type: 2}
+    - {fileID: 11400000, guid: c68a765ef6d529341ad81f5387644704, type: 2}
+    - {fileID: 11400000, guid: 38e2d5bd9d8dc5f40925e260b2643356, type: 2}
+    WorldType: 4
+    RoomSettings: {fileID: 0}
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 0
+    IsUnlocked: 0
+  Currency: 0
+  TutorialState: 0
+  currentWorld:
+    Name: 
+    SkillingSceneIndex: 0
+    WorldSprite: {fileID: 0}
+    Countries: []
+    Enemies: []
+    WorldType: 0
+    RoomSettings: {fileID: 0}
+    CurrencyPerMinute: 0
+    CurrentCountry:
+      Index: 0
+      EnemyKillsToComplete: 0
+      EnemyStatScalar: 0
+      SpritePixels: []
+      EnemyTierColor: {r: 0, g: 0, b: 0, a: 0}
+      EnemyKillCount: 0
+    IsFighting: 0
+    IsUnlocked: 0

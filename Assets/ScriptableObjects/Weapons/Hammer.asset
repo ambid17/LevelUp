@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dde72dbf87827439e676a28db5507d, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: 
+  weaponType: 5
+  readableName: Hammer
+  description: Smash your way through enemies. The weapon's ability is to slam the
+    ground and knock down enemies in a cone
+  icon: {fileID: 21300000, guid: d3ab081d95e765943aff2afc0d56dbf0, type: 3}
+  ammoIcon: {fileID: 21300000, guid: d3ab081d95e765943aff2afc0d56dbf0, type: 3}
+  abilityIcon: {fileID: 21300000, guid: d3ab081d95e765943aff2afc0d56dbf0, type: 3}
+  abilityCooldown: 4
+  fireRate: 1
+  damage: 2
+  weaponPrefab: {fileID: 4111206442278944079, guid: 482b3ad0c5e3e21409637463d0ccf30f, type: 3}
+  attackRange: 2
+  animationLength: 0
