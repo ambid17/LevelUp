@@ -50,16 +50,18 @@ namespace Minigames.Fight
 
         protected virtual void TryReload()
         {
-            // TODO: shouldn't this also check if the mag is empty? or that they pressed the reload key?
             if (overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
             {
                 return;
             }
+
             if (ReloadTimer < overridenWeapon.reloadTime)
             {
                 ReloadTimer += Time.deltaTime;
                 return;
             }
+
+            // slowly add bullet to mag over time
             overridenWeapon.bulletsInMagazine++;
             EventService.Dispatch(new PlayerAmmoUpdatedEvent(overridenWeapon.bulletsInMagazine, overridenWeapon.magazineSize));
             ReloadTimer = 0;
