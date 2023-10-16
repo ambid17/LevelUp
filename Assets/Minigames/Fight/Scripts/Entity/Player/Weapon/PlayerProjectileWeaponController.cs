@@ -8,8 +8,6 @@ namespace Minigames.Fight
 {
         protected float ReloadTimer;
 
-        private float projectileSpreadOffset;
-
         protected override void Start()
         {
             base.Start();
@@ -52,6 +50,7 @@ namespace Minigames.Fight
 
         protected virtual void TryReload()
         {
+            // TODO: shouldn't this also check if the mag is empty? or that they pressed the reload key?
             if (overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
             {
                 return;
@@ -68,9 +67,7 @@ namespace Minigames.Fight
 
         public override void Shoot()
         {
-            // TODO: look at effects for this
-            int projectileCount = 1;
-            for (int i = 0; i < projectileCount; i++)
+            for (int i = 0; i < overridenWeapon.projectileCount; i++)
             {
                 PlayerProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as PlayerProjectile;
 
@@ -78,7 +75,7 @@ namespace Minigames.Fight
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * projectileSpreadOffset;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * overridenWeapon.projectileSpread;
 
                 projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
