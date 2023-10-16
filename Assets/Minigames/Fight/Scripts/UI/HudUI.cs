@@ -62,6 +62,7 @@ namespace Minigames.Fight
         private void SetupAmmoAndAbility()
         {
             // TODO rework this with current weapon system and set up an event for weapon switch
+            _bulletTypeImage.sprite = GameManager.PlayerEntity.WeaponArmController.CurrentArm.EquippedWeapon.Weapon.ammoIcon;
         }
         
         private void SetGoldText()
