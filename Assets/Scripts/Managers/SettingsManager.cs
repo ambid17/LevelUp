@@ -9,7 +9,6 @@ namespace Minigames.Fight
         public ProgressSettings progressSettings;
         public EffectSettings effectSettings;
         public PlayerSettings playerSettings;
-        public EnemySpawnerSettings enemySpawnerSettings;
         public IncomeSettings incomeSettings;
 
         private EventService _eventService;
@@ -34,7 +33,6 @@ namespace Minigames.Fight
         {
             playerSettings.Init();
             progressSettings.Init();
-            enemySpawnerSettings.Init();
             incomeSettings.Init();
         }
     }

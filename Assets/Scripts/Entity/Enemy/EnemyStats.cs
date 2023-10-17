@@ -36,13 +36,12 @@ namespace Minigames.Fight
             goldValue *
             GameManager.SettingsManager.incomeSettings.GoldPerKill;
 
-        public float FireRate => fireRate * GameManager.SettingsManager.enemySpawnerSettings.FireRate;
+        public float FireRate => fireRate;
         public float MoveSpeed => moveSpeed;
         public float Acceleration => acceleration;
 
         public float MaxHp =>
-            maxHp  *
-            GameManager.SettingsManager.enemySpawnerSettings.Hp;
+            maxHp;
 
         public float MeleeWeaponDamage => meleeWeaponDamage;
         public float ProjectileWeaponDamage => projectileWeaponDamage;
