@@ -61,7 +61,6 @@ namespace Minigames.Fight
                 return;
             }
             float currentRotation = _currentArm.transform.rotation.eulerAngles.z;
-            Debug.Log(currentRotation);
             if (currentRotation < _currentArm.MinRotation && currentRotation > _currentArm.MaxRotation)
             {
                 _currentArm.ReturnToIdle();
