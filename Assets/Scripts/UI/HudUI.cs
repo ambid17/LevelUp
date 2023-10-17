@@ -11,7 +11,6 @@ namespace Minigames.Fight
     public class HudUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _goldText;
-        [SerializeField] private TMP_Text _goldPerMinuteText;
         [SerializeField] private Slider _hpSlider;
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private GameObject _ammoContainer;
@@ -30,14 +29,12 @@ namespace Minigames.Fight
         {
             _eventService = GameManager.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(SetGoldText);
-            _eventService.Add<CpmUpdatedEvent>(SetGoldPerMinuteText);
             _eventService.Add<PlayerHpUpdatedEvent>(SetHpSlider);
             _eventService.Add<PlayerAmmoUpdatedEvent>(SetAmmo);
             _eventService.Add<PlayerUsedAbilityEvent>(StartUseAbility);
             _upgradeButton.onClick.AddListener(OpenUpgrades);
         
             SetGoldText();
-            SetGoldPerMinuteText();
             SetHpSlider(new PlayerHpUpdatedEvent(1));
             SetupAmmoAndAbility();
         }
@@ -71,12 +68,6 @@ namespace Minigames.Fight
             float multipliedGold = Mathf.Pow(goldEarned, 1.1f);
             float difference = multipliedGold - goldEarned;
             _goldText.text = goldEarned.ToCurrencyString() + " + " + difference.ToCurrencyString();
-        }
-    
-        private void SetGoldPerMinuteText()
-        {
-            string value = GameManager.CurrencyManager.CurrencyPerMinute.ToCurrencyString();
-            _goldPerMinuteText.text = $"({value}/min)";
         }
 
         private void SetHpSlider(PlayerHpUpdatedEvent eventType)

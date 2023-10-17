@@ -10,8 +10,8 @@ namespace Minigames.Fight
     {
         [SerializeField] protected Material defaultMaterial;
         [SerializeField] private Material flashMaterial;
-        [SerializeField] protected Color defaultColor;
-        [SerializeField] protected Color flashColor;
+        [SerializeField] protected Color defaultColor = Color.white;
+        [SerializeField] protected Color flashColor = Color.white;
         [SerializeField] protected AnimationName takeHitAnimation;
 
 

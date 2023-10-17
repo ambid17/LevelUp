@@ -59,13 +59,8 @@ public class FightDataLoader : MonoBehaviour
         
         for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
         {
-            Platform.ProgressSettings.Worlds[worldIndex].CurrencyPerMinute = progressModel.WorldData[worldIndex].CurrencyPerMinute;
-            Platform.ProgressSettings.Worlds[worldIndex].LastTimeVisited = progressModel.WorldData[worldIndex].LastTimeVisited;
-            for (int countryIndex = 0; countryIndex < progressModel.WorldData[worldIndex].CountryData.Count; countryIndex++)
-            {
-                Platform.ProgressSettings.Worlds[worldIndex].Countries[countryIndex].EnemyKillCount =
-                    progressModel.WorldData[worldIndex].CountryData[countryIndex].Kills;
-            }
+            Platform.ProgressSettings.Worlds[worldIndex].IsUnlocked = progressModel.WorldData[worldIndex].IsUnlocked;
+            Platform.ProgressSettings.Worlds[worldIndex].IsCompleted = progressModel.WorldData[worldIndex].IsCompleted;
         }
     }
     

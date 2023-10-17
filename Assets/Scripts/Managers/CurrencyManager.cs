@@ -19,15 +19,6 @@ namespace Minigames.Fight
                 eventService.Dispatch<CurrencyUpdatedEvent>();
             }
         }
-        public float CurrencyPerMinute
-        {
-            get => _progressSettings.CurrentWorld.CurrencyPerMinute;
-            set
-            {
-                _progressSettings.CurrentWorld.CurrencyPerMinute = value;
-                eventService.Dispatch<CpmUpdatedEvent>();
-            }
-        }
         public ResourceTypeFloatDictionary PhysicalResources
         {
             get => _progressSettings.PhysicalResources;
@@ -39,9 +30,6 @@ namespace Minigames.Fight
 
         // TODO set up effects for this.
         public float ResourceValue { get => _progressSettings.BaseResourceValue; set => _progressSettings.BaseResourceValue = value; }
-
-        private float _gpmTimer; // GPM: gold per minute
-        private readonly float _gpmInterval = 5;
 
         protected override void Awake()
         { 

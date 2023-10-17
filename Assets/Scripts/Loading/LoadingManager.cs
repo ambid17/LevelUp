@@ -19,20 +19,9 @@ public class LoadingManager : MonoBehaviour
 
     private void LoadData()
     {
-        if (_progressSettings.CurrentWorld.IsFighting)
-        {
-            isDataLoaded = true;
-            return;
-        }
-        
-        // TODO: Load data for each game
-        // switch (_progressSettings.CurrentWorld.WorldType)
-        // {
-        //     case WorldType.Crafting:
-        //         _gameDataLoader.Load();
-        //         isDataLoaded = true;
-        //         break;
-        // }
+        // TODO don't let this be true until the rooms are generated. Set via a event
+        isDataLoaded = true;
+        return;
     }
 
     private IEnumerator LoadScene()
@@ -43,20 +32,13 @@ public class LoadingManager : MonoBehaviour
             yield return new WaitForSeconds(2);
         }
 
-        if (_progressSettings.CurrentWorld.IsFighting)
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Fight");
+        asyncOperation.allowSceneActivation = false;
+        while (asyncOperation.progress < 0.9f)
         {
-            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Fight");
-            asyncOperation.allowSceneActivation = false;
-            while (asyncOperation.progress < 0.9f || !_progressSettings.IsDoneScanning)
-            {
-                yield return null;
-            }
-            asyncOperation.allowSceneActivation = true;
+            yield return null;
         }
-        else
-        {
-            SceneManager.LoadScene(_progressSettings.CurrentWorld.SkillingSceneIndex);
-        }
+        asyncOperation.allowSceneActivation = true;
     }
     
     

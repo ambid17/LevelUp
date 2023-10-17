@@ -6,7 +6,6 @@ using Utils;
 namespace Minigames.Fight
 {
     public class CurrencyUpdatedEvent { }
-    public class CpmUpdatedEvent { }
     public class PlayerDiedEvent { }
     public class PlayerRevivedEvent { }
     public class PlayerHpUpdatedEvent : IEvent

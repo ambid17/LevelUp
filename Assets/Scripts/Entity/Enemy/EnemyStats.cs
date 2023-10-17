@@ -33,7 +33,7 @@ namespace Minigames.Fight
         public List<Effect> effects;
 
         public float GoldValue =>
-            goldValue * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar *
+            goldValue *
             GameManager.SettingsManager.incomeSettings.GoldPerKill;
 
         public float FireRate => fireRate * GameManager.SettingsManager.enemySpawnerSettings.FireRate;
@@ -41,15 +41,11 @@ namespace Minigames.Fight
         public float Acceleration => acceleration;
 
         public float MaxHp =>
-            maxHp * GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyStatScalar *
+            maxHp  *
             GameManager.SettingsManager.enemySpawnerSettings.Hp;
 
-        public float MeleeWeaponDamage => meleeWeaponDamage *
-                                     GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
-                                         .EnemyStatScalar;
-        public float ProjectileWeaponDamage => projectileWeaponDamage *
-                                     GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry
-                                         .EnemyStatScalar;
+        public float MeleeWeaponDamage => meleeWeaponDamage;
+        public float ProjectileWeaponDamage => projectileWeaponDamage;
 
         public float ProjectileSpeed => projectileSpeed;
 

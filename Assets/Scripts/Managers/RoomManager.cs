@@ -170,7 +170,6 @@ namespace Minigames.Fight
                     SpawnResources(graph, GameManager.PlayerEntity.transform.position);
                 }
             }
-            progressSettings.IsDoneScanning = true;
         }
 
         private void SpawnResources(GridGraph graph, Vector3 start)

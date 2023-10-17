@@ -22,8 +22,6 @@ namespace Minigames.Fight
         {
             base.Start();
             _enemyEntity = MyEntity as EnemyEntity;
-            defaultColor =
-                GameManager.SettingsManager.progressSettings.CurrentWorld.CurrentCountry.EnemyTierColor;
             SpriteRenderer.color = defaultColor;
             flashColor = Color.white;
             

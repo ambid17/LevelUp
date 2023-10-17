@@ -15,15 +15,7 @@ namespace Minigames.Fight
     public class WorldData
     {
         public string WorldName;
-        public List<CountryData> CountryData;
-        public float CurrencyPerMinute;
-        public DateTime LastTimeVisited;
-
-    }
-
-    public class CountryData
-    {
-        public int CountryIndex;
-        public float Kills;
+        public bool IsCompleted;
+        public bool IsUnlocked;
     }
 }

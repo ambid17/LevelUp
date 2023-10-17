@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: c7331afd4ee38fb4cb139cab057a4b83, type: 2}
+  weapon: {fileID: 11400000, guid: e643e4d5e7d35f54284b1586c2488357, type: 2}
 --- !u!114 &-698485910662565092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
   flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  flashColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  flashColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   takeHitAnimation:
     Name: Soldier_Ant_Take_Hit
     CanBeCancelled: 0

@@ -119,8 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
   flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  flashColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  flashColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   takeHitAnimation:
     Name: Bee_Take_Hit
     CanBeCancelled: 0
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 216851781
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e4d407df9c4284845910bd36b896c81e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
