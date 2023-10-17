@@ -1,6 +1,8 @@
     using System;
 using Minigames.Fight;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -42,7 +44,7 @@ public class WorldButton : MonoBehaviour
         this.world = world;
         gameObject.name = world.Name;
         _spriteRenderer.sprite = world.WorldSprite;
-        _sceneIndex = world.SkillingSceneIndex - _sceneIndexOffset;
+        _sceneIndex = SceneManager.GetSceneByName("Fight").buildIndex;
         SetOrbitLine();
     }
 

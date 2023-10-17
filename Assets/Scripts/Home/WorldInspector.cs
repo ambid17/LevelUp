@@ -35,12 +35,12 @@ public class WorldInspector : MonoBehaviour
         _world = world;
         planetNameText.text = world.Name;
         planetImage.sprite = world.WorldSprite;
-        progressText.text = $"Conquered {world.GetConqueredCountryCount()}/{world.Countries.Count} countries";
+        progressText.text = $"Conquered";
         conquerButton.onClick.AddListener(ConquerPlanet);
         travelButton.onClick.AddListener(TravelToPlanet);
 
         conquerButton.interactable = world.IsUnlocked;
-        travelButton.interactable = world.IsConquered();
+        travelButton.interactable = world.IsCompleted;
     }
 
     public void Hide()
@@ -53,7 +53,6 @@ public class WorldInspector : MonoBehaviour
     {
         GameManager.IsLoadingScene = true;
         Platform.ProgressSettings.CurrentWorld = _world;
-        Platform.ProgressSettings.CurrentWorld.IsFighting = true;
         SceneManager.LoadScene(loadingSceneName);
     }
     
@@ -61,7 +60,6 @@ public class WorldInspector : MonoBehaviour
     {
         GameManager.IsLoadingScene = true;
         Platform.ProgressSettings.CurrentWorld = _world;
-        Platform.ProgressSettings.CurrentWorld.IsFighting = false;
         SceneManager.LoadScene(loadingSceneName);
     }
 
