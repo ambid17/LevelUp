@@ -37,15 +37,19 @@ public class AnimationManager : MonoBehaviour
         {
             currentAnimation = name;
         }
+
+        // Don't allow queueing up the same animation
         if (IsAnimPlaying(name))
         {
             return;
         }
+
         if (!currentAnimation.CanBeCancelled)
         {
-            QueAnimation(name);
+            QueueAnimation(name);
             return;
         }
+
         anim.Play(name.Name, 0, time);
         currentAnimation = name;
     }
@@ -53,6 +57,7 @@ public class AnimationManager : MonoBehaviour
     // Force play an animation even if current can't be canceled.
     public void OverrideAnimation(AnimationName name, float normalizedTime)
     {
+        // Don't allow playing the same animation
         if (IsAnimPlaying(name))
         {
             return;
@@ -61,16 +66,13 @@ public class AnimationManager : MonoBehaviour
         currentAnimation = name;
     }
 
-    public void QueAnimation(AnimationName name)
+    public void QueueAnimation(AnimationName name)
     {
-        if (bufferedAnimation != null)
+        if (bufferedAnimation != null || IsAnimPlaying(name))
         {
             return;
         }
-        if (IsAnimPlaying(name))
-        {
-            return;
-        }
+
         if (!IsCurrentAnimLoopFinished(name.AcceptableOverrideTime))
         {
             float remainingTime = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
