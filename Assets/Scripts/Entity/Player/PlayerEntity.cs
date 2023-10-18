@@ -26,8 +26,6 @@ namespace Minigames.Fight
         [SerializeField]
         private float maxResourceSpawns;
 
-        private float _deathTimer;
-
         private PlayerAnimationController _animationControllerOverride;
 
         private bool _canRevive;
@@ -111,14 +109,13 @@ namespace Minigames.Fight
         
         protected override void Die()
         {
-            _deathTimer = 0;
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
             Stats.StatusEffects.Clear();
-            StartCoroutine(SpawnResources());
+            StartCoroutine(DropResources());
         }
 
-        IEnumerator SpawnResources()
+        IEnumerator DropResources()
         {
             _canRevive = false;
             ResourceTypeFloatDictionary localDictionary = GameManager.CurrencyManager.PhysicalResources;
