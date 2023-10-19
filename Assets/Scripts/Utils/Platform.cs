@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Minigames.Fight;
 using UnityEngine;
+using Utils;
 
 public class Platform : Singleton<Platform>
 {
@@ -10,6 +11,20 @@ public class Platform : Singleton<Platform>
     public static ProgressSettings ProgressSettings => Instance.progressSettings;
     
     public static bool ShouldSave = true;
+
+    private EventService _eventService;
+    public static EventService EventService
+    {
+        get
+        {
+            if (Instance._eventService == null)
+            {
+                Instance._eventService = new EventService();
+            }
+
+            return Instance._eventService;
+        }
+    }
 
     protected override void Initialize()
     {

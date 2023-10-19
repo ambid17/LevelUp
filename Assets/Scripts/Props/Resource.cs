@@ -43,7 +43,7 @@ namespace Minigames.Fight
             float speed = Random.Range(minSpeed, maxSpeed);
             myRigidbody.AddForce(new Vector2(x, y).normalized * speed, ForceMode2D.Impulse);
 
-            GameManager.EventService.Add<PlayerDiedEvent>(Die);
+            Platform.EventService.Add<PlayerDiedEvent>(Die);
         }
 
         public void Die()
@@ -103,7 +103,7 @@ namespace Minigames.Fight
         }
         private void OnDestroy()
         {
-            GameManager.EventService.Remove<PlayerDiedEvent>(Die);
+            Platform.EventService.Remove<PlayerDiedEvent>(Die);
         }
     }
 }

@@ -36,8 +36,8 @@ namespace Minigames.Fight
             _meleeWeaponController = GetComponent<PlayerMeleeWeaponController>();
             _equippedWeaponController = _projectileWeaponController;
             _equippedWeaponController.IsEquipped = true;
-            GameManager.EventService.Add<PlayerDiedEvent>(Die);
-            GameManager.EventService.Add<PlayerRevivedEvent>(Revive);
+            Platform.EventService.Add<PlayerDiedEvent>(Die);
+            Platform.EventService.Add<PlayerRevivedEvent>(Revive);
         }
 
         public void Die()

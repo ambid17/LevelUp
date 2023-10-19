@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 
@@ -151,6 +152,13 @@ namespace Minigames.Fight
         {
             ResourceType = resourceType;
             Number = number;
+        }
+    }
+
+    public class SceneIsReadyEvent : IEvent
+    {
+        public SceneIsReadyEvent()
+        {
         }
     }
 }

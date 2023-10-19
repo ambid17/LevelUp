@@ -24,7 +24,7 @@ namespace Minigames.Fight
             _currentArm = leftArm;
             _cam = GameManager.PlayerEntity.PlayerCamera;
 
-            GameManager.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
+            Platform.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
         }
 
         public void SwitchDirection(PlayerChangedDirectionEvent e)

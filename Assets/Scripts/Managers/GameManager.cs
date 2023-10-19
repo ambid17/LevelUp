@@ -28,19 +28,7 @@ namespace Minigames.Fight
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;
         
-        private EventService _eventService;
-        public static EventService EventService
-        {
-            get
-            {
-                if (Instance._eventService == null)
-                {
-                    Instance._eventService = new EventService();
-                }
-
-                return Instance._eventService;
-            }
-        }
+        
 
         protected override void Initialize()
         {

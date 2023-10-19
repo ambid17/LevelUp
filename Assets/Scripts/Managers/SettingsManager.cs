@@ -14,7 +14,7 @@ namespace Minigames.Fight
         private EventService _eventService;
         void Start()
         {
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
         }
 
         /// <summary>

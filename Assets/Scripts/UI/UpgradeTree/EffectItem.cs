@@ -91,11 +91,11 @@ namespace Minigames.Fight
             }
             if (effectNode.TierCategory != TierCategory.None)
             {
-                GameManager.EventService.Dispatch(new UnlockItemSelectedEvent(this));
+                Platform.EventService.Dispatch(new UnlockItemSelectedEvent(this));
             }
             else if (effectNode.Effect != null)
             {
-                GameManager.EventService.Dispatch(new EffectItemSelectedEvent(this));
+                Platform.EventService.Dispatch(new EffectItemSelectedEvent(this));
             }
             ToggleChildren(true);
             if (children.Count > 0)

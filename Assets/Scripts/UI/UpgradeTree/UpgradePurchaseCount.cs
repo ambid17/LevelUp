@@ -19,7 +19,7 @@ namespace Minigames.Fight
 
         void Start()
         {
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
             countButton.onClick.AddListener(OnButtonClicked);
 
             purchaseCountIndex = 0;

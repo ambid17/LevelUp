@@ -30,7 +30,7 @@ public class TooltipButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             content = _disabledContent;
         }
         
-        GameManager.EventService.Dispatch(new TooltipShowEvent(_header, content));
+        Platform.EventService.Dispatch(new TooltipShowEvent(_header, content));
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -41,6 +41,6 @@ public class TooltipButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             return;
         }
-        GameManager.EventService.Dispatch<TooltipHideEvent>();
+        Platform.EventService.Dispatch<TooltipHideEvent>();
     }
 }

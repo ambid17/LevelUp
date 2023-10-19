@@ -29,7 +29,7 @@ namespace Minigames.Fight
 
         private void Awake()
         {
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
             _eventService.Add<EffectItemSelectedEvent>(OnEffectSelected);
             _eventService.Add<UnlockItemSelectedEvent>(OnUnlockSelected);
             upgradeButton.onClick.AddListener(BuyUpgrade);

@@ -32,7 +32,7 @@ namespace Minigames.Fight
             MyEntity = GetComponent<Entity>();
             SpriteRenderer = GetComponent<SpriteRenderer>();
             Animator = GetComponent<Animator>();
-            EventService = GameManager.EventService;
+            EventService = Platform.EventService;
         }
 
 

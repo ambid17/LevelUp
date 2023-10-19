@@ -11,7 +11,7 @@ namespace Minigames.Fight
 
         protected virtual void Awake()
         {
-            eventService = GameManager.EventService;
+            eventService = Platform.EventService;
         }
     }
 }

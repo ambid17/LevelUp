@@ -13,7 +13,7 @@ namespace Minigames.Fight
 
         private void Start()
         {
-            GameManager.EventService.Add<PlayerResourceUpdateEvent>(UpdateResource);
+            Platform.EventService.Add<PlayerResourceUpdateEvent>(UpdateResource);
         }
 
         public void UpdateResource(PlayerResourceUpdateEvent e)
