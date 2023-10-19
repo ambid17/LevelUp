@@ -28,7 +28,6 @@ namespace Minigames.Fight
             if (CanShoot())
             {
                 _overridenEntity.WeaponArmController.PlayShootAnimation();
-                Shoot();
             }
 
             if (CanUseWeaponAbility())

@@ -19,10 +19,12 @@ MonoBehaviour:
   ammoIcon: {fileID: 0}
   abilityIcon: {fileID: 0}
   abilityCooldown: 0
-  fireRate: 0.5
+  fireRate: 0.1
   damage: 2
   projectilePrefab: {fileID: 9209020533433039234, guid: 2c53d0e6ea05d2441b854a711383c56e, type: 3}
   magazineSize: 0
   bulletsInMagazine: 0
   reloadTime: 0
   projectileCount: 0
+  projectileSpread: 0
+  bulletSpriteOverride: {fileID: 0}

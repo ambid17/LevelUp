@@ -33,6 +33,7 @@ public class AnimationManager : MonoBehaviour
 
     public void PlayAnimation(AnimationName name, float time)
     {
+        // Prevent null refs
         if (currentAnimation == null)
         {
             currentAnimation = name;

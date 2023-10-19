@@ -65,10 +65,12 @@ namespace Minigames.Fight
                 AnimationController.PlayEquipAnimation();
             }
         }
+
         public void ReturnToIdle()
         {
             StartCoroutine(RotateTowardsZero());
         }
+
         IEnumerator RotateTowardsZero()
         {
             while (transform.eulerAngles.z != 0)
@@ -89,6 +91,7 @@ namespace Minigames.Fight
         {
             _meleeWeaponController.Shoot();
         }
+
         public void ProjectileShoot()
         {
             _projectileWeaponController.Shoot();
