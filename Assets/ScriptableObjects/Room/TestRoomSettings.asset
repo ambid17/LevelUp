@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6892e9555da6d0f49a1a3459037409b2, type: 3}
+  m_Name: TestRoomSettings
+  m_EditorClassIdentifier: 
+  minRooms: 0
+  maxRooms: 0
+  startRoom: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+  rooms: []
+  wallTile: {fileID: 11400000, guid: 6f3ceea7cf19f334986c35ac0cc78694, type: 2}
+  tilesToReplace: 8
