@@ -2098,7 +2098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f40f28274f9b2c4fb7e5e400a0d9826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
+  progressSettings: {fileID: 11400000, guid: 2aa08277236dd614b9e066cb45c1231b, type: 2}
   effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
   playerSettings: {fileID: 11400000, guid: 9bddfe638d36abc488c374dfec22eb28, type: 2}
   incomeSettings: {fileID: 11400000, guid: 7632685d0406e4745acfd25bc667368d, type: 2}
@@ -2127,9 +2127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d61b1e79f2d4c45a4741947cb647e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
-  minCaches: 5
-  maxCaches: 10
+  progressSettings: {fileID: 11400000, guid: 2aa08277236dd614b9e066cb45c1231b, type: 2}
+  minCaches: 0
+  maxCaches: 0
   pathFinderPrefab: {fileID: 5540842416144370237, guid: 8dfc742d56700254a8d4ab18d13b6157, type: 3}
   resourceCachePrefab: {fileID: 8911795038111677234, guid: 8d323e7dac0642b40bfb89f00761146b, type: 3}
   cacheSpriteDictionary:
@@ -2282,6 +2282,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4881681057489713699, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085416, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2325,6 +2329,82 @@ PrefabInstance:
     - target: {fileID: 6777965647452085416, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: enemiesToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1557215892}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1322414675}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: spawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1125360019}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: FlowerWaypoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: PatrolWaypoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: WorkerWaypoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: FlowerWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1709337935}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: FlowerWaypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 947898610}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: FlowerWaypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1723792006}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: PatrolWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1681010347}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: PatrolWaypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1015024075}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: PatrolWaypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 30504760}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: WorkerWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 916557459}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: WorkerWaypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 173213772}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: WorkerWaypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 3260342}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[0].EnemyPrefab
+      value: 
+      objectReference: {fileID: 2083538932749553234, guid: 397fcdc02bde49141ab2b41163364880, type: 3}
+    - target: {fileID: 6777965647452085418, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[0].numberToSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6777965647452085423, guid: ec80ce9b5b52f254aa8f3786cf05c136, type: 3}
       propertyPath: m_Name
