@@ -21,13 +21,5 @@ namespace Minigames.Fight
             base.Start();
             _overridenEntity = MyEntity as PlayerEntity;
         }
-        protected void TryShoot()
-        {
-            if (GameManager.PlayerEntity.IsDead)
-            {
-                return;
-            }
-            _overridenEntity.WeaponArmController.Playshoot();
-        }
     }
 }

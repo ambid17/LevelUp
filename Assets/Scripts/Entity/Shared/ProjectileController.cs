@@ -21,7 +21,7 @@ namespace Minigames.Fight
 
         protected virtual void Start()
         {
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
         }
 

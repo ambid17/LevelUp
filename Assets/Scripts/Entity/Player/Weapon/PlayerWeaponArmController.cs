@@ -24,7 +24,7 @@ namespace Minigames.Fight
             _currentArm = leftArm;
             _cam = GameManager.PlayerEntity.PlayerCamera;
 
-            GameManager.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
+            Platform.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
         }
 
         public void SwitchDirection(PlayerChangedDirectionEvent e)
@@ -70,6 +70,7 @@ namespace Minigames.Fight
 
             _currentArm.transform.rotation = PhysicsUtils.LookAt(transform, _cam.ScreenToWorldPoint(Input.mousePosition), _currentArm.StartRotation);
         }
+
         private PlayerWeaponArm SwitchArms()
         {
             if (_currentArm == leftArm)
@@ -78,7 +79,8 @@ namespace Minigames.Fight
             }
             return leftArm;
         }
-        public void Playshoot()
+
+        public void PlayShootAnimation()
         {
             _currentArm.AnimationController.PlayShootAnimation();
         }

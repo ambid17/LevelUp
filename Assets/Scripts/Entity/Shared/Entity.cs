@@ -25,7 +25,7 @@ namespace Minigames.Fight
 
         protected virtual void Awake()
         {
-            eventService = GameManager.EventService;
+            eventService = Platform.EventService;
             MovementController = GetComponent<MovementController>();
             VisualController = GetComponent<VisualController>();
             animationController = GetComponent<AnimationManager>();

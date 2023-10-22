@@ -37,7 +37,7 @@ namespace Minigames.Fight
             closeButton.onClick.AddListener(Close);
             BuildTree();
             GenerateUi();
-            GameManager.EventService.Add<EffectItemSelectedEvent>(OnLayoutItemSelected);
+            Platform.EventService.Add<EffectItemSelectedEvent>(OnLayoutItemSelected);
         }
 
         private void Update()
@@ -82,7 +82,7 @@ namespace Minigames.Fight
                 _currentParent = _currentParent.parent;
                 _currentParent.Toggle(true);
                 _currentParent.ToggleChildren(true);
-                GameManager.EventService.Dispatch(new EffectItemSelectedEvent(_currentParent));
+                Platform.EventService.Dispatch(new EffectItemSelectedEvent(_currentParent));
             }
         }
 

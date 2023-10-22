@@ -36,8 +36,8 @@ namespace Minigames.Fight
             _meleeWeaponController = GetComponent<PlayerMeleeWeaponController>();
             _equippedWeaponController = _projectileWeaponController;
             _equippedWeaponController.IsEquipped = true;
-            GameManager.EventService.Add<PlayerDiedEvent>(Die);
-            GameManager.EventService.Add<PlayerRevivedEvent>(Revive);
+            Platform.EventService.Add<PlayerDiedEvent>(Die);
+            Platform.EventService.Add<PlayerRevivedEvent>(Revive);
         }
 
         public void Die()
@@ -65,10 +65,12 @@ namespace Minigames.Fight
                 AnimationController.PlayEquipAnimation();
             }
         }
+
         public void ReturnToIdle()
         {
             StartCoroutine(RotateTowardsZero());
         }
+
         IEnumerator RotateTowardsZero()
         {
             while (transform.eulerAngles.z != 0)
@@ -89,6 +91,7 @@ namespace Minigames.Fight
         {
             _meleeWeaponController.Shoot();
         }
+
         public void ProjectileShoot()
         {
             _projectileWeaponController.Shoot();

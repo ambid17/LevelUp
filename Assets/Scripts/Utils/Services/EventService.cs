@@ -55,5 +55,25 @@ namespace Utils
         public void Remove<IEventType>(Action<IEventType> action) where IEventType : IEvent {
             registry.Transient.Remove(action);
         }
+
+        public void AddPermanent<T>(Action action)
+        {
+            registry.Permanent.Add<T>(action);
+        }
+
+        public void AddPermanent<IEventType>(Action<IEventType> action) where IEventType : IEvent
+        {
+            registry.Permanent.Add(action);
+        }
+
+        public void RemovePermanent<T>(Action action)
+        {
+            registry.Transient.Remove<T>(action);
+        }
+
+        public void RemovePermanent<IEventType>(Action<IEventType> action) where IEventType : IEvent
+        {
+            registry.Transient.Remove(action);
+        }
     }
 }

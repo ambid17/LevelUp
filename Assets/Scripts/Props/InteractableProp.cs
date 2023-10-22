@@ -39,7 +39,7 @@ namespace Minigames.Fight
             {
                 _spriteRenderer.material = interactableMaterial;
                 _spriteRenderer.color = Color.blue;
-                GameManager.EventService.Dispatch(new OnCanInteractEvent(InteractionType));
+                Platform.EventService.Dispatch(new OnCanInteractEvent(InteractionType));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Minigames.Fight
             {
                 _spriteRenderer.material = defaultMaterial;
                 _spriteRenderer.color = Color.white;
-                GameManager.EventService.Dispatch(new OnCanInteractEvent(InteractionType.None));
+                Platform.EventService.Dispatch(new OnCanInteractEvent(InteractionType.None));
             }
         }
     }

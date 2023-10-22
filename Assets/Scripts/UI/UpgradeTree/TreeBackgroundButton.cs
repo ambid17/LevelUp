@@ -17,7 +17,7 @@ namespace Minigames.Fight
 
         void DisableInspector()
         {
-            GameManager.EventService.Dispatch(new EffectItemSelectedEvent(null));
+            Platform.EventService.Dispatch(new EffectItemSelectedEvent(null));
         }
     }
 }

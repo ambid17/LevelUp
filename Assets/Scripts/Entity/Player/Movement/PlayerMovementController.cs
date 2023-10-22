@@ -19,7 +19,7 @@ namespace Minigames.Fight
         void Start()
         {
             SetStartingMoveSpeed(GameManager.SettingsManager.playerSettings.MoveSpeed);
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
             _myEntity = MyEntity as PlayerEntity;
         }
 

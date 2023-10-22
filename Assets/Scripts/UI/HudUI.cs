@@ -27,7 +27,7 @@ namespace Minigames.Fight
 
         void Start()
         {
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(SetGoldText);
             _eventService.Add<PlayerHpUpdatedEvent>(SetHpSlider);
             _eventService.Add<PlayerAmmoUpdatedEvent>(SetAmmo);
@@ -36,7 +36,7 @@ namespace Minigames.Fight
         
             SetGoldText();
             SetHpSlider(new PlayerHpUpdatedEvent(1));
-            SetupAmmoAndAbility();
+            //SetupAmmoAndAbility();
         }
 
         private void Update()
