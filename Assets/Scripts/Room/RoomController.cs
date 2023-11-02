@@ -19,21 +19,7 @@ namespace Minigames.Fight
         public Tilemap Tilemap;
         public List<RoomConnection> roomConnections;
 
-        public float TotalBeeDamageTaken
-        {
-            get
-            {
-                float totalCurrentHealth = 0;
-                foreach (EntityBehaviorData behavior in beesInRoom)
-                {
-                    if (behavior != null)
-                    {
-                        totalCurrentHealth += behavior.CurrentHealth;
-                    }
-                }
-                return beeHealthSum - totalCurrentHealth;
-            }
-        }
+
 
         [SerializeField]
         private CinemachineVirtualCamera cam;
@@ -73,13 +59,7 @@ namespace Minigames.Fight
                 {
                     int randomInt = Random.Range(0, spawnPoints.Count);
                     EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
-                    behavior.roomController = this;
-                    if (behavior.EnemyType == SpecialEnemyType.Bee)
-                    {
-                        maxBeeHealth = behavior.CurrentHealth;
-                        beeHealthSum += maxBeeHealth;
-                        beesInRoom.Add(behavior);
-                    }
+
                     spawnPoints.Remove(spawnPoints[randomInt]);
                 }
             }

@@ -17,7 +17,7 @@ namespace Minigames.Fight
 
         private void Update()
         {
-            if (!behaviorData.Alerted)
+            if (!behaviorData)
             {
                 return;
             }

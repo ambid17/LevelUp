@@ -12,7 +12,6 @@ namespace Minigames.Fight
         private void Start()
         {
             col = GetComponent<CircleCollider2D>();
-            col.radius = behavior.SmellRadius;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -22,16 +21,6 @@ namespace Minigames.Fight
                 return;
             }
             EntityBehaviorData otherBehavior = collision.GetComponent<EntityBehaviorData>();
-            if (otherBehavior == null || otherBehavior.EnemyType != SpecialEnemyType.Ant)
-            {
-                return;
-            }
-
-            // If other ant is alerted we become alerted
-            if (otherBehavior.Alerted)
-            {
-                behavior.Alerted = true;
-            }
         }
     }
 
