@@ -13,7 +13,7 @@ namespace Minigames.Fight
         [SerializeField]
         private float tick;
         [SerializeField]
-        private int tickRandomizer;
+        private float tickRandomizer;
 
         public Transform playerTransform => myEntity.Target;
         public Vector2 playerPosition => myEntity.Target.position;

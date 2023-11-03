@@ -16,6 +16,10 @@ namespace Minigames.Fight
         public HiveMindManager(List<HiveMindBehaviorData> hiveMinds)
         {
             MyHiveMinds = hiveMinds;
+            foreach (HiveMindBehaviorData hiveMind in MyHiveMinds)
+            {
+                hiveMind.MyManager = this;
+            }
         }
 
         private void Update()

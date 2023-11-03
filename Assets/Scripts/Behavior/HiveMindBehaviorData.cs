@@ -11,7 +11,7 @@ namespace Minigames.Fight
         public int Id => myId;
         public HiveMindBehaviorData myBehaviorData => this;
 
-        
+        public HiveMindManager MyManager { get; set; }
     }
 }
 

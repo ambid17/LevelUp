@@ -18,11 +18,11 @@ GameObject:
   - component: {fileID: 5468921551894925541}
   - component: {fileID: 1087665331962127016}
   - component: {fileID: -1506387986271205772}
-  - component: {fileID: 2083538932749553234}
   - component: {fileID: 4602063734888168953}
   - component: {fileID: 3106216748061571400}
   - component: {fileID: 3675632202975684303}
   - component: {fileID: 8786738170713418640}
+  - component: {fileID: 4753106218521632268}
   m_Layer: 9
   m_Name: Bee
   m_TagString: Untagged
@@ -284,18 +284,6 @@ MonoBehaviour:
       Version: 1.7.4
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &2083538932749553234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16d2a68bce3d641488e00f5b8bede652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5
@@ -387,3 +375,19 @@ CapsuleCollider2D:
   m_Offset: {x: -0.08171713, y: 0.025815547}
   m_Size: {x: 0.5168855, y: 0.5546578}
   m_Direction: 0
+--- !u!114 &4753106218521632268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466c4b92a5a3f1c4482c419033d33e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myEntity: {fileID: -7786698165613059924}
+  tick: 1
+  tickRandomizer: 0.1
+  myId: 0
