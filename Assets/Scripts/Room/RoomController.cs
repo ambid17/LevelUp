@@ -37,9 +37,6 @@ namespace Minigames.Fight
         [SerializeField]
         private List<EnemyToSpawn> enemiesToSpawn;
 
-        private float beeHealthSum;
-        private float maxBeeHealth;
-
         private bool hasInitialized;
 
         private List<EntityBehaviorData> beesInRoom = new List<EntityBehaviorData>();
@@ -53,6 +50,8 @@ namespace Minigames.Fight
 
         private void SpawnEnemies()
         {
+            Dictionary<int, List<HiveMindBehaviorData>> hiveMinds = new();
+
             foreach (EnemyToSpawn enemy in enemiesToSpawn)
             {
                 for (int i = 0; i < enemy.numberToSpawn; i++)
@@ -60,8 +59,23 @@ namespace Minigames.Fight
                     int randomInt = Random.Range(0, spawnPoints.Count);
                     EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
 
+                    IHiveMind hiveMind = behavior.GetComponent<IHiveMind>();
+                    if (hiveMind != null)
+                    {
+                        if (!hiveMinds.ContainsKey(hiveMind.Id))
+                        {
+                            hiveMinds.Add(hiveMind.Id, new());
+                        }
+
+                        hiveMinds[hiveMind.Id].Add(hiveMind.myBehaviorData);
+                    }
+
                     spawnPoints.Remove(spawnPoints[randomInt]);
                 }
+            }
+            foreach (List<HiveMindBehaviorData> hiveMindList in hiveMinds.Values)
+            {
+                HiveMindManager hiveMindManager = new(hiveMindList);
             }
         }
 

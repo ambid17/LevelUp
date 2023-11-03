@@ -270,9 +270,9 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(296.2732,-265.818848)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(4.30841064,133.161316)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.ParallelComplete","NodeData":{"Offset":"(0,163.043457)"},"ID":2,"Name":"Parallel
-        Complete","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.RandomSelector","NodeData":{"Offset":"(-111.5495,123.125031)"},"ID":3,"Name":"Random
-        Selector","Instant":true,"Int32seed":0,"BooleanuseSeed":false,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(-116.607849,120.9617)"},"ID":4,"Name":"Idle","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(2.95735168,120.9617)"},"ID":5,"Name":"Idle","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(122.522583,120.9617)"},"ID":6,"Name":"Idle","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(142.9574,99.6573639)"},"ID":7,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(296.2732,-265.818848)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(4.30841064,133.161316)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.ParallelComplete","NodeData":{"Offset":"(0,141.304321)"},"ID":2,"Name":"Parallel
+        Complete","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.RandomSelector","NodeData":{"Offset":"(-100.679932,112.255463)"},"ID":3,"Name":"Random
+        Selector","Instant":true,"Int32seed":0,"BooleanuseSeed":false,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(-116.607849,120.9617)"},"ID":4,"Name":"Idle","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(2.95735168,120.9617)"},"ID":5,"Name":"Idle","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(122.522583,120.9617)"},"ID":6,"Name":"Idle","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(99.479126,112.301315)"},"ID":7,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -296,9 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d2a68bce3d641488e00f5b8bede652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: -7786698165613059924}
-  enemyType: 1
-  _smellRadius: 0
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5
