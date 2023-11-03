@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObjects/Fight/Enemy", order = 1)]
+    [CreateAssetMenu(fileName = "EnemyList", menuName = "ScriptableObjects/Fight/EnemyList", order = 1)]
     [Serializable]
-    public class Enemy : ScriptableObject
+    public class EnemyList : ScriptableObject
     {
         public List<EntityBehaviorData> enemies;
 

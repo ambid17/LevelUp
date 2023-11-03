@@ -39,8 +39,6 @@ namespace Minigames.Fight
 
         private bool hasInitialized;
 
-        private List<EntityBehaviorData> beesInRoom = new List<EntityBehaviorData>();
-
         private void Start()
         {
             cam.Follow = GameManager.CameraLerp.transform;
@@ -57,7 +55,7 @@ namespace Minigames.Fight
                 for (int i = 0; i < enemy.numberToSpawn; i++)
                 {
                     int randomInt = Random.Range(0, spawnPoints.Count);
-                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
+                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
 
                     IHiveMind hiveMind = behavior.GetComponent<IHiveMind>();
                     if (hiveMind != null)
@@ -249,7 +247,7 @@ namespace Minigames.Fight
     [Serializable]
     public class EnemyToSpawn
     {
-        public EntityBehaviorData EnemyPrefab;
+        public EnemyType EnemyPrefab;
         public int numberToSpawn;
     }
 }
