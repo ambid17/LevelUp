@@ -15,9 +15,8 @@ public class WorldInspector : MonoBehaviour
     [SerializeField] private Button conquerButton;
     [SerializeField] private Button travelButton;
     [SerializeField] private GameObject container;
+    [SerializeField] private GameObject loadingTransition;
     
-    private const string loadingSceneName = "Loading";
-
     private World _world;
     void Start()
     {
@@ -53,14 +52,14 @@ public class WorldInspector : MonoBehaviour
     {
         GameManager.IsLoadingScene = true;
         Platform.ProgressSettings.CurrentWorld = _world;
-        SceneManager.LoadScene(loadingSceneName);
+        Instantiate(loadingTransition);
     }
     
     private void TravelToPlanet()
     {
         GameManager.IsLoadingScene = true;
         Platform.ProgressSettings.CurrentWorld = _world;
-        SceneManager.LoadScene(loadingSceneName);
+        Instantiate(loadingTransition);
     }
 
     

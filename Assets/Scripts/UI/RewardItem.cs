@@ -24,7 +24,7 @@ namespace Minigames.Fight
 
         private void Start()
         {
-            _eventService = GameManager.EventService;
+            _eventService = Platform.EventService;
             _eventService.Add<EffectSelectedEvent>(OnSelected);
         }
 

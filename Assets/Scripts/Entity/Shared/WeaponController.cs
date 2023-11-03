@@ -22,7 +22,7 @@ namespace Minigames.Fight
         {
             MyEntity = GetComponent<Entity>();
 
-            EventService = GameManager.EventService;
+            EventService = Platform.EventService;
         }
 
         protected virtual void Start()

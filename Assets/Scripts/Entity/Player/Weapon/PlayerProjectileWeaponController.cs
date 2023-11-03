@@ -16,18 +16,18 @@ namespace Minigames.Fight
 
         protected override void Update()
         {
-            if (!isCurrentArm)
+            if (!isCurrentArm || MyEntity.IsDead)
             {
                 return;
             }
-            base.Update();
-
             
-            TryReload();
+            base.Update();
+            
+            TryRegenAmmo();
 
             if (CanShoot())
             {
-                TryShoot();
+                _overridenEntity.WeaponArmController.PlayShootAnimation();
             }
 
             if (CanUseWeaponAbility())
@@ -36,19 +36,20 @@ namespace Minigames.Fight
                 EventService.Dispatch<PlayerUsedAbilityEvent>();
                 UseWeaponAbility();
             }
-
         }
+
         public override void Setup(Weapon weapon)
         {
             base.Setup(weapon);
             // Calculate effect stuff.
         }
+
         protected override bool CanShoot()
         {
             return Input.GetKey(KeyCode.Mouse0) && IsEquipped && ShotTimer > weapon.fireRate && overridenWeapon.bulletsInMagazine > 0;
         }
 
-        protected virtual void TryReload()
+        protected virtual void TryRegenAmmo()
         {
             if (overridenWeapon.bulletsInMagazine == overridenWeapon.magazineSize)
             {

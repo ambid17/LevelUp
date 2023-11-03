@@ -81,17 +81,20 @@ namespace Minigames.Fight
         public void PlayShootAnimation()
         {
             AnimationName storedCurrentAnim = currentAnimation;
+            float projectileSpeedModifier = 1 / (arm.EquippedWeapon.Weapon.fireRate * 0.9f);
             if (CurrentWeaponMode == WeaponMode.Projectile)
             {
+                anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
                 PlayAnimation(projectileShoot, 0);
             }
             else if (CurrentWeaponMode == WeaponMode.Melee)
             {
+                anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
                 PlayAnimation(meleeShoot, 0);
             }
             if (_isAttemptingEquip)
             {
-                QueAnimation(storedCurrentAnim);
+                QueueAnimation(storedCurrentAnim);
             }
         }
 

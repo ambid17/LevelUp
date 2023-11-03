@@ -24,7 +24,7 @@ public class Tooltip : MonoBehaviour
         _containerRect = _container.GetComponent<RectTransform>();
         _camera = Camera.main;
         
-        _eventService = GameManager.EventService;
+        _eventService = Platform.EventService;
         _eventService.Add<TooltipShowEvent>(ShowTooltip);
         _eventService.Add<TooltipHideEvent>(HideTooltip);
         

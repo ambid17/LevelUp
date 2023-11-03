@@ -25,6 +25,6 @@ public class WeaponButton : MonoBehaviour
 
     private void SelectWeapon()
     {
-        GameManager.EventService.Dispatch(new WeaponSelectedEvent(_weapon));
+        Platform.EventService.Dispatch(new WeaponSelectedEvent(_weapon));
     }
 }

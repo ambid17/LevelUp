@@ -27,7 +27,7 @@ namespace Minigames.Fight
         
 //        void Awake()
 //        {
-//            _eventService = GameManager.EventService;
+//            _eventService = Platform.EventService;
 //            //_eventService.Add<CountryCompletedEvent>(OnCountryCompleted);
 //            //_eventService.Add<WorldCompletedEvent>(OnWorldCompleted);
 //            selectButton.interactable = false;
@@ -53,7 +53,7 @@ namespace Minigames.Fight
 //        //    // Update the player entity's managed list of on-hit effects
 //        //    if (selectedEffect.TriggerType == EffectTriggerType.OnHit)
 //        //    {
-//        //        GameManager.EventService.Dispatch<OnHitEffectUnlockedEvent>();
+//        //        Platform.EventService.Dispatch<OnHitEffectUnlockedEvent>();
 //        //    }
             
 //        //    GameManager.UIManager.ToggleUiPanel(UIPanelType.Reward, false);

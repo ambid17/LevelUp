@@ -11,18 +11,22 @@ namespace Minigames.Fight
         {
             return Input.GetKey(KeyCode.Mouse0) && IsEquipped && ShotTimer > weapon.fireRate;
         }
+
         protected override void Update()
         {
-            if (!isCurrentArm)
+            if (!isCurrentArm || MyEntity.IsDead)
             {
                 return;
             }
+            
             base.Update();
+            
             if (CanShoot())
             {
-                TryShoot();
+                _overridenEntity.WeaponArmController.PlayShootAnimation();
             }
         }
+
         public override void Shoot()
         {
             // TODO: toggle on and off instead of instantiating

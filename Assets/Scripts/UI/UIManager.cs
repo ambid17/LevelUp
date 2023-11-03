@@ -37,7 +37,7 @@ namespace Minigames.Fight
             ToggleUiPanel(UIPanelType.EffectCreate, false);
             ToggleUiPanel(UIPanelType.Pause, false);
             ToggleUiPanel(UIPanelType.Reward, false);
-            GameManager.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
+            Platform.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
         }
 
         private void OnPlayerInteract(PlayerInteractedEvent e)

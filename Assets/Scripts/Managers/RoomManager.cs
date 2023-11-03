@@ -153,13 +153,16 @@ namespace Minigames.Fight
                 graph.center = (min + max) / 2;
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
-            StartCoroutine(RecalculateGraph());
+
+            RecalculateGraph();
+
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
+
+            Platform.EventService.Dispatch(new SceneIsReadyEvent());
         }
 
-        private IEnumerator RecalculateGraph()
+        private void RecalculateGraph()
         {
-            yield return new WaitForSeconds(1);
             AstarPath.active.Scan();
 
             foreach (NavGraph navGraph in AstarPath.active.graphs)
