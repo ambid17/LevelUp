@@ -6,9 +6,7 @@ namespace Minigames.Fight
 {
     public class HiveMindBehaviorData : EntityBehaviorData, IHiveMind
     {
-        [SerializeField]
-        private int myId;
-        public int Id => myId;
+        public int Id { get; set; }
         public HiveMindBehaviorData myBehaviorData => this;
 
         public HiveMindManager MyManager { get; set; }

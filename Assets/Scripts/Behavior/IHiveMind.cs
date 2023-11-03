@@ -2,7 +2,7 @@ namespace Minigames.Fight
 {
     public interface IHiveMind
     {
-        int Id { get;}
+        int Id { get; set; }
         HiveMindBehaviorData myBehaviorData { get;}
     }
 }
