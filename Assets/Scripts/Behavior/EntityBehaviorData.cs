@@ -43,6 +43,10 @@ namespace Minigames.Fight
         public Vector2 PlayerPosition => myEntity.Target.position;
         public float Tick => tick + Time.deltaTime;
         public float Speed => myEntity.enemyStats.MoveSpeed;
+        public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerPosition);
+
+
+
         public List<Transform> FlowerWaypoints => room.FlowerWaypoints;
         public List<Transform> WorkerWaypoints => room.WorkerWaypoints;
         public List<Transform> PatrolWaypoints => room.PatrolWaypoints;
