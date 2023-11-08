@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -7,19 +8,30 @@ namespace Minigames.Fight
     public class HiveMindManager : MonoBehaviour
     {
         public List<HiveMindBehaviorData> MyHiveMinds;
+        public bool CanSeeTarget;
+
+        public bool IsAlerted => CurrentHiveHP < _totalHiveMaxHealth;
+
+        public float CurrentHiveHP => MyHiveMinds.Sum(h => h.MyEntity.Stats.currentHp);
+        public float AttackPriority => _totalHiveMaxHealth - CurrentHiveHP;
 
         [SerializeField]
         private float tick;
+        [SerializeField]
+        private float tickRandomizer;
 
         private float _tickTimer;
+        private float _totalHiveMaxHealth;
 
-        public HiveMindManager(List<HiveMindBehaviorData> hiveMinds)
+        public void Initialize(List<HiveMindBehaviorData> hiveMinds)
         {
             MyHiveMinds = hiveMinds;
             foreach (HiveMindBehaviorData hiveMind in MyHiveMinds)
             {
                 hiveMind.MyManager = this;
+                _totalHiveMaxHealth += hiveMind.MyEntity.enemyStats.MaxHp;
             }
+            tick += Random.Range(-tickRandomizer, tickRandomizer);
         }
 
         private void Update()
@@ -35,7 +47,28 @@ namespace Minigames.Fight
 
         private void OnTick()
         {
+            StartCoroutine(CheckLoS());
+        }
 
+        IEnumerator CheckLoS()
+        {
+            if (!IsAlerted)
+            {
+                yield break;
+            }
+            var hiveMindsByDistanceFromTarget = MyHiveMinds.OrderBy(h => (h.transform.position.AsVector2() - h.PlayerPosition).magnitude);
+            foreach (HiveMindBehaviorData hiveMind in hiveMindsByDistanceFromTarget)
+            {
+                GameObject player = PhysicsUtils.HasLineOfSight(hiveMind.transform, GameManager.PlayerEntity.transform, hiveMind.MyEntity.enemyStats.DetectRange, 360, hiveMind.ObstacleLayerMask);
+                if (player != null)
+                {
+                    CanSeeTarget = true;
+                    yield break;
+                }
+
+                yield return new WaitForSeconds(0);
+            }
+            CanSeeTarget = false;
         }
     }
 }

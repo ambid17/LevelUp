@@ -25,6 +25,9 @@ namespace Minigames.Fight
         private CinemachineVirtualCamera cam;
 
         [SerializeField]
+        private HiveMindManager hiveMindManagerPrefab;
+
+        [SerializeField]
         private float zoomSpeed;
         [SerializeField]
         private float zoomSize;
@@ -73,7 +76,8 @@ namespace Minigames.Fight
             }
             foreach (List<HiveMindBehaviorData> hiveMindList in hiveMinds.Values)
             {
-                HiveMindManager hiveMindManager = new(hiveMindList);
+                HiveMindManager hiveMindManager = Instantiate(hiveMindManagerPrefab);
+                hiveMindManager.Initialize(hiveMindList);
             }
         }
 

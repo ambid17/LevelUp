@@ -10,6 +10,9 @@ namespace Minigames.Fight
         public HiveMindBehaviorData myBehaviorData => this;
 
         public HiveMindManager MyManager { get; set; }
+        public override bool CanSeeTarget => MyManager.CanSeeTarget;
+        public bool IsAlerted => MyManager.IsAlerted;
+        public float AttackPriority => MyManager.AttackPriority;
     }
 }
 

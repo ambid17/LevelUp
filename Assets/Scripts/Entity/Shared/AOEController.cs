@@ -43,12 +43,7 @@ namespace Minigames.Fight
         }
         public virtual void SetUp(Entity entity)
         {
-            float damage = entity.Stats.damage;
-            if (overrideEffectDamage)
-            {
-                damage = damageOverrideValue;
-            }
-            storedHitData = new HitData(entity, damage);
+            storedHitData = new HitData(entity, damageOverrideValue);
             if (overrideStatusEffects)
             {
                 storedHitData.Effects = statusEffectOverrides;
