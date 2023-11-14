@@ -14,14 +14,14 @@ namespace Minigames.Fight
 
         public float CurrentHiveHP => MyHiveMinds.Sum(h => h.MyEntity.Stats.currentHp);
         public float AttackPriority => _totalHiveMaxHealth - CurrentHiveHP;
-
-        [SerializeField]
+        public Vector2 PlayerLastKnown => _playerLastKnown;
         private float tick;
         [SerializeField]
         private float tickRandomizer;
 
         private float _tickTimer;
         private float _totalHiveMaxHealth;
+        private Vector2 _playerLastKnown;
 
         public void Initialize(List<HiveMindBehaviorData> hiveMinds)
         {
@@ -62,6 +62,7 @@ namespace Minigames.Fight
                 GameObject player = PhysicsUtils.HasLineOfSight(hiveMind.transform, GameManager.PlayerEntity.transform, hiveMind.MyEntity.enemyStats.DetectRange, 360, hiveMind.ObstacleLayerMask);
                 if (player != null)
                 {
+                    _playerLastKnown = GameManager.PlayerEntity.transform.position;
                     CanSeeTarget = true;
                     yield break;
                 }

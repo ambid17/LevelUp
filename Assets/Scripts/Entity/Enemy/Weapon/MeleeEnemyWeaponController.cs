@@ -8,6 +8,8 @@ namespace Minigames.Fight
         private EnemyEntity _overridenEntity;
         private MeleeWeapon _overridenWeapon;
 
+        public MeleeWeapon OverridenWeapon => _overridenWeapon;
+
         protected override void Start()
         {
             base.Start();

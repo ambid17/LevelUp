@@ -129,16 +129,10 @@ MonoBehaviour:
   tickDamageDownPerSecond: 1
   enemyStats:
     goldValue: 1
-    fireRate: 0.5
     moveSpeed: 2
-    acceleration: 5
     maxHp: 10
-    meleeWeaponDamage: 0
-    projectileWeaponDamage: 0
     projectileSpeed: 10
     projectileLifeTime: 5
-    armor: 0
-    magicResistance: 0
     effects:
     - {fileID: 11400000, guid: 0e76fc0c77b3e1e459bb8b14807c96af, type: 2}
     canShootTarget: 0
@@ -146,6 +140,7 @@ MonoBehaviour:
     randomProjectileOffset: 0.1
     predictTargetPosition: 1
     isPassive: 0
+    DetectRange: 0
 --- !u!114 &-698485910662565092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,9 +473,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d2a68bce3d641488e00f5b8bede652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: -7786698165613059924}
-  enemyType: 0
-  _smellRadius: 0
+  ObstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  myEntity: {fileID: 0}
+  tick: 0
+  room: {fileID: 0}
+  tickRandomizer: 0
+  trackDamagePerTick: 0
+  damageDecayRate: 0
+  myWeapon: {fileID: 0}
 --- !u!95 &5054155416519530242
 Animator:
   serializedVersion: 5
@@ -556,6 +558,7 @@ MonoBehaviour:
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
     CurrentIndex: 0
+  MyEntity: {fileID: 0}
 --- !u!114 &1287365799941292616
 MonoBehaviour:
   m_ObjectHideFlags: 0

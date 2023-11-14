@@ -31,7 +31,8 @@ namespace BehaviorDesigner.Runtime.Tasks
         {
             if (animationManager.CurrentAnimation != Animation.Value)
             {
-                return TaskStatus.Failure;
+                animationManager.PlayAnimation(Animation.Value, 0);
+                return TaskStatus.Running;
             }
             if (SuccessType == SuccessType.None)
             {

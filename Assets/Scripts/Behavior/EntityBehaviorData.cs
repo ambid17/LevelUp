@@ -14,14 +14,15 @@ namespace Minigames.Fight
         private EnemyEntity myEntity;
         [SerializeField]
         private float tick;
-        [SerializeField]
-        private RoomController room;
+        public RoomController room;
         [SerializeField]
         private float tickRandomizer;
         [SerializeField]
         private bool trackDamagePerTick;
         [SerializeField]
         private float damageDecayRate;
+        [SerializeField]
+        private MeleeEnemyWeaponController myWeapon;
 
         public float DamageLastTick
         {
@@ -44,6 +45,9 @@ namespace Minigames.Fight
         public float Tick => tick + Time.deltaTime;
         public float Speed => myEntity.enemyStats.MoveSpeed;
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerPosition);
+        public float PursueDistance => (myWeapon.OverridenWeapon.attackRange * 0.5f);
+        public bool CanShoot => MyEntity.enemyStats.canShootTarget;
+        public bool CanMelee => MyEntity.enemyStats.canMeleeTarget;
 
 
 
@@ -72,7 +76,7 @@ namespace Minigames.Fight
 
         public virtual void OnTick()
         {
-            if (trackDamagePerTick)
+            if (trackDamagePerTick && DamageLastTick > 0)
             {
                 DamageLastTick -= damageDecayRate;
             }

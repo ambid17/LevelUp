@@ -59,7 +59,7 @@ namespace Minigames.Fight
                 {
                     int randomInt = Random.Range(0, spawnPoints.Count);
                     EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
-
+                    behavior.room = this;
                     IHiveMind hiveMind = behavior.GetComponent<IHiveMind>();
                     if (hiveMind != null)
                     {
