@@ -64,7 +64,7 @@ MonoBehaviour:
   enemyStats:
     goldValue: 1
     moveSpeed: 3.5
-    maxHp: 20
+    maxHp: 5
     projectileSpeed: 1
     projectileLifeTime: 5
     effects: []
@@ -73,7 +73,7 @@ MonoBehaviour:
     randomProjectileOffset: 0
     predictTargetPosition: 0
     isPassive: 1
-    DetectRange: 3
+    DetectRange: 10
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0

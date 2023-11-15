@@ -26,6 +26,11 @@ namespace Minigames.Fight
                 return FlowerWaypoints[i].position;
             }
         }
+
+        private void OnDestroy()
+        {
+            MyManager.MyHiveMinds.Remove(this);
+        }
     }
 }
 
