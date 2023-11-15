@@ -21,8 +21,6 @@ namespace Minigames.Fight
         private bool trackDamagePerTick;
         [SerializeField]
         private float damageDecayRate;
-        [SerializeField]
-        private MeleeEnemyWeaponController myWeapon;
 
         public float DamageLastTick
         {
@@ -45,9 +43,10 @@ namespace Minigames.Fight
         public float Tick => tick + Time.deltaTime;
         public float Speed => myEntity.enemyStats.MoveSpeed;
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerPosition);
-        public float PursueDistance => (myWeapon.OverridenWeapon.attackRange * 0.5f);
+        public float PursueDistance => (MyEntity.enemyStats.MeleeAttackRange * 0.5f);
         public bool CanShoot => MyEntity.enemyStats.canShootTarget;
         public bool CanMelee => MyEntity.enemyStats.canMeleeTarget;
+        public bool WithinVisionRadius => DistanceToPlayer <= MyEntity.enemyStats.DetectRange;
 
 
 

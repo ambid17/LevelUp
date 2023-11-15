@@ -15,6 +15,7 @@ namespace Minigames.Fight
             base.Start();
             _overridenEntity = MyEntity as EnemyEntity;
             _overridenWeapon = weapon as MeleeWeapon;
+            _overridenEntity.enemyStats.MeleeAttackRange = _overridenWeapon.attackRange;
         }
 
         protected override void Update()

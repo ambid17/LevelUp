@@ -37,5 +37,6 @@ namespace Minigames.Fight
         public bool predictTargetPosition;
         public bool isPassive;
         public float DetectRange;
+        public float MeleeAttackRange;
     }
 }
