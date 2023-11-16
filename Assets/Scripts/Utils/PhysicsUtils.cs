@@ -113,4 +113,10 @@ public static class PhysicsUtils
     {
         return new Vector2(vector3Int.x, vector3Int.y);
     }
+    public static Vector2 RandomAroundTarget(Vector2 target, float randomFactor)
+    {
+        Vector2 randomOffset = new Vector2(Random.Range(-randomFactor, randomFactor), Random.Range(-randomFactor, randomFactor));
+        Vector2 newPosition = target + randomOffset;
+        return newPosition;
+    }
 }

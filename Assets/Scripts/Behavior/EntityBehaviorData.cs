@@ -46,7 +46,7 @@ namespace Minigames.Fight
         public float PursueDistance => (MyEntity.enemyStats.MeleeAttackRange * 0.5f);
         public bool CanShoot => MyEntity.enemyStats.canShootTarget;
         public bool CanMelee => MyEntity.enemyStats.canMeleeTarget;
-        public bool WithinVisionRadius => DistanceToPlayer <= MyEntity.enemyStats.DetectRange;
+        public virtual bool WithinVisionRadius => DistanceToPlayer <= MyEntity.enemyStats.DetectRange;
 
 
 
