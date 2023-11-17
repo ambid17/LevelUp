@@ -28,6 +28,23 @@ namespace Minigames.Fight
             }
         }
 
+        public Vector2 RandomSoldierWaypoint
+        {
+            get
+            {
+                int i = Random.Range(0, PatrolWaypoints.Count);
+                return PatrolWaypoints[i].position;
+            }
+        }
+
+        public Vector2 RandomWorkerWaypoint
+        {
+            get
+            {
+                int i = Random.Range(0, WorkerWaypoints.Count);
+                return WorkerWaypoints[i].position;
+            }
+        }
         public float SmellRadius => PlayerHasPheromones ? MyEntity.enemyStats.DetectRange * smellFactor : MyEntity.enemyStats.DetectRange;
 
         public Vector2 RandomAroundPlayer => PhysicsUtils.RandomAroundTarget(PlayerPosition, MyEntity.enemyStats.DetectRange);
