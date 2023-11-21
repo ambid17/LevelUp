@@ -37,6 +37,24 @@ namespace Minigames.Fight
             }
         }
 
+        public Vector2 RandomSoldierWaypoint
+        {
+            get
+            {
+                int i = Random.Range(0, PatrolWaypoints.Count);
+                return PatrolWaypoints[i].position;
+            }
+        }
+
+        public Vector2 RandomWorkerWaypoint
+        {
+            get
+            {
+                int i = Random.Range(0, WorkerWaypoints.Count);
+                return WorkerWaypoints[i].position;
+            }
+        }
+
         public EnemyEntity MyEntity => myEntity;
         public Transform PlayerTransform => myEntity.Target;
         public Vector2 PlayerPosition => myEntity.Target.position;

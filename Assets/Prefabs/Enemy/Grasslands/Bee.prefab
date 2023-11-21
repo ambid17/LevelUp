@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8510735526301981977}
   - component: {fileID: -7786698165613059924}
   - component: {fileID: 8789358854941681159}
-  - component: {fileID: -698485910662565092}
   - component: {fileID: 1047883154001853991}
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
@@ -57,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementController: {fileID: -698485910662565092}
+  MovementController: {fileID: 0}
   VisualController: {fileID: 1047883154001853991}
   animationController: {fileID: 3106216748061571400}
   tickDamageDownPerSecond: 0
@@ -74,6 +73,7 @@ MonoBehaviour:
     predictTargetPosition: 0
     isPassive: 1
     DetectRange: 10
+    MeleeAttackRange: 0
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,19 +87,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 086c15e3a1bbd0f4eb41b64853538c86, type: 2}
---- !u!114 &-698485910662565092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2286d01694b30d4fb543d6400174a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idealDistanceFromPlayer: 0
 --- !u!114 &1047883154001853991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,8 +333,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5
@@ -454,12 +441,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 5184
+    m_Bits: 4160
   myEntity: {fileID: -7786698165613059924}
   tick: 1
   room: {fileID: 0}
   tickRandomizer: 0.1
   trackDamagePerTick: 1
   damageDecayRate: 0.5
-  myWeapon: {fileID: 8789358854941681159}
   retreatPriorityFactory: 2
