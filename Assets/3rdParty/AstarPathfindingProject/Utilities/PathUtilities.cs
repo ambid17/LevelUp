@@ -169,6 +169,7 @@ namespace Pathfinding
         // Returns a list of reachable nodes within a specified distance of the target node.
         public static List<GraphNode> GetReachableNodesWithinRadius(Vector3 startPoint, float maxDistance)
         {
+            
             // Get the nearest walkable node to the target point.
             GraphNode nearestWalkableNode = AstarPath.active.GetNearest(startPoint, NNConstraint.Default).node;
 
@@ -185,6 +186,13 @@ namespace Pathfinding
                 }
             }
             return nodesWithinRadius;
+        }
+
+        public static GraphNode GetRandomReachableNode(Vector3 origin)
+        {
+            List<GraphNode> nodes = GetReachableNodes(AstarPath.active.GetNearest(origin, NNConstraint.Default).node);
+            int i = Random.Range(0, nodes.Count);
+            return nodes[i];
         }
 
         static Queue<GraphNode> BFSQueue;

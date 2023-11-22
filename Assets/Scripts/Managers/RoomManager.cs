@@ -165,27 +165,16 @@ namespace Minigames.Fight
         {
             AstarPath.active.Scan();
 
-            foreach (NavGraph navGraph in AstarPath.active.graphs)
-            {
-                GridGraph graph = navGraph as GridGraph;
-                if (graph.name == groundGraph)
-                {
-                    SpawnResources(graph, GameManager.PlayerEntity.transform.position);
-                }
-            }
+            SpawnResources(GameManager.PlayerEntity.transform.position);
         }
 
-        private void SpawnResources(GridGraph graph, Vector3 start)
+        private void SpawnResources(Vector3 start)
         {
-            List<GraphNode> nodes = PathUtilities.GetReachableNodes(AstarPath.active.GetNearest(start, NNConstraint.Default).node);
             int numberToSpawn = Random.Range(minCaches, maxCaches);
 
             for (int i = 0; i < numberToSpawn; i++)
             {
-                int randomNode = Random.Range(0, nodes.Count);
-
-                ResourceCache cache = Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
-
+                ResourceCache cache = Instantiate(resourceCachePrefab, (Vector3)PathUtilities.GetRandomReachableNode(start).position, Quaternion.identity);
 
                 // TODO set up scalable type randomization with weight.
                 int type = Random.Range(0, 2);
