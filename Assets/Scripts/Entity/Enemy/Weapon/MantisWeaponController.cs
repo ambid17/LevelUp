@@ -33,7 +33,7 @@ namespace Minigames.Fight
 
         public void ShootCombo()
         {
-            ShotTimer = 0;
+            _comboTimer = 0;
             if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) > comboWeapon.attackRange)
             {
                 return;
