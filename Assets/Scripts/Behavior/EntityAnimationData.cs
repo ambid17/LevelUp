@@ -9,8 +9,8 @@ namespace Minigames.Fight
         public AnimationName IdleAnimation => idleAnimation;
         public AnimationName MoveAnimation => moveAnimation;
         public AnimationName VariableMoveAnimation => MyEntity.rb.velocity == Vector2.zero ? idleAnimation : moveAnimation;
-        public AnimationName MeleeAttackAnimation => meleeAttackAnimation;
-        public AnimationName RangedAttackAnimation => rangedAttackAnimation;
+        public virtual AnimationName MeleeAttackAnimation => meleeAttackAnimation;
+        public virtual AnimationName RangedAttackAnimation => rangedAttackAnimation;
         public AnimationName AlternateMoveAnimation => alternateMoveAnimation;
 
         [SerializeField] AnimationName idleAnimation;
