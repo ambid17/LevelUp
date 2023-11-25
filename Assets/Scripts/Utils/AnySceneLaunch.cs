@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AnySceneLaunch : MonoBehaviour
 {
-    public static readonly int ANY_SCENE_LAUNCH_INDEX = 3;
+    public static readonly int ANY_SCENE_LAUNCH_INDEX = 2;
     public static readonly int MAIN_SCENE_INDEX = 0;
     private static int targetSceneIndex = -1;
 

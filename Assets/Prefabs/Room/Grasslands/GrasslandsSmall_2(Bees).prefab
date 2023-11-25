@@ -6890,7 +6890,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1244560827
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -7195,6 +7195,7 @@ MonoBehaviour:
     - {x: 16, y: -15, z: 0}
     HasConnection: 0
   cam: {fileID: 4881681057489713699}
+  hiveMindManagerPrefab: {fileID: 6766046538432121563, guid: db90b8a579f800b48930dbdb6a912820, type: 3}
   zoomSpeed: 2
   zoomSize: 1
   startSize: 3
@@ -7213,8 +7214,10 @@ MonoBehaviour:
   - {fileID: 1092739060740558959}
   - {fileID: 2627149290232460322}
   enemiesToSpawn:
-  - EnemyPrefab: {fileID: 2083538932749553234, guid: 397fcdc02bde49141ab2b41163364880, type: 3}
-    numberToSpawn: 10
+  - EnemyPrefab: {fileID: 11400000, guid: b19aa7b8fef1316409e1e2a2c6849d75, type: 2}
+    numberToSpawn: 8
+  - EnemyPrefab: {fileID: 11400000, guid: b65af4a6bcfe4e741a9a2240159f76a3, type: 2}
+    numberToSpawn: 2
 --- !u!60 &6777965647452085417
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -21513,7 +21516,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1244560827
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 20
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.5, y: 0.5, z: 0}

@@ -21017,6 +21017,7 @@ MonoBehaviour:
     - {x: 16, y: -15, z: 0}
     HasConnection: 0
   cam: {fileID: 4881681057489713699}
+  hiveMindManagerPrefab: {fileID: 0}
   zoomSpeed: 2
   zoomSize: 1
   startSize: 3
@@ -21044,9 +21045,9 @@ MonoBehaviour:
   - {fileID: 5622387832486346980}
   - {fileID: 7996357399887492531}
   enemiesToSpawn:
-  - EnemyPrefab: {fileID: 2083538932749553234, guid: e6cee23ed31a3004e82de48c9b44aa26, type: 3}
+  - EnemyPrefab: {fileID: 11400000, guid: b91f9c87f6f0e7749a8e533ed19997ed, type: 2}
     numberToSpawn: 12
-  - EnemyPrefab: {fileID: 2083538932749553234, guid: 2229283ea4df18246808070c8dbd7169, type: 3}
+  - EnemyPrefab: {fileID: 11400000, guid: b9b3e91a23fc14745b7500b49f47fa71, type: 2}
     numberToSpawn: 6
 --- !u!60 &6777965647452085417
 PolygonCollider2D:
