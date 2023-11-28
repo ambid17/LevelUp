@@ -89,7 +89,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1244560827
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c242d0a244016bb48874c53d7e64fcd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3262,9 +3262,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1723041773
-  m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingLayerID: 235167977
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3431,6 +3431,7 @@ MonoBehaviour:
     - {x: -4, y: -11, z: 0}
     HasConnection: 0
   cam: {fileID: 4881681057489713699}
+  hiveMindManagerPrefab: {fileID: 0}
   zoomSpeed: 2
   zoomSize: 1
   startSize: 3
@@ -9526,7 +9527,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1244560827
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a97bec8318a8ebc44b4319ceb9ab1714, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11180,7 +11181,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1244560827
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.5, y: 0.5, z: 0}
