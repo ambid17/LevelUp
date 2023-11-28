@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
@@ -24,6 +25,12 @@ namespace Minigames.Fight
             base.Setup();
             Target = GameManager.PlayerEntity.transform;
             Stats.SetupFromEnemy(enemyStats);
+
+            // Magic float for now because I'm not sure flexibility will ever be necessary.
+            // Offsets animation speed and movement speed by the same amount to make enemies feel more natural.
+            float randomOffset = Random.Range(.9f, 1.1f);
+            enemyStats.MoveSpeed *= randomOffset;
+            animationController.Anim.speed *= randomOffset;
         }
 
         public override void TakeDamage(float damage)

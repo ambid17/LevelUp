@@ -24,7 +24,7 @@ namespace Minigames.Fight
             goldValue *
             GameManager.SettingsManager.incomeSettings.GoldPerKill;
 
-        public float MoveSpeed => moveSpeed;
+        public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
         public float MaxHp => maxHp;
 
         public float ProjectileSpeed => projectileSpeed;
