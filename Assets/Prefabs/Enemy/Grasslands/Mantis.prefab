@@ -74,6 +74,13 @@ MonoBehaviour:
     isPassive: 0
     DetectRange: 10
     MeleeAttackRange: 2
+  deathAnimation:
+    Name: Mantis_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.01
+    CurrentIndex: 12
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 2a6e6affecd5a9745838d0a0cf80a121, type: 3}
 --- !u!114 &9214928300637077400
 MonoBehaviour:
   m_ObjectHideFlags: 0

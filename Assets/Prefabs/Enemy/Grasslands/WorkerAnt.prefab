@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8510735526301981977}
   - component: {fileID: -7786698165613059924}
-  - component: {fileID: -698485910662565092}
   - component: {fileID: 1047883154001853991}
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
@@ -57,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementController: {fileID: -698485910662565092}
+  MovementController: {fileID: 0}
   VisualController: {fileID: 1047883154001853991}
   animationController: {fileID: 1054143287907748978}
   tickDamageDownPerSecond: 0
@@ -75,19 +74,13 @@ MonoBehaviour:
     isPassive: 0
     DetectRange: 5
     MeleeAttackRange: 0
---- !u!114 &-698485910662565092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2286d01694b30d4fb543d6400174a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idealDistanceFromPlayer: 0
+  deathAnimation:
+    Name: Worker_Ant_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.01
+    CurrentIndex: 2
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: d16cd3c681fed664da6c248e4d9a0bf7, type: 3}
 --- !u!114 &1047883154001853991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71edf828c4d76c84da3841986011d37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviorData: {fileID: 0}
+  behaviorData: {fileID: 6334097755643219291}
   dropFrequency: 1
   prefab: {fileID: 428041517705326441, guid: 17ff855d42cc5d942a162ffee6d463da, type: 3}
 --- !u!114 &2943846296819569835

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
+    public Animator Anim => anim;
     public bool IsAnimFinished => CurrentAnimationNomralizedTime >= 1;
     public float CurrentAnimationNomralizedTime => anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
     public AnimationName CurrentAnimation => currentAnimation;

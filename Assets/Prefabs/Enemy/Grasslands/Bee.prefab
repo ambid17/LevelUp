@@ -74,6 +74,13 @@ MonoBehaviour:
     isPassive: 1
     DetectRange: 10
     MeleeAttackRange: 0
+  deathAnimation:
+    Name: Bee_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.01
+    CurrentIndex: 4
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 36faca159f245f546af853b693b75fc1, type: 3}
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -75,6 +75,13 @@ MonoBehaviour:
     isPassive: 0
     DetectRange: 3
     MeleeAttackRange: 2
+  deathAnimation:
+    Name: Ant_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.01
+    CurrentIndex: 2
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 693a4289a543e6f4d95423ab6b2669c0, type: 3}
 --- !u!114 &8789358854941681159
 MonoBehaviour:
   m_ObjectHideFlags: 0

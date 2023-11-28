@@ -126,6 +126,13 @@ MonoBehaviour:
     isPassive: 0
     DetectRange: 5
     MeleeAttackRange: 2
+  deathAnimation:
+    Name: Beetle_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0.01
+    CurrentIndex: 4
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: f3f11944d88f3ae4f8566096ab28a9a0, type: 3}
 --- !u!114 &5632584843697323074
 MonoBehaviour:
   m_ObjectHideFlags: 0
