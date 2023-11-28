@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 6700159204235219801}
   - component: {fileID: 2859698617523764856}
   - component: {fileID: 500195683285685157}
-  - component: {fileID: 19589508554037770}
   m_Layer: 9
   m_Name: GardenSpider
   m_TagString: Untagged
@@ -342,7 +341,7 @@ MonoBehaviour:
         Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-152.819168,116.23645)"},"ID":12,"Name":"Is
         Target Slowed","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsTargetSlowed","IsShared":true,"PropertyMapping":"Minigames.Fight.SpiderBehaviorData/IsTargetSlowed","PropertyMappingOwner":3,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(4.225705,115.058128)"},"ID":13,"Name":"Try
         Shoot","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-103.706154,95.51135)"},"ID":14,"Name":"Shoot","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-93.63655,144.248535)"},"ID":15,"Name":"Does
-        Have LoS","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanSeeTarget","IsShared":true,"PropertyMapping":"Minigames.Fight.SpiderBehaviorData/CanSeeTarget","PropertyMappingOwner":4,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(95.0805359,136.3999)"},"ID":16,"Name":"Selector","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-74.9925842,117.351074)"},"ID":17,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-120,120)"},"ID":18,"Name":"Can
+        Have LoS","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanSeeTarget","IsShared":true,"PropertyMapping":"Minigames.Fight.SpiderBehaviorData/CanSeeTarget","PropertyMappingOwner":4,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(95.0805359,136.3999)"},"ID":16,"Name":"Selector","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-74.9925842,117.351074)"},"ID":17,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-136.666672,118.484848)"},"ID":18,"Name":"Can
         Shoot","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanShoot","IsShared":true,"PropertyMapping":"Minigames.Fight.SpiderBehaviorData/CanShoot","PropertyMappingOwner":5,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(-13.9925842,118.351074)"},"ID":19,"Name":"Stop
         Reavaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"StopReavaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(110,120)"},"ID":20,"Name":"Play
         Shoot","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Shoot
@@ -555,23 +554,3 @@ MonoBehaviour:
   damageDecayRate: 0.5
   playerSlowedMultiplier: 2
   optimalDistance: 10
---- !u!114 &19589508554037770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21cbe53486b0e3c48ab5d9fc67781b34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 0}
-  Anim: {fileID: 0}
-  DeathAnim:
-    Name: 
-    CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 0
