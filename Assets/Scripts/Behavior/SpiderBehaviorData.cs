@@ -10,6 +10,8 @@ namespace Minigames.Fight
         private float playerSlowedMultiplier = 2;
         [SerializeField]
         private float optimalDistance = 15;
+        [SerializeField]
+        private float baseAttackPriorityFactor;
 
         public bool IsTargetSlowed
         {
@@ -26,7 +28,7 @@ namespace Minigames.Fight
             }
         }
         public float DistanceComparedToOptimal => optimalDistance - DistanceToPlayer;
-        public float AttackPriority => -DistanceComparedToOptimal * (IsTargetSlowed ? playerSlowedMultiplier : 1);
+        public float AttackPriority => optimalDistance * baseAttackPriorityFactor * (IsTargetSlowed ? playerSlowedMultiplier : 1);
         public float RetreatPriority => DistanceComparedToOptimal + DamageLastTick;
     }
 }

@@ -409,7 +409,7 @@ MonoBehaviour:
         - {fileID: 8510735526301981988}
         byteData: 
         byteDataArray: 
-      Version: 1.7.4
+      Version: 1.7.7
   gizmoViewMode: 0
   showBehaviorDesignerGizmo: 0
 --- !u!95 &5054155416519530242
@@ -553,4 +553,5 @@ MonoBehaviour:
   trackDamagePerTick: 1
   damageDecayRate: 0.5
   playerSlowedMultiplier: 2
-  optimalDistance: 10
+  optimalDistance: 5
+  baseAttackPriorityFactor: 0.5

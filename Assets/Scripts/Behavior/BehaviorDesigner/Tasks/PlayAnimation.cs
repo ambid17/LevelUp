@@ -21,17 +21,25 @@ namespace BehaviorDesigner.Runtime.Tasks
         [Tooltip("When success should be returned")]
         public SuccessType SuccessType;
 
+        private bool _waitOneFrame = true;
+
         public override void OnStart()
         {
             base.OnStart();
 
             animationManager.PlayAnimation(Animation.Value, 0);
+            _waitOneFrame = true;
         }
         public override TaskStatus OnUpdate()
         {
             if (animationManager.CurrentAnimation != Animation.Value)
             {
                 animationManager.PlayAnimation(Animation.Value, 0);
+                return TaskStatus.Running;
+            }
+            if (_waitOneFrame)
+            {
+                _waitOneFrame = false;
                 return TaskStatus.Running;
             }
             if (SuccessType == SuccessType.None)
