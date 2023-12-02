@@ -77,14 +77,14 @@ namespace Minigames.Fight
             while (MyEntity.animationController.CurrentAnimation != takeHitAnimation)
             {
                 MyEntity.animationController.OverrideAnimation(takeHitAnimation, 0);
-                yield return null;
+                yield return new WaitForSeconds(0);
             }
 
             // If another animation is buffered, it may play just before the current animation is finished leading to undesired stun time.
             // By ensuring it's the correct animation we guarentee that the stun will end as soon as a different animation plays.
             while (MyEntity.animationController.CurrentAnimation == takeHitAnimation && !MyEntity.animationController.IsAnimFinished)
             {
-                yield return null;
+                yield return new WaitForSeconds(0);
             }
             MyEntity.Stunned = false;
 

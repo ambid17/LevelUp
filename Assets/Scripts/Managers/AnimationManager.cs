@@ -10,6 +10,8 @@ public class AnimationManager : MonoBehaviour
 
     [SerializeField]
     protected Animator anim;
+    [SerializeField]
+    protected AnimationName defaultAnimation;
 
     private AnimationName bufferedAnimation;
 
@@ -30,6 +32,7 @@ public class AnimationManager : MonoBehaviour
     public void ResetAnimations()
     {
         currentAnimation = null;
+        PlayAnimation(defaultAnimation, 0);
     }
 
     public void PlayAnimation(AnimationName name, float time)

@@ -369,6 +369,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 368501983372723143}
+  defaultAnimation:
+    Name: Soldier_Ant_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
 --- !u!114 &5622990192395103210
 MonoBehaviour:
   m_ObjectHideFlags: 0

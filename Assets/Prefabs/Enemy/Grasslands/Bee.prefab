@@ -112,9 +112,9 @@ MonoBehaviour:
   flashColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   takeHitAnimation:
     Name: Bee_Take_Hit
-    CanBeCancelled: 0
-    MaxBufferPercentage: 1
-    AcceptableOverrideTime: 0.01
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
     CurrentIndex: 3
 --- !u!212 &8510735526301981991
 SpriteRenderer:
@@ -375,6 +375,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4602063734888168953}
+  defaultAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
 --- !u!114 &3675632202975684303
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -501,6 +501,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 5054155416519530242}
+  defaultAnimation:
+    Name: Spider_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
 --- !u!114 &6700159204235219801
 MonoBehaviour:
   m_ObjectHideFlags: 0
