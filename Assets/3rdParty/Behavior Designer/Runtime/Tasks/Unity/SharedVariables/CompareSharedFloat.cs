@@ -9,9 +9,32 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables
         [Tooltip("The variable to compare to")]
         public SharedFloat compareTo;
 
+        public Comparison comparisonType;
+        public enum Comparison
+        {
+            LessThan,
+            GreaterThan,
+            EqualTo,
+            LessThanOrEqualTo,
+            GreaterThanOrEqualTo,
+        }
+
         public override TaskStatus OnUpdate()
         {
-            return variable.Value.Equals(compareTo.Value) ? TaskStatus.Success : TaskStatus.Failure;
+            switch (comparisonType)
+            {
+                case Comparison.LessThan:
+                    return variable.Value < compareTo.Value ? TaskStatus.Success : TaskStatus.Failure;
+                case Comparison.GreaterThan:
+                    return variable.Value > compareTo.Value ? TaskStatus.Success : TaskStatus.Failure;
+                case Comparison.EqualTo:
+                    return variable.Value == compareTo.Value ? TaskStatus.Success : TaskStatus.Failure;
+                case Comparison.LessThanOrEqualTo:
+                    return variable.Value <= compareTo.Value ? TaskStatus.Success : TaskStatus.Failure;
+                case Comparison.GreaterThanOrEqualTo:
+                    return variable.Value >= compareTo.Value ? TaskStatus.Success : TaskStatus.Failure;
+            }
+            return TaskStatus.Running;
         }
 
         public override void OnReset()
