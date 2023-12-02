@@ -11,6 +11,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         public SharedTransform target;
         [Tooltip("If target is null then use the target position")]
         public SharedVector2 targetPosition;
+        [Tooltip("Whether the agent should continue through invalid paths")]
+        public SharedBool ignoreInvalidPath;
 
         public override void OnAwake()
         {
@@ -22,12 +24,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         // Return running if the agent hasn't reached the destination yet
         public override TaskStatus OnUpdate()
         {
-            if (agent.path != null && agent.pathInvalid)
+            SetDestination(Target());
+            if (agent.path != null && agent.pathInvalid && !ignoreInvalidPath.Value)
             {
-                Stop();
                 return TaskStatus.Failure;
             }
-            SetDestination(Target());
             if (HasArrived())
             {
                 if (stopOnTaskEnd.Value)
