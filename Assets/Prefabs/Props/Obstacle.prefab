@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1955323467560263360}
   - component: {fileID: 3787918447072714006}
   - component: {fileID: 5232100677743477736}
+  - component: {fileID: 3470693751778085076}
   m_Layer: 10
   m_Name: Obstacle
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1244560827
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -115,3 +116,39 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
+--- !u!114 &3470693751778085076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558622372320787798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 1955323467560263360}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}

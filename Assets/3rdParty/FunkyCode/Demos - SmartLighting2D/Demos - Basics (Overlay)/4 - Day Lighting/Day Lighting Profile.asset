@@ -17,7 +17,7 @@ MonoBehaviour:
     - name: Default
       type: 0
       hdr: 2
-      darknessColor: {r: 0, g: 0, b: 0, a: 0}
+      darknessColor: {r: 0.9433962, g: 0.7115717, b: 0.30704877, a: 0.23529412}
       depth: -100
       resolution: 1
       dayLayers:
@@ -62,9 +62,9 @@ MonoBehaviour:
     coreAxis: 0
     projection: 0
   dayLightingSettings:
-    direction: 201.4
-    ShadowColor: {r: 0, g: 0, b: 0, a: 0.903}
-    height: 1.71
+    direction: 208
+    ShadowColor: {r: 0, g: 0, b: 0, a: 0.77254903}
+    height: 1.54
     bumpMap:
       height: 1
       strength: 1
