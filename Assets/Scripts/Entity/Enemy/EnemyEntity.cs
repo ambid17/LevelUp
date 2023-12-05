@@ -54,8 +54,6 @@ namespace Minigames.Fight
 
             EnemyDeathAnimationPlayer deathAnimPlayer = Instantiate(deathAnimPlayerPrafab, transform.position, transform.rotation);
             deathAnimPlayer.SpriteRenderer.flipX = VisualController.SpriteRenderer.flipX;
-            deathAnimPlayer.SpriteRenderer.sortingLayerName = VisualController.SpriteRenderer.sortingLayerName;
-            deathAnimPlayer.SpriteRenderer.sortingLayerID = VisualController.SpriteRenderer.sortingLayerID;
 
             Destroy(gameObject);
         }
