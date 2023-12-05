@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4815042606957390689}
   - component: {fileID: 4538895972567483010}
   - component: {fileID: 1506711408140763157}
+  - component: {fileID: 3360401645720849593}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -123,6 +124,42 @@ PolygonCollider2D:
       - {x: 0.671875, y: -0.015625}
       - {x: 0.71875, y: 0.0625}
       - {x: 0.71875, y: 0.203125}
+--- !u!114 &3360401645720849593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363568650693769259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4815042606957390689}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &371370265848595811
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +171,7 @@ GameObject:
   - component: {fileID: 8944266281625322994}
   - component: {fileID: 7145765849061108341}
   - component: {fileID: 8570050615333716762}
+  - component: {fileID: 7032973182680674184}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -224,7 +262,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -275,6 +313,42 @@ PolygonCollider2D:
       - {x: -0.15625, y: -0.484375}
       - {x: -0.1875, y: -0.484375}
       - {x: -0.234375, y: -0.515625}
+--- !u!114 &7032973182680674184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371370265848595811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8944266281625322994}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &394759567232031218
 GameObject:
   m_ObjectHideFlags: 0
@@ -4428,6 +4502,7 @@ GameObject:
   - component: {fileID: 3902143603518663532}
   - component: {fileID: 3681947656723122417}
   - component: {fileID: 6858877020260999501}
+  - component: {fileID: 6754221028829473402}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -4518,7 +4593,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -4568,6 +4643,42 @@ PolygonCollider2D:
       - {x: 0.078125, y: 0.1875}
       - {x: 0.078125, y: 0.140625}
       - {x: 0.078125, y: 0.15625}
+--- !u!114 &6754221028829473402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413224398581547554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3902143603518663532}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &544540024750873741
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,6 +4690,7 @@ GameObject:
   - component: {fileID: 6801606058825774097}
   - component: {fileID: 9064498254926335075}
   - component: {fileID: 7446181392124150401}
+  - component: {fileID: 7762515227202820264}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -4669,7 +4781,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -4726,6 +4838,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &7762515227202820264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544540024750873741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6801606058825774097}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &550129383954082170
 GameObject:
   m_ObjectHideFlags: 0
@@ -4737,6 +4885,7 @@ GameObject:
   - component: {fileID: 4253812294720788216}
   - component: {fileID: 301137928494264095}
   - component: {fileID: 5163041396175155857}
+  - component: {fileID: 5770209293516713691}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -4827,7 +4976,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -4846,6 +4995,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.171875}
       - {x: 0.234375, y: 0.109375}
       - {x: 0.234375, y: 0.203125}
+--- !u!114 &5770209293516713691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550129383954082170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4253812294720788216}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &564757040324309225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4969,6 +5154,7 @@ GameObject:
   - component: {fileID: 2365823291704573672}
   - component: {fileID: 2721062304500611286}
   - component: {fileID: 5734884874627105356}
+  - component: {fileID: 6460463988389539979}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -5076,6 +5262,42 @@ PolygonCollider2D:
       - {x: 0.21875, y: -0.15625}
       - {x: 0.21875, y: 0.09375}
       - {x: 0.09375, y: 0.21875}
+--- !u!114 &6460463988389539979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679328031867761869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 2365823291704573672}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &954720307940201513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,6 +5309,7 @@ GameObject:
   - component: {fileID: 1931211923415351173}
   - component: {fileID: 6498672332476000958}
   - component: {fileID: 7062680720554124000}
+  - component: {fileID: 8916642928049765367}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -5177,7 +5400,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -5195,6 +5418,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.171875}
       - {x: 0.140625, y: 0.21875}
       - {x: 0.0625, y: 0.28125}
+--- !u!114 &8916642928049765367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954720307940201513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 1931211923415351173}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &1190135605619653024
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,6 +5465,7 @@ GameObject:
   - component: {fileID: 3460884547706278795}
   - component: {fileID: 7759406217464863739}
   - component: {fileID: 8627149098275465362}
+  - component: {fileID: 7538210369714301410}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -5318,6 +5578,42 @@ PolygonCollider2D:
       - {x: 0.671875, y: -0.015625}
       - {x: 0.71875, y: 0.0625}
       - {x: 0.71875, y: 0.203125}
+--- !u!114 &7538210369714301410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190135605619653024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3460884547706278795}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &1485298819021555307
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,6 +5668,7 @@ GameObject:
   - component: {fileID: 2162490067188821309}
   - component: {fileID: 7911438524834047158}
   - component: {fileID: 8985235079956651357}
+  - component: {fileID: 3194682754457393892}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -5462,7 +5759,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -5481,6 +5778,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.171875}
       - {x: 0.234375, y: 0.109375}
       - {x: 0.234375, y: 0.203125}
+--- !u!114 &3194682754457393892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610260404008206669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 2162490067188821309}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &1772541596330481922
 GameObject:
   m_ObjectHideFlags: 0
@@ -5492,6 +5825,7 @@ GameObject:
   - component: {fileID: 1337081259568523567}
   - component: {fileID: 1912628820388279901}
   - component: {fileID: 3613721533828113260}
+  - component: {fileID: 53807668497264090}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -5582,7 +5916,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49999997, y: 0.3}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -5642,6 +5976,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.125}
       - {x: -0.015625, y: 0}
       - {x: 0, y: 0.015625}
+--- !u!114 &53807668497264090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772541596330481922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 1337081259568523567}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &1962058338842928377
 GameObject:
   m_ObjectHideFlags: 0
@@ -5653,6 +6023,7 @@ GameObject:
   - component: {fileID: 6683428464576378623}
   - component: {fileID: 8518259243712915765}
   - component: {fileID: 6402703884705551464}
+  - component: {fileID: 2463245848156246418}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -5769,6 +6140,42 @@ PolygonCollider2D:
       - {x: 0.359375, y: -0.28125}
       - {x: 0.828125, y: 0.0625}
       - {x: 0.828125, y: 0.21875}
+--- !u!114 &2463245848156246418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962058338842928377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6683428464576378623}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2275482054425042838
 GameObject:
   m_ObjectHideFlags: 0
@@ -5780,6 +6187,7 @@ GameObject:
   - component: {fileID: 8296404923305835916}
   - component: {fileID: 8092524635113989815}
   - component: {fileID: 8166227028116609484}
+  - component: {fileID: 861156707190587487}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -5870,7 +6278,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49999997, y: 0.3}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -5930,6 +6338,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.125}
       - {x: -0.015625, y: 0}
       - {x: 0, y: 0.015625}
+--- !u!114 &861156707190587487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2275482054425042838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8296404923305835916}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2281908090350210106
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,6 +6497,7 @@ GameObject:
   - component: {fileID: 8987661869041729171}
   - component: {fileID: 3419736436682680584}
   - component: {fileID: 381167913394565806}
+  - component: {fileID: 149146253063760484}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -6143,7 +6588,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -6200,6 +6645,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &149146253063760484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290993895090564576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8987661869041729171}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2326335039188393639
 GameObject:
   m_ObjectHideFlags: 0
@@ -6211,6 +6692,7 @@ GameObject:
   - component: {fileID: 5714148728397014374}
   - component: {fileID: 4296258484741188326}
   - component: {fileID: 7239672308460225511}
+  - component: {fileID: 7100254126111787117}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -6324,6 +6806,42 @@ PolygonCollider2D:
       - {x: 0.484375, y: -0.09375}
       - {x: 0.609375, y: 0.203125}
       - {x: 0.609375, y: 0.296875}
+--- !u!114 &7100254126111787117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326335039188393639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 5714148728397014374}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2329263654696365786
 GameObject:
   m_ObjectHideFlags: 0
@@ -6335,6 +6853,7 @@ GameObject:
   - component: {fileID: 5002254155105442053}
   - component: {fileID: 2199258221760162247}
   - component: {fileID: 5490018139835457243}
+  - component: {fileID: 1077192453548365122}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -6425,7 +6944,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -6482,6 +7001,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &1077192453548365122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329263654696365786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 5002254155105442053}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2361109681305492534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,6 +7048,7 @@ GameObject:
   - component: {fileID: 439105603873127942}
   - component: {fileID: 7151183115554240986}
   - component: {fileID: 7502524096402394977}
+  - component: {fileID: 1072664753729935914}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -6601,6 +7157,42 @@ PolygonCollider2D:
       - {x: 0.421875, y: -0.09375}
       - {x: 0.421875, y: 0.265625}
       - {x: 0.15625, y: 0.453125}
+--- !u!114 &1072664753729935914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361109681305492534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 439105603873127942}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2681221009406818557
 GameObject:
   m_ObjectHideFlags: 0
@@ -6612,6 +7204,7 @@ GameObject:
   - component: {fileID: 7640470618857239036}
   - component: {fileID: 582462420983383443}
   - component: {fileID: 5235357803181860438}
+  - component: {fileID: 806849816272607903}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -6721,6 +7314,42 @@ PolygonCollider2D:
       - {x: 0.328125, y: -0.046875}
       - {x: 0.328125, y: 0.1875}
       - {x: 0.140625, y: 0.390625}
+--- !u!114 &806849816272607903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681221009406818557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 7640470618857239036}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2857813544976244158
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,6 +7361,7 @@ GameObject:
   - component: {fileID: 2509854903923978359}
   - component: {fileID: 2455504904394242914}
   - component: {fileID: 7361227744891992987}
+  - component: {fileID: 6746663009716633031}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -6822,7 +7452,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -6854,6 +7484,42 @@ PolygonCollider2D:
       - {x: 0.109375, y: -0.65625}
       - {x: 0.171875, y: -0.578125}
       - {x: 0.140625, y: -0.328125}
+--- !u!114 &6746663009716633031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857813544976244158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 2509854903923978359}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3042018627362126055
 GameObject:
   m_ObjectHideFlags: 0
@@ -6865,6 +7531,7 @@ GameObject:
   - component: {fileID: 2477508741882164447}
   - component: {fileID: 1600798799107567975}
   - component: {fileID: 7848007478372106550}
+  - component: {fileID: 4680907630323062348}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -6973,6 +7640,42 @@ PolygonCollider2D:
       - {x: 0.421875, y: -0.09375}
       - {x: 0.421875, y: 0.265625}
       - {x: 0.15625, y: 0.453125}
+--- !u!114 &4680907630323062348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042018627362126055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 2477508741882164447}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3093122538204162275
 GameObject:
   m_ObjectHideFlags: 0
@@ -6984,6 +7687,7 @@ GameObject:
   - component: {fileID: 6549943021070513441}
   - component: {fileID: 3495145781753059473}
   - component: {fileID: 7856309377970506429}
+  - component: {fileID: 3196556745242004117}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -7074,7 +7778,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -7112,6 +7816,42 @@ PolygonCollider2D:
       - {x: 0.046875, y: -0.28125}
       - {x: 0.125, y: 0.140625}
       - {x: 0.46875, y: 0.4375}
+--- !u!114 &3196556745242004117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3093122538204162275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6549943021070513441}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3196522142678764036
 GameObject:
   m_ObjectHideFlags: 0
@@ -7123,6 +7863,7 @@ GameObject:
   - component: {fileID: 5227219968024701968}
   - component: {fileID: 7097094352924925463}
   - component: {fileID: 6707938484615415132}
+  - component: {fileID: 5687737729911651465}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -7232,6 +7973,42 @@ PolygonCollider2D:
       - {x: 0.46875, y: 0.03125}
       - {x: 0.46875, y: 0.171875}
       - {x: 0.453125, y: 0.25}
+--- !u!114 &5687737729911651465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196522142678764036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 5227219968024701968}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3205573682790756101
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,6 +8020,7 @@ GameObject:
   - component: {fileID: 3553672653952489976}
   - component: {fileID: 1552132877483012179}
   - component: {fileID: 6777627463814790692}
+  - component: {fileID: 2994342235434429499}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -7333,7 +8111,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -7390,6 +8168,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &2994342235434429499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205573682790756101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3553672653952489976}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3269102198548017913
 GameObject:
   m_ObjectHideFlags: 0
@@ -7401,6 +8215,7 @@ GameObject:
   - component: {fileID: 2165494114194123619}
   - component: {fileID: 3730782118649916137}
   - component: {fileID: 8174856945750009386}
+  - component: {fileID: 7326470151956987329}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -7517,6 +8332,42 @@ PolygonCollider2D:
       - {x: 0.359375, y: -0.28125}
       - {x: 0.828125, y: 0.0625}
       - {x: 0.828125, y: 0.21875}
+--- !u!114 &7326470151956987329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3269102198548017913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 2165494114194123619}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3281223147813031146
 GameObject:
   m_ObjectHideFlags: 0
@@ -7640,6 +8491,7 @@ GameObject:
   - component: {fileID: 7180378656978299417}
   - component: {fileID: 1953559722873978756}
   - component: {fileID: 8981297947564669770}
+  - component: {fileID: 3823189505757787511}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -7730,7 +8582,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49999997, y: 0.3}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -7790,6 +8642,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.125}
       - {x: -0.015625, y: 0}
       - {x: 0, y: 0.015625}
+--- !u!114 &3823189505757787511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3295196893541518211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 7180378656978299417}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3439518810245427047
 GameObject:
   m_ObjectHideFlags: 0
@@ -7801,6 +8689,7 @@ GameObject:
   - component: {fileID: 6985241525507618508}
   - component: {fileID: 322133372281109927}
   - component: {fileID: 975189283117404183}
+  - component: {fileID: 6974663184875634196}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -7891,7 +8780,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -7944,6 +8833,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.53125}
       - {x: 0.109375, y: -0.46875}
       - {x: 0.078125, y: 0.078125}
+--- !u!114 &6974663184875634196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3439518810245427047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6985241525507618508}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3635661733703663030
 GameObject:
   m_ObjectHideFlags: 0
@@ -7955,6 +8880,7 @@ GameObject:
   - component: {fileID: 7087614054843110289}
   - component: {fileID: 5341351779334865243}
   - component: {fileID: 4855071107514900308}
+  - component: {fileID: 8043689890612327968}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -8045,7 +8971,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -8096,6 +9022,42 @@ PolygonCollider2D:
       - {x: 0.203125, y: -0.5625}
       - {x: 0.15625, y: -0.515625}
       - {x: 0.125, y: -0.515625}
+--- !u!114 &8043689890612327968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635661733703663030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 7087614054843110289}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &3678512780092952080
 GameObject:
   m_ObjectHideFlags: 0
@@ -8219,6 +9181,7 @@ GameObject:
   - component: {fileID: 9062111609587326148}
   - component: {fileID: 1031489163536317850}
   - component: {fileID: 4299443158693922824}
+  - component: {fileID: 7273149451357542158}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -8309,7 +9272,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -8366,6 +9329,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &7273149451357542158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695823234462797483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 9062111609587326148}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &4148601343551500845
 GameObject:
   m_ObjectHideFlags: 0
@@ -8377,6 +9376,7 @@ GameObject:
   - component: {fileID: 3790106534573833563}
   - component: {fileID: 6467842159555767330}
   - component: {fileID: 8230164834365506167}
+  - component: {fileID: 2949577875295557586}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -8484,6 +9484,42 @@ PolygonCollider2D:
       - {x: 0.21875, y: -0.15625}
       - {x: 0.21875, y: 0.09375}
       - {x: 0.09375, y: 0.21875}
+--- !u!114 &2949577875295557586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4148601343551500845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3790106534573833563}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &4167175439724557091
 GameObject:
   m_ObjectHideFlags: 0
@@ -8495,6 +9531,7 @@ GameObject:
   - component: {fileID: 3097574734324642040}
   - component: {fileID: 3986179389389764202}
   - component: {fileID: 4567064983611030659}
+  - component: {fileID: 4868859165325156894}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -8585,7 +9622,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -8638,6 +9675,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.53125}
       - {x: 0.109375, y: -0.46875}
       - {x: 0.078125, y: 0.078125}
+--- !u!114 &4868859165325156894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4167175439724557091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3097574734324642040}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &4228288283794079616
 GameObject:
   m_ObjectHideFlags: 0
@@ -8696,6 +9769,7 @@ GameObject:
   - component: {fileID: 8568897102748388321}
   - component: {fileID: 7770144584185957543}
   - component: {fileID: 8190577471928317191}
+  - component: {fileID: 3780812448996034865}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -8786,7 +9860,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -8837,6 +9911,42 @@ PolygonCollider2D:
       - {x: 0.203125, y: -0.5625}
       - {x: 0.15625, y: -0.515625}
       - {x: 0.125, y: -0.515625}
+--- !u!114 &3780812448996034865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562218040017597290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8568897102748388321}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &4588659316890820045
 GameObject:
   m_ObjectHideFlags: 0
@@ -8879,6 +9989,7 @@ GameObject:
   - component: {fileID: 6775621033746330285}
   - component: {fileID: 272157361875126454}
   - component: {fileID: 6723598048399560147}
+  - component: {fileID: 9176367050429279802}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -8969,7 +10080,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -8987,6 +10098,42 @@ PolygonCollider2D:
       - {x: 0.0625, y: -0.25}
       - {x: 0.203125, y: -0.125}
       - {x: 0.203125, y: 0.3125}
+--- !u!114 &9176367050429279802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4605396895661567589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6775621033746330285}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &4689089544462960444
 GameObject:
   m_ObjectHideFlags: 0
@@ -8998,6 +10145,7 @@ GameObject:
   - component: {fileID: 4077885626172954434}
   - component: {fileID: 4648006953710385657}
   - component: {fileID: 4150758095404772297}
+  - component: {fileID: 4837358049677567561}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9088,7 +10236,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9106,6 +10254,42 @@ PolygonCollider2D:
       - {x: 0.0625, y: -0.25}
       - {x: 0.203125, y: -0.125}
       - {x: 0.203125, y: 0.3125}
+--- !u!114 &4837358049677567561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689089544462960444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4077885626172954434}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &5272024973420489258
 GameObject:
   m_ObjectHideFlags: 0
@@ -9117,6 +10301,7 @@ GameObject:
   - component: {fileID: 136447949595689657}
   - component: {fileID: 7755838505155336035}
   - component: {fileID: 2036430863349820591}
+  - component: {fileID: 5449684710675705939}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9207,7 +10392,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9224,6 +10409,42 @@ PolygonCollider2D:
       - {x: 0.109375, y: -0.25}
       - {x: 0.28125, y: 0.046875}
       - {x: 0.28125, y: 0.265625}
+--- !u!114 &5449684710675705939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5272024973420489258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 136447949595689657}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &5624829235904856908
 GameObject:
   m_ObjectHideFlags: 0
@@ -9235,6 +10456,7 @@ GameObject:
   - component: {fileID: 6211680539290618947}
   - component: {fileID: 1722332204952033424}
   - component: {fileID: 2969316590410272005}
+  - component: {fileID: 2101818113339565401}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9325,7 +10547,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9382,6 +10604,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &2101818113339565401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624829235904856908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6211680539290618947}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &5771186330586727532
 GameObject:
   m_ObjectHideFlags: 0
@@ -9393,6 +10651,7 @@ GameObject:
   - component: {fileID: 8467814139711147152}
   - component: {fileID: 1695015942324341692}
   - component: {fileID: 3672381514801665669}
+  - component: {fileID: 2773335052953462895}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9483,7 +10742,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9515,6 +10774,42 @@ PolygonCollider2D:
       - {x: 0.109375, y: -0.65625}
       - {x: 0.171875, y: -0.578125}
       - {x: 0.140625, y: -0.328125}
+--- !u!114 &2773335052953462895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5771186330586727532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8467814139711147152}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &5940342076955717383
 GameObject:
   m_ObjectHideFlags: 0
@@ -9526,6 +10821,7 @@ GameObject:
   - component: {fileID: 5138756436516975953}
   - component: {fileID: 7013516060676813000}
   - component: {fileID: 7786315199510273670}
+  - component: {fileID: 3143704946435940333}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9616,7 +10912,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9634,6 +10930,42 @@ PolygonCollider2D:
       - {x: 0.15625, y: -0.1875}
       - {x: 0.265625, y: -0.03125}
       - {x: 0.265625, y: 0.140625}
+--- !u!114 &3143704946435940333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5940342076955717383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 5138756436516975953}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &5945029296408195964
 GameObject:
   m_ObjectHideFlags: 0
@@ -9645,6 +10977,7 @@ GameObject:
   - component: {fileID: 4256667415257143596}
   - component: {fileID: 5247093727133812996}
   - component: {fileID: 7062218048877954096}
+  - component: {fileID: 5213736562594416454}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9735,7 +11068,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9786,6 +11119,42 @@ PolygonCollider2D:
       - {x: 0.203125, y: -0.5625}
       - {x: 0.15625, y: -0.515625}
       - {x: 0.125, y: -0.515625}
+--- !u!114 &5213736562594416454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5945029296408195964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4256667415257143596}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &6157187359525183086
 GameObject:
   m_ObjectHideFlags: 0
@@ -9797,6 +11166,7 @@ GameObject:
   - component: {fileID: 341895184282807916}
   - component: {fileID: 1256422861941128386}
   - component: {fileID: 6079815326346094522}
+  - component: {fileID: 7168846335110835968}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -9887,7 +11257,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -9944,6 +11314,42 @@ PolygonCollider2D:
       - {x: -0.03125, y: 0.4375}
       - {x: -0.03125, y: 0.296875}
       - {x: -0.015625, y: 0.296875}
+--- !u!114 &7168846335110835968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6157187359525183086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 341895184282807916}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &6267248999571772403
 GameObject:
   m_ObjectHideFlags: 0
@@ -9955,6 +11361,7 @@ GameObject:
   - component: {fileID: 2931400407765870587}
   - component: {fileID: 2656361262535671645}
   - component: {fileID: 6023384295044351916}
+  - component: {fileID: 3533251393649993465}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -10045,7 +11452,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -10095,6 +11502,42 @@ PolygonCollider2D:
       - {x: 0.078125, y: 0.1875}
       - {x: 0.078125, y: 0.140625}
       - {x: 0.078125, y: 0.15625}
+--- !u!114 &3533251393649993465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267248999571772403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 2931400407765870587}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &6406884138619843204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10106,6 +11549,7 @@ GameObject:
   - component: {fileID: 4655265021190315696}
   - component: {fileID: 6178759799929848940}
   - component: {fileID: 2689322912308122356}
+  - component: {fileID: 3366285247770412952}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -10218,6 +11662,42 @@ PolygonCollider2D:
       - {x: 0.671875, y: -0.015625}
       - {x: 0.71875, y: 0.0625}
       - {x: 0.71875, y: 0.203125}
+--- !u!114 &3366285247770412952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6406884138619843204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4655265021190315696}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &6747166270448285908
 GameObject:
   m_ObjectHideFlags: 0
@@ -10229,6 +11709,7 @@ GameObject:
   - component: {fileID: 1596969598547636625}
   - component: {fileID: 5625712607078534465}
   - component: {fileID: 842875180035493212}
+  - component: {fileID: 1360571322062771924}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -10341,6 +11822,42 @@ PolygonCollider2D:
       - {x: 0.671875, y: -0.015625}
       - {x: 0.71875, y: 0.0625}
       - {x: 0.71875, y: 0.203125}
+--- !u!114 &1360571322062771924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747166270448285908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 1596969598547636625}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &6777965646017647645
 GameObject:
   m_ObjectHideFlags: 0
@@ -22465,6 +23982,7 @@ GameObject:
   - component: {fileID: 7708391670482658932}
   - component: {fileID: 3177270918861547415}
   - component: {fileID: 4476036438611510172}
+  - component: {fileID: 2428544566717169598}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -22555,7 +24073,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -22608,6 +24126,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.53125}
       - {x: 0.109375, y: -0.46875}
       - {x: 0.078125, y: 0.078125}
+--- !u!114 &2428544566717169598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911892771786445904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 7708391670482658932}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7045041772564697158
 GameObject:
   m_ObjectHideFlags: 0
@@ -22619,6 +24173,7 @@ GameObject:
   - component: {fileID: 1791962070402519932}
   - component: {fileID: 611762948213938561}
   - component: {fileID: 4586575538648761966}
+  - component: {fileID: 7294712802324262637}
   m_Layer: 10
   m_Name: Stick-5
   m_TagString: Untagged
@@ -22733,6 +24288,42 @@ PolygonCollider2D:
       - {x: 0.0625, y: -2.0625}
       - {x: 0.1875, y: -1.5625}
       - {x: 0.375, y: -0.25}
+--- !u!114 &7294712802324262637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045041772564697158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 1791962070402519932}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7322350816322993154
 GameObject:
   m_ObjectHideFlags: 0
@@ -22905,6 +24496,7 @@ GameObject:
   - component: {fileID: 7472050146569771381}
   - component: {fileID: 6702017975898373224}
   - component: {fileID: 7818701116348075561}
+  - component: {fileID: 6100895724525373063}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -22995,7 +24587,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -23015,6 +24607,42 @@ PolygonCollider2D:
       - {x: 0.203125, y: 0.125}
       - {x: 0.203125, y: 0.25}
       - {x: 0.109375, y: 0.296875}
+--- !u!114 &6100895724525373063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7518748594862736977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 7472050146569771381}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7680014369453218870
 GameObject:
   m_ObjectHideFlags: 0
@@ -23026,6 +24654,7 @@ GameObject:
   - component: {fileID: 8212782307416957488}
   - component: {fileID: 2182323678792565249}
   - component: {fileID: 8597429744784046837}
+  - component: {fileID: 3755420973160480201}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -23135,6 +24764,42 @@ PolygonCollider2D:
       - {x: 0.46875, y: 0.03125}
       - {x: 0.46875, y: 0.171875}
       - {x: 0.453125, y: 0.25}
+--- !u!114 &3755420973160480201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680014369453218870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8212782307416957488}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7737893342813337990
 GameObject:
   m_ObjectHideFlags: 0
@@ -23258,6 +24923,7 @@ GameObject:
   - component: {fileID: 4089012433332977593}
   - component: {fileID: 2223968084812768375}
   - component: {fileID: 7445577761539842210}
+  - component: {fileID: 4570256786045184178}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -23348,7 +25014,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -23383,6 +25049,42 @@ PolygonCollider2D:
       - {x: 0.1875, y: -0.671875}
       - {x: 0.203125, y: -0.625}
       - {x: 0.203125, y: -0.546875}
+--- !u!114 &4570256786045184178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801930109438709314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4089012433332977593}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7822638847568136876
 GameObject:
   m_ObjectHideFlags: 0
@@ -23506,6 +25208,7 @@ GameObject:
   - component: {fileID: 7893586859677555141}
   - component: {fileID: 171428537960243650}
   - component: {fileID: 7312795551045382676}
+  - component: {fileID: 6942649344203270993}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -23596,7 +25299,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -23614,6 +25317,42 @@ PolygonCollider2D:
       - {x: 0.15625, y: -0.1875}
       - {x: 0.265625, y: -0.03125}
       - {x: 0.265625, y: 0.140625}
+--- !u!114 &6942649344203270993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846696332614914724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 7893586859677555141}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7857587174265284561
 GameObject:
   m_ObjectHideFlags: 0
@@ -23625,6 +25364,7 @@ GameObject:
   - component: {fileID: 6633826106433675851}
   - component: {fileID: 902646972855727885}
   - component: {fileID: 8269905166054018439}
+  - component: {fileID: 8189872347320387699}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -23715,7 +25455,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -23734,6 +25474,42 @@ PolygonCollider2D:
       - {x: 0.140625, y: -0.171875}
       - {x: 0.234375, y: 0.109375}
       - {x: 0.234375, y: 0.203125}
+--- !u!114 &8189872347320387699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7857587174265284561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6633826106433675851}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &7958924911105570860
 GameObject:
   m_ObjectHideFlags: 0
@@ -23857,6 +25633,7 @@ GameObject:
   - component: {fileID: 3976889270502563636}
   - component: {fileID: 633992516152790929}
   - component: {fileID: 2987203938848383874}
+  - component: {fileID: 8656602605717087379}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -23973,6 +25750,42 @@ PolygonCollider2D:
       - {x: 0.359375, y: -0.28125}
       - {x: 0.828125, y: 0.0625}
       - {x: 0.828125, y: 0.21875}
+--- !u!114 &8656602605717087379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8047392049233897187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3976889270502563636}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8161827488490413041
 GameObject:
   m_ObjectHideFlags: 0
@@ -29527,6 +31340,7 @@ GameObject:
   - component: {fileID: 8339976056721487032}
   - component: {fileID: 4385105842931488969}
   - component: {fileID: 8766782007366399536}
+  - component: {fileID: 87071377597481384}
   m_Layer: 13
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -29617,7 +31431,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -29637,6 +31451,42 @@ PolygonCollider2D:
       - {x: 0.203125, y: 0.125}
       - {x: 0.203125, y: 0.25}
       - {x: 0.109375, y: 0.296875}
+--- !u!114 &87071377597481384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323464755003097958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8339976056721487032}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8494471610160322075
 GameObject:
   m_ObjectHideFlags: 0
@@ -29648,6 +31498,7 @@ GameObject:
   - component: {fileID: 1748327417490201233}
   - component: {fileID: 610183474250161784}
   - component: {fileID: 886028612959427998}
+  - component: {fileID: 4137966701108010980}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -29756,6 +31607,42 @@ PolygonCollider2D:
       - {x: 0.421875, y: -0.09375}
       - {x: 0.421875, y: 0.265625}
       - {x: 0.15625, y: 0.453125}
+--- !u!114 &4137966701108010980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8494471610160322075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 1748327417490201233}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8535308533103877131
 GameObject:
   m_ObjectHideFlags: 0
@@ -29767,6 +31654,7 @@ GameObject:
   - component: {fileID: 6804686912255559503}
   - component: {fileID: 5632022513436467048}
   - component: {fileID: 5079545013976619192}
+  - component: {fileID: 7823281703241454308}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -29883,6 +31771,42 @@ PolygonCollider2D:
       - {x: 0.359375, y: -0.28125}
       - {x: 0.828125, y: 0.0625}
       - {x: 0.828125, y: 0.21875}
+--- !u!114 &7823281703241454308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8535308533103877131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 6804686912255559503}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8587036274318610344
 GameObject:
   m_ObjectHideFlags: 0
@@ -29894,6 +31818,7 @@ GameObject:
   - component: {fileID: 5668912384661536756}
   - component: {fileID: 8910818743682796669}
   - component: {fileID: 4411172364592567849}
+  - component: {fileID: 3739141127990422090}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -30006,6 +31931,42 @@ PolygonCollider2D:
       - {x: 0.671875, y: -0.015625}
       - {x: 0.71875, y: 0.0625}
       - {x: 0.71875, y: 0.203125}
+--- !u!114 &3739141127990422090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8587036274318610344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 5668912384661536756}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8603754587502634393
 GameObject:
   m_ObjectHideFlags: 0
@@ -30017,6 +31978,7 @@ GameObject:
   - component: {fileID: 8376516551588256452}
   - component: {fileID: 780250820035361426}
   - component: {fileID: 3256322150218311654}
+  - component: {fileID: 1916365960549332109}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -30107,7 +32069,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.32}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -30146,6 +32108,42 @@ PolygonCollider2D:
       - {x: 0.046875, y: -0.59375}
       - {x: 0.171875, y: -0.015625}
       - {x: -0.046875, y: 0.328125}
+--- !u!114 &1916365960549332109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603754587502634393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8376516551588256452}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8618295005434242337
 GameObject:
   m_ObjectHideFlags: 0
@@ -30157,6 +32155,7 @@ GameObject:
   - component: {fileID: 4480197010808667060}
   - component: {fileID: 2059875988500778898}
   - component: {fileID: 7448298813994738378}
+  - component: {fileID: 3419804447689881628}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -30247,7 +32246,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -30265,6 +32264,42 @@ PolygonCollider2D:
       - {x: 0.0625, y: -0.25}
       - {x: 0.203125, y: -0.125}
       - {x: 0.203125, y: 0.3125}
+--- !u!114 &3419804447689881628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8618295005434242337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4480197010808667060}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &8631365585624510015
 GameObject:
   m_ObjectHideFlags: 0
@@ -30307,6 +32342,7 @@ GameObject:
   - component: {fileID: 8370156908110952672}
   - component: {fileID: 1462804030329264737}
   - component: {fileID: 6447219946266421398}
+  - component: {fileID: 4397343853863063874}
   m_Layer: 10
   m_Name: Obstacle(Clone)
   m_TagString: Untagged
@@ -30419,6 +32455,42 @@ PolygonCollider2D:
       - {x: 0.671875, y: -0.015625}
       - {x: 0.71875, y: 0.0625}
       - {x: 0.71875, y: 0.203125}
+--- !u!114 &4397343853863063874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885930262887507685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 8370156908110952672}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &9084498092301923842
 GameObject:
   m_ObjectHideFlags: 0
@@ -30486,6 +32558,7 @@ GameObject:
   - component: {fileID: 3131125284695191623}
   - component: {fileID: 6711209721120142513}
   - component: {fileID: 2641939935825498245}
+  - component: {fileID: 5837667138616031306}
   m_Layer: 10
   m_Name: Prop(Clone)
   m_TagString: Untagged
@@ -30576,7 +32649,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.45}
     oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
@@ -30594,6 +32667,42 @@ PolygonCollider2D:
       - {x: 0.125, y: -0.25}
       - {x: 0.25, y: -0.015625}
       - {x: 0.25, y: 0.359375}
+--- !u!114 &5837667138616031306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126780483621227385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 3131125284695191623}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1001 &112309618548850512
 PrefabInstance:
   m_ObjectHideFlags: 0
