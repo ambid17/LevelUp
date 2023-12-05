@@ -1,4 +1,5 @@
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
@@ -26,10 +27,12 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         // Store the position after calculating offset.
         private Vector2 offsetTarget;
 
+        private bool _isDoneFindingPoint;
+
         public override void OnAwake()
         {
             base.OnAwake();
-            FindNewVantagePoint();
+            StartCoroutine(FindNewVantagePoint());
         }
         public override TaskStatus OnUpdate()
         {
@@ -37,20 +40,24 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             GraphNode nearestWalkableNode = AstarPath.active.GetNearest(target.Value.position, NNConstraint.Default).node;
 
             // If the nearest walkable node to the target has changed then run vantage point check again.
-            if (nearestWalkableNode != _currentTargetNode)
+            if (nearestWalkableNode != _currentTargetNode && _isDoneFindingPoint)
             {
-                FindNewVantagePoint();
+                StartCoroutine(FindNewVantagePoint());
             }
             if (HasArrived())
             {
                 return HasReachedOffset();
             }
-            OffsetTarget();
+            if (_isDoneFindingPoint)
+            {
+                OffsetTarget();
+            }
             return TaskStatus.Running;
         }
 
-        private void FindNewVantagePoint()
+        private IEnumerator FindNewVantagePoint()
         {
+            _isDoneFindingPoint = false;
             List<GraphNode> oldVantagePoints = PathUtilities.GetReachableNodesWithinRadius(target.Value.position, radius.Value);
 
             List<GraphNode> newVantagePoints = new List<GraphNode>();
@@ -66,6 +73,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                     {
                         newVantagePoints.Add(vantagePoint);
                     }
+                    yield return new WaitForSeconds(0);
                 }
             }
 
@@ -83,6 +91,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
             }
 
             SetDestination(targetPos);
+            _isDoneFindingPoint = true;
         }
 
         // Calculate offset to ensure Line of Sight.

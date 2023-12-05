@@ -154,15 +154,16 @@ namespace Minigames.Fight
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
 
-            RecalculateGraph();
+            StartCoroutine(RecalculateGraph());
 
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
 
             Platform.EventService.Dispatch(new SceneIsReadyEvent());
         }
 
-        private void RecalculateGraph()
+        private IEnumerator RecalculateGraph()
         {
+            yield return new WaitForSeconds(.01f);
             AstarPath.active.Scan();
 
             SpawnResources(GameManager.PlayerEntity.transform.position);
