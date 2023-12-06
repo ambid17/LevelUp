@@ -31,12 +31,17 @@ namespace Minigames.Fight
 
         public override void Shoot()
         {
-            ShotTimer = 0;
             if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) > _overridenWeapon.attackRange)
             {
                 return;
             }
             GameManager.PlayerEntity.TakeHit(Hit);
+        }
+
+        // Called by animation to reset shot timer on first frame.
+        public void ResetShotTimer()
+        {
+            ShotTimer = 0;
         }
         
     }

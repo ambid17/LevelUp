@@ -47,7 +47,7 @@ namespace Minigames.Fight
 
         public virtual void StartDamageFx(float damage)
         {
-            StartCoroutine(DamageAnimation());
+            DamageAnimation();
             SpriteRenderer.material = flashMaterial;
             SpriteRenderer.color = flashColor;
             IsFlashing = true;
@@ -68,28 +68,15 @@ namespace Minigames.Fight
                 }
             }
         }
-        protected virtual IEnumerator DamageAnimation()
+        protected virtual void DamageAnimation()
         {
             MyEntity.Stunned = true;
-            MyEntity.animationController.OverrideAnimation(takeHitAnimation, 0);
-
-            // Because Unity animations refresh on LateUpdate the timing for taking a hit will sometimes prevent this from being true on the first frame.
-            while (MyEntity.animationController.CurrentAnimation != takeHitAnimation)
-            {
-                MyEntity.animationController.OverrideAnimation(takeHitAnimation, 0);
-                yield return new WaitForSeconds(0);
-            }
-
-            // If another animation is buffered, it may play just before the current animation is finished leading to undesired stun time.
-            // By ensuring it's the correct animation we guarentee that the stun will end as soon as a different animation plays.
-            while (MyEntity.animationController.CurrentAnimation == takeHitAnimation && !MyEntity.animationController.IsAnimFinished)
-            {
-                yield return new WaitForSeconds(0);
-            }
+            StartCoroutine(MyEntity.animationController.Stun(takeHitAnimation, AfterStun));
+            
+        }
+        private void AfterStun()
+        {
             MyEntity.Stunned = false;
-
-            // Just in case another animation doesn't play right away we don't want to get locked into the stun animation for another loop.
-            MyEntity.animationController.ResetAnimations();
         }
     }
 }

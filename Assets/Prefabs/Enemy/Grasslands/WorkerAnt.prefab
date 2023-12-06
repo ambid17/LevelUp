@@ -78,7 +78,7 @@ MonoBehaviour:
     Name: Worker_Ant_Die
     CanBeCancelled: 0
     MaxBufferPercentage: 1
-    AcceptableOverrideTime: 0.01
+    AcceptableOverrideTime: 0
     CurrentIndex: 2
   deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: d16cd3c681fed664da6c248e4d9a0bf7, type: 3}
 --- !u!114 &1047883154001853991
@@ -100,8 +100,8 @@ MonoBehaviour:
   takeHitAnimation:
     Name: Worker_Ant_Take_Hit
     CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0
     CurrentIndex: 5
 --- !u!212 &8510735526301981991
 SpriteRenderer:

@@ -39,8 +39,8 @@ namespace Minigames.Fight
         
         public override void Shoot()
         {
-            ShotTimer = 0;
             EnemyProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as EnemyProjectile;
+
             Transform offset = !_overridenEntity.VisualController.SpriteRenderer.flipX ? leftShootOffset : rightShootOffset;
             projectile.transform.position = offset.position;
             
@@ -91,6 +91,12 @@ namespace Minigames.Fight
             float y = Random.Range(prediction.y - randomFactor, prediction.y + randomFactor);
 
             return new Vector2(x, y);
+        }
+
+        // Called by animation to reset timer on first frame.
+        public void ResetShotTimer()
+        {
+            ShotTimer = 0;
         }
     }
 }
