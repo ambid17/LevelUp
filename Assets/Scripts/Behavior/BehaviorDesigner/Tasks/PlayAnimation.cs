@@ -40,14 +40,9 @@ namespace BehaviorDesigner.Runtime.Tasks
             {
                 return TaskStatus.Failure;
             }
-            if (animationManager.CurrentAnimation != Animation.Value)
+            if (!animationManager.IsAnimPlaying(Animation.Value))
             {
                 animationManager.PlayAnimation(Animation.Value, 0);
-                return TaskStatus.Running;
-            }
-            if (_waitOneFrame)
-            {
-                _waitOneFrame = false;
                 return TaskStatus.Running;
             }
             _hasStarted = true;

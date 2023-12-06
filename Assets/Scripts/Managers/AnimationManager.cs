@@ -20,7 +20,7 @@ public class AnimationManager : MonoBehaviour
 
     private bool _isStunned;
 
-    protected bool IsAnimPlaying(AnimationName name)
+    public bool IsAnimPlaying(AnimationName name)
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
     }

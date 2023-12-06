@@ -6,6 +6,8 @@ namespace Minigames.Fight
 {
     public class EnemyProjectileSpawner : EnemyProjectile
     {
+        public Transform Offset => offSet;
+
         [SerializeField]
         private Animator anim;
         [SerializeField]
@@ -34,7 +36,7 @@ namespace Minigames.Fight
             _overridenEntity = myEntity;
             _direction = direction;
             _controller = controller;
-            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 180f;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 

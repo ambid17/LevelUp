@@ -63,7 +63,6 @@ MonoBehaviour:
   weaponArmController: {fileID: 6520759247579820641}
   resourcePrefab: {fileID: 3158209486798102802, guid: 0fcb200ac0effec47b2cee04e7a34263, type: 3}
   maxResourceSpawns: 100
-  CanMove: 1
   currentInteractionType: 0
 --- !u!114 &4274406417404922725
 MonoBehaviour:
@@ -206,8 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1822334565586454507}
   defaultAnimation:
-    Name: 
-    CanBeCancelled: 0
+    Name: Idle_Down
+    CanBeCancelled: 1
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
     CurrentIndex: 0
