@@ -29,11 +29,12 @@ namespace Minigames.Fight
 
     public enum UpgradeCategory
     {
-        Melee, Range, Player
+        None, Melee, Range, Player
     }
 
     public enum EffectCategory
     {
+        None,
         AoE,
         OnHit,
         Physical

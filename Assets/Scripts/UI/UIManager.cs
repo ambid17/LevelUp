@@ -9,8 +9,7 @@ namespace Minigames.Fight
     public enum UIPanelType
     {
         None,
-        EffectUpgrade,
-        EffectCreate,
+        Effect,
         Pause,
         Reward,
     }
@@ -20,7 +19,6 @@ namespace Minigames.Fight
         public ResourceTypeSpriteDictionary ResourceSpriteDictionary;
 
         [SerializeField] private UIPanel effectUpgradePanel;
-        [SerializeField] private UIPanel effectCreatePanel;
         [SerializeField] private UIPanel pausePanel;
         [SerializeField] private UIPanel rewardPanel;
         
@@ -33,8 +31,7 @@ namespace Minigames.Fight
         void Start()
         {
             // Make sure all UI is toggled off
-            ToggleUiPanel(UIPanelType.EffectUpgrade, false);
-            ToggleUiPanel(UIPanelType.EffectCreate, false);
+            ToggleUiPanel(UIPanelType.Effect, false);
             ToggleUiPanel(UIPanelType.Pause, false);
             ToggleUiPanel(UIPanelType.Reward, false);
             Platform.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
@@ -44,7 +41,7 @@ namespace Minigames.Fight
         {
             if (e.InteractionType == InteractionType.Create || e.InteractionType == InteractionType.Upgrade)
             {
-                ToggleUiPanel(UIPanelType.EffectUpgrade, true);
+                ToggleUiPanel(UIPanelType.Effect, true);
             }
         }
 
@@ -75,17 +72,11 @@ namespace Minigames.Fight
             
             switch (panelType)
             {
-                case UIPanelType.EffectUpgrade:
+                case UIPanelType.Effect:
                     effectUpgradePanel.Toggle(isActive);
                     break;
                 case UIPanelType.Pause:
                     pausePanel.Toggle(isActive);
-                    break;
-                case UIPanelType.EffectCreate:
-                    effectCreatePanel.Toggle(isActive);
-                //    break;
-                //case UIPanelType.Reward:
-                //    rewardPanel.Toggle(isActive);
                     break;
             }
         }

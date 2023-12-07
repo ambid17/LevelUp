@@ -73,26 +73,6 @@ namespace Minigames.Fight
             Effect = effect;
         }
     }
-    
-    public class EffectItemSelectedEvent : IEvent
-    {
-        public EffectItem EffectItem;
-
-        public EffectItemSelectedEvent(EffectItem effectItem)
-        {
-            EffectItem = effectItem;
-        }
-    }
-
-    public class UnlockItemSelectedEvent : IEvent
-    {
-        public EffectItem EffectItem;
-
-        public UnlockItemSelectedEvent(EffectItem effectItem)
-        {
-            EffectItem = effectItem;
-        }
-    }
 
     public class PurchaseCountChangedEvent : IEvent
     {
