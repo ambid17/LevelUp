@@ -17,6 +17,8 @@ namespace Minigames.Fight
         private TierCategorySelector tierCategorySelector;
         [SerializeField]
         private UpgradeSelector upgradeSelector;
+        [SerializeField]
+        private UpgradeInspector upgradeInspector;
 
         [SerializeField]
         private Button backButton;
@@ -111,7 +113,7 @@ namespace Minigames.Fight
 
         public void OnUpgradeSelected(Effect effect)
         {
-
+            upgradeInspector.OnEffectSelected(effect);
         }
     }
 }
