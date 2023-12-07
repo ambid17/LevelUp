@@ -181,7 +181,6 @@ namespace Minigames.Fight
         {
             target = transform.position;
             rb.velocity = Vector2.zero;
-            speed = 0;
             _Path = null;
         }
     }
