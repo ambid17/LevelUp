@@ -6,86 +6,97 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    public enum SpecialEnemyType
-    {
-        None,
-        Bee,
-        Ant,
-    }
-
     public class EntityBehaviorData : MonoBehaviour
     {
-        #region GeneralData
-        [NonSerialized]
-        public RoomController roomController;
+        public LayerMask ObstacleLayerMask;
 
         [SerializeField]
-        private EnemyEntity entity;
-
+        private EnemyEntity myEntity;
         [SerializeField]
-        private SpecialEnemyType enemyType;
-
-        public bool Stunned => entity.Stunned;
-        public bool IsMoving => entity.MovementController.MyRigidbody2D.velocity != Vector2.zero;
-        public float MoveSpeed => entity.enemyStats.MoveSpeed;
-        public GameObject PlayerGo => entity.Target.gameObject;
-        public Transform Player => entity.Target;
-        public Vector2 PlayerVector => entity.Target.position;
-        public Vector2 MyVector => transform.position;
-        public List<Transform> FlowerWaypoints => roomController.FlowerWaypoints;
-        public float CurrentHealth => entity.Stats.currentHp;
-        public float DamageTaken => entity.enemyStats.MaxHp - entity.Stats.currentHp;
-        public float DpsTaken => entity.Stats.damageTakenThisSecond;
-        public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerVector);
-        public SpecialEnemyType EnemyType => enemyType;
-        #endregion
-        #region BeeData
-
-        public float TotalDamageTaken => roomController.TotalBeeDamageTaken;
-
-        #endregion
-        #region AntData
+        private float tick;
+        public RoomController room;
         [SerializeField]
-        private float _smellRadius;
+        private float tickRandomizer;
+        [SerializeField]
+        private bool trackDamagePerTick;
+        [SerializeField]
+        private float damageDecayRate;
 
-        public float SmellRadius
+        public float DamageLastTick
+        {
+            get => myEntity.Stats.DamageTakenThisSecond;
+            set => myEntity.Stats.DamageTakenThisSecond = value;
+        }
+
+        public virtual bool CanSeeTarget
         {
             get
             {
-                bool playerHasPheromones = false;
-                foreach (StatusEffectInstance effectInstance in GameManager.PlayerEntity.Stats.StatusEffects)
-                {
-                    if (effectInstance.effect is PheromoneEffect)
-                    {
-                        playerHasPheromones = true;
-                    }
-                }
-                return playerHasPheromones ? _smellRadius * 1.5f : _smellRadius;
+                GameObject player = PhysicsUtils.HasLineOfSight(transform, GameManager.PlayerEntity.transform, MyEntity.enemyStats.DetectRange, 360, ObstacleLayerMask);
+                return player != null;
             }
         }
-        public Vector2 RandomAroundPlayer => new Vector2(Random.Range(PlayerVector.x - SmellRadius, PlayerVector.x + SmellRadius), Random.Range(PlayerVector.y - SmellRadius, PlayerVector.y + SmellRadius));
-        public bool Alerted { get; set; }
-        public List<Transform> SoldierWaypoints => roomController.PatrolWaypoints;
-        public List<Transform> WorkerWaypoints => roomController.WorkerWaypoints;
-        #endregion
-        #region SpiderData
-        public Vector2 PlayerVelocity => GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;
-        public bool CanShoot => entity.enemyStats.canShootTarget;
-        public bool CanMelee => entity.enemyStats.canMeleeTarget;
-        public bool IsTargetSlowed
+
+        public Vector2 RandomSoldierWaypoint
         {
             get
             {
-                foreach (StatusEffectInstance effectInstance in GameManager.PlayerEntity.Stats.StatusEffects)
-                {
-                    if (effectInstance.effect is SlowEffect)
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                int i = Random.Range(0, PatrolWaypoints.Count);
+                return PatrolWaypoints[i].position;
             }
         }
-        #endregion
+
+        public Vector2 RandomWorkerWaypoint
+        {
+            get
+            {
+                int i = Random.Range(0, WorkerWaypoints.Count);
+                return WorkerWaypoints[i].position;
+            }
+        }
+
+        public EnemyEntity MyEntity => myEntity;
+        public Transform PlayerTransform => myEntity.Target;
+        public Vector2 PlayerPosition => myEntity.Target.position;
+        public float Tick => tick + Time.deltaTime;
+        public float Speed => myEntity.enemyStats.MoveSpeed;
+        public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerPosition);
+        public float PursueDistance => (MyEntity.enemyStats.MeleeAttackRange * 0.5f);
+        public bool CanShoot => MyEntity.enemyStats.canShootTarget;
+        public bool CanMelee => MyEntity.enemyStats.canMeleeTarget;
+        public virtual bool WithinVisionRadius => DistanceToPlayer <= MyEntity.enemyStats.DetectRange;
+
+
+
+        public List<Transform> FlowerWaypoints => room.FlowerWaypoints;
+        public List<Transform> WorkerWaypoints => room.WorkerWaypoints;
+        public List<Transform> PatrolWaypoints => room.PatrolWaypoints;
+
+
+        private float _tickTimer;
+
+        private void Start()
+        {
+            tick += Random.Range(-tickRandomizer, tickRandomizer);
+        }
+
+        private void Update()
+        {
+            if (_tickTimer < tick)
+            {
+                _tickTimer += Time.deltaTime;
+                return;
+            }
+            OnTick();
+            _tickTimer = 0;
+        }
+
+        public virtual void OnTick()
+        {
+            if (trackDamagePerTick && DamageLastTick > 0)
+            {
+                DamageLastTick -= damageDecayRate;
+            }
+        }
     }
 }

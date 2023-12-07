@@ -7,7 +7,7 @@ namespace Minigames.Fight
     public class PheromoneTrail : MonoBehaviour
     {
         [SerializeField]
-        private EntityBehaviorData behaviorData;
+        private AntBehaviorData behaviorData;
         [SerializeField]
         private float dropFrequency;
         [SerializeField]
@@ -17,7 +17,7 @@ namespace Minigames.Fight
 
         private void Update()
         {
-            if (!behaviorData.Alerted)
+            if (!behaviorData.IsAlerted)
             {
                 return;
             }

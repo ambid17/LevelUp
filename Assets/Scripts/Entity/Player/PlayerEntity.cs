@@ -45,8 +45,6 @@ namespace Minigames.Fight
             }
         }
 
-        public bool CanMove = true;
-
         public InteractionType currentInteractionType = InteractionType.None; 
         
         protected override void Setup()

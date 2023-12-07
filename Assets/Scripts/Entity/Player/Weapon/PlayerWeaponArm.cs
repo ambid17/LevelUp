@@ -6,7 +6,7 @@ namespace Minigames.Fight
 {
     public class PlayerWeaponArm : MonoBehaviour
     {
-        public PlayerWeaponController EquippedWeapon => _equippedWeaponController;
+        public PlayerWeaponController EquippedWeapon => _equippedWeaponController ?? GetComponent<PlayerProjectileWeaponController>();
 
         public SpriteRenderer MySpriteRenderer;
         public float StartRotation;

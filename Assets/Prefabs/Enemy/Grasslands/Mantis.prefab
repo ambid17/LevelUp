@@ -1,0 +1,537 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &537301116338642075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537301116338642086}
+  - component: {fileID: 7104642938935533843}
+  - component: {fileID: 9214928300637077400}
+  - component: {fileID: 537301116338642072}
+  - component: {fileID: 537301116338642074}
+  - component: {fileID: 4219124595793531226}
+  - component: {fileID: 9111060777138381591}
+  - component: {fileID: 9208108506720587213}
+  - component: {fileID: 2925357441022889281}
+  - component: {fileID: 7104642938935533840}
+  - component: {fileID: 7104642938935533841}
+  - component: {fileID: 7104642938935533842}
+  - component: {fileID: 3879029092406399404}
+  - component: {fileID: 2263824210220229332}
+  m_Layer: 9
+  m_Name: Mantis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &537301116338642086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2526693, y: -1.0548377, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7104642938935533843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementController: {fileID: 0}
+  VisualController: {fileID: 9214928300637077400}
+  animationController: {fileID: 9208108506720587213}
+  tickDamageDownPerSecond: 0
+  enemyStats:
+    goldValue: 1
+    moveSpeed: 3
+    maxHp: 30
+    projectileSpeed: 1
+    projectileLifeTime: 5
+    effects: []
+    canShootTarget: 0
+    canMeleeTarget: 0
+    randomProjectileOffset: 0
+    predictTargetPosition: 0
+    isPassive: 0
+    DetectRange: 10
+    MeleeAttackRange: 2
+  deathAnimation:
+    Name: Mantis_Die
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0
+    CurrentIndex: 12
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 2a6e6affecd5a9745838d0a0cf80a121, type: 3}
+--- !u!114 &9214928300637077400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78366a1a0561e0546bfaabe3e0e70786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
+  flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  flashColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  takeHitAnimation:
+    Name: Mantis_Take_Hit
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0
+    CurrentIndex: 11
+--- !u!212 &537301116338642072
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 216851781
+  m_SortingLayer: 6
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 5c612a15dfab75742ac1fb0f1c51ec5c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!50 &537301116338642074
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4219124595793531226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: 2
+--- !u!114 &9111060777138381591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609a3520990b3ff4caadae37b6c85bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 7104642938935533843}
+  move: {x: 0, y: 0}
+--- !u!114 &9208108506720587213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf451aa77dc50f74485532d5a22b4e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7104642938935533841}
+  defaultAnimation:
+    Name: Mantis_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+--- !u!70 &2925357441022889281
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010218374, y: -0.069255225}
+  m_Size: {x: 0.6463157, y: 0.40147033}
+  m_Direction: 1
+--- !u!114 &7104642938935533840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a1614e18fab6c48a4d0e361c70e838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 4160
+  myEntity: {fileID: 7104642938935533843}
+  tick: 1
+  room: {fileID: 0}
+  tickRandomizer: 0.1
+  trackDamagePerTick: 0
+  damageDecayRate: 0
+--- !u!95 &7104642938935533841
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 91d816f8d056b2a41a13ea272c5c9a0f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &7104642938935533842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 1
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(331,30)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-183.913651,101.475754)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(-0.8972732,115.179688)"},"ID":2,"Name":"Set
+        Initial Destination","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomDestination","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/RandomPointOnMap","PropertyMappingOwner":0,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(185.076431,97.59401)"},"ID":3,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.ParallelComplete","NodeData":{"Offset":"(-0.0355174541,99.33256)"},"ID":4,"Name":"Parallel
+        Complete","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-447.500671,321.078)"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-1686.55627,196.150574)"},"ID":6,"Name":"Wander","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-464.659,130.035812)"},"ID":7,"Name":"Compare
+        Shared Bool","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsAlerted","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/CanSeeTarget","PropertyMappingOwner":1,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-314.975647,129.715927)"},"ID":8,"Name":"If
+        Not Already Flying","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-122.857208,115.714615)"},"ID":9,"Name":"If
+        Not Flying","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(0.225442886,117.143135)"},"ID":10,"Name":"Play
+        Take Off","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"TakeOff","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/TakeOffAnimation","PropertyMappingOwner":2},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(112.556244,119.774582)"},"ID":11,"Name":"Is
+        Flying","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-192.1315,129.7047)"},"ID":12,"Name":"Play
+        Fly","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Fly","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MoveAnimation","PropertyMappingOwner":3},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Custom2D.Seek","NodeData":{"Offset":"(-83.06213,130.8081)"},"ID":13,"Name":"Seek","Instant":true,"SharedTransformtarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null},"SharedVector2targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"},"SharedBoolignoreInvalidPath":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"speed","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/Speed","PropertyMappingOwner":4,"SinglemValue":0},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatstopDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrotateTowardsDestination":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrotationSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(25.7978725,131.639313)"},"ID":14,"Name":"Play
+        Land","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Land","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/LandAnimation","PropertyMappingOwner":5},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(138.099365,132.856277)"},"ID":15,"Name":"Is
+        Not Flying","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(252.401825,130.954773)"},"ID":16,"Name":"Idle","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Idle","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/IdleAnimation","PropertyMappingOwner":6},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(366.530273,132.348328)"},"ID":17,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0.5}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(492.900635,133.289871)"},"ID":18,"Name":"Set
+        New Destination","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomDestination","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/RandomPointOnMap","PropertyMappingOwner":7,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.ReturnFailure","NodeData":{"Offset":"(-641.760864,209.25087)"},"ID":19,"Name":"Return
+        Failure","Instant":true,"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0.502774,116.79612)"},"ID":20,"Name":"Pursue
+        Player Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedFloat","NodeData":{"Offset":"(-293.463562,131.333618)"},"ID":21,"Name":"Compare
+        Shared Float","Instant":true,"SharedFloatvariable":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"DistanceToPlayer","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/DistanceToPlayer","PropertyMappingOwner":8,"SinglemValue":0},"SharedFloatcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PursueDistance","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/PursueDistance","PropertyMappingOwner":9,"SinglemValue":0},"ComparisoncomparisonType":"GreaterThan"},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-130.957886,130.831009)"},"ID":22,"Name":"If
+        Not Already Flying","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-122.857239,115.7146)"},"ID":23,"Name":"If
+        Not Flying","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(0.225463867,117.143127)"},"ID":24,"Name":"Play
+        Take Off","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"TakeOff","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/TakeOffAnimation","PropertyMappingOwner":10},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(112.556213,119.7746)"},"ID":25,"Name":"Is
+        Flying","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-5.683319,130.748352)"},"ID":26,"Name":"Play
+        Fly","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Fly","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MoveAnimation","PropertyMappingOwner":11},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Custom2D.Pursue","NodeData":{"Offset":"(100.0316,133.278183)"},"ID":27,"Name":"Pursue","Instant":true,"SharedFloattargetDistPrediction":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":20},"SharedFloattargetDistPredictionMult":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":20},"SharedTransformtarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"PlayerTransform","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/PlayerTransform","PropertyMappingOwner":12},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"speed","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/Speed","PropertyMappingOwner":13,"SinglemValue":0},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatstopDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PursueDistance","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/PursueDistance","PropertyMappingOwner":14,"SinglemValue":0},"SharedBoolrotateTowardsDestination":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrotationSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(213.156677,130.679565)"},"ID":28,"Name":"Stop
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(327.804321,133.457291)"},"ID":29,"Name":"Play
+        Land","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Land","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/LandAnimation","PropertyMappingOwner":15},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(431.187927,134.37561)"},"ID":30,"Name":"Is
+        Not Flying","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(538.8853,133.054077)"},"ID":31,"Name":"Start
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(285.132446,318.9475)"},"ID":32,"Name":"Combo
+        Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-257.46225,137.993683)"},"ID":33,"Name":"If
+        Can Combo","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisWeaponController/CanUseCombo","PropertyMappingOwner":16,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(-149.854889,137.296341)"},"ID":34,"Name":"Stop
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedInt","NodeData":{"Offset":"(-18.476593,139.357056)"},"ID":35,"Name":"Set
+        Number Of Attacks","Instant":true,"SharedInttargetValue":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"RandomComboValue","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisWeaponController/RandomCombo","PropertyMappingOwner":17,"Int32mValue":0},"SharedInttargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"ComboCount","IsShared":true,"Int32mValue":0}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(114.64006,140.750183)"},"ID":36,"Name":"Start
+        Combo","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"StartCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/ComboStart","PropertyMappingOwner":18},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(224.841553,142.169708)"},"ID":37,"Name":"Combo
+        Attack","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"ComboCount","IsShared":true,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(2.114475,98.1010742)"},"ID":38,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedAnimationName","NodeData":{"Offset":"(-39.31526,104.345215)"},"ID":39,"Name":"Set
+        Shared Animation Name","Instant":true,"SharedAnimationNametargetValue":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"RandomCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/RangedAttackAnimation","PropertyMappingOwner":19},"SharedAnimationNametargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"ComboAnimation","IsShared":true,"AnimationNamemValue":{"BooleanCanBeCancelled":false,"SingleMaxBufferPercentage":0.8,"SingleAcceptableOverrideTime":0.05,"Int32CurrentIndex":0}}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(102.817078,106.464874)"},"ID":40,"Name":"Play
+        Animation","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"ComboAnimation","IsShared":true,"AnimationNamemValue":{"BooleanCanBeCancelled":false,"SingleMaxBufferPercentage":0.8,"SingleAcceptableOverrideTime":0.05,"Int32CurrentIndex":0}},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(214.205933,108.131348)"},"ID":41,"Name":"Play
+        Animation","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Idle","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/IdleAnimation","PropertyMappingOwner":20},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(329.5499,140.889)"},"ID":42,"Name":"End
+        Combo","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"EndCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/ComboEnd","PropertyMappingOwner":21},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(438.4708,141.610382)"},"ID":43,"Name":"Play
+        Exhaust","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Exhaust","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/Exhaust","PropertyMappingOwner":22},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(540.6265,142.241852)"},"ID":44,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(651.735168,143.118958)"},"ID":45,"Name":"Start
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(1192.448,227.978546)"},"ID":46,"Name":"Attack
+        Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-106.574814,125.912109)"},"ID":47,"Name":"Compare
+        Shared Bool","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanAttack","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/CanMelee","PropertyMappingOwner":23,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(18.9134789,125.456833)"},"ID":48,"Name":"Stop
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedAnimationName","NodeData":{"Offset":"(171.297241,129.59082)"},"ID":49,"Name":"Set
+        Shared Animation Name","Instant":true,"SharedAnimationNametargetValue":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"RandomAttack","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MeleeAttackAnimation","PropertyMappingOwner":24},"SharedAnimationNametargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"AttackAnimation","IsShared":true,"AnimationNamemValue":{"BooleanCanBeCancelled":false,"SingleMaxBufferPercentage":0.8,"SingleAcceptableOverrideTime":0.05,"Int32CurrentIndex":0}}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(319.717926,127.836189)"},"ID":50,"Name":"Play
+        Attack","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"AttackAnimation","IsShared":true,"AnimationNamemValue":{"BooleanCanBeCancelled":false,"SingleMaxBufferPercentage":0.8,"SingleAcceptableOverrideTime":0.05,"Int32CurrentIndex":0}},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(430.6754,126.8335)"},"ID":51,"Name":"Start
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(1808.66345,207.931763)"},"ID":52,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(-54.94861,151.29303)"},"ID":53,"Name":"Start
+        Evaluating","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(90.736084,150.335632)"},"ID":54,"Name":"Idle","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Idle","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/IdleAnimation","PropertyMappingOwner":25},"SuccessTypeSuccessType":"None","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(745.442261,119.475143)"},"ID":55,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(-61.2905,120.96769)"},"ID":56,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Tick","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/Tick","PropertyMappingOwner":26,"SinglemValue":0},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.UntilSuccess","NodeData":{"Offset":"(61.29019,122.580688)"},"ID":57,"Name":"Until
+        Success","Instant":true,"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(3.71933E-05,124.193436)"},"ID":58,"Name":"Compare
+        Shared Bool","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]}]}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"PauseEvaluation","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Tick","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/Tick","PropertyMappingOwner":27,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomDestination","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/RandomPointOnMap","PropertyMappingOwner":28,"Vector2mValue":"(0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsAlerted","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/CanSeeTarget","PropertyMappingOwner":29,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"speed","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/Speed","PropertyMappingOwner":30,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"TakeOff","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/TakeOffAnimation","PropertyMappingOwner":31},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Fly","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MoveAnimation","PropertyMappingOwner":32},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Land","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/LandAnimation","PropertyMappingOwner":33},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsFlying","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Idle","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/IdleAnimation","PropertyMappingOwner":34},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisWeaponController/CanUseCombo","PropertyMappingOwner":35,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"PlayerTransform","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/PlayerTransform","PropertyMappingOwner":36},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PursueDistance","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/PursueDistance","PropertyMappingOwner":37,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"ComboCount","IsShared":true,"Int32mValue":0},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"RandomComboValue","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisWeaponController/RandomCombo","PropertyMappingOwner":38,"Int32mValue":0},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"RandomAttack","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MeleeAttackAnimation","PropertyMappingOwner":39},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"RandomCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/RangedAttackAnimation","PropertyMappingOwner":40},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Exhaust","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/Exhaust","PropertyMappingOwner":41},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"StartCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/ComboStart","PropertyMappingOwner":42},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"EndCombo","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/ComboEnd","PropertyMappingOwner":43},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanAttack","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/CanMelee","PropertyMappingOwner":44,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"AttackAnimation","IsShared":true,"AnimationNamemValue":{"BooleanCanBeCancelled":false,"SingleMaxBufferPercentage":0.8,"SingleAcceptableOverrideTime":0.05,"Int32CurrentIndex":0}},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"ComboAnimation","IsShared":true,"AnimationNamemValue":{"BooleanCanBeCancelled":false,"SingleMaxBufferPercentage":0.8,"SingleAcceptableOverrideTime":0.05,"Int32CurrentIndex":0}},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"DistanceToPlayer","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/DistanceToPlayer","PropertyMappingOwner":45,"SinglemValue":0}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        - {fileID: 537301116338642075}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.4
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
+--- !u!114 &3879029092406399404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af87e33b68a8424a83f2558389552e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAnimation:
+    Name: Mantis_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  moveAnimation:
+    Name: Mantis_Fly
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 1
+  meleeAttackAnimation:
+    Name: Mantis_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  rangedAttackAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  alternateMoveAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  MyEntity: {fileID: 0}
+  takeOffAnimation:
+    Name: Mantis_Take_Off
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 2
+  landAnimation:
+    Name: Mantis_Land
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 3
+  comboStart:
+    Name: Mantis_Combo_Prep
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 8
+  comboEnd:
+    Name: Mantis_Combo_End
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 9
+  exhaust:
+    Name: Mantis_Exhaust
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 10
+  attackAnimations:
+  - Name: Mantis_Attack_1
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 4
+  - Name: Mantis_Attack_2
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 5
+  comboAnimations:
+  - Name: Mantis_Combo_1
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 6
+  - Name: Mantis_Combo_2
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 7
+--- !u!114 &2263824210220229332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537301116338642075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61494659081110489b86b09116ae21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: c26e2db57e0caaa4cbe312c922541a1d, type: 2}
+  comboWeapon: {fileID: 11400000, guid: d243d27805895934fb5430f160554f1f, type: 2}
+  minCombo: 5
+  maxCombo: 10

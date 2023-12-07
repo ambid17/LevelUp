@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040ceb1b8a8bc04448d7ed98f77b99bd, type: 3}
+  m_Name: ProjectileSpiderWeapon
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  readableName: 
+  description: 
+  icon: {fileID: 0}
+  ammoIcon: {fileID: 0}
+  abilityIcon: {fileID: 0}
+  abilityCooldown: 0
+  fireRate: 1
+  damage: 0.25
+  projectilePrefab: {fileID: 374483333003205131, guid: 757fc244e4e7a104d889eb2aebf4cbcd, type: 3}
+  magazineSize: 0
+  bulletsInMagazine: 0
+  reloadTime: 0
+  projectileCount: 1
+  projectileSpread: 0
+  bulletSpriteOverride: {fileID: 0}

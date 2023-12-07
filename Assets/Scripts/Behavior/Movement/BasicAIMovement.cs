@@ -94,8 +94,19 @@ namespace Minigames.Fight
             float distance = Mathf.Infinity;
             if (seeker.IsDone())
             {
-                move = nextWaypoint - (Vector2)transform.position;
+                move = nextWaypoint - transform.position.AsVector2();
                 distance = Vector2.Distance(transform.position, nextWaypoint);
+            }
+
+            // If our path is invalid we want to move to the nearest walkable node to avoid getting stuck.
+            if (pathInvalid)
+            {
+                NNConstraint myConstraint = NNConstraint.None;
+                myConstraint.graphMask = seeker.graphMask;
+                Vector2 nearestWalkable = (Vector3)AstarPath.active.GetNearest(transform.position, myConstraint).node.position;
+
+                // Multiplied by 2 to avoid getting in an infinite back and forth loop (spooky magic float).
+                move = nearestWalkable *2f - transform.position.AsVector2();
             }
 
             // If waypoint has been reached then agent heads towards next waypoint on the list
@@ -119,6 +130,7 @@ namespace Minigames.Fight
                 }
                 currentWaypoint++;
             }
+
             rb.velocity = move.normalized * speed;
 
             // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching

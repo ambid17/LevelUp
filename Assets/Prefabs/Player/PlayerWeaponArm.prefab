@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7392384324954230751}
   - component: {fileID: 3539462954745644519}
   - component: {fileID: 4429688076752172701}
+  - component: {fileID: 4654525238521823753}
   m_Layer: 0
   m_Name: PlayerWeaponArm
   m_TagString: Untagged
@@ -109,7 +110,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1162470409
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 295ea4903d7107447bb5ee6eaa6b9871, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,6 +136,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8893232071970078634}
+  defaultAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
   CurrentWeaponMode: 1
   projectileIdle:
     Name: Projectile_Arm_Idle
@@ -273,6 +280,42 @@ MonoBehaviour:
   _spawnAoeOnDeath: 0
   _aoePrefab: {fileID: 0}
   myArm: {fileID: 7392384324954230751}
+--- !u!114 &4654525238521823753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911779753337637818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4ab6ba76a19a947b8fd15e8cf78623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowLayer: 0
+  maskLayer: 0
+  shadowType: 4
+  maskType: 0
+  shadowEffect: 0
+  shadowDistance: 1
+  shadowThickness: 1
+  shadowSoftness: 0
+  shadowTranslucency: 0
+  maskLit: 0
+  depth: 0
+  depthFalloff: 0
+  depthCustomValue: 0
+  mainShape:
+    shadowType: 4
+    maskType: 0
+    transform: {fileID: 4795046202620827819}
+    height: 1
+    thickness: 1
+    isStatic: 0
+  normalMapMode:
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
 --- !u!1 &2280096968152248693
 GameObject:
   m_ObjectHideFlags: 0

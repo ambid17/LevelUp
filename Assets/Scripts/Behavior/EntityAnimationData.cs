@@ -8,8 +8,9 @@ namespace Minigames.Fight
     {
         public AnimationName IdleAnimation => idleAnimation;
         public AnimationName MoveAnimation => moveAnimation;
-        public AnimationName MeleeAttackAnimation => meleeAttackAnimation;
-        public AnimationName RangedAttackAnimation => rangedAttackAnimation;
+        public AnimationName VariableMoveAnimation => MyEntity.rb.velocity == Vector2.zero ? idleAnimation : moveAnimation;
+        public virtual AnimationName MeleeAttackAnimation => meleeAttackAnimation;
+        public virtual AnimationName RangedAttackAnimation => rangedAttackAnimation;
         public AnimationName AlternateMoveAnimation => alternateMoveAnimation;
 
         [SerializeField] AnimationName idleAnimation;
@@ -17,6 +18,7 @@ namespace Minigames.Fight
         [SerializeField] AnimationName meleeAttackAnimation;
         [SerializeField] AnimationName rangedAttackAnimation;
         [SerializeField] AnimationName alternateMoveAnimation;
+        [SerializeField] BasicAIMovement MyEntity;
     }
 
 }

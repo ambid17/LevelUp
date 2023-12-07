@@ -19,24 +19,13 @@ namespace Minigames.Fight
         public Tilemap Tilemap;
         public List<RoomConnection> roomConnections;
 
-        public float TotalBeeDamageTaken
-        {
-            get
-            {
-                float totalCurrentHealth = 0;
-                foreach (EntityBehaviorData behavior in beesInRoom)
-                {
-                    if (behavior != null)
-                    {
-                        totalCurrentHealth += behavior.CurrentHealth;
-                    }
-                }
-                return beeHealthSum - totalCurrentHealth;
-            }
-        }
+
 
         [SerializeField]
         private CinemachineVirtualCamera cam;
+
+        [SerializeField]
+        private HiveMindManager hiveMindManagerPrefab;
 
         [SerializeField]
         private float zoomSpeed;
@@ -51,12 +40,7 @@ namespace Minigames.Fight
         [SerializeField]
         private List<EnemyToSpawn> enemiesToSpawn;
 
-        private float beeHealthSum;
-        private float maxBeeHealth;
-
         private bool hasInitialized;
-
-        private List<EntityBehaviorData> beesInRoom = new List<EntityBehaviorData>();
 
         private void Start()
         {
@@ -67,21 +51,33 @@ namespace Minigames.Fight
 
         private void SpawnEnemies()
         {
+            Dictionary<int, List<HiveMindBehaviorData>> hiveMinds = new();
+
             foreach (EnemyToSpawn enemy in enemiesToSpawn)
             {
                 for (int i = 0; i < enemy.numberToSpawn; i++)
                 {
                     int randomInt = Random.Range(0, spawnPoints.Count);
-                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
-                    behavior.roomController = this;
-                    if (behavior.EnemyType == SpecialEnemyType.Bee)
+                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
+                    behavior.room = this;
+                    IHiveMind hiveMind = behavior.GetComponent<IHiveMind>();
+                    if (hiveMind != null)
                     {
-                        maxBeeHealth = behavior.CurrentHealth;
-                        beeHealthSum += maxBeeHealth;
-                        beesInRoom.Add(behavior);
+                        if (!hiveMinds.ContainsKey(hiveMind.Id))
+                        {
+                            hiveMinds.Add(hiveMind.Id, new());
+                        }
+
+                        hiveMinds[hiveMind.Id].Add(hiveMind.myBehaviorData);
                     }
+
                     spawnPoints.Remove(spawnPoints[randomInt]);
                 }
+            }
+            foreach (List<HiveMindBehaviorData> hiveMindList in hiveMinds.Values)
+            {
+                HiveMindManager hiveMindManager = Instantiate(hiveMindManagerPrefab);
+                hiveMindManager.Initialize(hiveMindList);
             }
         }
 
@@ -255,7 +251,7 @@ namespace Minigames.Fight
     [Serializable]
     public class EnemyToSpawn
     {
-        public EntityBehaviorData EnemyPrefab;
+        public EnemyType EnemyPrefab;
         public int numberToSpawn;
     }
 }

@@ -19,5 +19,13 @@ namespace Minigames.Fight
         {
             projectileWeapon.Shoot();
         }
+        public void ResetMelee()
+        {
+            meleeWeapon.ResetShotTimer();
+        }
+        public void ResetProjectile()
+        {
+            projectileWeapon.ResetShotTimer();
+        }
     }
 }

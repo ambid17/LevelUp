@@ -1,20 +1,26 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
+    public Animator Anim => anim;
     public bool IsAnimFinished => CurrentAnimationNomralizedTime >= 1;
     public float CurrentAnimationNomralizedTime => anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
     public AnimationName CurrentAnimation => currentAnimation;
 
     [SerializeField]
     protected Animator anim;
+    [SerializeField]
+    protected AnimationName defaultAnimation;
 
     private AnimationName bufferedAnimation;
 
     protected AnimationName currentAnimation;
 
-    protected bool IsAnimPlaying(AnimationName name)
+    private bool _isStunned;
+
+    public bool IsAnimPlaying(AnimationName name)
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
     }
@@ -29,10 +35,15 @@ public class AnimationManager : MonoBehaviour
     public void ResetAnimations()
     {
         currentAnimation = null;
+        PlayAnimation(defaultAnimation, 0);
     }
 
     public void PlayAnimation(AnimationName name, float time)
     {
+        if (_isStunned)
+        {
+            return;
+        }
         // Prevent null refs
         if (currentAnimation == null)
         {
@@ -69,6 +80,10 @@ public class AnimationManager : MonoBehaviour
 
     public void QueueAnimation(AnimationName name)
     {
+        if (_isStunned)
+        {
+            return;
+        }
         if (bufferedAnimation != null || IsAnimPlaying(name))
         {
             return;
@@ -91,9 +106,32 @@ public class AnimationManager : MonoBehaviour
         bufferedAnimation = name;
         while (!IsCurrentAnimLoopFinished(name.AcceptableOverrideTime))
         {
-            yield return null;
+            yield return new WaitForSeconds(0);
         }
         OverrideAnimation(name, 0);
         bufferedAnimation = null;
+    }
+
+    // Automatically return to the last animation you were performing after stun completes.
+    public IEnumerator Stun(AnimationName name, Action callback)
+    {
+        if (currentAnimation == name)
+        {
+            yield return null;
+        }
+        _isStunned = true;
+        StopCoroutine(PlayQuedAnimation(null));
+        OverrideAnimation(name, 0);
+        while (!IsAnimPlaying(name))
+        {
+            yield return new WaitForSeconds(0);
+        }
+        while (!IsAnimFinished)
+        {
+            yield return new WaitForSeconds(0);
+        }
+        OverrideAnimation(defaultAnimation, 0);
+        callback.Invoke();
+        _isStunned = false;
     }
 }

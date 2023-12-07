@@ -43,26 +43,6 @@ namespace Minigames.Fight
             {
                 TickStatuses();
             }
-
-            UpdateDps();
-        }
-
-        private void UpdateDps()
-        {
-            Stats.dpsTimer += Time.deltaTime;
-
-            if (Stats.dpsTimer > 1)
-            {
-                Stats.dpsTimer = 0;
-
-                // Option to reduce damage per second over time instead of resetting it entirely.
-                if (tickDamageDownPerSecond && Stats.damageTakenThisSecond > 0)
-                {
-                    Stats.damageTakenThisSecond -= 1;
-                    return;
-                }
-                Stats.damageTakenThisSecond = 0;
-            }
         }
 
         protected void TickStatuses()

@@ -112,7 +112,7 @@ namespace Minigames.Fight
             PlayAnimation(animation, storedNormalizedTime);
             storedNormalizedTime = 0;
         }
-        public AnimationName PlayTakeHitAnimation()
+        public AnimationName PlayerTakeHitAnimation()
         {
             AnimationName animation = null;
             switch (currentDirection)
@@ -130,7 +130,6 @@ namespace Minigames.Fight
                     animation = takeHitUp;
                     break;
             }
-            OverrideAnimation(animation, 0);
             return animation;
         }
         public void PlayDieAnimation()

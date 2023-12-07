@@ -13,6 +13,8 @@ namespace Minigames.Fight
         Transform leftShootOffset;
         [SerializeField]
         Transform rightShootOffset;
+        [SerializeField]
+        private bool spawnProjectileFromSeparateAnimation;
 
         private EnemyEntity _overridenEntity;
         private float timeToReachTarget;
@@ -39,9 +41,9 @@ namespace Minigames.Fight
         
         public override void Shoot()
         {
-            ShotTimer = 0;
             EnemyProjectile projectile = Instantiate(overridenWeapon.projectilePrefab) as EnemyProjectile;
-            Transform offset = !_overridenEntity.VisualController.SpriteRenderer.flipX ? leftShootOffset : rightShootOffset;
+
+            Transform offset = !_overridenEntity.VisualController.SpriteRenderer.flipX ? rightShootOffset : leftShootOffset;
             projectile.transform.position = offset.position;
             
             if (overridenWeapon.bulletSpriteOverride != null)
@@ -53,7 +55,16 @@ namespace Minigames.Fight
 
             if (_overridenEntity.enemyStats.predictTargetPosition)
             {
-                direction = PredictProjectileDirection(projectile.transform);
+                EnemyProjectileSpawner projectileSpawner = projectile as EnemyProjectileSpawner;
+                if (projectileSpawner != null)
+                {
+                    direction = PredictProjectileDirection(projectileSpawner.Offset);
+                }
+                else
+                {
+                    direction = PredictProjectileDirection(projectile.transform);
+                }
+                
             }
 
             if (destroyOnReachTarget)
@@ -91,6 +102,12 @@ namespace Minigames.Fight
             float y = Random.Range(prediction.y - randomFactor, prediction.y + randomFactor);
 
             return new Vector2(x, y);
+        }
+
+        // Called by animation to reset timer on first frame.
+        public void ResetShotTimer()
+        {
+            ShotTimer = 0;
         }
     }
 }

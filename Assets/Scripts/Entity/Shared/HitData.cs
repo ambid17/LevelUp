@@ -55,16 +55,12 @@ namespace Minigames.Fight
                 physicalDamage *= dmgMultiplier;
             }
 
-            physicalDamage -= (Target.Stats.armor - FlatArmorPenetration);
-
             float magicDamage = 0;
             // ex: +10 lightning damage on hit
             foreach (var effectDmg in EffectDamages)
             {
                 magicDamage += effectDmg;
             }
-
-            magicDamage -= (Target.Stats.magicResistance - FlatMagicPenetration);
 
             float totalDamage = physicalDamage + magicDamage;
             

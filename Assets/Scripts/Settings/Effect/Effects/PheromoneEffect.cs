@@ -47,10 +47,6 @@ namespace Minigames.Fight
             if (target.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 EntityBehaviorData behaviorData = target.GetComponent<EntityBehaviorData>();
-                if (behaviorData.EnemyType == SpecialEnemyType.Ant)
-                {
-                    behaviorData.Alerted = true;
-                }
             }
         }
 

@@ -154,38 +154,28 @@ namespace Minigames.Fight
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
 
-            RecalculateGraph();
+            StartCoroutine(RecalculateGraph());
 
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
 
             Platform.EventService.Dispatch(new SceneIsReadyEvent());
         }
 
-        private void RecalculateGraph()
+        private IEnumerator RecalculateGraph()
         {
+            yield return new WaitForSeconds(.01f);
             AstarPath.active.Scan();
 
-            foreach (NavGraph navGraph in AstarPath.active.graphs)
-            {
-                GridGraph graph = navGraph as GridGraph;
-                if (graph.name == groundGraph)
-                {
-                    SpawnResources(graph, GameManager.PlayerEntity.transform.position);
-                }
-            }
+            SpawnResources(GameManager.PlayerEntity.transform.position);
         }
 
-        private void SpawnResources(GridGraph graph, Vector3 start)
+        private void SpawnResources(Vector3 start)
         {
-            List<GraphNode> nodes = PathUtilities.GetReachableNodes(AstarPath.active.GetNearest(start, NNConstraint.Default).node);
             int numberToSpawn = Random.Range(minCaches, maxCaches);
 
             for (int i = 0; i < numberToSpawn; i++)
             {
-                int randomNode = Random.Range(0, nodes.Count);
-
-                ResourceCache cache = Instantiate(resourceCachePrefab, ((Vector3)nodes[randomNode].position), Quaternion.identity);
-
+                ResourceCache cache = Instantiate(resourceCachePrefab, (Vector3)PathUtilities.GetRandomReachableNode(start).position, Quaternion.identity);
 
                 // TODO set up scalable type randomization with weight.
                 int type = Random.Range(0, 2);

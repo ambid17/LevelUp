@@ -30,7 +30,7 @@ namespace Minigames.Fight
             CalculateHitData();
         }
 
-        public void CalculateHitData()
+        public virtual void CalculateHitData()
         {
             hit = new HitData(MyEntity, weapon.damage);
         }

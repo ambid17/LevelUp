@@ -8,11 +8,14 @@ namespace Minigames.Fight
         private EnemyEntity _overridenEntity;
         private MeleeWeapon _overridenWeapon;
 
+        public MeleeWeapon OverridenWeapon => _overridenWeapon;
+
         protected override void Start()
         {
             base.Start();
             _overridenEntity = MyEntity as EnemyEntity;
             _overridenWeapon = weapon as MeleeWeapon;
+            _overridenEntity.enemyStats.MeleeAttackRange = _overridenWeapon.attackRange;
         }
 
         protected override void Update()
@@ -28,12 +31,17 @@ namespace Minigames.Fight
 
         public override void Shoot()
         {
-            ShotTimer = 0;
             if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) > _overridenWeapon.attackRange)
             {
                 return;
             }
             GameManager.PlayerEntity.TakeHit(Hit);
+        }
+
+        // Called by animation to reset shot timer on first frame.
+        public void ResetShotTimer()
+        {
+            ShotTimer = 0;
         }
         
     }
