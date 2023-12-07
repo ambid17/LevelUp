@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 477293702911122595}
   - component: {fileID: 3149811893294134782}
   - component: {fileID: 1343080784318695699}
+  - component: {fileID: 3394489175596049447}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -137,7 +138,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1162470409
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 22b8ddb52b1208e49bc2739e4d90bdc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -320,7 +321,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0067013493, y: -0.11}
+  m_Offset: {x: -0.0067013493, y: 0}
   m_Size: {x: 0.3927456, y: 0.040634755}
   m_Direction: 1
 --- !u!70 &3149811893294134782
@@ -336,7 +337,7 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008, y: 0.29}
+  m_Offset: {x: -0.008, y: 0.4}
   m_Size: {x: 0.35, y: 0.76}
   m_Direction: 0
 --- !u!114 &1343080784318695699
@@ -375,6 +376,19 @@ MonoBehaviour:
     textureType: 0
     texture: {fileID: 0}
     sprite: {fileID: 0}
+--- !u!114 &3394489175596049447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274406417404922745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4274406417404922746}
 --- !u!1 &4274406417751090705
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274406417751090705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.112247, y: 0.54037905, z: -10}
+  m_LocalPosition: {x: -4.6331573, y: 3.4673862, z: -36.60446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -437,7 +451,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.9989128
+  orthographic size: 2.999998
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -623,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4795046202620827819, guid: 5591206a50ec9d544aa7c87df91c16e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.364
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 4795046202620827819, guid: 5591206a50ec9d544aa7c87df91c16e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -701,7 +715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4795046202620827819, guid: 5591206a50ec9d544aa7c87df91c16e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.364
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 4795046202620827819, guid: 5591206a50ec9d544aa7c87df91c16e5, type: 3}
       propertyPath: m_LocalPosition.z
