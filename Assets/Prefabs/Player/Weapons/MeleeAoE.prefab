@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9209020533433039234}
   - component: {fileID: 6870224812161163531}
   - component: {fileID: 7758767726815708866}
+  - component: {fileID: 6419289964741653836}
   m_Layer: 0
   m_Name: MeleeAoE
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2010298993
+  m_SortingLayerID: 1162470409
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6c3b72e633d0a142a08e7aa2e9033b5, type: 3}
@@ -157,3 +158,16 @@ PolygonCollider2D:
       - {x: 0.9364357, y: -0.18462951}
       - {x: 0.9045415, y: -0.23277086}
       - {x: -0.4677189, y: -0.23520374}
+--- !u!114 &6419289964741653836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979810435258772111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8449435345535733019}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5246368891887457513}
   - component: {fileID: 6800253967954409195}
   - component: {fileID: 4088652152483530749}
+  - component: {fileID: 2520877216826135741}
   m_Layer: 7
   m_Name: PlayerProjectile
   m_TagString: Untagged
@@ -102,7 +103,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2010298993
+  m_SortingLayerID: 1162470409
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: faffcdfe2b2f0564291a1dc3b95fd35a, type: 3}
@@ -116,3 +117,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2520877216826135741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639063276670690416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4088652152483530749}
