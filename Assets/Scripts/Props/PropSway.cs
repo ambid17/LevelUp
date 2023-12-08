@@ -96,8 +96,6 @@ public class PropSway : MonoBehaviour
         _triggerTimer += Time.deltaTime;
         float newSpeed = Mathf.Clamp(_myMat.GetFloat(_speed) - Time.deltaTime * decelRate * (speed/strength), _minSpeed, speed);
         float newStrength = Mathf.Clamp(_myMat.GetFloat(_strength) - Time.deltaTime * decelRate, _minStrength, strength);
-        Debug.Log(newSpeed);
-        Debug.Log(newStrength);
         _myMat.SetFloat(_speed, newSpeed);
         _myMat.SetFloat(_strength, newStrength);
     }
