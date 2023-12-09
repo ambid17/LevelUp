@@ -34,7 +34,7 @@ namespace Minigames.Fight
             switch (effect)
             {
                 case SlowEffect slow:
-                    moveEffects.Add(slow.Name, slow.slowAmount);
+                    moveEffects.Add(effect.GetType().Name, slow.slowAmount);
                     break;
             }
 
@@ -46,7 +46,7 @@ namespace Minigames.Fight
             switch (effect)
             {
                 case SlowEffect slow:
-                    moveEffects.Remove(slow.Name);
+                    moveEffects.Remove(effect.GetType().Name);
                     break;
             }
 

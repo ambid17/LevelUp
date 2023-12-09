@@ -111,9 +111,9 @@ namespace Minigames.Fight
             SetUI();
         }
 
-        public void OnUpgradeSelected(Effect effect)
+        public void OnUpgradeSelected(Upgrade upgrade)
         {
-            upgradeInspector.OnEffectSelected(effect);
+            upgradeInspector.OnUpgradeSelected(upgrade);
         }
     }
 }

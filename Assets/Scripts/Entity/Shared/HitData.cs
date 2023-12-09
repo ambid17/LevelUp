@@ -12,12 +12,10 @@ namespace Minigames.Fight
 
         public float BaseDamage;
         public List<Effect> Effects;
-        
-        public List<float> BaseDamageAdditions;
-        public List<float> BaseDamageMultipliers;
-        public float FlatArmorPenetration;
-        public float FlatMagicPenetration;
-        public List<float> EffectDamages; 
+
+        public float BaseDamageAddition;
+        public float DamageMultiplier;
+        public List<float> EffectDamages;
 
         public HitData(Entity source, float damage)
         {
@@ -26,44 +24,22 @@ namespace Minigames.Fight
             BaseDamage = damage;
             Effects = Source.Stats.OnHitEffects;
 
-            BaseDamageAdditions = new();
-            BaseDamageMultipliers = new();
+            BaseDamageAddition = 0;
+            DamageMultiplier = 1;
             EffectDamages = new();
         }
 
-        // Base damage * [weaponMult] + [effectDamage * effectMult]... - (armor * penetration)
         public float CalculateDamage(Entity target)
         {
             Target = target;
             foreach (var effect in Effects)
             {
-                // populates the list of damages/multipliers
+                // populates the lists of damages/multipliers
                 effect.Execute(this);
             }
 
-            float physicalDamage = BaseDamage;
+            float totalDamage = (BaseDamage + BaseDamageAddition) * DamageMultiplier;
 
-            // ex: +5 damage
-            foreach (var baseDmgAddtion in BaseDamageAdditions)
-            {
-                physicalDamage += baseDmgAddtion;
-            }
-            
-            // ex: +10% physical damage, +50% physical damage if enemy <50% hp
-            foreach (var dmgMultiplier in BaseDamageMultipliers)
-            {
-                physicalDamage *= dmgMultiplier;
-            }
-
-            float magicDamage = 0;
-            // ex: +10 lightning damage on hit
-            foreach (var effectDmg in EffectDamages)
-            {
-                magicDamage += effectDmg;
-            }
-
-            float totalDamage = physicalDamage + magicDamage;
-            
             return totalDamage;
         }
     }

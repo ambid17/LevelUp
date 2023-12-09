@@ -10,78 +10,73 @@ namespace Minigames.Fight
     [Serializable]
     public class EffectSettings : ScriptableObject
     {
-        [Header("Set in Editor")] public List<Effect> AllEffects;
+        [Header("Set in Editor")] public List<Upgrade> AllUpgrades;
 
         public List<Effect> OnHitEffects = new();
 
         public void SetDefaults()
         {
-            foreach (var effect in AllEffects)
+            foreach (var upgrade in AllUpgrades)
             {
-                effect.AmountOwned = 0;
-                effect.IsUnlocked = false;
-            }
-
-            OnHitEffects = null;
-        }
-
-        public void UnlockAllEffects()
-        {
-            foreach (var effect in AllEffects)
-            {
-                effect.Unlock(this);
+                upgrade.AmountOwned = 0;
+                upgrade.IsUnlocked = false;
             }
         }
 
-        public void LoadSavedEffect(EffectModel effectModel)
+        public void UnlockAllUpgrades()
         {
-            Type effectType = effectModel.Type;
-            var effectToLoad = AllEffects.FirstOrDefault(e => e.GetType() == effectType);
-
-            if (effectToLoad != null)
+            foreach (var upgrade in AllUpgrades)
             {
-                if (effectModel.IsUnlocked)
-                {
-                    effectToLoad.Unlock(this);
-                }
-                effectToLoad.AmountOwned = effectModel.AmountOwned;
+                upgrade.Unlock();
+            }
+        }
+
+        public void LoadSavedUpgrade(UpgradeModel upgradeModel)
+        {
+            Type upgradeType = upgradeModel.Type;
+            var upgradeToLoad = AllUpgrades.FirstOrDefault(e => e.GetType() == upgradeType);
+
+            if (upgradeToLoad != null)
+            {
+                upgradeToLoad.IsUnlocked = true;
+                upgradeToLoad.Craft(upgradeModel.AmountOwned);
             }
             else
             {
-                Debug.LogError($"No effect found of type: {effectType}");
+                Debug.LogError($"No upgrade found of type: {upgradeType}");
             }
         }
 
 
         [NonSerialized] private int _weightTotal;
 
-        public Effect GetRandomEffect()
+        public Upgrade GetRandomUpgrade()
         {
             if (_weightTotal == 0)
             {
-                _weightTotal = AllEffects.Sum(e => e.DropWeight);
+                _weightTotal = AllUpgrades.Sum(e => e.DropWeight);
             }
 
             int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
-            foreach (var effect in AllEffects)
+            foreach (var upgrade in AllUpgrades)
             {
-                randomWeight -= effect.DropWeight;
+                randomWeight -= upgrade.DropWeight;
                 if (randomWeight < 0)
                 {
-                    return effect;
+                    return upgrade;
                 }
             }
 
-            return AllEffects[0];
+            return AllUpgrades[0];
         }
 
-        public List<Effect> GetRandomEffects(int count)
+        public List<Upgrade> GetRandomUpgrades(int count)
         {
-            List<Effect> toReturn = new();
+            List<Upgrade> toReturn = new();
 
             while (toReturn.Count < count)
             {
-                Effect random = GetRandomEffect();
+                Upgrade random = GetRandomUpgrade();
                 if (!toReturn.Contains(random))
                 {
                     toReturn.Add(random);

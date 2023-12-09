@@ -17,7 +17,7 @@ namespace Minigames.Fight
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TMP_Text upgradeButtonText;
 
-        private Effect _currentEffect;
+        private Upgrade _currentUpgrade;
         private EventService _eventService;
 
         private void Start()
@@ -26,45 +26,45 @@ namespace Minigames.Fight
             upgradeButton.onClick.AddListener(BuyUpgrade);
         }
 
-        public void OnEffectSelected(Effect effect)
+        public void OnUpgradeSelected(Upgrade upgrade)
         {
-            _currentEffect = effect;
+            _currentUpgrade = upgrade;
             OnUpgradeUpdated();
         }
 
         public void BuyUpgrade()
         {
-            if (GameManager.CurrencyManager.TrySpendCurrency(_currentEffect.GetCost(1)))
+            if (GameManager.CurrencyManager.TrySpendCurrency(_currentUpgrade.GetCost(1)))
             {
-                _currentEffect.AmountOwned += 1;
-                _eventService.Dispatch(new EffectPurchasedEvent(_currentEffect));
+                _currentUpgrade.AmountOwned += 1;
+                _eventService.Dispatch(new UpgradePurchasedEvent(_currentUpgrade));
                 OnUpgradeUpdated();
             }
         }
 
         private void OnUpgradeUpdated()
         {
-            if (_currentEffect == null)
+            if (_currentUpgrade == null)
             {
                 return;
             }
 
-            icon.sprite = _currentEffect.Icon;
-            nameText.text = $"{_currentEffect.Name}\n{_currentEffect.GetUpgradeCountText()}";
-            upgradeButtonText.text = _currentEffect.GetCost(1).ToCurrencyString();
-            descriptionText.text = _currentEffect.GetDescription();
-            bonusText.text = _currentEffect.GetNextUpgradeDescription(1);
+            icon.sprite = _currentUpgrade.Icon;
+            nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
+            upgradeButtonText.text = _currentUpgrade.GetCost(1).ToCurrencyString();
+            descriptionText.text = _currentUpgrade.positive.GetDescription();
+            bonusText.text = _currentUpgrade.negative.GetDescription();
 
-            if (!_currentEffect.IsUnlocked)
+            if (!_currentUpgrade.IsUnlocked)
             {
                 upgradeButtonText.text = "LOCKED";
                 upgradeButton.interactable = false;
             }
             else
             {
-                bool hasPurchasesLeft = _currentEffect.AmountOwned < _currentEffect.MaxAmountOwned ||
-                                        _currentEffect.MaxAmountOwned == 0;
-                bool canAfford = GameManager.CurrencyManager.Currency > _currentEffect.GetCost(1);
+                bool hasPurchasesLeft = _currentUpgrade.AmountOwned < _currentUpgrade.MaxAmountOwned ||
+                                        _currentUpgrade.MaxAmountOwned == 0;
+                bool canAfford = GameManager.CurrencyManager.Currency > _currentUpgrade.GetCost(1);
                 upgradeButton.interactable = canAfford && hasPurchasesLeft;
                 if (!hasPurchasesLeft)
                 {

@@ -20,13 +20,13 @@ namespace Minigames.Fight
     }
     public class EnemyKilledEvent { }
 
-    public class EffectPurchasedEvent : IEvent
+    public class UpgradePurchasedEvent : IEvent
     {
-        public Effect Effect;
+        public Upgrade Upgrade;
 
-        public EffectPurchasedEvent(Effect effect)
+        public UpgradePurchasedEvent(Upgrade upgrade)
         {
-            Effect = effect;
+            Upgrade = upgrade;
         }
     }
     

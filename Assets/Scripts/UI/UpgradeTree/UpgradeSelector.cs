@@ -15,31 +15,31 @@ namespace Minigames.Fight
         [SerializeField]
         private Button upgradeButtonPrefab;
 
-        private List<Effect> effects;
+        private List<Upgrade> upgrades;
         private List<GameObject> buttonInstances;
 
         void Awake()
         {
-            effects = GameManager.SettingsManager.effectSettings.AllEffects;
+            upgrades = GameManager.SettingsManager.effectSettings.AllUpgrades;
             buttonInstances = new List<GameObject>();
         }
 
         private void OnEnable()
         {
-            var filteredEffects = effects.Where(e =>
+            var filteredUpgrades = upgrades.Where(e =>
                 e.UpgradeCategory == upgradeUI.upgradeCategory &&
                 e.EffectCategory == upgradeUI.effectCategory &&
                 e.TierCategory == upgradeUI.tierCategory
             ).ToList();
 
-            foreach( var effect in filteredEffects )
+            foreach( var upgrade in filteredUpgrades )
             {
                 var upgradeButton = Instantiate(upgradeButtonPrefab, transform);
 
                 var text = upgradeButton.GetComponentInChildren<TMP_Text>();
-                text.text = effect.Name;
+                text.text = upgrade.Name;
 
-                upgradeButton.onClick.AddListener(() => upgradeUI.OnUpgradeSelected(effect));
+                upgradeButton.onClick.AddListener(() => upgradeUI.OnUpgradeSelected(upgrade));
                 buttonInstances.Add(upgradeButton.gameObject);
             }
         }

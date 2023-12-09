@@ -31,11 +31,11 @@ public class FightDataLoader : MonoBehaviour
     private void LoadEffectData()
     {
         var effectContainer = EffectDataManager.Load();
-        if (effectContainer != null && effectContainer.effects != null)
+        if (effectContainer != null && effectContainer.upgrades != null)
         {
-            foreach (var effect in effectContainer.effects)
+            foreach (var upgrade in effectContainer.upgrades)
             {
-                effectSettings.LoadSavedEffect(effect);
+                effectSettings.LoadSavedUpgrade(upgrade);
             }
         }
     }

@@ -8,17 +8,17 @@ namespace Minigames.Fight
     {
         private static string FileLocation = $"{Application.persistentDataPath}/Effects.dat";
 
-        public static EffectContainer Load()
+        public static UpgradeContainer Load()
         {
-            EffectContainer data = FileUtils.LoadFile<EffectContainer>(FileLocation);
+            UpgradeContainer data = FileUtils.LoadFile<UpgradeContainer>(FileLocation);
             return data;
         }
 
         public static void Save()
         {
             // grab values from settings
-            List<Effect> upgrades = GameManager.SettingsManager.effectSettings.AllEffects;
-            EffectContainer data = new EffectContainer(upgrades);
+            List<Upgrade> upgrades = GameManager.SettingsManager.effectSettings.AllUpgrades;
+            UpgradeContainer data = new UpgradeContainer(upgrades);
         
             // write to file
             FileUtils.SaveFile(FileLocation, data);
