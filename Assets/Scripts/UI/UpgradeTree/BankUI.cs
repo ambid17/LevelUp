@@ -68,7 +68,7 @@ namespace Minigames.Fight
                 countUpText.transform.DOPunchScale(Vector3.one * 1.2f, interval / 2);
                 countUpText.text = $"{currentDelta}";
                 currentDnaText.text = $"{startingDna - currentDelta}";
-                bankedDnaText.text = $"{startingDna + currentDelta}";
+                bankedDnaText.text = $"{startingBankedDna + currentDelta}";
                 yield return new WaitForSeconds(interval);
             }
 

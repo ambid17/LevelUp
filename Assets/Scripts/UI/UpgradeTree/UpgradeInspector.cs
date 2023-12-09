@@ -26,6 +26,12 @@ namespace Minigames.Fight
             upgradeButton.onClick.AddListener(BuyUpgrade);
         }
 
+        private void OnEnable()
+        {
+            // Start the UI with nothing selected
+            OnUpgradeSelected(null);
+        }
+
         public void OnUpgradeSelected(Upgrade upgrade)
         {
             _currentUpgrade = upgrade;
@@ -44,6 +50,8 @@ namespace Minigames.Fight
 
         private void OnUpgradeUpdated()
         {
+            // Dont show anything if no upgrade selected
+            container.SetActive(_currentUpgrade != null);
             if (_currentUpgrade == null)
             {
                 return;
@@ -64,7 +72,7 @@ namespace Minigames.Fight
             {
                 bool hasPurchasesLeft = _currentUpgrade.AmountOwned < _currentUpgrade.MaxAmountOwned ||
                                         _currentUpgrade.MaxAmountOwned == 0;
-                bool canAfford = GameManager.CurrencyManager.Dna > _currentUpgrade.GetCost(1);
+                bool canAfford = GameManager.CurrencyManager.BankedDna > _currentUpgrade.GetCost(1);
                 upgradeButton.interactable = canAfford && hasPurchasesLeft;
                 if (!hasPurchasesLeft)
                 {
