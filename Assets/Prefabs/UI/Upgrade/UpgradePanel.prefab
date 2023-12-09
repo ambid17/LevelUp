@@ -399,7 +399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 351.5144, y: 0}
+  m_AnchoredPosition: {x: 380.58148, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7836827066700583921
@@ -748,7 +748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 387.4931, y: 0}
+  m_AnchoredPosition: {x: 421.21094, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1218377197642798201
@@ -2013,7 +2013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 153.11438, y: 0}
+  m_AnchoredPosition: {x: 182.18146, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8398750011849713027
@@ -3620,7 +3620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 188.04309, y: 0}
+  m_AnchoredPosition: {x: 221.76093, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5815924834485327181
@@ -4038,7 +4038,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6836920559873080933}
   - component: {fileID: 6836920559873080935}
-  - component: {fileID: 1395465674894422678}
   - component: {fileID: 8806600845138539691}
   m_Layer: 5
   m_Name: UpgradePanel
@@ -4076,19 +4075,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6836920559873080932}
   m_CullTransparentMesh: 1
---- !u!114 &1395465674894422678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6836920559873080932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5419e607ac67c64e999b108b20fbac4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  container: {fileID: 3745185204280581340}
 --- !u!114 &8806600845138539691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4101,6 +4087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4445af359850baf41844a125bf21ebcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  container: {fileID: 3745185204280581340}
   upgradeCategorySelector: {fileID: 4548035798651733444}
   effectCategorySelector: {fileID: 230316755189355589}
   tierCategorySelector: {fileID: 855225441372708891}

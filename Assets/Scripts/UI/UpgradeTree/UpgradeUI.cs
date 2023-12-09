@@ -13,7 +13,7 @@ namespace Minigames.Fight
         Craft
     }
 
-    public class UpgradeUI : MonoBehaviour
+    public class UpgradeUI : UIPanel
     {
         [SerializeField]
         private UpgradeCategorySelector upgradeCategorySelector;
@@ -86,7 +86,13 @@ namespace Minigames.Fight
             GameManager.UIManager.ToggleUiPanel(UIPanelType.Effect, false);
         }
 
-        private void OnEnable()
+        public override void Toggle(bool shouldBeActive)
+        {
+            base.Toggle(shouldBeActive);
+            ResetUI();
+        }
+
+        private void ResetUI()
         {
             upgradeCategory = UpgradeCategory.None;
             effectCategory = EffectCategory.None;
