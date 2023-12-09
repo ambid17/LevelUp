@@ -65,10 +65,9 @@ namespace Minigames.Fight
 
         public void ToggleUiPanel(UIPanelType panelType, bool isActive)
         {
-            Time.timeScale = isActive ? 0 : 1;
             isPaused = isActive;
 
-             currentPanelType = isActive ? panelType : UIPanelType.None;
+            currentPanelType = isActive ? panelType : UIPanelType.None;
             
             switch (panelType)
             {

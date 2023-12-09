@@ -59,15 +59,16 @@ namespace Minigames.Fight
 
             slider.DOValue(1, totalAnimationTime);
 
-            int iterations = 10;
+            int iterations = 20;
             float dnaDelta = startingDna / iterations;
             float interval = totalAnimationTime / iterations;
-            for(int i = 0; i < iterations; i++)
+            for(int i = 1; i <= iterations; i++)
             {
-                countUpText.transform.DOPunchScale(Vector3.one * 1.5f, interval);
-                countUpText.text = $"{dnaDelta * i}";
-                currentDnaText.text = $"{startingDna - dnaDelta}";
-                bankedDnaText.text = $"{startingDna + dnaDelta}";
+                float currentDelta = dnaDelta * i;
+                countUpText.transform.DOPunchScale(Vector3.one * 1.2f, interval / 2);
+                countUpText.text = $"{currentDelta}";
+                currentDnaText.text = $"{startingDna - currentDelta}";
+                bankedDnaText.text = $"{startingDna + currentDelta}";
                 yield return new WaitForSeconds(interval);
             }
 
@@ -76,7 +77,7 @@ namespace Minigames.Fight
 
             GameManager.SettingsManager.progressSettings.Dna = 0;
             GameManager.SettingsManager.progressSettings.BankedDna = startingDna + startingBankedDna;
-
+            Platform.EventService.Dispatch<CurrencyUpdatedEvent>();
         }
     }
 }

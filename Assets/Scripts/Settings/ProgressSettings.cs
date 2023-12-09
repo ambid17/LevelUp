@@ -62,6 +62,7 @@ namespace Minigames.Fight
         {
             CurrentWorld = null;
             Dna = 0;
+            BankedDna = 0;
             BaseResourceValue = 1;
             TutorialState = TutorialState.None;
 
@@ -82,7 +83,8 @@ namespace Minigames.Fight
             ProgressModel toReturn = new ProgressModel();
 
             toReturn.WorldData = GetWorldData();
-            toReturn.Currency = Dna;
+            toReturn.Dna = Dna;
+            toReturn.BankedDna = BankedDna;
             toReturn.TutorialState = TutorialState;
 
             return toReturn;

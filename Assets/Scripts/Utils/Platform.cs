@@ -57,5 +57,6 @@ public class Platform : Singleton<Platform>
     private void Save()
     {
         ProgressDataManager.Save(ProgressSettings);
+        EffectDataManager.Save();
     }
 }
