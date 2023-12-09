@@ -399,7 +399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 373.2483, y: 0}
+  m_AnchoredPosition: {x: 351.5144, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7836827066700583921
@@ -748,7 +748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 412.7044, y: 0}
+  m_AnchoredPosition: {x: 387.4931, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1218377197642798201
@@ -983,19 +983,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1789514939363725344}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6836920560860017215}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1225877037472503240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1445,7 @@ MonoBehaviour:
   tier1Button: {fileID: 3927876423232537237}
   tier2button: {fileID: 6835432612286736813}
   tier3button: {fileID: 2492874064459636086}
-  upgradeUI: {fileID: 0}
+  upgradeUI: {fileID: 8806600845138539691}
 --- !u!1 &2064465468305790326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +2013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 174.8483, y: 0}
+  m_AnchoredPosition: {x: 153.11438, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8398750011849713027
@@ -3203,7 +3191,7 @@ MonoBehaviour:
   meleeButton: {fileID: 7170949952019021201}
   rangeButton: {fileID: 5152629946722063768}
   playerButton: {fileID: 2980113379856949441}
-  upgradeUI: {fileID: 0}
+  upgradeUI: {fileID: 8806600845138539691}
 --- !u!1 &5280113149296146012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3632,7 +3620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 213.25443, y: 0}
+  m_AnchoredPosition: {x: 188.04309, y: 0}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5815924834485327181
@@ -3828,7 +3816,7 @@ MonoBehaviour:
   aoe: {fileID: 4798207288591132360}
   onHit: {fileID: 8368085874300962847}
   physical: {fileID: 7500285869325257377}
-  upgradeUI: {fileID: 0}
+  upgradeUI: {fileID: 8806600845138539691}
 --- !u!1 &6582206469052377786
 GameObject:
   m_ObjectHideFlags: 0
@@ -5633,7 +5621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd0a41f51ac1564bb204d6e91978de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeUI: {fileID: 0}
+  upgradeUI: {fileID: 8806600845138539691}
   upgradeButtonPrefab: {fileID: 1507307728254756086, guid: 220b0225b3b61df4283b3c9792f2f41c, type: 3}
 --- !u!1 &7629105933992247839
 GameObject:
