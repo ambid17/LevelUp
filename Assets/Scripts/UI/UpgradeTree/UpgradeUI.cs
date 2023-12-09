@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 namespace Minigames.Fight
 {
+    public enum UpgradeUiState
+    {
+        Upgrade,
+        Craft
+    }
+
     public class UpgradeUI : MonoBehaviour
     {
         [SerializeField]
@@ -30,11 +36,28 @@ namespace Minigames.Fight
         public UpgradeCategory upgradeCategory = UpgradeCategory.None;
         public EffectCategory effectCategory = EffectCategory.None;
         public TierCategory tierCategory = TierCategory.None;
+        public UpgradeUiState upgradeUiState = UpgradeUiState.Upgrade;
 
         void Start()
         {
             backButton.onClick.AddListener(Back);
             closeButton.onClick.AddListener(Close);
+            Platform.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
+        }
+
+        private void OnPlayerInteract(PlayerInteractedEvent e)
+        {
+            if(e.InteractionType == InteractionType.Craft)
+            {
+                upgradeUiState = UpgradeUiState.Craft;
+                GameManager.UIManager.ToggleUiPanel(UIPanelType.Effect, true);
+            }
+
+            if(e.InteractionType == InteractionType.Upgrade)
+            {
+                upgradeUiState = UpgradeUiState.Upgrade;
+                GameManager.UIManager.ToggleUiPanel(UIPanelType.Effect, true);
+            }
         }
 
         private void Back()
@@ -83,10 +106,11 @@ namespace Minigames.Fight
             {
                 upgradeCategorySelector.gameObject.SetActive(true);
             }
-            else if(effectCategory == EffectCategory.None)
+            else if (effectCategory == EffectCategory.None)
             {
                 effectCategorySelector.gameObject.SetActive(true);
-            }else if(tierCategory == TierCategory.None)
+            }
+            else if (tierCategory == TierCategory.None)
             {
                 tierCategorySelector.gameObject.SetActive(true);
             }

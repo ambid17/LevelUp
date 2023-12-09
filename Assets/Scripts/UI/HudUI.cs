@@ -31,7 +31,7 @@ namespace Minigames.Fight
 
         private void OpenUpgrades()
         {
-            GameManager.UIManager.ToggleUiPanel(UIPanelType.Effect, true);
+            _eventService.Dispatch(new PlayerInteractedEvent(InteractionType.Upgrade));
         }
         
         private void SetGoldText()
