@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PropSway : MonoBehaviour
 {
+    public SpriteRenderer ShadowRenderer;
+
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     [SerializeField]
@@ -27,6 +29,7 @@ public class PropSway : MonoBehaviour
     private float _minStrength;
 
     private Material _myMat;
+    private Material _shadowMat;
 
     private List<Transform> _enteredEntities = new();
     private List<Transform> _triggeredEntities = new();
@@ -41,6 +44,10 @@ public class PropSway : MonoBehaviour
     private void Awake()
     {
         _myMat = spriteRenderer.material;
+        if (ShadowRenderer != null)
+        {
+            _shadowMat = ShadowRenderer.material;
+        }
         float centerX = spriteRenderer.sprite.pivot.x / spriteRenderer.sprite.rect.width;
         float centerY = spriteRenderer.sprite.pivot.y / spriteRenderer.sprite.rect.height;
 
@@ -98,6 +105,11 @@ public class PropSway : MonoBehaviour
         float newStrength = Mathf.Clamp(_myMat.GetFloat(_strength) - Time.deltaTime * decelRate, _minStrength, strength);
         _myMat.SetFloat(_speed, newSpeed);
         _myMat.SetFloat(_strength, newStrength);
+        if (_shadowMat != null)
+        {
+            _shadowMat.SetFloat(_speed, newSpeed);
+            _shadowMat.SetFloat(_strength, newStrength);
+        }
     }
 
     private void Shake()
@@ -109,5 +121,10 @@ public class PropSway : MonoBehaviour
         _triggerTimer = 0;
         _myMat.SetFloat(_speed, speed);
         _myMat.SetFloat(_strength, strength);
+        if (_shadowMat != null)
+        {
+            _shadowMat.SetFloat(_speed, speed);
+            _shadowMat.SetFloat(_strength, strength);
+        }
     }
 }
