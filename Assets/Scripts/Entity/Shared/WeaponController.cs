@@ -12,8 +12,7 @@ namespace Minigames.Fight
         public Weapon Weapon => weapon;
         public HitData Hit => hit;
         protected float ShotTimer;
-        protected float WeaponAbilityTimer;
-        public float AbilityTimer => WeaponAbilityTimer;
+
         protected EventService EventService;
         protected Entity MyEntity;
         protected HitData hit;
@@ -38,7 +37,6 @@ namespace Minigames.Fight
         public virtual void Setup(Weapon weapon)
         {
             this.weapon = weapon;
-            WeaponAbilityTimer = weapon.abilityCooldown;
         }
 
         protected virtual void Update()
@@ -49,7 +47,6 @@ namespace Minigames.Fight
             }
 
             ShotTimer += Time.deltaTime;
-            WeaponAbilityTimer += Time.deltaTime;
         }
 
         protected virtual bool ShouldPreventUpdate()
@@ -63,15 +60,6 @@ namespace Minigames.Fight
         }
 
         public virtual void Shoot()
-        {
-        }
-        
-        protected virtual bool CanUseWeaponAbility()
-        {
-            return Input.GetMouseButton(1) && WeaponAbilityTimer > weapon.abilityCooldown;
-        }
-
-        protected virtual void UseWeaponAbility()
         {
         }
     }

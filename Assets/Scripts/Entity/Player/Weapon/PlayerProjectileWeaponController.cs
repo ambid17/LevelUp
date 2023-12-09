@@ -29,13 +29,6 @@ namespace Minigames.Fight
             {
                 _overridenEntity.WeaponArmController.PlayShootAnimation();
             }
-
-            if (CanUseWeaponAbility())
-            {
-                WeaponAbilityTimer = 0;
-                EventService.Dispatch<PlayerUsedAbilityEvent>();
-                UseWeaponAbility();
-            }
         }
 
         public override void Setup(Weapon weapon)
