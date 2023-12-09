@@ -82,7 +82,6 @@ namespace Minigames.Fight
         public virtual void Craft(int purchaseCount)
         {
             AmountOwned += purchaseCount;
-            // TODO handle updating player hit data / entity stats
             //Platform.EventService.Dispatch(new OnUpgradeCraftedEvent(this));
         }
 

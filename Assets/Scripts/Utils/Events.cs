@@ -96,10 +96,6 @@ namespace Minigames.Fight
             MaxAmmo = maxAmmo;
         }
     }
-    
-    public class PlayerUsedAbilityEvent
-    {
-    }
 
     public class CountryCompletedEvent
     {

@@ -64,7 +64,7 @@ namespace Minigames.Fight
             {
                 bool hasPurchasesLeft = _currentUpgrade.AmountOwned < _currentUpgrade.MaxAmountOwned ||
                                         _currentUpgrade.MaxAmountOwned == 0;
-                bool canAfford = GameManager.CurrencyManager.Currency > _currentUpgrade.GetCost(1);
+                bool canAfford = GameManager.CurrencyManager.Dna > _currentUpgrade.GetCost(1);
                 upgradeButton.interactable = canAfford && hasPurchasesLeft;
                 if (!hasPurchasesLeft)
                 {

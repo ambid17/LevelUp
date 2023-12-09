@@ -10,12 +10,12 @@ namespace Minigames.Fight
     {
         [SerializeField] private NotificationPopup notificationPopup;
         private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
-        public float Currency
+        public float Dna
         {
-            get => _progressSettings.Currency;
+            get => _progressSettings.Dna;
             set
             {
-                _progressSettings.Currency = value;
+                _progressSettings.Dna = value;
                 eventService.Dispatch<CurrencyUpdatedEvent>();
             }
         }
@@ -45,17 +45,17 @@ namespace Minigames.Fight
         public void EnemyKilled(float baseGoldValue)
         {
             float gold = baseGoldValue;
-            Currency += gold;
+            Dna += gold;
         }
 
         public bool TrySpendCurrency(float currencyToSpend)
         {
-            if (currencyToSpend > Currency)
+            if (currencyToSpend > Dna)
             {
                 return false;
             }
         
-            Currency -= currencyToSpend;
+            Dna -= currencyToSpend;
             return true;
         }
 
@@ -79,7 +79,7 @@ namespace Minigames.Fight
 
         public void ResetCurrency()
         {
-            Currency = 0;
+            Dna = 0;
         }
     }
 }
