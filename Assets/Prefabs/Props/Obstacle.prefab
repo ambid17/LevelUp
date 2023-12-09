@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 611442376063891486}
-  - component: {fileID: 6297083114986175219}
+  - component: {fileID: 8832171356245371390}
+  - component: {fileID: 8787626234736887968}
   m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_Father: {fileID: 1955323467560263360}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6297083114986175219
+--- !u!212 &8832171356245371390
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8787626234736887968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141193710216388379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a6d7d24c742df408e8302dd3e84259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentRenderer: {fileID: 3787918447072714006}
+  myRenderer: {fileID: 8832171356245371390}
 --- !u!1 &7558622372320787798
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +111,6 @@ GameObject:
   - component: {fileID: 3787918447072714006}
   - component: {fileID: 5232100677743477736}
   - component: {fileID: -1475948766868619651}
-  - component: {fileID: 7944010915145110351}
   m_Layer: 10
   m_Name: Obstacle
   m_TagString: Untagged
@@ -214,23 +228,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1173b4414c4f2074bba316702cca9b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7944010915145110351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558622372320787798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f24c4219366d9244affd9a659c61324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainSpriteRenderer: {fileID: 3787918447072714006}
-  alpha: 0.8
-  offset: -1
-  amountToWiden: 20
-  originOffset: 0
-  go: {fileID: 7141193710216388379}
-  _shadowSpriteRenderer: {fileID: 6297083114986175219}
-  generateOnAwake: 0

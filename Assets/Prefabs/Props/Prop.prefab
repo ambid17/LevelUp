@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6010742261019086405}
-  - component: {fileID: 2613468774821953356}
+  - component: {fileID: 5589871025881908326}
+  - component: {fileID: 4352581297699103286}
   m_Layer: 13
   m_Name: Shadow
   m_TagString: Untagged
@@ -32,7 +33,21 @@ Transform:
   m_Father: {fileID: 1955323467560263360}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2613468774821953356
+--- !u!114 &5589871025881908326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704346194037667607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a6d7d24c742df408e8302dd3e84259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentRenderer: {fileID: 3787918447072714006}
+  myRenderer: {fileID: 4352581297699103286}
+--- !u!212 &4352581297699103286
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +112,6 @@ GameObject:
   - component: {fileID: -2987289229388407667}
   - component: {fileID: 4433820874609558672}
   - component: {fileID: 5597376885623966980}
-  - component: {fileID: 267141078680533296}
   m_Layer: 13
   m_Name: Prop
   m_TagString: Untagged
@@ -234,23 +248,3 @@ MonoBehaviour:
   decelRate: 1
   triggerDistance: 0.5
   timeBetweenTriggers: 0.5
---- !u!114 &267141078680533296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558622372320787798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f24c4219366d9244affd9a659c61324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainSpriteRenderer: {fileID: 3787918447072714006}
-  alpha: 0.8
-  offset: -1
-  amountToWiden: 400
-  originOffset: 0
-  go: {fileID: 3704346194037667607}
-  _shadowSpriteRenderer: {fileID: 2613468774821953356}
-  generateOnAwake: 0

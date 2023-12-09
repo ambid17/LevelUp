@@ -5,7 +5,7 @@ using UnityEngine;
 
     public class StaticSpriteSort : MonoBehaviour
     {
-        void Start()
+        void Awake()
         {
             var spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sortingOrder = transform.GetSortingOrder();

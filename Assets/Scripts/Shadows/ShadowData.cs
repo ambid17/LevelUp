@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ using UnityEngine;
 [Serializable]
 public class ShadowData : ScriptableObject
 {
-    public Dictionary<Sprite, ShadowSpriteData> SpriteShadowMappings;
+    public SpriteShadowSpritedataDictionary SpriteShadowMappings;
 
     [SerializeField]
     private List<Sprite> sprites;
@@ -55,8 +56,6 @@ public class ShadowData : ScriptableObject
             // Generates new sprites based on the initial sprite.
             Texture2D unflippedShadowTexture = new(mainTexture.width * 2, mainTexture.height);
             Texture2D flippedShadowTexture = new(mainTexture.width * 2, mainTexture.height);
-            Sprite unflippedShadowSprite = Sprite.Create(unflippedShadowTexture, new Rect(0, 0, sprite.rect.width * 2, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
-            Sprite flippedShadowSprite = Sprite.Create(flippedShadowTexture, new Rect(0, 0, sprite.rect.width * 2, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
 
             // Calculate the width difference between the two textures to offset the sprite positions.
             int flippedDifference = flippedShadowTexture.width - mainTexture.width;
@@ -81,19 +80,80 @@ public class ShadowData : ScriptableObject
             // Render each pixel from the original texture as the shadow color with an offset on the X axis
             foreach (Vector2 vector in renderedCoordinates)
             {
+                Color color = shadowColor;
+                // Reduce the alpha of the pixel based on the alpha of the sprite.
+                color.a -= Mathf.Clamp((1 - mainTexture.GetPixel((int)vector.x, (int)vector.y).a), 0, 1);
+
                 int offsetX = (int)vector.x + (unflippedDifference / 2) - ((int)sprite.rect.center.x - (int)sprite.pivot.x);
-                unflippedShadowTexture.SetPixel(offsetX + (((int)vector.y - (int)sprite.pivot.y) * shadowOffset), (int)vector.y, shadowColor);
+                unflippedShadowTexture.SetPixel(offsetX + (((int)vector.y - (int)sprite.pivot.y) * shadowOffset), (int)vector.y, color);
             }
             foreach (Vector2 vector in renderedCoordinates)
             {
+                Color color = shadowColor;
+                // Reduce the alpha of the pixel based on the alpha of the sprite.
+                color.a -= Mathf.Clamp((1 - mainTexture.GetPixel((int)vector.x, (int)vector.y).a), 0, 1);
+
                 int offsetX = (int)vector.x + (flippedDifference / 2) - ((int)sprite.rect.center.x - (int)sprite.pivot.x);
-                flippedShadowTexture.SetPixel(offsetX + (((int)vector.y - (int)sprite.pivot.y) * -shadowOffset), (int)vector.y, shadowColor);
+                flippedShadowTexture.SetPixel(offsetX + (((int)vector.y - (int)sprite.pivot.y) * -shadowOffset), (int)vector.y, color);
             }
             unflippedShadowTexture.Apply();
             flippedShadowTexture.Apply();
 
-            SpriteShadowMappings.Add(sprite, new(flippedShadowSprite, unflippedShadowSprite));
+            string unflippedPath = "Assets/Textures/ShadowSprites/" + mainTexture.name + "_Shadow.png";
+            string flippedPath = "Assets/Textures/ShadowSprites/" + mainTexture.name + "_Flipped_Shadow.png";
+
+            Sprite unflippedShadowSprite = Sprite.Create(unflippedShadowTexture, new Rect(0, 0, sprite.rect.width * 2, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
+            Sprite flippedShadowSprite = Sprite.Create(flippedShadowTexture, new Rect(0, 0, sprite.rect.width * 2, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
+
+            unflippedShadowSprite.name = sprite.name + "_Shadow";
+            flippedShadowSprite.name = sprite.name + "_Flipped_Shadow";
+
+            File.WriteAllBytes(unflippedPath, unflippedShadowTexture.EncodeToPNG());
+            File.WriteAllBytes(flippedPath, flippedShadowTexture.EncodeToPNG());
+
+            AssetDatabase.Refresh();
+
+            AssetDatabase.AddObjectToAsset(unflippedShadowSprite, unflippedPath);
+            AssetDatabase.AddObjectToAsset(flippedShadowSprite, flippedPath);
+
+            AssetDatabase.SaveAssetIfDirty(new GUID(AssetDatabase.AssetPathToGUID(unflippedPath)));
+            AssetDatabase.SaveAssetIfDirty(new GUID(AssetDatabase.AssetPathToGUID(flippedPath)));
+
+
+            TextureImporter unflippedTextureImporter = AssetImporter.GetAtPath(unflippedPath) as TextureImporter;
+
+            TextureImporterSettings unflippedTexSettings = new TextureImporterSettings();
+
+            unflippedTextureImporter.ReadTextureSettings(unflippedTexSettings);
+            unflippedTexSettings.spriteAlignment = (int)SpriteAlignment.Custom;
+            unflippedTextureImporter.SetTextureSettings(unflippedTexSettings);
+            unflippedTextureImporter.spritePixelsPerUnit = unflippedShadowSprite.pixelsPerUnit;
+            unflippedTextureImporter.spritePivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
+            unflippedTextureImporter.spriteBorder = unflippedShadowSprite.border;
+
+            EditorUtility.SetDirty(unflippedTextureImporter);
+
+            TextureImporter flippedTextureImporter = AssetImporter.GetAtPath(flippedPath) as TextureImporter;
+
+            TextureImporterSettings flippedTexSettings = new TextureImporterSettings();
+
+            flippedTextureImporter.ReadTextureSettings(flippedTexSettings);
+            flippedTexSettings.spriteAlignment = (int)SpriteAlignment.Custom;
+            flippedTextureImporter.SetTextureSettings(flippedTexSettings);
+
+            flippedTextureImporter.spritePixelsPerUnit = flippedShadowSprite.pixelsPerUnit;
+            flippedTextureImporter.spritePivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
+            flippedTextureImporter.spriteBorder = flippedShadowSprite.border;
+            EditorUtility.SetDirty(flippedTextureImporter);
+            unflippedTextureImporter.SaveAndReimport();
+            flippedTextureImporter.SaveAndReimport();
+
+            Sprite finalUnflippedSprite = (Sprite)AssetDatabase.LoadAssetAtPath(unflippedPath, typeof(Sprite));
+            Sprite finalFlippedSprite = (Sprite)AssetDatabase.LoadAssetAtPath(flippedPath, typeof(Sprite));
+
+            SpriteShadowMappings.Add(sprite, new(finalFlippedSprite, finalUnflippedSprite));
         }
+        Debug.Log("Shadow Sprites Succesfully Generated");
     }
 }
 
