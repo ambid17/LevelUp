@@ -141,6 +141,7 @@ namespace Minigames.Fight
         public void OnTierCategorySelected(TierCategory tierCategory)
         {
             this.tierCategory = tierCategory;
+            upgradeInspector.OnUpgradeTierSelected(upgradeCategory, effectCategory, tierCategory);
             SetUI();
         }
 

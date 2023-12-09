@@ -31,6 +31,15 @@ namespace Minigames.Fight
             }
         }
 
+        public List<Upgrade> GetUpgradesForCategories(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
+        {
+            return AllUpgrades.Where(e =>
+                e.UpgradeCategory == upgradeCategory &&
+                e.EffectCategory == effectCategory &&
+                e.TierCategory == tierCategory
+            ).ToList();
+        }
+
         public void LoadSavedUpgrade(UpgradeModel upgradeModel)
         {
             Type upgradeType = upgradeModel.Type;
