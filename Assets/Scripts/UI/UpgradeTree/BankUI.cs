@@ -30,15 +30,13 @@ namespace Minigames.Fight
             currentDnaText.text = GameManager.SettingsManager.progressSettings.Dna.ToString();
             bankedDnaText.text = GameManager.SettingsManager.progressSettings.BankedDna.ToString();
 
+            // if we have no DNA to bank, disable bank button
+            bankButton.interactable = GameManager.SettingsManager.progressSettings.Dna > 0;
+
             StartCoroutine(RebuildUI());
         }
 
-        [ContextMenu("test")]
-        public void Test()
-        {
-            StartCoroutine(RebuildUI());
-        }
-
+        // Forces the horizontal layout groups to regenerate, fixing any overlaps when the text changes
         private IEnumerator RebuildUI()
         {
             yield return new WaitForEndOfFrame();
@@ -78,6 +76,9 @@ namespace Minigames.Fight
             GameManager.SettingsManager.progressSettings.Dna = 0;
             GameManager.SettingsManager.progressSettings.BankedDna = startingDna + startingBankedDna;
             Platform.EventService.Dispatch<CurrencyUpdatedEvent>();
+
+            // we have no DNA to bank, disable bank button
+            bankButton.interactable = false;
         }
     }
 }

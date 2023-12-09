@@ -39,6 +39,9 @@ namespace Minigames.Fight
 
         private void Back()
         {
+            // clear the inspector
+            upgradeInspector.OnUpgradeSelected(null);
+
             if (tierCategory != TierCategory.None)
             {
                 tierCategory = TierCategory.None;
