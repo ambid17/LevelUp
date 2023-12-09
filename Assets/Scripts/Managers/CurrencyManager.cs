@@ -19,6 +19,17 @@ namespace Minigames.Fight
                 eventService.Dispatch<CurrencyUpdatedEvent>();
             }
         }
+
+        public float BankedDna
+        {
+            get => _progressSettings.BankedDna;
+            set
+            {
+                _progressSettings.BankedDna = value;
+                eventService.Dispatch<CurrencyUpdatedEvent>();
+            }
+        }
+
         public ResourceTypeFloatDictionary PhysicalResources
         {
             get => _progressSettings.PhysicalResources;
@@ -50,12 +61,12 @@ namespace Minigames.Fight
 
         public bool TrySpendCurrency(float currencyToSpend)
         {
-            if (currencyToSpend > Dna)
+            if (currencyToSpend > BankedDna)
             {
                 return false;
             }
-        
-            Dna -= currencyToSpend;
+
+            BankedDna -= currencyToSpend;
             return true;
         }
 
