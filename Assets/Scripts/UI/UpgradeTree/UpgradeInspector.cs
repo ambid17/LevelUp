@@ -17,6 +17,7 @@ namespace Minigames.Fight
         [SerializeField] private TMP_Text bonusText;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TMP_Text upgradeButtonText;
+        [SerializeField] private RectTransform upgradeButtonRect;
 
         private Upgrade _currentUpgrade;
         private EventService _eventService;
@@ -30,7 +31,6 @@ namespace Minigames.Fight
         private void Start()
         {
             _eventService = Platform.EventService;
-            upgradeButton.onClick.AddListener(BuyUpgrade);
         }
 
         private void OnEnable()
@@ -49,29 +49,27 @@ namespace Minigames.Fight
 
             // convert from the tier (1,2,3...) to the cost
             int tierValue = (int)tierCategory;
-            upgradeButtonText.text = tierCostMapping[tierValue].ToCurrencyString();
+            float tierCost = tierCostMapping[tierValue];
+            upgradeButtonText.text = tierCost.ToCurrencyString();
 
-            var upgradesInCategory = GameManager.SettingsManager.effectSettings.GetUpgradesForCategories(upgradeCategory, effectCategory, tierCategory);
+            var upgradesInCategory = GameManager.SettingsManager.effectSettings.GetAllUpgradesInCategory(upgradeCategory, effectCategory, tierCategory);
             var unlockedInCategory = upgradesInCategory.Where(u => u.IsUnlocked).ToList();
             descriptionText.text = $"You have unlocked {unlockedInCategory.Count} / {upgradesInCategory.Count} upgrades in this category";
             bonusText.gameObject.SetActive(false);
 
-            if (!_currentUpgrade.IsUnlocked)
+            
+            bool hasPurchasesLeft = unlockedInCategory.Count < upgradesInCategory.Count;
+            bool canAfford = GameManager.CurrencyManager.BankedDna > tierCost;
+            upgradeButton.interactable = canAfford && hasPurchasesLeft;
+            if (!hasPurchasesLeft)
             {
-                upgradeButtonText.text = "LOCKED";
-                upgradeButton.interactable = false;
+                upgradeButtonText.text = "MAXED";
             }
-            else
-            {
-                bool hasPurchasesLeft = _currentUpgrade.AmountOwned < _currentUpgrade.MaxAmountOwned ||
-                                        _currentUpgrade.MaxAmountOwned == 0;
-                bool canAfford = GameManager.CurrencyManager.BankedDna > _currentUpgrade.GetCost(1);
-                upgradeButton.interactable = canAfford && hasPurchasesLeft;
-                if (!hasPurchasesLeft)
-                {
-                    upgradeButtonText.text = "MAXED";
-                }
-            }
+
+            upgradeButton.onClick.RemoveAllListeners();
+            upgradeButton.onClick.AddListener(() => UnlockRandomUpgrade(upgradeCategory, effectCategory, tierCategory));
+
+            StartCoroutine(RebuildUpgradeButton());
         }
 
         public void OnUpgradeSelected(Upgrade upgrade)
@@ -90,6 +88,20 @@ namespace Minigames.Fight
             }
         }
 
+        public void UnlockRandomUpgrade(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
+        {
+            int tierValue = (int)tierCategory;
+            float tierCost = tierCostMapping[tierValue];
+            if (GameManager.CurrencyManager.TrySpendCurrency(tierCost))
+            {
+                var upgrade = GameManager.SettingsManager.effectSettings.GetUpgradeToUnlock(upgradeCategory, effectCategory, tierCategory);
+                upgrade.IsUnlocked = true;
+
+                // Update the UI with the new state
+                OnUpgradeTierSelected(upgradeCategory, effectCategory, tierCategory);
+            }
+        }
+
         private void OnUpgradeUpdated()
         {
             // Dont show anything if no upgrade selected
@@ -98,6 +110,9 @@ namespace Minigames.Fight
             {
                 return;
             }
+
+            upgradeButton.onClick.RemoveAllListeners();
+            upgradeButton.onClick.AddListener(BuyUpgrade);
 
             icon.gameObject.SetActive(_currentUpgrade.Icon != null);
             icon.sprite = _currentUpgrade.Icon;
@@ -123,7 +138,15 @@ namespace Minigames.Fight
                     upgradeButtonText.text = "MAXED";
                 }
             }
+
+            StartCoroutine(RebuildUpgradeButton());
         }
 
+        // Forces the horizontal layout groups to regenerate, fixing any overlaps when the text changes
+        private IEnumerator RebuildUpgradeButton()
+        {
+            yield return new WaitForEndOfFrame();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(upgradeButtonRect);
+        }
     }
 }

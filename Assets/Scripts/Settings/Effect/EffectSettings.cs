@@ -31,7 +31,7 @@ namespace Minigames.Fight
             }
         }
 
-        public List<Upgrade> GetUpgradesForCategories(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
+        public List<Upgrade> GetAllUpgradesInCategory(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
         {
             return AllUpgrades.Where(e =>
                 e.UpgradeCategory == upgradeCategory &&
@@ -47,7 +47,8 @@ namespace Minigames.Fight
 
             if (upgradeToLoad != null)
             {
-                upgradeToLoad.IsUnlocked = true;
+                upgradeToLoad.IsUnlocked = upgradeModel.IsUnlocked;
+                // TODO: unlock then craft?
                 upgradeToLoad.Craft(upgradeModel.AmountOwned);
             }
             else
@@ -56,43 +57,28 @@ namespace Minigames.Fight
             }
         }
 
-
-        [NonSerialized] private int _weightTotal;
-
-        public Upgrade GetRandomUpgrade()
+        // Uses a weighted random algorithm to get a locked upgrade, filtered by category
+        public Upgrade GetUpgradeToUnlock(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
         {
-            if (_weightTotal == 0)
-            {
-                _weightTotal = AllUpgrades.Sum(e => e.DropWeight);
-            }
+            var lockedUpgrades = AllUpgrades.Where(e =>
+                e.UpgradeCategory == upgradeCategory &&
+                e.EffectCategory == effectCategory &&
+                e.TierCategory == tierCategory &&
+                e.IsUnlocked == false
+            ).ToList();
+            int _weightTotal = lockedUpgrades.Sum(e => e.DropWeight > 0 ? e.DropWeight : 1);
 
             int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
-            foreach (var upgrade in AllUpgrades)
+            foreach (var upgrade in lockedUpgrades)
             {
-                randomWeight -= upgrade.DropWeight;
+                randomWeight -= upgrade.DropWeight > 0 ? upgrade.DropWeight : 1;
                 if (randomWeight < 0)
                 {
                     return upgrade;
                 }
             }
 
-            return AllUpgrades[0];
-        }
-
-        public List<Upgrade> GetRandomUpgrades(int count)
-        {
-            List<Upgrade> toReturn = new();
-
-            while (toReturn.Count < count)
-            {
-                Upgrade random = GetRandomUpgrade();
-                if (!toReturn.Contains(random))
-                {
-                    toReturn.Add(random);
-                }
-            }
-
-            return toReturn;
+            return lockedUpgrades[0];
         }
     }
 }
