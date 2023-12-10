@@ -34,14 +34,17 @@ namespace Minigames.Fight
 
         public override void OnTick()
         {
-            if (!IsAlerted)
+            if (IsAlerted)
             {
-                if (WithinVisionRadius)
-                {
-                    IsAlerted = true;
-                }
                 return;
             }
+
+            if (WithinVisionRadius || MyEntity.Stats.currentHp < MyEntity.Stats.maxHp)
+            {
+                IsAlerted = true;
+                return;
+            }
+
             foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, SmellRadius))
             {
                 AntBehaviorData ant = col.GetComponent<AntBehaviorData>();

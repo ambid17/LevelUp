@@ -15,6 +15,7 @@ namespace Minigames.Fight
         [SerializeField] private UIManager uiManager;
         [SerializeField] private DamageTextPool damageTextPool;
         [SerializeField] private RoomManager roomManager;
+        [SerializeField] private ShadowData shadowData;
     
         public static PlayerEntity PlayerEntity => Instance._playerEntity;
         public static CameraLerp CameraLerp => Instance._cameraLerp;
@@ -24,6 +25,7 @@ namespace Minigames.Fight
         public static UIManager UIManager => Instance.uiManager;
         public static DamageTextPool DamageTextPool => Instance.damageTextPool;
         public static RoomManager RoomManager => Instance.roomManager;
+        public static ShadowData ShadowData => Instance.shadowData;
 
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;

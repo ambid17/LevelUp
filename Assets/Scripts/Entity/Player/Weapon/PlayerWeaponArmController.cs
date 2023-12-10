@@ -19,6 +19,9 @@ namespace Minigames.Fight
         private PlayerWeaponArm _currentArm;
         private Camera _cam;
 
+        private int _leftSortingOrder = 0;
+        private int _rightSortingOrder = 0;
+
         private void Start()
         {
             _currentArm = leftArm;
@@ -29,29 +32,27 @@ namespace Minigames.Fight
 
         public void SwitchDirection(PlayerChangedDirectionEvent e)
         {
-            int leftSortingOrder = 0;
-            int rightSortingOrder = 0;
+            int baseLayer = GameManager.PlayerEntity.VisualController.SpriteRenderer.sortingOrder;
+            
             switch (e.NewDirection)
             {
                 case Direction.Down:
-                    leftSortingOrder = 1;
-                    rightSortingOrder = 1;
+                    _leftSortingOrder = baseLayer + 1;
+                    _rightSortingOrder = baseLayer + 1;
                     break;
                 case Direction.Up:
-                    leftSortingOrder = -1;
-                    rightSortingOrder = -1;
+                    _leftSortingOrder = baseLayer -1;
+                    _rightSortingOrder = baseLayer -1;
                     break;
                 case Direction.Left:
-                    leftSortingOrder = -1;
-                    rightSortingOrder = 1;
+                    _leftSortingOrder = baseLayer -1;
+                    _rightSortingOrder = baseLayer + 1;
                     break;
                 case Direction.Right:
-                    leftSortingOrder = 1;
-                    rightSortingOrder = -1;
+                    _leftSortingOrder = baseLayer + 1;
+                    _rightSortingOrder = baseLayer -1;
                     break;
             }
-            leftArm.MySpriteRenderer.sortingOrder = leftSortingOrder;
-            rightArm.MySpriteRenderer.sortingOrder = rightSortingOrder;
         }
         
         private void Update()
@@ -60,6 +61,8 @@ namespace Minigames.Fight
             {
                 return;
             }
+            leftArm.MySpriteRenderer.sortingOrder = _leftSortingOrder;
+            rightArm.MySpriteRenderer.sortingOrder = _rightSortingOrder;
             float currentRotation = _currentArm.transform.rotation.eulerAngles.z;
             if (currentRotation < _currentArm.MinRotation && currentRotation > _currentArm.MaxRotation)
             {

@@ -24,6 +24,8 @@ public class ResourceTypeFloatDictionary : SerializableDictionary<ResourceType, 
 
 [Serializable]
 public class PropTypeSpriteListDictionary : SerializableDictionary<PropType, List<Sprite>> {}
+[Serializable]
+public class SpriteShadowSpritedataDictionary : SerializableDictionary<Sprite, ShadowSpriteData> { }
 
 [Serializable]
 public class MyClass
