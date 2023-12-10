@@ -48,18 +48,20 @@ namespace Minigames.Fight
         {
             currentHp = enemyStats.MaxHp;
             maxHp = enemyStats.MaxHp;
-            OnHitEffects = enemyStats.effects;
         }
     }
 
     public class CombatStats
     {
         public ModifiableStat baseDamage;
-        public float onHitDamage;
+
+        public ModifiableStat onHitDamage;
+
+        public ModifiableStat projectileMoveSpeed;
+
+        public ModifiableStat projectileLifeTime;
+
         public List<Effect> OnHitEffects = new();
-
-
-        public ModifiableStat DamageToTake;
     }
 
     public class MovementStats
@@ -117,6 +119,12 @@ namespace Minigames.Fight
             {
                 calculated *= mod;
             }
+        }
+
+        public void Clear()
+        {
+            BaseModifiers.Clear();
+            CompoundingModifiers.Clear();
         }
     }
 }

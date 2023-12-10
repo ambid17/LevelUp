@@ -52,11 +52,7 @@ namespace Minigames.Fight
                 statusEffect.OnTick(Time.deltaTime);
             }
         }
-        public virtual void TakeHit(HitData hit)
-        {
-            TakeDamage(Stats.combatStats.DamageToTake.Calculated);
-        }
-        public virtual void TakeDamage(float damage)
+        public virtual void TakeHit(float damage, Entity hitter)
         {
             Stats.TakeDamage(damage);
 
@@ -64,13 +60,28 @@ namespace Minigames.Fight
 
             if (IsDead)
             {
-                Die();
+                Die(hitter);
             }
         }
-
-        protected virtual void Die()
+        public void DealDamage(Entity target)
         {
+            foreach (var effect in Stats.combatStats.OnHitEffects)
+            {
+                effect.Execute(this, target);
+            }
+            float damage = Stats.combatStats.baseDamage.Calculated + Stats.combatStats.onHitDamage.Calculated;
+            target.TakeHit(damage, this);
+            Stats.combatStats.onHitDamage.Clear();
+        }
 
+        protected virtual void OnKill()
+        {
+            // Execute OnKillEffects.
+        }
+
+        protected virtual void Die(Entity killer)
+        {
+            killer.OnKill();
         }
     }
 }

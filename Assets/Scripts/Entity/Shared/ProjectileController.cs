@@ -5,17 +5,14 @@ namespace Minigames.Fight
 {
     public class ProjectileController : MonoBehaviour
     {
-        protected bool spawnAoeOnDeath;
-        protected AOEController aoePrefab; 
-
         protected Entity _myEntity;
         protected float _deathTimer = 0;
         protected Vector2 _shootDirection;
         protected bool _isMarkedForDeath;
 
-        protected HitData hit;
-
         private EventService _eventService;
+
+        private CombatStats _myCombatStats => MyEntity.Stats.combatStats;
 
         public Entity MyEntity => _myEntity;
 
@@ -27,11 +24,6 @@ namespace Minigames.Fight
 
         private void OnDestroy()
         {
-            if (spawnAoeOnDeath)
-            {
-                AOEController aOEController = Instantiate(aoePrefab, transform.position, new Quaternion(0, 0, 0, 0));
-                aOEController.SetUp(_myEntity);
-            }
             _eventService.Remove<PlayerDiedEvent>(Die);
         }
 
@@ -47,14 +39,15 @@ namespace Minigames.Fight
             Move();
         }
 
-        protected virtual bool ShouldDie()
+        protected  bool ShouldDie()
         {
-            return false;
+            return _deathTimer > _myCombatStats.projectileLifeTime.Calculated;
         }
 
-        protected virtual void Move()
+        protected void Move()
         {
-            
+            Vector2 delta = _shootDirection * _myCombatStats.projectileMoveSpeed.Calculated * Time.deltaTime;
+            transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
         public virtual void Setup(Entity myEntity, Vector2 direction)
@@ -63,9 +56,33 @@ namespace Minigames.Fight
             _shootDirection = direction.normalized;
         }
 
-        protected virtual void OnTriggerEnter2D(Collider2D col)
+        protected void OnTriggerEnter2D(Collider2D col)
         {
-            
+            if (_isMarkedForDeath)
+            {
+                return;
+            }
+
+            if (col.gameObject.layer == PhysicsUtils.GroundLayer)
+            {
+                Die();
+            }
+
+            if (!IsValidTarget(col.gameObject.layer))
+            {
+                return;
+            }
+
+            Entity target = col.gameObject.GetComponent<Entity>();
+
+            MyEntity.DealDamage(target);
+
+            Die();
+        }
+
+        protected virtual bool IsValidTarget(int layer)
+        {
+            return true;
         }
 
         protected virtual void Die()

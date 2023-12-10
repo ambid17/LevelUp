@@ -43,7 +43,7 @@ namespace Minigames.Fight
         {
             if (target.Stats.currentHp / target.Stats.maxHp > minHpPercent)
             {
-                source.Stats.combatStats.DamageToTake.CompoundingModifiers.Add(Total);
+                source.Stats.combatStats.onHitDamage.CompoundingModifiers.Add(Total);
             }
         }
     }
