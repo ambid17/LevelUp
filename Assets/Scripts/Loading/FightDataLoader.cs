@@ -31,11 +31,11 @@ public class FightDataLoader : MonoBehaviour
     private void LoadEffectData()
     {
         var effectContainer = EffectDataManager.Load();
-        if (effectContainer != null && effectContainer.effects != null)
+        if (effectContainer != null && effectContainer.upgrades != null)
         {
-            foreach (var effect in effectContainer.effects)
+            foreach (var upgrade in effectContainer.upgrades)
             {
-                effectSettings.LoadSavedEffect(effect);
+                effectSettings.LoadSavedUpgrade(upgrade);
             }
         }
     }
@@ -54,8 +54,10 @@ public class FightDataLoader : MonoBehaviour
     
     public void LoadSerializedProgress(ProgressModel progressModel)
     {
-        Platform.ProgressSettings.Currency = progressModel.Currency;
+        Platform.ProgressSettings.Dna = progressModel.Dna;
+        Platform.ProgressSettings.BankedDna = progressModel.BankedDna;
         Platform.ProgressSettings.TutorialState = progressModel.TutorialState;
+        Platform.ProgressSettings.PhysicalResources = progressModel.PhysicalResources;
         
         for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
         {

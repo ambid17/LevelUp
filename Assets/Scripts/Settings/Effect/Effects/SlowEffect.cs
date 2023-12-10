@@ -9,6 +9,7 @@ namespace Minigames.Fight
     [Serializable]
     public class SlowEffect : Effect, IStatusEffect
     {
+        [Header("Effect specific")]
         public float slowChance = 0.1f;
         public float duration = 2f;
         public float Duration => duration;

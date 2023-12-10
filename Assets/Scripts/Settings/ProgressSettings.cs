@@ -24,7 +24,8 @@ namespace Minigames.Fight
             {TierCategory.Tier3, 3},
         };
         [Header("Run-time Values")] 
-        public float Currency;
+        public float Dna;
+        public float BankedDna;
         public TutorialState TutorialState;
         public ResourceTypeFloatDictionary PhysicalResources = new();
         public float BaseResourceValue;
@@ -57,16 +58,24 @@ namespace Minigames.Fight
             }
         }
 
+        [ContextMenu("Set Defaults")]
         public void SetDefaults()
         {
             CurrentWorld = null;
-            Currency = 0;
+            Dna = 0;
+            BankedDna = 0;
             BaseResourceValue = 1;
             TutorialState = TutorialState.None;
 
             foreach (var world in Worlds)
             {
                 world.SetDefaults();
+            }
+
+
+            PhysicalResources = new();
+            foreach (var enumValue in Enum.GetValues(typeof(ResourceType))){
+                PhysicalResources[enumValue] = 0f;
             }
         }
 
@@ -81,8 +90,10 @@ namespace Minigames.Fight
             ProgressModel toReturn = new ProgressModel();
 
             toReturn.WorldData = GetWorldData();
-            toReturn.Currency = Currency;
+            toReturn.Dna = Dna;
+            toReturn.BankedDna = BankedDna;
             toReturn.TutorialState = TutorialState;
+            toReturn.PhysicalResources = PhysicalResources;
 
             return toReturn;
         }

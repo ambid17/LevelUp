@@ -12,6 +12,7 @@ namespace Minigames.Fight
     [Serializable]
     public class DamageHighHealthEffect : Effect
     {
+        [Header("Effect specific")]
         public float percentDamagePerStack;
         public float minHpPercent;
 
@@ -37,7 +38,7 @@ namespace Minigames.Fight
         {
             if (hit.Target.Stats.currentHp / hit.Target.Stats.maxHp > minHpPercent)
             {
-                hit.BaseDamageMultipliers.Add(Total);
+                hit.DamageMultiplier += Total;
             }
         }
     }

@@ -8,8 +8,10 @@ namespace Minigames.Fight
     public class ProgressModel
     {
         public List<WorldData> WorldData;
-        public float Currency;
+        public float Dna;
+        public float BankedDna;
         public TutorialState TutorialState;
+        public ResourceTypeFloatDictionary PhysicalResources;
     }
 
     public class WorldData

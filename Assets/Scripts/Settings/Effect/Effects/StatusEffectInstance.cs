@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
 
 namespace Minigames.Fight
 {
     public class StatusEffectInstance : IEquatable<StatusEffectInstance>
     {
+        [Header("Effect specific")]
         public Entity source;
         public Entity target;
         public float remainingTime;
