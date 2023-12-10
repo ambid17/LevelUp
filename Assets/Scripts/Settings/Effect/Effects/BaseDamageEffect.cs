@@ -8,6 +8,7 @@ namespace Minigames.Fight
     [Serializable]
     public class BaseDamageEffect : Effect
     {
+        [Header("Effect specific")]
         public float baseDamagePerStack;
 
         private float Total => baseDamagePerStack * AmountOwned;
@@ -29,7 +30,7 @@ namespace Minigames.Fight
         }
         public override void Execute(HitData hit)
         {
-            hit.BaseDamageAdditions.Add(Total);
+            hit.BaseDamageAddition += Total;
         }
     }
 }

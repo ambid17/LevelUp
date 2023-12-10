@@ -6,7 +6,7 @@ public class UIPanel : MonoBehaviour
 {
     [SerializeField] private GameObject container;
 
-    public void Toggle(bool shouldBeActive)
+    public virtual void Toggle(bool shouldBeActive)
     {
         container.SetActive(shouldBeActive);
     }

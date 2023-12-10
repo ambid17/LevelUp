@@ -20,16 +20,16 @@ namespace Minigames.Fight
     }
     public class EnemyKilledEvent { }
 
-    public class EffectPurchasedEvent : IEvent
+    public class UpgradeCraftedEvent : IEvent
     {
-        public Effect Effect;
+        public Upgrade Upgrade;
 
-        public EffectPurchasedEvent(Effect effect)
+        public UpgradeCraftedEvent(Upgrade upgrade)
         {
-            Effect = effect;
+            Upgrade = upgrade;
         }
     }
-    
+
     public class OnHitEffectUnlockedEvent { }
 
     public class OnCanInteractEvent : IEvent
@@ -73,26 +73,6 @@ namespace Minigames.Fight
             Effect = effect;
         }
     }
-    
-    public class EffectItemSelectedEvent : IEvent
-    {
-        public EffectItem EffectItem;
-
-        public EffectItemSelectedEvent(EffectItem effectItem)
-        {
-            EffectItem = effectItem;
-        }
-    }
-
-    public class UnlockItemSelectedEvent : IEvent
-    {
-        public EffectItem EffectItem;
-
-        public UnlockItemSelectedEvent(EffectItem effectItem)
-        {
-            EffectItem = effectItem;
-        }
-    }
 
     public class PurchaseCountChangedEvent : IEvent
     {
@@ -115,10 +95,6 @@ namespace Minigames.Fight
             CurrentAmmo = currentAmmo;
             MaxAmmo = maxAmmo;
         }
-    }
-    
-    public class PlayerUsedAbilityEvent
-    {
     }
 
     public class CountryCompletedEvent

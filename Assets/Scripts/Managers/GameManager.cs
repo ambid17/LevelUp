@@ -30,8 +30,6 @@ namespace Minigames.Fight
         private float autoSaveTimer;
         private const float autoSaveInterval = 10;
         
-        
-
         protected override void Initialize()
         {
             SettingsManager.Init();
@@ -53,23 +51,6 @@ namespace Minigames.Fight
                 autoSaveTimer = 0;
                 //Save();
             }
-        }
-
-        private void OnDestroy()
-        {
-            Save();
-        
-            // In the editor we want to clear scriptable object changes that way they aren't saved and always in the git history, and messing up tests
-            // This isn't a problem in the built application as scriptable object changes don't save
-#if UNITY_EDITOR
-            SettingsManager.SetDefaults();
-#endif
-        }
-
-        private void Save()
-        {
-            ProgressDataManager.Save(SettingsManager.progressSettings);
-            EffectDataManager.Save();
         }
     }
 }

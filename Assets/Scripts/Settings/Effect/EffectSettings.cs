@@ -10,85 +10,81 @@ namespace Minigames.Fight
     [Serializable]
     public class EffectSettings : ScriptableObject
     {
-        [Header("Set in Editor")] public List<Effect> AllEffects;
+        [Header("Set in Editor")] public List<Upgrade> AllUpgrades;
 
         public List<Effect> OnHitEffects = new();
 
         public void SetDefaults()
         {
-            foreach (var effect in AllEffects)
+            foreach (var upgrade in AllUpgrades)
             {
-                effect.AmountOwned = 0;
-                effect.IsUnlocked = false;
-            }
-
-            OnHitEffects = null;
-        }
-
-        public void UnlockAllEffects()
-        {
-            foreach (var effect in AllEffects)
-            {
-                effect.Unlock(this);
+                upgrade.AmountOwned = 0;
+                upgrade.IsUnlocked = false;
+                upgrade.IsCrafted = false;
             }
         }
 
-        public void LoadSavedEffect(EffectModel effectModel)
+        public void UnlockAllUpgrades()
         {
-            Type effectType = effectModel.Type;
-            var effectToLoad = AllEffects.FirstOrDefault(e => e.GetType() == effectType);
-
-            if (effectToLoad != null)
+            foreach (var upgrade in AllUpgrades)
             {
-                if (effectModel.IsUnlocked)
+                upgrade.Unlock();
+            }
+        }
+
+        public List<Upgrade> GetAllUpgradesInCategory(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
+        {
+            return AllUpgrades.Where(e =>
+                e.UpgradeCategory == upgradeCategory &&
+                e.EffectCategory == effectCategory &&
+                e.TierCategory == tierCategory
+            ).ToList();
+        }
+
+        public void LoadSavedUpgrade(UpgradeModel upgradeModel)
+        {
+            Type upgradeType = upgradeModel.Type;
+            var upgradeToLoad = AllUpgrades.FirstOrDefault(e => e.GetType() == upgradeType);
+
+            if (upgradeToLoad != null)
+            {
+                upgradeToLoad.IsUnlocked = upgradeModel.IsUnlocked;
+                upgradeToLoad.AmountOwned = upgradeModel.AmountOwned;
+                upgradeToLoad.IsCrafted = upgradeModel.IsCrafted;
+
+                if (upgradeToLoad.IsCrafted)
                 {
-                    effectToLoad.Unlock(this);
+                    upgradeToLoad.Craft();
                 }
-                effectToLoad.AmountOwned = effectModel.AmountOwned;
             }
             else
             {
-                Debug.LogError($"No effect found of type: {effectType}");
+                Debug.LogError($"No upgrade found of type: {upgradeType}");
             }
         }
 
-
-        [NonSerialized] private int _weightTotal;
-
-        public Effect GetRandomEffect()
+        // Uses a weighted random algorithm to get a locked upgrade, filtered by category
+        public Upgrade GetUpgradeToUnlock(UpgradeCategory upgradeCategory, EffectCategory effectCategory, TierCategory tierCategory)
         {
-            if (_weightTotal == 0)
-            {
-                _weightTotal = AllEffects.Sum(e => e.DropWeight);
-            }
+            var lockedUpgrades = AllUpgrades.Where(e =>
+                e.UpgradeCategory == upgradeCategory &&
+                e.EffectCategory == effectCategory &&
+                e.TierCategory == tierCategory &&
+                e.IsUnlocked == false
+            ).ToList();
+            int _weightTotal = lockedUpgrades.Sum(e => e.DropWeight > 0 ? e.DropWeight : 1);
 
             int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
-            foreach (var effect in AllEffects)
+            foreach (var upgrade in lockedUpgrades)
             {
-                randomWeight -= effect.DropWeight;
+                randomWeight -= upgrade.DropWeight > 0 ? upgrade.DropWeight : 1;
                 if (randomWeight < 0)
                 {
-                    return effect;
+                    return upgrade;
                 }
             }
 
-            return AllEffects[0];
-        }
-
-        public List<Effect> GetRandomEffects(int count)
-        {
-            List<Effect> toReturn = new();
-
-            while (toReturn.Count < count)
-            {
-                Effect random = GetRandomEffect();
-                if (!toReturn.Contains(random))
-                {
-                    toReturn.Add(random);
-                }
-            }
-
-            return toReturn;
+            return lockedUpgrades[0];
         }
     }
 }

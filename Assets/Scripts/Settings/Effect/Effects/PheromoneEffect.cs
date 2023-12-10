@@ -6,6 +6,7 @@ namespace Minigames.Fight
     [Serializable]
     public class PheromoneEffect : Effect, IStatusEffect
     {
+        [Header("Effect specific")]
         public float duration = 2f;
         public float Duration => duration;
         public float TickRate => 0;

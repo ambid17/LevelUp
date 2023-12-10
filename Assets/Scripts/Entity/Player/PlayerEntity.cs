@@ -9,7 +9,7 @@ namespace Minigames.Fight
 {
     public enum InteractionType
     {
-        None, Upgrade, Create
+        None, Upgrade, Craft
     }
     public class PlayerEntity : Entity
     {

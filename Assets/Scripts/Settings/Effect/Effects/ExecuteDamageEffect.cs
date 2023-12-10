@@ -9,6 +9,7 @@ namespace Minigames.Fight
     [Serializable]
     public class ExecuteDamageEffect : Effect
     {
+        [Header("Effect specific")]
         public float percentDamagePerStack;
         public float executePercent;
 
@@ -34,7 +35,7 @@ namespace Minigames.Fight
         {
             if (hit.Target.Stats.currentHp / hit.Target.Stats.maxHp < executePercent)
             {
-                hit.BaseDamageMultipliers.Add(Total);
+                hit.DamageMultiplier += Total;
             }
         }
     }

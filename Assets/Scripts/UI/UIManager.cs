@@ -9,20 +9,19 @@ namespace Minigames.Fight
     public enum UIPanelType
     {
         None,
-        EffectUpgrade,
-        EffectCreate,
+        Effect,
         Pause,
-        Reward,
     }
     
+    /// <summary>
+    /// The UIManager exists to be able to disable any UI with escape, and to be able to open the pause menu based on the state of other UI
+    /// </summary>
     public class UIManager : MonoBehaviour
     {
         public ResourceTypeSpriteDictionary ResourceSpriteDictionary;
 
-        [SerializeField] private UIPanel effectUpgradePanel;
-        [SerializeField] private UIPanel effectCreatePanel;
+        [SerializeField] private UIPanel upgradePanel;
         [SerializeField] private UIPanel pausePanel;
-        [SerializeField] private UIPanel rewardPanel;
         
         public bool isPaused;
 
@@ -33,19 +32,8 @@ namespace Minigames.Fight
         void Start()
         {
             // Make sure all UI is toggled off
-            ToggleUiPanel(UIPanelType.EffectUpgrade, false);
-            ToggleUiPanel(UIPanelType.EffectCreate, false);
+            ToggleUiPanel(UIPanelType.Effect, false);
             ToggleUiPanel(UIPanelType.Pause, false);
-            ToggleUiPanel(UIPanelType.Reward, false);
-            Platform.EventService.Add<PlayerInteractedEvent>(OnPlayerInteract);
-        }
-
-        private void OnPlayerInteract(PlayerInteractedEvent e)
-        {
-            if (e.InteractionType == InteractionType.Create || e.InteractionType == InteractionType.Upgrade)
-            {
-                ToggleUiPanel(UIPanelType.EffectUpgrade, true);
-            }
         }
 
         void Update()
@@ -58,7 +46,6 @@ namespace Minigames.Fight
                 {
                     ToggleUiPanel(UIPanelType.Pause, true);
                 }
-                // Don't allow closing the reward panel
                 else
                 {
                     ToggleUiPanel(currentPanelType, false);
@@ -68,24 +55,17 @@ namespace Minigames.Fight
 
         public void ToggleUiPanel(UIPanelType panelType, bool isActive)
         {
-            Time.timeScale = isActive ? 0 : 1;
             isPaused = isActive;
 
-             currentPanelType = isActive ? panelType : UIPanelType.None;
+            currentPanelType = isActive ? panelType : UIPanelType.None;
             
             switch (panelType)
             {
-                case UIPanelType.EffectUpgrade:
-                    effectUpgradePanel.Toggle(isActive);
+                case UIPanelType.Effect:
+                    upgradePanel.Toggle(isActive);
                     break;
                 case UIPanelType.Pause:
                     pausePanel.Toggle(isActive);
-                    break;
-                case UIPanelType.EffectCreate:
-                    effectCreatePanel.Toggle(isActive);
-                //    break;
-                //case UIPanelType.Reward:
-                //    rewardPanel.Toggle(isActive);
                     break;
             }
         }
