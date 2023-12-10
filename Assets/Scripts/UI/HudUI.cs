@@ -26,7 +26,7 @@ namespace Minigames.Fight
             _upgradeButton.onClick.AddListener(OpenUpgrades);
         
             SetGoldText();
-            SetHpSlider(new PlayerHpUpdatedEvent(1));
+            SetHpSlider(new PlayerHpUpdatedEvent());
         }
 
         private void OpenUpgrades()
@@ -39,7 +39,7 @@ namespace Minigames.Fight
             _goldText.text = GameManager.CurrencyManager.Dna.ToCurrencyString();
         }
 
-        private void SetHpSlider(PlayerHpUpdatedEvent eventType)
+        private void SetHpSlider()
         {
             _hpSlider.value = _combatStats.currentHp / _combatStats.maxHp.Calculated;
         }

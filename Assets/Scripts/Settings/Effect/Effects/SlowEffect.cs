@@ -59,9 +59,12 @@ namespace Minigames.Fight
             return stat * slowAmount;
         }
 
-        public void OnTick(Entity target)
+        public void OnTick(Entity source, Entity target)
         {
-            
+        }
+
+        public void OnComplete()
+        {
         }
     }
 }

@@ -49,13 +49,17 @@ namespace Minigames.Fight
             bool doesApply = Random.value < chance;
             if (doesApply)
             {
-                target.Stats.StatusEffects.Add(this);
+                target.Stats.combatStats.AddOrRefreshStatusEffect(this, source, target);
             }
         }
 
-        public void OnTick(Entity target)
+        public void OnTick(Entity source, Entity target)
         {
-            target.TakeDamage(HitDamage);
+            target.TakeHit(HitDamage, source);
+        }
+
+        public void OnComplete()
+        {
         }
     }
 }

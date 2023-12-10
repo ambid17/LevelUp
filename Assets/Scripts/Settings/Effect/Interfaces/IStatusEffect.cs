@@ -4,7 +4,8 @@ namespace Minigames.Fight
     {
         public float Duration { get; }
         public float TickRate { get; }
-        void OnTick(Entity target);
+        public void OnTick(Entity source, Entity target);
         public float ImpactStat(float stat);
+        public void OnComplete();
     }
 }

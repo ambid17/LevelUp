@@ -24,8 +24,8 @@ namespace Minigames.Fight
 
         public float DamageLastTick
         {
-            get => myEntity.Stats.DamageTakenThisSecond;
-            set => myEntity.Stats.DamageTakenThisSecond = value;
+            get => myEntity.Stats.combatStats.DamageTakenThisSecond;
+            set => myEntity.Stats.combatStats.DamageTakenThisSecond = value;
         }
 
         public virtual bool CanSeeTarget

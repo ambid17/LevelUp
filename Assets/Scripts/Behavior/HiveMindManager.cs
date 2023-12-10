@@ -12,7 +12,7 @@ namespace Minigames.Fight
 
         public bool IsAlerted => CurrentHiveHP < _totalHiveMaxHealth;
 
-        public float CurrentHiveHP => MyHiveMinds.Sum(h => h.MyEntity.Stats.currentHp);
+        public float CurrentHiveHP => MyHiveMinds.Sum(h => h.MyEntity.Stats.combatStats.currentHp);
         public float AttackPriority => _totalHiveMaxHealth - CurrentHiveHP;
         public Vector2 PlayerLastKnown => _playerLastKnown;
         private float tick;
