@@ -26,7 +26,7 @@ public class PercentSpeedIncreaseEffect : Effect
         return 1 + (percentPerStack * newAmountOwned);
     }
 
-    public override void Apply(Entity target)
+    public override void OnCraft(Entity target)
     {
         target.Stats.movementStats.moveSpeed.CompoundingModifiers.Add(Total);
     }

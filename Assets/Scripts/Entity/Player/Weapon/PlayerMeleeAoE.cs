@@ -6,32 +6,10 @@ namespace Minigames.Fight
 {
     public class PlayerMeleeAoE : PlayerProjectile
     {
-        [SerializeField]
-        private Animator anim;
-
-        protected override bool ShouldDie()
+        public override void Setup(Entity myEntity, Vector2 direction)
         {
-            return anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
-        }
-
-        public override void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
-        {
-            base.Setup(myEntity, direction, controller);
+            base.Setup(myEntity, direction);
             transform.rotation = PhysicsUtils.LookAt(transform, GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
-        }
-
-        protected override void OnTriggerEnter2D(Collider2D col)
-        {
-            if (_isMarkedForDeath)
-            {
-                return;
-            }
-
-            else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
-            {
-                Entity enemyEntity = col.gameObject.GetComponent<Entity>();
-                enemyEntity.TakeHit(hit);
-            }
         }
     }
 }

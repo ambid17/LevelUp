@@ -9,15 +9,7 @@ namespace Minigames.Fight
     public class CurrencyUpdatedEvent { }
     public class PlayerDiedEvent { }
     public class PlayerRevivedEvent { }
-    public class PlayerHpUpdatedEvent : IEvent
-    {
-        public float PercentHp;
-
-        public PlayerHpUpdatedEvent(float percentHp)
-        {
-            PercentHp = percentHp;
-        }
-    }
+    public class PlayerHpUpdatedEvent { }
     public class EnemyKilledEvent { }
 
     public class UpgradeCraftedEvent : IEvent
@@ -29,8 +21,6 @@ namespace Minigames.Fight
             Upgrade = upgrade;
         }
     }
-
-    public class OnHitEffectUnlockedEvent { }
 
     public class OnCanInteractEvent : IEvent
     {

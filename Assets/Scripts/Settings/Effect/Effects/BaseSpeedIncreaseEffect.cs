@@ -8,31 +8,26 @@ public class BaseSpeedIncreaseEffect : Effect
     [Header("Effect specific")]
     public float perStack;
 
-    private float Total => 1 + (perStack * AmountOwned);
+    private float Total => (perStack * AmountOwned);
 
-    private readonly string _description = "Slows player move speed by {0}%";
+    private readonly string _description = "Increase player move speed by {0}";
     public override string GetDescription()
     {
-        return string.Format(_description, Total * 100);
+        return string.Format(_description, Total);
     }
     public override string GetNextUpgradeDescription(int purchaseCount)
     {
-        return string.Format(_description, NextUpgradeChance(purchaseCount) * 100);
+        return string.Format(_description, NextUpgradeChance(purchaseCount));
     }
 
     private float NextUpgradeChance(int purchaseCount)
     {
         int newAmountOwned = AmountOwned + purchaseCount;
-        return 1 + (perStack * newAmountOwned);
+        return (perStack * newAmountOwned);
     }
 
-    public override void Apply(Entity target)
+    public override void OnCraft(Entity target)
     {
         target.Stats.movementStats.moveSpeed.BaseModifiers.Add(Total);
-    }
-
-    public override void Execute(Entity target, Entity source)
-    {
-
     }
 }

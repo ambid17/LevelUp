@@ -18,17 +18,10 @@ namespace Minigames.Fight
         private int maxCombo = 10;
 
         private float _comboTimer;
-        private HitData _comboHitData;
         protected override void Update()
         {
             base.Update();
             _comboTimer += Time.deltaTime;
-        }
-
-        public override void CalculateHitData()
-        {
-            base.CalculateHitData();
-            _comboHitData = new HitData(MyEntity, comboWeapon.damage);
         }
 
         public void ShootCombo()
@@ -38,7 +31,8 @@ namespace Minigames.Fight
             {
                 return;
             }
-            GameManager.PlayerEntity.TakeHit(_comboHitData);
+
+            MyEntity.DealDamage(GameManager.PlayerEntity);
         }
     }
 }

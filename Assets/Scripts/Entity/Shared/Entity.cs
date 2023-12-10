@@ -16,7 +16,7 @@ namespace Minigames.Fight
         public AnimationManager animationController;
         public EntityStats Stats;
         
-        public bool IsDead => Stats.currentHp <= 0;
+        public bool IsDead => Stats.combatStats.currentHp <= 0;
 
         protected EventService eventService;
 
@@ -39,19 +39,9 @@ namespace Minigames.Fight
         
         protected virtual void Update()
         {
-            if (Stats.StatusEffects.Count > 0)
-            {
-                TickStatuses();
-            }
+            Stats.TickStatuses();
         }
 
-        protected void TickStatuses()
-        {
-            foreach (var statusEffect in Stats.StatusEffects.ToList())
-            {
-                statusEffect.OnTick(Time.deltaTime);
-            }
-        }
         public virtual void TakeHit(float damage, Entity hitter)
         {
             Stats.TakeDamage(damage);
@@ -63,6 +53,7 @@ namespace Minigames.Fight
                 Die(hitter);
             }
         }
+
         public void DealDamage(Entity target)
         {
             foreach (var effect in Stats.combatStats.OnHitEffects)

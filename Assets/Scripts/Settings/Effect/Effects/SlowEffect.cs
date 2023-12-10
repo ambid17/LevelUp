@@ -1,5 +1,6 @@
 using System;
 using Minigames.Fight;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,18 +11,19 @@ namespace Minigames.Fight
     public class SlowEffect : Effect, IStatusEffect
     {
         [Header("Effect specific")]
-        public float slowChance = 0.1f;
         public float duration = 2f;
         public float Duration => duration;
-        public float slowAmount = 0.01f;
-        public float chanceScalar = 0.01f;
         public float TickRate => 0;
 
-        public float SlowChance => slowChance + (chanceScalar * AmountOwned);
-        
-        private readonly string _description = "{0}% to slow enemies by {1}% for {2} seconds";
+        public float slowAmount = 0.5f;
+        public float chanceScalar = 0.01f;
         
 
+        public float slowChance = 0.5f;
+        public float SlowChance => slowChance + (chanceScalar * AmountOwned);
+        
+        private readonly string _description = "{0}% chance to slow enemies by {1}% for {2} seconds";
+        
         public override string GetDescription()
         {
             return string.Format(_description, SlowChance * 100, slowAmount * 100, duration);
@@ -38,28 +40,27 @@ namespace Minigames.Fight
             return slowChance + (chanceScalar * newAmountOwned);
         }
 
-        public override void Execute(HitData hit)
+        public override void OnCraft(Entity target)
         {
-            TryApplyEffect(hit);
+            target.Stats.combatStats.OnHitEffects.Add(this);
         }
 
-        public void TryApplyEffect(HitData hit)
+        public override void Execute(Entity source, Entity target)
         {
             bool doesSlow = Random.value < SlowChance;
             if (doesSlow)
             {
-                StatusEffectInstance.Create(hit, this);
+                target.Stats.movementStats.moveSpeed.AddOrRefreshStatusEffect(this, source, target);
             }
         }
 
-        public void ApplyEffect(Entity target)
+        public void ApplyStatEffect(ModifiableStat statToModify)
         {
-            target.MovementController.ApplyMoveEffect(this);
+            statToModify.CompoundingModifiers.Add(slowAmount);
         }
 
         public void RemoveEffect(Entity target)
         {
-            target.MovementController.RemoveMoveEffect(this);
         }
 
         public void OnTick(Entity target)

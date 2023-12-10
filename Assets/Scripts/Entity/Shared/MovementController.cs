@@ -18,44 +18,5 @@ namespace Minigames.Fight
             MyRigidbody2D = GetComponent<Rigidbody2D>();
             MyEntity = GetComponent<Entity>();
         }
-
-        protected virtual void SetStartingMoveSpeed(float moveSpeed)
-        {
-            BaseMoveSpeed = moveSpeed;
-            CurrentMoveSpeed = moveSpeed;
-        }
-
-        public virtual void ApplyMoveEffect(Effect effect)
-        {
-            switch (effect)
-            {
-                case SlowEffect slow:
-                    moveEffects.Add(effect.GetType().Name, slow.slowAmount);
-                    break;
-            }
-
-            RecalculateMoveSpeed();
-        }
-
-        public virtual void RemoveMoveEffect(Effect effect)
-        {
-            switch (effect)
-            {
-                case SlowEffect slow:
-                    moveEffects.Remove(effect.GetType().Name);
-                    break;
-            }
-
-            RecalculateMoveSpeed();
-        }
-
-        private void RecalculateMoveSpeed()
-        {
-            CurrentMoveSpeed = BaseMoveSpeed;
-            foreach (var kvp in moveEffects)
-            {
-                CurrentMoveSpeed *= kvp.Value;
-            }
-        }
     }
 }

@@ -28,14 +28,9 @@ namespace Minigames.Fight
             int newAmountOwned = AmountOwned + purchaseCount;
             return baseDamagePerStack * newAmountOwned;
         }
-        public override void Apply(Entity target)
+        public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.damage.BaseModifiers.Add(Total);
-        }
-
-        public override void Execute(Entity target, Entity source)
-        {
-
+            target.Stats.combatStats.baseDamage.BaseModifiers.Add(Total);
         }
     }
 }

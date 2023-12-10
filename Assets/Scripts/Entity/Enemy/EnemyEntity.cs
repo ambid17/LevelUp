@@ -24,7 +24,6 @@ namespace Minigames.Fight
         {
             base.Setup();
             Target = GameManager.PlayerEntity.transform;
-            Stats.SetupFromEnemy(enemyStats);
 
             // Magic float for now because I'm not sure flexibility will ever be necessary.
             // Offsets animation speed and movement speed by the same amount to make enemies feel more natural.
@@ -33,13 +32,10 @@ namespace Minigames.Fight
             animationController.Anim.speed *= randomOffset;
         }
 
-        public override void TakeDamage(float damage)
-        {
-            base.TakeDamage(damage);
-        }
 
-        protected override void Die()
+        protected override void Die(Entity killer)
         {
+            base.Die(killer);
             // Since we are shooting so many projectiles...
             // OnTriggerEnter() gets called in Projectile multiple times before we get destroyed
             // This prevents duplicate deaths

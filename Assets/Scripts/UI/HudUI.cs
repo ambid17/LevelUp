@@ -16,7 +16,7 @@ namespace Minigames.Fight
         [SerializeField] private TMP_Text _remainingAmmoText;
 
         private EventService _eventService;
-
+        private CombatStats _combatStats => GameManager.PlayerEntity.Stats.combatStats;
         void Start()
         {
             _eventService = Platform.EventService;
@@ -41,7 +41,7 @@ namespace Minigames.Fight
 
         private void SetHpSlider(PlayerHpUpdatedEvent eventType)
         {
-            _hpSlider.value = eventType.PercentHp;
+            _hpSlider.value = _combatStats.currentHp / _combatStats.maxHp.Calculated;
         }
 
         private void SetAmmo(PlayerAmmoUpdatedEvent e)

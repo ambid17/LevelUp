@@ -8,46 +8,32 @@ namespace Minigames.Fight
 {
     public class EntityStats
     {
-        public float currentHp;
-        public float maxHp;
-        public float DamageTakenThisSecond;
-        public List<StatusEffectInstance> StatusEffects = new();
-
         public MovementStats movementStats;
         public CombatStats combatStats;
 
         // Effects
-        
         public List<Effect> OnKillEffects = new();
         public List<Effect> OnDeathEffects = new();
         public List<Effect> OnTakeDamageEffects = new();
         public List<Effect> OnTimerEffects = new();
         public List<Effect> OnPurchaseEffects = new();
 
+        public EntityStats()
+        {
+            movementStats = new MovementStats();
+            combatStats = new CombatStats();
+        }
+
         public void TakeDamage(float damage)
         {
-            currentHp -= damage;
-            DamageTakenThisSecond += damage;
+            combatStats.currentHp -= damage;
+            combatStats.DamageTakenThisSecond += damage;
         }
 
-        public bool AddStatusEffect(StatusEffectInstance instance)
+        public void TickStatuses()
         {
-            if (StatusEffects.Contains(instance))
-            {
-                StatusEffects[StatusEffects.IndexOf(instance)].remainingTime = instance.remainingTime;
-                return false;
-            }
-            else
-            {
-                StatusEffects.Add(instance);
-                return true;
-            }
-        }
-
-        public void SetupFromEnemy(EnemyStats enemyStats)
-        {
-            currentHp = enemyStats.MaxHp;
-            maxHp = enemyStats.MaxHp;
+            movementStats.TickStatuses();
+            combatStats.TickStatuses();
         }
     }
 
@@ -61,12 +47,30 @@ namespace Minigames.Fight
 
         public ModifiableStat projectileLifeTime;
 
+        public ModifiableStat maxHp;
+        public float currentHp;
+        public float DamageTakenThisSecond;
+
         public List<Effect> OnHitEffects = new();
+
+        public CombatStats()
+        {
+        }
+
+        public void TickStatuses()
+        {
+            
+        }
     }
 
     public class MovementStats
     {
         public ModifiableStat moveSpeed;
+
+        public void TickStatuses()
+        {
+            moveSpeed.TickStatuses();
+        }
     }
 
     // TODO handle types other than float
@@ -91,6 +95,7 @@ namespace Minigames.Fight
                 Refresh();
             }
         }
+
         private List<float> compoundingModifiers;
         public List<float> CompoundingModifiers
         {
@@ -102,6 +107,38 @@ namespace Minigames.Fight
                     compoundingModifiers = new List<float>();
                 }
                 compoundingModifiers = value;
+                Refresh();
+            }
+        }
+
+        private List<StatusEffectData> effectsImpactingStat;
+        private List<StatusEffectData> EffectsImpactingStat
+        {
+            get { return effectsImpactingStat;}
+            set
+            {
+                if(effectsImpactingStat == null)
+                {
+                    effectsImpactingStat = new List<StatusEffectData>();
+                }
+
+                effectsImpactingStat = value;
+            }
+        }
+
+        public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)
+        {
+            var existing = EffectsImpactingStat.First(e => e.statusEffect.Equals(statusEffect));
+            if (existing != null)
+            {
+                existing.Reapply();
+            }
+            else
+            {
+                var newStatusEffect = new StatusEffectData(statusEffect, source, target);
+                EffectsImpactingStat.Add(newStatusEffect);
+
+                statusEffect.ApplyStatEffect(this);
                 Refresh();
             }
         }
@@ -125,6 +162,68 @@ namespace Minigames.Fight
         {
             BaseModifiers.Clear();
             CompoundingModifiers.Clear();
+        }
+
+        public void TickStatuses()
+        {
+            foreach(var status in effectsImpactingStat)
+            {
+                status.OnTick();
+            }
+        }
+    }
+
+    public class TimerEffectData
+    {
+        public float timer;
+        public float tickRate;
+        public Effect myEffect;
+
+        public Entity source;
+        public Entity target;
+
+        public void OnTick()
+        {
+            timer += Time.deltaTime;
+            if (timer >= tickRate)
+            {
+                myEffect.Execute(source, target);
+                timer = 0;
+            }
+        }
+    }
+
+    public class StatusEffectData
+    {
+        public float timer;
+        public IStatusEffect statusEffect;
+        public Entity source;
+        public Entity target;
+
+
+        public StatusEffectData(IStatusEffect statusEffect, Entity source, Entity target)
+        {
+            this.statusEffect = statusEffect;
+            this.source = source;
+            this.target = target;
+
+            timer = 0;
+        }
+
+        public void OnTick()
+        {
+            // myEffect.Tick(effectedEntity);
+            timer += Time.deltaTime;
+            if (timer >= statusEffect.Duration)
+            {
+                // effectedEntity.AppliedStatusEffects.Remove(this);
+            }
+        }
+
+        public void Reapply()
+        {
+            // TODO figure out how the fuck to diferentiate status effects
+            // that do or don't reapply on tick.
         }
     }
 }

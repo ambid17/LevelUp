@@ -89,16 +89,18 @@ namespace Minigames.Fight
 
             if (IsCrafted)
             {
-                positive.Apply(GameManager.PlayerEntity);
-                negative.Apply(GameManager.PlayerEntity);
+                positive.OnCraft(GameManager.PlayerEntity);
+                positive.SetAmountOwned(AmountOwned);
+                negative.OnCraft(GameManager.PlayerEntity);
+                negative.SetAmountOwned(AmountOwned);
             }
         }
 
         public virtual void Craft()
         {
             IsCrafted = true;
-            positive.Apply(GameManager.PlayerEntity);
-            negative.Apply(GameManager.PlayerEntity);
+            positive.OnCraft(GameManager.PlayerEntity);
+            negative.OnCraft(GameManager.PlayerEntity);
         }
 
         public string GetUpgradeCountText()

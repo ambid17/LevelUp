@@ -30,14 +30,9 @@ namespace Minigames.Fight
             return 1 + (perStack * newAmountOwned);
         }
 
-        public override void Apply(Entity target)
+        public override void OnCraft(Entity target)
         {
             target.Stats.movementStats.moveSpeed.BaseModifiers.Add(Total);
-        }
-
-        public override void Execute(Entity target, Entity source)
-        {
-
         }
     }
 }

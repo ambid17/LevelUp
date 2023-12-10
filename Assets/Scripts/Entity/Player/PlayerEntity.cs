@@ -29,60 +29,26 @@ namespace Minigames.Fight
         private PlayerAnimationController _animationControllerOverride;
 
         private bool _canRevive;
-        
-        public float CurrentHp
-        {
-            get => Stats.currentHp;
-            set
-            {
-                float newHp = value;
-                // if adding to player hp, clamp it to max
-                newHp = Mathf.Clamp(newHp, 0, GameManager.SettingsManager.playerSettings.MaxHp);
-                Stats.currentHp = newHp;
 
-                float hpPercent = Stats.currentHp / GameManager.SettingsManager.playerSettings.MaxHp;
-                eventService.Dispatch(new PlayerHpUpdatedEvent(hpPercent));
-            }
-        }
+        public InteractionType currentInteractionType = InteractionType.None;
 
-        public InteractionType currentInteractionType = InteractionType.None; 
-        
         protected override void Setup()
         {
             base.Setup();
-            Stats.currentHp = GameManager.SettingsManager.playerSettings.MaxHp;
-            eventService.Add<OnHitEffectUnlockedEvent>(SetupOnHitEffects);
             eventService.Add<OnCanInteractEvent>(OnCanInteract);
-            SetupOnHitEffects(); // go ahead and query the onHit effects that were populated on load
             _animationControllerOverride = animationController as PlayerAnimationController;
         }
 
-        private void SetupOnHitEffects()
-        {
-            Stats.OnHitEffects = GameManager.SettingsManager.effectSettings.OnHitEffects.OrderBy(e => e.ExecutionOrder).ToList();
-        }
 
         private void OnCanInteract(OnCanInteractEvent e)
         {
             currentInteractionType = e.InteractionType;
         }
 
-        public override void TakeDamage(float damage)
+        public override void TakeHit(float damage, Entity hitter)
         {
-
-            CurrentHp -= damage;
-
-            // Damage FX are confusing if a hit only applies status effects.
-            if (damage > 0)
-            {
-                VisualController.StartDamageFx(damage);
-            }
-
-            if (IsDead)
-            {
-                Die();
-                StartCoroutine(WaitForRevive());
-            }
+            base.TakeHit(damage, hitter);
+            eventService.Dispatch<PlayerHpUpdatedEvent>();
         }
 
         protected override void Update()
@@ -104,13 +70,15 @@ namespace Minigames.Fight
             // TODO: play interact animation
             eventService.Dispatch(new PlayerInteractedEvent(currentInteractionType));
         }
-        
-        protected override void Die()
+
+        protected override void Die(Entity killer)
         {
+            base.Die(killer);
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
-            Stats.StatusEffects.Clear();
+            //Stats.StatusEffects.Clear();
             StartCoroutine(DropResources());
+            StartCoroutine(WaitForRevive());
         }
 
         IEnumerator DropResources()
@@ -149,7 +117,7 @@ namespace Minigames.Fight
             }
             _canRevive = true;
         }
-        
+
         private IEnumerator WaitForRevive()
         {
             while (!_animationControllerOverride.IsAnimFinished)

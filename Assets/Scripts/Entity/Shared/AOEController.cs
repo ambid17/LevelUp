@@ -7,7 +7,6 @@ namespace Minigames.Fight
     public class AOEController : MonoBehaviour
     {
         protected bool canTriggerEffect => isCollidingWithTarget && localEffectInterval <= 0;
-        protected HitData storedHitData;
 
         [SerializeField]
         private float lifeTime;

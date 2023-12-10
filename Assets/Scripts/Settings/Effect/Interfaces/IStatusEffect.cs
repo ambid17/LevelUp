@@ -4,9 +4,8 @@ namespace Minigames.Fight
     {
         public float Duration { get; }
         public float TickRate { get; }
-        public void TryApplyEffect(HitData hit);
         public void RemoveEffect(Entity target);
-        void ApplyEffect(Entity target);
         void OnTick(Entity target);
+        public void ApplyStatEffect(ModifiableStat statToModify);
     }
 }

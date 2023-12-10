@@ -1,5 +1,6 @@
 using System;
 using Minigames.Fight;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,26 +39,18 @@ namespace Minigames.Fight
             return baseDamage + (damageScalar * newAmountOwned);
         }
 
-        public override void Execute(HitData hit)
+        public override void OnCraft(Entity target)
         {
-            TryApplyEffect(hit);
+            target.Stats.combatStats.OnHitEffects.Add(this);
         }
 
-        public void TryApplyEffect(HitData hit)
+        public override void Execute(Entity source, Entity target)
         {
             bool doesApply = Random.value < chance;
             if (doesApply)
             {
-                StatusEffectInstance.Create(hit, this);
+                target.Stats.StatusEffects.Add(this);
             }
-        }
-
-        public void ApplyEffect(Entity target)
-        {
-        }
-
-        public void RemoveEffect(Entity target)
-        {
         }
 
         public void OnTick(Entity target)

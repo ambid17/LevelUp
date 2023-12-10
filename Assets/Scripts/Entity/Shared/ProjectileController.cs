@@ -12,14 +12,18 @@ namespace Minigames.Fight
 
         private EventService _eventService;
 
+        public Entity MyEntity => _myEntity;
         private CombatStats _myCombatStats => MyEntity.Stats.combatStats;
 
-        public Entity MyEntity => _myEntity;
+        private SpriteRenderer _spriteRenderer;
+
 
         protected virtual void Start()
         {
             _eventService = Platform.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
+
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnDestroy()
@@ -37,6 +41,11 @@ namespace Minigames.Fight
             }
 
             Move();
+        }
+
+        public virtual void SetSprite(Sprite sprite)
+        {
+            _spriteRenderer.sprite = sprite;
         }
 
         protected  bool ShouldDie()
