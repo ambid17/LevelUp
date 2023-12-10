@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PercentSpeedIncreaseEffect : Effect
+public class PercentSpeedEffect : Effect
 {
     [Header("Effect specific")]
     public float percentPerStack;
 
-    private float Total => 1 + (percentPerStack * AmountOwned);
+    private float Impact => 1 + (percentPerStack * AmountOwned);
 
-    private readonly string _description = "Slows player move speed by {0}%";
+    private readonly string _description = "Impacts player move speed by {0}%";
+
     public override string GetDescription()
     {
-        return string.Format(_description, Total * 100);
+        return string.Format(_description, Impact * 100);
     }
     public override string GetNextUpgradeDescription(int purchaseCount)
     {
@@ -28,11 +29,11 @@ public class PercentSpeedIncreaseEffect : Effect
 
     public override void OnCraft(Entity target)
     {
-        target.Stats.movementStats.moveSpeed.CompoundingModifiers.Add(Total);
+        target.Stats.movementStats.moveSpeed.AddEffect(this);
     }
 
-    public override void Execute(Entity target, Entity source)
+    public override float ImpactStat(float stat)
     {
-        
+        return stat * Impact;
     }
 }

@@ -17,12 +17,12 @@ namespace Minigames.Fight
         public float perStack;
         public float minHpPercent;
 
-        private float Total => 1 + (perStack * AmountOwned);
+        private float Impact => 1 + (perStack * AmountOwned);
         
         private readonly string _description = "Deal {0}% more damage to enemies >{1}% hp";
         public override string GetDescription()
         {
-            return string.Format(_description, Total * 100, minHpPercent * 100);
+            return string.Format(_description, Impact * 100, minHpPercent * 100);
         }
         public override string GetNextUpgradeDescription(int purchaseCount)
         {
@@ -41,10 +41,15 @@ namespace Minigames.Fight
 
         public override void Execute(Entity source, Entity target)
         {
-            if (target.Stats.currentHp / target.Stats.maxHp > minHpPercent)
+            if (target.Stats.combatStats.currentHp / target.Stats.combatStats.maxHp.Calculated > minHpPercent)
             {
-                source.Stats.combatStats.onHitDamage.CompoundingModifiers.Add(Total);
+                source.Stats.combatStats.onHitDamage.AddEffect(this);
             }
+        }
+
+        public override float ImpactStat(float stat)
+        {
+            return stat * Impact;
         }
     }
 }

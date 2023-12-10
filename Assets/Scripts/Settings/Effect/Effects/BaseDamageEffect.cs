@@ -9,14 +9,14 @@ namespace Minigames.Fight
     public class BaseDamageEffect : Effect
     {
         [Header("Effect specific")]
-        public float baseDamagePerStack;
+        public float perStack;
 
-        private float Total => baseDamagePerStack * AmountOwned;
+        private float Impact => perStack * AmountOwned;
 
-        private readonly string _description = "+{0} base damage";
+        private readonly string _description = "Adds {0} base damage";
         public override string GetDescription()
         {
-            return string.Format(_description, Total);
+            return string.Format(_description, Impact);
         }
         public override string GetNextUpgradeDescription(int purchaseCount)
         {
@@ -26,11 +26,17 @@ namespace Minigames.Fight
         private float NextUpgradeChance(int purchaseCount)
         {
             int newAmountOwned = AmountOwned + purchaseCount;
-            return baseDamagePerStack * newAmountOwned;
+            return perStack * newAmountOwned;
         }
+
         public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.baseDamage.BaseModifiers.Add(Total);
+            target.Stats.combatStats.baseDamage.AddEffect(this);
+        }
+
+        public override float ImpactStat(float stat)
+        {
+            return stat + Impact;
         }
     }
 }

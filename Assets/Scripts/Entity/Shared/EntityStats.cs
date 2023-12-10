@@ -82,53 +82,24 @@ namespace Minigames.Fight
         private float calculated;
         public float Calculated => calculated;
 
-        private List<float> baseModifiers;
-        public List<float> BaseModifiers
+        public List<Effect> effects;
+        public List<StatusEffectData> statusEffects;
+
+        public ModifiableStat()
         {
-            get { return baseModifiers; }
-            set {
-                if (baseModifiers == null)
-                {
-                    baseModifiers = new List<float>();
-                }
-                baseModifiers = value;
-                Refresh();
-            }
+            effects = new();
+            statusEffects = new();
         }
 
-        private List<float> compoundingModifiers;
-        public List<float> CompoundingModifiers
+        public void AddEffect(Effect effect)
         {
-            get { return compoundingModifiers; }
-            set
-            {
-                if(compoundingModifiers == null)
-                {
-                    compoundingModifiers = new List<float>();
-                }
-                compoundingModifiers = value;
-                Refresh();
-            }
-        }
-
-        private List<StatusEffectData> effectsImpactingStat;
-        private List<StatusEffectData> EffectsImpactingStat
-        {
-            get { return effectsImpactingStat;}
-            set
-            {
-                if(effectsImpactingStat == null)
-                {
-                    effectsImpactingStat = new List<StatusEffectData>();
-                }
-
-                effectsImpactingStat = value;
-            }
+            effects.Add(effect);
+            Refresh();
         }
 
         public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)
         {
-            var existing = EffectsImpactingStat.First(e => e.statusEffect.Equals(statusEffect));
+            var existing = statusEffects.First(e => e.statusEffect.Equals(statusEffect));
             if (existing != null)
             {
                 existing.Reapply();
@@ -136,9 +107,7 @@ namespace Minigames.Fight
             else
             {
                 var newStatusEffect = new StatusEffectData(statusEffect, source, target);
-                EffectsImpactingStat.Add(newStatusEffect);
-
-                statusEffect.ApplyStatEffect(this);
+                statusEffects.Add(newStatusEffect);
                 Refresh();
             }
         }
@@ -147,28 +116,31 @@ namespace Minigames.Fight
         {
             calculated = baseValue;
 
-            foreach (var mod in baseModifiers)
+            foreach (var mod in effects)
             {
-                calculated += mod;
+                calculated = mod.ImpactStat(calculated);
             }
 
-            foreach (var mod in compoundingModifiers)
+            foreach(var mod in statusEffects)
             {
-                calculated *= mod;
+                calculated = mod.statusEffect.ImpactStat(calculated);
             }
         }
 
         public void Clear()
         {
-            BaseModifiers.Clear();
-            CompoundingModifiers.Clear();
+            calculated = 0;
         }
 
         public void TickStatuses()
         {
-            foreach(var status in effectsImpactingStat)
+            foreach(var status in statusEffects)
             {
-                status.OnTick();
+                bool didFinish = status.OnTick();
+                if (didFinish)
+                {
+                    statusEffects.Remove(status);
+                }
             }
         }
     }
@@ -200,7 +172,6 @@ namespace Minigames.Fight
         public Entity source;
         public Entity target;
 
-
         public StatusEffectData(IStatusEffect statusEffect, Entity source, Entity target)
         {
             this.statusEffect = statusEffect;
@@ -210,18 +181,15 @@ namespace Minigames.Fight
             timer = 0;
         }
 
-        public void OnTick()
+        public bool OnTick()
         {
-            // myEffect.Tick(effectedEntity);
             timer += Time.deltaTime;
-            if (timer >= statusEffect.Duration)
-            {
-                // effectedEntity.AppliedStatusEffects.Remove(this);
-            }
+            return timer >= statusEffect.Duration;
         }
 
         public void Reapply()
         {
+            timer = 0;
             // TODO figure out how the fuck to diferentiate status effects
             // that do or don't reapply on tick.
         }

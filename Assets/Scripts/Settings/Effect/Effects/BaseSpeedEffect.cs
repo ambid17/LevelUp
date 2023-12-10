@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSpeedIncreaseEffect : Effect
+public class BaseSpeedEffect : Effect
 {
     [Header("Effect specific")]
     public float perStack;
 
-    private float Total => (perStack * AmountOwned);
+    private float Impact => perStack * AmountOwned;
 
-    private readonly string _description = "Increase player move speed by {0}";
+    private readonly string _description = "Impacts player move speed by {0}";
     public override string GetDescription()
     {
-        return string.Format(_description, Total);
+        return string.Format(_description, Impact);
     }
     public override string GetNextUpgradeDescription(int purchaseCount)
     {
@@ -28,6 +28,11 @@ public class BaseSpeedIncreaseEffect : Effect
 
     public override void OnCraft(Entity target)
     {
-        target.Stats.movementStats.moveSpeed.BaseModifiers.Add(Total);
+        target.Stats.movementStats.moveSpeed.AddEffect(this);
+    }
+
+    public override float ImpactStat(float stat)
+    {
+        return stat + Impact;
     }
 }

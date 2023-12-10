@@ -54,13 +54,9 @@ namespace Minigames.Fight
             }
         }
 
-        public void ApplyStatEffect(ModifiableStat statToModify)
+        public override float ImpactStat(float stat)
         {
-            statToModify.CompoundingModifiers.Add(slowAmount);
-        }
-
-        public void RemoveEffect(Entity target)
-        {
+            return stat * slowAmount;
         }
 
         public void OnTick(Entity target)

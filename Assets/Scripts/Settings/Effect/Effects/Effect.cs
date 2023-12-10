@@ -55,5 +55,10 @@ namespace Minigames.Fight
         {
 
         }
+
+        public virtual float ImpactStat(float stat)
+        {
+            return stat;
+        }
     }
 }
