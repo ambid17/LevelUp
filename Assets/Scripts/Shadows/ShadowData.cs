@@ -54,8 +54,8 @@ public class ShadowData : ScriptableObject
             }
 
             // Generates new sprites based on the initial sprite.
-            Texture2D unflippedShadowTexture = new(mainTexture.width * 2, mainTexture.height);
-            Texture2D flippedShadowTexture = new(mainTexture.width * 2, mainTexture.height);
+            Texture2D unflippedShadowTexture = new(mainTexture.width * 4, mainTexture.height);
+            Texture2D flippedShadowTexture = new(mainTexture.width * 4, mainTexture.height);
 
             // Calculate the width difference between the two textures to offset the sprite positions.
             int flippedDifference = flippedShadowTexture.width - mainTexture.width;
@@ -102,8 +102,8 @@ public class ShadowData : ScriptableObject
             string unflippedPath = "Assets/Textures/ShadowSprites/" + mainTexture.name + "_Shadow.png";
             string flippedPath = "Assets/Textures/ShadowSprites/" + mainTexture.name + "_Flipped_Shadow.png";
 
-            Sprite unflippedShadowSprite = Sprite.Create(unflippedShadowTexture, new Rect(0, 0, sprite.rect.width * 2, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
-            Sprite flippedShadowSprite = Sprite.Create(flippedShadowTexture, new Rect(0, 0, sprite.rect.width * 2, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
+            Sprite unflippedShadowSprite = Sprite.Create(unflippedShadowTexture, new Rect(0, 0, sprite.rect.width * 4, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
+            Sprite flippedShadowSprite = Sprite.Create(flippedShadowTexture, new Rect(0, 0, sprite.rect.width * 4, sprite.rect.height), new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height), sprite.pixelsPerUnit, uint.MinValue, SpriteMeshType.FullRect, sprite.border);
 
             unflippedShadowSprite.name = sprite.name + "_Shadow";
             flippedShadowSprite.name = sprite.name + "_Flipped_Shadow";
@@ -126,6 +126,7 @@ public class ShadowData : ScriptableObject
 
             unflippedTextureImporter.ReadTextureSettings(unflippedTexSettings);
             unflippedTexSettings.spriteAlignment = (int)SpriteAlignment.Custom;
+            unflippedTexSettings.spriteMeshType = SpriteMeshType.FullRect;
             unflippedTextureImporter.SetTextureSettings(unflippedTexSettings);
             unflippedTextureImporter.spritePixelsPerUnit = unflippedShadowSprite.pixelsPerUnit;
             unflippedTextureImporter.spritePivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
@@ -139,6 +140,7 @@ public class ShadowData : ScriptableObject
 
             flippedTextureImporter.ReadTextureSettings(flippedTexSettings);
             flippedTexSettings.spriteAlignment = (int)SpriteAlignment.Custom;
+            flippedTexSettings.spriteMeshType = SpriteMeshType.FullRect;
             flippedTextureImporter.SetTextureSettings(flippedTexSettings);
 
             flippedTextureImporter.spritePixelsPerUnit = flippedShadowSprite.pixelsPerUnit;

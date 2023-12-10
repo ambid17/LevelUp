@@ -18,6 +18,7 @@ namespace Minigames.Fight
             _lastKnownFlipX = parentRenderer.flipX;
             _lastKnownSprite = parentRenderer.sprite;
             myRenderer.sprite = GameManager.ShadowData.SpriteShadowMappings[parentRenderer.sprite].ShadowSprite(parentRenderer.flipX);
+            myRenderer.flipX = parentRenderer.flipX;
             myRenderer.material = parentRenderer.sharedMaterial;
             myRenderer.sortingLayerID = parentRenderer.sortingLayerID;
             myRenderer.sortingOrder = parentRenderer.sortingOrder - 1;
@@ -32,6 +33,7 @@ namespace Minigames.Fight
                 _lastKnownSprite = parentRenderer.sprite;
 
                 myRenderer.sprite = GameManager.ShadowData.SpriteShadowMappings[parentRenderer.sprite].ShadowSprite(parentRenderer.flipX);
+                myRenderer.flipX = parentRenderer.flipX;
             }
         }
     }

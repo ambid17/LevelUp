@@ -14,6 +14,7 @@ namespace Minigames.Fight
         private void Start()
         {
             myRenderer.sprite = GameManager.ShadowData.SpriteShadowMappings[parentRenderer.sprite].ShadowSprite(parentRenderer.flipX);
+            myRenderer.flipX = parentRenderer.flipX;
             myRenderer.material = parentRenderer.sharedMaterial;
             myRenderer.sortingLayerID = parentRenderer.sortingLayerID;
             myRenderer.sortingOrder = parentRenderer.sortingOrder - 1;
