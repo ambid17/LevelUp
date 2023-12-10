@@ -59,5 +59,10 @@ namespace Minigames.Fight
 
             return stat;
         }
+
+        public virtual bool CanImpactStat(float stat, Entity source, Entity target)
+        {
+
+        }
     }
 }

@@ -11,27 +11,15 @@ namespace Minigames.Fight
     /// </summary>
     [CreateAssetMenu(fileName = "DamageHighHealthEffect", menuName = "ScriptableObjects/Fight/Effects/DamageHighHealthEffect", order = 1)]
     [Serializable]
-    public class DamageHighHealthEffect : Effect
+    public class DamageHighHealthEffect : StatModifierEffect
     {
-        [Header("Effect specific")]
-        public float perStack;
         public float minHpPercent;
 
-        private float Impact => 1 + (perStack * AmountOwned);
-        
-        private readonly string _description = "Deal {0}% more damage to enemies >{1}% hp";
-        public override string GetDescription()
+        public override StatImpactType statImpactType => StatImpactType.Compounding;
+
+        public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return string.Format(_description, Impact * 100, minHpPercent * 100);
-        }
-        public override string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, minHpPercent * 100);
-        } 
-        private float NextUpgradeChance(int purchaseCount)
-        {
-            int newAmountOwned = AmountOwned + purchaseCount;
-            return 1 + (perStack * newAmountOwned);
+            return entity.Stats.combatStats.baseDamage;
         }
 
         public override void OnCraft(Entity target)
@@ -43,13 +31,8 @@ namespace Minigames.Fight
         {
             if (target.Stats.combatStats.currentHp / target.Stats.combatStats.maxHp.Calculated > minHpPercent)
             {
-                source.Stats.combatStats.onHitDamage.AddEffect(this);
+                source.Stats.combatStats.onHitDamage.AddSingleUseEffect(this);
             }
-        }
-
-        public override float ImpactStat(float stat)
-        {
-            return stat * Impact;
         }
     }
 }

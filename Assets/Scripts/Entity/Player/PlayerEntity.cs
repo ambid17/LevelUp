@@ -76,7 +76,7 @@ namespace Minigames.Fight
             base.Die(killer);
             _animationControllerOverride.PlayDieAnimation();
             eventService.Dispatch<PlayerDiedEvent>();
-            //Stats.StatusEffects.Clear();
+            Stats.ClearAllStatusEffects();
             StartCoroutine(DropResources());
             StartCoroutine(WaitForRevive());
         }
@@ -137,7 +137,6 @@ namespace Minigames.Fight
             // Wait a bit before reviving to make sure no physics updates happen before you're in the start room.
             yield return new WaitForSeconds(0.1f);
 
-            CurrentHp = GameManager.SettingsManager.playerSettings.MaxHp;
             eventService.Dispatch<PlayerRevivedEvent>();
             _animationControllerOverride.ResetAnimations();
             _animationControllerOverride.PlayRunAnimation();

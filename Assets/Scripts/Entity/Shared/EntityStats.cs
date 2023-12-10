@@ -35,6 +35,12 @@ namespace Minigames.Fight
             movementStats.TickStatuses();
             combatStats.TickStatuses();
         }
+
+        public void ClearAllStatusEffects()
+        {
+            movementStats.ClearAllStatusEffects();
+            combatStats.ClearAllStatusEffects();
+        }
     }
 
     public class CombatStats
@@ -87,6 +93,16 @@ namespace Minigames.Fight
                 hpStatusEffects.Add(newStatusEffect);
             }
         }
+
+        public void ClearAllStatusEffects()
+        {
+            baseDamage.statusEffects.Clear();
+            onHitDamage.statusEffects.Clear();
+            projectileMoveSpeed.statusEffects.Clear();
+            projectileLifeTime.statusEffects.Clear();
+            maxHp.statusEffects.Clear();
+            hpStatusEffects.Clear();
+        }
     }
 
     public class MovementStats
@@ -97,6 +113,11 @@ namespace Minigames.Fight
         {
             moveSpeed.TickStatuses();
         }
+
+        public void ClearAllStatusEffects()
+        {
+            moveSpeed.statusEffects.Clear();
+        }
     }
 
     // TODO handle types other than float
@@ -106,10 +127,18 @@ namespace Minigames.Fight
         public float BaseValue => baseValue;
 
         private float calculated;
-        public float Calculated => calculated;
+        public float Calculated
+        {
+            get
+            {
+                singleUseEffects.Clear();
+                return calculated;
+            }
+        }
 
         public List<StatModifierEffect> flatEffects;
         public List<StatModifierEffect> compoundingEffects;
+        public List<StatModifierEffect> singleUseEffects;
         public List<StatusEffectData> statusEffects;
 
         public ModifiableStat()
@@ -121,7 +150,7 @@ namespace Minigames.Fight
 
         public void AddEffect(StatModifierEffect effect)
         {
-            if(effect.statImpactType == StatImpactType.Flat)
+            if (effect.statImpactType == StatImpactType.Flat)
             {
                 flatEffects.Add(effect);
             }
@@ -129,6 +158,12 @@ namespace Minigames.Fight
             {
                 compoundingEffects.Add(effect);
             }
+            RecalculateStat();
+        }
+
+        public void AddSingleUseEffect(StatModifierEffect effect)
+        {
+            singleUseEffects.Add(effect);
             RecalculateStat();
         }
 
@@ -161,6 +196,11 @@ namespace Minigames.Fight
                 calculated = effect.ImpactStat(calculated);
             }
 
+            foreach (var effect in singleUseEffects)
+            {
+                calculated = effect.ImpactStat(calculated);
+            }
+
             foreach (var effect in statusEffects)
             {
                 calculated = effect.statusEffect.ImpactStat(calculated);
@@ -174,7 +214,7 @@ namespace Minigames.Fight
 
         public void TickStatuses()
         {
-            foreach(var status in statusEffects)
+            foreach (var status in statusEffects)
             {
                 bool didFinish = status.OnTick();
                 if (didFinish)
@@ -228,7 +268,7 @@ namespace Minigames.Fight
             timer += Time.deltaTime;
             tickTimer += Time.deltaTime;
 
-            if(tickTimer > statusEffect.TickRate)
+            if (tickTimer > statusEffect.TickRate)
             {
                 statusEffect.OnTick(source, target);
                 tickTimer = 0;
@@ -237,7 +277,7 @@ namespace Minigames.Fight
             bool didFinish = timer >= statusEffect.Duration;
             if (didFinish)
             {
-                statusEffect.onComplete();
+                statusEffect.OnComplete();
             }
 
             return didFinish;
@@ -246,7 +286,6 @@ namespace Minigames.Fight
         public void Reapply()
         {
             timer = 0;
-            tickTimer = 0;
             // TODO figure out how the fuck to diferentiate status effects
             // that do or don't reapply on tick.
         }

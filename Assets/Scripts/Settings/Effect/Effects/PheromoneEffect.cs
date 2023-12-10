@@ -39,8 +39,9 @@ namespace Minigames.Fight
             if (target.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
                 storedVisual = Instantiate(visualEffectPrefab, GameManager.PlayerEntity.transform.position, GameManager.PlayerEntity.transform.rotation, GameManager.PlayerEntity.transform);
-                target.Stats.combatStats.AddOrRefreshStatusEffect(this, source, target);
             }
+
+            target.Stats.combatStats.AddOrRefreshStatusEffect(this, source, target);
         }
 
         public override float ImpactStat(float stat)
