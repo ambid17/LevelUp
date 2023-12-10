@@ -56,6 +56,10 @@ namespace Minigames.Fight
         public int AmountOwned;
         public int MaxAmountOwned;
 
+        [Header("Craft info")]
+        public bool IsCrafted;
+        public SerializableDictionary<ResourceType, float> resourceCosts;
+
         [Header("Cost info")]
         public float BaseCost;
         public float CostScalar;
@@ -79,9 +83,16 @@ namespace Minigames.Fight
             IsUnlocked = true;
         }
 
-        public virtual void Craft(int purchaseCount)
+        public virtual void BuyUpgrade() 
         {
-            AmountOwned += purchaseCount;
+            AmountOwned++;
+        }
+
+        public virtual void Craft()
+        {
+            IsCrafted = true;
+
+            // TODO apply the effects here
             //Platform.EventService.Dispatch(new OnUpgradeCraftedEvent(this));
         }
 

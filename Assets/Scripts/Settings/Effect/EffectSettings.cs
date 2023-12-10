@@ -20,6 +20,7 @@ namespace Minigames.Fight
             {
                 upgrade.AmountOwned = 0;
                 upgrade.IsUnlocked = false;
+                upgrade.IsCrafted = false;
             }
         }
 
@@ -48,8 +49,13 @@ namespace Minigames.Fight
             if (upgradeToLoad != null)
             {
                 upgradeToLoad.IsUnlocked = upgradeModel.IsUnlocked;
-                // TODO: unlock then craft?
-                upgradeToLoad.Craft(upgradeModel.AmountOwned);
+                upgradeToLoad.AmountOwned = upgradeModel.AmountOwned;
+                upgradeToLoad.IsCrafted = upgradeModel.IsCrafted;
+
+                if (upgradeToLoad.IsCrafted)
+                {
+                    upgradeToLoad.Craft();
+                }
             }
             else
             {
