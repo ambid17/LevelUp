@@ -9,9 +9,6 @@ namespace Minigames.Fight
 {
     public class MovementController : MonoBehaviour
     {
-        protected float CurrentMoveSpeed;
-        private float BaseMoveSpeed;
-        private Dictionary<string,float> moveEffects;
         [NonSerialized]
         public Rigidbody2D MyRigidbody2D;
         protected Entity MyEntity;
@@ -20,7 +17,6 @@ namespace Minigames.Fight
         {
             MyRigidbody2D = GetComponent<Rigidbody2D>();
             MyEntity = GetComponent<Entity>();
-            moveEffects = new();
         }
 
         protected virtual void SetStartingMoveSpeed(float moveSpeed)

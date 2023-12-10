@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -13,10 +14,10 @@ namespace Minigames.Fight
     public class DamageHighHealthEffect : Effect
     {
         [Header("Effect specific")]
-        public float percentDamagePerStack;
+        public float perStack;
         public float minHpPercent;
 
-        private float Total => 1 + (percentDamagePerStack * AmountOwned);
+        private float Total => 1 + (perStack * AmountOwned);
         
         private readonly string _description = "Deal {0}% more damage to enemies >{1}% hp";
         public override string GetDescription()
@@ -27,18 +28,22 @@ namespace Minigames.Fight
         {
             return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, minHpPercent * 100);
         } 
-
         private float NextUpgradeChance(int purchaseCount)
         {
             int newAmountOwned = AmountOwned + purchaseCount;
-            return 1 + (percentDamagePerStack * newAmountOwned);
+            return 1 + (perStack * newAmountOwned);
         }
 
-        public override void Execute(HitData hit)
+        public override void Apply(Entity target)
         {
-            if (hit.Target.Stats.currentHp / hit.Target.Stats.maxHp > minHpPercent)
+            target.Stats.combatStats.OnHitEffects.Add(this);
+        }
+
+        public override void Execute(Entity source, Entity target)
+        {
+            if (target.Stats.currentHp / target.Stats.maxHp > minHpPercent)
             {
-                hit.DamageMultiplier += Total;
+                source.Stats.combatStats.DamageToTake.CompoundingModifiers.Add(Total);
             }
         }
     }

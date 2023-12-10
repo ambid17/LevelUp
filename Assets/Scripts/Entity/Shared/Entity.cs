@@ -54,12 +54,7 @@ namespace Minigames.Fight
         }
         public virtual void TakeHit(HitData hit)
         {
-            float damage = hit.CalculateDamage(this);
-
-            if (damage > 0)
-            {
-                TakeDamage(damage);
-            }
+            TakeDamage(Stats.combatStats.DamageToTake.Calculated);
         }
         public virtual void TakeDamage(float damage)
         {

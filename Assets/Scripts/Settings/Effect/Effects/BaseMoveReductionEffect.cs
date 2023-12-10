@@ -10,9 +10,9 @@ namespace Minigames.Fight
     public class BaseMoveReductionEffect : Effect
     {
         [Header("Effect specific")]
-        public float percentSlowPerStack;
+        public float perStack;
 
-        private float Total => 1 + (percentSlowPerStack * AmountOwned);
+        private float Total => -(perStack * AmountOwned);
 
         private readonly string _description = "Slows player move speed by {0}%";
         public override string GetDescription()
@@ -27,13 +27,17 @@ namespace Minigames.Fight
         private float NextUpgradeChance(int purchaseCount)
         {
             int newAmountOwned = AmountOwned + purchaseCount;
-            return 1 + (percentSlowPerStack * newAmountOwned);
+            return 1 + (perStack * newAmountOwned);
         }
 
-        public override void Execute(HitData hit)
+        public override void Apply(Entity target)
         {
-            // TODO: fix by editing entity stats
-            hit.DamageMultiplier += Total;
+            target.Stats.movementStats.moveSpeed.BaseModifiers.Add(Total);
+        }
+
+        public override void Execute(Entity target, Entity source)
+        {
+
         }
     }
 }

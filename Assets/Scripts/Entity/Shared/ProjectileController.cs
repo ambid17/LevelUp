@@ -57,16 +57,10 @@ namespace Minigames.Fight
             
         }
 
-        public virtual void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
+        public virtual void Setup(Entity myEntity, Vector2 direction)
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
-
-            hit = controller.Hit;
-
-            ProjectileWeaponController projectileController = controller as ProjectileWeaponController;
-            spawnAoeOnDeath = projectileController.SpawnAoeOnDeath;
-            aoePrefab = projectileController.AoePrefab;
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D col)

@@ -86,14 +86,19 @@ namespace Minigames.Fight
         public virtual void BuyUpgrade() 
         {
             AmountOwned++;
+
+            if (IsCrafted)
+            {
+                positive.Apply(GameManager.PlayerEntity);
+                negative.Apply(GameManager.PlayerEntity);
+            }
         }
 
         public virtual void Craft()
         {
             IsCrafted = true;
-
-            // TODO apply the effects here
-            //Platform.EventService.Dispatch(new OnUpgradeCraftedEvent(this));
+            positive.Apply(GameManager.PlayerEntity);
+            negative.Apply(GameManager.PlayerEntity);
         }
 
         public string GetUpgradeCountText()

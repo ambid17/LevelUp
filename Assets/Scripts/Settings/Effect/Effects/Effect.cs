@@ -11,12 +11,10 @@ namespace Minigames.Fight
         OnKill,
         OnDeath,
         OnTakeDamage,
-        OnPurchase, 
+        OnCraft, 
         OnTimer
     }
 
-
-    [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]
     [Serializable]
     public abstract class Effect : ScriptableObject, IEquatable<Effect>
     {
@@ -30,13 +28,13 @@ namespace Minigames.Fight
         [Header("Set at runtime")]
         public int AmountOwned;
 
-
         public bool Equals(Effect other)
         {
             if (other == null) return false;
             return other.GetType().Equals(this.GetType());
         }
 
-        public abstract void Execute(HitData hit);
+        public abstract void Apply(Entity target);
+        public abstract void Execute(Entity target, Entity source);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,17 @@ namespace Minigames.Fight
         public float maxHp;
         public float DamageTakenThisSecond;
         public List<StatusEffectInstance> StatusEffects = new();
-        public List<Effect> OnHitEffects = new();
+
+        public MovementStats movementStats;
+        public CombatStats combatStats;
+
+        // Effects
+        
+        public List<Effect> OnKillEffects = new();
+        public List<Effect> OnDeathEffects = new();
+        public List<Effect> OnTakeDamageEffects = new();
+        public List<Effect> OnTimerEffects = new();
+        public List<Effect> OnPurchaseEffects = new();
 
         public void TakeDamage(float damage)
         {
@@ -38,6 +49,74 @@ namespace Minigames.Fight
             currentHp = enemyStats.MaxHp;
             maxHp = enemyStats.MaxHp;
             OnHitEffects = enemyStats.effects;
+        }
+    }
+
+    public class CombatStats
+    {
+        public ModifiableStat baseDamage;
+        public float onHitDamage;
+        public List<Effect> OnHitEffects = new();
+
+
+        public ModifiableStat DamageToTake;
+    }
+
+    public class MovementStats
+    {
+        public ModifiableStat moveSpeed;
+    }
+
+    // TODO handle types other than float
+    public class ModifiableStat
+    {
+        private float baseValue;
+        public float BaseValue => baseValue;
+
+        private float calculated;
+        public float Calculated => calculated;
+
+        private List<float> baseModifiers;
+        public List<float> BaseModifiers
+        {
+            get { return baseModifiers; }
+            set {
+                if (baseModifiers == null)
+                {
+                    baseModifiers = new List<float>();
+                }
+                baseModifiers = value;
+                Refresh();
+            }
+        }
+        private List<float> compoundingModifiers;
+        public List<float> CompoundingModifiers
+        {
+            get { return compoundingModifiers; }
+            set
+            {
+                if(compoundingModifiers == null)
+                {
+                    compoundingModifiers = new List<float>();
+                }
+                compoundingModifiers = value;
+                Refresh();
+            }
+        }
+
+        public void Refresh()
+        {
+            calculated = baseValue;
+
+            foreach (var mod in baseModifiers)
+            {
+                calculated += mod;
+            }
+
+            foreach (var mod in compoundingModifiers)
+            {
+                calculated *= mod;
+            }
         }
     }
 }

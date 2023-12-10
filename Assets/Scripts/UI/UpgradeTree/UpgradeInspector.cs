@@ -149,12 +149,7 @@ namespace Minigames.Fight
         {
             if (GameManager.CurrencyManager.TrySpendCurrency(_currentUpgrade.GetCost(1)))
             {
-                _currentUpgrade.AmountOwned += 1;
-                if(_currentUpgrade.IsCrafted)
-                {
-                    _eventService.Dispatch(new UpgradeCraftedEvent(_currentUpgrade));
-
-                }
+                _currentUpgrade.BuyUpgrade();
                 OnUpgradeSelectedForUpgrade();
             }
         }
@@ -199,7 +194,7 @@ namespace Minigames.Fight
         {
             if (GameManager.CurrencyManager.TryCraftUpgrade(_currentUpgrade))
             {
-                _eventService.Dispatch(new UpgradeCraftedEvent(_currentUpgrade));
+                _currentUpgrade.Craft();
                 OnUpgradeSelectedForCraft();
             }
         }

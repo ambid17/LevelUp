@@ -22,9 +22,9 @@ namespace Minigames.Fight
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 
-        public override void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
+        public override void Setup(Entity myEntity, Vector2 direction)
         {
-            base.Setup(myEntity, direction, controller);
+            base.Setup(myEntity, direction);
         
             _shootDirection = direction.normalized;
             //// TODO: look at effects for this
@@ -46,7 +46,13 @@ namespace Minigames.Fight
             else if (col.gameObject.layer == PhysicsUtils.EnemyLayer)
             {
                 Entity enemyEntity = col.gameObject.GetComponent<Entity>();
-                enemyEntity.TakeHit(hit);
+
+                float effectDamage = 0;
+                foreach(var effect in MyEntity.Stats.combatStats.OnHitEffects)
+                {
+                    effectDamage += effect.Execute(MyEntity, enemyEntity);
+                }
+                enemyEntity.TakeHit();
 
                 if (_canPenetrateIndefinitely)
                 {
