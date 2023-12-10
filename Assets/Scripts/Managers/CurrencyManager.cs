@@ -92,5 +92,41 @@ namespace Minigames.Fight
         {
             Dna = 0;
         }
+
+        public bool CanAffordCraft(Upgrade upgrade)
+        {
+            foreach(var resource in upgrade.resourceCosts)
+            {
+                if (PhysicalResources[resource.Key] < resource.Value)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool TryCraftUpgrade(Upgrade upgrade)
+        {
+            if (upgrade.IsCrafted)
+            {
+                Debug.LogError($"Trying to craft an already crafted upgrade : {upgrade.Name}");
+                return false;
+            }
+
+            if (CanAffordCraft(upgrade))
+            {
+                foreach (var resource in upgrade.resourceCosts)
+                {
+                    PhysicalResources[resource.Key] -= resource.Value;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

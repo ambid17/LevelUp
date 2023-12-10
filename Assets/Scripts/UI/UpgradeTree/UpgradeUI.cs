@@ -78,7 +78,7 @@ namespace Minigames.Fight
                 upgradeCategory = UpgradeCategory.None;
             }
 
-            SetUI();
+            RefreshUI();
         }
 
         private void Close()
@@ -98,10 +98,10 @@ namespace Minigames.Fight
             effectCategory = EffectCategory.None;
             tierCategory = TierCategory.None;
 
-            SetUI();
+            RefreshUI();
         }
 
-        private void SetUI()
+        private void RefreshUI()
         {
             upgradeCategorySelector.gameObject.SetActive(false);
             effectCategorySelector.gameObject.SetActive(false);
@@ -129,13 +129,13 @@ namespace Minigames.Fight
         public void OnUpgradeCategorySelected(UpgradeCategory upgradeCategory)
         {
             this.upgradeCategory = upgradeCategory;
-            SetUI();
+            RefreshUI();
         }
 
         public void OnEffectCategorySelected(EffectCategory effectCategory)
         {
             this.effectCategory = effectCategory;
-            SetUI();
+            RefreshUI();
         }
 
         public void OnTierCategorySelected(TierCategory tierCategory)
@@ -144,9 +144,9 @@ namespace Minigames.Fight
 
             if (upgradeUiState == UpgradeUiState.Upgrade)
             {
-                upgradeInspector.OnUpgradeTierSelected(upgradeCategory, effectCategory, tierCategory);
+                upgradeInspector.OnUpgradeTierSelected();
             }
-            SetUI();
+            RefreshUI();
         }
 
         public void OnUpgradeSelected(Upgrade upgrade)

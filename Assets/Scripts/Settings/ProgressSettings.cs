@@ -58,6 +58,7 @@ namespace Minigames.Fight
             }
         }
 
+        [ContextMenu("Set Defaults")]
         public void SetDefaults()
         {
             CurrentWorld = null;
@@ -69,6 +70,12 @@ namespace Minigames.Fight
             foreach (var world in Worlds)
             {
                 world.SetDefaults();
+            }
+
+
+            PhysicalResources = new();
+            foreach (var enumValue in Enum.GetValues(typeof(ResourceType))){
+                PhysicalResources[enumValue] = 0f;
             }
         }
 
@@ -86,6 +93,7 @@ namespace Minigames.Fight
             toReturn.Dna = Dna;
             toReturn.BankedDna = BankedDna;
             toReturn.TutorialState = TutorialState;
+            toReturn.PhysicalResources = PhysicalResources;
 
             return toReturn;
         }

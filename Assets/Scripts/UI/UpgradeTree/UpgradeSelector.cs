@@ -15,24 +15,39 @@ namespace Minigames.Fight
         [SerializeField]
         private Button upgradeButtonPrefab;
 
-        private List<Upgrade> upgrades;
+        private List<Upgrade> allUpgrades;
         private List<GameObject> buttonInstances;
 
         void Awake()
         {
-            upgrades = GameManager.SettingsManager.effectSettings.AllUpgrades;
+            allUpgrades = GameManager.SettingsManager.effectSettings.AllUpgrades;
             buttonInstances = new List<GameObject>();
         }
 
         private void OnEnable()
         {
-            var filteredUpgrades = upgrades.Where(e =>
-                e.UpgradeCategory == upgradeUI.upgradeCategory &&
-                e.EffectCategory == upgradeUI.effectCategory &&
-                e.TierCategory == upgradeUI.tierCategory
-            ).ToList();
+            List<Upgrade> upgrades = new List<Upgrade>();
+            if (upgradeUI.upgradeUiState == UpgradeUiState.Upgrade)
+            {
+                upgrades = allUpgrades.Where(e =>
+                    e.UpgradeCategory == upgradeUI.upgradeCategory &&
+                    e.EffectCategory == upgradeUI.effectCategory &&
+                    e.TierCategory == upgradeUI.tierCategory
+                ).ToList();
+            }
+            else if (upgradeUI.upgradeUiState == UpgradeUiState.Craft)
+            {
+                upgrades = allUpgrades.Where(e =>
+                    e.UpgradeCategory == upgradeUI.upgradeCategory &&
+                    e.EffectCategory == upgradeUI.effectCategory &&
+                    e.TierCategory == upgradeUI.tierCategory &&
+                    e.IsUnlocked == true && 
+                    e.IsCrafted == false
+                ).ToList();
+            }
 
-            foreach( var upgrade in filteredUpgrades )
+
+            foreach (var upgrade in upgrades)
             {
                 var upgradeButton = Instantiate(upgradeButtonPrefab, transform);
 
@@ -45,9 +60,11 @@ namespace Minigames.Fight
         }
 
 
+
+
         private void OnDisable()
         {
-            foreach(var button in buttonInstances)
+            foreach (var button in buttonInstances)
             {
                 Destroy(button.gameObject);
             }
