@@ -81,12 +81,6 @@ namespace Minigames.Fight
 
         public abstract void Execute(HitData hit);
 
-        /// <summary>
-        /// Effects are unlocked during end of country/world rewards
-        /// You can get new effects which should unlock them.
-        /// If you get an effect you already own, it grants a free purchase of it
-        /// </summary>
-        /// <param name="settings"></param>
         public virtual void Unlock(EffectSettings settings)
         {
             if (!IsUnlocked)
