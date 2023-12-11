@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Minigames.Fight
 {
@@ -45,17 +46,14 @@ namespace Minigames.Fight
 
     public class CombatStats
     {
-        public ModifiableStat baseDamage = new();
-        public ModifiableStat onHitDamage = new();
-        public ModifiableStat projectileMoveSpeed = new();
-        public ModifiableStat projectileLifeTime = new();
+        public MeleeWeaponStats meleeWeaponStats;
+        public ProjectileWeaponStats projectileWeaponStats;
         public ModifiableStat maxHp = new();
 
         public float currentHp;
         public float DamageTakenThisSecond;
 
         public List<Effect> OnHitEffects = new();
-
         public List<StatusEffectData> hpStatusEffects;
 
         public CombatStats()
@@ -64,10 +62,8 @@ namespace Minigames.Fight
 
         public void TickStatuses()
         {
-            baseDamage.TickStatuses();
-            onHitDamage.TickStatuses();
-            projectileMoveSpeed.TickStatuses();
-            projectileLifeTime.TickStatuses();
+            meleeWeaponStats.TickStatuses();
+            projectileWeaponStats.TickStatuses();
             maxHp.TickStatuses();
 
             foreach (var status in hpStatusEffects)
@@ -96,13 +92,54 @@ namespace Minigames.Fight
 
         public void ClearAllStatusEffects()
         {
-            baseDamage.statusEffects.Clear();
-            onHitDamage.statusEffects.Clear();
-            projectileMoveSpeed.statusEffects.Clear();
-            projectileLifeTime.statusEffects.Clear();
+            meleeWeaponStats.ClearAllStatusEffects();
+            projectileWeaponStats.ClearAllStatusEffects();
             maxHp.statusEffects.Clear();
             hpStatusEffects.Clear();
         }
+    }
+
+    public class WeaponStats
+    {
+        public ModifiableStat baseDamage = new();
+        public ModifiableStat onHitDamage = new();
+
+        public virtual void TickStatuses()
+        {
+            baseDamage.TickStatuses();
+            onHitDamage.TickStatuses();
+        }
+
+        public virtual void ClearAllStatusEffects()
+        {
+            baseDamage.statusEffects.Clear();
+            onHitDamage.statusEffects.Clear();
+        }
+    }
+
+    public class ProjectileWeaponStats : WeaponStats
+    {
+        public ModifiableStat projectileMoveSpeed = new();
+        public ModifiableStat projectileLifeTime = new();
+
+        public override void TickStatuses()
+        {
+            base.TickStatuses();
+            projectileMoveSpeed.TickStatuses();
+            projectileLifeTime.TickStatuses();
+        }
+
+        public override void ClearAllStatusEffects()
+        {
+            base.ClearAllStatusEffects();
+            projectileMoveSpeed.statusEffects.Clear();
+            projectileLifeTime.statusEffects.Clear();
+        }
+    }
+
+    public class MeleeWeaponStats : WeaponStats
+    {
+
     }
 
     public class MovementStats
