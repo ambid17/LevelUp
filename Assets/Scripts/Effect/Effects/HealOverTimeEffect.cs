@@ -19,6 +19,9 @@ namespace Minigames.Fight
             source.Stats.combatStats.AddHp(HealAmount);
         }
 
+        // TODO: can use Physics.overlapCircle for now...
+        // but we will want to Generate a list of all active entities
+        // and just filtering that list down
         public List<Entity> GetTargets()
         {
             return null;
