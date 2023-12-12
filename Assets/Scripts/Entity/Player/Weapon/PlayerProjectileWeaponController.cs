@@ -31,12 +31,6 @@ namespace Minigames.Fight
             }
         }
 
-        public override void Setup(Weapon weapon)
-        {
-            base.Setup(weapon);
-            // Calculate effect stuff.
-        }
-
         protected override bool CanShoot()
         {
             return Input.GetKey(KeyCode.Mouse0) && IsEquipped && ShotTimer > weapon.fireRate && overridenWeapon.bulletsInMagazine > 0;

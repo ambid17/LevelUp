@@ -50,12 +50,12 @@ namespace Minigames.Fight
 
         protected  bool ShouldDie()
         {
-            return _deathTimer > _myCombatStats.projectileLifeTime.Calculated;
+            return _deathTimer > _myCombatStats.projectileWeaponStats.projectileLifeTime.Calculated;
         }
 
         protected void Move()
         {
-            Vector2 delta = _shootDirection * _myCombatStats.projectileMoveSpeed.Calculated * Time.deltaTime;
+            Vector2 delta = _shootDirection * _myCombatStats.projectileWeaponStats.projectileMoveSpeed.Calculated * Time.deltaTime;
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 

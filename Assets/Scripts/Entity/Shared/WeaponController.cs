@@ -8,51 +8,45 @@ namespace Minigames.Fight
 {
     public class WeaponController : MonoBehaviour
     {
-        [SerializeField] protected Weapon weapon;
-        public Weapon Weapon => weapon;
         protected float ShotTimer;
+        protected float MeleeTimer;
 
-        protected EventService EventService;
         protected Entity MyEntity;
 
         void Awake()
         {
             MyEntity = GetComponent<Entity>();
-
-            EventService = Platform.EventService;
         }
 
         protected virtual void Start()
         {
-        }
 
-        public virtual void Setup(Weapon weapon)
-        {
-            this.weapon = weapon;
         }
 
         protected virtual void Update()
         {
-            if (ShouldPreventUpdate())
-            {
-                return;
-            }
-
             ShotTimer += Time.deltaTime;
-        }
-
-        protected virtual bool ShouldPreventUpdate()
-        {
-            return GameManager.PlayerEntity.IsDead || weapon == null;
+            MeleeTimer += Time.deltaTime;
         }
         
         protected virtual bool CanShoot()
         {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate;
+            return true;
+        }
+
+        protected virtual bool CanMelee()
+        {
+            return true;
         }
 
         public virtual void Shoot()
         {
+
+        }
+
+        public virtual void Melee()
+        {
+
         }
     }
 }

@@ -46,8 +46,8 @@ namespace Minigames.Fight
 
     public class CombatStats
     {
-        public MeleeWeaponStats meleeWeaponStats;
-        public ProjectileWeaponStats projectileWeaponStats;
+        public WeaponStats meleeWeaponStats;
+        public WeaponStats projectileWeaponStats;
         public ModifiableStat maxHp = new();
 
         public float currentHp;
@@ -103,43 +103,54 @@ namespace Minigames.Fight
     {
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();
+        public ModifiableStat projectileMoveSpeed = new();
+        public ModifiableStat projectileLifeTime = new();
+        public ModifiableStat rateOfFire = new();
+        public ModifiableStat maxAmmo = new();
+        public ModifiableStat ammoRegenRate = new();
+        public ModifiableStat projectilesPerShot = new();
+        public ModifiableStat projectileSpread = new();
+
+        public float currentAmmo;
+
+        public List<Effect> aoeEffects = new();
+        public List<StatusEffectData> ammoStatusEffects = new();
+
+        private float _regenTimer;
+
+        public virtual void ConsumeAmmo(int ammoToConsume)
+        {
+            currentAmmo-= ammoToConsume;
+        }
+
+        public virtual void TryRegenAmmo() 
+        {
+            if (currentAmmo >= maxAmmo.Calculated)
+            {
+                return;
+            }
+            _regenTimer += Time.deltaTime;
+            if (_regenTimer >= ammoRegenRate.Calculated)
+            {
+                currentAmmo++;
+            }
+        }
 
         public virtual void TickStatuses()
         {
             baseDamage.TickStatuses();
             onHitDamage.TickStatuses();
+            projectileMoveSpeed.TickStatuses();
+            projectileLifeTime.TickStatuses();
         }
 
         public virtual void ClearAllStatusEffects()
         {
             baseDamage.statusEffects.Clear();
             onHitDamage.statusEffects.Clear();
-        }
-    }
-
-    public class ProjectileWeaponStats : WeaponStats
-    {
-        public ModifiableStat projectileMoveSpeed = new();
-        public ModifiableStat projectileLifeTime = new();
-
-        public override void TickStatuses()
-        {
-            base.TickStatuses();
-            projectileMoveSpeed.TickStatuses();
-            projectileLifeTime.TickStatuses();
-        }
-
-        public override void ClearAllStatusEffects()
-        {
-            base.ClearAllStatusEffects();
             projectileMoveSpeed.statusEffects.Clear();
             projectileLifeTime.statusEffects.Clear();
         }
-    }
-
-    public class MeleeWeaponStats : WeaponStats
-    {
-
     }
 
     public class MovementStats

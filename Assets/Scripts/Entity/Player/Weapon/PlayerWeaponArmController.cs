@@ -85,7 +85,7 @@ namespace Minigames.Fight
 
         public void PlayShootAnimation()
         {
-            _currentArm.AnimationController.PlayShootAnimation();
+            _currentArm.TryAttack();
         }
     }
 }
