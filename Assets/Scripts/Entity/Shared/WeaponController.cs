@@ -11,9 +11,9 @@ namespace Minigames.Fight
         public WeaponMode CurrentWeaponMode = WeaponMode.Projectile;
         public WeaponStats CurrentWeapon => CurrentWeaponMode == WeaponMode.Projectile ? _combatStats.projectileWeaponStats : _combatStats.meleeWeaponStats;
 
-        protected CombatStats _combatStats;
+        protected CombatStats _combatStats => MyEntity.Stats.combatStats;
 
-        protected float ShotTimer;
+        protected float ShootTimer;
         protected float MeleeTimer;
 
         protected Entity MyEntity;
@@ -30,7 +30,7 @@ namespace Minigames.Fight
 
         protected virtual void Update()
         {
-            ShotTimer += Time.deltaTime;
+            ShootTimer += Time.deltaTime;
             MeleeTimer += Time.deltaTime;
         }
         

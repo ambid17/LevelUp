@@ -40,8 +40,15 @@ namespace Minigames.Fight
                 return;
             }
             ControlArms();
-            TryShoot();
-            TryMelee();
+            if (CanShoot())
+            {
+                TryShoot();
+            }
+
+            if (CanMelee())
+            {
+                TryMelee();
+            }
             _combatStats.projectileWeaponStats.TryRegenAmmo();
         }
 
@@ -112,13 +119,18 @@ namespace Minigames.Fight
             return leftArm;
         }
 
-        protected override bool CanShoot()
+        public override bool CanShoot()
         {
-            return ShotTimer >= _combatStats.projectileWeaponStats.rateOfFire.Calculated && Input.GetKey(KeyCode.Mouse0) && _combatStats.projectileWeaponStats.maxAmmo.Calculated > 0;
+            return ShootTimer >= 
+                _combatStats.projectileWeaponStats.rateOfFire.Calculated && 
+                Input.GetKey(KeyCode.Mouse0) && 
+                _combatStats.projectileWeaponStats.currentAmmo > 0;
         }
-        protected override bool CanMelee()
+        public override bool CanMelee()
         {
-            return MeleeTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Input.GetKey(KeyCode.Mouse0);
+            return MeleeTimer >= 
+                _combatStats.meleeWeaponStats.rateOfFire.Calculated && 
+                Input.GetKey(KeyCode.Mouse0);
         }
 
         public override void Shoot()

@@ -17,6 +17,7 @@ namespace Minigames.Fight
         public Rigidbody2D MyRigidbody2D;
 
         private Vector2 _lastInput;
+        private const float ACCELERATION = 20;
     
         void Start()
         {
@@ -96,7 +97,7 @@ namespace Minigames.Fight
     
         private void ApplyAcceleration()
         {
-            float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.fixedDeltaTime;
+            float maxAcceleration = ACCELERATION * Time.fixedDeltaTime;
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
             MyRigidbody2D.velocity = _movementToApply;

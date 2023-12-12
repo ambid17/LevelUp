@@ -110,8 +110,8 @@ namespace Minigames.Fight
                         yield return null;
                     }
                 }
-                GameManager.CurrencyManager.ResetResource(resourceType);
             }
+            GameManager.CurrencyManager.PhysicalResources = new();
             _hasFinishedDroppingResources = true;
         }
 

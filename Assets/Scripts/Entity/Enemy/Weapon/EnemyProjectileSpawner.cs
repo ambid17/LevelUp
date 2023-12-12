@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
+    /// <summary>
+    /// If the enemy gets to the point of spawning a projectile and the animation gets interrupted (by death or CC)
+    /// this creates the graphic for the projectile being spawned, and spawns the projectile.
+    /// 
+    /// This guarantees that if an enemy has reached the point in their animation where they shoot, that the shot's animation goes off
+    /// </summary>
     public class EnemyProjectileSpawner : ProjectileController
     {
         public Transform Offset => offSet;
@@ -16,18 +22,24 @@ namespace Minigames.Fight
         private ProjectileController projectilePrefab;
         [SerializeField]
         private Sprite projectileSprite;
+        [SerializeField]
+        private float angleOffset = -180;
 
         private Entity _overridenEntity;
         private Vector2 _direction;
+        
 
         public override void Setup(Entity myEntity, Vector2 direction)
         {
             _overridenEntity = myEntity;
             _direction = direction;
-            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 180f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float rotationToTarget = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg + angleOffset;
+            transform.rotation = Quaternion.AngleAxis(rotationToTarget, Vector3.forward);
         }
 
+        /// <summary>
+        /// Called from animation
+        /// </summary>
         public void SpawnProjectile()
         {
             ProjectileController projectile = Instantiate(projectilePrefab);

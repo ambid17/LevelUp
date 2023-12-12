@@ -11,11 +11,11 @@ namespace Minigames.Fight
     public class Entity : MonoBehaviour
     {
         public bool Stunned { get; set; }
-        public MovementController MovementController;
         public VisualController VisualController;
         public AnimationManager AnimationController;
         public WeaponController WeaponController;
         public EntityStats Stats;
+        public Rigidbody2D Rigidbody2D;
         
         public bool IsDead => Stats.combatStats.currentHp <= 0;
 
@@ -27,9 +27,9 @@ namespace Minigames.Fight
         protected virtual void Awake()
         {
             eventService = Platform.EventService;
-            MovementController = GetComponent<MovementController>();
             VisualController = GetComponent<VisualController>();
             AnimationController = GetComponent<AnimationManager>();
+            Rigidbody2D = GetComponent<Rigidbody2D>();
             Setup();
         }
 

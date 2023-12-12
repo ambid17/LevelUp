@@ -29,7 +29,7 @@ namespace Minigames.Fight
             foreach (HiveMindBehaviorData hiveMind in MyHiveMinds)
             {
                 hiveMind.MyManager = this;
-                _totalHiveMaxHealth += hiveMind.MyEntity.enemyStats.MaxHp;
+                _totalHiveMaxHealth += hiveMind.MyEntity.Stats.combatStats.maxHp.Calculated;
             }
             tick += Random.Range(-tickRandomizer, tickRandomizer);
         }

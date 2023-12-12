@@ -35,7 +35,7 @@ namespace Minigames.Fight
             Transform offset = shootOffset;
             projectile.transform.position = offset.position;
 
-            Vector2 direction = _storedDirection;
+            Vector2 direction;
 
             EnemyProjectileSpawner projectileSpawner = projectile as EnemyProjectileSpawner;
             if (projectileSpawner != null)
@@ -55,14 +55,14 @@ namespace Minigames.Fight
             projectile.Setup(MyEntity, direction);
         }
 
-        protected override bool CanShoot()
+        public override bool CanShoot()
         {
-            return ShotTimer >= _combatStats.projectileWeaponStats.rateOfFire.Calculated;
+            return ShootTimer >= _combatStats.projectileWeaponStats.rateOfFire.Calculated;
         }
 
-        protected override bool CanMelee()
+        public override bool CanMelee()
         {
-            return ShotTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Vector2.Distance(GameManager.PlayerEntity.transform.position, transform.position) < _combatStats.projectileWeaponStats.MaxRange;
+            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Vector2.Distance(GameManager.PlayerEntity.transform.position, transform.position) < _combatStats.projectileWeaponStats.MaxRange;
         }
 
         public override void Melee()
@@ -86,14 +86,14 @@ namespace Minigames.Fight
         // Resets shot timer to make animation cancelling more effective.
         public void SetProjectileDirection()
         {
-            ShotTimer = 0;
+            ShootTimer = 0;
             _storedDirection = GameManager.PlayerEntity.transform.position - shootOffset.position;
             _storedTarget = GameManager.PlayerEntity.transform.position;
         }
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
         {
-            Vector2 targetVelocity = GameManager.PlayerEntity.MovementController.MyRigidbody2D.velocity;
+            Vector2 targetVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
 
             Vector2 relativePosition = origin - _storedDirection;
             float theta = Vector2.Angle(relativePosition, targetVelocity);
