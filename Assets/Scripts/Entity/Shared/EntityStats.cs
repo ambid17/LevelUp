@@ -25,12 +25,6 @@ namespace Minigames.Fight
             combatStats = new CombatStats();
         }
 
-        public void TakeDamage(float damage)
-        {
-            combatStats.currentHp -= damage;
-            combatStats.DamageTakenThisSecond += damage;
-        }
-
         public void TickStatuses()
         {
             movementStats.TickStatuses();
@@ -54,10 +48,22 @@ namespace Minigames.Fight
         public float DamageTakenThisSecond;
         
         public List<StatusEffectData> hpStatusEffects;
-        public List<TimerEffectData> playerAoeEffects;
+        public List<TimerEffectData> playerTimerEffects;
 
         public CombatStats()
         {
+        }
+
+        public void AddHp(float hpToAdd)
+        {
+            currentHp += hpToAdd;
+            currentHp = Mathf.Clamp(currentHp, 0, maxHp.Calculated);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            currentHp -= damage;
+            DamageTakenThisSecond += damage;
         }
 
         public void TickStatuses()
@@ -74,6 +80,11 @@ namespace Minigames.Fight
                     hpStatusEffects.Remove(status);
                 }
             }
+
+            foreach(var effect in playerTimerEffects)
+            {
+                effect.OnTick();
+            }
         }
 
         public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)
@@ -88,6 +99,12 @@ namespace Minigames.Fight
                 var newStatusEffect = new StatusEffectData(statusEffect, source, target);
                 hpStatusEffects.Add(newStatusEffect);
             }
+        }
+
+        public void AddTimerEffect(ITimerEffect timerEffect, Entity source)
+        {
+            var newStatusEffect = new TimerEffectData(timerEffect, source);
+            playerTimerEffects.Add(newStatusEffect);
         }
 
         public void ClearAllStatusEffects()
@@ -290,17 +307,24 @@ namespace Minigames.Fight
     {
         public float timer;
         public float tickRate;
-        public Effect myEffect;
+        public ITimerEffect timerEffect;
 
         public Entity source;
-        public Entity target;
+
+        public TimerEffectData(ITimerEffect timerEffect, Entity source)
+        {
+            this.timerEffect = timerEffect;
+            this.source = source;
+            timer = 0;
+        }
 
         public void OnTick()
         {
             timer += Time.deltaTime;
             if (timer >= tickRate)
             {
-                myEffect.Execute(source, target);
+                var targets = timerEffect.GetTargets();
+                timerEffect.OnTick(source, targets);
                 timer = 0;
             }
         }

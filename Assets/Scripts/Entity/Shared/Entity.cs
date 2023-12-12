@@ -45,7 +45,7 @@ namespace Minigames.Fight
 
         public virtual void TakeHit(float damage, Entity hitter)
         {
-            Stats.TakeDamage(damage);
+            Stats.combatStats.TakeDamage(damage);
 
             VisualController.StartDamageFx(damage);
 
