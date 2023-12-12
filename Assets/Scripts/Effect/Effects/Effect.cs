@@ -23,7 +23,9 @@ namespace Minigames.Fight
         public EffectTriggerType TriggerType;
 
         [Header("Set at runtime")]
-        public int AmountOwned;
+        protected int _amountOwned;
+        protected UpgradeCategory _upgradeCategory;
+        protected EffectCategory _effectCategory;
 
         public virtual string GetDescription()
         {
@@ -41,19 +43,21 @@ namespace Minigames.Fight
             return other.GetType().Equals(this.GetType());
         }
 
-        public virtual void SetAmountOwned(int amountOwned)
+        public virtual void GiveUpgradeInfo(int amountOwned, UpgradeCategory upgradeCategory, EffectCategory effectCategory)
         {
-            AmountOwned = amountOwned;
+            _amountOwned = amountOwned;
+            _upgradeCategory = upgradeCategory;
+            _effectCategory = effectCategory;
         }
 
         public virtual void OnCraft(Entity target)
         {
-
+            throw new NotImplementedException();
         }
 
         public virtual void Execute(Entity source, Entity target)
         {
-
+            throw new NotImplementedException();
         }
 
         public virtual float ImpactStat(float stat)

@@ -13,7 +13,7 @@ namespace Minigames.Fight
         private EventService _eventService;
 
         public Entity MyEntity => _myEntity;
-        private WeaponStats _myWeaponStats => MyEntity.WeaponController.CurrentWeapon;
+        private WeaponStats _myWeaponStats;
 
         private SpriteRenderer _spriteRenderer;
 
@@ -63,6 +63,10 @@ namespace Minigames.Fight
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
+
+            // Grab the current weapon stats on setup
+            // If we did this anywhere else later on, the current weapon could be swapped out
+            _myWeaponStats = MyEntity.WeaponController.CurrentWeapon;
         }
 
         protected void OnTriggerEnter2D(Collider2D col)
@@ -84,7 +88,7 @@ namespace Minigames.Fight
 
             Entity target = col.gameObject.GetComponent<Entity>();
 
-            MyEntity.DealDamage(target);
+            MyEntity.DealDamage(target, _myWeaponStats);
 
             Die();
         }
@@ -99,6 +103,12 @@ namespace Minigames.Fight
             if (_isMarkedForDeath) return;
 
             _isMarkedForDeath = true;
+
+            foreach(var effect in _myWeaponStats.AoeEffects)
+            {
+                // TODO: add in offsets so that the effects aren't all on top of each other
+                effect.Place(MyEntity, transform.position);
+            }
 
             Destroy(gameObject);
         }

@@ -90,9 +90,9 @@ namespace Minigames.Fight
             if (IsCrafted)
             {
                 positive.OnCraft(GameManager.PlayerEntity);
-                positive.SetAmountOwned(AmountOwned);
+                positive.GiveUpgradeInfo(AmountOwned, UpgradeCategory, EffectCategory);
                 negative.OnCraft(GameManager.PlayerEntity);
-                negative.SetAmountOwned(AmountOwned);
+                negative.GiveUpgradeInfo(AmountOwned, UpgradeCategory, EffectCategory);
             }
         }
 

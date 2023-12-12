@@ -20,7 +20,7 @@ namespace Minigames.Fight
         
 
         public float slowChance = 0.5f;
-        public float SlowChance => slowChance + (chanceScalar * AmountOwned);
+        public float SlowChance => slowChance + (chanceScalar * _amountOwned);
         
         private readonly string _description = "{0}% chance to slow enemies by {1}% for {2} seconds";
         
@@ -36,13 +36,20 @@ namespace Minigames.Fight
 
         private float NextUpgradeChance(int purchaseCount)
         {
-            int newAmountOwned = AmountOwned + purchaseCount;
+            int newAmountOwned = _amountOwned + purchaseCount;
             return slowChance + (chanceScalar * newAmountOwned);
         }
 
         public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.OnHitEffects.Add(this);
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                target.Stats.combatStats.projectileWeaponStats.OnHitEffects.Add(this);
+            }
+            else
+            {
+                target.Stats.combatStats.meleeWeaponStats.OnHitEffects.Add(this);
+            }
         }
 
         public override void Execute(Entity source, Entity target)

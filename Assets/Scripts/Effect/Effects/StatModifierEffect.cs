@@ -18,7 +18,7 @@ namespace Minigames.Fight
         public float perStack;
         public virtual StatImpactType statImpactType { get; protected set; }
 
-        private float Impact => perStack * AmountOwned;
+        private float Impact => perStack * _amountOwned;
 
         private readonly string _description = "Adds {0} base damage per stack";
         public override string GetDescription()
@@ -31,7 +31,7 @@ namespace Minigames.Fight
         }
         private float NextUpgradeChance(int purchaseCount)
         {
-            int newAmountOwned = AmountOwned + purchaseCount;
+            int newAmountOwned = _amountOwned + purchaseCount;
             return perStack * newAmountOwned;
         }
 
@@ -41,9 +41,12 @@ namespace Minigames.Fight
             statToAffect.AddEffect(this);
         }
 
+        /// <summary>
+        /// Asks the child class what stat it would like to impact
+        /// </summary>
         public virtual ModifiableStat GetStatToAffect(Entity entity)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         public override float ImpactStat(float stat)

@@ -19,10 +19,10 @@ namespace Minigames.Fight
         public float tickRate = 1f;
         public float TickRate => tickRate;
 
-        public float HitDamage => baseDamage + (damageScalar * AmountOwned);
+        public float HitDamage => baseDamage + (damageScalar * _amountOwned);
         
         private readonly string _description = "{0}% to burn enemies for {1} damage each second for {2} seconds";
-
+        
         public override string GetDescription()
         {
             return string.Format(_description, chance * 100, HitDamage, duration);
@@ -35,13 +35,20 @@ namespace Minigames.Fight
 
         private float NextUpgrade(int purchaseCount)
         {
-            int newAmountOwned = AmountOwned + purchaseCount;
+            int newAmountOwned = _amountOwned + purchaseCount;
             return baseDamage + (damageScalar * newAmountOwned);
         }
 
         public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.OnHitEffects.Add(this);
+            if(_upgradeCategory == UpgradeCategory.Range)
+            {
+                target.Stats.combatStats.projectileWeaponStats.OnHitEffects.Add(this);
+            }
+            else
+            {
+                target.Stats.combatStats.meleeWeaponStats.OnHitEffects.Add(this);
+            }
         }
 
         public override void Execute(Entity source, Entity target)

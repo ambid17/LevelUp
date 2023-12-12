@@ -31,7 +31,9 @@ namespace Minigames.Fight
 
         public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.OnHitEffects.Add(this);
+            // This should never be used by players
+            // This should be manually added to the Ant's effect list for its weapon
+            throw new NotImplementedException();
         }
 
         public override void Execute(Entity source, Entity target)

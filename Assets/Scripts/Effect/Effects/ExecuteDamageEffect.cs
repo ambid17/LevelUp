@@ -13,7 +13,7 @@ namespace Minigames.Fight
         public float perStack;
         public float executePercent;
 
-        private float Impact => 1 + (perStack * AmountOwned);
+        private float Impact => 1 + (perStack * _amountOwned);
         private readonly string _description = "Deal {0}% more damage to enemies <{1}% hp";
 
         public override string GetDescription()
@@ -27,13 +27,20 @@ namespace Minigames.Fight
 
         private float NextUpgradeChance(int purchaseCount)
         {
-            int newAmountOwned = AmountOwned + purchaseCount;
+            int newAmountOwned = _amountOwned + purchaseCount;
             return 1 + (perStack * newAmountOwned);
         }
 
         public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.OnHitEffects.Add(this);
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                target.Stats.combatStats.projectileWeaponStats.OnHitEffects.Add(this);
+            }
+            else
+            {
+                target.Stats.combatStats.meleeWeaponStats.OnHitEffects.Add(this);
+            }
         }
 
         public override void Execute(Entity source, Entity target)

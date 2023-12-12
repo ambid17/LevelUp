@@ -52,9 +52,9 @@ namespace Minigames.Fight
 
         public float currentHp;
         public float DamageTakenThisSecond;
-
-        public List<Effect> OnHitEffects = new();
+        
         public List<StatusEffectData> hpStatusEffects;
+        public List<TimerEffectData> playerAoeEffects;
 
         public CombatStats()
         {
@@ -119,7 +119,8 @@ namespace Minigames.Fight
 
         public float currentAmmo;
 
-        public List<Effect> aoeEffects = new();
+        public List<AoeEffect> AoeEffects = new();
+        public List<Effect> OnHitEffects = new();
         public List<StatusEffectData> ammoStatusEffects = new();
 
         private float _regenTimer;

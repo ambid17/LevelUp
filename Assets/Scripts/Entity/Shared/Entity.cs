@@ -55,10 +55,10 @@ namespace Minigames.Fight
             }
         }
 
-        public void DealDamage(Entity target)
+        public void DealDamage(Entity target, WeaponStats weaponStats)
         {
             // Execute all of the onHit effects to populate the onHitDamage
-            foreach (var effect in Stats.combatStats.OnHitEffects)
+            foreach (var effect in weaponStats.OnHitEffects)
             {
                 effect.Execute(this, target);
             }

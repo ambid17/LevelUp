@@ -25,7 +25,14 @@ namespace Minigames.Fight
 
         public override void OnCraft(Entity target)
         {
-            target.Stats.combatStats.OnHitEffects.Add(this);
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                target.Stats.combatStats.projectileWeaponStats.OnHitEffects.Add(this);
+            }
+            else
+            {
+                target.Stats.combatStats.meleeWeaponStats.OnHitEffects.Add(this);
+            }
         }
 
         public override void Execute(Entity source, Entity target)
