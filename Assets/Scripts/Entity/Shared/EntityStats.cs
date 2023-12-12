@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 namespace Minigames.Fight
 {
+    [Serializable]
     public class EntityStats
     {
         public MovementStats movementStats;
@@ -176,7 +177,7 @@ namespace Minigames.Fight
             projectileLifeTime.statusEffects.Clear();
         }
     }
-
+    [Serializable]
     public class MovementStats
     {
         public ModifiableStat moveSpeed;
@@ -191,7 +192,7 @@ namespace Minigames.Fight
             moveSpeed.statusEffects.Clear();
         }
     }
-
+    [Serializable]
     // TODO handle types other than float
     public class ModifiableStat
     {
@@ -302,7 +303,7 @@ namespace Minigames.Fight
             calculated = value;
         }
     }
-
+    [Serializable]
     public class TimerEffectData
     {
         public float timer;
@@ -329,7 +330,7 @@ namespace Minigames.Fight
             }
         }
     }
-
+    [Serializable]
     public class StatusEffectData
     {
         public float timer;

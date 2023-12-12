@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 5632584843697323080}
   - component: {fileID: 5632584843697323081}
   - component: {fileID: 5632584843697323086}
-  - component: {fileID: 5632584843697323074}
   - component: {fileID: 5632584843697323075}
   - component: {fileID: 5632584843697323072}
   - component: {fileID: 5632584843697323073}
@@ -122,6 +121,7 @@ GameObject:
   - component: {fileID: 5632584843697323083}
   - component: {fileID: 4272542551161120298}
   - component: {fileID: 9035566671129628041}
+  - component: {fileID: 4929714853864448460}
   m_Layer: 9
   m_Name: Beetle
   m_TagString: Untagged
@@ -209,24 +209,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementController: {fileID: 0}
   VisualController: {fileID: 5632584843697323075}
-  animationController: {fileID: 5632584843697323082}
+  AnimationController: {fileID: 5632584843697323082}
+  WeaponController: {fileID: 0}
+  Rigidbody2D: {fileID: 5632584843697323072}
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
-    moveSpeed: 1.5
-    maxHp: 10
-    projectileSpeed: 0
-    projectileLifeTime: 0
-    effects: []
-    canShootTarget: 0
-    canMeleeTarget: 0
-    randomProjectileOffset: 0
-    predictTargetPosition: 0
     isPassive: 0
     DetectRange: 5
-    MeleeAttackRange: 2
   deathAnimation:
     Name: Beetle_Die
     CanBeCancelled: 0
@@ -234,19 +225,6 @@ MonoBehaviour:
     AcceptableOverrideTime: 0
     CurrentIndex: 4
   deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: f3f11944d88f3ae4f8566096ab28a9a0, type: 3}
---- !u!114 &5632584843697323074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5632584843697323087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: f4b4c9488c90f6d4199f95d091da521a, type: 2}
 --- !u!114 &5632584843697323075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,8 +514,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &9035566671129628041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,3 +529,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5632584843697323081}
+--- !u!114 &4929714853864448460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632584843697323087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8edd9ff3556b74e40a74765fcc08331d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWeaponMode: 1
+  unflippedShootOffset: {fileID: 5632584843697323080}
+  flippedShootOffset: {fileID: 5632584843697323080}
+  flippedMeleeOffset: {fileID: 5632584843697323080}
+  unflippedMeleeOffset: {fileID: 5632584843697323080}
+  _destroyOnReachTarget: 0

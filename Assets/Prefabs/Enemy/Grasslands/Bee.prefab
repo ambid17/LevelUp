@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8510735526301981977}
   - component: {fileID: -7786698165613059924}
-  - component: {fileID: 8789358854941681159}
+  - component: {fileID: 5889153746653695671}
   - component: {fileID: 1047883154001853991}
   - component: {fileID: 8510735526301981991}
   - component: {fileID: 8510735526301981989}
@@ -157,24 +157,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementController: {fileID: 0}
   VisualController: {fileID: 1047883154001853991}
-  animationController: {fileID: 3106216748061571400}
+  AnimationController: {fileID: 3106216748061571400}
+  WeaponController: {fileID: 5889153746653695671}
+  Rigidbody2D: {fileID: 8510735526301981989}
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
-    moveSpeed: 3.5
-    maxHp: 5
-    projectileSpeed: 1
-    projectileLifeTime: 5
-    effects: []
-    canShootTarget: 0
-    canMeleeTarget: 0
-    randomProjectileOffset: 0
-    predictTargetPosition: 0
     isPassive: 1
     DetectRange: 10
-    MeleeAttackRange: 0
   deathAnimation:
     Name: Bee_Die
     CanBeCancelled: 0
@@ -182,7 +173,7 @@ MonoBehaviour:
     AcceptableOverrideTime: 0
     CurrentIndex: 4
   deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 36faca159f245f546af853b693b75fc1, type: 3}
---- !u!114 &8789358854941681159
+--- !u!114 &5889153746653695671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,10 +182,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8510735526301981988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
+  m_Script: {fileID: 11500000, guid: 8edd9ff3556b74e40a74765fcc08331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 086c15e3a1bbd0f4eb41b64853538c86, type: 2}
+  CurrentWeaponMode: 1
+  unflippedShootOffset: {fileID: 8510735526301981977}
+  flippedShootOffset: {fileID: 8510735526301981977}
+  flippedMeleeOffset: {fileID: 8510735526301981977}
+  unflippedMeleeOffset: {fileID: 8510735526301981977}
+  _destroyOnReachTarget: 0
 --- !u!114 &1047883154001853991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,8 +438,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5
