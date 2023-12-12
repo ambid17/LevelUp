@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7217469006251800790}
   m_Layer: 9
-  m_Name: LeftShootPosition
+  m_Name: FlippedShootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,6 +130,37 @@ Transform:
   m_Father: {fileID: 8510735526301981977}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1703687653116210624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3606190758713836633}
+  m_Layer: 9
+  m_Name: UnflippedMeleePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3606190758713836633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703687653116210624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.092, y: 0.96, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8510735526301981977}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7108099795489856760
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7092808712819003313}
   m_Layer: 9
-  m_Name: RightShootPosition
+  m_Name: UnflippedShootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,13 +207,10 @@ GameObject:
   - component: {fileID: 8510735526301981989}
   - component: {fileID: 5468921551894925541}
   - component: {fileID: 1087665331962127016}
-  - component: {fileID: 8118519002331892122}
   - component: {fileID: 2926861443713235242}
   - component: {fileID: 5054155416519530242}
-  - component: {fileID: 5536586052788864798}
   - component: {fileID: 2068693523010453336}
   - component: {fileID: 1287365799941292616}
-  - component: {fileID: 6700159204235219801}
   - component: {fileID: 2859698617523764856}
   - component: {fileID: 500195683285685157}
   - component: {fileID: 8694587903216392311}
@@ -208,6 +236,7 @@ Transform:
   - {fileID: 7217469006251800790}
   - {fileID: 7092808712819003313}
   - {fileID: 1677465792185217864}
+  - {fileID: 3606190758713836633}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -225,7 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementController: {fileID: 0}
   VisualController: {fileID: 1047883154001853991}
-  animationController: {fileID: 1287365799941292616}
+  animationController: {fileID: 0}
+  WeaponController: {fileID: 0}
   tickDamageDownPerSecond: 1
   enemyStats:
     goldValue: 1
@@ -240,15 +270,15 @@ MonoBehaviour:
     randomProjectileOffset: 0.1
     predictTargetPosition: 1
     isPassive: 0
-    DetectRange: 15
-    MeleeAttackRange: 2
+    DetectRange: 0
+    MeleeAttackRange: 0
   deathAnimation:
-    Name: Spider_Die
+    Name: 
     CanBeCancelled: 0
-    MaxBufferPercentage: 1
-    AcceptableOverrideTime: 0
-    CurrentIndex: 2
-  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: fb52fa8dbaa6431478c068c91982a2e1, type: 3}
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  deathAnimPlayerPrafab: {fileID: 0}
 --- !u!114 &1047883154001853991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,11 +296,11 @@ MonoBehaviour:
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   flashColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   takeHitAnimation:
-    Name: Spider_Take_Hit
+    Name: 
     CanBeCancelled: 0
-    MaxBufferPercentage: 1
-    AcceptableOverrideTime: 0
-    CurrentIndex: 5
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
 --- !u!212 &8510735526301981991
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -386,26 +416,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: -7786698165613059924}
   move: {x: 0, y: 0}
---- !u!114 &8118519002331892122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9eb91c769fd4ab479db131b42d186d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 3d88f5d8abe1a70429881f229c085d29, type: 2}
-  destroyOnReachTarget: 1
-  overridenWeapon: {fileID: 0}
-  _spawnAoeOnDeath: 1
-  _aoePrefab: {fileID: 4353102549835907066, guid: a1ca224e137e2dd40b78ecd2c13e7052, type: 3}
-  leftShootOffset: {fileID: 7217469006251800790}
-  rightShootOffset: {fileID: 7092808712819003313}
-  spawnProjectileFromSeparateAnimation: 0
 --- !u!114 &2926861443713235242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,19 +549,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &5536586052788864798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 639330439d867354c883c1a29e47bb52, type: 2}
 --- !u!114 &2068693523010453336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,29 +562,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleAnimation:
-    Name: Spider_Idle
-    CanBeCancelled: 1
+    Name: 
+    CanBeCancelled: 0
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
     CurrentIndex: 0
   moveAnimation:
-    Name: Spider_Walk
-    CanBeCancelled: 1
+    Name: 
+    CanBeCancelled: 0
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
-    CurrentIndex: 1
+    CurrentIndex: 0
   meleeAttackAnimation:
-    Name: Spider_Melee_Attack
-    CanBeCancelled: 1
+    Name: 
+    CanBeCancelled: 0
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
-    CurrentIndex: 4
+    CurrentIndex: 0
   rangedAttackAnimation:
-    Name: Spider_Ranged_Attack
-    CanBeCancelled: 1
+    Name: 
+    CanBeCancelled: 0
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
-    CurrentIndex: 3
+    CurrentIndex: 0
   alternateMoveAnimation:
     Name: 
     CanBeCancelled: 0
@@ -607,27 +604,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf451aa77dc50f74485532d5a22b4e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 5054155416519530242}
+  anim: {fileID: 0}
   defaultAnimation:
-    Name: Spider_Idle
-    CanBeCancelled: 1
+    Name: 
+    CanBeCancelled: 0
     MaxBufferPercentage: 0.8
     AcceptableOverrideTime: 0.05
     CurrentIndex: 0
---- !u!114 &6700159204235219801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510735526301981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97a83dbe019c5545ba72f5e89b1c261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeWeapon: {fileID: 5536586052788864798}
-  projectileWeapon: {fileID: 8118519002331892122}
 --- !u!70 &2859698617523764856
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -658,16 +641,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 5184
-  myEntity: {fileID: -7786698165613059924}
-  tick: 1
+    m_Bits: 0
+  myEntity: {fileID: 0}
+  tick: 0
   room: {fileID: 0}
-  tickRandomizer: 0.1
-  trackDamagePerTick: 1
-  damageDecayRate: 0.5
+  tickRandomizer: 0
+  trackDamagePerTick: 0
+  damageDecayRate: 0
   playerSlowedMultiplier: 2
-  optimalDistance: 5
-  baseAttackPriorityFactor: 0.5
+  optimalDistance: 15
+  baseAttackPriorityFactor: 0
 --- !u!114 &8694587903216392311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,4 +663,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 8510735526301981991}
+  spriteRenderer: {fileID: 0}

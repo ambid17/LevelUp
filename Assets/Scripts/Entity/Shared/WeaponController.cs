@@ -8,59 +8,50 @@ namespace Minigames.Fight
 {
     public class WeaponController : MonoBehaviour
     {
-        [SerializeField] protected Weapon weapon;
-        public Weapon Weapon => weapon;
-        public HitData Hit => hit;
-        protected float ShotTimer;
+        public WeaponMode CurrentWeaponMode = WeaponMode.Projectile;
+        public WeaponStats CurrentWeapon => CurrentWeaponMode == WeaponMode.Projectile ? _combatStats.projectileWeaponStats : _combatStats.meleeWeaponStats;
 
-        protected EventService EventService;
+        protected CombatStats _combatStats => MyEntity.Stats.combatStats;
+
+        protected float ShootTimer;
+        protected float MeleeTimer;
+
         protected Entity MyEntity;
-        protected HitData hit;
 
         void Awake()
         {
             MyEntity = GetComponent<Entity>();
-
-            EventService = Platform.EventService;
         }
 
         protected virtual void Start()
         {
-            CalculateHitData();
-        }
 
-        public virtual void CalculateHitData()
-        {
-            hit = new HitData(MyEntity, weapon.damage);
-        }
-
-        public virtual void Setup(Weapon weapon)
-        {
-            this.weapon = weapon;
         }
 
         protected virtual void Update()
         {
-            if (ShouldPreventUpdate())
-            {
-                return;
-            }
-
-            ShotTimer += Time.deltaTime;
-        }
-
-        protected virtual bool ShouldPreventUpdate()
-        {
-            return GameManager.PlayerEntity.IsDead || weapon == null;
+            ShootTimer += Time.deltaTime;
+            MeleeTimer += Time.deltaTime;
         }
         
-        protected virtual bool CanShoot()
+        public virtual bool CanShoot()
         {
-            return Input.GetMouseButton(0) && ShotTimer > weapon.fireRate;
+            return true;
+        }
+
+        public virtual bool CanMelee()
+        {
+            return true;
         }
 
         public virtual void Shoot()
         {
+
+        }
+
+        public virtual void Melee()
+        {
+
         }
     }
 }

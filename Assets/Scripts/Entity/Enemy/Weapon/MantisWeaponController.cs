@@ -4,41 +4,36 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class MantisWeaponController : MeleeEnemyWeaponController
+    public class MantisWeaponController : EnemyWeaponController
     {
         public int RandomCombo => Random.Range(minCombo, maxCombo + 1);
-        public MeleeWeapon ComboWeapon => comboWeapon;
-        public bool CanUseCombo => _comboTimer > comboWeapon.fireRate;
+        public WeaponStats ComboWeapon => _comboWeapon;
+        public bool CanUseCombo => _comboTimer > _comboWeapon.rateOfFire.Calculated;
 
-        [SerializeField]
-        private MeleeWeapon comboWeapon;
+        
         [SerializeField]
         private int minCombo = 5;
         [SerializeField]
         private int maxCombo = 10;
 
+        private WeaponStats _comboWeapon = new();
+
         private float _comboTimer;
-        private HitData _comboHitData;
         protected override void Update()
         {
             base.Update();
             _comboTimer += Time.deltaTime;
         }
 
-        public override void CalculateHitData()
-        {
-            base.CalculateHitData();
-            _comboHitData = new HitData(MyEntity, comboWeapon.damage);
-        }
-
         public void ShootCombo()
         {
+
+        }
+
+        // Called by animator to ensure cooldown gets called appropriately.
+        public void ResetCombo()
+        {
             _comboTimer = 0;
-            if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) > comboWeapon.attackRange)
-            {
-                return;
-            }
-            GameManager.PlayerEntity.TakeHit(_comboHitData);
         }
     }
 }

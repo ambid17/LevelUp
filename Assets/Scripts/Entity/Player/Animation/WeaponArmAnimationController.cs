@@ -12,9 +12,6 @@ namespace Minigames.Fight
 
     public class WeaponArmAnimationController : AnimationManager
     {
-
-        public WeaponMode CurrentWeaponMode = WeaponMode.Projectile;
-
         [Header("Projectile")]
         [SerializeField]
         private AnimationName projectileIdle;
@@ -44,9 +41,9 @@ namespace Minigames.Fight
 
         private bool _isAttemptingEquip;
 
-        public void PlayIdleAnimation()
+        public void PlayIdleAnimation(WeaponMode mode)
         {
-            if (CurrentWeaponMode == WeaponMode.Projectile)
+            if (mode == WeaponMode.Projectile)
             {
                 if (IsAnimPlaying(projectileIdle))
                 {
@@ -54,7 +51,7 @@ namespace Minigames.Fight
                 }
                 PlayAnimation(projectileIdle, 0);
             }
-            else if (CurrentWeaponMode == WeaponMode.Melee)
+            else if (mode == WeaponMode.Melee)
             {
                 if (IsAnimPlaying(meleeIdle))
                 {
@@ -64,59 +61,54 @@ namespace Minigames.Fight
             }
         }
 
-        public void PlayEquipAnimation()
+        public void PlayEquipAnimation(WeaponMode mode)
         {
             AnimationName name = new();
-            if (CurrentWeaponMode == WeaponMode.Melee)
+            if (mode == WeaponMode.Melee)
             {
                 name = projectileEquip;
             }
-            else if (CurrentWeaponMode == WeaponMode.Projectile)
+            else if (mode == WeaponMode.Projectile)
             {
                 name = meleeEquip;
             }
             StartCoroutine(ChangeWeapons(name));
         }
 
-        public void PlayShootAnimation()
+        public void PlayAttackAnimation(WeaponMode mode, float fireRate)
         {
-            AnimationName storedCurrentAnim = currentAnimation;
-            float projectileSpeedModifier = 1 / (arm.EquippedWeapon.Weapon.fireRate * 0.9f);
-            if (CurrentWeaponMode == WeaponMode.Projectile)
+            float projectileSpeedModifier = 1 / (fireRate * 0.9f);
+            if (mode == WeaponMode.Projectile)
             {
                 anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
                 PlayAnimation(projectileShoot, 0);
             }
-            else if (CurrentWeaponMode == WeaponMode.Melee)
+            else if (mode == WeaponMode.Melee)
             {
                 anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
                 PlayAnimation(meleeShoot, 0);
             }
-            if (_isAttemptingEquip)
-            {
-                QueueAnimation(storedCurrentAnim);
-            }
         }
 
-        public void PlayDieAnimation()
+        public void PlayDieAnimation(WeaponMode mode)
         {
-            if (CurrentWeaponMode == WeaponMode.Projectile)
+            if (mode == WeaponMode.Projectile)
             {
                 OverrideAnimation(projectileDie, 0);
             }
-            else if (CurrentWeaponMode == WeaponMode.Melee)
+            else if (mode == WeaponMode.Melee)
             {
                 OverrideAnimation(meleeDie, 0);
             }
         }
 
-        public void PlayReviveAnimation()
+        public void PlayReviveAnimation(WeaponMode mode)
         {
-            if (CurrentWeaponMode == WeaponMode.Projectile)
+            if (mode == WeaponMode.Projectile)
             {
                 OverrideAnimation(projectileRevive, 0);
             }
-            else if (CurrentWeaponMode == WeaponMode.Melee)
+            else if (mode == WeaponMode.Melee)
             {
                 OverrideAnimation(meleeRevive, 0);
             }
@@ -124,19 +116,19 @@ namespace Minigames.Fight
 
         IEnumerator ChangeWeapons(AnimationName name)
         {
-            _isAttemptingEquip = true;
-            PlayAnimation(name, 0);
             while (!IsAnimPlaying(name))
             {
-                yield return null;
+                OverrideAnimation(name, 0);
+                yield return new WaitForSeconds(0);
             }
-            while (CurrentAnimationNomralizedTime < projectileShoot.AcceptableOverrideTime)
+            while (CurrentAnimationNomralizedTime < name.MaxBufferPercentage)
             {
-                yield return null;
+                yield return new WaitForSeconds(0);
             }
-            CurrentWeaponMode = CurrentWeaponMode == WeaponMode.Projectile ? WeaponMode.Melee : WeaponMode.Projectile;
-            arm.ChangeEquippedWeapon();
-            _isAttemptingEquip = false;
+            if (bufferedAnimation == null)
+            {
+                PlayAnimation(defaultAnimation, 0);
+            }
         }
     }
 

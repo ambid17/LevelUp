@@ -12,7 +12,7 @@ namespace Minigames.Fight
 
         public bool IsAlerted => CurrentHiveHP < _totalHiveMaxHealth;
 
-        public float CurrentHiveHP => MyHiveMinds.Sum(h => h.MyEntity.Stats.currentHp);
+        public float CurrentHiveHP => MyHiveMinds.Sum(h => h.MyEntity.Stats.combatStats.currentHp);
         public float AttackPriority => _totalHiveMaxHealth - CurrentHiveHP;
         public Vector2 PlayerLastKnown => _playerLastKnown;
         private float tick;
@@ -29,7 +29,7 @@ namespace Minigames.Fight
             foreach (HiveMindBehaviorData hiveMind in MyHiveMinds)
             {
                 hiveMind.MyManager = this;
-                _totalHiveMaxHealth += hiveMind.MyEntity.enemyStats.MaxHp;
+                _totalHiveMaxHealth += hiveMind.MyEntity.Stats.combatStats.maxHp.Calculated;
             }
             tick += Random.Range(-tickRandomizer, tickRandomizer);
         }

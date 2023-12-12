@@ -26,7 +26,6 @@ namespace Minigames.Fight
         [Header("Run-time Values")] 
         public float Dna;
         public float BankedDna;
-        public TutorialState TutorialState;
         public ResourceTypeFloatDictionary PhysicalResources = new();
         public float BaseResourceValue;
 
@@ -65,7 +64,6 @@ namespace Minigames.Fight
             Dna = 0;
             BankedDna = 0;
             BaseResourceValue = 1;
-            TutorialState = TutorialState.None;
 
             foreach (var world in Worlds)
             {
@@ -92,7 +90,6 @@ namespace Minigames.Fight
             toReturn.WorldData = GetWorldData();
             toReturn.Dna = Dna;
             toReturn.BankedDna = BankedDna;
-            toReturn.TutorialState = TutorialState;
             toReturn.PhysicalResources = PhysicalResources;
 
             return toReturn;

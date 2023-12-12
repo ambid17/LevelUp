@@ -10,7 +10,6 @@ namespace Minigames.Fight
         public List<WorldData> WorldData;
         public float Dna;
         public float BankedDna;
-        public TutorialState TutorialState;
         public ResourceTypeFloatDictionary PhysicalResources;
     }
 

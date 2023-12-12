@@ -17,9 +17,9 @@ namespace Minigames.Fight
             get
             {
                 bool playerHasPheromones = false;
-                foreach (StatusEffectInstance effectInstance in GameManager.PlayerEntity.Stats.StatusEffects)
+                foreach (var effect in GameManager.PlayerEntity.Stats.combatStats.hpStatusEffects)
                 {
-                    if (effectInstance.effect is PheromoneEffect)
+                    if (effect.statusEffect is PheromoneEffect)
                     {
                         playerHasPheromones = true;
                     }
@@ -39,7 +39,7 @@ namespace Minigames.Fight
                 return;
             }
 
-            if (WithinVisionRadius || MyEntity.Stats.currentHp < MyEntity.Stats.maxHp)
+            if (WithinVisionRadius || MyEntity.Stats.combatStats.currentHp < MyEntity.Stats.combatStats.maxHp.Calculated)
             {
                 IsAlerted = true;
                 return;

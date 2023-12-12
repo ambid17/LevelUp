@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -10,35 +11,28 @@ namespace Minigames.Fight
     /// </summary>
     [CreateAssetMenu(fileName = "DamageHighHealthEffect", menuName = "ScriptableObjects/Fight/Effects/DamageHighHealthEffect", order = 1)]
     [Serializable]
-    public class DamageHighHealthEffect : Effect
+    public class DamageHighHealthEffect : StatModifierEffect
     {
-        [Header("Effect specific")]
-        public float percentDamagePerStack;
         public float minHpPercent;
 
-        private float Total => 1 + (percentDamagePerStack * AmountOwned);
-        
-        private readonly string _description = "Deal {0}% more damage to enemies >{1}% hp";
-        public override string GetDescription()
-        {
-            return string.Format(_description, Total * 100, minHpPercent * 100);
-        }
-        public override string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, minHpPercent * 100);
-        } 
+        public override StatImpactType statImpactType => StatImpactType.Compounding;
 
-        private float NextUpgradeChance(int purchaseCount)
+        public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            int newAmountOwned = AmountOwned + purchaseCount;
-            return 1 + (percentDamagePerStack * newAmountOwned);
+            //     return entity.Stats.combatStats.baseDamage;
+            return null;
         }
 
-        public override void Execute(HitData hit)
+        public override void OnCraft(Entity target)
         {
-            if (hit.Target.Stats.currentHp / hit.Target.Stats.maxHp > minHpPercent)
+            target.Stats.combatStats.OnHitEffects.Add(this);
+        }
+
+        public override void Execute(Entity source, Entity target)
+        {
+            if (target.Stats.combatStats.currentHp / target.Stats.combatStats.maxHp.Calculated > minHpPercent)
             {
-                hit.DamageMultiplier += Total;
+               // source.Stats.combatStats.onHitDamage.AddSingleUseEffect(this);
             }
         }
     }

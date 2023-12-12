@@ -5,33 +5,29 @@ namespace Minigames.Fight
 {
     public class ProjectileController : MonoBehaviour
     {
-        protected bool spawnAoeOnDeath;
-        protected AOEController aoePrefab; 
-
         protected Entity _myEntity;
         protected float _deathTimer = 0;
         protected Vector2 _shootDirection;
         protected bool _isMarkedForDeath;
 
-        protected HitData hit;
-
         private EventService _eventService;
 
         public Entity MyEntity => _myEntity;
+        private WeaponStats _myWeaponStats => MyEntity.WeaponController.CurrentWeapon;
+
+        private SpriteRenderer _spriteRenderer;
+
 
         protected virtual void Start()
         {
             _eventService = Platform.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
+
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnDestroy()
         {
-            if (spawnAoeOnDeath)
-            {
-                AOEController aOEController = Instantiate(aoePrefab, transform.position, new Quaternion(0, 0, 0, 0));
-                aOEController.SetUp(_myEntity);
-            }
             _eventService.Remove<PlayerDiedEvent>(Die);
         }
 
@@ -47,31 +43,55 @@ namespace Minigames.Fight
             Move();
         }
 
-        protected virtual bool ShouldDie()
+        public virtual void SetSprite(Sprite sprite)
         {
-            return false;
+            _spriteRenderer.sprite = sprite;
         }
 
-        protected virtual void Move()
+        protected  bool ShouldDie()
         {
-            
+            return _deathTimer >  _myWeaponStats.projectileLifeTime.Calculated;
         }
 
-        public virtual void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
+        protected void Move()
+        {
+            Vector2 delta = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated * Time.deltaTime;
+            transform.position += new Vector3(delta.x, delta.y, 0);
+        }
+
+        public virtual void Setup(Entity myEntity, Vector2 direction)
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
-
-            hit = controller.Hit;
-
-            ProjectileWeaponController projectileController = controller as ProjectileWeaponController;
-            spawnAoeOnDeath = projectileController.SpawnAoeOnDeath;
-            aoePrefab = projectileController.AoePrefab;
         }
 
-        protected virtual void OnTriggerEnter2D(Collider2D col)
+        protected void OnTriggerEnter2D(Collider2D col)
         {
-            
+            if (_isMarkedForDeath)
+            {
+                return;
+            }
+
+            if (col.gameObject.layer == PhysicsUtils.GroundLayer)
+            {
+                Die();
+            }
+
+            if (!IsValidTarget(col.gameObject.layer))
+            {
+                return;
+            }
+
+            Entity target = col.gameObject.GetComponent<Entity>();
+
+            MyEntity.DealDamage(target);
+
+            Die();
+        }
+
+        protected virtual bool IsValidTarget(int layer)
+        {
+            return true;
         }
 
         protected virtual void Die()

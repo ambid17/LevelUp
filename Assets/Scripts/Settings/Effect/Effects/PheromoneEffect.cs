@@ -29,39 +29,33 @@ namespace Minigames.Fight
             return string.Empty;
         }
 
-        public override void Execute(HitData hit)
+        public override void OnCraft(Entity target)
         {
-            TryApplyEffect(hit);
+            target.Stats.combatStats.OnHitEffects.Add(this);
         }
 
-        public void TryApplyEffect(HitData hit)
-        {
-            StatusEffectInstance.Create(hit, this);
-        }
-
-        public void ApplyEffect(Entity target)
+        public override void Execute(Entity source, Entity target)
         {
             if (target.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                storedVisual = Instantiate(visualEffectPrefab, GameManager.PlayerEntity.transform.position, GameManager.PlayerEntity.transform.rotation, GameManager.PlayerEntity.transform);             
+                storedVisual = Instantiate(visualEffectPrefab, GameManager.PlayerEntity.transform.position, GameManager.PlayerEntity.transform.rotation, GameManager.PlayerEntity.transform);
             }
-            if (target.gameObject.layer == PhysicsUtils.EnemyLayer)
-            {
-                EntityBehaviorData behaviorData = target.GetComponent<EntityBehaviorData>();
-            }
+
+            target.Stats.combatStats.AddOrRefreshStatusEffect(this, source, target);
         }
 
-        public void RemoveEffect(Entity target)
+        public override float ImpactStat(float stat)
         {
-            if (target.gameObject.layer == PhysicsUtils.PlayerLayer)
-            {
-                Destroy(storedVisual);
-            }
+            return stat;
         }
 
-        public void OnTick(Entity target)
+        public void OnTick(Entity source, Entity target)
         {
+        }
 
+        public void OnComplete()
+        {
+            Destroy(storedVisual);
         }
     }
 }

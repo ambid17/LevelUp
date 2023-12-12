@@ -6,31 +6,14 @@ namespace Minigames.Fight
 {
     [CreateAssetMenu(fileName = "BaseDamageEffect", menuName = "ScriptableObjects/Fight/Effects/BaseDamageEffect", order = 1)]
     [Serializable]
-    public class BaseDamageEffect : Effect
+    public class BaseDamageEffect : StatModifierEffect
     {
-        [Header("Effect specific")]
-        public float baseDamagePerStack;
+        public override StatImpactType statImpactType => StatImpactType.Flat;
 
-        private float Total => baseDamagePerStack * AmountOwned;
-
-        private readonly string _description = "+{0} base damage";
-        public override string GetDescription()
+        public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return string.Format(_description, Total);
-        }
-        public override string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Format(_description, NextUpgradeChance(purchaseCount));
-        } 
-
-        private float NextUpgradeChance(int purchaseCount)
-        {
-            int newAmountOwned = AmountOwned + purchaseCount;
-            return baseDamagePerStack * newAmountOwned;
-        }
-        public override void Execute(HitData hit)
-        {
-            hit.BaseDamageAddition += Total;
+            // return entity.Stats.combatStats.baseDamage;
+            return null;
         }
     }
 }

@@ -14,7 +14,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     protected AnimationName defaultAnimation;
 
-    private AnimationName bufferedAnimation;
+    protected AnimationName bufferedAnimation;
 
     protected AnimationName currentAnimation;
 

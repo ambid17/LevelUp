@@ -4,7 +4,13 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class EnemyProjectileSpawner : EnemyProjectile
+    /// <summary>
+    /// If the enemy gets to the point of spawning a projectile and the animation gets interrupted (by death or CC)
+    /// this creates the graphic for the projectile being spawned, and spawns the projectile.
+    /// 
+    /// This guarantees that if an enemy has reached the point in their animation where they shoot, that the shot's animation goes off
+    /// </summary>
+    public class EnemyProjectileSpawner : ProjectileController
     {
         public Transform Offset => offSet;
 
@@ -13,39 +19,33 @@ namespace Minigames.Fight
         [SerializeField]
         private Transform offSet;
         [SerializeField]
-        private EnemyProjectile projectilePrefab;
+        private ProjectileController projectilePrefab;
         [SerializeField]
         private Sprite projectileSprite;
+        [SerializeField]
+        private float angleOffset = -180;
 
         private Entity _overridenEntity;
         private Vector2 _direction;
-        private WeaponController _controller;
+        
 
-        protected override bool ShouldDie()
-        {
-            return anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1;
-        }
-
-        protected override void Move()
-        {
-            return;
-        }
-
-        public override void Setup(Entity myEntity, Vector2 direction, WeaponController controller)
+        public override void Setup(Entity myEntity, Vector2 direction)
         {
             _overridenEntity = myEntity;
             _direction = direction;
-            _controller = controller;
-            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 180f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float rotationToTarget = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg + angleOffset;
+            transform.rotation = Quaternion.AngleAxis(rotationToTarget, Vector3.forward);
         }
 
+        /// <summary>
+        /// Called from animation
+        /// </summary>
         public void SpawnProjectile()
         {
-            EnemyProjectile projectile = Instantiate(projectilePrefab);
+            ProjectileController projectile = Instantiate(projectilePrefab);
             projectile.transform.position = offSet.position;
-            projectile.MySpriteRenderer.sprite = projectileSprite;
-            projectile.Setup(_overridenEntity, _direction, _controller);
+            projectile.SetSprite(projectileSprite);
+            projectile.Setup(_overridenEntity, _direction);
         }
     }
 }

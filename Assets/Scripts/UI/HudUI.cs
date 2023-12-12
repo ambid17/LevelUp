@@ -16,7 +16,7 @@ namespace Minigames.Fight
         [SerializeField] private TMP_Text _remainingAmmoText;
 
         private EventService _eventService;
-
+        private CombatStats _combatStats => GameManager.PlayerEntity.Stats.combatStats;
         void Start()
         {
             _eventService = Platform.EventService;
@@ -26,7 +26,7 @@ namespace Minigames.Fight
             _upgradeButton.onClick.AddListener(OpenUpgrades);
         
             SetGoldText();
-            SetHpSlider(new PlayerHpUpdatedEvent(1));
+           // SetHpSlider(new PlayerHpUpdatedEvent());
         }
 
         private void OpenUpgrades()
@@ -39,9 +39,9 @@ namespace Minigames.Fight
             _goldText.text = GameManager.CurrencyManager.Dna.ToCurrencyString();
         }
 
-        private void SetHpSlider(PlayerHpUpdatedEvent eventType)
+        private void SetHpSlider()
         {
-            _hpSlider.value = eventType.PercentHp;
+            _hpSlider.value = _combatStats.currentHp / _combatStats.maxHp.Calculated;
         }
 
         private void SetAmmo(PlayerAmmoUpdatedEvent e)

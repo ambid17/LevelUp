@@ -10,15 +10,15 @@ namespace Minigames.Fight
     public class ExecuteDamageEffect : Effect
     {
         [Header("Effect specific")]
-        public float percentDamagePerStack;
+        public float perStack;
         public float executePercent;
 
-        private float Total => 1 + (percentDamagePerStack * AmountOwned);
+        private float Impact => 1 + (perStack * AmountOwned);
         private readonly string _description = "Deal {0}% more damage to enemies <{1}% hp";
 
         public override string GetDescription()
         {
-            return string.Format(_description, Total * 100, executePercent * 100);
+            return string.Format(_description, Impact * 100, executePercent * 100);
         }
         public override string GetNextUpgradeDescription(int purchaseCount)
         {
@@ -28,15 +28,25 @@ namespace Minigames.Fight
         private float NextUpgradeChance(int purchaseCount)
         {
             int newAmountOwned = AmountOwned + purchaseCount;
-            return 1 + (percentDamagePerStack * newAmountOwned);
+            return 1 + (perStack * newAmountOwned);
         }
 
-        public override void Execute(HitData hit)
+        public override void OnCraft(Entity target)
         {
-            if (hit.Target.Stats.currentHp / hit.Target.Stats.maxHp < executePercent)
+            target.Stats.combatStats.OnHitEffects.Add(this);
+        }
+
+        public override void Execute(Entity source, Entity target)
+        {
+            if (target.Stats.combatStats.currentHp / target.Stats.combatStats.maxHp.Calculated < executePercent)
             {
-                hit.DamageMultiplier += Total;
+               // source.Stats.combatStats.onHitDamage.AddEffect(this);
             }
+        }
+
+        public override float ImpactStat(float stat)
+        {
+            return stat * Impact;
         }
     }
 }
