@@ -24,22 +24,17 @@ namespace Minigames.Fight
         {
             base.Setup();
             Target = GameManager.PlayerEntity.transform;
-            Stats.SetupFromEnemy(enemyStats);
 
             // Magic float for now because I'm not sure flexibility will ever be necessary.
             // Offsets animation speed and movement speed by the same amount to make enemies feel more natural.
             float randomOffset = Random.Range(.9f, 1.1f);
-            enemyStats.MoveSpeed *= randomOffset;
-            animationController.Anim.speed *= randomOffset;
+            AnimationController.Anim.speed *= randomOffset;
         }
 
-        public override void TakeDamage(float damage)
-        {
-            base.TakeDamage(damage);
-        }
 
-        protected override void Die()
+        protected override void Die(Entity killer)
         {
+            base.Die(killer);
             // Since we are shooting so many projectiles...
             // OnTriggerEnter() gets called in Projectile multiple times before we get destroyed
             // This prevents duplicate deaths
@@ -50,7 +45,7 @@ namespace Minigames.Fight
         
             _isMarkedForDeath = true;
         
-            GameManager.CurrencyManager.EnemyKilled(enemyStats.GoldValue);
+            GameManager.CurrencyManager.EnemyKilled(enemyStats.goldValue);
 
             EnemyDeathAnimationPlayer deathAnimPlayer = Instantiate(deathAnimPlayerPrafab, transform.position, transform.rotation);
             deathAnimPlayer.SpriteRenderer.flipX = VisualController.SpriteRenderer.flipX;

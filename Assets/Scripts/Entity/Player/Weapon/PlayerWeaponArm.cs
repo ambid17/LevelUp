@@ -6,8 +6,6 @@ namespace Minigames.Fight
 {
     public class PlayerWeaponArm : MonoBehaviour
     {
-        public PlayerWeaponController EquippedWeapon => _equippedWeaponController ?? GetComponent<PlayerProjectileWeaponController>();
-
         public SpriteRenderer MySpriteRenderer;
         public float StartRotation;
         public float MinRotation;
@@ -17,13 +15,11 @@ namespace Minigames.Fight
         public Transform MeleeOrigin;
         public Transform ProjectileOrigin;
 
+        public PlayerWeaponController WeaponController;
+
 
         [SerializeField]
         private float returnToIdleSpeed = 2;
-
-        private PlayerWeaponController _equippedWeaponController;
-        private PlayerProjectileWeaponController _projectileWeaponController;
-        private PlayerMeleeWeaponController _meleeWeaponController;
 
         private void Start()
         {
@@ -32,38 +28,29 @@ namespace Minigames.Fight
 
         private void SetupWeaponControllers()
         {
-            _projectileWeaponController = GetComponent<PlayerProjectileWeaponController>();
-            _meleeWeaponController = GetComponent<PlayerMeleeWeaponController>();
-            _equippedWeaponController = _projectileWeaponController;
-            _equippedWeaponController.IsEquipped = true;
+            Platform.EventService.Add<PlayerChangedWeaponEvent>(SwitchWeapons);
             Platform.EventService.Add<PlayerDiedEvent>(Die);
             Platform.EventService.Add<PlayerRevivedEvent>(Revive);
         }
 
         public void Die()
         {
-            AnimationController.PlayDieAnimation();
+            AnimationController.PlayDieAnimation(WeaponController.CurrentWeaponMode);
         }
 
         public void Revive()
         {
-            AnimationController.PlayReviveAnimation();
+            AnimationController.PlayReviveAnimation(WeaponController.CurrentWeaponMode);
         }
 
-        private void Update()
+        public void SwitchWeapons(PlayerChangedWeaponEvent e)
         {
-            if (GameManager.PlayerEntity.IsDead)
-            {
-                return;
-            }
-            if (AnimationController.IsAnimFinished)
-            {
-                AnimationController.PlayIdleAnimation();
-            }
-            if (Input.mouseScrollDelta.y != 0)
-            {
-                AnimationController.PlayEquipAnimation();
-            }
+            AnimationController.PlayEquipAnimation(e.NewWeaponMode);
+        }
+
+        public void Attack(float fireRate)
+        {
+            AnimationController.PlayAttackAnimation(WeaponController.CurrentWeaponMode, fireRate);
         }
 
         public void ReturnToIdle()
@@ -80,21 +67,14 @@ namespace Minigames.Fight
             }
         }
 
-        public void ChangeEquippedWeapon()
-        {
-            _equippedWeaponController.IsEquipped = false;
-            _equippedWeaponController = _equippedWeaponController == _projectileWeaponController ? _meleeWeaponController : _projectileWeaponController;
-            _equippedWeaponController.IsEquipped = true;
-        }
-
         public void MeleeShoot()
         {
-            _meleeWeaponController.Shoot();
+            WeaponController.Shoot();
         }
 
         public void ProjectileShoot()
         {
-            _projectileWeaponController.Shoot();
+            WeaponController.Melee();
         }
     }
 }

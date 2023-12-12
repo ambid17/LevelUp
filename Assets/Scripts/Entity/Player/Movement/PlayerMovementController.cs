@@ -3,7 +3,7 @@ using Utils;
 
 namespace Minigames.Fight
 {
-    public class PlayerMovementController : MovementController
+    public class PlayerMovementController : MonoBehaviour
     {
         private Vector2 _movementToApply;
         private Vector2 _currentInput;
@@ -12,15 +12,17 @@ namespace Minigames.Fight
 
         private const float _idleSpeed = .1f;
 
-        PlayerEntity _myEntity;
+        [SerializeField]
+        private PlayerEntity _myEntity;
+        public Rigidbody2D MyRigidbody2D;
 
         private Vector2 _lastInput;
+        private const float ACCELERATION = 20;
     
         void Start()
         {
-            SetStartingMoveSpeed(GameManager.SettingsManager.playerSettings.MoveSpeed);
             _eventService = Platform.EventService;
-            _myEntity = MyEntity as PlayerEntity;
+            MyRigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         void Update()
@@ -70,7 +72,7 @@ namespace Minigames.Fight
             }
 
             _lastInput = input;
-            _currentInput = input.normalized * CurrentMoveSpeed;
+            _currentInput = input.normalized * _myEntity.Stats.movementStats.moveSpeed.Calculated;
         }
     
         private void Move()
@@ -95,7 +97,7 @@ namespace Minigames.Fight
     
         private void ApplyAcceleration()
         {
-            float maxAcceleration = GameManager.SettingsManager.playerSettings.Acceleration * Time.fixedDeltaTime;
+            float maxAcceleration = ACCELERATION * Time.fixedDeltaTime;
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
             MyRigidbody2D.velocity = _movementToApply;

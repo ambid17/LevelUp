@@ -36,34 +36,31 @@ namespace Minigames.Fight
             return stunChance + (chanceScalar * newAmountOwned);
         }
 
-        public override void Execute(HitData hit)
+        public override void OnCraft(Entity target)
         {
-            TryApplyEffect(hit);
+            target.Stats.combatStats.OnHitEffects.Add(this);
         }
 
-        public void TryApplyEffect(HitData hit)
+        public override void Execute(Entity source, Entity target)
         {
-            bool doesSlow = Random.value < StunChance;
-            doesSlow = true;
-            if (doesSlow)
+            bool doesStun = Random.value < StunChance;
+            if (doesStun)
             {
-                StatusEffectInstance.Create(hit, this);
+                target.Stats.movementStats.moveSpeed.AddOrRefreshStatusEffect(this, source, target);
             }
         }
 
-        public void ApplyEffect(Entity target)
+        public override float ImpactStat(float stat)
         {
-            target.MovementController.ApplyMoveEffect(this);
+            return stat * 0;
         }
 
-        public void RemoveEffect(Entity target)
+        public void OnTick(Entity source, Entity target)
         {
-            target.MovementController.RemoveMoveEffect(this);
         }
 
-        public void OnTick(Entity target)
+        public void OnComplete()
         {
-            
         }
     }
 }

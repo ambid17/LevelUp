@@ -9,7 +9,7 @@ namespace Minigames.Fight
     public class CurrencyManager : FightBehavior
     {
         [SerializeField] private NotificationPopup notificationPopup;
-        private ProgressSettings _progressSettings => GameManager.SettingsManager.progressSettings;
+        private ProgressSettings _progressSettings => GameManager.ProgressSettings;
         public float Dna
         {
             get => _progressSettings.Dna;
@@ -81,11 +81,6 @@ namespace Minigames.Fight
                 PhysicalResources.Add(type, amount);
             }
             eventService.Dispatch(new PlayerResourceUpdateEvent(type, PhysicalResources[type]));
-        }
-
-        public void ResetResource(ResourceType type)
-        {
-            PhysicalResources[type] = 0;
         }
 
         public void ResetCurrency()

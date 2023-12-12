@@ -68,7 +68,7 @@ namespace Minigames.Fight
             float tierCost = tierCostMapping[tierValue];
             upgradeButtonText.text = tierCost.ToCurrencyString();
 
-            var upgradesInCategory = GameManager.SettingsManager.effectSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
+            var upgradesInCategory = GameManager.EffectSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
             var unlockedInCategory = upgradesInCategory.Where(u => u.IsUnlocked).ToList();
             descriptionText.text = $"You have unlocked {unlockedInCategory.Count} / {upgradesInCategory.Count} upgrades in this category";
 
@@ -96,7 +96,7 @@ namespace Minigames.Fight
             float tierCost = tierCostMapping[tierValue];
             if (GameManager.CurrencyManager.TrySpendCurrency(tierCost))
             {
-                var upgrade = GameManager.SettingsManager.effectSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
+                var upgrade = GameManager.EffectSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
                 upgrade.IsUnlocked = true;
 
                 // Update the UI with the new state
@@ -149,12 +149,7 @@ namespace Minigames.Fight
         {
             if (GameManager.CurrencyManager.TrySpendCurrency(_currentUpgrade.GetCost(1)))
             {
-                _currentUpgrade.AmountOwned += 1;
-                if(_currentUpgrade.IsCrafted)
-                {
-                    _eventService.Dispatch(new UpgradeCraftedEvent(_currentUpgrade));
-
-                }
+                _currentUpgrade.BuyUpgrade();
                 OnUpgradeSelectedForUpgrade();
             }
         }
@@ -199,7 +194,7 @@ namespace Minigames.Fight
         {
             if (GameManager.CurrencyManager.TryCraftUpgrade(_currentUpgrade))
             {
-                _eventService.Dispatch(new UpgradeCraftedEvent(_currentUpgrade));
+                _currentUpgrade.Craft();
                 OnUpgradeSelectedForCraft();
             }
         }

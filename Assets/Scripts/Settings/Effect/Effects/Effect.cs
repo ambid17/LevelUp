@@ -11,18 +11,13 @@ namespace Minigames.Fight
         OnKill,
         OnDeath,
         OnTakeDamage,
-        OnPurchase, 
+        OnCraft,
         OnTimer
     }
 
-
-    [CreateAssetMenu(fileName = "Effect", menuName = "ScriptableObjects/Fight/Effect", order = 1)]
     [Serializable]
-    public abstract class Effect : ScriptableObject, IEquatable<Effect>
+    public class Effect : ScriptableObject, IEquatable<Effect>
     {
-        public abstract string GetDescription();
-        public abstract string GetNextUpgradeDescription(int purchaseCount);
-
         [Header("Trigger info")]
         public int ExecutionOrder;
         public EffectTriggerType TriggerType;
@@ -30,6 +25,15 @@ namespace Minigames.Fight
         [Header("Set at runtime")]
         public int AmountOwned;
 
+        public virtual string GetDescription()
+        {
+            return string.Empty;
+        }
+
+        public virtual string GetNextUpgradeDescription(int purchaseCount)
+        {
+            return string.Empty;
+        }
 
         public bool Equals(Effect other)
         {
@@ -37,6 +41,24 @@ namespace Minigames.Fight
             return other.GetType().Equals(this.GetType());
         }
 
-        public abstract void Execute(HitData hit);
+        public virtual void SetAmountOwned(int amountOwned)
+        {
+            AmountOwned = amountOwned;
+        }
+
+        public virtual void OnCraft(Entity target)
+        {
+
+        }
+
+        public virtual void Execute(Entity source, Entity target)
+        {
+
+        }
+
+        public virtual float ImpactStat(float stat)
+        {
+            return stat;
+        }
     }
 }

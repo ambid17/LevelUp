@@ -17,9 +17,9 @@ namespace Minigames.Fight
         {
             get
             {
-                foreach (StatusEffectInstance effectInstance in GameManager.PlayerEntity.Stats.StatusEffects)
+                foreach (var effect in GameManager.PlayerEntity.Stats.movementStats.moveSpeed.statusEffects)
                 {
-                    if (effectInstance.effect is SlowEffect)
+                    if (effect.statusEffect is SlowEffect)
                     {
                         return true;
                     }

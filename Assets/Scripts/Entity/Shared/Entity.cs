@@ -11,12 +11,13 @@ namespace Minigames.Fight
     public class Entity : MonoBehaviour
     {
         public bool Stunned { get; set; }
-        public MovementController MovementController;
         public VisualController VisualController;
-        public AnimationManager animationController;
+        public AnimationManager AnimationController;
+        public WeaponController WeaponController;
         public EntityStats Stats;
+        public Rigidbody2D Rigidbody2D;
         
-        public bool IsDead => Stats.currentHp <= 0;
+        public bool IsDead => Stats.combatStats.currentHp <= 0;
 
         protected EventService eventService;
 
@@ -26,9 +27,9 @@ namespace Minigames.Fight
         protected virtual void Awake()
         {
             eventService = Platform.EventService;
-            MovementController = GetComponent<MovementController>();
             VisualController = GetComponent<VisualController>();
-            animationController = GetComponent<AnimationManager>();
+            AnimationController = GetComponent<AnimationManager>();
+            Rigidbody2D = GetComponent<Rigidbody2D>();
             Setup();
         }
 
@@ -39,29 +40,10 @@ namespace Minigames.Fight
         
         protected virtual void Update()
         {
-            if (Stats.StatusEffects.Count > 0)
-            {
-                TickStatuses();
-            }
+            Stats.TickStatuses();
         }
 
-        protected void TickStatuses()
-        {
-            foreach (var statusEffect in Stats.StatusEffects.ToList())
-            {
-                statusEffect.OnTick(Time.deltaTime);
-            }
-        }
-        public virtual void TakeHit(HitData hit)
-        {
-            float damage = hit.CalculateDamage(this);
-
-            if (damage > 0)
-            {
-                TakeDamage(damage);
-            }
-        }
-        public virtual void TakeDamage(float damage)
+        public virtual void TakeHit(float damage, Entity hitter)
         {
             Stats.TakeDamage(damage);
 
@@ -69,13 +51,35 @@ namespace Minigames.Fight
 
             if (IsDead)
             {
-                Die();
+                Die(hitter);
             }
         }
 
-        protected virtual void Die()
+        public void DealDamage(Entity target)
         {
+            // Execute all of the onHit effects to populate the onHitDamage
+            foreach (var effect in Stats.combatStats.OnHitEffects)
+            {
+                effect.Execute(this, target);
+            }
 
+            float damage = WeaponController.CurrentWeapon.baseDamage.Calculated 
+                + WeaponController.CurrentWeapon.onHitDamage.Calculated;
+            target.TakeHit(damage, this);
+            
+            // Clear the onHitDamage because it is only used once per hit as many of the effects
+            // are dependent on target stats
+            WeaponController.CurrentWeapon.onHitDamage.Clear();
+        }
+
+        protected virtual void OnKill()
+        {
+            // Execute OnKillEffects.
+        }
+
+        protected virtual void Die(Entity killer)
+        {
+            killer.OnKill();
         }
     }
 }

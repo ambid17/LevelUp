@@ -27,11 +27,11 @@ namespace Minigames.Fight
         {
             slider.value = 0.2f;
             countUpText.text = "";
-            currentDnaText.text = GameManager.SettingsManager.progressSettings.Dna.ToString();
-            bankedDnaText.text = GameManager.SettingsManager.progressSettings.BankedDna.ToString();
+            currentDnaText.text = GameManager.ProgressSettings.Dna.ToString();
+            bankedDnaText.text = GameManager.ProgressSettings.BankedDna.ToString();
 
             // if we have no DNA to bank, disable bank button
-            bankButton.interactable = GameManager.SettingsManager.progressSettings.Dna > 0;
+            bankButton.interactable = GameManager.ProgressSettings.Dna > 0;
 
             StartCoroutine(RebuildUI());
         }
@@ -52,8 +52,8 @@ namespace Minigames.Fight
         private IEnumerator RunBankAnimation()
         {
             float totalAnimationTime = 5;
-            float startingDna = GameManager.SettingsManager.progressSettings.Dna;
-            float startingBankedDna = GameManager.SettingsManager.progressSettings.BankedDna;
+            float startingDna = GameManager.ProgressSettings.Dna;
+            float startingBankedDna = GameManager.ProgressSettings.BankedDna;
 
             slider.DOValue(1, totalAnimationTime);
 
@@ -73,8 +73,8 @@ namespace Minigames.Fight
 
             yield return new WaitForSeconds(1);
 
-            GameManager.SettingsManager.progressSettings.Dna = 0;
-            GameManager.SettingsManager.progressSettings.BankedDna = startingDna + startingBankedDna;
+            GameManager.ProgressSettings.Dna = 0;
+            GameManager.ProgressSettings.BankedDna = startingDna + startingBankedDna;
             Platform.EventService.Dispatch<CurrencyUpdatedEvent>();
 
             // we have no DNA to bank, disable bank button
