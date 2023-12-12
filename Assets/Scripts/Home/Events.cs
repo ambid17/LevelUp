@@ -17,13 +17,3 @@ public class TooltipShowEvent : IEvent
 }
 
 public class TooltipHideEvent { }
-
-public class WeaponSelectedEvent : IEvent
-{
-    public Weapon Weapon;
-
-    public WeaponSelectedEvent(Weapon weapon)
-    {
-        Weapon = weapon;
-    }
-}
