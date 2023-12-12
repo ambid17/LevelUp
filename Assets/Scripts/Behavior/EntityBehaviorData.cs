@@ -59,11 +59,12 @@ namespace Minigames.Fight
         public Transform PlayerTransform => myEntity.Target;
         public Vector2 PlayerPosition => myEntity.Target.position;
         public float Tick => tick + Time.deltaTime;
-        public float Speed => myEntity.enemyStats.MoveSpeed;
+        public float Speed => myEntity.Stats.movementStats.moveSpeed.Calculated;
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerPosition);
-        public float PursueDistance => (MyEntity.enemyStats.MeleeAttackRange * 0.5f);
-        public bool CanShoot => MyEntity.enemyStats.canShootTarget;
-        public bool CanMelee => MyEntity.enemyStats.canMeleeTarget;
+        // Stopping distance from the player is half of the weapons range
+        public float PursueDistance => (MyEntity.WeaponController.CurrentWeapon.MaxRange / 2);
+        public bool CanShoot => MyEntity.WeaponController.CanShoot();
+        public bool CanMelee => MyEntity.WeaponController.CanMelee();
         public virtual bool WithinVisionRadius => DistanceToPlayer <= MyEntity.enemyStats.DetectRange;
 
 

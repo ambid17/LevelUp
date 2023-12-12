@@ -71,7 +71,7 @@ namespace Minigames.Fight
         protected virtual void DamageAnimation()
         {
             MyEntity.Stunned = true;
-            StartCoroutine(MyEntity.animationController.Stun(takeHitAnimation, AfterStun));
+            StartCoroutine(MyEntity.AnimationController.Stun(takeHitAnimation, AfterStun));
             
         }
         private void AfterStun()

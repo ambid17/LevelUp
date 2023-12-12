@@ -28,8 +28,7 @@ namespace Minigames.Fight
             // Magic float for now because I'm not sure flexibility will ever be necessary.
             // Offsets animation speed and movement speed by the same amount to make enemies feel more natural.
             float randomOffset = Random.Range(.9f, 1.1f);
-            enemyStats.MoveSpeed *= randomOffset;
-            animationController.Anim.speed *= randomOffset;
+            AnimationController.Anim.speed *= randomOffset;
         }
 
 
@@ -46,7 +45,7 @@ namespace Minigames.Fight
         
             _isMarkedForDeath = true;
         
-            GameManager.CurrencyManager.EnemyKilled(enemyStats.GoldValue);
+            GameManager.CurrencyManager.EnemyKilled(enemyStats.goldValue);
 
             EnemyDeathAnimationPlayer deathAnimPlayer = Instantiate(deathAnimPlayerPrafab, transform.position, transform.rotation);
             deathAnimPlayer.SpriteRenderer.flipX = VisualController.SpriteRenderer.flipX;

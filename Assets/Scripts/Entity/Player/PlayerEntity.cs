@@ -25,7 +25,7 @@ namespace Minigames.Fight
 
         private PlayerAnimationController _animationControllerOverride;
 
-        private bool _canRevive;
+        private bool _hasFinishedDroppingResources;
 
         public InteractionType currentInteractionType = InteractionType.None;
 
@@ -33,7 +33,7 @@ namespace Minigames.Fight
         {
             base.Setup();
             eventService.Add<OnCanInteractEvent>(OnCanInteract);
-            _animationControllerOverride = animationController as PlayerAnimationController;
+            _animationControllerOverride = base.AnimationController as PlayerAnimationController;
         }
 
 
@@ -80,7 +80,7 @@ namespace Minigames.Fight
 
         IEnumerator DropResources()
         {
-            _canRevive = false;
+            _hasFinishedDroppingResources = false;
             ResourceTypeFloatDictionary localDictionary = GameManager.CurrencyManager.PhysicalResources;
             List<ResourceType> keys = new(localDictionary.Keys);
             int spawnCap = 10;
@@ -112,30 +112,31 @@ namespace Minigames.Fight
                 }
                 GameManager.CurrencyManager.ResetResource(resourceType);
             }
-            _canRevive = true;
+            _hasFinishedDroppingResources = true;
         }
 
         private IEnumerator WaitForRevive()
         {
             while (!_animationControllerOverride.IsAnimFinished)
             {
-                yield return null;
+                yield return new WaitForSeconds(0);
             }
 
-            yield return new WaitForSeconds(GameManager.SettingsManager.incomeSettings.DeathTimer);
-
-            while (!_canRevive)
+            while (!_hasFinishedDroppingResources)
             {
-                yield return null;
+                yield return new WaitForSeconds(0);
             }
 
             transform.position = GameManager.RoomManager.StartRoom.Tilemap.cellBounds.center;
 
+            // TODO: play revive sequence with the robot butler
             // Wait a bit before reviving to make sure no physics updates happen before you're in the start room.
             yield return new WaitForSeconds(0.1f);
 
             eventService.Dispatch<PlayerRevivedEvent>();
             _animationControllerOverride.ResetAnimations();
+            // Spawn back in in the idle animation state
+            // TODO: switch to default animation
             _animationControllerOverride.PlayRunAnimation();
         }
     }

@@ -34,12 +34,12 @@ namespace Minigames.Fight
             MeleeTimer += Time.deltaTime;
         }
         
-        protected virtual bool CanShoot()
+        public virtual bool CanShoot()
         {
             return true;
         }
 
-        protected virtual bool CanMelee()
+        public virtual bool CanMelee()
         {
             return true;
         }

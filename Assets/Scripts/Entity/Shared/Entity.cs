@@ -13,7 +13,7 @@ namespace Minigames.Fight
         public bool Stunned { get; set; }
         public MovementController MovementController;
         public VisualController VisualController;
-        public AnimationManager animationController;
+        public AnimationManager AnimationController;
         public WeaponController WeaponController;
         public EntityStats Stats;
         
@@ -29,7 +29,7 @@ namespace Minigames.Fight
             eventService = Platform.EventService;
             MovementController = GetComponent<MovementController>();
             VisualController = GetComponent<VisualController>();
-            animationController = GetComponent<AnimationManager>();
+            AnimationController = GetComponent<AnimationManager>();
             Setup();
         }
 
@@ -57,13 +57,19 @@ namespace Minigames.Fight
 
         public void DealDamage(Entity target)
         {
+            // Execute all of the onHit effects to populate the onHitDamage
             foreach (var effect in Stats.combatStats.OnHitEffects)
             {
                 effect.Execute(this, target);
             }
-           // float damage = Stats.combatStats.baseDamage.Calculated + Stats.combatStats.onHitDamage.Calculated;
-           // target.TakeHit(damage, this);
-           // Stats.combatStats.onHitDamage.Clear();
+
+            float damage = WeaponController.CurrentWeapon.baseDamage.Calculated 
+                + WeaponController.CurrentWeapon.onHitDamage.Calculated;
+            target.TakeHit(damage, this);
+            
+            // Clear the onHitDamage because it is only used once per hit as many of the effects
+            // are dependent on target stats
+            WeaponController.CurrentWeapon.onHitDamage.Clear();
         }
 
         protected virtual void OnKill()
