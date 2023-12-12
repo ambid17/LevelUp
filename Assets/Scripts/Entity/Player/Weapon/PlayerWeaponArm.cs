@@ -35,12 +35,12 @@ namespace Minigames.Fight
 
         public void Die()
         {
-            AnimationController.PlayDieAnimation(WeaponController._currentWeaponMode);
+            AnimationController.PlayDieAnimation(WeaponController.CurrentWeaponMode);
         }
 
         public void Revive()
         {
-            AnimationController.PlayReviveAnimation(WeaponController._currentWeaponMode);
+            AnimationController.PlayReviveAnimation(WeaponController.CurrentWeaponMode);
         }
 
         public void SwitchWeapons(PlayerChangedWeaponEvent e)
@@ -50,7 +50,7 @@ namespace Minigames.Fight
 
         public void Attack(float fireRate)
         {
-            AnimationController.PlayAttackAnimation(WeaponController._currentWeaponMode, fireRate);
+            AnimationController.PlayAttackAnimation(WeaponController.CurrentWeaponMode, fireRate);
         }
 
         public void ReturnToIdle()

@@ -74,13 +74,19 @@ namespace Minigames.Fight
             melee.Setup(MyEntity, _storedDirection);
         }
 
+        // Called by animator to ensure less than perfect aim.
+        // Resets melee timer to make animation cancelling more effective.
         public void SetMeleeDirection()
         {
+            MeleeTimer = 0;
             _storedDirection = GameManager.PlayerEntity.transform.position - meleeOffset.position;
         }
 
+        // Called by animator to ensure less than perfect aim.
+        // Resets shot timer to make animation cancelling more effective.
         public void SetProjectileDirection()
         {
+            ShotTimer = 0;
             _storedDirection = GameManager.PlayerEntity.transform.position - shootOffset.position;
             _storedTarget = GameManager.PlayerEntity.transform.position;
         }

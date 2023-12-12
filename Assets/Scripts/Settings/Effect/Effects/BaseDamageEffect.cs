@@ -12,7 +12,8 @@ namespace Minigames.Fight
 
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return entity.Stats.combatStats.baseDamage;
+            // return entity.Stats.combatStats.baseDamage;
+            return null;
         }
     }
 }

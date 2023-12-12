@@ -61,9 +61,9 @@ namespace Minigames.Fight
             {
                 effect.Execute(this, target);
             }
-            float damage = Stats.combatStats.baseDamage.Calculated + Stats.combatStats.onHitDamage.Calculated;
-            target.TakeHit(damage, this);
-            Stats.combatStats.onHitDamage.Clear();
+           // float damage = Stats.combatStats.baseDamage.Calculated + Stats.combatStats.onHitDamage.Calculated;
+           // target.TakeHit(damage, this);
+           // Stats.combatStats.onHitDamage.Clear();
         }
 
         protected virtual void OnKill()

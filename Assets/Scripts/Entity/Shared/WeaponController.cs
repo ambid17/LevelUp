@@ -8,8 +8,8 @@ namespace Minigames.Fight
 {
     public class WeaponController : MonoBehaviour
     {
-        protected WeaponMode _currentWeaponMode = WeaponMode.Projectile;
-        public WeaponStats CurrentWeapon => _currentWeaponMode == WeaponMode.Projectile ? _combatStats.projectileWeaponStats : _combatStats.meleeWeaponStats;
+        public WeaponMode CurrentWeaponMode = WeaponMode.Projectile;
+        public WeaponStats CurrentWeapon => CurrentWeaponMode == WeaponMode.Projectile ? _combatStats.projectileWeaponStats : _combatStats.meleeWeaponStats;
 
         protected CombatStats _combatStats;
 

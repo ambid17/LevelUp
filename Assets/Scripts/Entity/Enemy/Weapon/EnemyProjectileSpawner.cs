@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public class EnemyProjectileSpawner : EnemyProjectile
+    public class EnemyProjectileSpawner : ProjectileController
     {
         public Transform Offset => offSet;
 
@@ -13,7 +13,7 @@ namespace Minigames.Fight
         [SerializeField]
         private Transform offSet;
         [SerializeField]
-        private EnemyProjectile projectilePrefab;
+        private ProjectileController projectilePrefab;
         [SerializeField]
         private Sprite projectileSprite;
 
@@ -30,7 +30,7 @@ namespace Minigames.Fight
 
         public void SpawnProjectile()
         {
-            EnemyProjectile projectile = Instantiate(projectilePrefab);
+            ProjectileController projectile = Instantiate(projectilePrefab);
             projectile.transform.position = offSet.position;
             projectile.SetSprite(projectileSprite);
             projectile.Setup(_overridenEntity, _direction);

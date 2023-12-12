@@ -15,12 +15,9 @@ namespace Minigames.Fight
     {
         public PlayerAnimationController AnimationController => _animationControllerOverride;
         public Camera PlayerCamera => playerCamera;
-        public PlayerWeaponArmController WeaponArmController => weaponArmController;
 
         [SerializeField]
         private Camera playerCamera;
-        [SerializeField]
-        private PlayerWeaponArmController weaponArmController;
         [SerializeField]
         private Resource resourcePrefab;
         [SerializeField]

@@ -26,7 +26,7 @@ namespace Minigames.Fight
             _upgradeButton.onClick.AddListener(OpenUpgrades);
         
             SetGoldText();
-            SetHpSlider(new PlayerHpUpdatedEvent());
+           // SetHpSlider(new PlayerHpUpdatedEvent());
         }
 
         private void OpenUpgrades()

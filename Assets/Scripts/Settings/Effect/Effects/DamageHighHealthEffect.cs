@@ -19,7 +19,8 @@ namespace Minigames.Fight
 
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return entity.Stats.combatStats.baseDamage;
+            //     return entity.Stats.combatStats.baseDamage;
+            return null;
         }
 
         public override void OnCraft(Entity target)
@@ -31,7 +32,7 @@ namespace Minigames.Fight
         {
             if (target.Stats.combatStats.currentHp / target.Stats.combatStats.maxHp.Calculated > minHpPercent)
             {
-                source.Stats.combatStats.onHitDamage.AddSingleUseEffect(this);
+               // source.Stats.combatStats.onHitDamage.AddSingleUseEffect(this);
             }
         }
     }

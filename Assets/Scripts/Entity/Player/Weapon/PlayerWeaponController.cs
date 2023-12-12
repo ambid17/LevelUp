@@ -62,7 +62,7 @@ namespace Minigames.Fight
 
         private void TryShoot()
         {
-            if (_currentWeaponMode == WeaponMode.Melee)
+            if (CurrentWeaponMode == WeaponMode.Melee)
             {
                 return;
             }
@@ -71,7 +71,7 @@ namespace Minigames.Fight
 
         private void TryMelee()
         {
-            if (_currentWeaponMode == WeaponMode.Projectile)
+            if (CurrentWeaponMode == WeaponMode.Projectile)
             {
                 return;
             }
@@ -133,7 +133,7 @@ namespace Minigames.Fight
                 float indexOffset = (float)i - i / 2;
                 Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _combatStats.projectileWeaponStats.projectileSpread.Calculated;
 
-                projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
+                projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
                 projectile.Setup(MyEntity, direction);
             }
@@ -152,7 +152,7 @@ namespace Minigames.Fight
                 float indexOffset = (float)i - i / 2;
                 Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _combatStats.meleeWeaponStats.projectileSpread.Calculated;
 
-                projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
+                projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
                 projectile.Setup(MyEntity, direction);
             }

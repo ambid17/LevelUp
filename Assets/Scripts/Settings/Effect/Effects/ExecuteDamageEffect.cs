@@ -40,7 +40,7 @@ namespace Minigames.Fight
         {
             if (target.Stats.combatStats.currentHp / target.Stats.combatStats.maxHp.Calculated < executePercent)
             {
-                source.Stats.combatStats.onHitDamage.AddEffect(this);
+               // source.Stats.combatStats.onHitDamage.AddEffect(this);
             }
         }
 
