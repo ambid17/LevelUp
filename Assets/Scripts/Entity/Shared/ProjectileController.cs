@@ -13,7 +13,7 @@ namespace Minigames.Fight
         private EventService _eventService;
 
         public Entity MyEntity => _myEntity;
-        private CombatStats _myCombatStats => MyEntity.Stats.combatStats;
+        private WeaponStats _myWeaponStats => MyEntity.WeaponController.CurrentWeapon;
 
         private SpriteRenderer _spriteRenderer;
 
@@ -50,12 +50,12 @@ namespace Minigames.Fight
 
         protected  bool ShouldDie()
         {
-            return _deathTimer > _myCombatStats.projectileWeaponStats.projectileLifeTime.Calculated;
+            return _deathTimer >  _myWeaponStats.projectileLifeTime.Calculated;
         }
 
         protected void Move()
         {
-            Vector2 delta = _shootDirection * _myCombatStats.projectileWeaponStats.projectileMoveSpeed.Calculated * Time.deltaTime;
+            Vector2 delta = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated * Time.deltaTime;
             transform.position += new Vector3(delta.x, delta.y, 0);
         }
 

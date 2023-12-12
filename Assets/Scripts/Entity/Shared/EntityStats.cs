@@ -99,8 +99,13 @@ namespace Minigames.Fight
         }
     }
 
+    [Serializable]
     public class WeaponStats
     {
+        public float MaxRange => projectileLifeTime.Calculated * projectileMoveSpeed.Calculated;
+
+        public ProjectileController projectilePrefab;
+
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();
         public ModifiableStat projectileMoveSpeed = new();
@@ -110,6 +115,7 @@ namespace Minigames.Fight
         public ModifiableStat ammoRegenRate = new();
         public ModifiableStat projectilesPerShot = new();
         public ModifiableStat projectileSpread = new();
+        public ModifiableStat projectileSize = new();
 
         public float currentAmmo;
 
@@ -271,6 +277,11 @@ namespace Minigames.Fight
                     RecalculateStat();
                 }
             }
+        }
+
+        public void OverrideStat(float value)
+        {
+            calculated = value;
         }
     }
 

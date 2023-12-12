@@ -14,6 +14,7 @@ namespace Minigames.Fight
         public MovementController MovementController;
         public VisualController VisualController;
         public AnimationManager animationController;
+        public WeaponController WeaponController;
         public EntityStats Stats;
         
         public bool IsDead => Stats.combatStats.currentHp <= 0;

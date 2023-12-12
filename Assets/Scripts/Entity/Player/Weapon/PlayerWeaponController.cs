@@ -6,8 +6,6 @@ namespace Minigames.Fight
 {
     public class PlayerWeaponController : WeaponController
     {
-        public WeaponMode _currentWeaponMode = WeaponMode.Projectile;
-
         protected PlayerEntity _overridenEntity;
 
         public PlayerWeaponArm CurrentArm => _currentArm ?? leftArm;
@@ -16,8 +14,6 @@ namespace Minigames.Fight
         private PlayerWeaponArm leftArm;
         [SerializeField]
         private PlayerWeaponArm rightArm;
-        [SerializeField]
-        private PlayerProjectile projectilePrefab;
 
         private PlayerWeaponArm _currentArm;
         private Camera _cam;
@@ -27,9 +23,7 @@ namespace Minigames.Fight
 
         protected override void Start()
         {
-            MyEntity = GameManager.PlayerEntity;
             base.Start();
-            _overridenEntity = MyEntity as PlayerEntity;
 
             _currentArm = leftArm;
             _cam = GameManager.PlayerEntity.PlayerCamera;
@@ -48,7 +42,7 @@ namespace Minigames.Fight
             ControlArms();
             TryShoot();
             TryMelee();
-            MyEntity.Stats.combatStats.projectileWeaponStats.TryRegenAmmo();
+            _combatStats.projectileWeaponStats.TryRegenAmmo();
         }
 
         private void ControlArms()
@@ -72,7 +66,7 @@ namespace Minigames.Fight
             {
                 return;
             }
-            CurrentArm.Attack(MyEntity.Stats.combatStats.projectileWeaponStats.rateOfFire.Calculated);
+            CurrentArm.Attack(_combatStats.projectileWeaponStats.rateOfFire.Calculated);
         }
 
         private void TryMelee()
@@ -81,7 +75,7 @@ namespace Minigames.Fight
             {
                 return;
             }
-            CurrentArm.Attack(MyEntity.Stats.combatStats.meleeWeaponStats.rateOfFire.Calculated);
+            CurrentArm.Attack(_combatStats.meleeWeaponStats.rateOfFire.Calculated);
         }
 
         public void SwitchDirection(PlayerChangedDirectionEvent e)
@@ -120,29 +114,49 @@ namespace Minigames.Fight
 
         protected override bool CanShoot()
         {
-            return ShotTimer >= MyEntity.Stats.combatStats.projectileWeaponStats.rateOfFire.Calculated && Input.GetKey(KeyCode.Mouse0) && MyEntity.Stats.combatStats.projectileWeaponStats.maxAmmo.Calculated > 0;
+            return ShotTimer >= _combatStats.projectileWeaponStats.rateOfFire.Calculated && Input.GetKey(KeyCode.Mouse0) && _combatStats.projectileWeaponStats.maxAmmo.Calculated > 0;
         }
         protected override bool CanMelee()
         {
-            return MeleeTimer >= MyEntity.Stats.combatStats.meleeWeaponStats.rateOfFire.Calculated && Input.GetKey(KeyCode.Mouse0);
+            return MeleeTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Input.GetKey(KeyCode.Mouse0);
         }
 
         public override void Shoot()
         {
-            for (int i = 0; i < MyEntity.Stats.combatStats.projectileWeaponStats.projectilesPerShot.Calculated; i++)
+            for (int i = 0; i < _combatStats.projectileWeaponStats.projectilesPerShot.Calculated; i++)
             {
-                PlayerProjectile projectile = Instantiate(projectilePrefab);
+                ProjectileController projectile = Instantiate(_combatStats.projectileWeaponStats.projectilePrefab);
 
                 Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * MyEntity.Stats.combatStats.projectileWeaponStats.projectileSpread.Calculated;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _combatStats.projectileWeaponStats.projectileSpread.Calculated;
 
                 projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
                 projectile.Setup(MyEntity, direction);
             }
+            _combatStats.projectileWeaponStats.ConsumeAmmo(1);
+        }
+
+        public override void Melee()
+        {
+            for (int i = 0; i < _combatStats.meleeWeaponStats.projectilesPerShot.Calculated; i++)
+            {
+                ProjectileController projectile = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
+
+                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+                // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
+                float indexOffset = (float)i - i / 2;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _combatStats.meleeWeaponStats.projectileSpread.Calculated;
+
+                projectile.transform.position = _overridenEntity.WeaponArmController.CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
+
+                projectile.Setup(MyEntity, direction);
+            }
+            _combatStats.meleeWeaponStats.ConsumeAmmo(1);
         }
     }
 }
