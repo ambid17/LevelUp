@@ -20,10 +20,10 @@ namespace Minigames.Fight
         public List<Effect> OnTimerEffects = new();
         public List<Effect> OnPurchaseEffects = new();
 
-        public EntityStats()
+        public void Init()
         {
-            movementStats = new MovementStats();
-            combatStats = new CombatStats();
+            movementStats.Init();
+            combatStats.Init();
         }
 
         public void TickStatuses()
@@ -39,6 +39,7 @@ namespace Minigames.Fight
         }
     }
 
+    [Serializable]
     public class CombatStats
     {
         public WeaponStats meleeWeaponStats;
@@ -51,8 +52,10 @@ namespace Minigames.Fight
         public List<StatusEffectData> hpStatusEffects;
         public List<TimerEffectData> playerTimerEffects;
 
-        public CombatStats()
+        public void Init()
         {
+            meleeWeaponStats.Init();
+            projectileWeaponStats.Init();
         }
 
         public void AddHp(float hpToAdd)
@@ -139,9 +142,38 @@ namespace Minigames.Fight
 
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();
-        public List<StatusEffectData> ammoStatusEffects = new();
+        public List<StatusEffectData> AmmoStatusEffects = new();
 
         private float _regenTimer;
+
+        public void Init()
+        {
+            baseDamage.Init();
+            onHitDamage.Init();
+            projectileMoveSpeed.Init();
+            projectileLifeTime.Init();
+            rateOfFire.Init();
+            maxAmmo.Init();
+            ammoRegenRate.Init();
+            projectilesPerShot.Init();
+            projectileSpread.Init();
+            projectileSize.Init();
+
+            if(AoeEffects == null)
+            {
+                AoeEffects = new();
+            }
+
+            if (OnHitEffects == null)
+            {
+                OnHitEffects = new();
+            }
+
+            if (AmmoStatusEffects == null)
+            {
+                AmmoStatusEffects = new();
+            }
+        }
 
         public virtual void ConsumeAmmo(int ammoToConsume)
         {
@@ -182,6 +214,11 @@ namespace Minigames.Fight
     {
         public ModifiableStat moveSpeed;
 
+        public void Init()
+        {
+            moveSpeed.Init();
+        }
+
         public void TickStatuses()
         {
             moveSpeed.TickStatuses();
@@ -196,8 +233,8 @@ namespace Minigames.Fight
     // TODO handle types other than float
     public class ModifiableStat
     {
+        [SerializeField]
         private float baseValue;
-        public float BaseValue => baseValue;
 
         private float calculated;
         public float Calculated
@@ -214,11 +251,29 @@ namespace Minigames.Fight
         public List<StatModifierEffect> singleUseEffects;
         public List<StatusEffectData> statusEffects;
 
-        public ModifiableStat()
+        public void Init()
         {
-            flatEffects = new();
-            compoundingEffects = new();
-            statusEffects = new();
+            if(flatEffects == null)
+            {
+                flatEffects = new();
+            }
+
+            if(compoundingEffects == null)
+            {
+                compoundingEffects = new();
+            }
+
+            if (singleUseEffects == null)
+            {
+                singleUseEffects = new();
+            }
+
+            if(statusEffects == null)
+            {
+                statusEffects = new();
+            }
+
+            RecalculateStat();
         }
 
         public void AddEffect(StatModifierEffect effect)

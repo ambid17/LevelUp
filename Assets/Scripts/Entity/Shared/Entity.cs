@@ -35,7 +35,7 @@ namespace Minigames.Fight
 
         protected virtual void Setup()
         {
-            Stats = new EntityStats();
+            Stats.Init();
         }
         
         protected virtual void Update()
@@ -80,6 +80,16 @@ namespace Minigames.Fight
         protected virtual void Die(Entity killer)
         {
             killer.OnKill();
+        }
+
+
+        [ContextMenu("Setup")]
+        public void SetupInspector()
+        {
+            VisualController = GetComponent<VisualController>();
+            AnimationController = GetComponent<AnimationManager>();
+            WeaponController = GetComponent<WeaponController>();
+            Rigidbody2D = GetComponent<Rigidbody2D>();
         }
     }
 }

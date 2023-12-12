@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2456182786003906160}
   - component: {fileID: 8449435345535733019}
-  - component: {fileID: 9209020533433039234}
   - component: {fileID: 6870224812161163531}
   - component: {fileID: 7758767726815708866}
   - component: {fileID: 6419289964741653836}
+  - component: {fileID: 4186852672648367031}
   m_Layer: 0
-  m_Name: MeleeAoE
+  m_Name: MeleeProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,21 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9209020533433039234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6979810435258772111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0eaba4f5ac4ee468cf56c31019f0b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToLive: 5
-  moveSpeed: 5
-  anim: {fileID: 6870224812161163531}
 --- !u!95 &6870224812161163531
 Animator:
   serializedVersion: 5
@@ -171,3 +156,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8449435345535733019}
+--- !u!114 &4186852672648367031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979810435258772111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b6cd904d84c67429c6576ee5aa31ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

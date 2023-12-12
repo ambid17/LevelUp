@@ -212,6 +212,162 @@ MonoBehaviour:
   VisualController: {fileID: 5632584843697323075}
   AnimationController: {fileID: 5632584843697323082}
   WeaponController: {fileID: 0}
+  Stats:
+    movementStats:
+      moveSpeed:
+        baseValue: 2
+        flatEffects: []
+        compoundingEffects: []
+        singleUseEffects: []
+        statusEffects: []
+    combatStats:
+      meleeWeaponStats:
+        projectilePrefab: {fileID: 735428608842954597, guid: 23b8dfa1611f6464cb08a80ba0610156, type: 3}
+        baseDamage:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        onHitDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileMoveSpeed:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileLifeTime:
+          baseValue: 0.1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        rateOfFire:
+          baseValue: 2
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        maxAmmo:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        ammoRegenRate:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectilesPerShot:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSpread:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSize:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        currentAmmo: 0
+        AoeEffects: []
+        OnHitEffects: []
+        ammoStatusEffects: []
+      projectileWeaponStats:
+        projectilePrefab: {fileID: 0}
+        baseDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        onHitDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileMoveSpeed:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileLifeTime:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        rateOfFire:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        maxAmmo:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        ammoRegenRate:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectilesPerShot:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSpread:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSize:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        currentAmmo: 0
+        AoeEffects: []
+        OnHitEffects: []
+        ammoStatusEffects: []
+      maxHp:
+        baseValue: 5
+        flatEffects: []
+        compoundingEffects: []
+        singleUseEffects: []
+        statusEffects: []
+      currentHp: 0
+      DamageTakenThisSecond: 0
+      hpStatusEffects: []
+      playerTimerEffects: []
+    OnKillEffects: []
+    OnDeathEffects: []
+    OnTakeDamageEffects: []
+    OnTimerEffects: []
+    OnPurchaseEffects: []
   Rigidbody2D: {fileID: 5632584843697323072}
   tickDamageDownPerSecond: 0
   enemyStats:

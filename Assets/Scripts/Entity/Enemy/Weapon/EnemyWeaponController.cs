@@ -109,5 +109,14 @@ namespace Minigames.Fight
 
             return difference.normalized;
         }
+
+        [ContextMenu("Setup")]
+        public void SetupInspector()
+        {
+            unflippedShootOffset = transform;
+            unflippedMeleeOffset = transform;
+            flippedMeleeOffset = transform;
+            flippedShootOffset = transform;
+        }
     }
 }

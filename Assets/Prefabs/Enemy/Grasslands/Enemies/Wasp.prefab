@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 5979765343580716154}
   - component: {fileID: 5979765343580716155}
   - component: {fileID: 5979765343580716156}
-  - component: {fileID: 5979765343580716144}
   - component: {fileID: 5979765343580716145}
   - component: {fileID: 5979765343580716146}
   - component: {fileID: 5979765343580716147}
@@ -122,6 +121,7 @@ GameObject:
   - component: {fileID: 2854591839937308184}
   - component: {fileID: 863201625223484589}
   - component: {fileID: 5385215658125782457}
+  - component: {fileID: 5755726660791847325}
   m_Layer: 9
   m_Name: Wasp
   m_TagString: Untagged
@@ -209,24 +209,171 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementController: {fileID: 0}
   VisualController: {fileID: 5979765343580716145}
-  animationController: {fileID: 5979765343580716152}
+  AnimationController: {fileID: 5979765343580716152}
+  WeaponController: {fileID: 0}
+  Stats:
+    movementStats:
+      moveSpeed:
+        baseValue: 2
+        flatEffects: []
+        compoundingEffects: []
+        singleUseEffects: []
+        statusEffects: []
+    combatStats:
+      meleeWeaponStats:
+        projectilePrefab: {fileID: 735428608842954597, guid: 23b8dfa1611f6464cb08a80ba0610156, type: 3}
+        baseDamage:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        onHitDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileMoveSpeed:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileLifeTime:
+          baseValue: 0.1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        rateOfFire:
+          baseValue: 2
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        maxAmmo:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        ammoRegenRate:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectilesPerShot:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSpread:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSize:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        currentAmmo: 0
+        AoeEffects: []
+        OnHitEffects: []
+        ammoStatusEffects: []
+      projectileWeaponStats:
+        projectilePrefab: {fileID: 0}
+        baseDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        onHitDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileMoveSpeed:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileLifeTime:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        rateOfFire:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        maxAmmo:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        ammoRegenRate:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectilesPerShot:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSpread:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        projectileSize:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+        currentAmmo: 0
+        AoeEffects: []
+        OnHitEffects: []
+        ammoStatusEffects: []
+      maxHp:
+        baseValue: 5
+        flatEffects: []
+        compoundingEffects: []
+        singleUseEffects: []
+        statusEffects: []
+      currentHp: 0
+      DamageTakenThisSecond: 0
+      hpStatusEffects: []
+      playerTimerEffects: []
+    OnKillEffects: []
+    OnDeathEffects: []
+    OnTakeDamageEffects: []
+    OnTimerEffects: []
+    OnPurchaseEffects: []
+  Rigidbody2D: {fileID: 5979765343580716146}
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
-    moveSpeed: 3
-    maxHp: 5
-    projectileSpeed: 0
-    projectileLifeTime: 0
-    effects: []
-    canShootTarget: 0
-    canMeleeTarget: 0
-    randomProjectileOffset: 0
-    predictTargetPosition: 0
     isPassive: 0
     DetectRange: 5
-    MeleeAttackRange: 2
   deathAnimation:
     Name: Wasp_Die
     CanBeCancelled: 0
@@ -234,19 +381,6 @@ MonoBehaviour:
     AcceptableOverrideTime: 0
     CurrentIndex: 4
   deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 0180491739f588e4eb4815ad5df39c95, type: 3}
---- !u!114 &5979765343580716144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5979765343580716157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65248136d7f9c534fba845dddfddb2af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 086c15e3a1bbd0f4eb41b64853538c86, type: 2}
 --- !u!114 &5979765343580716145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,8 +650,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!95 &863201625223484589
 Animator:
   serializedVersion: 5
@@ -551,3 +685,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5979765343580716155}
+--- !u!114 &5755726660791847325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979765343580716157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8edd9ff3556b74e40a74765fcc08331d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWeaponMode: 0
+  unflippedShootOffset: {fileID: 0}
+  flippedShootOffset: {fileID: 0}
+  flippedMeleeOffset: {fileID: 0}
+  unflippedMeleeOffset: {fileID: 0}
+  _destroyOnReachTarget: 0
