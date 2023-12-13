@@ -52,12 +52,12 @@ namespace Minigames.Fight
             Move();
         }
 
-        protected  bool ShouldDie()
+        protected virtual bool ShouldDie()
         {
             return _deathTimer >  _myWeaponStats.projectileLifeTime.Calculated;
         }
 
-        protected void Move()
+        protected virtual void Move()
         {
             _rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
         }

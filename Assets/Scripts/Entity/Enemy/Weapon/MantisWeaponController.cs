@@ -15,10 +15,11 @@ namespace Minigames.Fight
         private int minCombo = 5;
         [SerializeField]
         private int maxCombo = 10;
-
+        [SerializeField]
         private WeaponStats _comboWeapon = new();
 
         private float _comboTimer;
+
         protected override void Update()
         {
             base.Update();
@@ -27,13 +28,16 @@ namespace Minigames.Fight
 
         public void ShootCombo()
         {
-
-        }
-
-        // Called by animator to ensure cooldown gets called appropriately.
-        public void ResetCombo()
-        {
             _comboTimer = 0;
+            ProjectileController melee = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
+
+            melee.transform.position = meleeOffset.position;
+            melee.transform.rotation = PhysicsUtils.LookAt(transform, _storedTarget, 180);
+
+            // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
+            CurrentWeaponMode = WeaponMode.Melee;
+
+            melee.Setup(MyEntity, _storedDirection);
         }
     }
 }

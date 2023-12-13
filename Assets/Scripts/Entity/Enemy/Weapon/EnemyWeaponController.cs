@@ -9,8 +9,8 @@ namespace Minigames.Fight
     public class EnemyWeaponController : WeaponController
     {
         public Vector2 CurrentOffsetPosition => CurrentWeaponMode == WeaponMode.Projectile ? shootOffset.position : meleeOffset.position;
-        private Transform shootOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedShootOffset : unflippedShootOffset;
-        private Transform meleeOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedMeleeOffset : unflippedMeleeOffset;
+        protected Transform shootOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedShootOffset : unflippedShootOffset;
+        protected Transform meleeOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedMeleeOffset : unflippedMeleeOffset;
 
         [SerializeField]
         private Transform unflippedShootOffset;
@@ -24,8 +24,8 @@ namespace Minigames.Fight
         [SerializeField]
         private bool _destroyOnReachTarget;
 
-        private Vector2 _storedDirection;
-        private Vector2 _storedTarget;
+        protected Vector2 _storedDirection;
+        protected Vector2 _storedTarget;
 
         private float _timeToReachTarget;
 
@@ -68,7 +68,7 @@ namespace Minigames.Fight
             // The pursue distance now checks the distance relative to the position the melee object instantiate instead of transform.position
             // this means the enemy will never be able to attack. Additionally the entire purpose for checking proximity was that damage was applied directly,
             // now the melee VFX actually have to touch the player making this check unecessary.
-            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated;
+            return MeleeTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated;
         }
 
         public override void Melee()

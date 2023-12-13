@@ -24,7 +24,7 @@ namespace Minigames.Fight
         [SerializeField]
         private Sprite projectileSprite;
         [SerializeField]
-        private AnimatorController animation;
+        private AnimatorController _animation;
         [SerializeField]
         private float angleOffset = -180;
 
@@ -34,10 +34,20 @@ namespace Minigames.Fight
 
         public override void Setup(Entity myEntity, Vector2 direction)
         {
+            base.Setup(myEntity, direction);
             _overridenEntity = myEntity;
             _direction = direction;
             float rotationToTarget = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg + angleOffset;
             transform.rotation = Quaternion.AngleAxis(rotationToTarget, Vector3.forward);
+        }
+
+        protected override void Move()
+        {
+        }
+
+        protected override bool ShouldDie()
+        {
+            return anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1;
         }
 
         /// <summary>
@@ -48,7 +58,7 @@ namespace Minigames.Fight
             ProjectileController projectile = Instantiate(projectilePrefab);
             projectile.transform.position = offSet.position;
             projectile.Setup(_overridenEntity, _direction);
-            projectile.OverrideVisuals(projectileSprite, animation);
+            projectile.OverrideVisuals(projectileSprite, _animation);
         }
     }
 }
