@@ -16,6 +16,7 @@ namespace Minigames.Fight
         private WeaponStats _myWeaponStats;
 
         private SpriteRenderer _spriteRenderer;
+        private Rigidbody2D rb;
 
 
         protected virtual void Start()
@@ -24,6 +25,7 @@ namespace Minigames.Fight
             _eventService.Add<PlayerDiedEvent>(Die);
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>();
         }
 
         private void OnDestroy()
@@ -40,6 +42,10 @@ namespace Minigames.Fight
                 Die();
             }
 
+            
+        }
+        private void FixedUpdate()
+        {
             Move();
         }
 
@@ -55,8 +61,7 @@ namespace Minigames.Fight
 
         protected void Move()
         {
-            Vector2 delta = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated * Time.deltaTime;
-            transform.position += new Vector3(delta.x, delta.y, 0);
+            rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
         }
 
         public virtual void Setup(Entity myEntity, Vector2 direction)
