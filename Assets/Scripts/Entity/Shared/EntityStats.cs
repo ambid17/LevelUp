@@ -54,6 +54,18 @@ namespace Minigames.Fight
         {
             meleeWeaponStats.Init();
             projectileWeaponStats.Init();
+            maxHp.Init();
+
+            if (hpStatusEffects == null)
+            {
+                hpStatusEffects = new();
+            }
+            if (playerTimerEffects == null)
+            {
+                playerTimerEffects = new();
+            }
+
+            currentHp = maxHp.Calculated;
         }
 
         public void AddHp(float hpToAdd)
@@ -130,6 +142,10 @@ namespace Minigames.Fight
         public float currentAmmo;
         [JsonIgnore]
         private float _regenTimer;
+        [JsonIgnore]
+        public LayerMask targetLayers;
+        [JsonIgnore]
+        public LayerMask destroyOnImpactLayers;
 
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();
@@ -141,6 +157,8 @@ namespace Minigames.Fight
         public ModifiableStat projectilesPerShot = new();
         public ModifiableStat projectileSpread = new();
         public ModifiableStat projectileSize = new();
+
+        
 
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();
@@ -158,6 +176,8 @@ namespace Minigames.Fight
             projectilesPerShot.Init();
             projectileSpread.Init();
             projectileSize.Init();
+
+            currentAmmo = maxAmmo.Calculated;
 
             if(AoeEffects == null)
             {

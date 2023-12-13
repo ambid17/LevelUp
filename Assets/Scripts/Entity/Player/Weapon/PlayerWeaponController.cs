@@ -181,6 +181,8 @@ namespace Minigames.Fight
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
+                projectile.transform.rotation = PhysicsUtils.LookAt(transform, GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
+
                 projectile.Setup(MyEntity, direction);
             }
             MeleeTimer = 0;

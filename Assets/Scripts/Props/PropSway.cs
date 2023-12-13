@@ -80,6 +80,14 @@ public class PropSway : MonoBehaviour
     {
         foreach (Transform t in _enteredEntities.ToList())
         {
+            // Projectiles move so fast that they sometimes leave the trigger area before the next physics update
+            // and will sometimes destroy themselves while inside of the trigger area
+            // this failsafe will ensure we never check a null transform.
+            if (t == null)
+            {
+                _enteredEntities.Remove(t);
+                continue;
+            }
             if (Vector2.Distance(t.position, transform.position) <= triggerDistance)
             {
                 _enteredEntities.Remove(t);
@@ -89,6 +97,11 @@ public class PropSway : MonoBehaviour
         }
         foreach (Transform t in _triggeredEntities.ToList())
         {
+            if (t == null)
+            {
+                _triggeredEntities.Remove(t);
+                continue;
+            }
             if (Vector2.Distance(t.position, transform.position) > triggerDistance)
             {
                 _triggeredEntities.Remove(t);

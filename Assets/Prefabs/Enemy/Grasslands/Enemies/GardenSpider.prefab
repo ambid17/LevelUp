@@ -264,6 +264,7 @@ MonoBehaviour:
         compoundingEffects: []
         singleUseEffects: []
         statusEffects: []
+        overrideEffect: {fileID: 0}
     combatStats:
       meleeWeaponStats:
         projectilePrefab: {fileID: 735428608842954597, guid: 23b8dfa1611f6464cb08a80ba0610156, type: 3}
@@ -273,60 +274,70 @@ MonoBehaviour:
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         onHitDamage:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileMoveSpeed:
           baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileLifeTime:
           baseValue: 0.1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         rateOfFire:
           baseValue: 2
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         maxAmmo:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         ammoRegenRate:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectilesPerShot:
           baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSpread:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSize:
           baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
@@ -339,60 +350,70 @@ MonoBehaviour:
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         onHitDamage:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileMoveSpeed:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileLifeTime:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         rateOfFire:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         maxAmmo:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         ammoRegenRate:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectilesPerShot:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSpread:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSize:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
@@ -403,6 +424,7 @@ MonoBehaviour:
         compoundingEffects: []
         singleUseEffects: []
         statusEffects: []
+        overrideEffect: {fileID: 0}
       currentHp: 0
       DamageTakenThisSecond: 0
       hpStatusEffects: []
@@ -750,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf451aa77dc50f74485532d5a22b4e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 5054155416519530242}
   defaultAnimation:
     Name: 
     CanBeCancelled: 0
@@ -809,7 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 8510735526301981991}
 --- !u!114 &4967633341327300346
 MonoBehaviour:
   m_ObjectHideFlags: 0
