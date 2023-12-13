@@ -20,7 +20,7 @@ namespace Minigames.Fight
         public List<Effect> OnTimerEffects = new();
         public List<Effect> OnPurchaseEffects = new();
 
-        public void Init(string overrideFilePath)
+        public void Init(string overrideFilePath = "")
         {
             // TODO: figure out how to get the right file path
             movementStats.Init();
