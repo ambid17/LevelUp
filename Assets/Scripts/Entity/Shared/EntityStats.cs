@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,13 +13,7 @@ namespace Minigames.Fight
     {
         public MovementStats movementStats;
         public CombatStats combatStats;
-
-        // Effects
-        public List<Effect> OnKillEffects = new();
-        public List<Effect> OnDeathEffects = new();
-        public List<Effect> OnTakeDamageEffects = new();
-        public List<Effect> OnTimerEffects = new();
-        public List<Effect> OnPurchaseEffects = new();
+        
 
         public void Init(string overrideFilePath = "")
         {
@@ -47,7 +42,9 @@ namespace Minigames.Fight
         public WeaponStats projectileWeaponStats;
         public ModifiableStat maxHp = new();
 
+        [NonSerialized]
         public float currentHp;
+        [NonSerialized]
         public float DamageTakenThisSecond;
         
         public List<StatusEffectData> hpStatusEffects;
@@ -124,9 +121,15 @@ namespace Minigames.Fight
     [Serializable]
     public class WeaponStats
     {
+        [JsonIgnore]
         public float MaxRange => projectileLifeTime.Calculated * projectileMoveSpeed.Calculated;
 
+        [JsonIgnore]
         public ProjectileController projectilePrefab;
+        [JsonIgnore]
+        public float currentAmmo;
+        [JsonIgnore]
+        private float _regenTimer;
 
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();
@@ -139,13 +142,9 @@ namespace Minigames.Fight
         public ModifiableStat projectileSpread = new();
         public ModifiableStat projectileSize = new();
 
-        public float currentAmmo;
-
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();
         public List<StatusEffectData> AmmoStatusEffects = new();
-
-        private float _regenTimer;
 
         public void Init()
         {
@@ -237,8 +236,10 @@ namespace Minigames.Fight
     {
         [SerializeField]
         private float baseValue;
+        public float BaseValue => baseValue;
 
         private float calculated;
+        [JsonIgnore]
         public float Calculated
         {
             get
@@ -250,10 +251,18 @@ namespace Minigames.Fight
 
         public List<StatModifierEffect> flatEffects;
         public List<StatModifierEffect> compoundingEffects;
+        [JsonIgnore]
         public List<StatModifierEffect> singleUseEffects;
+        [JsonIgnore]
         public List<StatusEffectData> statusEffects;
         // If this effect is set, it will override all other effects and negate them
         public StatModifierEffect overrideEffect;
+
+        public List<Effect> OnKillEffects = new();
+        public List<Effect> OnDeathEffects = new();
+        public List<Effect> OnTakeDamageEffects = new();
+        public List<Effect> OnTimerEffects = new();
+        public List<Effect> OnPurchaseEffects = new();
 
         public void Init()
         {
@@ -373,6 +382,7 @@ namespace Minigames.Fight
             calculated = value;
         }
     }
+
     [Serializable]
     public class TimerEffectData
     {
@@ -400,6 +410,7 @@ namespace Minigames.Fight
             }
         }
     }
+
     [Serializable]
     public class StatusEffectData
     {
