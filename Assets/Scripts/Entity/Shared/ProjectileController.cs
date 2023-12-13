@@ -86,16 +86,18 @@ namespace Minigames.Fight
                 Die();
             }
 
-            if (!IsValidTarget(col.gameObject.layer))
+            if ((_myWeaponStats.targetLayers.value & (1 << col.transform.gameObject.layer)) > 0)
             {
-                return;
+                Entity target = col.gameObject.GetComponent<Entity>();
+
+                MyEntity.DealDamage(target, _myWeaponStats);
             }
 
-            Entity target = col.gameObject.GetComponent<Entity>();
-
-            MyEntity.DealDamage(target, _myWeaponStats);
-
-            Die();
+            if ((_myWeaponStats.destroyOnImpactLayers.value & (1 << col.transform.gameObject.layer)) > 0)
+            {
+                Die();
+            }
+            
         }
 
         protected virtual bool IsValidTarget(int layer)

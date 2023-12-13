@@ -153,6 +153,9 @@ namespace Minigames.Fight
 
         public float currentAmmo;
 
+        public LayerMask targetLayers;
+        public LayerMask destroyOnImpactLayers;
+
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();
         public List<StatusEffectData> AmmoStatusEffects = new();
