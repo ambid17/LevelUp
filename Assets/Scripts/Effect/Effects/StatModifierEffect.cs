@@ -8,7 +8,8 @@ namespace Minigames.Fight
     public enum StatImpactType
     {
         Flat,
-        Compounding
+        Compounding,
+        ManualSet
     }
 
     [Serializable]
@@ -58,6 +59,9 @@ namespace Minigames.Fight
             else if(statImpactType == StatImpactType.Compounding)
             {
                 return stat * Impact;
+            }else if(statImpactType == StatImpactType.ManualSet)
+            {
+                return Impact;
             }
 
             return stat;

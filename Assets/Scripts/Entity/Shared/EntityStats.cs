@@ -251,6 +251,7 @@ namespace Minigames.Fight
         public List<StatModifierEffect> compoundingEffects;
         public List<StatModifierEffect> singleUseEffects;
         public List<StatusEffectData> statusEffects;
+        public StatModifierEffect overrideEffect;
 
         public void Init()
         {
@@ -283,9 +284,13 @@ namespace Minigames.Fight
             {
                 flatEffects.Add(effect);
             }
-            else
+            else if(effect.statImpactType == StatImpactType.Compounding)
             {
                 compoundingEffects.Add(effect);
+            }
+            else
+            {
+                overrideEffect = effect;
             }
             RecalculateStat();
         }
@@ -313,6 +318,13 @@ namespace Minigames.Fight
 
         public void RecalculateStat()
         {
+            // Allows the designer to set a hard override for any stat with an effect
+            if (overrideEffect != null)
+            {
+                calculated = overrideEffect.ImpactStat(calculated);
+                return;
+            }
+
             calculated = baseValue;
 
             foreach (var effect in flatEffects)

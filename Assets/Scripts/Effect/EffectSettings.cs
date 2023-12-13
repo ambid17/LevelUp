@@ -12,8 +12,6 @@ namespace Minigames.Fight
     {
         [Header("Set in Editor")] public List<Upgrade> AllUpgrades;
 
-        public List<Effect> OnHitEffects = new();
-
         public void SetDefaults()
         {
             foreach (var upgrade in AllUpgrades)
