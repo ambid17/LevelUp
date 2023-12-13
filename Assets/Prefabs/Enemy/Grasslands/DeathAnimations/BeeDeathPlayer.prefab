@@ -146,14 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cbe53486b0e3c48ab5d9fc67781b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 3360778816388492033}
-  Anim: {fileID: 5806668680758904361}
-  DeathAnim:
-    Name: Bee_Die
-    CanBeCancelled: 0
-    MaxBufferPercentage: 0.8
-    AcceptableOverrideTime: 0.05
-    CurrentIndex: 0
+  spriteRenderer: {fileID: 3360778816388492033}
+  anim: {fileID: 5806668680758904361}
 --- !u!212 &3360778816388492033
 SpriteRenderer:
   m_ObjectHideFlags: 0

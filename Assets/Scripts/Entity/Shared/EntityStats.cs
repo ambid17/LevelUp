@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -146,6 +147,10 @@ namespace Minigames.Fight
         public LayerMask targetLayers;
         [JsonIgnore]
         public LayerMask destroyOnImpactLayers;
+
+        public Sprite sprite;
+
+        public AnimatorController animation;
 
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();

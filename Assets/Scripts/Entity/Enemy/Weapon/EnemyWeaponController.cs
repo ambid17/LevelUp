@@ -8,6 +8,7 @@ namespace Minigames.Fight
 {
     public class EnemyWeaponController : WeaponController
     {
+        public Vector2 CurrentOffsetPosition => CurrentWeaponMode == WeaponMode.Projectile ? shootOffset.position : meleeOffset.position;
         private Transform shootOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedShootOffset : unflippedShootOffset;
         private Transform meleeOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedMeleeOffset : unflippedMeleeOffset;
 
@@ -63,7 +64,11 @@ namespace Minigames.Fight
 
         public override bool CanMelee()
         {
-            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Vector2.Distance(GameManager.PlayerEntity.transform.position, transform.position) < _combatStats.meleeWeaponStats.MaxRange;
+            // Removed the requirement to be within range.
+            // The pursue distance now checks the distance relative to the position the melee object instantiate instead of transform.position
+            // this means the enemy will never be able to attack. Additionally the entire purpose for checking proximity was that damage was applied directly,
+            // now the melee VFX actually have to touch the player making this check unecessary.
+            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated;
         }
 
         public override void Melee()
@@ -71,9 +76,10 @@ namespace Minigames.Fight
             ProjectileController melee = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
 
             melee.transform.position = meleeOffset.position;
+            melee.transform.rotation = PhysicsUtils.LookAt(transform, _storedTarget, 180);
 
             // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
-            CurrentWeaponMode = WeaponMode.Projectile;
+            CurrentWeaponMode = WeaponMode.Melee;
 
             melee.Setup(MyEntity, _storedDirection);
         }
@@ -84,6 +90,7 @@ namespace Minigames.Fight
         {
             MeleeTimer = 0;
             _storedDirection = GameManager.PlayerEntity.transform.position - meleeOffset.position;
+            _storedTarget = GameManager.PlayerEntity.transform.position;
         }
 
         // Called by animator to ensure less than perfect aim.

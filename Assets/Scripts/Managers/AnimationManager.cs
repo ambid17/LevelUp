@@ -119,6 +119,7 @@ public class AnimationManager : MonoBehaviour
         OverrideAnimation(name, 0);
         while (!IsAnimPlaying(name))
         {
+            OverrideAnimation(name, 0);
             yield return new WaitForSeconds(0);
         }
         while (!IsAnimFinished)

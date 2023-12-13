@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EnemyDeathAnimationPlayer : MonoBehaviour
 {
-    public SpriteRenderer SpriteRenderer;
-
     [SerializeField]
-    private Animator Anim;
+    private SpriteRenderer spriteRenderer;
     [SerializeField]
-    private AnimationName DeathAnim;
+    private Animator anim;
 
-    public void Start()
+    public void Setup(SpriteRenderer renderer, AnimatorController animation)
     {
-        Anim.Play(DeathAnim.Name);
+        spriteRenderer.sprite = renderer.sprite;
+        spriteRenderer.flipX = renderer.flipX;
+        anim.runtimeAnimatorController = animation;
     }
 }

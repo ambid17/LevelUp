@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 using Utils;
 
@@ -16,16 +17,18 @@ namespace Minigames.Fight
         private WeaponStats _myWeaponStats;
 
         private SpriteRenderer _spriteRenderer;
-        private Rigidbody2D rb;
+        private Rigidbody2D _rb;
+        private Animator _anim;
 
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             _eventService = Platform.EventService;
             _eventService.Add<PlayerDiedEvent>(Die);
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            rb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
         private void OnDestroy()
@@ -49,11 +52,6 @@ namespace Minigames.Fight
             Move();
         }
 
-        public virtual void SetSprite(Sprite sprite)
-        {
-            _spriteRenderer.sprite = sprite;
-        }
-
         protected  bool ShouldDie()
         {
             return _deathTimer >  _myWeaponStats.projectileLifeTime.Calculated;
@@ -61,7 +59,7 @@ namespace Minigames.Fight
 
         protected void Move()
         {
-            rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
+            _rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
         }
 
         public virtual void Setup(Entity myEntity, Vector2 direction)
@@ -72,6 +70,12 @@ namespace Minigames.Fight
             // Grab the current weapon stats on setup
             // If we did this anywhere else later on, the current weapon could be swapped out
             _myWeaponStats = MyEntity.WeaponController.CurrentWeapon;
+
+            _spriteRenderer.sprite = _myWeaponStats.sprite;
+            if (_myWeaponStats.animation != null)
+            {
+                _anim.runtimeAnimatorController = _myWeaponStats.animation;
+            }
         }
 
         protected void OnTriggerEnter2D(Collider2D col)
@@ -100,9 +104,13 @@ namespace Minigames.Fight
             
         }
 
-        protected virtual bool IsValidTarget(int layer)
+        public virtual void OverrideVisuals(Sprite sprite, AnimatorController animation)
         {
-            return true;
+            _spriteRenderer.sprite = sprite;
+            if (animation != null)
+            {
+                _anim.runtimeAnimatorController = animation;
+            }
         }
 
         protected virtual void Die()

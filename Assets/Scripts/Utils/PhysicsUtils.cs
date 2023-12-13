@@ -84,6 +84,11 @@ public static class PhysicsUtils
 
         RaycastHit2D hit = Physics2D.Linecast(source.position, target.position, layerMask);
 
+        if (hit.collider == null)
+        {
+            return null;
+        }
+
         // Check we have line of sight of the correct target
         if(hit.collider.gameObject.GetInstanceID() != target.gameObject.GetInstanceID())
         {

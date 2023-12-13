@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -23,6 +24,8 @@ namespace Minigames.Fight
         [SerializeField]
         private Sprite projectileSprite;
         [SerializeField]
+        private AnimatorController animation;
+        [SerializeField]
         private float angleOffset = -180;
 
         private Entity _overridenEntity;
@@ -44,8 +47,8 @@ namespace Minigames.Fight
         {
             ProjectileController projectile = Instantiate(projectilePrefab);
             projectile.transform.position = offSet.position;
-            projectile.SetSprite(projectileSprite);
             projectile.Setup(_overridenEntity, _direction);
+            projectile.OverrideVisuals(projectileSprite, animation);
         }
     }
 }
