@@ -234,7 +234,7 @@ MonoBehaviour:
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
-        ammoStatusEffects: []
+        AmmoStatusEffects: []
       projectileWeaponStats:
         projectilePrefab: {fileID: 0}
         baseDamage:
@@ -300,7 +300,7 @@ MonoBehaviour:
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
-        ammoStatusEffects: []
+        AmmoStatusEffects: []
       maxHp:
         baseValue: 5
         flatEffects: []
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edd9ff3556b74e40a74765fcc08331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeaponMode: 1
+  CurrentWeaponMode: 0
   unflippedShootOffset: {fileID: 8510735526301981977}
   flippedShootOffset: {fileID: 8510735526301981977}
   flippedMeleeOffset: {fileID: 8510735526301981977}
@@ -594,8 +594,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5

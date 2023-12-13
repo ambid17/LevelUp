@@ -150,19 +150,19 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
         projectileMoveSpeed:
-          baseValue: 8
+          baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
         projectileLifeTime:
-          baseValue: 5
+          baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
         rateOfFire:
-          baseValue: 1
+          baseValue: 0.001
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -174,7 +174,7 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
         ammoRegenRate:
-          baseValue: 1
+          baseValue: 0.0001
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -186,7 +186,7 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
         projectileSpread:
-          baseValue: 0
+          baseValue: 10
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -197,7 +197,7 @@ MonoBehaviour:
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
-        currentAmmo: 0
+        currentAmmo: 6
         AoeEffects: []
         OnHitEffects: []
         AmmoStatusEffects: []

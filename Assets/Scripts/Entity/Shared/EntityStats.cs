@@ -189,6 +189,7 @@ namespace Minigames.Fight
             _regenTimer += Time.deltaTime;
             if (_regenTimer >= ammoRegenRate.Calculated)
             {
+                _regenTimer = 0;
                 currentAmmo++;
             }
         }

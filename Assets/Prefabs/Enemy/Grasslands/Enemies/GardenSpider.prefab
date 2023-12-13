@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VisualController: {fileID: 1047883154001853991}
   AnimationController: {fileID: 1287365799941292616}
-  WeaponController: {fileID: 0}
+  WeaponController: {fileID: 4967633341327300346}
   Stats:
     movementStats:
       moveSpeed:
@@ -330,7 +330,7 @@ MonoBehaviour:
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
-        ammoStatusEffects: []
+        AmmoStatusEffects: []
       projectileWeaponStats:
         projectilePrefab: {fileID: 0}
         baseDamage:
@@ -396,7 +396,7 @@ MonoBehaviour:
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
-        ammoStatusEffects: []
+        AmmoStatusEffects: []
       maxHp:
         baseValue: 5
         flatEffects: []
@@ -673,8 +673,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!95 &5054155416519530242
 Animator:
   serializedVersion: 5
@@ -787,13 +787,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  myEntity: {fileID: 0}
-  tick: 0
+    m_Bits: 5184
+  myEntity: {fileID: -7786698165613059924}
+  tick: 1
   room: {fileID: 0}
-  tickRandomizer: 0
-  trackDamagePerTick: 0
-  damageDecayRate: 0
+  tickRandomizer: 0.1
+  trackDamagePerTick: 1
+  damageDecayRate: 0.5
   playerSlowedMultiplier: 2
   optimalDistance: 15
   baseAttackPriorityFactor: 0

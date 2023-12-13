@@ -6,7 +6,7 @@ public static class PhysicsUtils
 {
     public static readonly int PlayerLayer = 6;
     public static int ProjectileLayer = 7;
-    public static int GroundLayer = 10;
+    public static int ObstacleLayer = 10;
     public static int wallLayer = 12;
     public static int EnemyLayer = 9;
 

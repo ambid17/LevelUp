@@ -76,7 +76,7 @@ namespace Minigames.Fight
                 return;
             }
 
-            if (col.gameObject.layer == PhysicsUtils.GroundLayer)
+            if (col.gameObject.layer == PhysicsUtils.ObstacleLayer || col.gameObject.layer == PhysicsUtils.wallLayer)
             {
                 Die();
             }

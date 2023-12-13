@@ -235,7 +235,7 @@ MonoBehaviour:
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
-        ammoStatusEffects: []
+        AmmoStatusEffects: []
       projectileWeaponStats:
         projectilePrefab: {fileID: 0}
         baseDamage:
@@ -301,7 +301,7 @@ MonoBehaviour:
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
-        ammoStatusEffects: []
+        AmmoStatusEffects: []
       maxHp:
         baseValue: 5
         flatEffects: []
@@ -555,8 +555,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!95 &368501983372723143
 Animator:
   serializedVersion: 5
@@ -691,7 +691,7 @@ MonoBehaviour:
   tickRandomizer: 0.1
   trackDamagePerTick: 0
   damageDecayRate: 0
-  smellFactor: 0
+  smellFactor: 1.5
 --- !u!114 &-5186065690957399296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,9 +717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edd9ff3556b74e40a74765fcc08331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeaponMode: 1
-  unflippedShootOffset: {fileID: 0}
-  flippedShootOffset: {fileID: 0}
-  flippedMeleeOffset: {fileID: 0}
-  unflippedMeleeOffset: {fileID: 0}
+  CurrentWeaponMode: 0
+  unflippedShootOffset: {fileID: 8510735526301981977}
+  flippedShootOffset: {fileID: 8510735526301981977}
+  flippedMeleeOffset: {fileID: 8510735526301981977}
+  unflippedMeleeOffset: {fileID: 8510735526301981977}
   _destroyOnReachTarget: 0

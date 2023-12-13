@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -48,6 +49,12 @@ namespace Minigames.Fight
             if (CanMelee())
             {
                 TryMelee();
+            }
+            if (Input.mouseScrollDelta.y != 0 || Input.GetKeyDown(KeyCode.Space))
+            {
+                WeaponMode otherWeapon = CurrentWeaponMode == WeaponMode.Projectile ? WeaponMode.Melee : WeaponMode.Projectile;
+                Platform.EventService.Dispatch(new PlayerChangedWeaponEvent(otherWeapon));
+                CurrentWeaponMode = otherWeapon;
             }
             _combatStats.projectileWeaponStats.TryRegenAmmo();
         }
@@ -143,13 +150,21 @@ namespace Minigames.Fight
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _combatStats.projectileWeaponStats.projectileSpread.Calculated;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset;
+
+                float spreadX = Random.Range(-_combatStats.projectileWeaponStats.projectileSpread.Calculated, _combatStats.projectileWeaponStats.projectileSpread.Calculated);
+                float spreadY = Random.Range(-_combatStats.projectileWeaponStats.projectileSpread.Calculated, _combatStats.projectileWeaponStats.projectileSpread.Calculated);
+
+                Vector2 spread = new Vector2(spreadX, spreadY);
+
+                direction += spread.normalized;
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, direction.normalized);
             }
             _combatStats.projectileWeaponStats.ConsumeAmmo(1);
+            ShootTimer = 0;
         }
 
         public override void Melee()
@@ -168,7 +183,7 @@ namespace Minigames.Fight
 
                 projectile.Setup(MyEntity, direction);
             }
-            _combatStats.meleeWeaponStats.ConsumeAmmo(1);
+            MeleeTimer = 0;
         }
     }
 }

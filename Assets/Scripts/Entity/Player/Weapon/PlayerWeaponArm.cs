@@ -67,14 +67,20 @@ namespace Minigames.Fight
             }
         }
 
+        /// <summary>
+        /// Called from animation
+        /// </summary>
         public void MeleeShoot()
         {
-            WeaponController.Shoot();
+            WeaponController.Melee();
         }
 
+        /// <summary>
+        /// Called from animation
+        /// </summary>
         public void ProjectileShoot()
         {
-            WeaponController.Melee();
+            WeaponController.Shoot();
         }
     }
 }

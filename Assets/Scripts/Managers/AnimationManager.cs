@@ -91,11 +91,6 @@ public class AnimationManager : MonoBehaviour
 
         if (!IsCurrentAnimLoopFinished(name.AcceptableOverrideTime))
         {
-            float remainingTime = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
-            if (remainingTime >= name.MaxBufferPercentage)
-            {
-                return;
-            }
             StartCoroutine(PlayQuedAnimation(name));
             return;
         }
