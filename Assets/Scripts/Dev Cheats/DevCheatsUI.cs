@@ -6,16 +6,8 @@ namespace Minigames.Fight
 {
     public class DevCheatsUI : UIPanel
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        // Create an entity stats
+        // save it with a file name
+        // then import the stats and choose which entity's stats should be overriden
     }
 }
