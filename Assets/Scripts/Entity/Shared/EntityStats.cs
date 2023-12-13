@@ -251,6 +251,7 @@ namespace Minigames.Fight
         public List<StatModifierEffect> compoundingEffects;
         public List<StatModifierEffect> singleUseEffects;
         public List<StatusEffectData> statusEffects;
+        // If this effect is set, it will override all other effects and negate them
         public StatModifierEffect overrideEffect;
 
         public void Init()
