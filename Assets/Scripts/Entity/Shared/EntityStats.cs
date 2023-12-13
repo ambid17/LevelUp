@@ -57,6 +57,18 @@ namespace Minigames.Fight
         {
             meleeWeaponStats.Init();
             projectileWeaponStats.Init();
+            maxHp.Init();
+
+            if (hpStatusEffects == null)
+            {
+                hpStatusEffects = new();
+            }
+            if (playerTimerEffects == null)
+            {
+                playerTimerEffects = new();
+            }
+
+            currentHp = maxHp.Calculated;
         }
 
         public void AddHp(float hpToAdd)
@@ -159,6 +171,8 @@ namespace Minigames.Fight
             projectilesPerShot.Init();
             projectileSpread.Init();
             projectileSize.Init();
+
+            currentAmmo = maxAmmo.Calculated;
 
             if(AoeEffects == null)
             {

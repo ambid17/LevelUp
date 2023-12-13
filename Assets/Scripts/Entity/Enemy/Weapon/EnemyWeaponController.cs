@@ -51,7 +51,8 @@ namespace Minigames.Fight
             {
                 _combatStats.projectileWeaponStats.projectileLifeTime.OverrideStat(_timeToReachTarget);
             }
-
+            // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
+            CurrentWeaponMode = WeaponMode.Projectile;
             projectile.Setup(MyEntity, direction);
         }
 
@@ -62,7 +63,7 @@ namespace Minigames.Fight
 
         public override bool CanMelee()
         {
-            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Vector2.Distance(GameManager.PlayerEntity.transform.position, transform.position) < _combatStats.projectileWeaponStats.MaxRange;
+            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Vector2.Distance(GameManager.PlayerEntity.transform.position, transform.position) < _combatStats.meleeWeaponStats.MaxRange;
         }
 
         public override void Melee()
@@ -70,6 +71,9 @@ namespace Minigames.Fight
             ProjectileController melee = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
 
             melee.transform.position = meleeOffset.position;
+
+            // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
+            CurrentWeaponMode = WeaponMode.Projectile;
 
             melee.Setup(MyEntity, _storedDirection);
         }

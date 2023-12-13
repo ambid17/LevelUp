@@ -168,6 +168,7 @@ MonoBehaviour:
         compoundingEffects: []
         singleUseEffects: []
         statusEffects: []
+        overrideEffect: {fileID: 0}
     combatStats:
       meleeWeaponStats:
         projectilePrefab: {fileID: 735428608842954597, guid: 23b8dfa1611f6464cb08a80ba0610156, type: 3}
@@ -177,60 +178,70 @@ MonoBehaviour:
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         onHitDamage:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileMoveSpeed:
           baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileLifeTime:
           baseValue: 0.1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         rateOfFire:
           baseValue: 2
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         maxAmmo:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         ammoRegenRate:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectilesPerShot:
           baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSpread:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSize:
           baseValue: 1
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
@@ -243,60 +254,70 @@ MonoBehaviour:
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         onHitDamage:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileMoveSpeed:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileLifeTime:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         rateOfFire:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         maxAmmo:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         ammoRegenRate:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectilesPerShot:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSpread:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         projectileSize:
           baseValue: 0
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
+          overrideEffect: {fileID: 0}
         currentAmmo: 0
         AoeEffects: []
         OnHitEffects: []
@@ -307,6 +328,7 @@ MonoBehaviour:
         compoundingEffects: []
         singleUseEffects: []
         statusEffects: []
+        overrideEffect: {fileID: 0}
       currentHp: 0
       DamageTakenThisSecond: 0
       hpStatusEffects: []
@@ -516,7 +538,7 @@ MonoBehaviour:
         First Flower","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomFlower","IsShared":true,"PropertyMapping":"Minigames.Fight.HiveMindBehaviorData/RandomFlower","PropertyMappingOwner":0,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentFlower","IsShared":true,"Vector2mValue":"(0,0)"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(90,120)"},"ID":3,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.ParallelComplete","NodeData":{"Offset":"(0,104.718964)"},"ID":4,"Name":"Parallel
         Complete","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-215.858292,255.81424)"},"ID":5,"Name":"Wander
         Until Alerted","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-207.533157,98.74751)"},"ID":6,"Name":"If
-        Not Alerted","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.Math.BoolComparison","NodeData":{"Offset":"(-749.9043,113.501045)"},"ID":7,"Name":"IsAlerted","Instant":true,"SharedBoolbool1":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsAggro","IsShared":true,"PropertyMapping":"Minigames.Fight.HiveMindBehaviorData/IsAggro","PropertyMappingOwner":1,"BooleanmValue":false},"SharedBoolbool2":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-640.3373,113.231873)"},"ID":8,"Name":"Play
+        Not Alerted","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.Math.BoolComparison","NodeData":{"Offset":"(-749.9043,113.501045)"},"ID":7,"Name":"IsAlerted","Instant":true,"SharedBoolbool1":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsAggro","IsShared":true,"PropertyMapping":"Minigames.Fight.HiveMindBehaviorData/IsAggro","PropertyMappingOwner":1,"BooleanmValue":false},"SharedBoolbool2":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-748.0295,113.231873)"},"ID":8,"Name":"Play
         Move","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"MoveAnimation","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MoveAnimation","PropertyMappingOwner":2},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Custom2D.Seek","NodeData":{"Offset":"(-503.4881,108.2123)"},"ID":9,"Name":"Seek
         Current Flower","Instant":true,"SharedTransformtarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null},"SharedVector2targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentFlower","IsShared":true,"Vector2mValue":"(0,0)"},"SharedBoolignoreInvalidPath":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"PropertyMapping":"Minigames.Fight.HiveMindBehaviorData/Speed","PropertyMappingOwner":3,"SinglemValue":0},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatstopDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrotateTowardsDestination":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatrotationSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-382.0827,111.040466)"},"ID":10,"Name":"Play
         Idle","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"IdleAnimation","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/IdleAnimation","PropertyMappingOwner":4},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(-266.164551,115.055176)"},"ID":11,"Name":"DelayReavaluation","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"DelayReavaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.ConditionalEvaluator","NodeData":{"Offset":"(-135.079437,106.467834)"},"ID":12,"Name":"While
