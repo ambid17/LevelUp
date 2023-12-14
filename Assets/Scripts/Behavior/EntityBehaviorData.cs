@@ -67,7 +67,8 @@ namespace Minigames.Fight
             get
             {
                 EnemyWeaponController weaponController = MyEntity.WeaponController as EnemyWeaponController;
-                float f = (MyEntity.WeaponController.CurrentWeapon.MaxRange / 2) + Vector2.Distance(transform.position, weaponController.CurrentOffsetPosition);
+                float f = (MyEntity.WeaponController.CurrentWeapon.MaxRange / 2) +
+                    Vector2.Distance(transform.position, weaponController.CurrentOffsetPosition);
                 return f;
             }
         }

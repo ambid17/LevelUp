@@ -39,8 +39,10 @@ namespace Minigames.Fight
             Vector2 direction;
 
             EnemyProjectileSpawner projectileSpawner = projectile as EnemyProjectileSpawner;
+
             if (projectileSpawner != null)
             {
+                projectileSpawner.FaceTarget(_storedTarget);
                 direction = PredictProjectileDirection(projectileSpawner.Offset.position);
             }
             else
@@ -76,7 +78,7 @@ namespace Minigames.Fight
             ProjectileController melee = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
 
             melee.transform.position = meleeOffset.position;
-            melee.transform.rotation = PhysicsUtils.LookAt(transform, _storedTarget, 180);
+            melee.transform.rotation = PhysicsUtils.LookAt(melee.transform, _storedTarget, 180);
 
             // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
             CurrentWeaponMode = WeaponMode.Melee;
@@ -96,17 +98,16 @@ namespace Minigames.Fight
         // Called by animator to ensure less than perfect aim.
         // Resets shot timer to make animation cancelling more effective.
         public void SetProjectileDirection()
-        {
+        { 
             ShootTimer = 0;
-            _storedDirection = GameManager.PlayerEntity.transform.position - shootOffset.position;
             _storedTarget = GameManager.PlayerEntity.transform.position;
         }
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
         {
             Vector2 targetVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
-
-            Vector2 relativePosition = origin - _storedDirection;
+            Vector2 direction = _storedTarget - origin;
+            Vector2 relativePosition = origin - direction;
             float theta = Vector2.Angle(relativePosition, targetVelocity);
 
             float a = (targetVelocity.magnitude * targetVelocity.magnitude) - (_combatStats.projectileWeaponStats.projectileMoveSpeed.Calculated * _combatStats.projectileWeaponStats.projectileMoveSpeed.Calculated);

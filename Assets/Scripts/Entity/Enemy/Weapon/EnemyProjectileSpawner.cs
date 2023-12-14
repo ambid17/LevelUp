@@ -26,7 +26,7 @@ namespace Minigames.Fight
         [SerializeField]
         private AnimatorController _animation;
         [SerializeField]
-        private float angleOffset = -180;
+        private float startAngle = 180;
 
         private Entity _overridenEntity;
         private Vector2 _direction;
@@ -37,8 +37,11 @@ namespace Minigames.Fight
             base.Setup(myEntity, direction);
             _overridenEntity = myEntity;
             _direction = direction;
-            float rotationToTarget = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg + angleOffset;
-            transform.rotation = Quaternion.AngleAxis(rotationToTarget, Vector3.forward);
+        }
+
+        public void FaceTarget(Vector2 target)
+        {
+            transform.rotation = PhysicsUtils.LookAt(transform, target, startAngle);
         }
 
         protected override void Move()
