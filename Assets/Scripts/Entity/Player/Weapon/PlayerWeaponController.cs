@@ -27,7 +27,7 @@ namespace Minigames.Fight
             base.Start();
 
             _currentArm = leftArm;
-            _cam = GameManager.PlayerEntity.PlayerCamera;
+            _cam = GameManager.PlayerCamera;
 
             Platform.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
         }
@@ -150,7 +150,7 @@ namespace Minigames.Fight
             {
                 ProjectileController projectile = Instantiate(_combatStats.projectileWeaponStats.projectilePrefab);
 
-                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
@@ -177,7 +177,7 @@ namespace Minigames.Fight
             {
                 ProjectileController projectile = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
 
-                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
@@ -185,7 +185,7 @@ namespace Minigames.Fight
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
-                projectile.transform.rotation = PhysicsUtils.LookAt(projectile.transform, GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
+                projectile.transform.rotation = PhysicsUtils.LookAt(projectile.transform, GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
 
                 projectile.Setup(MyEntity, direction);
             }

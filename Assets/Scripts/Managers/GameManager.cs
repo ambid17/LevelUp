@@ -16,6 +16,7 @@ namespace Minigames.Fight
         [SerializeField] private ShadowData shadowData;
         [SerializeField] public ProgressSettings progressSettings;
         [SerializeField] public EffectSettings effectSettings;
+        private Camera _playerCamera;
 
         public static PlayerEntity PlayerEntity => Instance._playerEntity;
         public static CameraLerp CameraLerp => Instance._cameraLerp;
@@ -26,6 +27,7 @@ namespace Minigames.Fight
         public static ShadowData ShadowData => Instance.shadowData;
         public static ProgressSettings ProgressSettings => Instance.progressSettings;
         public static EffectSettings EffectSettings => Instance.effectSettings;
+        public static Camera PlayerCamera => Instance._playerCamera;
 
         protected override void Initialize()
         {
@@ -37,6 +39,7 @@ namespace Minigames.Fight
         {
             _playerEntity = Instantiate(playerPrefab);
             _cameraLerp = Instantiate(cameraLerpPrefab);
+            _playerCamera = _cameraLerp.GetComponent<Camera>();
         }
 
 #if UNITY_EDITOR

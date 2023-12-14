@@ -67,6 +67,16 @@ public static class PhysicsUtils
         return Quaternion.Slerp(transform.rotation, finalRotation, lerpFactor);
     }
 
+    public static Bounds AsBounds(this BoundsInt boundsInt)
+    {
+        Bounds bounds = new();
+        bounds.center = boundsInt.center; 
+        bounds.size = boundsInt.size;
+        bounds.min = new Vector3(boundsInt.xMin, boundsInt.yMin);
+        bounds.max = new Vector3(boundsInt.xMax, boundsInt.yMax);
+        return bounds;
+    }
+
     /// <summary>
     /// To determine if an object is in an arc of another it has to fit 2 criteria:
     /// - the distance between the objects has to be less than the radius of the cone
@@ -109,6 +119,26 @@ public static class PhysicsUtils
 
         return null;
 
+    }
+    public static bool IsWithinBounds(Vector2 position, Bounds bounds)
+    {
+        if (position.x < bounds.min.x)
+        {
+            return false;
+        }
+        if (position.x > bounds.max.x)
+        {
+            return false;
+        }
+        if (position.y < bounds.min.y)
+        {
+            return false;
+        }
+        if (position.y > bounds.max.y)
+        {
+            return false;
+        }
+        return true;
     }
     public static Vector2 AsVector2(this BoundsInt boundsInt)
     {

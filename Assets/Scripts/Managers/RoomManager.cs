@@ -9,7 +9,6 @@ namespace Minigames.Fight
 {
     public class RoomManager : Singleton<RoomManager>
     {
-        public CinemachineVirtualCamera CurrentCam { get; set; }
         public RoomController StartRoom => _startRoom;
 
         [SerializeField]
@@ -75,9 +74,9 @@ namespace Minigames.Fight
                     direction = GetRandomCardinalDirection();
 
                     // Calculate the location the new room will spawn in.
-                    float x = (targetRoom.myPolygonCollider.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
-                    float y = (targetRoom.myPolygonCollider.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
-                    center = targetRoom.myPolygonCollider.bounds.center.AsVector2() + new Vector2(x, y);
+                    float x = (targetRoom.MyCollider.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
+                    float y = (targetRoom.MyCollider.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
+                    center = targetRoom.MyCollider.bounds.center.AsVector2() + new Vector2(x, y);
 
 
                     // Abort before doing the overlap check if the chosen direction has already been used (slight performance boost).
@@ -157,6 +156,7 @@ namespace Minigames.Fight
             StartCoroutine(RecalculateGraph());
 
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
+            GameManager.CameraLerp.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
 
             Platform.EventService.Dispatch(new SceneIsReadyEvent());
         }

@@ -79,6 +79,8 @@ namespace Minigames.Fight
             _myWeaponStats = MyEntity.WeaponController.CurrentWeapon;
 
             _spriteRenderer.sprite = _myWeaponStats.sprite;
+            transform.localScale *= _myWeaponStats.projectileSize.Calculated;
+
             if (_myWeaponStats.animation != null)
             {
                 _anim.runtimeAnimatorController = _myWeaponStats.animation;

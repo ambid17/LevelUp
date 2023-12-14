@@ -14,10 +14,7 @@ namespace Minigames.Fight
     public class PlayerEntity : Entity
     {
         public PlayerAnimationController AnimationController => _animationControllerOverride;
-        public Camera PlayerCamera => playerCamera;
 
-        [SerializeField]
-        private Camera playerCamera;
         [SerializeField]
         private Resource resourcePrefab;
         [SerializeField]
