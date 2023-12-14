@@ -56,8 +56,8 @@ namespace Minigames.Fight
 
             if (!_isTransitioning)
             {
-                newPos.x = Mathf.Clamp(newPos.x, _bounds.min.x - (worldWidth / 2), _bounds.max.x + (worldWidth / 2));
-                newPos.y = Mathf.Clamp(newPos.y, _bounds.min.y - (worldHeight / 2), _bounds.max.y + (worldHeight / 2));
+                newPos.x = Mathf.Clamp(newPos.x, _bounds.min.x + (worldWidth / 2), _bounds.max.x - (worldWidth / 2));
+                newPos.y = Mathf.Clamp(newPos.y, _bounds.min.y + (worldHeight / 2), _bounds.max.y - (worldHeight / 2));
             }
 
             transform.position = new Vector3(newPos.x, newPos.y, -10);
@@ -74,7 +74,6 @@ namespace Minigames.Fight
 
         IEnumerator MoveToNextRoom()
         {
-            yield return null;
             _isTransitioning = true;
             while (_camera.orthographicSize > zoomOrthagraphicSize)
             {

@@ -88,7 +88,7 @@ namespace Minigames.Fight
             {
                 return;
             }
-            if (!PhysicsUtils.IsWithinBounds(GameManager.PlayerEntity.transform.position, Tilemap.cellBounds.AsBounds()))
+            if (!PhysicsUtils.IsWithinBounds(GameManager.PlayerEntity.transform.position, MyCollider.bounds))
             {
                 return;
             }
@@ -127,6 +127,11 @@ namespace Minigames.Fight
             PatrolWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Patrol).Select(waypoint => waypoint.transform).ToList();
             FlowerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Flower).Select(waypoint => waypoint.transform).ToList();
             WorkerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Worker).Select(waypoint => waypoint.transform).ToList();
+
+            if (PatrolWaypoints.Count == 0)
+            {
+                PatrolWaypoints = spawnPoints;
+            }
 
             MyCollider = GetComponent<BoxCollider2D>();
 
