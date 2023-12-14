@@ -20,6 +20,9 @@ namespace Minigames.Fight
         private Rigidbody2D _rb;
         private Animator _anim;
 
+        private bool _isOverridingLifetime;
+        private float _lifetimeOverride;
+
 
         protected virtual void Awake()
         {
@@ -54,6 +57,10 @@ namespace Minigames.Fight
 
         protected virtual bool ShouldDie()
         {
+            if (_isOverridingLifetime)
+            {
+                return _deathTimer > _lifetimeOverride;
+            }
             return _deathTimer >  _myWeaponStats.projectileLifeTime.Calculated;
         }
 
@@ -62,7 +69,7 @@ namespace Minigames.Fight
             _rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
         }
 
-        public virtual void Setup(Entity myEntity, Vector2 direction)
+        public virtual void Setup(Entity myEntity, Vector2 direction, float lifetimeOverride = 0)
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
@@ -75,6 +82,11 @@ namespace Minigames.Fight
             if (_myWeaponStats.animation != null)
             {
                 _anim.runtimeAnimatorController = _myWeaponStats.animation;
+            }
+            if (lifetimeOverride != 0)
+            {
+                _isOverridingLifetime = true;
+                _lifetimeOverride = lifetimeOverride;
             }
         }
 

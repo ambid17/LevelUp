@@ -32,7 +32,7 @@ namespace Minigames.Fight
         private Vector2 _direction;
         
 
-        public override void Setup(Entity myEntity, Vector2 direction)
+        public override void Setup(Entity myEntity, Vector2 direction, float lifetimeOverride = 0)
         {
             base.Setup(myEntity, direction);
             _overridenEntity = myEntity;

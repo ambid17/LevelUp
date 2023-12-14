@@ -245,7 +245,7 @@ MonoBehaviour:
           OnTimerEffects: []
           OnPurchaseEffects: []
         projectileMoveSpeed:
-          baseValue: 1
+          baseValue: 10
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -257,7 +257,7 @@ MonoBehaviour:
           OnTimerEffects: []
           OnPurchaseEffects: []
         projectileLifeTime:
-          baseValue: 1
+          baseValue: 2
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -269,7 +269,7 @@ MonoBehaviour:
           OnTimerEffects: []
           OnPurchaseEffects: []
         rateOfFire:
-          baseValue: 0.001
+          baseValue: 0.0001
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -293,7 +293,7 @@ MonoBehaviour:
           OnTimerEffects: []
           OnPurchaseEffects: []
         ammoRegenRate:
-          baseValue: 0.0001
+          baseValue: 0.00001
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -317,7 +317,7 @@ MonoBehaviour:
           OnTimerEffects: []
           OnPurchaseEffects: []
         projectileSpread:
-          baseValue: 10
+          baseValue: 30
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []

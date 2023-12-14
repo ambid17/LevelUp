@@ -83,7 +83,9 @@ namespace Minigames.Fight
             // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
             CurrentWeaponMode = WeaponMode.Melee;
 
-            melee.Setup(MyEntity, _storedDirection);
+            float lifetimeOverride = Vector2.Distance(melee.transform.position, _storedTarget) / _combatStats.meleeWeaponStats.projectileMoveSpeed.Calculated;
+
+            melee.Setup(MyEntity, _storedDirection, lifetimeOverride);
         }
 
         // Called by animator to ensure less than perfect aim.
