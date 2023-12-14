@@ -59,10 +59,15 @@ namespace Minigames.Fight
             _combatStats.projectileWeaponStats.TryRegenAmmo();
         }
 
+        private void LateUpdate()
+        {
+            // Moved to LateUpdate because it always seemed to apply before the player setting it's layer.
+            leftArm.MySpriteRenderer.sortingOrder = MyEntity.VisualController.SpriteRenderer.sortingOrder + _leftSortingOrder;
+            rightArm.MySpriteRenderer.sortingOrder = MyEntity.VisualController.SpriteRenderer.sortingOrder + _rightSortingOrder;
+        }
+
         private void ControlArms()
         {
-            leftArm.MySpriteRenderer.sortingOrder = _leftSortingOrder;
-            rightArm.MySpriteRenderer.sortingOrder = _rightSortingOrder;
             float currentRotation = _currentArm.transform.rotation.eulerAngles.z;
             if (currentRotation < _currentArm.MinRotation && currentRotation > _currentArm.MaxRotation)
             {
@@ -94,25 +99,24 @@ namespace Minigames.Fight
 
         public void SwitchDirection(PlayerChangedDirectionEvent e)
         {
-            int baseLayer = GameManager.PlayerEntity.VisualController.SpriteRenderer.sortingOrder;
 
             switch (e.NewDirection)
             {
                 case Direction.Down:
-                    _leftSortingOrder = baseLayer + 1;
-                    _rightSortingOrder = baseLayer + 1;
+                    _leftSortingOrder = + 1;
+                    _rightSortingOrder = + 1;
                     break;
                 case Direction.Up:
-                    _leftSortingOrder = baseLayer - 1;
-                    _rightSortingOrder = baseLayer - 1;
+                    _leftSortingOrder = - 1;
+                    _rightSortingOrder = - 1;
                     break;
                 case Direction.Left:
-                    _leftSortingOrder = baseLayer - 1;
-                    _rightSortingOrder = baseLayer + 1;
+                    _leftSortingOrder = -1;
+                    _rightSortingOrder = + 1;
                     break;
                 case Direction.Right:
-                    _leftSortingOrder = baseLayer + 1;
-                    _rightSortingOrder = baseLayer - 1;
+                    _leftSortingOrder = + 1;
+                    _rightSortingOrder = - 1;
                     break;
             }
         }
@@ -181,7 +185,7 @@ namespace Minigames.Fight
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
-                projectile.transform.rotation = PhysicsUtils.LookAt(transform, GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
+                projectile.transform.rotation = PhysicsUtils.LookAt(projectile.transform, GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
 
                 projectile.Setup(MyEntity, direction);
             }
