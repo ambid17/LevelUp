@@ -35,6 +35,11 @@ namespace Minigames.Fight
         [SerializeField]
         private List<EnemyToSpawn> enemiesToSpawn;
 
+        [SerializeField]
+        private MinimapRoomRender minimapGraphic;
+        [SerializeField]
+        private MinimapRoomRender minimapGraphicPrefab;
+
         private bool hasInitialized;
 
         private void SpawnEnemies()
@@ -76,6 +81,7 @@ namespace Minigames.Fight
                 // Spawn enemies when player first enters the room instead of on start.
                 if (!hasInitialized)
                 {
+                    minimapGraphic.Activate();
                     SpawnEnemies();
                     hasInitialized = true;
                 }
@@ -96,6 +102,7 @@ namespace Minigames.Fight
             {
                 return;
             }
+            GameManager.MinimapCamera.transform.position = new Vector3(MyCollider.bounds.center.x, MyCollider.bounds.center.y, -10);
             GameManager.CameraLerp.Transition(MyCollider.bounds);
         }
 
@@ -115,6 +122,15 @@ namespace Minigames.Fight
         }
 
 #if UNITY_EDITOR
+        [ContextMenu("Setup Room Graphic")]
+        public void SetupRoomGraphics()
+        {
+            minimapGraphic = Instantiate(minimapGraphicPrefab, transform);
+            minimapGraphic.transform.position = MyCollider.bounds.center;
+            minimapGraphic.transform.localScale = MyCollider.bounds.size;
+            EditorUtility.SetDirty(this);
+        }
+
         [ContextMenu("getcomponents")]
         public void GetComponents()
         {

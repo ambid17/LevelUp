@@ -157,6 +157,7 @@ namespace Minigames.Fight
 
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
             GameManager.CameraLerp.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
+            GameManager.MinimapCamera.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
 
             Platform.EventService.Dispatch(new SceneIsReadyEvent());
         }
