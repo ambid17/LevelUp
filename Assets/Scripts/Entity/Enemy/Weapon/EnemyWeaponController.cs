@@ -26,6 +26,8 @@ namespace Minigames.Fight
 
         protected Vector2 _storedDirection;
         protected Vector2 _storedTarget;
+        protected Vector2 _storedVelocity;
+        protected Vector2 _storedPrediction;
 
         private float _timeToReachTarget;
 
@@ -42,7 +44,10 @@ namespace Minigames.Fight
 
             if (projectileSpawner != null)
             {
+                // Run algorithm twice to approximate the correct position for the projectilespawner offset.
                 projectileSpawner.FaceTarget(_storedTarget);
+                direction = PredictProjectileDirection(projectileSpawner.Offset.position);
+                projectileSpawner.FaceTarget(_storedPrediction);
                 direction = PredictProjectileDirection(projectileSpawner.Offset.position);
             }
             else
@@ -104,13 +109,14 @@ namespace Minigames.Fight
         { 
             ShootTimer = 0;
             _storedTarget = GameManager.PlayerEntity.transform.position;
+            _storedVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
         }
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
         {
             // TODO: equation only works if projectile is faster than target, need a check with a secondary equation.
 
-            Vector2 targetVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
+            Vector2 targetVelocity = _storedVelocity;
             Vector2 direction = _storedTarget - origin;
             Vector2 relativePosition = origin - direction;
             float theta = Vector2.Angle(relativePosition, targetVelocity);
@@ -121,8 +127,8 @@ namespace Minigames.Fight
             float delta = Mathf.Sqrt((b * b) - (4 * a * c));
             _timeToReachTarget = -(b + delta) / (2 * a);
 
-            Vector2 prediction = _storedTarget + (targetVelocity * _timeToReachTarget);
-            Vector2 difference = prediction - origin;
+            _storedPrediction = _storedTarget + (targetVelocity * _timeToReachTarget);
+            Vector2 difference = _storedPrediction - origin;
 
             return difference.normalized;
         }
