@@ -75,6 +75,7 @@ MonoBehaviour:
         OnPurchaseEffects: []
     combatStats:
       meleeWeaponStats:
+        MaxRange: 0
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 0
         targetLayers:
@@ -83,7 +84,7 @@ MonoBehaviour:
         destroyOnImpactLayers:
           serializedVersion: 2
           m_Bits: 0
-        sprite: {fileID: -1546718728, guid: 39ff1ed304d2b9b4d9ef6b4ae892a174, type: 3}
+        sprite: {fileID: 1151905315, guid: 39ff1ed304d2b9b4d9ef6b4ae892a174, type: 3}
         animation: {fileID: 9100000, guid: 6da85e683a1b45345be79d924e78b043, type: 2}
         baseDamage:
           baseValue: 1
@@ -209,6 +210,7 @@ MonoBehaviour:
         OnHitEffects: []
         AmmoStatusEffects: []
       projectileWeaponStats:
+        MaxRange: 0
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 6
         targetLayers:
@@ -358,7 +360,6 @@ MonoBehaviour:
       playerTimerEffects: []
   Rigidbody2D: {fileID: 4274406417404922747}
   tickDamageDownPerSecond: 0
-  playerCamera: {fileID: 0}
   resourcePrefab: {fileID: 3158209486798102802, guid: 0fcb200ac0effec47b2cee04e7a34263, type: 3}
   maxResourceSpawns: 100
   currentInteractionType: 0

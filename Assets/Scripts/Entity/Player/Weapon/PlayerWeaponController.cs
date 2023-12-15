@@ -18,6 +18,7 @@ namespace Minigames.Fight
 
         private PlayerWeaponArm _currentArm;
         private Camera _cam;
+        private bool _isTryingToShoot;
 
         private int _leftSortingOrder = 0;
         private int _rightSortingOrder = 0;
@@ -30,6 +31,7 @@ namespace Minigames.Fight
             _cam = GameManager.PlayerCamera;
 
             Platform.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
+            Platform.EventService.Dispatch(new PlayerChangedWeaponEvent(CurrentWeaponMode));
         }
 
         protected override void Update()
@@ -54,9 +56,16 @@ namespace Minigames.Fight
             {
                 WeaponMode otherWeapon = CurrentWeaponMode == WeaponMode.Projectile ? WeaponMode.Melee : WeaponMode.Projectile;
                 Platform.EventService.Dispatch(new PlayerChangedWeaponEvent(otherWeapon));
+                if (otherWeapon == WeaponMode.Projectile)
+                {
+                    Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)_combatStats.projectileWeaponStats.currentAmmo, (int)_combatStats.projectileWeaponStats.maxAmmo.Calculated));
+                }
                 CurrentWeaponMode = otherWeapon;
             }
-            _combatStats.projectileWeaponStats.TryRegenAmmo();
+            if (!_isTryingToShoot)
+            {
+                _combatStats.projectileWeaponStats.TryRegenAmmo();
+            }
         }
 
         private void LateUpdate()
@@ -132,10 +141,12 @@ namespace Minigames.Fight
 
         public override bool CanShoot()
         {
-            return ShootTimer >= 
-                _combatStats.projectileWeaponStats.rateOfFire.Calculated && 
-                Input.GetKey(KeyCode.Mouse0) && 
-                _combatStats.projectileWeaponStats.currentAmmo > 0;
+            _isTryingToShoot = Input.GetKey(KeyCode.Mouse0) &&
+                _combatStats.projectileWeaponStats.currentAmmo > 0 && 
+                CurrentWeaponMode == WeaponMode.Projectile;
+            return ShootTimer >=
+                _combatStats.projectileWeaponStats.rateOfFire.Calculated && _isTryingToShoot;
+                
         }
         public override bool CanMelee()
         {
@@ -168,6 +179,7 @@ namespace Minigames.Fight
                 projectile.Setup(MyEntity, MyEntity.Stats.combatStats.projectileWeaponStats, direction.normalized);
             }
             _combatStats.projectileWeaponStats.ConsumeAmmo(1);
+
             ShootTimer = 0;
         }
 

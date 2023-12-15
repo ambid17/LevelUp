@@ -183,8 +183,9 @@ namespace Minigames.Fight
             projectileSize.Init();
 
             currentAmmo = maxAmmo.Calculated;
+            Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)currentAmmo, (int)maxAmmo.Calculated));
 
-            if(AoeEffects == null)
+            if (AoeEffects == null)
             {
                 AoeEffects = new();
             }
@@ -203,6 +204,7 @@ namespace Minigames.Fight
         public virtual void ConsumeAmmo(int ammoToConsume)
         {
             currentAmmo-= ammoToConsume;
+            Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)currentAmmo, (int)maxAmmo.Calculated));
         }
 
         public virtual void TryRegenAmmo() 
@@ -216,6 +218,7 @@ namespace Minigames.Fight
             {
                 _regenTimer = 0;
                 currentAmmo++;
+                Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)currentAmmo, (int)maxAmmo.Calculated));
             }
         }
 
