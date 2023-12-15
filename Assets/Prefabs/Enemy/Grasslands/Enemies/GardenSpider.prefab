@@ -273,6 +273,7 @@ MonoBehaviour:
         OnPurchaseEffects: []
     combatStats:
       meleeWeaponStats:
+        MaxRange: 1
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 0
         targetLayers:
@@ -407,6 +408,7 @@ MonoBehaviour:
         OnHitEffects: []
         AmmoStatusEffects: []
       projectileWeaponStats:
+        MaxRange: 0
         projectilePrefab: {fileID: 1947599340863131889, guid: 3e122101c826c524ca8e2d8384432237, type: 3}
         currentAmmo: 0
         targetLayers:

@@ -80,6 +80,7 @@ MonoBehaviour:
         OnPurchaseEffects: []
     combatStats:
       meleeWeaponStats:
+        MaxRange: 1
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 0
         targetLayers:
@@ -214,6 +215,7 @@ MonoBehaviour:
         OnHitEffects: []
         AmmoStatusEffects: []
       projectileWeaponStats:
+        MaxRange: 0
         projectilePrefab: {fileID: 0}
         currentAmmo: 0
         targetLayers:
@@ -827,6 +829,141 @@ MonoBehaviour:
   _destroyOnReachTarget: 0
   minCombo: 5
   maxCombo: 10
+  _comboWeapon:
+    MaxRange: 0
+    projectilePrefab: {fileID: 0}
+    currentAmmo: 0
+    targetLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    destroyOnImpactLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    sprite: {fileID: 0}
+    animation: {fileID: 0}
+    baseDamage:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    onHitDamage:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    projectileMoveSpeed:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    projectileLifeTime:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    rateOfFire:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    maxAmmo:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    ammoRegenRate:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    projectilesPerShot:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    projectileSpread:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    projectileSize:
+      baseValue: 0
+      flatEffects: []
+      compoundingEffects: []
+      singleUseEffects: []
+      statusEffects: []
+      overrideEffect: {fileID: 0}
+      OnKillEffects: []
+      OnDeathEffects: []
+      OnTakeDamageEffects: []
+      OnTimerEffects: []
+      OnPurchaseEffects: []
+    AoeEffects: []
+    OnHitEffects: []
+    AmmoStatusEffects: []
 --- !u!114 &-2690275262199868481
 MonoBehaviour:
   m_ObjectHideFlags: 0

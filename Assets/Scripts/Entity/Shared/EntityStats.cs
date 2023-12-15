@@ -135,7 +135,7 @@ namespace Minigames.Fight
     public class WeaponStats
     {
         [JsonIgnore]
-        public float MaxRange => projectileLifeTime.Calculated * projectileMoveSpeed.Calculated;
+        public float MaxRange;
 
         [JsonIgnore]
         public ProjectileController projectilePrefab;
