@@ -14,7 +14,7 @@ namespace Minigames.Fight
         private EventService _eventService;
 
         public Entity MyEntity => _myEntity;
-        private WeaponStats _myWeaponStats;
+        protected WeaponStats _myWeaponStats;
 
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rb;
@@ -69,14 +69,14 @@ namespace Minigames.Fight
             _rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
         }
 
-        public virtual void Setup(Entity myEntity, Vector2 direction, float lifetimeOverride = 0)
+        public virtual void Setup(Entity myEntity, WeaponStats weapon, Vector2 direction, float lifetimeOverride = 0)
         {
             _myEntity = myEntity;
             _shootDirection = direction.normalized;
 
             // Grab the current weapon stats on setup
             // If we did this anywhere else later on, the current weapon could be swapped out
-            _myWeaponStats = MyEntity.WeaponController.CurrentWeapon;
+            _myWeaponStats = weapon;
 
             _spriteRenderer.sprite = _myWeaponStats.sprite;
             transform.localScale *= _myWeaponStats.projectileSize.Calculated;

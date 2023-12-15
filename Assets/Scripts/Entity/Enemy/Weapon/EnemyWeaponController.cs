@@ -49,14 +49,15 @@ namespace Minigames.Fight
             {
                 direction = PredictProjectileDirection(projectile.transform.position);
             }
+            float lifeTimeOverride = 0;
 
             if (_destroyOnReachTarget)
             {
-                _combatStats.projectileWeaponStats.projectileLifeTime.OverrideStat(_timeToReachTarget);
+                lifeTimeOverride = _timeToReachTarget;
             }
             // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
             CurrentWeaponMode = WeaponMode.Projectile;
-            projectile.Setup(MyEntity, direction);
+            projectile.Setup(MyEntity, MyEntity.Stats.combatStats.projectileWeaponStats, direction, lifeTimeOverride);
         }
 
         public override bool CanShoot()
@@ -85,7 +86,7 @@ namespace Minigames.Fight
 
             float lifetimeOverride = Vector2.Distance(melee.transform.position, _storedTarget) / _combatStats.meleeWeaponStats.projectileMoveSpeed.Calculated;
 
-            melee.Setup(MyEntity, _storedDirection, lifetimeOverride);
+            melee.Setup(MyEntity, MyEntity.Stats.combatStats.meleeWeaponStats , _storedDirection, lifetimeOverride);
         }
 
         // Called by animator to ensure less than perfect aim.

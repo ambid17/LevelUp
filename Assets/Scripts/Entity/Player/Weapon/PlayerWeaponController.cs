@@ -165,7 +165,7 @@ namespace Minigames.Fight
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
-                projectile.Setup(MyEntity, direction.normalized);
+                projectile.Setup(MyEntity, MyEntity.Stats.combatStats.projectileWeaponStats, direction.normalized);
             }
             _combatStats.projectileWeaponStats.ConsumeAmmo(1);
             ShootTimer = 0;
@@ -187,7 +187,7 @@ namespace Minigames.Fight
 
                 projectile.transform.rotation = PhysicsUtils.LookAt(projectile.transform, GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, MyEntity.Stats.combatStats.meleeWeaponStats, direction);
             }
             MeleeTimer = 0;
         }

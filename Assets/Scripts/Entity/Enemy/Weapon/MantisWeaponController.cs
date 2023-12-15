@@ -37,7 +37,7 @@ namespace Minigames.Fight
             // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
             CurrentWeaponMode = WeaponMode.Melee;
 
-            melee.Setup(MyEntity, _storedDirection);
+            melee.Setup(MyEntity, _comboWeapon, _storedDirection);
         }
     }
 }

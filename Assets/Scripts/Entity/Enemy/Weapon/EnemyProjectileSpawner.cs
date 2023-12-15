@@ -24,19 +24,22 @@ namespace Minigames.Fight
         [SerializeField]
         private Sprite projectileSprite;
         [SerializeField]
-        private AnimatorController _animation;
+        private AnimatorController myAnimation;
         [SerializeField]
         private float startAngle = 180;
 
         private Entity _overridenEntity;
         private Vector2 _direction;
+        private float _storedLifetimeOverride;
+        private bool _isDoneSpawning;
         
 
-        public override void Setup(Entity myEntity, Vector2 direction, float lifetimeOverride = 0)
+        public override void Setup(Entity myEntity, WeaponStats weapon, Vector2 direction, float lifetimeOverride = 0)
         {
-            base.Setup(myEntity, direction);
             _overridenEntity = myEntity;
             _direction = direction;
+            _myWeaponStats = weapon;
+            _storedLifetimeOverride = lifetimeOverride;
         }
 
         public void FaceTarget(Vector2 target)
@@ -50,7 +53,7 @@ namespace Minigames.Fight
 
         protected override bool ShouldDie()
         {
-            return anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1;
+            return anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && _isDoneSpawning;
         }
 
         /// <summary>
@@ -60,8 +63,9 @@ namespace Minigames.Fight
         {
             ProjectileController projectile = Instantiate(projectilePrefab);
             projectile.transform.position = offSet.position;
-            projectile.Setup(_overridenEntity, _direction);
-            projectile.OverrideVisuals(projectileSprite, _animation);
+            projectile.Setup(_overridenEntity, _myWeaponStats, _direction, _storedLifetimeOverride);
+            projectile.OverrideVisuals(projectileSprite, myAnimation);
+            _isDoneSpawning = true;
         }
     }
 }
