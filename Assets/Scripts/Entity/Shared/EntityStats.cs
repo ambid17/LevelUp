@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
@@ -405,9 +406,9 @@ namespace Minigames.Fight
             }
         }
 
-        public void OverrideStat(float value)
+        public void Randomize(float random)
         {
-            calculated = value;
+            calculated *= random;
         }
     }
 

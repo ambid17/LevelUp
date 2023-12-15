@@ -30,6 +30,7 @@ namespace Minigames.Fight
             // Offsets animation speed and movement speed by the same amount to make enemies feel more natural.
             float randomOffset = Random.Range(.9f, 1.1f);
             AnimationController.Anim.speed *= randomOffset;
+            Stats.movementStats.moveSpeed.Randomize(randomOffset);
         }
 
 
