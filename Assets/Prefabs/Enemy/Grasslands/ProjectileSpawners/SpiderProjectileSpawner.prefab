@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1947599340863131889}
   - component: {fileID: 207078495065479604}
   - component: {fileID: 1308146472948770257}
+  - component: {fileID: 285241286159705760}
   m_Layer: 0
   m_Name: SpiderProjectileSpawner
   m_TagString: Untagged
@@ -83,7 +84,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
   projectileSprite: {fileID: 21300000, guid: faffcdfe2b2f0564291a1dc3b95fd35a, type: 3}
   _animation: {fileID: 0}
-  angleOffset: -180
+  startAngle: 180
 --- !u!95 &207078495065479604
 Animator:
   serializedVersion: 5
@@ -156,3 +157,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &285241286159705760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962413800216924116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1308146472948770257}
