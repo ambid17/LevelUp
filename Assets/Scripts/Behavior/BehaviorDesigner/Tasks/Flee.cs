@@ -18,12 +18,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         // Return running if the agent is still fleeing
         public override TaskStatus OnUpdate()
         {
-            // If agent reaches the end of the path but can't reach the final destination return failure
-            if (HasArrived() && agent.pathInvalid)
-            {
-                Stop();
-                return TaskStatus.Failure;
-            }
             if (Vector3.Magnitude(transform.position - target.Value.position) > fleedDistance.Value)
             {
                 return TaskStatus.Success;
