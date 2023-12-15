@@ -108,6 +108,8 @@ namespace Minigames.Fight
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
         {
+            // TODO: equation only works if projectile is faster than target, need a check with a secondary equation.
+
             Vector2 targetVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
             Vector2 direction = _storedTarget - origin;
             Vector2 relativePosition = origin - direction;

@@ -442,7 +442,7 @@ MonoBehaviour:
           OnTimerEffects: []
           OnPurchaseEffects: []
         projectileMoveSpeed:
-          baseValue: 1
+          baseValue: 8
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
@@ -964,7 +964,7 @@ MonoBehaviour:
   flippedShootOffset: {fileID: 7217469006251800790}
   flippedMeleeOffset: {fileID: 7271087876344463700}
   unflippedMeleeOffset: {fileID: 3606190758713836633}
-  _destroyOnReachTarget: 0
+  _destroyOnReachTarget: 1
 --- !u!1 &9013098721899062222
 GameObject:
   m_ObjectHideFlags: 0
