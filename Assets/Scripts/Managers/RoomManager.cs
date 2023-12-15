@@ -107,6 +107,8 @@ namespace Minigames.Fight
 
                 // Add to available rooms so it too can be branched off of.
                 availableRooms.Add(roomInstance);
+
+                roomInstance.SpawnEnemies();
             }
 
             // Close off unused exits.

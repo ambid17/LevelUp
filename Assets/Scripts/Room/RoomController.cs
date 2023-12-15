@@ -42,35 +42,48 @@ namespace Minigames.Fight
 
         private bool hasInitialized;
 
-        private void SpawnEnemies()
+        private void InitializeEnemies()
         {
             Dictionary<int, List<HiveMindBehaviorData>> hiveMinds = new();
 
-            foreach (EnemyToSpawn enemy in enemiesToSpawn)
+            foreach (EntityBehaviorData enemy in GameManager.EnemyObjectPool.AllEnemies.Where(e => e.room == this).ToList())
             {
-                for (int i = 0; i < enemy.numberToSpawn; i++)
-                {
-                    int randomInt = Random.Range(0, spawnPoints.Count);
-                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
-                    behavior.room = this;
-                    IHiveMind hiveMind = behavior.GetComponent<IHiveMind>();
-                    if (hiveMind != null)
-                    {
-                        if (!hiveMinds.ContainsKey(hiveMind.Id))
-                        {
-                            hiveMinds.Add(hiveMind.Id, new());
-                        }
+                int randomInt = Random.Range(0, spawnPoints.Count);
+                enemy.transform.parent = null;
+                enemy.transform.position = spawnPoints[randomInt].position;
+                enemy.gameObject.SetActive(true);
 
-                        hiveMinds[hiveMind.Id].Add(hiveMind.myBehaviorData);
+                IHiveMind hiveMind = enemy.GetComponent<IHiveMind>();
+                if (hiveMind != null)
+                {
+                    if (!hiveMinds.ContainsKey(hiveMind.Id))
+                    {
+                        hiveMinds.Add(hiveMind.Id, new());
                     }
 
-                    spawnPoints.Remove(spawnPoints[randomInt]);
+                    hiveMinds[hiveMind.Id].Add(hiveMind.myBehaviorData);
                 }
+
+                spawnPoints.Remove(spawnPoints[randomInt]);
             }
             foreach (List<HiveMindBehaviorData> hiveMindList in hiveMinds.Values)
             {
                 HiveMindManager hiveMindManager = Instantiate(hiveMindManagerPrefab);
                 hiveMindManager.Initialize(hiveMindList);
+            }
+        }
+
+        public void SpawnEnemies()
+        {
+            foreach (EnemyToSpawn enemy in enemiesToSpawn)
+            {
+                for (int i = 0; i < enemy.numberToSpawn; i++)
+                {
+                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, GameManager.EnemyObjectPool.transform);
+                    behavior.room = this;
+                    GameManager.EnemyObjectPool.AllEnemies.Add(behavior);
+                    behavior.gameObject.SetActive(false);
+                }
             }
         }
 
@@ -82,7 +95,7 @@ namespace Minigames.Fight
                 if (!hasInitialized)
                 {
                     minimapGraphic.Activate();
-                    SpawnEnemies();
+                    InitializeEnemies();
                     hasInitialized = true;
                 }
             }

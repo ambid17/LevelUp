@@ -31,6 +31,9 @@ namespace Minigames.Fight
         private float _lastKnownLookDirection;
         int framesSinceLastDirectionChange;
 
+        private GraphNode _occupiedNode => AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
+        private GraphNode _lastOccupiedNode;
+
         [SerializeField]
         private Vector2 move;
 
@@ -59,6 +62,7 @@ namespace Minigames.Fight
             // idiot proofing
             rb.gravityScale = 0;
             StartCoroutine(RepeatUpdatePath());
+            _lastOccupiedNode = _occupiedNode;
         }
         private IEnumerator RepeatUpdatePath()
         {
@@ -79,6 +83,10 @@ namespace Minigames.Fight
             {
                 Stop();
                 return;
+            }
+            if (_lastOccupiedNode != _occupiedNode) 
+            {
+
             }
             float distance = Mathf.Infinity;
             if (seeker.IsDone())
