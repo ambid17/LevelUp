@@ -17,7 +17,7 @@ namespace Minigames.Fight
         public Rigidbody2D MyRigidbody2D;
 
         private Vector2 _lastInput;
-        private const float ACCELERATION = 20;
+        private const float ACCELERATION = 50;
     
         void Start()
         {
