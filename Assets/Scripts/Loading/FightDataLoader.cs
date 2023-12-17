@@ -15,17 +15,22 @@ public class FightDataLoader : Singleton<FightDataLoader>
     public static int TargetSceneIndex;
     public static readonly string ENTITY_FOLDER = "Entities";
 
+    // List of entities that have their entityStats serialized
     [SerializeField]
     private List<Entity> serializableEntities;
     public static List<Entity> SerializableEntities => Instance.serializableEntities;
 
+    // The model that holds the data for remapping entityStats to a new file
     [SerializeField]
-    private EntityStatsRemapModel entityStatsRemapModel;
-    public static EntityStatsRemapModel EntityStatsRemapModel => Instance.entityStatsRemapModel;
+    public SerializableDictionary<string, string> fileNameRemappings;
+    public static SerializableDictionary<string, string> FileNameRemappings => Instance.fileNameRemappings;
 
+    // Maps from the entity's file name to the entity stats so it can be loaded once an accessed instantly
     [SerializeField]
     private SerializableDictionary<string, EntityStats> entityStatsMap;
     public static SerializableDictionary<string, EntityStats> EntityStatsMap => Instance.entityStatsMap;
+
+    
 
 
     protected override void Initialize()
@@ -54,18 +59,40 @@ public class FightDataLoader : Singleton<FightDataLoader>
         // just create the file and remap all entityStats to their defaults
         if (!File.Exists(EntityStatsRemapModel.FILE_PATH))
         {
-            entityStatsRemapModel = new EntityStatsRemapModel();
+            fileNameRemappings = new();
 
             foreach(var entity in serializableEntities)
             {
-                entityStatsRemapModel.fileNameRemappings.Add(entity.statsFileName, entity.statsFileName);
+                fileNameRemappings.Add(entity.statsFileName, entity.statsFileName);
             }
-            FileUtils.SaveFile(EntityStatsRemapModel.FILE_PATH, entityStatsRemapModel);
+            FileUtils.SaveFile(EntityStatsRemapModel.FILE_PATH, new EntityStatsRemapModel(fileNameRemappings));
         }
         else
         {
-            entityStatsRemapModel = FileUtils.LoadFile<EntityStatsRemapModel>(EntityStatsRemapModel.FILE_PATH);
+            var model = FileUtils.LoadFile<EntityStatsRemapModel>(EntityStatsRemapModel.FILE_PATH);
+            fileNameRemappings = model.fileNameRemappings;
         }
+    }
+
+    public void SaveEntityStatsRemapping()
+    {
+        FileUtils.SaveFile(EntityStatsRemapModel.FILE_PATH, new EntityStatsRemapModel(fileNameRemappings));
+    }
+
+    public void UpdateRemapping(string baseName, string remappedName)
+    {
+        fileNameRemappings[baseName] = remappedName;
+
+        var entityToUpdate = serializableEntities.First(e => e.statsFileName == baseName);
+        if(entityToUpdate == null)
+        {
+            Debug.LogError($"Could not find entity with file name: {baseName}");
+            return;
+        }
+        var stats = FileUtils.LoadFile<EntityStats>(GetEntityMappedFilePath(entityToUpdate));
+        entityStatsMap[entityToUpdate.statsFileName] = stats;
+
+        entityToUpdate.LoadStats();
     }
 
     /// <summary>
@@ -83,10 +110,11 @@ public class FightDataLoader : Singleton<FightDataLoader>
 
         foreach (var entity in serializableEntities)
         {
-            if (!File.Exists(entity.ENTITY_STATS_FILE_PATH))
+            var defaultFilePath = GetEntityDefaultFilePath(entity);
+            if (!File.Exists(defaultFilePath))
             {
                 var entityStats = entity.GetComponent<Entity>().Stats;
-                FileUtils.SaveFile<EntityStats>(entity.ENTITY_STATS_FILE_PATH, entityStats);
+                FileUtils.SaveFile<EntityStats>(defaultFilePath, entityStats);
             }
         }
     }
@@ -96,7 +124,8 @@ public class FightDataLoader : Singleton<FightDataLoader>
         entityStatsMap = new();
         foreach (var entity in serializableEntities)
         {
-            var stats = FileUtils.LoadFile<EntityStats>(entity.ENTITY_STATS_FILE_PATH);
+            var filePath = GetEntityMappedFilePath(entity);
+            var stats = FileUtils.LoadFile<EntityStats>(filePath);
             entityStatsMap.Add(entity.statsFileName, stats);
         }
     }
@@ -160,5 +189,29 @@ public class FightDataLoader : Singleton<FightDataLoader>
         EditorUtility.SetDirty(this);
     }
 
-    
+    public static string GetEntityFolderPath()
+    {
+        return Path.Combine(Application.persistentDataPath, FightDataLoader.ENTITY_FOLDER);
+    }
+
+    public static string GetEntityDefaultFilePath(Entity entity)
+    {
+        return Path.Combine(GetEntityFolderPath(), GetEntityDefaultFileName(entity));
+    }
+
+    public static string GetEntityDefaultFileName(Entity entity)
+    {
+        return $"{entity.statsFileName}.json";
+    }
+
+    public static string GetEntityMappedFilePath(Entity entity)
+    {
+        return Path.Combine(GetEntityFolderPath(), GetEntityMappedFileName(entity));
+    }
+
+    public static string GetEntityMappedFileName(Entity entity)
+    {
+        var fileName = Instance.fileNameRemappings[entity.statsFileName];
+        return $"{fileName}.json"; ;
+    }
 }

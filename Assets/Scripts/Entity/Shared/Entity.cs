@@ -21,8 +21,7 @@ namespace Minigames.Fight
 
         // Used to load entity stats from appData file
         public string statsFileName; // i.e. "Player", "Bee", etc
-        public string ENTITY_STATS_FOLDER_PATH => Path.Combine(Application.persistentDataPath, FightDataLoader.ENTITY_FOLDER); // i.e. AppData/LocalLow/Caos Creations/Entities
-        public string ENTITY_STATS_FILE_PATH => Path.Combine(ENTITY_STATS_FOLDER_PATH, $"{statsFileName}.json"); // i.e. AppData/LocalLow/Caos Creations/Entities/Player.json
+        
 
         public bool IsDead => Stats.combatStats.currentHp <= 0;
 
@@ -37,14 +36,20 @@ namespace Minigames.Fight
             VisualController = GetComponent<VisualController>();
             AnimationController = GetComponent<AnimationManager>();
             Rigidbody2D = GetComponent<Rigidbody2D>();
+            LoadStats();
             Setup();
         }
 
-        protected virtual void Setup()
+        public void LoadStats()
         {
             var savedStats = FightDataLoader.EntityStatsMap[statsFileName];
             Stats.Load(savedStats);
             Stats.Init();
+        }
+
+        protected virtual void Setup()
+        {
+            
         }
         
         protected virtual void Update()

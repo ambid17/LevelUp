@@ -3,27 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityStatsEditor : MonoBehaviour
 {
-    public enum EditorMode
-    {
-        Edit,
-        Duplicate
-    }
-
-    private EditorMode _editorMode;
+    [SerializeField] private GameObject visuals;
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button cancelButton;
+    [SerializeField] private DevCheatsUI devCheatsUI;
     private EntityStats _entityStats;
 
     void Start()
     {
-        
+        saveButton.onClick.AddListener(Save);
+        cancelButton.onClick.AddListener(Cancel);
     }
 
-    public void Setup(string fileName, EditorMode editorMode)
+    private void Save()
     {
-        _editorMode = editorMode;
-        _entityStats = GetFileData(fileName);
+        visuals.SetActive(false);
+        devCheatsUI.OnFinishOperation();
+    }
+
+    private void Cancel()
+    {
+        visuals.SetActive(false);
+        devCheatsUI.OnFinishOperation();
+    }
+
+    public void Setup(Entity entityToEdit)
+    {
+        visuals.SetActive(true);
+        _entityStats = FightDataLoader.EntityStatsMap[entityToEdit.statsFileName];
     }
 
     private EntityStats GetFileData(string fileName)

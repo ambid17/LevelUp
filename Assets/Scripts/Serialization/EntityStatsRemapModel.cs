@@ -22,4 +22,9 @@ public class EntityStatsRemapModel
     {
         fileNameRemappings = new();
     }
+
+    public EntityStatsRemapModel(SerializableDictionary<string, string> fileNameRemappings)
+    {
+        this.fileNameRemappings = fileNameRemappings;
+    }
 }

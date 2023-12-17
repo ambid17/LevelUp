@@ -1,25 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EntityStatsRow : MonoBehaviour
+public class FileSelectorButton : MonoBehaviour
 {
-    public TMP_Text entityNameText;
-    public TMP_Text entityFileNameText;
-    public Button rowButton;
+    public Button button;
     [SerializeField] private Image buttonImage;
+    public TMP_Text buttonText;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite selectedSprite;
-
-    public void Setup(string entityName, string entityFileName, Action onClick)
-    {
-        entityNameText.text = entityName;
-        entityFileNameText.text = entityFileName;
-        rowButton.onClick.AddListener(() => onClick());
-    }
 
     public void Select()
     {
@@ -30,6 +21,4 @@ public class EntityStatsRow : MonoBehaviour
     {
         buttonImage.sprite = defaultSprite;
     }
-
-    
 }
