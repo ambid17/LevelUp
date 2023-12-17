@@ -2,6 +2,7 @@ using Minigames.Fight;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -34,7 +35,7 @@ public class DuplicateStatsPopup : MonoBehaviour
     {
         var filePath = Path.Combine(FightDataLoader.GetEntityFolderPath(), $"{inputField.text}.json");
         FileUtils.SaveFile(filePath, toDuplicate.Stats);
-        Debug.Log($"Saved entityStats duplicate of ");
+        Debug.Log($"Saved entityStats duplicate of {toDuplicate.statsFileName} to {filePath}");
 
         inputField.text = string.Empty;
         visuals.SetActive(false);

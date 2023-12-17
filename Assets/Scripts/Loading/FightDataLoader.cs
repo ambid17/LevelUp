@@ -84,15 +84,16 @@ public class FightDataLoader : Singleton<FightDataLoader>
         fileNameRemappings[baseName] = remappedName;
 
         var entityToUpdate = serializableEntities.First(e => e.statsFileName == baseName);
-        if(entityToUpdate == null)
-        {
-            Debug.LogError($"Could not find entity with file name: {baseName}");
-            return;
-        }
+        
+        // Update the stats mapping
         var stats = FileUtils.LoadFile<EntityStats>(GetEntityMappedFilePath(entityToUpdate));
         entityStatsMap[entityToUpdate.statsFileName] = stats;
 
-        entityToUpdate.LoadStats();
+        // save the stat remapping
+        FileUtils.SaveFile(EntityStatsRemapModel.FILE_PATH, new EntityStatsRemapModel(fileNameRemappings));
+
+        // Send out an event so entities can choose to use the new mapping
+        Platform.EventService.Dispatch(new EntityStatsFileRemappedEvent(baseName));
     }
 
     /// <summary>

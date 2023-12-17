@@ -21,7 +21,7 @@ namespace Minigames.Fight
 
         // Used to load entity stats from appData file
         public string statsFileName; // i.e. "Player", "Bee", etc
-        
+
 
         public bool IsDead => Stats.combatStats.currentHp <= 0;
 
@@ -38,6 +38,16 @@ namespace Minigames.Fight
             Rigidbody2D = GetComponent<Rigidbody2D>();
             LoadStats();
             Setup();
+
+            Platform.EventService.Add<EntityStatsFileRemappedEvent>(OnStatsRemapped);
+        }
+
+        private void OnStatsRemapped(EntityStatsFileRemappedEvent e)
+        {
+            if (e.StatsFileName == statsFileName)
+            {
+                LoadStats();
+            }
         }
 
         public void LoadStats()
@@ -49,9 +59,9 @@ namespace Minigames.Fight
 
         protected virtual void Setup()
         {
-            
+
         }
-        
+
         protected virtual void Update()
         {
             Stats.TickStatuses();
@@ -77,10 +87,10 @@ namespace Minigames.Fight
                 effect.Execute(this, target);
             }
 
-            float damage = WeaponController.CurrentWeapon.baseDamage.Calculated 
+            float damage = WeaponController.CurrentWeapon.baseDamage.Calculated
                 + WeaponController.CurrentWeapon.onHitDamage.Calculated;
             target.TakeHit(damage, this);
-            
+
             // Clear the onHitDamage because it is only used once per hit as many of the effects
             // are dependent on target stats
             WeaponController.CurrentWeapon.onHitDamage.Clear();

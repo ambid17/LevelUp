@@ -32,6 +32,8 @@ public class FileSelector : MonoBehaviour
     {
         visuals.SetActive(true);
 
+        selectedEntity = entity;
+
         selectorButtons = new();
 
         foreach (var filePath in Directory.EnumerateFiles(entityDirectory))
@@ -57,8 +59,19 @@ public class FileSelector : MonoBehaviour
         button.Select();
     }
 
+    private void ClearFiles()
+    {
+        foreach(var selectorButton in selectorButtons)
+        {
+            Destroy(selectorButton.gameObject);
+        }
+
+        selectorButtons.Clear();
+    }
+
     private void Cancel()
     {
+        ClearFiles();
         visuals.SetActive(false);
         devCheatsUI.OnFinishOperation();
     }
@@ -66,6 +79,8 @@ public class FileSelector : MonoBehaviour
     private void Select()
     {
         FightDataLoader.Instance.UpdateRemapping(selectedEntity.statsFileName, selectedFile);
+
+        ClearFiles();
         visuals.SetActive(false);
         devCheatsUI.OnFinishOperation();
     }

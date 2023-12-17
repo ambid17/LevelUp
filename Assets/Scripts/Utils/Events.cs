@@ -128,4 +128,14 @@ namespace Minigames.Fight
         {
         }
     }
+
+    public class EntityStatsFileRemappedEvent : IEvent
+    {
+        public string StatsFileName;
+
+        public EntityStatsFileRemappedEvent(string statsFileName)
+        {
+            StatsFileName = statsFileName;
+        }
+    }
 }
