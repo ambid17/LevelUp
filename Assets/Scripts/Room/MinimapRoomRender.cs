@@ -6,10 +6,15 @@ namespace Minigames.Fight
 {
     public class MinimapRoomRender : MonoBehaviour
     {
-        [SerializeField]
-        private Color activeColor;
-        [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        public Color activeColor;
+        public Color defaultColor;
+
+        public SpriteRenderer spriteRenderer;
+
+        private void Start()
+        {
+            spriteRenderer.color = defaultColor;
+        }
 
         public void Activate()
         {
