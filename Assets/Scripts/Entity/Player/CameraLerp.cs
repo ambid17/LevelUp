@@ -22,6 +22,8 @@ namespace Minigames.Fight
         private float transitionTime;
         [SerializeField]
         private float deadRadius;
+        [SerializeField]
+        private float transitionLerpMultiplier;
 
         private Bounds _bounds = new();
         private Camera _camera;
@@ -41,23 +43,31 @@ namespace Minigames.Fight
 
             float aspect = (float)Screen.width / Screen.height;
 
-            float worldHeight = _camera.orthographicSize * 2;
+            float cameraViewHeight = _camera.orthographicSize * 2;
 
-            float worldWidth = worldHeight * aspect;
+            float cameraViewWidth = cameraViewHeight * aspect;
 
-            Vector2 target = Vector2.Lerp(playerPos, mousePos, lerpFactor);
+            Vector2 target = Vector2.zero;
 
+            // If transitioning, the target is just getting the camera into the bounds of the new room
             if (_isTransitioning)
             {
-                target = GameManager.PlayerEntity.transform.position;
+                target.x = Mathf.Clamp(target.x, _bounds.min.x + (cameraViewWidth / 2), _bounds.max.x - (cameraViewWidth / 2));
+                target.y = Mathf.Clamp(target.y, _bounds.min.y + (cameraViewHeight / 2), _bounds.max.y - (cameraViewHeight / 2));
+            }
+            else
+            {
+                target = Vector2.Lerp(playerPos, mousePos, lerpFactor);
             }
 
-            Vector2 newPos = Vector2.MoveTowards(transform.position, target, lerpSpeed * Time.deltaTime);
+            // while the camera is transitioning, it needs to move fast enough to be done, otherwise the camera will snap to in bounds when the transition finishes
+            float calculatedLerpSpeed = _isTransitioning ? lerpSpeed * transitionLerpMultiplier : lerpSpeed;
+            Vector2 newPos = Vector2.MoveTowards(transform.position, target, calculatedLerpSpeed * Time.deltaTime);
 
             if (!_isTransitioning)
             {
-                newPos.x = Mathf.Clamp(newPos.x, _bounds.min.x + (worldWidth / 2), _bounds.max.x - (worldWidth / 2));
-                newPos.y = Mathf.Clamp(newPos.y, _bounds.min.y + (worldHeight / 2), _bounds.max.y - (worldHeight / 2));
+                newPos.x = Mathf.Clamp(newPos.x, _bounds.min.x + (cameraViewWidth / 2), _bounds.max.x - (cameraViewWidth / 2));
+                newPos.y = Mathf.Clamp(newPos.y, _bounds.min.y + (cameraViewHeight / 2), _bounds.max.y - (cameraViewHeight / 2));
             }
 
             transform.position = new Vector3(newPos.x, newPos.y, -10);
