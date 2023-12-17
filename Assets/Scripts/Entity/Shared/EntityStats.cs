@@ -16,6 +16,16 @@ namespace Minigames.Fight
         public MovementStats movementStats;
         public CombatStats combatStats;
         
+        /// <summary>
+        /// This exists to handle things that can only be saved in inspector, such as prefabs.
+        /// For now, only certain stats can be overridden from a file
+        /// </summary>
+        /// <param name="stats"></param>
+        public void Load(EntityStats stats)
+        {
+            movementStats.Load(stats.movementStats);
+            combatStats.Load(stats.combatStats);
+        }
 
         public void Init()
         {
@@ -51,6 +61,13 @@ namespace Minigames.Fight
         public List<StatusEffectData> hpStatusEffects;
         [JsonIgnore]
         public List<TimerEffectData> playerTimerEffects;
+
+        public void Load(CombatStats stats)
+        {
+            maxHp = stats.maxHp;
+            meleeWeaponStats.Load(stats.meleeWeaponStats);
+            projectileWeaponStats.Load(stats.projectileWeaponStats);
+        }
 
         public void Init()
         {
@@ -168,6 +185,20 @@ namespace Minigames.Fight
         [JsonIgnore]
         public List<StatusEffectData> AmmoStatusEffects = new();
 
+        public void Load(WeaponStats weaponStats)
+        {
+            baseDamage = weaponStats.baseDamage;
+            onHitDamage = weaponStats.onHitDamage;
+            projectileMoveSpeed = weaponStats.projectileMoveSpeed;
+            projectileLifeTime = weaponStats.projectileLifeTime;
+            rateOfFire = weaponStats.rateOfFire;
+            maxAmmo = weaponStats.maxAmmo;
+            ammoRegenRate = weaponStats.ammoRegenRate;
+            projectilesPerShot = weaponStats.projectilesPerShot;
+            projectileSpread = weaponStats.projectileSpread;
+            projectileSize = weaponStats.projectileSize;
+        }
+
         public void Init()
         {
             baseDamage.Init();
@@ -242,6 +273,11 @@ namespace Minigames.Fight
     {
         public ModifiableStat moveSpeed;
 
+        public void Load(MovementStats stats)
+        {
+            moveSpeed = stats.moveSpeed;
+        }
+
         public void Init()
         {
             moveSpeed.Init();
@@ -262,6 +298,7 @@ namespace Minigames.Fight
     public class ModifiableStat
     {
         [SerializeField]
+        [JsonProperty]
         private float baseValue;
         public float BaseValue => baseValue;
 

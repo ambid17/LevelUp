@@ -42,7 +42,8 @@ namespace Minigames.Fight
 
         protected virtual void Setup()
         {
-            Stats = FightDataLoader.EntityStatsMap[this];
+            var savedStats = FightDataLoader.EntityStatsMap[statsFileName];
+            Stats.Load(savedStats);
             Stats.Init();
         }
         

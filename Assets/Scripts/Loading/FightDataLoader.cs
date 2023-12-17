@@ -24,13 +24,13 @@ public class FightDataLoader : Singleton<FightDataLoader>
     public static EntityStatsRemapModel EntityStatsRemapModel => Instance.entityStatsRemapModel;
 
     [SerializeField]
-    private SerializableDictionary<Entity, EntityStats> entityStatsMap;
-    public static SerializableDictionary<Entity, EntityStats> EntityStatsMap => Instance.entityStatsMap;
+    private SerializableDictionary<string, EntityStats> entityStatsMap;
+    public static SerializableDictionary<string, EntityStats> EntityStatsMap => Instance.entityStatsMap;
 
 
-
-    private void Awake()
+    protected override void Initialize()
     {
+        DontDestroyOnLoad(gameObject);
         Scene current = SceneManager.GetActiveScene();
         if (current.buildIndex == AnySceneLaunch.ANY_SCENE_LAUNCH_INDEX)
         {
@@ -97,7 +97,7 @@ public class FightDataLoader : Singleton<FightDataLoader>
         foreach (var entity in serializableEntities)
         {
             var stats = FileUtils.LoadFile<EntityStats>(entity.ENTITY_STATS_FILE_PATH);
-            entityStatsMap.Add(entity, stats);
+            entityStatsMap.Add(entity.statsFileName, stats);
         }
     }
 
