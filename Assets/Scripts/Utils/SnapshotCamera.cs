@@ -1,65 +1,39 @@
-using UnityEditor;
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
-
-// Object rendering code based on Dave Carlile's "Create a GameObject Image Using Render Textures" post
-// Link: http://crappycoding.com/2014/12/create-gameobject-image-using-render-textures/
 
 /// <summary>
-/// Takes snapshot images of prefabs and GameObject instances, and provides methods to save them as PNG files.
+/// Takes snapshot of gameobject in scene and saves to PNG
+/// 
+/// To setup: 
+/// - open the "RoomSnapshotGenerator" scene
+/// - drag in a prefab to the scene that you want to screenshot
+/// - drag the reference of the instantiated prefab into "objectToSnapshot"
+/// - click on the ellipsis for this component and click "Take snapshot"
 /// </summary>
 public class SnapshotCamera : MonoBehaviour
 {
     [SerializeField] private Camera cam;
-    [SerializeField] private int layerToAssign;
-    [SerializeField] private string snapshotFileName;
     [SerializeField] private GameObject objectToSnapshot;
-    [SerializeField] private int imageSize;
+    private const int imageSize = 256;
 
-    public float cameraOrthoSize;
 
-    [ContextMenu("Generate minimap sprite")]
-    private void GenerateMinimapSprite()
+    [ContextMenu("Take snapshot")]
+    private void SnapshotGameobject()
     {
-        if (cam == null)
-        {
-            cam = MakeSnapshotCamera();
-        }
+        var objectCollider = objectToSnapshot.GetComponent<Collider2D>();
 
-        SetLayersRecursively(objectToSnapshot);
+        var extents = objectCollider.bounds.extents;
+        cam.orthographicSize = extents.x > extents.y ? extents.x : extents.y;
+
+        var position = objectCollider.bounds.center;
+        position.z = -10;
+        cam.transform.position = position;
 
         var snapshot = TakeSnapshot(imageSize, imageSize);
 
-        SavePNG(snapshot, $"{snapshotFileName}.png", Path.Combine("Textures", "MinimapSprites"));
+        SavePNG(snapshot, $"{objectToSnapshot.name}.png", Path.Combine("Textures", "MinimapSprites"));
     }
 
-    public Camera MakeSnapshotCamera()
-    {
-        GameObject snapshotCameraGO = new GameObject("Snapshot Camera");
-        Camera cam = snapshotCameraGO.AddComponent<Camera>();
-
-        cam.cullingMask = 1 << layerToAssign;
-        cam.orthographic = true;
-        cam.orthographicSize = 10;
-        cam.clearFlags = CameraClearFlags.SolidColor;
-        cam.backgroundColor = Color.clear;
-        cam.nearClipPlane = 0.1f;
-
-        return cam;
-    }
-
-    private void SetLayersRecursively(GameObject gameObject)
-    {
-        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
-            transform.gameObject.layer = layerToAssign;
-    }
-
-    /// <summary>
-    /// Takes a snapshot of whatever is in front of the camera and within the camera's culling mask and returns it as a Texture2D.
-    /// </summary>
     private Texture2D TakeSnapshot(int width, int height)
     {
         // Get a temporary render texture and render the camera
