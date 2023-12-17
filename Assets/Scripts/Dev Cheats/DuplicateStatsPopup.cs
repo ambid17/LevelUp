@@ -26,6 +26,7 @@ public class DuplicateStatsPopup : MonoBehaviour
 
     public void Show(Entity toDuplicate)
     {
+        visuals.SetActive(true);
         this.toDuplicate = toDuplicate;
     }
 

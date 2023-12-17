@@ -9,14 +9,6 @@ namespace Minigames.Fight
 {
     public class DevCheatsUI : UIPanel
     {
-        enum DevCheatsState
-        {
-            ListStats,
-            EditStats,
-            ChangeFile,
-            DuplicateFile,
-        }
-
         // Create an entity stats
         // save it with a file name
         // then import the stats and choose which entity's stats should be overriden
@@ -32,8 +24,6 @@ namespace Minigames.Fight
         [SerializeField] private DuplicateStatsPopup duplicateStatsPopup;
 
         public Entity selectedEntity;
-        private DevCheatsState state;
-
 
         private void Start()
         {
