@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FileSelector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform fileContainer;
+    [SerializeField] private Transform fileButtonPrefab;
+    [SerializeField] private GameObject visuals;
+
+    [SerializeField] private Button cancelButton;
+    [SerializeField] private Button selectButton;
+
+    private void Start()
     {
-        
+        cancelButton.onClick.AddListener(Cancel);
+        selectButton.onClick.AddListener(Select);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeEntity()
     {
-        
+        visuals.SetActive(true);
+    }
+
+    private void Cancel()
+    {
+
+    }
+
+    private void Select()
+    {
+        visuals.SetActive(false);
     }
 }

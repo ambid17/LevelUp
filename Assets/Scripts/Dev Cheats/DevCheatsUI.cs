@@ -17,7 +17,6 @@ namespace Minigames.Fight
         [SerializeField] private Button changeEntityStatsButton;
         [SerializeField] private EntityStatsRow entityStatsRowPrefab;
         [SerializeField] private Transform entityStatsRowContainer;
-        [SerializeField] private SerializableDictionary<GameObject, string> entityFilePathMapping;
         [SerializeField] private GameObject entityStatsListContainer;
 
 
@@ -50,10 +49,10 @@ namespace Minigames.Fight
 
             statsRows = new List<EntityStatsRow>();
 
-            foreach (var entity in entityFilePathMapping.Keys)
+            foreach (var entity in FightDataLoader.SerializableEntities)
             {
                 var entityStatsRow = Instantiate(entityStatsRowPrefab, entityStatsRowContainer);
-                string entityFileName = entityFilePathMapping[entity];
+                string entityFileName = entity.statsFileName;
                 entityStatsRow.Setup(entity.name, entityFileName, () => OnRowSelected(entityFileName));
 
                 statsRows.Add(entityStatsRow);
@@ -94,45 +93,6 @@ namespace Minigames.Fight
         {
             fileSelectorContainer.SetActive(true);
             // show popup to select a entityStats to use
-        }
-
-        /// <summary>
-        /// In order for this to work, you have to set the "Asset Label" of each prefab to "Entity"
-        /// </summary>
-        [ContextMenu("Populate entity mappings")]
-        public void PopulateEntityMapping()
-        {
-            string[] entityGuids = AssetDatabase.FindAssets("l:Entity");
-            entityFilePathMapping = new();
-
-            foreach (string guid in entityGuids)
-            {
-                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                GameObject entity = (GameObject) AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject));
-
-                entityFilePathMapping.Add(entity, $"{entity.name}.json");
-            }
-
-            EditorUtility.SetDirty(this);
-        }
-
-        [ContextMenu("Create EntityStats Files")]
-        public void CreateEntityStatsFiles()
-        {
-            var dataFolder = Application.persistentDataPath;
-            var entitiesFolder = Path.Combine(dataFolder, "Entities");
-
-            if (!Directory.Exists(entitiesFolder))
-            {
-                Directory.CreateDirectory(entitiesFolder);
-            }
-
-            foreach (var entity in entityFilePathMapping.Keys)
-            {
-                var entityFilePath = Path.Combine(entitiesFolder, entityFilePathMapping[entity]);
-                var entityStats = entity.GetComponent<Entity>().Stats;
-                FileUtils.SaveFile<EntityStats>(entityFilePath, entityStats);
-            }
         }
     }
 }

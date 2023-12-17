@@ -236,8 +236,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca270ea179297fb4c922ca2911dff1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
   effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
+  serializableEntities:
+  - {fileID: -7786698165613059924, guid: 397fcdc02bde49141ab2b41163364880, type: 3}
+  - {fileID: 5632584843697323086, guid: 8669bff7bca27bc4cbb529994d08bce4, type: 3}
+  - {fileID: -7786698165613059924, guid: bc5b618f9bfbf3a4eb3526d039db9a2b, type: 3}
+  - {fileID: 7104642938935533843, guid: 1f522bb62a353f945a998ed23a610b4f, type: 3}
+  - {fileID: -7786698165613059924, guid: 2229283ea4df18246808070c8dbd7169, type: 3}
+  - {fileID: 5979765343580716156, guid: ddca6166c3e63f048b582f769e76b592, type: 3}
+  - {fileID: -7786698165613059924, guid: e6cee23ed31a3004e82de48c9b44aa26, type: 3}
+  - {fileID: 8595262085980706986, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
 --- !u!4 &1821568680
 Transform:
   m_ObjectHideFlags: 0

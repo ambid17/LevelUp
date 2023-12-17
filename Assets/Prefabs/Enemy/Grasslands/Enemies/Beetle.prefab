@@ -576,6 +576,7 @@ MonoBehaviour:
       hpStatusEffects: []
       playerTimerEffects: []
   Rigidbody2D: {fileID: 5632584843697323072}
+  statsFileName: Beetle
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
@@ -872,8 +873,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &9035566671129628041
 MonoBehaviour:
   m_ObjectHideFlags: 0

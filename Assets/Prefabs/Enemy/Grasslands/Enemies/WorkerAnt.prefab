@@ -175,6 +175,7 @@ MonoBehaviour:
         OnPurchaseEffects: []
     combatStats:
       meleeWeaponStats:
+        MaxRange: 0
         projectilePrefab: {fileID: 735428608842954597, guid: 23b8dfa1611f6464cb08a80ba0610156, type: 3}
         currentAmmo: 0
         targetLayers:
@@ -309,6 +310,7 @@ MonoBehaviour:
         OnHitEffects: []
         AmmoStatusEffects: []
       projectileWeaponStats:
+        MaxRange: 0
         projectilePrefab: {fileID: 0}
         currentAmmo: 0
         targetLayers:
@@ -457,6 +459,7 @@ MonoBehaviour:
       hpStatusEffects: []
       playerTimerEffects: []
   Rigidbody2D: {fileID: 8510735526301981989}
+  statsFileName: WorkerAnt
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1

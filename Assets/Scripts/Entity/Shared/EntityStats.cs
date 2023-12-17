@@ -17,9 +17,8 @@ namespace Minigames.Fight
         public CombatStats combatStats;
         
 
-        public void Init(string overrideFilePath = "")
+        public void Init()
         {
-            // TODO: figure out how to get the right file path
             movementStats.Init();
             combatStats.Init();
         }
@@ -44,12 +43,13 @@ namespace Minigames.Fight
         public WeaponStats projectileWeaponStats;
         public ModifiableStat maxHp = new();
 
-        [NonSerialized]
+        [JsonIgnore]
         public float currentHp;
-        [NonSerialized]
+        [JsonIgnore]
         public float DamageTakenThisSecond;
-        
+        [JsonIgnore]
         public List<StatusEffectData> hpStatusEffects;
+        [JsonIgnore]
         public List<TimerEffectData> playerTimerEffects;
 
         public void Init()
@@ -137,7 +137,6 @@ namespace Minigames.Fight
     {
         [JsonIgnore]
         public float MaxRange;
-
         [JsonIgnore]
         public ProjectileController projectilePrefab;
         [JsonIgnore]
@@ -148,9 +147,9 @@ namespace Minigames.Fight
         public LayerMask targetLayers;
         [JsonIgnore]
         public LayerMask destroyOnImpactLayers;
-
+        [JsonIgnore]
         public Sprite sprite;
-
+        [JsonIgnore]
         public AnimatorController animation;
 
         public ModifiableStat baseDamage = new();
@@ -164,10 +163,9 @@ namespace Minigames.Fight
         public ModifiableStat projectileSpread = new();
         public ModifiableStat projectileSize = new();
 
-        
-
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();
+        [JsonIgnore]
         public List<StatusEffectData> AmmoStatusEffects = new();
 
         public void Init()
@@ -287,11 +285,11 @@ namespace Minigames.Fight
         // If this effect is set, it will override all other effects and negate them
         public StatModifierEffect overrideEffect;
 
-        public List<Effect> OnKillEffects = new();
-        public List<Effect> OnDeathEffects = new();
-        public List<Effect> OnTakeDamageEffects = new();
-        public List<Effect> OnTimerEffects = new();
-        public List<Effect> OnPurchaseEffects = new();
+        //public List<Effect> OnKillEffects = new();
+        //public List<Effect> OnDeathEffects = new();
+        //public List<Effect> OnTakeDamageEffects = new();
+        //public List<Effect> OnTimerEffects = new();
+        //public List<Effect> OnPurchaseEffects = new();
 
         public void Init()
         {

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Minigames.Fight;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 
@@ -16,7 +18,12 @@ namespace Minigames.Fight
         public WeaponController WeaponController;
         public EntityStats Stats;
         public Rigidbody2D Rigidbody2D;
-        
+
+        // Used to load entity stats from appData file
+        public string statsFileName; // i.e. "Player", "Bee", etc
+        public string ENTITY_STATS_FOLDER_PATH => Path.Combine(Application.persistentDataPath, FightDataLoader.ENTITY_FOLDER); // i.e. AppData/LocalLow/Caos Creations/Entities
+        public string ENTITY_STATS_FILE_PATH => Path.Combine(ENTITY_STATS_FOLDER_PATH, $"{statsFileName}.json"); // i.e. AppData/LocalLow/Caos Creations/Entities/Player.json
+
         public bool IsDead => Stats.combatStats.currentHp <= 0;
 
         protected EventService eventService;
@@ -35,6 +42,7 @@ namespace Minigames.Fight
 
         protected virtual void Setup()
         {
+            Stats = FightDataLoader.EntityStatsMap[this];
             Stats.Init();
         }
         
@@ -90,6 +98,10 @@ namespace Minigames.Fight
             AnimationController = GetComponent<AnimationManager>();
             WeaponController = GetComponent<WeaponController>();
             Rigidbody2D = GetComponent<Rigidbody2D>();
+
+            statsFileName = gameObject.name;
+
+            EditorUtility.SetDirty(this);
         }
     }
 }

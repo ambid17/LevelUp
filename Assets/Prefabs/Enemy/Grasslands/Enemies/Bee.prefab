@@ -524,6 +524,7 @@ MonoBehaviour:
       hpStatusEffects: []
       playerTimerEffects: []
   Rigidbody2D: {fileID: 8510735526301981989}
+  statsFileName: Bee
   tickDamageDownPerSecond: 0
   enemyStats:
     goldValue: 1
@@ -796,8 +797,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5
