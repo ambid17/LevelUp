@@ -52,6 +52,7 @@ namespace Minigames.Fight
             // If transitioning, the target is just getting the camera into the bounds of the new room
             if (_isTransitioning)
             {
+                target = GameManager.PlayerEntity.transform.position;
                 target.x = Mathf.Clamp(target.x, _bounds.min.x + (cameraViewWidth / 2), _bounds.max.x - (cameraViewWidth / 2));
                 target.y = Mathf.Clamp(target.y, _bounds.min.y + (cameraViewHeight / 2), _bounds.max.y - (cameraViewHeight / 2));
             }
