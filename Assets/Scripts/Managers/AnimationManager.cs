@@ -26,7 +26,7 @@ public class AnimationManager : MonoBehaviour
     }
 
     // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.
-    public bool IsCurrentAnimLoopFinished(float acceptableDifference)
+    public bool IsCurrentAnimLoopFinished(float acceptableDifference = 0.05f)
     {
         float difference = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
         return  Mathf.Clamp(difference, 1 - acceptableDifference, 1 + acceptableDifference) == difference;

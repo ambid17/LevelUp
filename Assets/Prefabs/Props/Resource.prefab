@@ -73,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1244560827
+  m_SortingLayerID: 235167977
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 394b7a277e892f3438b66c763a475c18, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,6 +107,24 @@ MonoBehaviour:
   minSpeed: 10
   maxSpeed: 20
   deceleration: 5
+  grassSprites:
+  - {fileID: 21300000, guid: b059579eaf064c149b8df8ae1571946b, type: 3}
+  - {fileID: 21300000, guid: 4540682d110946046a7ab97a3008a047, type: 3}
+  - {fileID: 21300000, guid: c9e6475b56dc171448881fc20d489243, type: 3}
+  - {fileID: 21300000, guid: ac6ffcb647374b74c9ca55f09b4398f3, type: 3}
+  dirtSprites:
+  - {fileID: 21300000, guid: b858f579cc437d24cafa84fbf15f6605, type: 3}
+  - {fileID: 21300000, guid: 8f01f782c17171f4b81451c3b888d7c8, type: 3}
+  - {fileID: 21300000, guid: a29ee476f2b29034f8ee20c63a3074b5, type: 3}
+  - {fileID: 21300000, guid: 57d8a4b9ed6269f458595f7b029dffeb, type: 3}
+  - {fileID: 21300000, guid: f4ae7e88a27e4ca4a9b813933a99cbb3, type: 3}
+  - {fileID: 21300000, guid: be1e920d47aa0cc47b0eb3f0e7e041ab, type: 3}
+  - {fileID: 21300000, guid: 01d29ac72bde02447a743e962badd25a, type: 3}
+  - {fileID: 21300000, guid: 8e76e1773cc546949b681a3eb662cf58, type: 3}
+  - {fileID: 21300000, guid: 3e475b14371eb084d93f94b071862123, type: 3}
+  - {fileID: 21300000, guid: 0a730fa5c5f556242b6f808af753e890, type: 3}
+  - {fileID: 21300000, guid: a84acbad91c01a84fb1ecb20dafd3bf7, type: 3}
+  - {fileID: 21300000, guid: b33c540711de20f4fae387baecde30dd, type: 3}
 --- !u!50 &3158209486798102801
 Rigidbody2D:
   serializedVersion: 4
