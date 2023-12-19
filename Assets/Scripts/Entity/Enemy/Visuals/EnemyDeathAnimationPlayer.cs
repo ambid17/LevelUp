@@ -14,6 +14,7 @@ public class EnemyDeathAnimationPlayer : MonoBehaviour
     {
         spriteRenderer.sprite = renderer.sprite;
         spriteRenderer.flipX = renderer.flipX;
+        spriteRenderer.sortingOrder = renderer.sortingOrder;
         anim.runtimeAnimatorController = animation;
     }
 }
