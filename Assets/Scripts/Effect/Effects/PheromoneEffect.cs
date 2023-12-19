@@ -24,11 +24,6 @@ namespace Minigames.Fight
             return string.Format(_description, duration);
         }
 
-        public override string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Empty;
-        }
-
         public override void OnCraft(Entity target)
         {
             // This should never be used by players

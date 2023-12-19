@@ -353,13 +353,18 @@ namespace Minigames.Fight
             RecalculateStat();
         }
 
-        public void AddEffect(StatModifierEffect effect)
+        /// <summary>
+        /// When adding the effect for the first time, it gets populated in the list.
+        /// When updating an effect, the Impact is recalculated using AmountOwned, so we just ignore adding it to the list again
+        /// </summary>
+        /// <param name="effect"></param>
+        public void AddOrUpdateStatEffect(StatModifierEffect effect)
         {
-            if (effect.statImpactType == StatImpactType.Additive)
+            if (effect.statImpactType == StatImpactType.Additive && !flatEffects.Contains(effect))
             {
                 flatEffects.Add(effect);
             }
-            else if(effect.statImpactType == StatImpactType.Compounding)
+            else if(effect.statImpactType == StatImpactType.Compounding && !compoundingEffects.Contains(effect))
             {
                 compoundingEffects.Add(effect);
             }

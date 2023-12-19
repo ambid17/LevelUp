@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Minigames.Fight
 {
@@ -70,8 +71,8 @@ namespace Minigames.Fight
         public EffectCategory EffectCategory;
         public TierCategory TierCategory;
 
-        public Effect positive;
-        public Effect negative;
+        public EffectUpgradeContainer positive;
+        public EffectUpgradeContainer negative;
 
         public string UpgradePath => $"upgrades/{UpgradeCategory}/{EffectCategory}/{TierCategory}/{Name}";
 
@@ -89,18 +90,16 @@ namespace Minigames.Fight
 
             if (IsCrafted)
             {
-                positive.OnCraft(GameManager.PlayerEntity);
-                positive.GiveUpgradeInfo(AmountOwned, UpgradeCategory, EffectCategory);
-                negative.OnCraft(GameManager.PlayerEntity);
-                negative.GiveUpgradeInfo(AmountOwned, UpgradeCategory, EffectCategory);
+                // Update the effect with the new AmountOwned
+                Craft();
             }
         }
 
         public virtual void Craft()
         {
             IsCrafted = true;
-            positive.OnCraft(GameManager.PlayerEntity);
-            negative.OnCraft(GameManager.PlayerEntity);
+            positive.Craft(this);
+            negative.Craft(this);
         }
 
         public string GetUpgradeCountText()
@@ -154,6 +153,20 @@ namespace Minigames.Fight
             }
 
             return totalCost;
+        }
+    }
+
+
+    [Serializable]
+    public class EffectUpgradeContainer
+    {
+        public Effect effect;
+        public float impactPerStat;
+
+        public void Craft(Upgrade upgrade)
+        {
+            effect.GiveUpgradeInfo(upgrade.AmountOwned, upgrade.UpgradeCategory, upgrade.EffectCategory);
+            effect.OnCraft(GameManager.PlayerEntity);
         }
     }
 }

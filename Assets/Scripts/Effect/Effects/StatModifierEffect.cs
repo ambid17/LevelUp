@@ -58,7 +58,7 @@ namespace Minigames.Fight
         public override void OnCraft(Entity entity)
         {
             var statToAffect = GetStatToAffect(entity);
-            statToAffect.AddEffect(this);
+            statToAffect.AddOrUpdateStatEffect(this);
         }
 
         /// <summary>
