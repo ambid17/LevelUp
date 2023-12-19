@@ -17,12 +17,9 @@ namespace Minigames.Fight
             damageText.Setup(damage.ToString(), transform.position);
         }
 
-        /// <summary>
-        /// Called from animation
-        /// </summary>
-        public void FacePlayer()
+        public void FaceTarget(Vector2 target)
         {
-            float direction = GameManager.PlayerEntity.transform.position.x - transform.position.x;
+            float direction = target.x - transform.position.x;
             MyEntity.VisualController.SpriteRenderer.flipX = direction < 0 ? false : true;
         }
     }

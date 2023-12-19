@@ -101,6 +101,8 @@ namespace Minigames.Fight
             MeleeTimer = 0;
             _storedDirection = GameManager.PlayerEntity.transform.position - meleeOffset.position;
             _storedTarget = GameManager.PlayerEntity.transform.position;
+            EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
+            myVC.FaceTarget(_storedTarget);
         }
 
         // Called by animator to ensure less than perfect aim.
@@ -110,6 +112,8 @@ namespace Minigames.Fight
             ShootTimer = 0;
             _storedTarget = GameManager.PlayerEntity.transform.position;
             _storedVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
+            EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
+            myVC.FaceTarget(_storedTarget);
         }
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
