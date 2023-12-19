@@ -44,9 +44,6 @@ namespace Minigames.Fight
 
             if (projectileSpawner != null)
             {
-                // Run algorithm twice to approximate the correct position for the projectilespawner offset.
-                projectileSpawner.FaceTarget(_storedTarget);
-                direction = PredictProjectileDirection(projectileSpawner.Offset.position);
                 projectileSpawner.FaceTarget(_storedPrediction);
                 direction = PredictProjectileDirection(projectileSpawner.Offset.position);
             }
@@ -111,9 +108,11 @@ namespace Minigames.Fight
         { 
             ShootTimer = 0;
             _storedTarget = GameManager.PlayerEntity.transform.position;
-            EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
-            myVC.FaceTarget(_storedTarget);
             _storedVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
+            _storedDirection = PredictProjectileDirection(transform.position);
+            EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
+            myVC.FaceTarget(_storedPrediction);
+            _storedDirection = PredictProjectileDirection(shootOffset.position);
         }
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
