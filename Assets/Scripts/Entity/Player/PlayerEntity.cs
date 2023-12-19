@@ -132,9 +132,6 @@ namespace Minigames.Fight
 
             eventService.Dispatch<PlayerRevivedEvent>();
             _animationControllerOverride.ResetAnimations();
-            // Spawn back in in the idle animation state
-            // TODO: switch to default animation
-            _animationControllerOverride.PlayRunAnimation();
         }
     }
 }
