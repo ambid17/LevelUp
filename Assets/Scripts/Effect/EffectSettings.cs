@@ -70,12 +70,12 @@ namespace Minigames.Fight
                 e.TierCategory == tierCategory &&
                 e.IsUnlocked == false
             ).ToList();
-            int _weightTotal = lockedUpgrades.Sum(e => e.DropWeight > 0 ? e.DropWeight : 1);
+            int _weightTotal = lockedUpgrades.Sum(e => 1);
 
             int randomWeight = UnityEngine.Random.Range(0, _weightTotal);
             foreach (var upgrade in lockedUpgrades)
             {
-                randomWeight -= upgrade.DropWeight > 0 ? upgrade.DropWeight : 1;
+                randomWeight -= 1;
                 if (randomWeight < 0)
                 {
                     return upgrade;

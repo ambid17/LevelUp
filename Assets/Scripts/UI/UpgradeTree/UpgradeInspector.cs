@@ -120,8 +120,8 @@ namespace Minigames.Fight
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
             upgradeButtonText.text = _currentUpgrade.GetCost(1).ToCurrencyString();
-            descriptionText.text = _currentUpgrade.positive.GetDescription();
-            bonusText.text = _currentUpgrade.negative.GetDescription();
+            descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
+            bonusText.text = _currentUpgrade.negative.effect.GetDescription();
 
             resourcesText.gameObject.SetActive(false);
 
@@ -170,8 +170,8 @@ namespace Minigames.Fight
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
             upgradeButtonText.text = "CRAFT";
-            descriptionText.text = _currentUpgrade.positive.GetDescription();
-            bonusText.text = _currentUpgrade.negative.GetDescription();
+            descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
+            bonusText.text = _currentUpgrade.negative.effect.GetDescription();
 
             resourcesText.gameObject.SetActive(true);
             StringBuilder stringBuilder = new StringBuilder();
