@@ -1,9 +1,7 @@
-using Minigames.Fight;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Minigames.Fight
 {
@@ -11,14 +9,6 @@ namespace Minigames.Fight
     {
         Additive,
         Exponential
-    }
-
-    public enum Category
-    {
-        UpgradeCategory,
-        EffectCategory,
-        TierCategory,
-        Name,
     }
 
     public enum UpgradeCategory
@@ -73,11 +63,6 @@ namespace Minigames.Fight
 
         public EffectUpgradeContainer positive;
         public EffectUpgradeContainer negative;
-
-        public string UpgradePath => $"upgrades/{UpgradeCategory}/{EffectCategory}/{TierCategory}/{Name}";
-
-        [Header("Random drop info")]
-        public int DropWeight = 1;
 
         public virtual void Unlock()
         {
