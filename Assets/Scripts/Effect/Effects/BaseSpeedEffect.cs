@@ -10,7 +10,7 @@ namespace Minigames.Fight
     [Serializable]
     public class BaseSpeedEffect : StatModifierEffect
     {
-        public override StatImpactType statImpactType => StatImpactType.Flat;
+        public override StatImpactType statImpactType => StatImpactType.Additive;
 
         public override ModifiableStat GetStatToAffect(Entity entity)
         {

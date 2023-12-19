@@ -27,17 +27,6 @@ namespace Minigames.Fight
         public override string GetDescription()
         {
             return string.Format(_description, SlowChance * 100, slowAmount * 100, duration);
-        } 
-
-        public override string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, slowAmount * 100, duration);
-        } 
-
-        private float NextUpgradeChance(int purchaseCount)
-        {
-            int newAmountOwned = _amountOwned + purchaseCount;
-            return slowChance + (chanceScalar * newAmountOwned);
         }
 
         public override void OnCraft(Entity target)

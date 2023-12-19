@@ -20,16 +20,6 @@ namespace Minigames.Fight
         {
             return string.Format(_description, Impact * 100, executePercent * 100);
         }
-        public override string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Format(_description, NextUpgradeChance(purchaseCount) * 100, executePercent * 100);
-        } 
-
-        private float NextUpgradeChance(int purchaseCount)
-        {
-            int newAmountOwned = _amountOwned + purchaseCount;
-            return 1 + (perStack * newAmountOwned);
-        }
 
         public override void OnCraft(Entity target)
         {

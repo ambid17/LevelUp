@@ -32,11 +32,6 @@ namespace Minigames.Fight
             return string.Empty;
         }
 
-        public virtual string GetNextUpgradeDescription(int purchaseCount)
-        {
-            return string.Empty;
-        }
-
         public bool Equals(Effect other)
         {
             if (other == null) return false;

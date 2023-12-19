@@ -355,7 +355,7 @@ namespace Minigames.Fight
 
         public void AddEffect(StatModifierEffect effect)
         {
-            if (effect.statImpactType == StatImpactType.Flat)
+            if (effect.statImpactType == StatImpactType.Additive)
             {
                 flatEffects.Add(effect);
             }
