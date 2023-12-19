@@ -157,7 +157,6 @@ namespace Minigames.Fight
 
         public void Stop()
         {
-            target = transform.position;
             rb.velocity = Vector2.zero;
             _Path = null;
         }
