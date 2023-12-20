@@ -14,6 +14,13 @@ namespace Minigames.Fight
     {
         None, Upgrade, Craft
     }
+
+    public enum PlayerControlledActionType
+    {
+        Craft,
+        BossRoomEntry,
+    }
+
     public class PlayerEntity : Entity
     {
         public PlayerAnimationController AnimationController => _animationControllerOverride;
@@ -73,7 +80,8 @@ namespace Minigames.Fight
             // TODO: play interact animation
             if(currentInteractionType == InteractionType.Craft)
             {
-                gameObject.AddComponent<PlayerPathfindingMovementController>();
+                PlayerPathfindingMovementController pathfindingMovementController = gameObject.AddComponent<PlayerPathfindingMovementController>();
+                pathfindingMovementController.StartPath(GameManager.RoomManager.BossRoom.ConstructionChamber.PlayerMoveTarget, PlayerControlledActionType.Craft);
             }
         }
 

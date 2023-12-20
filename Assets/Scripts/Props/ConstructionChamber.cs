@@ -49,7 +49,7 @@ namespace Minigames.Fight
 
         private void OnPlayerInteracted(PlayerControlledActionFinishedEvent e)
         {
-            if (e.InteractionType == InteractionType.Craft)
+            if (e.ActionType == PlayerControlledActionType.Craft)
             {
                 StartCoroutine(animationManager.PlayAnimationWithCallback(doorClose, () =>
                 {

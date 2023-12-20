@@ -12,6 +12,7 @@ public static class PhysicsUtils
 
     public static int groundGraph = 1;
     public static int flyGraph = 2;
+    public static int playerGraph = 3;
 
     public static Vector2 AsVector2(this Vector3 _v)
     {

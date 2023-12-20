@@ -9,6 +9,7 @@ namespace Minigames.Fight
 {
     public class RoomManager : Singleton<RoomManager>
     {
+        public BossRoomController BossRoom => _bossRoom;
         public RoomController StartRoom => _startRoom;
 
         [SerializeField]
@@ -24,8 +25,7 @@ namespace Minigames.Fight
 
         private RoomSettings _roomSettings;
         private RoomController _startRoom;
-
-        private const string groundGraph = "GroundGraph";
+        private BossRoomController _bossRoom;
 
         protected override void Initialize()
         {
@@ -149,6 +149,10 @@ namespace Minigames.Fight
             foreach (NavGraph navGraph in path.graphs)
             {
                 GridGraph graph = navGraph as GridGraph;
+                if (graph.graphIndex == PhysicsUtils.playerGraph)
+                {
+                    continue;
+                }
                 graph.center = (min + max) / 2;
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }

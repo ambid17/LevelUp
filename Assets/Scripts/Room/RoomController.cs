@@ -40,9 +40,9 @@ namespace Minigames.Fight
         [SerializeField]
         private MinimapRoomRender minimapGraphicPrefab;
 
-        private bool hasInitialized;
+        protected bool hasInitialized;
 
-        private void InitializeEnemies()
+        protected virtual void InitializeEnemies()
         {
             Dictionary<int, List<HiveMindBehaviorData>> hiveMinds = new();
 
@@ -91,13 +91,7 @@ namespace Minigames.Fight
         {
             if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                // Spawn enemies when player first enters the room instead of on start.
-                if (!hasInitialized)
-                {
-                    minimapGraphic.Activate();
-                    InitializeEnemies();
-                    hasInitialized = true;
-                }
+                
             }
         }
 
@@ -111,12 +105,16 @@ namespace Minigames.Fight
             {
                 return;
             }
-            if (GameManager.CameraLerp.CameraBounds == MyCollider.bounds)
+            // Spawn enemies when player first enters the room instead of on start.
+            if (hasInitialized)
             {
                 return;
             }
+            minimapGraphic.Activate();
+            InitializeEnemies();
             GameManager.MinimapCamera.transform.position = new Vector3(MyCollider.bounds.center.x, MyCollider.bounds.center.y, -10);
             GameManager.CameraLerp.Transition(MyCollider.bounds);
+            hasInitialized = true;
         }
 
         // If a connection is not being used close it off.

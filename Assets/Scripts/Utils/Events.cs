@@ -52,11 +52,11 @@ namespace Minigames.Fight
     /// </summary>
     public class PlayerControlledActionFinishedEvent : IEvent
     {
-        public InteractionType InteractionType;
+        public PlayerControlledActionType ActionType;
 
-        public PlayerControlledActionFinishedEvent(InteractionType interactionType)
+        public PlayerControlledActionFinishedEvent(PlayerControlledActionType actionType)
         {
-            InteractionType = interactionType;
+            ActionType = actionType;
         }
     }
 

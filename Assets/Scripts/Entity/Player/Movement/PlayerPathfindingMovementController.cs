@@ -12,6 +12,7 @@ public class PlayerPathfindingMovementController : MonoBehaviour
     private PlayerEntity _myEntity;
     private Seeker _seeker;
     private Rigidbody2D _myRigidbody2D;
+    private PlayerControlledActionType _actionType;
 
     private Path path;
     private int currentWaypoint;
@@ -28,13 +29,16 @@ public class PlayerPathfindingMovementController : MonoBehaviour
         // find the chamber
         // TODO: use boss room to get access
         var chamber = FindObjectOfType<ConstructionChamber>();
+    }
 
-
+    public void StartPath(Vector2 target, PlayerControlledActionType actionType)
+    {
         // path to the chamber
         _myEntity.IsControlled = true;
         _seeker = gameObject.AddComponent<Seeker>();
         _seeker.pathCallback += OnFinishPath;
-        _seeker.StartPath(transform.position, chamber.PlayerMoveTarget);
+        _seeker.StartPath(transform.position, target);
+        _actionType = actionType;
     }
 
     private void OnFinishPath(Path p)
@@ -82,7 +86,7 @@ public class PlayerPathfindingMovementController : MonoBehaviour
             {
                 Destroy(_seeker);
                 Destroy(this);
-                Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(InteractionType.Craft));
+                Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(_actionType));
             }
         }
     }
