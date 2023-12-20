@@ -20,25 +20,25 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         [Tooltip("The GameObject that the agent is moving towards")]
         public SharedGameObject target;
         [Tooltip("If target is null then use the target position")]
-        public SharedVector3 targetPosition;
+        public SharedVector2 targetPosition;
 
         public override TaskStatus OnUpdate()
         {
             var position = Target();
             // Return a task status of success once we've reached the target
-            if (Vector3.Magnitude(transform.position - position) < arriveDistance.Value) {
+            if (Vector3.Magnitude(transform.position.AsVector2() - position) < arriveDistance.Value) {
                 return TaskStatus.Success;
             }
             // We haven't reached the target yet so keep moving towards it
             transform.position = Vector3.MoveTowards(transform.position, position, speed.Value * Time.deltaTime);
-            if (lookAtTarget.Value && (position - transform.position).sqrMagnitude > 0.01f) {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(position - transform.position), maxLookAtRotationDelta.Value);
+            if (lookAtTarget.Value && (position - transform.position.AsVector2()).sqrMagnitude > 0.01f) {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(position - transform.position.AsVector2()), maxLookAtRotationDelta.Value);
             }
             return TaskStatus.Running;
         }
 
         // Return targetPosition if targetTransform is null
-        private Vector3 Target()
+        private Vector2 Target()
         {
             if (target == null || target.Value == null) {
                 return targetPosition.Value;
