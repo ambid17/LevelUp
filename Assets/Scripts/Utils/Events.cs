@@ -14,6 +14,8 @@ namespace Minigames.Fight
 
     public class DidCraftUpgradeEvent { }
 
+    public class ClosedCraftingUiEvent { }
+
     public class UpgradeCraftedEvent : IEvent
     {
         public Upgrade Upgrade;

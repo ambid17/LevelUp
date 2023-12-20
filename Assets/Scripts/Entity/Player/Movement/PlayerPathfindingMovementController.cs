@@ -18,7 +18,6 @@ public class PlayerPathfindingMovementController : MonoBehaviour
     private Vector3 targetPosition;
     private Direction lastDirection;
 
-    private const float WAIT_TIME_FOR_FINISH = .3f;
     private const float REACHED_DESTINATION_DISTANCE = .01f;
 
     void Start()
@@ -81,18 +80,11 @@ public class PlayerPathfindingMovementController : MonoBehaviour
             }
             else
             {
-                StartCoroutine(FinishPathing());
+                Destroy(_seeker);
+                Destroy(this);
+                Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(InteractionType.Craft));
             }
         }
-    }
-
-    private IEnumerator FinishPathing()
-    {
-        yield return new WaitForSeconds(WAIT_TIME_FOR_FINISH);
-        _myEntity.IsControlled = false;
-        Destroy(_seeker);
-        Destroy(this);
-        Platform.EventService.Dispatch(new PlayerInteractedEvent(InteractionType.Craft));
     }
 
     private void Move()

@@ -89,6 +89,11 @@ namespace Minigames.Fight
         public override void Toggle(bool shouldBeActive)
         {
             base.Toggle(shouldBeActive);
+
+            if(!shouldBeActive && upgradeUiState == UpgradeUiState.Craft)
+            {
+                Platform.EventService.Dispatch<ClosedCraftingUiEvent>();
+            }
             ResetUI();
         }
 
