@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks;
+using FunkyCode.Utilities;
 using Minigames.Fight;
 using Pathfinding;
 using System.Collections;
@@ -17,7 +18,8 @@ public class PlayerPathfindingMovementController : MonoBehaviour
     private Vector3 targetPosition;
     private Direction lastDirection;
 
-    private const float PATHFINDING_WAYPOINT_DISTANCE = .3f;
+    private const float WAIT_TIME_FOR_FINISH = .3f;
+    private const float REACHED_DESTINATION_DISTANCE = .01f;
 
     void Start()
     {
@@ -32,8 +34,8 @@ public class PlayerPathfindingMovementController : MonoBehaviour
         // path to the chamber
         _myEntity.IsControlled = true;
         _seeker = gameObject.AddComponent<Seeker>();
-        _seeker.StartPath(transform.position, chamber.PlayerMoveTarget);
         _seeker.pathCallback += OnFinishPath;
+        _seeker.StartPath(transform.position, chamber.PlayerMoveTarget);
     }
 
     private void OnFinishPath(Path p)
@@ -66,9 +68,11 @@ public class PlayerPathfindingMovementController : MonoBehaviour
             return;
         }
 
-        float distanceToWaypoint = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
+        Vector3 currentPosition = transform.position;
+        currentPosition.z = 0;
+        float distanceToWaypoint = Vector3.Distance(currentPosition, path.vectorPath[currentWaypoint]);
 
-        if (distanceToWaypoint < PATHFINDING_WAYPOINT_DISTANCE)
+        if (distanceToWaypoint < REACHED_DESTINATION_DISTANCE)
         {
             if (currentWaypoint + 1 < path.vectorPath.Count)
             {
@@ -77,17 +81,26 @@ public class PlayerPathfindingMovementController : MonoBehaviour
             }
             else
             {
-                // send event when done
-                Platform.EventService.Dispatch(new PlayerInteractedEvent(InteractionType.Craft));
+                StartCoroutine(FinishPathing());
             }
         }
+    }
+
+    private IEnumerator FinishPathing()
+    {
+        yield return new WaitForSeconds(WAIT_TIME_FOR_FINISH);
+        _myEntity.IsControlled = false;
+        Destroy(_seeker);
+        Destroy(this);
+        Platform.EventService.Dispatch(new PlayerInteractedEvent(InteractionType.Craft));
     }
 
     private void Move()
     {
         var movement = targetPosition - transform.position;
+        movement.z = 0;
 
-        if (movement.magnitude > PATHFINDING_WAYPOINT_DISTANCE)
+        if (movement.magnitude > REACHED_DESTINATION_DISTANCE)
         {
             float speed = _myEntity.Stats.movementStats.moveSpeed.Calculated;
 

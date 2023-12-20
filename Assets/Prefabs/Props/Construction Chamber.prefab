@@ -94,10 +94,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3287408951766189118}
   - component: {fileID: 7900254011857629874}
+  - component: {fileID: 2730807647093324160}
   - component: {fileID: 5198208647757399415}
   - component: {fileID: 4223410961718067559}
-  - component: {fileID: 2730807647093324160}
   - component: {fileID: 2730807647093324161}
+  - component: {fileID: 2744168883812054419}
+  - component: {fileID: 1556266754249744284}
   m_Layer: 0
   m_Name: Construction Chamber
   m_TagString: Untagged
@@ -118,6 +120,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 186092300}
+  - {fileID: 2863132289740258464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -173,6 +176,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2730807647093324160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146848244121561846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13cf4fbc8daeaa4f90014b5c59c12ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idle:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  doorOpen:
+    Name: Open
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 2
+  doorClose:
+    Name: Close
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 3
+  finishedUpgrade:
+    Name: FinishedUpgrade
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 1
+  animationManager: {fileID: 5198208647757399415}
+  playerMoveTarget: {fileID: 2863132289740258464}
 --- !u!114 &5198208647757399415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf451aa77dc50f74485532d5a22b4e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 4223410961718067559}
   defaultAnimation:
     Name: 
     CanBeCancelled: 0
@@ -212,18 +253,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &2730807647093324160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146848244121561846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13cf4fbc8daeaa4f90014b5c59c12ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2730807647093324161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,3 +265,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1173b4414c4f2074bba316702cca9b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2744168883812054419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146848244121561846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b630c4aaf46ca4e86b464a659b6c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractionType: 2
+--- !u!58 &1556266754249744284
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146848244121561846}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
+--- !u!1 &5993571852050906639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2863132289740258464}
+  m_Layer: 0
+  m_Name: Player Move Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2863132289740258464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993571852050906639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.309, y: -0.475, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3287408951766189118}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
