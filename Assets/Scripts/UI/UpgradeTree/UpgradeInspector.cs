@@ -196,6 +196,7 @@ namespace Minigames.Fight
             {
                 _currentUpgrade.Craft();
                 OnUpgradeSelectedForCraft();
+                Platform.EventService.Dispatch<DidCraftUpgradeEvent>();
             }
         }
 

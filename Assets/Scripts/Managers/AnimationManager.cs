@@ -20,6 +20,18 @@ public class AnimationManager : MonoBehaviour
 
     private bool _isStunned;
 
+
+    public IEnumerator PlayAnimationWithCallback(AnimationName animationName, Action callback)
+    {
+        PlayAnimation(animationName);
+
+        yield return new WaitUntil(() => IsAnimPlaying(animationName));
+
+        yield return new WaitUntil(() => IsAnimFinished);
+
+        callback();
+    }
+
     public bool IsAnimPlaying(AnimationName name)
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
@@ -38,7 +50,7 @@ public class AnimationManager : MonoBehaviour
         PlayAnimation(defaultAnimation, 0);
     }
 
-    public void PlayAnimation(AnimationName name, float time)
+    public void PlayAnimation(AnimationName name, float time = 0)
     {
         if (_isStunned)
         {

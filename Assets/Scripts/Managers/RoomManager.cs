@@ -12,8 +12,6 @@ namespace Minigames.Fight
         public RoomController StartRoom => _startRoom;
 
         [SerializeField]
-        private ProgressSettings progressSettings;
-        [SerializeField]
         private int minCaches = 5;
         [SerializeField]
         private int maxCaches = 10;

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BehaviorDesigner.Runtime.Tasks;
 using Minigames.Fight;
+using Pathfinding;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -47,11 +50,17 @@ namespace Minigames.Fight
 
         protected override void Update()
         {
-            if (GameManager.PlayerEntity.IsDead)
+            if (IsDead)
             {
                 return;
             }
             base.Update();
+
+            // Let statuses still tick, but don't allow overriding interaction
+            if (IsControlled)
+            {
+                return;
+            }
 
             if (Input.GetKeyDown(KeyCode.E) && currentInteractionType != InteractionType.None)
             {
@@ -62,7 +71,10 @@ namespace Minigames.Fight
         private void Interact()
         {
             // TODO: play interact animation
-            eventService.Dispatch(new PlayerInteractedEvent(currentInteractionType));
+            if(currentInteractionType == InteractionType.Craft)
+            {
+                gameObject.AddComponent<PlayerPathfindingMovementController>();
+            }
         }
 
         protected override void Die(Entity killer)

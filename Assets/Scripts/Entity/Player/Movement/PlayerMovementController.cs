@@ -27,6 +27,11 @@ namespace Minigames.Fight
 
         void Update()
         {
+            if (_myEntity.IsControlled)
+            {
+                return;
+            }
+
             if (_myEntity.IsDead || _myEntity.Stunned)
             {
                 MyRigidbody2D.velocity = Vector2.zero;
@@ -87,6 +92,11 @@ namespace Minigames.Fight
     
         private void FixedUpdate()
         {
+            if (_myEntity.IsControlled)
+            {
+                return;
+            }
+
             if (_myEntity.IsDead || _myEntity.Stunned)
             {
                 MyRigidbody2D.velocity = Vector2.zero;

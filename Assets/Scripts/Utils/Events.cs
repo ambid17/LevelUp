@@ -12,6 +12,8 @@ namespace Minigames.Fight
     public class PlayerHpUpdatedEvent { }
     public class EnemyKilledEvent { }
 
+    public class DidCraftUpgradeEvent { }
+
     public class UpgradeCraftedEvent : IEvent
     {
         public Upgrade Upgrade;
@@ -41,6 +43,22 @@ namespace Minigames.Fight
             InteractionType = interactionType;
         }
     }
+
+
+    /// <summary>
+    /// Used when the player is controlled, lets it know when the controlled action is finished
+    /// </summary>
+    public class PlayerControlledActionFinishedEvent : IEvent
+    {
+        public InteractionType InteractionType;
+
+        public PlayerControlledActionFinishedEvent(InteractionType interactionType)
+        {
+            InteractionType = interactionType;
+        }
+    }
+
+    
 
     public class CurrencyRewardEvent: IEvent
     {
