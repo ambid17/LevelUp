@@ -76,8 +76,6 @@ namespace Minigames.Fight
 
             float distanceToWaypoint = Vector3.Distance(currentPosition, currentTarget);
 
-            Debug.Log($"check waypoint pos: {currentPosition} target {currentTarget} dist {distanceToWaypoint}");
-
             if (distanceToWaypoint < REACHED_DESTINATION_DISTANCE)
             {
                 if (currentWaypoint + 1 < path.vectorPath.Count)
@@ -100,8 +98,6 @@ namespace Minigames.Fight
             var offsetToWaypoint = targetPosition - transform.position;
             offsetToWaypoint.z = 0;
 
-            Debug.Log($"offset {offsetToWaypoint}");
-
             if (offsetToWaypoint.magnitude > REACHED_DESTINATION_DISTANCE)
             {
                 float speedThisFrame = CINEMATIC_MOVE_SPEED * Time.deltaTime;
@@ -110,12 +106,7 @@ namespace Minigames.Fight
                 Vector2 velocity = Vector2.ClampMagnitude(velocityBeforeClamp, offsetToWaypoint.magnitude);
                 Vector2 newPosition = transform.position.AsVector2() + velocity;
 
-                Debug.Log($"pos: {transform.position} target: {targetPosition} offset: {offsetToWaypoint}beforeClamp: {velocityBeforeClamp} velocity {velocity}  newPos: {newPosition} speed: {speedThisFrame} time: {Time.deltaTime}");
-
-
                 transform.position = newPosition;
-
-                Debug.Log($"after set: {transform.position}");
 
                 Direction currentDirection = GetDirection(velocity);
                 if (currentDirection != lastDirection)
