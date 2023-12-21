@@ -13,6 +13,7 @@ namespace Minigames.Fight
     {
         private PlayerEntity _myEntity;
         private Seeker _seeker;
+        private SimpleSmoothModifier _simpleSmoothModifier;
         private Rigidbody2D _myRigidbody2D;
         private PlayerControlledActionType _actionType;
 
@@ -22,16 +23,17 @@ namespace Minigames.Fight
         private Direction lastDirection;
 
         private const float REACHED_DESTINATION_DISTANCE = .01f;
+        private const float CINEMATIC_MOVE_SPEED = 5;
 
         public void StartPath(Vector2 target, PlayerControlledActionType actionType)
         {
             _myEntity = GetComponent<PlayerEntity>();
             _myRigidbody2D = GetComponent<Rigidbody2D>();
-            _myRigidbody2D.isKinematic = true;
-
+            _myRigidbody2D.velocity = Vector2.zero;
             // path to the chamber
             _myEntity.IsControlled = true;
             _seeker = gameObject.AddComponent<Seeker>();
+            _simpleSmoothModifier = gameObject.AddComponent<SimpleSmoothModifier>();
             _seeker.graphMask = GraphMask.FromGraphName("PlayerGraph");
             _seeker.StartPath(transform.position, target, OnFinishPath);
             _actionType = actionType;
@@ -42,8 +44,8 @@ namespace Minigames.Fight
             if (!p.error)
             {
                 path = p;
-                currentWaypoint = 0;
-                targetPosition = path.vectorPath[0];
+                currentWaypoint = 2;
+                targetPosition = path.vectorPath[currentWaypoint];
             }
         }
 
@@ -52,24 +54,29 @@ namespace Minigames.Fight
             _seeker.pathCallback -= OnFinishPath;
         }
 
-        void FixedUpdate()
+        void Update()
         {
-            SetPathfindingTarget();
-
-            Move();
-        }
-
-        private void SetPathfindingTarget()
-        {
-            if (path == null)
+            if (path == null || !_seeker.IsDone())
             {
                 // We have no path to follow yet, so don't do anything
                 return;
             }
 
+            SetPathfindingTarget();
+            Move();
+        }
+
+        private void SetPathfindingTarget()
+        {
             Vector3 currentPosition = transform.position;
             currentPosition.z = 0;
-            float distanceToWaypoint = Vector3.Distance(currentPosition, path.vectorPath[currentWaypoint]);
+
+            Vector3 currentTarget = path.vectorPath[currentWaypoint];
+            currentTarget.z = 0;
+
+            float distanceToWaypoint = Vector3.Distance(currentPosition, currentTarget);
+
+            Debug.Log($"check waypoint pos: {currentPosition} target {currentTarget} dist {distanceToWaypoint}");
 
             if (distanceToWaypoint < REACHED_DESTINATION_DISTANCE)
             {
@@ -80,10 +87,10 @@ namespace Minigames.Fight
                 }
                 else
                 {
-                    _myRigidbody2D.isKinematic = false;
+                    Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(_actionType));
+                    Destroy(_simpleSmoothModifier);
                     Destroy(_seeker);
                     Destroy(this);
-                    Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(_actionType));
                 }
             }
         }
@@ -93,16 +100,22 @@ namespace Minigames.Fight
             var offsetToWaypoint = targetPosition - transform.position;
             offsetToWaypoint.z = 0;
 
+            Debug.Log($"offset {offsetToWaypoint}");
+
             if (offsetToWaypoint.magnitude > REACHED_DESTINATION_DISTANCE)
             {
-                float speed = _myEntity.Stats.movementStats.moveSpeed.Calculated;
-
-                Vector2 velocity = offsetToWaypoint.normalized * speed * Time.fixedDeltaTime;
+                float speedThisFrame = CINEMATIC_MOVE_SPEED * Time.deltaTime;
+                Vector2 velocityBeforeClamp = offsetToWaypoint.normalized * speedThisFrame;
                 // clamp the new velocity length to the distance to the next waypoint so we can't overshoot
-                velocity = Vector2.ClampMagnitude(velocity, offsetToWaypoint.magnitude);
-                Vector2 newPosition = _myRigidbody2D.position + velocity;
+                Vector2 velocity = Vector2.ClampMagnitude(velocityBeforeClamp, offsetToWaypoint.magnitude);
+                Vector2 newPosition = transform.position.AsVector2() + velocity;
 
-                _myRigidbody2D.MovePosition(newPosition);
+                Debug.Log($"pos: {transform.position} target: {targetPosition} offset: {offsetToWaypoint}beforeClamp: {velocityBeforeClamp} velocity {velocity}  newPos: {newPosition} speed: {speedThisFrame} time: {Time.deltaTime}");
+
+
+                transform.position = newPosition;
+
+                Debug.Log($"after set: {transform.position}");
 
                 Direction currentDirection = GetDirection(velocity);
                 if (currentDirection != lastDirection)
