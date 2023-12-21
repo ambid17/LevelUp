@@ -22,6 +22,8 @@ namespace Minigames.Fight
         private ResourceCache resourceCachePrefab;
         [SerializeField]
         ResourceTypeSpriteDictionary cacheSpriteDictionary;
+        [SerializeField]
+        bool spawnBossRoomAtStart;
 
         private RoomSettings _roomSettings;
         private RoomController _startRoom;
@@ -47,6 +49,11 @@ namespace Minigames.Fight
 
             List<RoomController> roomsToInstantiate = new();
             Vector2 direction = Vector2.zero;
+
+            if (spawnBossRoomAtStart)
+            {
+                SpawnBossRoom(availableRooms);
+            }
 
             // Populate our rooms to instantiate list with the determined number of random rooms
             for (int i = 0; i < roomCount; i++)
@@ -113,8 +120,13 @@ namespace Minigames.Fight
                 roomInstance.SpawnEnemies();
             }
 
-            SpawnBossRoom(availableRooms);
+            if (!spawnBossRoomAtStart)
+            {
+                SpawnBossRoom(availableRooms);
+            }
+
             availableRooms.Add(_bossRoom);
+
 
             // Close off unused exits.
             foreach (RoomController room in availableRooms)
@@ -189,11 +201,13 @@ namespace Minigames.Fight
                     float y = (room.MyCollider.bounds.extents.y + (bossRoom.Tilemap.cellBounds.AsVector2().y / 2)) * unusedConnection.Direction.y;
                     Vector2 center = room.MyCollider.bounds.center.AsVector2() + new Vector2(x, y);
 
-                    if (!Physics2D.OverlapBox(center, (room.Tilemap.cellBounds.AsVector2() - Vector2.one) * 0.99f, 0))
+                    Vector2 size = (bossRoom.Tilemap.cellBounds.AsVector2() - Vector2.one) * 0.99f;
+                    if (!Physics2D.OverlapBox(center, size, 0))
                     {
                         // Once room has spawned mark the old rooms connection as having been used.
                         unusedConnection.HasConnection = true;
-                        _bossRoom = Instantiate(bossRoom, center - room.Tilemap.cellBounds.center.AsVector2(), Quaternion.identity);
+                        Vector3 spawnPosition = center - bossRoom.Tilemap.cellBounds.center.AsVector2();
+                        _bossRoom = Instantiate(bossRoom, spawnPosition, Quaternion.identity);
                         _bossRoom.DistanceFromStartRoom = room.DistanceFromStartRoom + 1;
 
                         RoomConnection connectionInstance = _bossRoom.roomConnections.First(r => r.Direction == -unusedConnection.Direction);

@@ -62,6 +62,7 @@ namespace Minigames.Fight
         // Using initialize enemies for entire boss opening sequence, possibly rename to initialize room for clarity?
         protected override void InitializeEnemies()
         {
+            // TODO: disable all enemies to save performance
             AstarPath.OnLatePostScan += StartPlayerPathing;
 
             GridGraph graph = AstarPath.active.graphs.First(g => g.graphIndex == PhysicsUtils.playerGraph) as GridGraph;
