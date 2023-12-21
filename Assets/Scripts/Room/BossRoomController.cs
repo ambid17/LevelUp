@@ -33,10 +33,11 @@ namespace Minigames.Fight
         [SerializeField]
         private ConstructionChamber constructionChamber;
 
-        private bool _fightOver => hasInitialized && _boss == null;
+        private bool _fightOver => _hasActivated && _boss == null;
 
         private RoomConnection _entrance;
         private EntityBehaviorData _boss;
+        private bool _hasActivated = false;
         private bool _bossDefeated = false;
 
         private void Start()
@@ -87,6 +88,7 @@ namespace Minigames.Fight
             _boss.transform.parent = null;
             _boss.transform.position = bossEntry.position;
             _boss.gameObject.SetActive(true);
+            _hasActivated = true;
         }
         
         private void OnBossEntered()

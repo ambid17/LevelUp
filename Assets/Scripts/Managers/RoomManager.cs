@@ -35,6 +35,7 @@ namespace Minigames.Fight
 
             // Instantiate start room.
             _startRoom = Instantiate(_roomSettings.startRoom);
+            _startRoom.DistanceFromStartRoom = 0;
 
             // Add start room to our list of rooms to branch from.
             availableRooms.Add(_startRoom);
@@ -99,6 +100,9 @@ namespace Minigames.Fight
                 // Instantiate room in direction.
                 var roomInstance = Instantiate(room, center - room.Tilemap.cellBounds.center.AsVector2(), Quaternion.identity);
 
+                // Track how many rooms from start room we are.
+                roomInstance.DistanceFromStartRoom = targetRoom.DistanceFromStartRoom + 1;
+
                 // Mark the new rooms connection with the old room.
                 RoomConnection connectionInstance = roomInstance.roomConnections.First(r => r.Direction == -direction);
                 connectionInstance.HasConnection = true;
@@ -108,6 +112,9 @@ namespace Minigames.Fight
 
                 roomInstance.SpawnEnemies();
             }
+
+            SpawnBossRoom(availableRooms);
+            availableRooms.Add(_bossRoom);
 
             // Close off unused exits.
             foreach (RoomController room in availableRooms)
@@ -164,6 +171,39 @@ namespace Minigames.Fight
             GameManager.MinimapCamera.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
 
             Platform.EventService.Dispatch(new SceneIsReadyEvent());
+        }
+
+        private void SpawnBossRoom(List<RoomController> availableRooms)
+        {
+            // Add boss room to the furthest room from start.
+            List<RoomController> controllersByDistanceFromStart = availableRooms.OrderByDescending(r => r.DistanceFromStartRoom).ToList();
+            int randomBossRoom = Random.Range(0, _roomSettings.bossRooms.Count);
+            BossRoomController bossRoom = _roomSettings.bossRooms[randomBossRoom];
+
+            foreach (RoomController room in controllersByDistanceFromStart)
+            {
+                foreach (RoomConnection unusedConnection in room.roomConnections.Where(c => c.HasConnection == false))
+                {
+                    // Calculate the location the boss room will spawn in.
+                    float x = (room.MyCollider.bounds.extents.x + (bossRoom.Tilemap.cellBounds.AsVector2().x / 2)) * unusedConnection.Direction.x;
+                    float y = (room.MyCollider.bounds.extents.y + (bossRoom.Tilemap.cellBounds.AsVector2().y / 2)) * unusedConnection.Direction.y;
+                    Vector2 center = room.MyCollider.bounds.center.AsVector2() + new Vector2(x, y);
+
+                    if (!Physics2D.OverlapBox(center, (room.Tilemap.cellBounds.AsVector2() - Vector2.one) * 0.99f, 0))
+                    {
+                        // Once room has spawned mark the old rooms connection as having been used.
+                        unusedConnection.HasConnection = true;
+                        _bossRoom = Instantiate(bossRoom, center - room.Tilemap.cellBounds.center.AsVector2(), Quaternion.identity);
+                        _bossRoom.DistanceFromStartRoom = room.DistanceFromStartRoom + 1;
+
+                        RoomConnection connectionInstance = _bossRoom.roomConnections.First(r => r.Direction == -unusedConnection.Direction);
+                        connectionInstance.HasConnection = true;
+                        _bossRoom.SpawnEnemies();
+
+                        return;
+                    }
+                }
+            }
         }
 
         private IEnumerator RecalculateGraph()

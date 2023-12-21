@@ -10,9 +10,17 @@ public static class PhysicsUtils
     public static int wallLayer = 12;
     public static int EnemyLayer = 9;
 
-    public static int groundGraph = 1;
-    public static int flyGraph = 2;
-    public static int playerGraph = 3;
+    public static int groundGraph = 0;
+    public static int flyGraph = 1;
+    public static int playerGraph = 2;
+
+    public static List<Vector2> CardinalDirections = new()
+    {
+        Vector2.right,
+        Vector2.left,
+        Vector2.up,
+        Vector2.down,
+    };
 
     public static Vector2 AsVector2(this Vector3 _v)
     {

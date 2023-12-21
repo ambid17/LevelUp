@@ -12,6 +12,8 @@ namespace Minigames.Fight
 {
     public class RoomController : MonoBehaviour
     {
+        public int DistanceFromStartRoom { get; set; }
+
         public List<Transform> FlowerWaypoints;
         public List<Transform> WorkerWaypoints;
         public List<Transform> PatrolWaypoints;
@@ -87,14 +89,6 @@ namespace Minigames.Fight
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
-            {
-                
-            }
-        }
-
         private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.gameObject.layer != PhysicsUtils.PlayerLayer)
@@ -105,6 +99,11 @@ namespace Minigames.Fight
             {
                 return;
             }
+            if (GameManager.CameraLerp.CameraBounds != MyCollider.bounds)
+            {
+                GameManager.MinimapCamera.transform.position = new Vector3(MyCollider.bounds.center.x, MyCollider.bounds.center.y, -10);
+                GameManager.CameraLerp.Transition(MyCollider.bounds);
+            }
             // Spawn enemies when player first enters the room instead of on start.
             if (hasInitialized)
             {
@@ -112,8 +111,6 @@ namespace Minigames.Fight
             }
             minimapGraphic.Activate();
             InitializeEnemies();
-            GameManager.MinimapCamera.transform.position = new Vector3(MyCollider.bounds.center.x, MyCollider.bounds.center.y, -10);
-            GameManager.CameraLerp.Transition(MyCollider.bounds);
             hasInitialized = true;
         }
 
