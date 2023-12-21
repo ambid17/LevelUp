@@ -62,13 +62,20 @@ namespace Minigames.Fight
         // Using initialize enemies for entire boss opening sequence, possibly rename to initialize room for clarity?
         protected override void InitializeEnemies()
         {
+            AstarPath.OnLatePostScan += StartPlayerPathing;
+
             GridGraph graph = AstarPath.active.graphs.First(g => g.graphIndex == PhysicsUtils.playerGraph) as GridGraph;
             graph.center = MyCollider.bounds.center;
             graph.SetDimensions(Tilemap.cellBounds.size.x * 4, Tilemap.cellBounds.size.y * 4, .25f);
             graph.Scan();
 
+        }
+
+        private void StartPlayerPathing(AstarPath script)
+        {
             PlayerPathfindingMovementController pathfindingMovementController = GameManager.PlayerEntity.gameObject.AddComponent<PlayerPathfindingMovementController>();
             pathfindingMovementController.StartPath(playerEntryDestination.position, PlayerControlledActionType.BossRoomEntry);
+            AstarPath.OnLatePostScan -= StartPlayerPathing;
         }
 
         private void OnPlayerEntered(PlayerControlledActionFinishedEvent e)

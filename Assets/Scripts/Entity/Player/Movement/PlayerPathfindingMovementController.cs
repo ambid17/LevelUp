@@ -27,6 +27,7 @@ namespace Minigames.Fight
         {
             _myEntity = GetComponent<PlayerEntity>();
             _myRigidbody2D = GetComponent<Rigidbody2D>();
+            _myRigidbody2D.isKinematic = true;
 
             // path to the chamber
             _myEntity.IsControlled = true;
@@ -79,6 +80,7 @@ namespace Minigames.Fight
                 }
                 else
                 {
+                    _myRigidbody2D.isKinematic = false;
                     Destroy(_seeker);
                     Destroy(this);
                     Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(_actionType));
@@ -88,17 +90,18 @@ namespace Minigames.Fight
 
         private void Move()
         {
-            var movement = targetPosition - transform.position;
-            movement.z = 0;
+            var offsetToWaypoint = targetPosition - transform.position;
+            offsetToWaypoint.z = 0;
 
-            if (movement.magnitude > REACHED_DESTINATION_DISTANCE)
+            if (offsetToWaypoint.magnitude > REACHED_DESTINATION_DISTANCE)
             {
                 float speed = _myEntity.Stats.movementStats.moveSpeed.Calculated;
 
-                Vector2 velocity = movement.normalized * speed * Time.fixedDeltaTime;
-                velocity = Vector2.ClampMagnitude(velocity, movement.magnitude);
+                Vector2 velocity = offsetToWaypoint.normalized * speed * Time.fixedDeltaTime;
+                // clamp the new velocity length to the distance to the next waypoint so we can't overshoot
+                velocity = Vector2.ClampMagnitude(velocity, offsetToWaypoint.magnitude);
+                Vector2 newPosition = _myRigidbody2D.position + velocity;
 
-                Vector2 newPosition = (Vector2)transform.position + velocity;
                 _myRigidbody2D.MovePosition(newPosition);
 
                 Direction currentDirection = GetDirection(velocity);
