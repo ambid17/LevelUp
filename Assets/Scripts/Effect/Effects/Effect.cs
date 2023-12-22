@@ -45,6 +45,11 @@ namespace Minigames.Fight
             _effectCategory = effectCategory;
         }
 
+        public virtual void OverrideStats(EffectOverrides overrides)
+        {
+
+        }
+
         public virtual void OnCraft(Entity target)
         {
             throw new NotImplementedException();

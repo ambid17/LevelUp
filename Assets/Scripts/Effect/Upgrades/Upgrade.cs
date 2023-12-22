@@ -146,12 +146,17 @@ namespace Minigames.Fight
     public class EffectUpgradeContainer
     {
         public Effect effect;
-        public float impactPerStat;
-
+        public EffectOverrides overrides;
         public void Craft(Upgrade upgrade)
         {
             effect.GiveUpgradeInfo(upgrade.AmountOwned, upgrade.UpgradeCategory, upgrade.EffectCategory);
             effect.OnCraft(GameManager.PlayerEntity);
+            effect.OverrideStats(overrides);
         }
+    }
+
+    public class EffectOverrides
+    {
+        public float impactPerStat;
     }
 }
