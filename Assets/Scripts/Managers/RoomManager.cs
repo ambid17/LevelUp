@@ -9,11 +9,9 @@ namespace Minigames.Fight
 {
     public class RoomManager : Singleton<RoomManager>
     {
-        public CinemachineVirtualCamera CurrentCam { get; set; }
+        public BossRoomController BossRoom => _bossRoom;
         public RoomController StartRoom => _startRoom;
 
-        [SerializeField]
-        private ProgressSettings progressSettings;
         [SerializeField]
         private int minCaches = 5;
         [SerializeField]
@@ -24,11 +22,12 @@ namespace Minigames.Fight
         private ResourceCache resourceCachePrefab;
         [SerializeField]
         ResourceTypeSpriteDictionary cacheSpriteDictionary;
+        [SerializeField]
+        bool spawnBossRoomAtStart;
 
         private RoomSettings _roomSettings;
         private RoomController _startRoom;
-
-        private const string groundGraph = "GroundGraph";
+        private BossRoomController _bossRoom;
 
         protected override void Initialize()
         {
@@ -38,6 +37,7 @@ namespace Minigames.Fight
 
             // Instantiate start room.
             _startRoom = Instantiate(_roomSettings.startRoom);
+            _startRoom.DistanceFromStartRoom = 0;
 
             // Add start room to our list of rooms to branch from.
             availableRooms.Add(_startRoom);
@@ -49,6 +49,11 @@ namespace Minigames.Fight
 
             List<RoomController> roomsToInstantiate = new();
             Vector2 direction = Vector2.zero;
+
+            if (spawnBossRoomAtStart)
+            {
+                SpawnBossRoom(availableRooms);
+            }
 
             // Populate our rooms to instantiate list with the determined number of random rooms
             for (int i = 0; i < roomCount; i++)
@@ -75,9 +80,9 @@ namespace Minigames.Fight
                     direction = GetRandomCardinalDirection();
 
                     // Calculate the location the new room will spawn in.
-                    float x = (targetRoom.myPolygonCollider.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
-                    float y = (targetRoom.myPolygonCollider.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
-                    center = targetRoom.myPolygonCollider.bounds.center.AsVector2() + new Vector2(x, y);
+                    float x = (targetRoom.MyCollider.bounds.extents.x + (room.Tilemap.cellBounds.AsVector2().x / 2)) * direction.x;
+                    float y = (targetRoom.MyCollider.bounds.extents.y + (room.Tilemap.cellBounds.AsVector2().y / 2)) * direction.y;
+                    center = targetRoom.MyCollider.bounds.center.AsVector2() + new Vector2(x, y);
 
 
                     // Abort before doing the overlap check if the chosen direction has already been used (slight performance boost).
@@ -102,13 +107,26 @@ namespace Minigames.Fight
                 // Instantiate room in direction.
                 var roomInstance = Instantiate(room, center - room.Tilemap.cellBounds.center.AsVector2(), Quaternion.identity);
 
+                // Track how many rooms from start room we are.
+                roomInstance.DistanceFromStartRoom = targetRoom.DistanceFromStartRoom + 1;
+
                 // Mark the new rooms connection with the old room.
                 RoomConnection connectionInstance = roomInstance.roomConnections.First(r => r.Direction == -direction);
                 connectionInstance.HasConnection = true;
 
                 // Add to available rooms so it too can be branched off of.
                 availableRooms.Add(roomInstance);
+
+                roomInstance.SpawnEnemies();
             }
+
+            if (!spawnBossRoomAtStart)
+            {
+                SpawnBossRoom(availableRooms);
+            }
+
+            availableRooms.Add(_bossRoom);
+
 
             // Close off unused exits.
             foreach (RoomController room in availableRooms)
@@ -150,6 +168,10 @@ namespace Minigames.Fight
             foreach (NavGraph navGraph in path.graphs)
             {
                 GridGraph graph = navGraph as GridGraph;
+                if (graph.graphIndex == PhysicsUtils.playerGraph)
+                {
+                    continue;
+                }
                 graph.center = (min + max) / 2;
                 graph.SetDimensions(((int)max.x * 2) - ((int)min.x * 2), ((int)max.y * 2) - ((int)min.y * 2), .5f);
             }
@@ -157,8 +179,45 @@ namespace Minigames.Fight
             StartCoroutine(RecalculateGraph());
 
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
+            GameManager.CameraLerp.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
+            GameManager.MinimapCamera.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
 
             Platform.EventService.Dispatch(new SceneIsReadyEvent());
+        }
+
+        private void SpawnBossRoom(List<RoomController> availableRooms)
+        {
+            // Add boss room to the furthest room from start.
+            List<RoomController> controllersByDistanceFromStart = availableRooms.OrderByDescending(r => r.DistanceFromStartRoom).ToList();
+            int randomBossRoom = Random.Range(0, _roomSettings.bossRooms.Count);
+            BossRoomController bossRoom = _roomSettings.bossRooms[randomBossRoom];
+
+            foreach (RoomController room in controllersByDistanceFromStart)
+            {
+                foreach (RoomConnection unusedConnection in room.roomConnections.Where(c => c.HasConnection == false))
+                {
+                    // Calculate the location the boss room will spawn in.
+                    float x = (room.MyCollider.bounds.extents.x + (bossRoom.Tilemap.cellBounds.AsVector2().x / 2)) * unusedConnection.Direction.x;
+                    float y = (room.MyCollider.bounds.extents.y + (bossRoom.Tilemap.cellBounds.AsVector2().y / 2)) * unusedConnection.Direction.y;
+                    Vector2 center = room.MyCollider.bounds.center.AsVector2() + new Vector2(x, y);
+
+                    Vector2 size = (bossRoom.Tilemap.cellBounds.AsVector2() - Vector2.one) * 0.99f;
+                    if (!Physics2D.OverlapBox(center, size, 0))
+                    {
+                        // Once room has spawned mark the old rooms connection as having been used.
+                        unusedConnection.HasConnection = true;
+                        Vector3 spawnPosition = center - bossRoom.Tilemap.cellBounds.center.AsVector2();
+                        _bossRoom = Instantiate(bossRoom, spawnPosition, Quaternion.identity);
+                        _bossRoom.DistanceFromStartRoom = room.DistanceFromStartRoom + 1;
+
+                        RoomConnection connectionInstance = _bossRoom.roomConnections.First(r => r.Direction == -unusedConnection.Direction);
+                        connectionInstance.HasConnection = true;
+                        _bossRoom.SpawnEnemies();
+
+                        return;
+                    }
+                }
+            }
         }
 
         private IEnumerator RecalculateGraph()

@@ -44,12 +44,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
                     lastTargetPosition = targetPosition;
                 }
             }
-            // If agent reaches the end of the path but can't reach the final destination return failure
-            if (HasArrived() && agent.pathInvalid)
-            {
-                Stop();
-                return TaskStatus.Failure;
-            }
             return TaskStatus.Running;
         }
 

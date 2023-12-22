@@ -1,34 +1,36 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
+    [Serializable]
     public class EntityStats
     {
         public MovementStats movementStats;
         public CombatStats combatStats;
-
-        // Effects
-        public List<Effect> OnKillEffects = new();
-        public List<Effect> OnDeathEffects = new();
-        public List<Effect> OnTakeDamageEffects = new();
-        public List<Effect> OnTimerEffects = new();
-        public List<Effect> OnPurchaseEffects = new();
-
-        public EntityStats()
+        
+        /// <summary>
+        /// This exists to handle things that can only be saved in inspector, such as prefabs.
+        /// For now, only certain stats can be overridden from a file
+        /// </summary>
+        /// <param name="stats"></param>
+        public void Load(EntityStats stats)
         {
-            movementStats = new MovementStats();
-            combatStats = new CombatStats();
+            movementStats.Load(stats.movementStats);
+            combatStats.Load(stats.combatStats);
         }
 
-        public void TakeDamage(float damage)
+        public void Init()
         {
-            combatStats.currentHp -= damage;
-            combatStats.DamageTakenThisSecond += damage;
+            movementStats.Init();
+            combatStats.Init();
         }
 
         public void TickStatuses()
@@ -44,20 +46,57 @@ namespace Minigames.Fight
         }
     }
 
+    [Serializable]
     public class CombatStats
     {
         public WeaponStats meleeWeaponStats;
         public WeaponStats projectileWeaponStats;
         public ModifiableStat maxHp = new();
 
+        [JsonIgnore]
         public float currentHp;
+        [JsonIgnore]
         public float DamageTakenThisSecond;
-
-        public List<Effect> OnHitEffects = new();
+        [JsonIgnore]
         public List<StatusEffectData> hpStatusEffects;
+        [JsonIgnore]
+        public List<TimerEffectData> playerTimerEffects;
 
-        public CombatStats()
+        public void Load(CombatStats stats)
         {
+            maxHp = stats.maxHp;
+            meleeWeaponStats.Load(stats.meleeWeaponStats);
+            projectileWeaponStats.Load(stats.projectileWeaponStats);
+        }
+
+        public void Init()
+        {
+            meleeWeaponStats.Init();
+            projectileWeaponStats.Init();
+            maxHp.Init();
+
+            if (hpStatusEffects == null)
+            {
+                hpStatusEffects = new();
+            }
+            if (playerTimerEffects == null)
+            {
+                playerTimerEffects = new();
+            }
+
+            currentHp = maxHp.Calculated;
+        }
+
+        public void AddHp(float hpToAdd)
+        {
+            currentHp += hpToAdd;
+            currentHp = Mathf.Clamp(currentHp, 0, maxHp.Calculated);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            currentHp -= damage;
+            DamageTakenThisSecond += damage;
         }
 
         public void TickStatuses()
@@ -73,6 +112,11 @@ namespace Minigames.Fight
                 {
                     hpStatusEffects.Remove(status);
                 }
+            }
+
+            foreach(var effect in playerTimerEffects)
+            {
+                effect.OnTick();
             }
         }
 
@@ -90,6 +134,12 @@ namespace Minigames.Fight
             }
         }
 
+        public void AddTimerEffect(ITimerEffect timerEffect, Entity source)
+        {
+            var newStatusEffect = new TimerEffectData(timerEffect, source);
+            playerTimerEffects.Add(newStatusEffect);
+        }
+
         public void ClearAllStatusEffects()
         {
             meleeWeaponStats.ClearAllStatusEffects();
@@ -102,9 +152,22 @@ namespace Minigames.Fight
     [Serializable]
     public class WeaponStats
     {
-        public float MaxRange => projectileLifeTime.Calculated * projectileMoveSpeed.Calculated;
-
+        [JsonIgnore]
+        public float MaxRange;
+        [JsonIgnore]
         public ProjectileController projectilePrefab;
+        [JsonIgnore]
+        public float currentAmmo;
+        [JsonIgnore]
+        private float _regenTimer;
+        [JsonIgnore]
+        public LayerMask targetLayers;
+        [JsonIgnore]
+        public LayerMask destroyOnImpactLayers;
+        [JsonIgnore]
+        public Sprite sprite;
+        [JsonIgnore]
+        public AnimatorController animation;
 
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();
@@ -117,16 +180,61 @@ namespace Minigames.Fight
         public ModifiableStat projectileSpread = new();
         public ModifiableStat projectileSize = new();
 
-        public float currentAmmo;
+        public List<AoeEffect> AoeEffects = new();
+        public List<Effect> OnHitEffects = new();
+        [JsonIgnore]
+        public List<StatusEffectData> AmmoStatusEffects = new();
 
-        public List<Effect> aoeEffects = new();
-        public List<StatusEffectData> ammoStatusEffects = new();
+        public void Load(WeaponStats weaponStats)
+        {
+            baseDamage = weaponStats.baseDamage;
+            onHitDamage = weaponStats.onHitDamage;
+            projectileMoveSpeed = weaponStats.projectileMoveSpeed;
+            projectileLifeTime = weaponStats.projectileLifeTime;
+            rateOfFire = weaponStats.rateOfFire;
+            maxAmmo = weaponStats.maxAmmo;
+            ammoRegenRate = weaponStats.ammoRegenRate;
+            projectilesPerShot = weaponStats.projectilesPerShot;
+            projectileSpread = weaponStats.projectileSpread;
+            projectileSize = weaponStats.projectileSize;
+        }
 
-        private float _regenTimer;
+        public void Init()
+        {
+            baseDamage.Init();
+            onHitDamage.Init();
+            projectileMoveSpeed.Init();
+            projectileLifeTime.Init();
+            rateOfFire.Init();
+            maxAmmo.Init();
+            ammoRegenRate.Init();
+            projectilesPerShot.Init();
+            projectileSpread.Init();
+            projectileSize.Init();
+
+            currentAmmo = maxAmmo.Calculated;
+            Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)currentAmmo, (int)maxAmmo.Calculated));
+
+            if (AoeEffects == null)
+            {
+                AoeEffects = new();
+            }
+
+            if (OnHitEffects == null)
+            {
+                OnHitEffects = new();
+            }
+
+            if (AmmoStatusEffects == null)
+            {
+                AmmoStatusEffects = new();
+            }
+        }
 
         public virtual void ConsumeAmmo(int ammoToConsume)
         {
             currentAmmo-= ammoToConsume;
+            Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)currentAmmo, (int)maxAmmo.Calculated));
         }
 
         public virtual void TryRegenAmmo() 
@@ -138,7 +246,9 @@ namespace Minigames.Fight
             _regenTimer += Time.deltaTime;
             if (_regenTimer >= ammoRegenRate.Calculated)
             {
+                _regenTimer = 0;
                 currentAmmo++;
+                Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)currentAmmo, (int)maxAmmo.Calculated));
             }
         }
 
@@ -158,10 +268,20 @@ namespace Minigames.Fight
             projectileLifeTime.statusEffects.Clear();
         }
     }
-
+    [Serializable]
     public class MovementStats
     {
         public ModifiableStat moveSpeed;
+
+        public void Load(MovementStats stats)
+        {
+            moveSpeed = stats.moveSpeed;
+        }
+
+        public void Init()
+        {
+            moveSpeed.Init();
+        }
 
         public void TickStatuses()
         {
@@ -173,14 +293,17 @@ namespace Minigames.Fight
             moveSpeed.statusEffects.Clear();
         }
     }
-
+    [Serializable]
     // TODO handle types other than float
     public class ModifiableStat
     {
+        [SerializeField]
+        [JsonProperty]
         private float baseValue;
         public float BaseValue => baseValue;
 
         private float calculated;
+        [JsonIgnore]
         public float Calculated
         {
             get
@@ -192,25 +315,62 @@ namespace Minigames.Fight
 
         public List<StatModifierEffect> flatEffects;
         public List<StatModifierEffect> compoundingEffects;
+        [JsonIgnore]
         public List<StatModifierEffect> singleUseEffects;
+        [JsonIgnore]
         public List<StatusEffectData> statusEffects;
+        // If this effect is set, it will override all other effects and negate them
+        public StatModifierEffect overrideEffect;
 
-        public ModifiableStat()
+        //public List<Effect> OnKillEffects = new();
+        //public List<Effect> OnDeathEffects = new();
+        //public List<Effect> OnTakeDamageEffects = new();
+        //public List<Effect> OnTimerEffects = new();
+        //public List<Effect> OnPurchaseEffects = new();
+
+        public void Init()
         {
-            flatEffects = new();
-            compoundingEffects = new();
-            statusEffects = new();
+            if(flatEffects == null)
+            {
+                flatEffects = new();
+            }
+
+            if(compoundingEffects == null)
+            {
+                compoundingEffects = new();
+            }
+
+            if (singleUseEffects == null)
+            {
+                singleUseEffects = new();
+            }
+
+            if(statusEffects == null)
+            {
+                statusEffects = new();
+            }
+
+            RecalculateStat();
         }
 
-        public void AddEffect(StatModifierEffect effect)
+        /// <summary>
+        /// When adding the effect for the first time, it gets populated in the list.
+        /// When updating an effect, the Impact is recalculated using AmountOwned, so we just ignore adding it to the list again
+        /// </summary>
+        /// <param name="effect"></param>
+        public void AddOrUpdateStatEffect(StatModifierEffect effect)
         {
-            if (effect.statImpactType == StatImpactType.Flat)
+            if (effect.statImpactType == StatImpactType.Additive && !flatEffects.Contains(effect))
             {
                 flatEffects.Add(effect);
             }
-            else
+            else if(effect.statImpactType == StatImpactType.Compounding && !compoundingEffects.Contains(effect))
             {
                 compoundingEffects.Add(effect);
+            }
+            else
+            {
+                overrideEffect = effect;
             }
             RecalculateStat();
         }
@@ -238,6 +398,13 @@ namespace Minigames.Fight
 
         public void RecalculateStat()
         {
+            // Allows the designer to set a hard override for any stat with an effect
+            if (overrideEffect != null)
+            {
+                calculated = overrideEffect.ImpactStat(calculated);
+                return;
+            }
+
             calculated = baseValue;
 
             foreach (var effect in flatEffects)
@@ -279,32 +446,41 @@ namespace Minigames.Fight
             }
         }
 
-        public void OverrideStat(float value)
+        public void Randomize(float random)
         {
-            calculated = value;
+            calculated *= random;
         }
     }
 
+    [Serializable]
     public class TimerEffectData
     {
         public float timer;
         public float tickRate;
-        public Effect myEffect;
+        public ITimerEffect timerEffect;
 
         public Entity source;
-        public Entity target;
+
+        public TimerEffectData(ITimerEffect timerEffect, Entity source)
+        {
+            this.timerEffect = timerEffect;
+            this.source = source;
+            timer = 0;
+        }
 
         public void OnTick()
         {
             timer += Time.deltaTime;
             if (timer >= tickRate)
             {
-                myEffect.Execute(source, target);
+                var targets = timerEffect.GetTargets();
+                timerEffect.OnTick(source, targets);
                 timer = 0;
             }
         }
     }
 
+    [Serializable]
     public class StatusEffectData
     {
         public float timer;

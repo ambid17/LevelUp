@@ -22,23 +22,17 @@ namespace Minigames.Fight
     /// </summary>
     public class InteractableProp : MonoBehaviour
     {
-        private SpriteRenderer _spriteRenderer;
-        [SerializeField] private Material defaultMaterial;
-        [SerializeField] private Material interactableMaterial;
         [SerializeField] private InteractionType InteractionType;
 
 
         private void Start()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                _spriteRenderer.material = interactableMaterial;
-                _spriteRenderer.color = Color.blue;
                 Platform.EventService.Dispatch(new OnCanInteractEvent(InteractionType));
             }
         }
@@ -47,8 +41,6 @@ namespace Minigames.Fight
         {
             if (other.gameObject.layer == PhysicsUtils.PlayerLayer)
             {
-                _spriteRenderer.material = defaultMaterial;
-                _spriteRenderer.color = Color.white;
                 Platform.EventService.Dispatch(new OnCanInteractEvent(InteractionType.None));
             }
         }

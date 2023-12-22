@@ -1,0 +1,912 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4997024521012483794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2414631667131021654}
+  m_Layer: 9
+  m_Name: UnflippedMeleeOffset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2414631667131021654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997024521012483794}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.782, y: 0.294, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8510735526301981977}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5704093733750563641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1210437189685972300}
+  - component: {fileID: 9012151680045747844}
+  - component: {fileID: 3287212857411056575}
+  m_Layer: 0
+  m_Name: Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1210437189685972300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704093733750563641}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8510735526301981977}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9012151680045747844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704093733750563641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016953ded87d4d04b881d6040da7d895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentRenderer: {fileID: 8510735526301981991}
+  myRenderer: {fileID: 3287212857411056575}
+--- !u!212 &3287212857411056575
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704093733750563641}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &6193345662992702120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154963773211062935}
+  m_Layer: 9
+  m_Name: FlippedMeleeOffset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &154963773211062935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193345662992702120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.782, y: 0.294, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8510735526301981977}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8510735526301981988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8510735526301981977}
+  - component: {fileID: -7786698165613059924}
+  - component: {fileID: 1047883154001853991}
+  - component: {fileID: 8510735526301981991}
+  - component: {fileID: 8510735526301981989}
+  - component: {fileID: 5468921551894925541}
+  - component: {fileID: 1087665331962127016}
+  - component: {fileID: 7898162689922971567}
+  - component: {fileID: 368501983372723143}
+  - component: {fileID: 4893244674369185060}
+  - component: {fileID: 5622990192395103210}
+  - component: {fileID: 9058479032037320744}
+  - component: {fileID: 5486298600329082138}
+  - component: {fileID: -5186065690957399296}
+  - component: {fileID: 5409954415154852297}
+  m_Layer: 9
+  m_Name: SoldierAnt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8510735526301981977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1210437189685972300}
+  - {fileID: 2414631667131021654}
+  - {fileID: 154963773211062935}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7786698165613059924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisualController: {fileID: 1047883154001853991}
+  AnimationController: {fileID: 4893244674369185060}
+  WeaponController: {fileID: 5409954415154852297}
+  Stats:
+    movementStats:
+      moveSpeed:
+        baseValue: 2
+        flatEffects: []
+        compoundingEffects: []
+        singleUseEffects: []
+        statusEffects: []
+        overrideEffect: {fileID: 0}
+        OnKillEffects: []
+        OnDeathEffects: []
+        OnTakeDamageEffects: []
+        OnTimerEffects: []
+        OnPurchaseEffects: []
+    combatStats:
+      meleeWeaponStats:
+        MaxRange: 1
+        projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
+        currentAmmo: 0
+        targetLayers:
+          serializedVersion: 2
+          m_Bits: 64
+        destroyOnImpactLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        sprite: {fileID: 21300000, guid: a2f324d6cd7d9fb439ffa59186b1ca89, type: 3}
+        animation: {fileID: 9100000, guid: 6da85e683a1b45345be79d924e78b043, type: 2}
+        baseDamage:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        onHitDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileMoveSpeed:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileLifeTime:
+          baseValue: 0.25
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        rateOfFire:
+          baseValue: 2
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        maxAmmo:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        ammoRegenRate:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectilesPerShot:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileSpread:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileSize:
+          baseValue: 1
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        AoeEffects: []
+        OnHitEffects: []
+        AmmoStatusEffects: []
+      projectileWeaponStats:
+        MaxRange: 0
+        projectilePrefab: {fileID: 0}
+        currentAmmo: 0
+        targetLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        destroyOnImpactLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        sprite: {fileID: 0}
+        animation: {fileID: 0}
+        baseDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        onHitDamage:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileMoveSpeed:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileLifeTime:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        rateOfFire:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        maxAmmo:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        ammoRegenRate:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectilesPerShot:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileSpread:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        projectileSize:
+          baseValue: 0
+          flatEffects: []
+          compoundingEffects: []
+          singleUseEffects: []
+          statusEffects: []
+          overrideEffect: {fileID: 0}
+          OnKillEffects: []
+          OnDeathEffects: []
+          OnTakeDamageEffects: []
+          OnTimerEffects: []
+          OnPurchaseEffects: []
+        AoeEffects: []
+        OnHitEffects: []
+        AmmoStatusEffects: []
+      maxHp:
+        baseValue: 5
+        flatEffects: []
+        compoundingEffects: []
+        singleUseEffects: []
+        statusEffects: []
+        overrideEffect: {fileID: 0}
+        OnKillEffects: []
+        OnDeathEffects: []
+        OnTakeDamageEffects: []
+        OnTimerEffects: []
+        OnPurchaseEffects: []
+      hpStatusEffects: []
+      playerTimerEffects: []
+  Rigidbody2D: {fileID: 8510735526301981989}
+  statsFileName: SoldierAnt
+  tickDamageDownPerSecond: 1
+  enemyStats:
+    goldValue: 1
+    isPassive: 0
+    DetectRange: 3
+  deathAnimation: {fileID: 9100000, guid: 14194d0e28a84d7468a03d610bcee2bc, type: 2}
+  deathAnimPlayerPrafab: {fileID: 3360778816388492034, guid: 36faca159f245f546af853b693b75fc1, type: 3}
+--- !u!114 &1047883154001853991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78366a1a0561e0546bfaabe3e0e70786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
+  flashMaterial: {fileID: 2100000, guid: f184f20336aff7a4daac818638e6de00, type: 2}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  flashColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  takeHitAnimation:
+    Name: Soldier_Ant_Take_Hit
+    CanBeCancelled: 0
+    MaxBufferPercentage: 1
+    AcceptableOverrideTime: 0
+    CurrentIndex: 4
+--- !u!212 &8510735526301981991
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e607a1eee63871646bcdeec8c91aca89, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1162470409
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: a25505ce8255ab24c8737cc63f683905, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!50 &8510735526301981989
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &5468921551894925541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: 1
+--- !u!114 &1087665331962127016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609a3520990b3ff4caadae37b6c85bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: -7786698165613059924}
+  move: {x: 0, y: 0}
+--- !u!114 &7898162689922971567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(552.5,30)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-87.79901,95.07362)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(-230.23143,139.668213)"},"ID":2,"Name":"Set
+        Shared Vector 2","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomAroundPlayer","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomAroundPlayer","PropertyMappingOwner":0,"Vector2mValue":"(0,0)"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(-89.1972656,135.875015)"},"ID":3,"Name":"Set
+        Shared Vector 2","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"GetRandomPatrolPoint","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomSoldierWaypoint","PropertyMappingOwner":1,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentPatrolPoint","IsShared":true,"Vector2mValue":"(0,0)"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(90,140)"},"ID":4,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.ParallelComplete","NodeData":{"Offset":"(-0.0841064453,106.274231)"},"ID":5,"Name":"Parallel
+        Complete","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-98.08411,138.274231)"},"ID":6,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-517.7371,189.851913)"},"ID":7,"Name":"Patrol
+        Until Alerted","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-142.010651,155.695084)"},"ID":8,"Name":"If
+        Not Alerted","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsAlerted","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/IsAlerted","PropertyMappingOwner":2,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-34.7456169,155.59)"},"ID":9,"Name":"Play
+        Walk","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Walk","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MoveAnimation","PropertyMappingOwner":3},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Custom2D.Seek","NodeData":{"Offset":"(66.97685,155.384949)"},"ID":10,"Name":"Seek","Instant":true,"SharedTransformtarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null},"SharedVector2targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentPatrolPoint","IsShared":true,"Vector2mValue":"(0,0)"},"SharedBoolignoreInvalidPath":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/Speed","PropertyMappingOwner":4,"SinglemValue":0},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatstopDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrotateTowardsDestination":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrotationSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(186.363312,157.68129)"},"ID":11,"Name":"Set
+        Shared Vector 2","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"GetRandomPatrolPoint","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomSoldierWaypoint","PropertyMappingOwner":5,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentPatrolPoint","IsShared":true,"Vector2mValue":"(0,0)"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-61.33071,152.141724)"},"ID":12,"Name":"Attack
+        Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-96.8146057,152.141724)"},"ID":13,"Name":"If
+        Can See Player","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanSeeTarget","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/CanSeeTarget","PropertyMappingOwner":6,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(10,150)"},"ID":14,"Name":"Play
+        Walk","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Walk","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MoveAnimation","PropertyMappingOwner":7},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Custom2D.Pursue","NodeData":{"Offset":"(113.185425,152.141724)"},"ID":15,"Name":"Pursue","Instant":true,"SharedFloattargetDistPrediction":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":20},"SharedFloattargetDistPredictionMult":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":20},"SharedTransformtarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"PlayerTrasnform","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/PlayerTransform","PropertyMappingOwner":8},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/Speed","PropertyMappingOwner":9,"SinglemValue":0},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatstopDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PursueStopDistance","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/PursueDistance","PropertyMappingOwner":10,"SinglemValue":0},"SharedBoolrotateTowardsDestination":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrotationSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(214.63678,153.7731)"},"ID":16,"Name":"Try
+        Attack","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-101.423828,144.682373)"},"ID":17,"Name":"Attack","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-225.06015,166.19751)"},"ID":18,"Name":"If
+        Can Attack","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanAttack","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/CanMelee","PropertyMappingOwner":11,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(-75.9693,166.19751)"},"ID":19,"Name":"DelayReavaluation","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"DelayReavaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(71.3974457,166.197647)"},"ID":20,"Name":"Attack","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"AttackAnimation","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MeleeAttackAnimation"},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(197.363953,166.19751)"},"ID":21,"Name":"Don''t
+        Delay","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"DelayReavaluation","IsShared":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(249.153122,196.961609)"},"ID":22,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedBool","NodeData":{"Offset":"(-31.78449,112.489838)"},"ID":23,"Name":"Don''t
+        Delay","Instant":true,"SharedBooltargetValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBooltargetVariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"DelayReavaluation","IsShared":true,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(118.682358,112.588455)"},"ID":24,"Name":"Idle","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"IdleAnimation","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/IdleAnimation"},"SuccessTypeSuccessType":"None","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(439.646271,148.896484)"},"ID":25,"Name":"Patrol
+        Around Player","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-134.210938,110)"},"ID":26,"Name":"Play
+        Walk","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Walk","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MoveAnimation","PropertyMappingOwner":12},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.ConditionalEvaluator","NodeData":{"Offset":"(4.326782,109.748718)"},"ID":27,"Name":"While
+        Can''t See Player","Instant":true,"SharedBoolreevaluate":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"ConditionalconditionalTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.Math.BoolComparison","SharedBoolbool1":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanSeeTarget","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/CanSeeTarget","PropertyMappingOwner":13,"BooleanmValue":false},"SharedBoolbool2":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},"BooleangraphLabel":false,"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Custom2D.Seek","NodeData":{"Offset":"(-1.24999928,100)"},"ID":28,"Name":"Seek","Instant":true,"SharedTransformtarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null},"SharedVector2targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"},"SharedBoolignoreInvalidPath":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/Speed","PropertyMappingOwner":14,"SinglemValue":0},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatstopDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrotateTowardsDestination":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrotationSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(154.3539,109.999939)"},"ID":29,"Name":"Set
+        New Destination","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomAroundPlayer","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomAroundPlayer","PropertyMappingOwner":15,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedVector2","NodeData":{"Offset":"(594.3227,147.928772)"},"ID":30,"Name":"Set
+        New Destination","Instant":true,"SharedVector2targetValue":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomAroundPlayer","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomAroundPlayer","PropertyMappingOwner":16,"Vector2mValue":"(0,0)"},"SharedVector2targetVariable":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(732.909241,239.95636)"},"ID":31,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(-65.74109,123.703247)"},"ID":32,"Name":"Wait","Instant":false,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Tick","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityBehaviorData/Tick","PropertyMappingOwner":17,"SinglemValue":0},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.UntilSuccess","NodeData":{"Offset":"(92.5,132.5)"},"ID":33,"Name":"Until
+        Success","Instant":true,"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-8.161499,143.831665)"},"ID":34,"Name":"Compare
+        Shared Bool","Instant":true,"SharedBoolvariable":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"DelayReavaluation","IsShared":true,"BooleanmValue":false},"SharedBoolcompareTo":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]}]}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Tick","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityBehaviorData/Tick","PropertyMappingOwner":18,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsAlerted","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/IsAlerted","PropertyMappingOwner":19,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Walk","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MoveAnimation","PropertyMappingOwner":20},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/Speed","PropertyMappingOwner":21,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedTransformList","Name":"PatrolWaypoints","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/PatrolWaypoints","PropertyMappingOwner":22,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanSeeTarget","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/CanSeeTarget","PropertyMappingOwner":23,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"PlayerTrasnform","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/PlayerTransform","PropertyMappingOwner":24},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PursueStopDistance","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/PursueDistance","PropertyMappingOwner":25,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanAttack","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/CanMelee","PropertyMappingOwner":26,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"DelayReavaluation","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"AttackAnimation","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/MeleeAttackAnimation"},{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"IdleAnimation","IsShared":true,"PropertyMapping":"Minigames.Fight.EntityAnimationData/IdleAnimation"},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentDestination","IsShared":true,"Vector2mValue":"(0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"RandomAroundPlayer","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomAroundPlayer","PropertyMappingOwner":27,"Vector2mValue":"(0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"CurrentPatrolPoint","IsShared":true,"Vector2mValue":"(0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"GetRandomPatrolPoint","IsShared":true,"PropertyMapping":"Minigames.Fight.AntBehaviorData/RandomSoldierWaypoint","PropertyMappingOwner":28,"Vector2mValue":"(0,0)"}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        - {fileID: 8510735526301981988}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.4
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
+--- !u!95 &368501983372723143
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02f56e2a9ba70064cab6168b3ff331d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4893244674369185060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf451aa77dc50f74485532d5a22b4e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 368501983372723143}
+  defaultAnimation:
+    Name: Soldier_Ant_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+--- !u!114 &5622990192395103210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92cb59ece3df56f46ac73dc508ffc7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAnimation:
+    Name: Soldier_Ant_Idle
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  moveAnimation:
+    Name: Soldier_Ant_Walk
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 1
+  meleeAttackAnimation:
+    Name: Soldier_Ant_Attack
+    CanBeCancelled: 1
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 3
+  rangedAttackAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  alternateMoveAnimation:
+    Name: 
+    CanBeCancelled: 0
+    MaxBufferPercentage: 0.8
+    AcceptableOverrideTime: 0.05
+    CurrentIndex: 0
+  MyEntity: {fileID: 0}
+--- !u!70 &9058479032037320744
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02631209, y: 0.27}
+  m_Size: {x: 1.3158838, y: 0.7475366}
+  m_Direction: 1
+--- !u!114 &5486298600329082138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a121d3edc10a449aa3eb7006f261e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 5184
+  myEntity: {fileID: -7786698165613059924}
+  tick: 1
+  room: {fileID: 0}
+  tickRandomizer: 0.1
+  trackDamagePerTick: 0
+  damageDecayRate: 0
+  smellFactor: 1.5
+--- !u!114 &-5186065690957399296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd0d16716069944e90b260ad8b718b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8510735526301981991}
+--- !u!114 &5409954415154852297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510735526301981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8edd9ff3556b74e40a74765fcc08331d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWeaponMode: 0
+  unflippedShootOffset: {fileID: 8510735526301981977}
+  flippedShootOffset: {fileID: 8510735526301981977}
+  flippedMeleeOffset: {fileID: 154963773211062935}
+  unflippedMeleeOffset: {fileID: 2414631667131021654}
+  _destroyOnReachTarget: 0

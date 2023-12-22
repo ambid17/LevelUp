@@ -39,8 +39,6 @@ namespace Minigames.Fight
         [SerializeField]
         private PlayerWeaponArm arm;
 
-        private bool _isAttemptingEquip;
-
         public void PlayIdleAnimation(WeaponMode mode)
         {
             if (mode == WeaponMode.Projectile)
@@ -60,6 +58,26 @@ namespace Minigames.Fight
                 PlayAnimation(meleeIdle, 0);
             }
         }
+        
+        private void ForceIdleAnimation(WeaponMode mode)
+        {
+            if (mode == WeaponMode.Projectile)
+            {
+                if (IsAnimPlaying(projectileIdle))
+                {
+                    return;
+                }
+                OverrideAnimation(projectileIdle, 0);
+            }
+            else if (mode == WeaponMode.Melee)
+            {
+                if (IsAnimPlaying(meleeIdle))
+                {
+                    return;
+                }
+                OverrideAnimation(meleeIdle, 0);
+            }
+        }
 
         public void PlayEquipAnimation(WeaponMode mode)
         {
@@ -72,22 +90,24 @@ namespace Minigames.Fight
             {
                 name = meleeEquip;
             }
-            StartCoroutine(ChangeWeapons(name));
+            StartCoroutine(PlayAnimOnce(name, mode));
         }
 
         public void PlayAttackAnimation(WeaponMode mode, float fireRate)
         {
             float projectileSpeedModifier = 1 / (fireRate * 0.9f);
+
+            AnimationName name = new();
             if (mode == WeaponMode.Projectile)
             {
-                anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
-                PlayAnimation(projectileShoot, 0);
+                name = projectileShoot;
             }
             else if (mode == WeaponMode.Melee)
             {
-                anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
-                PlayAnimation(meleeShoot, 0);
+                name = meleeShoot;
             }
+            anim.SetFloat("PlaybackSpeed", projectileSpeedModifier);
+            StartCoroutine(PlayAnimOnce(name, mode));
         }
 
         public void PlayDieAnimation(WeaponMode mode)
@@ -114,7 +134,10 @@ namespace Minigames.Fight
             }
         }
 
-        IEnumerator ChangeWeapons(AnimationName name)
+        /// <summary>
+        /// Some unskippable anims will get stuck at their last frame, this ensures they always return to idle
+        /// </summary>
+        IEnumerator PlayAnimOnce(AnimationName name, WeaponMode mode)
         {
             while (!IsAnimPlaying(name))
             {
@@ -127,8 +150,9 @@ namespace Minigames.Fight
             }
             if (bufferedAnimation == null)
             {
-                PlayAnimation(defaultAnimation, 0);
+                yield return null;
             }
+            ForceIdleAnimation(mode);
         }
     }
 

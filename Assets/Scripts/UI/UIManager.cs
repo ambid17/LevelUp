@@ -11,6 +11,7 @@ namespace Minigames.Fight
         None,
         Effect,
         Pause,
+        DevCheats
     }
     
     /// <summary>
@@ -22,6 +23,7 @@ namespace Minigames.Fight
 
         [SerializeField] private UIPanel upgradePanel;
         [SerializeField] private UIPanel pausePanel;
+        [SerializeField] private UIPanel devCheatsPanel;
         
         public bool isPaused;
 
@@ -34,6 +36,7 @@ namespace Minigames.Fight
             // Make sure all UI is toggled off
             ToggleUiPanel(UIPanelType.Effect, false);
             ToggleUiPanel(UIPanelType.Pause, false);
+            ToggleUiPanel(UIPanelType.DevCheats, false);
         }
 
         void Update()
@@ -66,6 +69,9 @@ namespace Minigames.Fight
                     break;
                 case UIPanelType.Pause:
                     pausePanel.Toggle(isActive);
+                    break;
+                case UIPanelType.DevCheats:
+                    devCheatsPanel.Toggle(isActive);
                     break;
             }
         }

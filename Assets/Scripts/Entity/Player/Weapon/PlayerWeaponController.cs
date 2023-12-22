@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -17,6 +18,7 @@ namespace Minigames.Fight
 
         private PlayerWeaponArm _currentArm;
         private Camera _cam;
+        private bool _isTryingToShoot;
 
         private int _leftSortingOrder = 0;
         private int _rightSortingOrder = 0;
@@ -26,9 +28,10 @@ namespace Minigames.Fight
             base.Start();
 
             _currentArm = leftArm;
-            _cam = GameManager.PlayerEntity.PlayerCamera;
+            _cam = GameManager.PlayerCamera;
 
             Platform.EventService.Add<PlayerChangedDirectionEvent>(SwitchDirection);
+            Platform.EventService.Dispatch(new PlayerChangedWeaponEvent(CurrentWeaponMode));
         }
 
         protected override void Update()
@@ -49,13 +52,31 @@ namespace Minigames.Fight
             {
                 TryMelee();
             }
-            _combatStats.projectileWeaponStats.TryRegenAmmo();
+            if (Input.mouseScrollDelta.y != 0 || Input.GetKeyDown(KeyCode.Space))
+            {
+                WeaponMode otherWeapon = CurrentWeaponMode == WeaponMode.Projectile ? WeaponMode.Melee : WeaponMode.Projectile;
+                Platform.EventService.Dispatch(new PlayerChangedWeaponEvent(otherWeapon));
+                if (otherWeapon == WeaponMode.Projectile)
+                {
+                    Platform.EventService.Dispatch(new PlayerAmmoUpdatedEvent((int)_combatStats.projectileWeaponStats.currentAmmo, (int)_combatStats.projectileWeaponStats.maxAmmo.Calculated));
+                }
+                CurrentWeaponMode = otherWeapon;
+            }
+            if (!_isTryingToShoot)
+            {
+                _combatStats.projectileWeaponStats.TryRegenAmmo();
+            }
+        }
+
+        private void LateUpdate()
+        {
+            // Moved to LateUpdate because it always seemed to apply before the player setting it's layer.
+            leftArm.MySpriteRenderer.sortingOrder = MyEntity.VisualController.SpriteRenderer.sortingOrder + _leftSortingOrder;
+            rightArm.MySpriteRenderer.sortingOrder = MyEntity.VisualController.SpriteRenderer.sortingOrder + _rightSortingOrder;
         }
 
         private void ControlArms()
         {
-            leftArm.MySpriteRenderer.sortingOrder = _leftSortingOrder;
-            rightArm.MySpriteRenderer.sortingOrder = _rightSortingOrder;
             float currentRotation = _currentArm.transform.rotation.eulerAngles.z;
             if (currentRotation < _currentArm.MinRotation && currentRotation > _currentArm.MaxRotation)
             {
@@ -87,25 +108,24 @@ namespace Minigames.Fight
 
         public void SwitchDirection(PlayerChangedDirectionEvent e)
         {
-            int baseLayer = GameManager.PlayerEntity.VisualController.SpriteRenderer.sortingOrder;
 
             switch (e.NewDirection)
             {
                 case Direction.Down:
-                    _leftSortingOrder = baseLayer + 1;
-                    _rightSortingOrder = baseLayer + 1;
+                    _leftSortingOrder = + 1;
+                    _rightSortingOrder = + 1;
                     break;
                 case Direction.Up:
-                    _leftSortingOrder = baseLayer - 1;
-                    _rightSortingOrder = baseLayer - 1;
+                    _leftSortingOrder = - 1;
+                    _rightSortingOrder = - 1;
                     break;
                 case Direction.Left:
-                    _leftSortingOrder = baseLayer - 1;
-                    _rightSortingOrder = baseLayer + 1;
+                    _leftSortingOrder = -1;
+                    _rightSortingOrder = + 1;
                     break;
                 case Direction.Right:
-                    _leftSortingOrder = baseLayer + 1;
-                    _rightSortingOrder = baseLayer - 1;
+                    _leftSortingOrder = + 1;
+                    _rightSortingOrder = - 1;
                     break;
             }
         }
@@ -121,10 +141,12 @@ namespace Minigames.Fight
 
         public override bool CanShoot()
         {
-            return ShootTimer >= 
-                _combatStats.projectileWeaponStats.rateOfFire.Calculated && 
-                Input.GetKey(KeyCode.Mouse0) && 
-                _combatStats.projectileWeaponStats.currentAmmo > 0;
+            _isTryingToShoot = Input.GetKey(KeyCode.Mouse0) &&
+                _combatStats.projectileWeaponStats.currentAmmo > 0 && 
+                CurrentWeaponMode == WeaponMode.Projectile;
+            return ShootTimer >=
+                _combatStats.projectileWeaponStats.rateOfFire.Calculated && _isTryingToShoot;
+                
         }
         public override bool CanMelee()
         {
@@ -139,17 +161,26 @@ namespace Minigames.Fight
             {
                 ProjectileController projectile = Instantiate(_combatStats.projectileWeaponStats.projectilePrefab);
 
-                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
-                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset * _combatStats.projectileWeaponStats.projectileSpread.Calculated;
+                Vector2 offset = Vector2.Perpendicular(direction).normalized * indexOffset;
+
+                float spreadX = Random.Range(-_combatStats.projectileWeaponStats.projectileSpread.Calculated, _combatStats.projectileWeaponStats.projectileSpread.Calculated);
+                float spreadY = Random.Range(-_combatStats.projectileWeaponStats.projectileSpread.Calculated, _combatStats.projectileWeaponStats.projectileSpread.Calculated);
+
+                Vector2 spread = new Vector2(spreadX, spreadY);
+
+                direction += spread.normalized;
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
-                projectile.Setup(MyEntity, direction);
+                projectile.Setup(MyEntity, MyEntity.Stats.combatStats.projectileWeaponStats, direction.normalized);
             }
             _combatStats.projectileWeaponStats.ConsumeAmmo(1);
+
+            ShootTimer = 0;
         }
 
         public override void Melee()
@@ -158,7 +189,7 @@ namespace Minigames.Fight
             {
                 ProjectileController projectile = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
 
-                Vector2 direction = GameManager.PlayerEntity.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 direction = GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
                 // Map the indices to start from the leftmost projectile and spawn them to the right using the offset
                 float indexOffset = (float)i - i / 2;
@@ -166,9 +197,11 @@ namespace Minigames.Fight
 
                 projectile.transform.position = CurrentArm.ProjectileOrigin.position.AsVector2() + offset;
 
-                projectile.Setup(MyEntity, direction);
+                projectile.transform.rotation = PhysicsUtils.LookAt(projectile.transform, GameManager.PlayerCamera.ScreenToWorldPoint(Input.mousePosition), 180);
+
+                projectile.Setup(MyEntity, MyEntity.Stats.combatStats.meleeWeaponStats, direction);
             }
-            _combatStats.meleeWeaponStats.ConsumeAmmo(1);
+            MeleeTimer = 0;
         }
     }
 }

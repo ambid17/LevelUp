@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using UnityEditor.Animations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,7 +15,7 @@ namespace Minigames.Fight
         public Transform Target;
 
         [SerializeField]
-        private AnimationName deathAnimation;
+        private AnimatorController deathAnimation;
         [SerializeField]
         private EnemyDeathAnimationPlayer deathAnimPlayerPrafab;
 
@@ -29,6 +30,7 @@ namespace Minigames.Fight
             // Offsets animation speed and movement speed by the same amount to make enemies feel more natural.
             float randomOffset = Random.Range(.9f, 1.1f);
             AnimationController.Anim.speed *= randomOffset;
+            Stats.movementStats.moveSpeed.Randomize(randomOffset);
         }
 
 
@@ -48,7 +50,7 @@ namespace Minigames.Fight
             GameManager.CurrencyManager.EnemyKilled(enemyStats.goldValue);
 
             EnemyDeathAnimationPlayer deathAnimPlayer = Instantiate(deathAnimPlayerPrafab, transform.position, transform.rotation);
-            deathAnimPlayer.SpriteRenderer.flipX = VisualController.SpriteRenderer.flipX;
+            deathAnimPlayer.Setup(VisualController.SpriteRenderer, deathAnimation);
 
             Destroy(gameObject);
         }

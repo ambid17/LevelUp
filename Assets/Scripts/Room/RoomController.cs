@@ -12,17 +12,14 @@ namespace Minigames.Fight
 {
     public class RoomController : MonoBehaviour
     {
+        public int DistanceFromStartRoom { get; set; }
+
         public List<Transform> FlowerWaypoints;
         public List<Transform> WorkerWaypoints;
         public List<Transform> PatrolWaypoints;
-        public PolygonCollider2D myPolygonCollider;
         public Tilemap Tilemap;
         public List<RoomConnection> roomConnections;
-
-
-
-        [SerializeField]
-        private CinemachineVirtualCamera cam;
+        public BoxCollider2D MyCollider;
 
         [SerializeField]
         private HiveMindManager hiveMindManagerPrefab;
@@ -40,39 +37,36 @@ namespace Minigames.Fight
         [SerializeField]
         private List<EnemyToSpawn> enemiesToSpawn;
 
-        private bool hasInitialized;
+        [SerializeField]
+        private MinimapRoomRender minimapGraphic;
+        [SerializeField]
+        private MinimapRoomRender minimapGraphicPrefab;
 
-        private void Start()
-        {
-            cam.Follow = GameManager.CameraLerp.transform;
-            cam.Priority = 0;
-            cam.m_Lens.OrthographicSize = startSize;
-        }
+        protected bool hasInitialized;
 
-        private void SpawnEnemies()
+        protected virtual void InitializeEnemies()
         {
             Dictionary<int, List<HiveMindBehaviorData>> hiveMinds = new();
 
-            foreach (EnemyToSpawn enemy in enemiesToSpawn)
+            foreach (EntityBehaviorData enemy in GameManager.EnemyObjectPool.AllEnemies.Where(e => e.room == this).ToList())
             {
-                for (int i = 0; i < enemy.numberToSpawn; i++)
-                {
-                    int randomInt = Random.Range(0, spawnPoints.Count);
-                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, spawnPoints[randomInt].position, transform.rotation);
-                    behavior.room = this;
-                    IHiveMind hiveMind = behavior.GetComponent<IHiveMind>();
-                    if (hiveMind != null)
-                    {
-                        if (!hiveMinds.ContainsKey(hiveMind.Id))
-                        {
-                            hiveMinds.Add(hiveMind.Id, new());
-                        }
+                int randomInt = Random.Range(0, spawnPoints.Count);
+                enemy.transform.parent = null;
+                enemy.transform.position = spawnPoints[randomInt].position;
+                enemy.gameObject.SetActive(true);
 
-                        hiveMinds[hiveMind.Id].Add(hiveMind.myBehaviorData);
+                IHiveMind hiveMind = enemy.GetComponent<IHiveMind>();
+                if (hiveMind != null)
+                {
+                    if (!hiveMinds.ContainsKey(hiveMind.Id))
+                    {
+                        hiveMinds.Add(hiveMind.Id, new());
                     }
 
-                    spawnPoints.Remove(spawnPoints[randomInt]);
+                    hiveMinds[hiveMind.Id].Add(hiveMind.myBehaviorData);
                 }
+
+                spawnPoints.Remove(spawnPoints[randomInt]);
             }
             foreach (List<HiveMindBehaviorData> hiveMindList in hiveMinds.Values)
             {
@@ -81,35 +75,43 @@ namespace Minigames.Fight
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public void SpawnEnemies()
         {
-            if (collision.gameObject.layer == PhysicsUtils.PlayerLayer)
+            foreach (EnemyToSpawn enemy in enemiesToSpawn)
             {
-                // Spawn enemies when player first enters the room instead of on start.
-                if (!hasInitialized)
+                for (int i = 0; i < enemy.numberToSpawn; i++)
                 {
-                    SpawnEnemies();
-                    hasInitialized = true;
+                    EntityBehaviorData behavior = Instantiate(enemy.EnemyPrefab.MyEnemyPrefab, GameManager.EnemyObjectPool.transform);
+                    behavior.room = this;
+                    GameManager.EnemyObjectPool.AllEnemies.Add(behavior);
+                    behavior.gameObject.SetActive(false);
                 }
-                if (GameManager.RoomManager.CurrentCam != null)
-                {
-                    GameManager.RoomManager.CurrentCam.Priority = 0;
-                }
-                GameManager.RoomManager.CurrentCam = cam;
-                cam.m_Lens.OrthographicSize = 1;
-                cam.Priority = 10;
             }
         }
-        private void Update()
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
-            if (cam.m_Lens.OrthographicSize == startSize)
+            if (collision.gameObject.layer != PhysicsUtils.PlayerLayer)
             {
                 return;
             }
-            if (cam.m_Lens.OrthographicSize < startSize)
+            if (!PhysicsUtils.IsWithinBounds(GameManager.PlayerEntity.transform.position, MyCollider.bounds))
             {
-                cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, startSize, zoomSpeed *Time.deltaTime);
+                return;
             }
+            if (GameManager.CameraLerp.CameraBounds != MyCollider.bounds)
+            {
+                GameManager.MinimapCamera.transform.position = new Vector3(MyCollider.bounds.center.x, MyCollider.bounds.center.y, -10);
+                GameManager.CameraLerp.Transition(MyCollider.bounds);
+            }
+            // Spawn enemies when player first enters the room instead of on start.
+            if (hasInitialized)
+            {
+                return;
+            }
+            minimapGraphic.Activate();
+            InitializeEnemies();
+            hasInitialized = true;
         }
 
         // If a connection is not being used close it off.
@@ -128,10 +130,18 @@ namespace Minigames.Fight
         }
 
 #if UNITY_EDITOR
+        [ContextMenu("Setup Room Graphic")]
+        public void SetupRoomGraphics()
+        {
+            minimapGraphic = Instantiate(minimapGraphicPrefab, transform);
+            minimapGraphic.transform.position = MyCollider.bounds.center;
+            minimapGraphic.transform.localScale = MyCollider.bounds.size;
+            EditorUtility.SetDirty(this);
+        }
+
         [ContextMenu("getcomponents")]
         public void GetComponents()
         {
-            myPolygonCollider = GetComponent<PolygonCollider2D>();
             Tilemap = GetComponentsInChildren<Tilemap>().FirstOrDefault(t => t.gameObject.layer == PhysicsUtils.wallLayer);
             Tilemap.CompressBounds();
 
@@ -141,6 +151,16 @@ namespace Minigames.Fight
             PatrolWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Patrol).Select(waypoint => waypoint.transform).ToList();
             FlowerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Flower).Select(waypoint => waypoint.transform).ToList();
             WorkerWaypoints = waypoints.Where(w => w.waypointType == WaypointType.Worker).Select(waypoint => waypoint.transform).ToList();
+
+            if (PatrolWaypoints.Count == 0)
+            {
+                PatrolWaypoints = spawnPoints;
+            }
+
+            MyCollider = GetComponent<BoxCollider2D>();
+
+            MyCollider.size = Tilemap.size.AsVector2();
+            MyCollider.offset = Tilemap.cellBounds.AsBounds().center;
             
             EditorUtility.SetDirty(this);
         }

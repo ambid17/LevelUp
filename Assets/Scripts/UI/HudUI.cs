@@ -14,6 +14,7 @@ namespace Minigames.Fight
         [SerializeField] private Slider _hpSlider;
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private TMP_Text _remainingAmmoText;
+        [SerializeField] private Image _ammoImage;
 
         private EventService _eventService;
         private CombatStats _combatStats => GameManager.PlayerEntity.Stats.combatStats;
@@ -22,7 +23,8 @@ namespace Minigames.Fight
             _eventService = Platform.EventService;
             _eventService.Add<CurrencyUpdatedEvent>(SetGoldText);
             _eventService.Add<PlayerHpUpdatedEvent>(SetHpSlider);
-            _eventService.Add<PlayerAmmoUpdatedEvent>(SetAmmo);
+            _eventService.Add<PlayerAmmoUpdatedEvent>(UpdateAmmo);
+            _eventService.Add<PlayerChangedWeaponEvent>(SetWeaponUI);
             _upgradeButton.onClick.AddListener(OpenUpgrades);
         
             SetGoldText();
@@ -44,7 +46,19 @@ namespace Minigames.Fight
             _hpSlider.value = _combatStats.currentHp / _combatStats.maxHp.Calculated;
         }
 
-        private void SetAmmo(PlayerAmmoUpdatedEvent e)
+        private void SetWeaponUI(PlayerChangedWeaponEvent e)
+        {
+            if (e.NewWeaponMode == WeaponMode.Melee)
+            {
+                _ammoImage.sprite = _combatStats.meleeWeaponStats.sprite;
+            }
+            else if (e.NewWeaponMode == WeaponMode.Projectile)
+            {
+                _ammoImage.sprite = _combatStats.projectileWeaponStats.sprite;
+            }
+        }
+
+        private void UpdateAmmo(PlayerAmmoUpdatedEvent e)
         {
             _remainingAmmoText.text = $"{e.CurrentAmmo} / {e.MaxAmmo}";
         }

@@ -12,6 +12,11 @@ namespace Minigames.Fight
     public class PlayerHpUpdatedEvent { }
     public class EnemyKilledEvent { }
 
+    public class DidCraftUpgradeEvent { }
+
+    public class ClosedCraftingUiEvent { }
+    public class BossEnteredEvent { }
+
     public class UpgradeCraftedEvent : IEvent
     {
         public Upgrade Upgrade;
@@ -41,6 +46,22 @@ namespace Minigames.Fight
             InteractionType = interactionType;
         }
     }
+
+
+    /// <summary>
+    /// Used when the player is controlled, lets it know when the controlled action is finished
+    /// </summary>
+    public class PlayerControlledActionFinishedEvent : IEvent
+    {
+        public PlayerControlledActionType ActionType;
+
+        public PlayerControlledActionFinishedEvent(PlayerControlledActionType actionType)
+        {
+            ActionType = actionType;
+        }
+    }
+
+    
 
     public class CurrencyRewardEvent: IEvent
     {
@@ -126,6 +147,16 @@ namespace Minigames.Fight
     {
         public SceneIsReadyEvent()
         {
+        }
+    }
+
+    public class EntityStatsFileRemappedEvent : IEvent
+    {
+        public string StatsFileName;
+
+        public EntityStatsFileRemappedEvent(string statsFileName)
+        {
+            StatsFileName = statsFileName;
         }
     }
 }

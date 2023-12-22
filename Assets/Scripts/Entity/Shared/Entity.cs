@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Minigames.Fight;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 
@@ -11,12 +13,17 @@ namespace Minigames.Fight
     public class Entity : MonoBehaviour
     {
         public bool Stunned { get; set; }
+        public bool IsControlled;
         public VisualController VisualController;
         public AnimationManager AnimationController;
         public WeaponController WeaponController;
         public EntityStats Stats;
         public Rigidbody2D Rigidbody2D;
-        
+
+        // Used to load entity stats from appData file
+        public string statsFileName; // i.e. "Player", "Bee", etc
+
+
         public bool IsDead => Stats.combatStats.currentHp <= 0;
 
         protected EventService eventService;
@@ -30,14 +37,32 @@ namespace Minigames.Fight
             VisualController = GetComponent<VisualController>();
             AnimationController = GetComponent<AnimationManager>();
             Rigidbody2D = GetComponent<Rigidbody2D>();
+            LoadStats();
             Setup();
+
+            Platform.EventService.Add<EntityStatsFileRemappedEvent>(OnStatsRemapped);
+        }
+
+        private void OnStatsRemapped(EntityStatsFileRemappedEvent e)
+        {
+            if (e.StatsFileName == statsFileName)
+            {
+                LoadStats();
+            }
+        }
+
+        public void LoadStats()
+        {
+            var savedStats = FightDataLoader.EntityStatsMap[statsFileName];
+            Stats.Load(savedStats);
+            Stats.Init();
         }
 
         protected virtual void Setup()
         {
-            Stats = new EntityStats();
+
         }
-        
+
         protected virtual void Update()
         {
             Stats.TickStatuses();
@@ -45,7 +70,7 @@ namespace Minigames.Fight
 
         public virtual void TakeHit(float damage, Entity hitter)
         {
-            Stats.TakeDamage(damage);
+            Stats.combatStats.TakeDamage(damage);
 
             VisualController.StartDamageFx(damage);
 
@@ -55,18 +80,18 @@ namespace Minigames.Fight
             }
         }
 
-        public void DealDamage(Entity target)
+        public void DealDamage(Entity target, WeaponStats weaponStats)
         {
             // Execute all of the onHit effects to populate the onHitDamage
-            foreach (var effect in Stats.combatStats.OnHitEffects)
+            foreach (var effect in weaponStats.OnHitEffects)
             {
                 effect.Execute(this, target);
             }
 
-            float damage = WeaponController.CurrentWeapon.baseDamage.Calculated 
+            float damage = WeaponController.CurrentWeapon.baseDamage.Calculated
                 + WeaponController.CurrentWeapon.onHitDamage.Calculated;
             target.TakeHit(damage, this);
-            
+
             // Clear the onHitDamage because it is only used once per hit as many of the effects
             // are dependent on target stats
             WeaponController.CurrentWeapon.onHitDamage.Clear();
@@ -80,6 +105,20 @@ namespace Minigames.Fight
         protected virtual void Die(Entity killer)
         {
             killer.OnKill();
+        }
+
+
+        [ContextMenu("Setup")]
+        public void SetupInspector()
+        {
+            VisualController = GetComponent<VisualController>();
+            AnimationController = GetComponent<AnimationManager>();
+            WeaponController = GetComponent<WeaponController>();
+            Rigidbody2D = GetComponent<Rigidbody2D>();
+
+            statsFileName = gameObject.name;
+
+            EditorUtility.SetDirty(this);
         }
     }
 }

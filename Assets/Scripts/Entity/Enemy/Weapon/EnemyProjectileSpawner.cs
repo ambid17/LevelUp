@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Minigames.Fight
@@ -23,18 +24,36 @@ namespace Minigames.Fight
         [SerializeField]
         private Sprite projectileSprite;
         [SerializeField]
-        private float angleOffset = -180;
+        private AnimatorController myAnimation;
+        [SerializeField]
+        private float startAngle = 180;
 
         private Entity _overridenEntity;
         private Vector2 _direction;
+        private float _storedLifetimeOverride;
+        private bool _isDoneSpawning;
         
 
-        public override void Setup(Entity myEntity, Vector2 direction)
+        public override void Setup(Entity myEntity, WeaponStats weapon, Vector2 direction, float lifetimeOverride = 0)
         {
             _overridenEntity = myEntity;
             _direction = direction;
-            float rotationToTarget = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg + angleOffset;
-            transform.rotation = Quaternion.AngleAxis(rotationToTarget, Vector3.forward);
+            _myWeaponStats = weapon;
+            _storedLifetimeOverride = lifetimeOverride;
+        }
+
+        public void FaceTarget(Vector2 target)
+        {
+            transform.rotation = PhysicsUtils.LookAt(transform, target, startAngle);
+        }
+
+        protected override void Move()
+        {
+        }
+
+        protected override bool ShouldDie()
+        {
+            return anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && _isDoneSpawning;
         }
 
         /// <summary>
@@ -44,8 +63,9 @@ namespace Minigames.Fight
         {
             ProjectileController projectile = Instantiate(projectilePrefab);
             projectile.transform.position = offSet.position;
-            projectile.SetSprite(projectileSprite);
-            projectile.Setup(_overridenEntity, _direction);
+            projectile.Setup(_overridenEntity, _myWeaponStats, _direction, _storedLifetimeOverride);
+            projectile.OverrideVisuals(projectileSprite, myAnimation);
+            _isDoneSpawning = true;
         }
     }
 }

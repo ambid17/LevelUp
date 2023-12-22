@@ -142,7 +142,7 @@ public class ShadowData : ScriptableObject
 
             flippedTextureImporter.ReadTextureSettings(flippedTexSettings);
             flippedTexSettings.spriteAlignment = (int)SpriteAlignment.Custom;
-            flippedTexSettings.spriteMeshType = SpriteMeshType.FullRect;
+            flippedTexSettings.spriteMeshType = SpriteMeshType.Tight;
             flippedTextureImporter.SetTextureSettings(flippedTexSettings);
 
             flippedTextureImporter.spritePixelsPerUnit = flippedShadowSprite.pixelsPerUnit;

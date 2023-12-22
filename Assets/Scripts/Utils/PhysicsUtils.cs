@@ -6,12 +6,21 @@ public static class PhysicsUtils
 {
     public static readonly int PlayerLayer = 6;
     public static int ProjectileLayer = 7;
-    public static int GroundLayer = 10;
+    public static int ObstacleLayer = 10;
     public static int wallLayer = 12;
     public static int EnemyLayer = 9;
 
-    public static int groundGraph = 1;
-    public static int flyGraph = 2;
+    public static int groundGraph = 0;
+    public static int flyGraph = 1;
+    public static int playerGraph = 2;
+
+    public static List<Vector2> CardinalDirections = new()
+    {
+        Vector2.right,
+        Vector2.left,
+        Vector2.up,
+        Vector2.down,
+    };
 
     public static Vector2 AsVector2(this Vector3 _v)
     {
@@ -67,6 +76,16 @@ public static class PhysicsUtils
         return Quaternion.Slerp(transform.rotation, finalRotation, lerpFactor);
     }
 
+    public static Bounds AsBounds(this BoundsInt boundsInt)
+    {
+        Bounds bounds = new();
+        bounds.center = boundsInt.center; 
+        bounds.size = boundsInt.size;
+        bounds.min = new Vector3(boundsInt.xMin, boundsInt.yMin);
+        bounds.max = new Vector3(boundsInt.xMax, boundsInt.yMax);
+        return bounds;
+    }
+
     /// <summary>
     /// To determine if an object is in an arc of another it has to fit 2 criteria:
     /// - the distance between the objects has to be less than the radius of the cone
@@ -83,6 +102,11 @@ public static class PhysicsUtils
         }
 
         RaycastHit2D hit = Physics2D.Linecast(source.position, target.position, layerMask);
+
+        if (hit.collider == null)
+        {
+            return null;
+        }
 
         // Check we have line of sight of the correct target
         if(hit.collider.gameObject.GetInstanceID() != target.gameObject.GetInstanceID())
@@ -104,6 +128,26 @@ public static class PhysicsUtils
 
         return null;
 
+    }
+    public static bool IsWithinBounds(Vector2 position, Bounds bounds)
+    {
+        if (position.x < bounds.min.x)
+        {
+            return false;
+        }
+        if (position.x > bounds.max.x)
+        {
+            return false;
+        }
+        if (position.y < bounds.min.y)
+        {
+            return false;
+        }
+        if (position.y > bounds.max.y)
+        {
+            return false;
+        }
+        return true;
     }
     public static Vector2 AsVector2(this BoundsInt boundsInt)
     {

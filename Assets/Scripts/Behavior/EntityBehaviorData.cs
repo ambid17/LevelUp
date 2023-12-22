@@ -62,7 +62,7 @@ namespace Minigames.Fight
         public float Speed => myEntity.Stats.movementStats.moveSpeed.Calculated;
         public float DistanceToPlayer => Vector2.Distance(transform.position, PlayerPosition);
         // Stopping distance from the player is half of the weapons range
-        public float PursueDistance => (MyEntity.WeaponController.CurrentWeapon.MaxRange / 2);
+        public float PursueDistance => MyEntity.WeaponController.CurrentWeapon.MaxRange /2;
         public bool CanShoot => MyEntity.WeaponController.CanShoot();
         public bool CanMelee => MyEntity.WeaponController.CanMelee();
         public virtual bool WithinVisionRadius => DistanceToPlayer <= MyEntity.enemyStats.DetectRange;

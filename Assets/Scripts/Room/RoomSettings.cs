@@ -14,6 +14,7 @@ namespace Minigames.Fight
         public int maxRooms;
         public RoomController startRoom;
         public List<RoomController> rooms;
+        public List<BossRoomController> bossRooms;
         public Tile wallTile;
         public int tilesToReplace = 8;
 

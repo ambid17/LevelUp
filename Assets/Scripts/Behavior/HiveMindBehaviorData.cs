@@ -29,7 +29,11 @@ namespace Minigames.Fight
 
         private void OnDestroy()
         {
-            MyManager.MyHiveMinds.Remove(this);
+            // Prevent error logspam on quit or leaving the scene
+            if(MyManager != null && MyManager.MyHiveMinds != null)
+            {
+                MyManager.MyHiveMinds.Remove(this);
+            }
         }
     }
 }

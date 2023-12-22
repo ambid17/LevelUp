@@ -17,7 +17,7 @@ namespace Minigames.Fight
         public Rigidbody2D MyRigidbody2D;
 
         private Vector2 _lastInput;
-        private const float ACCELERATION = 20;
+        private const float ACCELERATION = 50;
     
         void Start()
         {
@@ -27,7 +27,12 @@ namespace Minigames.Fight
 
         void Update()
         {
-            if (GameManager.PlayerEntity.IsDead || GameManager.PlayerEntity.Stunned)
+            if (_myEntity.IsControlled)
+            {
+                return;
+            }
+
+            if (_myEntity.IsDead || _myEntity.Stunned)
             {
                 MyRigidbody2D.velocity = Vector2.zero;
                 return;
@@ -87,7 +92,12 @@ namespace Minigames.Fight
     
         private void FixedUpdate()
         {
-            if (GameManager.PlayerEntity.IsDead || GameManager.PlayerEntity.Stunned)
+            if (_myEntity.IsControlled)
+            {
+                return;
+            }
+
+            if (_myEntity.IsDead || _myEntity.Stunned)
             {
                 MyRigidbody2D.velocity = Vector2.zero;
                 return;

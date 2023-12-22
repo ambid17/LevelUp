@@ -8,8 +8,9 @@ namespace Minigames.Fight
 {
     public class EnemyWeaponController : WeaponController
     {
-        private Transform shootOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedShootOffset : unflippedShootOffset;
-        private Transform meleeOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedMeleeOffset : unflippedMeleeOffset;
+        public Vector2 CurrentOffsetPosition => CurrentWeaponMode == WeaponMode.Projectile ? shootOffset.position : meleeOffset.position;
+        protected Transform shootOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedShootOffset : unflippedShootOffset;
+        protected Transform meleeOffset => MyEntity.VisualController.SpriteRenderer.flipX ? flippedMeleeOffset : unflippedMeleeOffset;
 
         [SerializeField]
         private Transform unflippedShootOffset;
@@ -23,8 +24,10 @@ namespace Minigames.Fight
         [SerializeField]
         private bool _destroyOnReachTarget;
 
-        private Vector2 _storedDirection;
-        private Vector2 _storedTarget;
+        protected Vector2 _storedDirection;
+        protected Vector2 _storedTarget;
+        protected Vector2 _storedVelocity;
+        protected Vector2 _storedPrediction;
 
         private float _timeToReachTarget;
 
@@ -38,21 +41,25 @@ namespace Minigames.Fight
             Vector2 direction;
 
             EnemyProjectileSpawner projectileSpawner = projectile as EnemyProjectileSpawner;
+
             if (projectileSpawner != null)
             {
+                projectileSpawner.FaceTarget(_storedPrediction);
                 direction = PredictProjectileDirection(projectileSpawner.Offset.position);
             }
             else
             {
                 direction = PredictProjectileDirection(projectile.transform.position);
             }
+            float lifeTimeOverride = 0;
 
             if (_destroyOnReachTarget)
             {
-                _combatStats.projectileWeaponStats.projectileLifeTime.OverrideStat(_timeToReachTarget);
+                lifeTimeOverride = _timeToReachTarget;
             }
-
-            projectile.Setup(MyEntity, direction);
+            // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
+            CurrentWeaponMode = WeaponMode.Projectile;
+            projectile.Setup(MyEntity, MyEntity.Stats.combatStats.projectileWeaponStats, direction, lifeTimeOverride);
         }
 
         public override bool CanShoot()
@@ -62,7 +69,11 @@ namespace Minigames.Fight
 
         public override bool CanMelee()
         {
-            return ShootTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated && Vector2.Distance(GameManager.PlayerEntity.transform.position, transform.position) < _combatStats.projectileWeaponStats.MaxRange;
+            // Removed the requirement to be within range.
+            // The pursue distance now checks the distance relative to the position the melee object instantiate instead of transform.position
+            // this means the enemy will never be able to attack. Additionally the entire purpose for checking proximity was that damage was applied directly,
+            // now the melee VFX actually have to touch the player making this check unecessary.
+            return MeleeTimer >= _combatStats.meleeWeaponStats.rateOfFire.Calculated;
         }
 
         public override void Melee()
@@ -70,8 +81,14 @@ namespace Minigames.Fight
             ProjectileController melee = Instantiate(_combatStats.meleeWeaponStats.projectilePrefab);
 
             melee.transform.position = meleeOffset.position;
+            melee.transform.rotation = PhysicsUtils.LookAt(melee.transform, _storedTarget, 180);
 
-            melee.Setup(MyEntity, _storedDirection);
+            // Set weapon mode here instead of anywhere else to ensure it's the same frame as projectile setting up.
+            CurrentWeaponMode = WeaponMode.Melee;
+
+            float lifetimeOverride = Vector2.Distance(melee.transform.position, _storedTarget) / _combatStats.meleeWeaponStats.projectileMoveSpeed.Calculated;
+
+            melee.Setup(MyEntity, MyEntity.Stats.combatStats.meleeWeaponStats , _storedDirection, lifetimeOverride);
         }
 
         // Called by animator to ensure less than perfect aim.
@@ -79,23 +96,32 @@ namespace Minigames.Fight
         public void SetMeleeDirection()
         {
             MeleeTimer = 0;
+            _storedTarget = GameManager.PlayerEntity.transform.position;
+            EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
+            myVC.FaceTarget(_storedTarget);
             _storedDirection = GameManager.PlayerEntity.transform.position - meleeOffset.position;
         }
 
         // Called by animator to ensure less than perfect aim.
         // Resets shot timer to make animation cancelling more effective.
         public void SetProjectileDirection()
-        {
+        { 
             ShootTimer = 0;
-            _storedDirection = GameManager.PlayerEntity.transform.position - shootOffset.position;
             _storedTarget = GameManager.PlayerEntity.transform.position;
+            _storedVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
+            _storedDirection = PredictProjectileDirection(transform.position);
+            EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
+            myVC.FaceTarget(_storedPrediction);
+            _storedDirection = PredictProjectileDirection(shootOffset.position);
         }
 
         private Vector2 PredictProjectileDirection(Vector2 origin)
         {
-            Vector2 targetVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
+            // TODO: equation only works if projectile is faster than target, need a check with a secondary equation.
 
-            Vector2 relativePosition = origin - _storedDirection;
+            Vector2 targetVelocity = _storedVelocity;
+            Vector2 direction = _storedTarget - origin;
+            Vector2 relativePosition = origin - direction;
             float theta = Vector2.Angle(relativePosition, targetVelocity);
 
             float a = (targetVelocity.magnitude * targetVelocity.magnitude) - (_combatStats.projectileWeaponStats.projectileMoveSpeed.Calculated * _combatStats.projectileWeaponStats.projectileMoveSpeed.Calculated);
@@ -104,10 +130,19 @@ namespace Minigames.Fight
             float delta = Mathf.Sqrt((b * b) - (4 * a * c));
             _timeToReachTarget = -(b + delta) / (2 * a);
 
-            Vector2 prediction = _storedTarget + (targetVelocity * _timeToReachTarget);
-            Vector2 difference = prediction - origin;
+            _storedPrediction = _storedTarget + (targetVelocity * _timeToReachTarget);
+            Vector2 difference = _storedPrediction - origin;
 
             return difference.normalized;
+        }
+
+        [ContextMenu("Setup")]
+        public void SetupInspector()
+        {
+            unflippedShootOffset = transform;
+            unflippedMeleeOffset = transform;
+            flippedMeleeOffset = transform;
+            flippedShootOffset = transform;
         }
     }
 }

@@ -23,6 +23,10 @@ namespace Minigames.Fight
         private float maxSpeed = 10f;
         [SerializeField]
         private float deceleration = 0.5f;
+        [SerializeField]
+        private List<Sprite> grassSprites;
+        [SerializeField]
+        private List<Sprite> dirtSprites;
 
         private bool _hasStopped;
 
@@ -34,9 +38,16 @@ namespace Minigames.Fight
 
         public void Setup(Sprite sprite, ResourceType resourceType, float resourceValue)
         {
-            mySpriteRenderer.sprite = sprite;
             myResourceType = resourceType;
             _resourceValue = resourceValue;
+
+            if(myResourceType == ResourceType.Grass)
+            {
+                mySpriteRenderer.sprite = grassSprites[Random.Range(0, grassSprites.Count)];
+            }else if(myResourceType == ResourceType.Dirt)
+            {
+                mySpriteRenderer.sprite = dirtSprites[Random.Range(0, grassSprites.Count)];
+            }
 
             float x = Random.Range(-1f, 1f);
             float y = Random.Range(-1f, 1f);

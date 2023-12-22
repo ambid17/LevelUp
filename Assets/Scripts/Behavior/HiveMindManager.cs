@@ -57,8 +57,13 @@ namespace Minigames.Fight
                 yield break;
             }
             var hiveMindsByDistanceFromTarget = MyHiveMinds.OrderBy(h => (h.transform.position.AsVector2() - h.PlayerPosition).magnitude);
-            foreach (HiveMindBehaviorData hiveMind in hiveMindsByDistanceFromTarget)
+            foreach (HiveMindBehaviorData hiveMind in hiveMindsByDistanceFromTarget.ToList())
             {
+                if (hiveMind == null)
+                {
+                    MyHiveMinds.Remove(hiveMind);
+                    continue;
+                }
                 GameObject player = PhysicsUtils.HasLineOfSight(hiveMind.transform, GameManager.PlayerEntity.transform, hiveMind.MyEntity.enemyStats.DetectRange, 360, hiveMind.ObstacleLayerMask);
                 if (player != null)
                 {

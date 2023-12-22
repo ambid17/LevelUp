@@ -12,6 +12,7 @@ namespace Minigames.Fight
         [SerializeField] private Button homeButton;
         [SerializeField] private Button deleteButton;
         [SerializeField] private Button quitButton;
+        [SerializeField] private Button devCheatsButton;
     
         void Start()
         {
@@ -19,6 +20,7 @@ namespace Minigames.Fight
             homeButton.onClick.AddListener(Home);
             deleteButton.onClick.AddListener(DeleteSave);
             quitButton.onClick.AddListener(Quit);
+            devCheatsButton.onClick.AddListener(DevCheats);
         }
 
         private void Resume()
@@ -56,5 +58,11 @@ namespace Minigames.Fight
             Application.Quit();
         }
 
+
+        public void DevCheats()
+        {
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.Pause, false);
+            GameManager.UIManager.ToggleUiPanel(UIPanelType.DevCheats, true);
+        }
     }
 }

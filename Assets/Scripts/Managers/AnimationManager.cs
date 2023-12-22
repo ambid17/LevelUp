@@ -20,13 +20,25 @@ public class AnimationManager : MonoBehaviour
 
     private bool _isStunned;
 
+
+    public IEnumerator PlayAnimationWithCallback(AnimationName animationName, Action callback)
+    {
+        PlayAnimation(animationName);
+
+        yield return new WaitUntil(() => IsAnimPlaying(animationName));
+
+        yield return new WaitUntil(() => IsAnimFinished);
+
+        callback();
+    }
+
     public bool IsAnimPlaying(AnimationName name)
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(name.Name);
     }
 
     // Returns true if the normalized difference between current normalized time and next loop is less than acceptableDifference.
-    public bool IsCurrentAnimLoopFinished(float acceptableDifference)
+    public bool IsCurrentAnimLoopFinished(float acceptableDifference = 0.05f)
     {
         float difference = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
         return  Mathf.Clamp(difference, 1 - acceptableDifference, 1 + acceptableDifference) == difference;
@@ -38,7 +50,7 @@ public class AnimationManager : MonoBehaviour
         PlayAnimation(defaultAnimation, 0);
     }
 
-    public void PlayAnimation(AnimationName name, float time)
+    public void PlayAnimation(AnimationName name, float time = 0)
     {
         if (_isStunned)
         {
@@ -91,11 +103,6 @@ public class AnimationManager : MonoBehaviour
 
         if (!IsCurrentAnimLoopFinished(name.AcceptableOverrideTime))
         {
-            float remainingTime = Mathf.Ceil(CurrentAnimationNomralizedTime) - CurrentAnimationNomralizedTime;
-            if (remainingTime >= name.MaxBufferPercentage)
-            {
-                return;
-            }
             StartCoroutine(PlayQuedAnimation(name));
             return;
         }
@@ -124,6 +131,7 @@ public class AnimationManager : MonoBehaviour
         OverrideAnimation(name, 0);
         while (!IsAnimPlaying(name))
         {
+            OverrideAnimation(name, 0);
             yield return new WaitForSeconds(0);
         }
         while (!IsAnimFinished)

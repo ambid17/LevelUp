@@ -46,17 +46,6 @@ namespace Minigames.Fight
         // Destination has been reached if agent is within stopping distance of the final waypoint
         public bool reachedDestination => Vector2.Distance(transform.position, target) < stopDistance;
 
-        public bool pathInvalid
-        {
-            get
-            {
-                NNConstraint myConstraint = NNConstraint.None;
-                myConstraint.graphMask = seeker.graphMask;
-                GraphNode node1 = AstarPath.active.GetNearest(transform.position, myConstraint).node;
-                GraphNode node2 = AstarPath.active.GetNearest(target, myConstraint).node;
-                return !PathUtilities.IsPathPossible(node1, node2);
-            }
-        }
         public Path path => _Path;
         public Rigidbody2D rb => _rb;
 
@@ -96,17 +85,6 @@ namespace Minigames.Fight
             {
                 move = nextWaypoint - transform.position.AsVector2();
                 distance = Vector2.Distance(transform.position, nextWaypoint);
-            }
-
-            // If our path is invalid we want to move to the nearest walkable node to avoid getting stuck.
-            if (pathInvalid)
-            {
-                NNConstraint myConstraint = NNConstraint.None;
-                myConstraint.graphMask = seeker.graphMask;
-                Vector2 nearestWalkable = (Vector3)AstarPath.active.GetNearest(transform.position, myConstraint).node.position;
-
-                // Multiplied by 2 to avoid getting in an infinite back and forth loop (spooky magic float).
-                move = nearestWalkable *2f - transform.position.AsVector2();
             }
 
             // If waypoint has been reached then agent heads towards next waypoint on the list
@@ -179,7 +157,6 @@ namespace Minigames.Fight
 
         public void Stop()
         {
-            target = transform.position;
             rb.velocity = Vector2.zero;
             _Path = null;
         }

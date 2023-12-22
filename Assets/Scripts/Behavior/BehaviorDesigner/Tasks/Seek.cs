@@ -25,10 +25,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         public override TaskStatus OnUpdate()
         {
             SetDestination(Target());
-            if (agent.path != null && agent.pathInvalid && !ignoreInvalidPath.Value)
-            {
-                return TaskStatus.Failure;
-            }
             if (HasArrived())
             {
                 if (stopOnTaskEnd.Value)
