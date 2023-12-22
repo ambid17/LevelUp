@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using Utils;
 
@@ -24,12 +25,6 @@ namespace Minigames.Fight
 
         private Upgrade _currentUpgrade;
         private EventService _eventService;
-        private Dictionary<int, float> tierCostMapping = new Dictionary<int, float>()
-        {
-            {1, 100},
-            {2, 200},
-            {3, 500},
-        };
 
         private void Start()
         {
@@ -65,7 +60,7 @@ namespace Minigames.Fight
 
             // convert from the tier (1,2,3...) to the cost
             int tierValue = (int)upgradeUI.tierCategory;
-            float tierCost = tierCostMapping[tierValue];
+            float tierCost = CurrencyManager.TierCostMapping[tierValue];
             upgradeButtonText.text = tierCost.ToCurrencyString();
 
             var upgradesInCategory = GameManager.EffectSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
@@ -93,7 +88,7 @@ namespace Minigames.Fight
         public void UnlockRandomUpgrade()
         {
             int tierValue = (int)upgradeUI.tierCategory;
-            float tierCost = tierCostMapping[tierValue];
+            float tierCost = CurrencyManager.TierCostMapping[tierValue];
             if (GameManager.CurrencyManager.TrySpendCurrency(tierCost))
             {
                 var upgrade = GameManager.EffectSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
@@ -119,7 +114,7 @@ namespace Minigames.Fight
             icon.gameObject.SetActive(_currentUpgrade.Icon != null);
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
-            upgradeButtonText.text = _currentUpgrade.GetCost(1).ToCurrencyString();
+            upgradeButtonText.text = CurrencyManager.GetUpgradeCost(_currentUpgrade).ToCurrencyString();
             descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
             bonusText.text = _currentUpgrade.negative.effect.GetDescription();
 
@@ -134,7 +129,7 @@ namespace Minigames.Fight
             {
                 bool hasPurchasesLeft = _currentUpgrade.AmountOwned < _currentUpgrade.MaxAmountOwned ||
                                         _currentUpgrade.MaxAmountOwned == 0;
-                bool canAfford = GameManager.CurrencyManager.BankedDna > _currentUpgrade.GetCost(1);
+                bool canAfford = GameManager.CurrencyManager.BankedDna > CurrencyManager.GetUpgradeCost(_currentUpgrade);
                 upgradeButton.interactable = canAfford && hasPurchasesLeft;
                 if (!hasPurchasesLeft)
                 {
@@ -147,7 +142,7 @@ namespace Minigames.Fight
 
         public void BuyUpgrade()
         {
-            if (GameManager.CurrencyManager.TrySpendCurrency(_currentUpgrade.GetCost(1)))
+            if (GameManager.CurrencyManager.TrySpendCurrency(CurrencyManager.GetUpgradeCost(_currentUpgrade)))
             {
                 _currentUpgrade.BuyUpgrade();
                 OnUpgradeSelectedForUpgrade();
@@ -176,7 +171,7 @@ namespace Minigames.Fight
             resourcesText.gameObject.SetActive(true);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Resource costs:");
-            foreach(var cost in _currentUpgrade.resourceCosts)
+            foreach(var cost in CurrencyManager.GetUpgradeResourceCosts(_currentUpgrade))
             {
                 stringBuilder.AppendLine($"{cost.Key} : {cost.Value}");
             }
