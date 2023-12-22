@@ -47,7 +47,7 @@ namespace Minigames.Fight
 
         public virtual void OverrideStats(EffectOverrides overrides)
         {
-
+            throw new NotImplementedException();
         }
 
         public virtual void OnCraft(Entity target)
