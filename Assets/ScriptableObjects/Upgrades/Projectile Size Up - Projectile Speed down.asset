@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
-  m_Name: RP-T1-bigger bullet
+  m_Name: Projectile Size Up - Projectile Speed down
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Projectile Size Up - Projectile Speed down
   Icon: {fileID: 0}
   IsUnlocked: 0
   AmountOwned: 0
   MaxAmountOwned: 0
   IsCrafted: 0
-  UpgradeCategory: 0
-  EffectCategory: 0
-  TierCategory: 0
+  UpgradeCategory: 2
+  EffectCategory: 3
+  TierCategory: 1
   positive:
-    effect: {fileID: 0}
+    effect: {fileID: 11400000, guid: 16c5bf9255205b44495166d02385e36a, type: 2}
   negative:
-    effect: {fileID: 0}
+    effect: {fileID: 11400000, guid: ec257b75c41529a44b9d0d197eb3490a, type: 2}

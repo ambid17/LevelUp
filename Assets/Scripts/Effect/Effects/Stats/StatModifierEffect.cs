@@ -21,7 +21,6 @@ namespace Minigames.Fight
         [Tooltip("For Additive effects, 1 is 100%, 1.1 is 110%")]
         public float perStack;
         public virtual StatImpactType statImpactType { get; protected set; }
-        public virtual StatImpactType impactCalculationType { get; protected set; }
 
         /// <summary>
         /// Handles how much a stat is impacted by an effect
@@ -34,11 +33,11 @@ namespace Minigames.Fight
         {
             get
             {
-                if(impactCalculationType == StatImpactType.Flat || impactCalculationType == StatImpactType.Additive)
+                if(statImpactType == StatImpactType.Flat || statImpactType == StatImpactType.Additive)
                 {
                     return perStack * _amountOwned;
                 }
-                else if(impactCalculationType == StatImpactType.Compounding)
+                else if(statImpactType == StatImpactType.Compounding)
                 {
                     return Mathf.Pow(perStack, _amountOwned);
                 }
@@ -71,11 +70,11 @@ namespace Minigames.Fight
 
         public override float ImpactStat(float stat)
         {
-            if (statImpactType == StatImpactType.Additive)
+            if (statImpactType == StatImpactType.Flat)
             {
                 return stat + Impact;
             }
-            else if (statImpactType == StatImpactType.Compounding)
+            else if (statImpactType == StatImpactType.Compounding || statImpactType == StatImpactType.Additive)
             {
                 return stat * Impact;
             }

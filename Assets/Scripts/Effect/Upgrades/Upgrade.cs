@@ -102,8 +102,17 @@ namespace Minigames.Fight
         }
     }
 
+    [Serializable]
     public class EffectOverrides
     {
-        public float impactPerStat;
+        public float impactPerStack;
+        public StatImpactType impactType;
+
+        [Header("Stats/On hit effects")]
+        public float applicationChance;
+
+        [Header("Status effects only")]
+        public float duration;
+        public float tickRate;
     }
 }
