@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
   m_Name: Fire Rate Up - Damage Down
   m_EditorClassIdentifier: 
-  Name: 
+  Name: + Fire Rate, - Damage
   Icon: {fileID: 0}
   IsUnlocked: 0
   AmountOwned: 0
   MaxAmountOwned: 0
   IsCrafted: 0
-  UpgradeCategory: 0
-  EffectCategory: 0
-  TierCategory: 0
+  UpgradeCategory: 2
+  EffectCategory: 3
+  TierCategory: 2
   positive:
     effect: {fileID: 0}
     overrides:

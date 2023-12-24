@@ -11,7 +11,14 @@ namespace Minigames.Fight
     {
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return entity.Stats.combatStats.projectileWeaponStats.ammoRegenRate;
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                return entity.Stats.combatStats.projectileWeaponStats.ammoRegenRate;
+            }
+            else
+            {
+                return entity.Stats.combatStats.meleeWeaponStats.ammoRegenRate;
+            }
         }
     }
 }

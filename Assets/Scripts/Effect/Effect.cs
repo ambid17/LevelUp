@@ -45,7 +45,7 @@ namespace Minigames.Fight
             _effectCategory = effectCategory;
         }
 
-        public virtual void OverrideStats(EffectOverrides overrides)
+        public virtual void ApplyOverrides(EffectOverrides overrides)
         {
             throw new NotImplementedException();
         }

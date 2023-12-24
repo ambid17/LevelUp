@@ -97,8 +97,8 @@ namespace Minigames.Fight
         public void Craft(Upgrade upgrade)
         {
             effect.GiveUpgradeInfo(upgrade.AmountOwned, upgrade.UpgradeCategory, upgrade.EffectCategory);
+            effect.ApplyOverrides(overrides);
             effect.OnCraft(GameManager.PlayerEntity);
-            effect.OverrideStats(overrides);
         }
     }
 

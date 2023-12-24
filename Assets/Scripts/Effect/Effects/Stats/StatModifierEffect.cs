@@ -18,8 +18,8 @@ namespace Minigames.Fight
     {
         [Header("Stat Modifier Specific")]
 
-        [Tooltip("For Additive effects, 1 is 100%, 1.1 is 110%")]
-        public float perStack;
+        [Tooltip("For Additive/Compounding effects, 1 is 100%, 1.1 is 110%")]
+        public float impactPerStack;
         public virtual StatImpactType statImpactType { get; protected set; }
 
         /// <summary>
@@ -35,15 +35,15 @@ namespace Minigames.Fight
             {
                 if(statImpactType == StatImpactType.Flat || statImpactType == StatImpactType.Additive)
                 {
-                    return perStack * _amountOwned;
+                    return impactPerStack * _amountOwned;
                 }
                 else if(statImpactType == StatImpactType.Compounding)
                 {
-                    return Mathf.Pow(perStack, _amountOwned);
+                    return Mathf.Pow(impactPerStack, _amountOwned);
                 }
                 else
                 {
-                    return perStack;
+                    return impactPerStack;
                 }
             }
         }
@@ -52,6 +52,11 @@ namespace Minigames.Fight
         public override string GetDescription()
         {
             return string.Format(_description, Impact);
+        }
+
+        public override void ApplyOverrides(EffectOverrides overrides)
+        {
+            impactPerStack = overrides.impactPerStack;
         }
 
         public override void OnCraft(Entity entity)

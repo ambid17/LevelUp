@@ -8,7 +8,7 @@ namespace Minigames.Fight
 {
     [CreateAssetMenu(fileName = "BaseSpeedEffect", menuName = "ScriptableObjects/Fight/Effects/BaseSpeedEffect", order = 1)]
     [Serializable]
-    public class BaseSpeedEffect : StatModifierEffect
+    public class MoveSpeedEffect : StatModifierEffect
     {
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
