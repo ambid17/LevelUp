@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "EffectSettings", menuName = "ScriptableObjects/Fight/EffectSettings", order = 1)]
+    [CreateAssetMenu(fileName = "UpgradeSettings", menuName = "ScriptableObjects/Fight/UpgradeSettings", order = 1)]
     [Serializable]
-    public class EffectSettings : ScriptableObject
+    public class UpgradeSettings : ScriptableObject
     {
         [Header("Set in Editor")] public List<Upgrade> AllUpgrades;
 
@@ -83,6 +84,23 @@ namespace Minigames.Fight
             }
 
             return lockedUpgrades[0];
+        }
+
+        [ContextMenu("Populate Upgrades")]
+        public void FindAndPopulateUpgrades()
+        {
+            AllUpgrades = new();
+
+            var upgradeGuids = AssetDatabase.FindAssets("t:scriptableobject", new[] { "Assets/ScriptableObjects/Upgrades" });
+
+            foreach (var guid in upgradeGuids)
+            {
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                var upgrade = AssetDatabase.LoadAssetAtPath<Upgrade>(assetPath);
+                AllUpgrades.Add(upgrade);
+            }
+
+            EditorUtility.SetDirty(this);
         }
     }
 }

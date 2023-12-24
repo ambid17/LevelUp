@@ -9,7 +9,7 @@ using Utils;
 public class Platform : Singleton<Platform>
 {
     [SerializeField] private ProgressSettings progressSettings;
-    [SerializeField] private EffectSettings effectSettings;
+    [SerializeField] private UpgradeSettings effectSettings;
     public static ProgressSettings ProgressSettings => Instance.progressSettings;
     
     public static bool ShouldSave = true;

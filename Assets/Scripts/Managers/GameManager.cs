@@ -16,7 +16,7 @@ namespace Minigames.Fight
         [SerializeField] private RoomManager roomManager;
         [SerializeField] private ShadowData shadowData;
         [SerializeField] public ProgressSettings progressSettings;
-        [SerializeField] public EffectSettings effectSettings;
+        [SerializeField] public UpgradeSettings effectSettings;
         [SerializeField] private Camera minimapCameraPrefab;
         [SerializeField] private EnemyObjectPool enemyObjectPoolPrefab;
         private Camera _playerCamera;
@@ -31,7 +31,7 @@ namespace Minigames.Fight
         public static RoomManager RoomManager => Instance.roomManager;
         public static ShadowData ShadowData => Instance.shadowData;
         public static ProgressSettings ProgressSettings => Instance.progressSettings;
-        public static EffectSettings EffectSettings => Instance.effectSettings;
+        public static UpgradeSettings EffectSettings => Instance.effectSettings;
         public static Camera PlayerCamera => Instance._playerCamera;
         public static Camera MinimapCamera => Instance._minimapCamera;
         public static EnemyObjectPool EnemyObjectPool => Instance._enemyObjectPool;
