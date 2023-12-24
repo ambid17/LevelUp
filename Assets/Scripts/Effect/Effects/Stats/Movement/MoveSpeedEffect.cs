@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "BaseSpeedEffect", menuName = "ScriptableObjects/Fight/Effects/BaseSpeedEffect", order = 1)]
+    [CreateAssetMenu(fileName = "MoveSpeedEffect", menuName = "ScriptableObjects/Effects/MoveSpeedEffect", order = 1)]
     [Serializable]
     public class MoveSpeedEffect : StatModifierEffect
     {

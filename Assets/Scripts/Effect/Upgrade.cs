@@ -29,7 +29,7 @@ namespace Minigames.Fight
         Tier3
     }
 
-    [CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/Fight/Upgrade", order = 1)]
+    [CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/Upgrade", order = 1)]
     [Serializable]
     public class Upgrade : ScriptableObject
     {

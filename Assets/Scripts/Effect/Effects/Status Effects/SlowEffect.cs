@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "SlowEffect", menuName = "ScriptableObjects/Fight/SlowEffect", order = 1)]
+    [CreateAssetMenu(fileName = "SlowEffect", menuName = "ScriptableObjects/Effects/SlowEffect", order = 1)]
     [Serializable]
     public class SlowEffect : Effect, IStatusEffect
     {

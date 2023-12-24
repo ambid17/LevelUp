@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "BaseDamageEffect", menuName = "ScriptableObjects/Fight/Effects/BaseDamageEffect", order = 1)]
+    [CreateAssetMenu(fileName = "BaseDamageEffect", menuName = "ScriptableObjects/Effects/BaseDamageEffect", order = 1)]
     [Serializable]
     public class BaseDamageEffect : StatModifierEffect
     {

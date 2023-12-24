@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "RandomRangedEffect", menuName = "ScriptableObjects/Fight/Effects/RandomRangedEffect", order = 1)]
+    [CreateAssetMenu(fileName = "RandomRangedEffect", menuName = "ScriptableObjects/Effects/RandomRangedEffect", order = 1)]
     [Serializable]
     public class RandomRangedEffect: StatModifierEffect
     {

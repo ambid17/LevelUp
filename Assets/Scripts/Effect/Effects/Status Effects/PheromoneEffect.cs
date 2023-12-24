@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "SlowEffect", menuName = "ScriptableObjects/Fight/PheromoneEffect", order = 1)]
+    [CreateAssetMenu(fileName = "SlowEffect", menuName = "ScriptableObjects/Effects/PheromoneEffect", order = 1)]
     [Serializable]
     public class PheromoneEffect : Effect, IStatusEffect
     {

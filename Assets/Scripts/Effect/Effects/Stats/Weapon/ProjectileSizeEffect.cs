@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "ProjectileSizeEffect", menuName = "ScriptableObjects/Fight/Effects/ProjectileSizeEffect", order = 1)]
+    [CreateAssetMenu(fileName = "ProjectileSizeEffect", menuName = "ScriptableObjects/Effects/ProjectileSizeEffect", order = 1)]
     [Serializable]
     public class ProjectileSizeEffect : StatModifierEffect
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "MagSizeEffect", menuName = "ScriptableObjects/Fight/Effects/MagSizeEffect", order = 1)]
+    [CreateAssetMenu(fileName = "MagSizeEffect", menuName = "ScriptableObjects/Effects/MagSizeEffect", order = 1)]
     [Serializable]
     public class MagSizeEffect : StatModifierEffect
     {

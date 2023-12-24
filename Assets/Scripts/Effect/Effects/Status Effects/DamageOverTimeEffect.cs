@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "DamageOverTimeEffect", menuName = "ScriptableObjects/Fight/DamageOverTimeEffect", order = 1)]
+    [CreateAssetMenu(fileName = "DamageOverTimeEffect", menuName = "ScriptableObjects/Effects/DamageOverTimeEffect", order = 1)]
     [Serializable]
     public class DamageOverTimeEffect : Effect, IStatusEffect
     {
