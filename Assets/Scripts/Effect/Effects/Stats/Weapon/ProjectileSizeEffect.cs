@@ -5,13 +5,20 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "ProjectileSizeEffect", menuName = "ScriptableObjects/Effects/ProjectileSizeEffect", order = 1)]
+    [CreateAssetMenu(fileName = "ProjectileSizeEffect", menuName = "ScriptableObjects/Effects/Weapon/ProjectileSizeEffect", order = 1)]
     [Serializable]
     public class ProjectileSizeEffect : StatModifierEffect
     {
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return entity.Stats.combatStats.projectileWeaponStats.projectileSize;
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                return entity.Stats.combatStats.projectileWeaponStats.projectileSize;
+            }
+            else
+            {
+                return entity.Stats.combatStats.meleeWeaponStats.projectileSize;
+            }
         }
     }
 }

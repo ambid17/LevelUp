@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "AmmoRegenRateEffect", menuName = "ScriptableObjects/Effects/AmmoRegenRateEffect", order = 1)]
+    [CreateAssetMenu(fileName = "AmmoRegenRateEffect", menuName = "ScriptableObjects/Effects/Weapon/AmmoRegenRateEffect", order = 1)]
     [Serializable]
     public class AmmoRegenRateEffect : StatModifierEffect
     {

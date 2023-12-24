@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "ProjectileSpeedEffect", menuName = "ScriptableObjects/Effects/Weapon/ProjectileSpeedEffect", order = 1)]
+    [CreateAssetMenu(fileName = "MaxAmmoEffect", menuName = "ScriptableObjects/Effects/Weapon/MaxAmmoEffect", order = 1)]
     [Serializable]
-    public class ProjectileSpeedEffect : StatModifierEffect
+    public class MaxAmmoEffect : StatModifierEffect
     {
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
             if (_upgradeCategory == UpgradeCategory.Range)
             {
-                return entity.Stats.combatStats.projectileWeaponStats.projectileMoveSpeed;
+                return entity.Stats.combatStats.projectileWeaponStats.maxAmmo;
             }
             else
             {
-                return entity.Stats.combatStats.meleeWeaponStats.projectileMoveSpeed;
+                return entity.Stats.combatStats.meleeWeaponStats.maxAmmo;
             }
         }
     }

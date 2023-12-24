@@ -5,13 +5,20 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "ProjectileSpreadEffect", menuName = "ScriptableObjects/Effects/ProjectileSpreadEffect", order = 1)]
+    [CreateAssetMenu(fileName = "ProjectileSpreadEffect", menuName = "ScriptableObjects/Effects/Weapon/ProjectileSpreadEffect", order = 1)]
     [Serializable]
     public class ProjectileSpreadEffect : StatModifierEffect
     {
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return entity.Stats.combatStats.projectileWeaponStats.projectileSpread;
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                return entity.Stats.combatStats.projectileWeaponStats.projectileSpread;
+            }
+            else
+            {
+                return entity.Stats.combatStats.meleeWeaponStats.projectileSpread;
+            }
         }
     }
 }

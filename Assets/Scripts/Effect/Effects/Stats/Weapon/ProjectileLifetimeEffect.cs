@@ -5,13 +5,20 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "ProjectileLifetimeEffect", menuName = "ScriptableObjects/Effects/ProjectileLifetimeEffect", order = 1)]
+    [CreateAssetMenu(fileName = "ProjectileLifetimeEffect", menuName = "ScriptableObjects/Effects/Weapon/ProjectileLifetimeEffect", order = 1)]
     [Serializable]
     public class ProjectileLifetimeEffect : StatModifierEffect
     {
         public override ModifiableStat GetStatToAffect(Entity entity)
         {
-            return entity.Stats.combatStats.projectileWeaponStats.projectileLifeTime;
+            if (_upgradeCategory == UpgradeCategory.Range)
+            {
+                return entity.Stats.combatStats.projectileWeaponStats.projectileLifeTime;
+            }
+            else
+            {
+                return entity.Stats.combatStats.meleeWeaponStats.projectileLifeTime;
+            }
         }
     }
 }
