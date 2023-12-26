@@ -118,14 +118,14 @@ namespace Minigames.Fight
 
                 Tilemap.SetTile(tilePos, GameManager.ProgressSettings.CurrentWorld.RoomSettings.wallTile);
             }
-            Vector2 min = new(xMin, yMin);
-            Vector2 max = new(xMax, yMax);
+            Vector2 min = new(xMin - 2, yMin -2);
+            Vector2 max = new(xMax +2, yMax + 2);
 
             Vector2 extents = (max - min) * .5f;
             Vector2 center = min + extents;
             _entranceBounds = new(center, extents * 2);
 
-            var gou = new GraphUpdateObject(MyCollider.bounds);
+            var gou = new GraphUpdateObject(_entranceBounds);
             AstarPath.active.UpdateGraphs(gou);
 
             _boss = GameManager.EnemyObjectPool.AllEnemies.First(b => b.room == this);
@@ -146,11 +146,13 @@ namespace Minigames.Fight
         {
             _bossDefeated = true;
             constructionChamber.gameObject.SetActive(true);
+            var gou = new GraphUpdateObject(constructionChamber.SpriteRenderer.bounds);
+            AstarPath.active.UpdateGraphs(gou);
             foreach (Vector3Int tilePos in _entrance.TilePositions)
             {
                 Tilemap.SetTile(tilePos, null);
             }
-            var gou = new GraphUpdateObject(_entranceBounds);
+            gou = new GraphUpdateObject(_entranceBounds);
             AstarPath.active.UpdateGraphs(gou);
             foreach (EntityBehaviorData enemy in _enemiesToReactivate)
             {
