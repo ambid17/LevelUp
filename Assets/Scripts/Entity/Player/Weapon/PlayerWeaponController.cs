@@ -42,6 +42,11 @@ namespace Minigames.Fight
             {
                 return;
             }
+            if (GameManager.PlayerEntity.IsControlled)
+            {
+                _currentArm.ReturnToIdle();
+                return;
+            }
             ControlArms();
             if (CanShoot())
             {
