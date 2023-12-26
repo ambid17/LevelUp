@@ -83,6 +83,7 @@ namespace Minigames.Fight
 
         private void StartPlayerPathing(AstarPath script)
         {
+            GameManager.CameraLerp.PlayCinematic(GameManager.PlayerEntity.transform);
             PlayerPathfindingMovementController pathfindingMovementController = GameManager.PlayerEntity.gameObject.AddComponent<PlayerPathfindingMovementController>();
             pathfindingMovementController.StartPath(playerEntryDestination.position, PlayerControlledActionType.BossRoomEntry);
             AstarPath.OnLatePostScan -= StartPlayerPathing;
@@ -90,6 +91,7 @@ namespace Minigames.Fight
 
         private void OnPlayerEntered(PlayerControlledActionFinishedEvent e)
         {
+            GameManager.CameraLerp.EndCinematic();
             if (e.ActionType != PlayerControlledActionType.BossRoomEntry)
             {
                 return;
@@ -106,11 +108,13 @@ namespace Minigames.Fight
             _boss.transform.position = bossOrigin.position;
             _boss.gameObject.SetActive(true);
             _hasActivated = true;
+            GameManager.CameraLerp.PlayCinematic(_boss.transform);
         }
         
         private void OnBossEntered()
         {
             GameManager.PlayerEntity.IsControlled = false;
+            GameManager.CameraLerp.EndCinematic();
         }
 
         private void OnBossDefeated()

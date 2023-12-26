@@ -28,6 +28,8 @@ namespace Minigames.Fight
         private Bounds _bounds = new();
         private Camera _camera;
         private bool _isTransitioning;
+        private bool _isCinematic;
+        private Transform _cinematicTarget;
 
 
         private void Start()
@@ -53,6 +55,12 @@ namespace Minigames.Fight
             if (_isTransitioning)
             {
                 target = GameManager.PlayerEntity.transform.position;
+                target.x = Mathf.Clamp(target.x, _bounds.min.x + (cameraViewWidth / 2), _bounds.max.x - (cameraViewWidth / 2));
+                target.y = Mathf.Clamp(target.y, _bounds.min.y + (cameraViewHeight / 2), _bounds.max.y - (cameraViewHeight / 2));
+            }
+            else if(_isCinematic)
+            {
+                target = _cinematicTarget.position;
                 target.x = Mathf.Clamp(target.x, _bounds.min.x + (cameraViewWidth / 2), _bounds.max.x - (cameraViewWidth / 2));
                 target.y = Mathf.Clamp(target.y, _bounds.min.y + (cameraViewHeight / 2), _bounds.max.y - (cameraViewHeight / 2));
             }
@@ -83,6 +91,18 @@ namespace Minigames.Fight
             StartCoroutine(MoveToNextRoom());
         }
 
+        public void PlayCinematic(Transform cinematicTarget)
+        {
+            StartCoroutine(RunCinematicWhenAvailable(cinematicTarget));
+        }
+
+        public void EndCinematic()
+        {
+            StopCoroutine(RunCinematicWhenAvailable(null));
+            _cinematicTarget = null;
+            _isCinematic = false;
+        }
+
         IEnumerator MoveToNextRoom()
         {
             _isTransitioning = true;
@@ -100,6 +120,13 @@ namespace Minigames.Fight
             }
             _camera.orthographicSize = startingOrthographicSize;
             _isTransitioning = false;
+        }
+
+        IEnumerator RunCinematicWhenAvailable(Transform cinematicTarget)
+        {
+            yield return new WaitUntil(() => !_isTransitioning);
+            _isCinematic = true;
+            _cinematicTarget = cinematicTarget;
         }
 
     }
