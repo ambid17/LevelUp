@@ -103,7 +103,7 @@ namespace Minigames.Fight
             }
             _boss = GameManager.EnemyObjectPool.AllEnemies.First(b => b.room == this);
             _boss.transform.parent = null;
-            _boss.transform.position = bossEntry.position;
+            _boss.transform.position = bossOrigin.position;
             _boss.gameObject.SetActive(true);
             _hasActivated = true;
         }
