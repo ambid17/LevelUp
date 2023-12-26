@@ -2,6 +2,7 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ namespace Minigames.Fight
         private EntityBehaviorData _boss;
         private bool _hasActivated = false;
         private bool _bossDefeated = false;
+        private List<EntityBehaviorData> _enemiesToReactivate = new();
 
         private void Start()
         {
@@ -62,7 +64,14 @@ namespace Minigames.Fight
         // Using initialize enemies for entire boss opening sequence, possibly rename to initialize room for clarity?
         protected override void InitializeEnemies()
         {
-            // TODO: disable all enemies to save performance
+            foreach (EntityBehaviorData enemy in GameManager.EnemyObjectPool.AllEnemies)
+            {
+                if (enemy.gameObject.activeInHierarchy)
+                {
+                    _enemiesToReactivate.Add(enemy);
+                    enemy.gameObject.SetActive(false);
+                }
+            }
             AstarPath.OnLatePostScan += StartPlayerPathing;
 
             GridGraph graph = AstarPath.active.graphs.First(g => g.graphIndex == PhysicsUtils.playerGraph) as GridGraph;
@@ -114,6 +123,11 @@ namespace Minigames.Fight
                 var gou = new GraphUpdateObject(MyCollider.bounds);
                 AstarPath.active.UpdateGraphs(gou);
             }
+            foreach (EntityBehaviorData enemy in _enemiesToReactivate)
+            {
+                enemy.gameObject.SetActive(true);
+            }
+            _enemiesToReactivate.Clear();
         }
     }
 }
