@@ -41,6 +41,7 @@ namespace Minigames.Fight
         private bool _hasActivated = false;
         private bool _bossDefeated = false;
         private List<EntityBehaviorData> _enemiesToReactivate = new();
+        private Bounds _entranceBounds;
 
         private void Start()
         {
@@ -72,21 +73,15 @@ namespace Minigames.Fight
                     enemy.gameObject.SetActive(false);
                 }
             }
-            AstarPath.OnLatePostScan += StartPlayerPathing;
 
-            GridGraph graph = AstarPath.active.graphs.First(g => g.graphIndex == PhysicsUtils.playerGraph) as GridGraph;
-            graph.center = MyCollider.bounds.center;
-            graph.SetDimensions(Tilemap.cellBounds.size.x * 4, Tilemap.cellBounds.size.y * 4, .25f);
-            graph.Scan();
-
+            StartPlayerPathing();
         }
 
-        private void StartPlayerPathing(AstarPath script)
+        private void StartPlayerPathing()
         {
             GameManager.CameraLerp.PlayCinematic(GameManager.PlayerEntity.transform);
             PlayerPathfindingMovementController pathfindingMovementController = GameManager.PlayerEntity.gameObject.AddComponent<PlayerPathfindingMovementController>();
             pathfindingMovementController.StartPath(playerEntryDestination.position, PlayerControlledActionType.BossRoomEntry);
-            AstarPath.OnLatePostScan -= StartPlayerPathing;
         }
 
         private void OnPlayerEntered(PlayerControlledActionFinishedEvent e)
@@ -97,12 +92,42 @@ namespace Minigames.Fight
                 return;
             }
             _entrance = roomConnections.First(r => r.HasConnection);
+            float xMin = float.MaxValue;
+            float yMin = float.MaxValue;
+            float xMax = float.MinValue;
+            float yMax = float.MinValue;
             foreach (Vector3Int tilePos in _entrance.TilePositions)
             {
+                Vector3 worldPos = Tilemap.CellToWorld(tilePos);
+                if (worldPos.x < xMin)
+                {
+                    xMin = worldPos.x;
+                }
+                if (worldPos.y < yMin)
+                {
+                    yMin = worldPos.y;
+                }
+                if (worldPos.x > xMax)
+                {
+                    xMax = worldPos.x;
+                }
+                if (worldPos.y > yMax)
+                {
+                    yMax = worldPos.y;
+                }
+
                 Tilemap.SetTile(tilePos, GameManager.ProgressSettings.CurrentWorld.RoomSettings.wallTile);
-                var gou = new GraphUpdateObject(MyCollider.bounds);
-                AstarPath.active.UpdateGraphs(gou);
             }
+            Vector2 min = new(xMin, yMin);
+            Vector2 max = new(xMax, yMax);
+
+            Vector2 extents = (max - min) * .5f;
+            Vector2 center = min + extents;
+            _entranceBounds = new(center, extents * 2);
+
+            var gou = new GraphUpdateObject(MyCollider.bounds);
+            AstarPath.active.UpdateGraphs(gou);
+
             _boss = GameManager.EnemyObjectPool.AllEnemies.First(b => b.room == this);
             _boss.transform.parent = null;
             _boss.transform.position = bossOrigin.position;
@@ -124,9 +149,9 @@ namespace Minigames.Fight
             foreach (Vector3Int tilePos in _entrance.TilePositions)
             {
                 Tilemap.SetTile(tilePos, null);
-                var gou = new GraphUpdateObject(MyCollider.bounds);
-                AstarPath.active.UpdateGraphs(gou);
             }
+            var gou = new GraphUpdateObject(_entranceBounds);
+            AstarPath.active.UpdateGraphs(gou);
             foreach (EntityBehaviorData enemy in _enemiesToReactivate)
             {
                 enemy.gameObject.SetActive(true);

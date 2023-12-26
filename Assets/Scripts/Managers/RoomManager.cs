@@ -1,9 +1,11 @@
 using Cinemachine;
+using FunkyCode.SuperTilemapEditorSupport.Light.Shadow;
 using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Minigames.Fight
 {
@@ -170,6 +172,8 @@ namespace Minigames.Fight
                 GridGraph graph = navGraph as GridGraph;
                 if (graph.graphIndex == PhysicsUtils.playerGraph)
                 {
+                    graph.center = _bossRoom.MyCollider.bounds.center;
+                    graph.SetDimensions(_bossRoom.Tilemap.cellBounds.size.x * 4, _bossRoom.Tilemap.cellBounds.size.y * 4, .25f);
                     continue;
                 }
                 graph.center = (min + max) / 2;
@@ -177,6 +181,7 @@ namespace Minigames.Fight
             }
 
             StartCoroutine(RecalculateGraph());
+            
 
             GameManager.PlayerEntity.transform.position = _startRoom.Tilemap.cellBounds.center;
             GameManager.CameraLerp.transform.position = new Vector3(_startRoom.Tilemap.cellBounds.center.x, _startRoom.Tilemap.cellBounds.center.y, -10);
