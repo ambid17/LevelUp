@@ -16,7 +16,8 @@ namespace Minigames.Fight
         private float baseValue;
         public float BaseValue => baseValue;
 
-        private float calculated;
+        [field: SerializeField, ReadOnlyField]
+        private float calculated { get; set; }
         [JsonIgnore]
         public float Calculated
         {
@@ -26,6 +27,9 @@ namespace Minigames.Fight
                 return calculated;
             }
         }
+
+        [property: SerializeField]
+        public float ViewCalculated => calculated;
 
         public List<StatModifierEffect> flatEffects;
         public List<StatModifierEffect> additiveEffects;
