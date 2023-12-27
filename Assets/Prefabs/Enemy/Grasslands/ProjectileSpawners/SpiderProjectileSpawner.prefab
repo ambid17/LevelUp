@@ -251,11 +251,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d52d390530df6e4c8af26d55431d69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySpriteRenderer: {fileID: 7036862249472715835}
   anim: {fileID: 8166612580751293349}
   offSet: {fileID: 1082357194814126155}
-  projectilePrefab: {fileID: 3866094613508053641, guid: 4db1821d7cd4b2843bc06ba1bff6d532, type: 3}
+  projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
   projectileSprite: {fileID: 21300000, guid: faffcdfe2b2f0564291a1dc3b95fd35a, type: 3}
+  myAnimation: {fileID: 0}
+  startAngle: 180
 --- !u!114 &475389020540241065
 MonoBehaviour:
   m_ObjectHideFlags: 0
