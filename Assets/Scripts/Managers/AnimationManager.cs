@@ -108,6 +108,7 @@ public class AnimationManager : MonoBehaviour
         }
         OverrideAnimation(name, 0);
     }
+
     private IEnumerator PlayQuedAnimation(AnimationName name)
     {
         bufferedAnimation = name;
@@ -140,6 +141,11 @@ public class AnimationManager : MonoBehaviour
         }
         OverrideAnimation(defaultAnimation, 0);
         callback.Invoke();
+        _isStunned = false;
+    }
+
+    public void EndStun()
+    {
         _isStunned = false;
     }
 }

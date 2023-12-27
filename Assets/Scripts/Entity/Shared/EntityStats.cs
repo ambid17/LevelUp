@@ -69,6 +69,11 @@ namespace Minigames.Fight
             projectileWeaponStats.Load(stats.projectileWeaponStats);
         }
 
+        public void ResetHp()
+        {
+            currentHp = maxHp.Calculated;
+        }
+
         public void Init()
         {
             meleeWeaponStats.Init();

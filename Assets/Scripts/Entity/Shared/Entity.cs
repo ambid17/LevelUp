@@ -70,14 +70,19 @@ namespace Minigames.Fight
 
         public virtual void TakeHit(float damage, Entity hitter)
         {
+            if (IsDead)
+            {
+                return;
+            }
             Stats.combatStats.TakeDamage(damage);
-
-            VisualController.StartDamageFx(damage);
 
             if (IsDead)
             {
                 Die(hitter);
+                return;
             }
+
+            VisualController.StartDamageFx(damage);
         }
 
         public void DealDamage(Entity target, WeaponStats weaponStats)
