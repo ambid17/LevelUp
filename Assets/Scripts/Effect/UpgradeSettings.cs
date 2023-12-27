@@ -42,8 +42,7 @@ namespace Minigames.Fight
 
         public void LoadSavedUpgrade(UpgradeModel upgradeModel)
         {
-            Type upgradeType = upgradeModel.Type;
-            var upgradeToLoad = AllUpgrades.FirstOrDefault(e => e.GetType() == upgradeType);
+            var upgradeToLoad = AllUpgrades.FirstOrDefault(upgrade => upgrade.Name == upgradeModel.Name);
 
             if (upgradeToLoad != null)
             {
@@ -58,7 +57,7 @@ namespace Minigames.Fight
             }
             else
             {
-                Debug.LogError($"No upgrade found of type: {upgradeType}");
+                Debug.LogError($"No upgrade found with name: {upgradeModel.Name}");
             }
         }
 

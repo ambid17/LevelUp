@@ -7,7 +7,6 @@ namespace Minigames.Fight
     [Serializable]
     public class UpgradeModel
     {
-        public Type Type;
         public string Name;
         public int AmountOwned;
         public bool IsUnlocked;

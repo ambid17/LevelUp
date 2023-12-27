@@ -52,13 +52,5 @@ namespace Minigames.Fight
             _playerCamera = _cameraLerp.GetComponent<Camera>();
             _minimapCamera = Instantiate(minimapCameraPrefab);
         }
-
-#if UNITY_EDITOR
-        private void OnApplicationQuit()
-        {
-            progressSettings.SetDefaults();
-            effectSettings.SetDefaults();
-        }
-#endif
     }
 }

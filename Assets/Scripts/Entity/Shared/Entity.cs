@@ -70,6 +70,7 @@ namespace Minigames.Fight
 
         public virtual void TakeHit(float damage, Entity hitter)
         {
+            Debug.Log($"{gameObject.name} took damage from {hitter.name}, damage: {damage}");
             Stats.combatStats.TakeDamage(damage);
 
             VisualController.StartDamageFx(damage);
