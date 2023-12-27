@@ -87,6 +87,7 @@ namespace Minigames.Fight
         {
             currentDnaText.text = GameManager.ProgressSettings.Dna.ToString();
             bankedDnaText.text = GameManager.ProgressSettings.BankedDna.ToString();
+            StartCoroutine(RebuildUI());
         }
     }
 }
