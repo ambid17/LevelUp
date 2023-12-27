@@ -1,12 +1,9 @@
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
@@ -314,6 +311,7 @@ namespace Minigames.Fight
         }
 
         public List<StatModifierEffect> flatEffects;
+        public List<StatModifierEffect> additiveEffects;
         public List<StatModifierEffect> compoundingEffects;
         [JsonIgnore]
         public List<StatModifierEffect> singleUseEffects;
@@ -335,7 +333,12 @@ namespace Minigames.Fight
                 flatEffects = new();
             }
 
-            if(compoundingEffects == null)
+            if (additiveEffects == null)
+            {
+                additiveEffects = new();
+            }
+
+            if (compoundingEffects == null)
             {
                 compoundingEffects = new();
             }
@@ -360,18 +363,19 @@ namespace Minigames.Fight
         /// <param name="effect"></param>
         public void AddOrUpdateStatEffect(StatModifierEffect effect)
         {
-            if (effect.statImpactType == StatImpactType.Additive && !flatEffects.Contains(effect))
+            if (effect.statImpactType == StatImpactType.Flat && !flatEffects.Contains(effect))
             {
                 flatEffects.Add(effect);
+            }
+            else if (effect.statImpactType == StatImpactType.Additive && !additiveEffects.Contains(effect))
+            {
+                additiveEffects.Add(effect);
             }
             else if(effect.statImpactType == StatImpactType.Compounding && !compoundingEffects.Contains(effect))
             {
                 compoundingEffects.Add(effect);
             }
-            else
-            {
-                overrideEffect = effect;
-            }
+
             RecalculateStat();
         }
 
@@ -408,6 +412,11 @@ namespace Minigames.Fight
             calculated = baseValue;
 
             foreach (var effect in flatEffects)
+            {
+                calculated = effect.ImpactStat(calculated);
+            }
+
+            foreach (var effect in additiveEffects)
             {
                 calculated = effect.ImpactStat(calculated);
             }
