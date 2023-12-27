@@ -57,6 +57,7 @@ namespace Minigames.Fight
         public override void ApplyOverrides(EffectOverrides overrides)
         {
             impactPerStack = overrides.impactPerStack;
+            statImpactType = overrides.impactType;
         }
 
         public override void OnCraft(Entity entity)
