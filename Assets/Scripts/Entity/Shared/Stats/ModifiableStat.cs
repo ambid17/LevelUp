@@ -28,9 +28,6 @@ namespace Minigames.Fight
             }
         }
 
-        [property: SerializeField]
-        public float ViewCalculated => calculated;
-
         public List<StatModifierEffect> flatEffects;
         public List<StatModifierEffect> additiveEffects;
         public List<StatModifierEffect> compoundingEffects;
