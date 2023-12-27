@@ -17,7 +17,7 @@ namespace Minigames.Fight
         public static void Save()
         {
             // grab values from settings
-            List<Upgrade> upgrades = GameManager.EffectSettings.AllUpgrades;
+            List<Upgrade> upgrades = GameManager.UpgradeSettings.AllUpgrades;
             UpgradeContainer data = new UpgradeContainer(upgrades);
         
             // write to file

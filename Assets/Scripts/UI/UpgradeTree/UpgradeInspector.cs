@@ -63,7 +63,7 @@ namespace Minigames.Fight
             float tierCost = CurrencyManager.TierCostMapping[tierValue];
             upgradeButtonText.text = tierCost.ToCurrencyString();
 
-            var upgradesInCategory = GameManager.EffectSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
+            var upgradesInCategory = GameManager.UpgradeSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
             var unlockedInCategory = upgradesInCategory.Where(u => u.IsUnlocked).ToList();
             descriptionText.text = $"You have unlocked {unlockedInCategory.Count} / {upgradesInCategory.Count} upgrades in this category";
 
@@ -91,7 +91,7 @@ namespace Minigames.Fight
             float tierCost = CurrencyManager.TierCostMapping[tierValue];
             if (GameManager.CurrencyManager.TrySpendCurrency(tierCost))
             {
-                var upgrade = GameManager.EffectSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
+                var upgrade = GameManager.UpgradeSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
                 upgrade.IsUnlocked = true;
 
                 // Update the UI with the new state
