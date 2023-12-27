@@ -49,15 +49,21 @@ namespace Minigames.Fight
                 upgradeToLoad.IsUnlocked = upgradeModel.IsUnlocked;
                 upgradeToLoad.AmountOwned = upgradeModel.AmountOwned;
                 upgradeToLoad.IsCrafted = upgradeModel.IsCrafted;
-
-                if (upgradeToLoad.IsCrafted)
-                {
-                    upgradeToLoad.Craft();
-                }
             }
             else
             {
                 Debug.LogError($"No upgrade found with name: {upgradeModel.Name}");
+            }
+        }
+
+        public void CraftSavedEffects() 
+        {
+            foreach(var upgrade in AllUpgrades)
+            {
+                if(upgrade.IsCrafted)
+                {
+                    upgrade.Craft();
+                }
             }
         }
 

@@ -51,6 +51,9 @@ namespace Minigames.Fight
             _cameraLerp = Instantiate(cameraLerpPrefab);
             _playerCamera = _cameraLerp.GetComponent<Camera>();
             _minimapCamera = Instantiate(minimapCameraPrefab);
+
+            // The effects need to know the player exists as they apply to the player's stats, so this needs to happen after the player is created
+            UpgradeSettings.CraftSavedEffects();
         }
     }
 }
