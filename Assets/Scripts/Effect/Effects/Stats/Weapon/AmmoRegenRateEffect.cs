@@ -20,5 +20,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.ammoRegenRate;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Ammo Regen Rate";
+        }
     }
 }

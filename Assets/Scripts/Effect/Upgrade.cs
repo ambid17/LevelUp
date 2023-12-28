@@ -52,6 +52,12 @@ namespace Minigames.Fight
         public EffectUpgradeContainer positive;
         public EffectUpgradeContainer negative;
 
+        public void Init()
+        {
+            positive.Init();
+            negative.Init();
+        }
+
         public virtual void Unlock()
         {
             IsUnlocked = true;
@@ -94,10 +100,25 @@ namespace Minigames.Fight
     {
         public Effect effect;
         public EffectOverrides overrides;
+
+        public void Init()
+        {
+            if(effect == null)
+            {
+                return;
+            }
+            // TODO: effects are being overridden incorrectly
+            //effect = ScriptableObject.CreateInstance<Effect>();
+            effect.ApplyOverrides(overrides);
+        }
+
         public void Craft(Upgrade upgrade)
         {
+            if (effect == null)
+            {
+                return;
+            }
             effect.GiveUpgradeInfo(upgrade.AmountOwned, upgrade.UpgradeCategory, upgrade.EffectCategory);
-            effect.ApplyOverrides(overrides);
             effect.OnCraft(GameManager.PlayerEntity);
         }
     }

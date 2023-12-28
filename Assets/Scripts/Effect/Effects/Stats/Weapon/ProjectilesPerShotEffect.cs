@@ -20,5 +20,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.projectilesPerShot;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Projectiles Per Shot";
+        }
     }
 }

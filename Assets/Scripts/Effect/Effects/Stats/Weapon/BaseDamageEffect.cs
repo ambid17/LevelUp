@@ -19,5 +19,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.baseDamage;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Base Damage";
+        }
     }
 }

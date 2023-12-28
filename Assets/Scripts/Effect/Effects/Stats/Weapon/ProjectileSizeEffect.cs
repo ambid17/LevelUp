@@ -20,5 +20,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.projectileSize;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Projectile Size";
+        }
     }
 }

@@ -8,7 +8,6 @@ namespace Minigames.Fight
     public enum WeaponStat
     {
         baseDamage,
-        onHitDamage,
         projectileMoveSpeed,
         projectileLifeTime,
         rateOfFire,
@@ -73,8 +72,6 @@ namespace Minigames.Fight
             {
                 case WeaponStat.baseDamage:
                     return weaponStats.baseDamage;
-                case WeaponStat.onHitDamage:
-                    return weaponStats.onHitDamage;
                 case WeaponStat.projectileMoveSpeed:
                     return weaponStats.projectileMoveSpeed;
                 case WeaponStat.projectileLifeTime:
@@ -121,6 +118,86 @@ namespace Minigames.Fight
             }
 
             return stat;
+        }
+
+        private readonly string _description = "{0}% chance for {1}{2} {3} per stack {4}";
+        public override string GetDescription()
+        {
+            string chance = $"{percentChance * 100}";
+            string raisesOrLowers = "+";
+
+            switch (statImpactType)
+            {
+                case StatImpactType.Flat:
+                    if (impactPerStack < 0)
+                    {
+                        raisesOrLowers = "-";
+                    }
+                    break;
+                case StatImpactType.Additive:
+                case StatImpactType.Compounding:
+                    if (impactPerStack < 1)
+                    {
+                        raisesOrLowers = "-";
+                    }
+                    break;
+                default:
+                    raisesOrLowers = "+";
+                    break;
+            }
+
+            string impactString = impactPerStack.ToString();
+            if (statImpactType == StatImpactType.Additive || statImpactType == StatImpactType.Compounding)
+            {
+                // convert from 1.1 -> 0.1 -> 10%
+                // or from 0.9 -> -10%
+                float impact = impactPerStack;
+                if (impactPerStack > 1)
+                {
+                    impact -= 1;
+                }
+                else
+                {
+                    impact = Mathf.Abs(1 - impact);
+                }
+                impactString = $"{impact * 100}%";
+            }
+
+            string impactTypeString = string.Empty;
+            if (statImpactType == StatImpactType.Additive || statImpactType == StatImpactType.Compounding)
+            {
+                impactTypeString = statImpactType.ToString();
+            }
+            return string.Format(_description, chance, raisesOrLowers, impactString, GetStatName(), impactTypeString);
+        }
+
+        public override string GetStatName()
+        {
+            switch (weaponStat)
+            {
+                case WeaponStat.baseDamage:
+                    return "Base Damage";
+                case WeaponStat.projectileMoveSpeed:
+                    return "Projectile Move Speed";
+                case WeaponStat.projectileLifeTime:
+                    return "Projectile Lifetime";
+                case WeaponStat.rateOfFire:
+                    return "Rate Of Fire";
+                case WeaponStat.maxAmmo:
+                    return "Max Ammo";
+                case WeaponStat.ammoRegenRate:
+                    return "Ammo Regen Rate";
+                case WeaponStat.projectilesPerShot:
+                    return "Projectiles Per Shot";
+                case WeaponStat.projectileSpread:
+                    return "Projectile Spread";
+                case WeaponStat.projectileSize:
+                    return "Projectile Size";
+                case WeaponStat.projectilePenetration:
+                    return "Projectile Penetration";
+                default:
+                    return null;
+            }
         }
     }
 }

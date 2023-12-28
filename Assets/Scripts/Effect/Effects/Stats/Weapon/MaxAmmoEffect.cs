@@ -20,5 +20,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.maxAmmo;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Max Ammo";
+        }
     }
 }

@@ -60,6 +60,7 @@ namespace Minigames.Fight
         {
             foreach(var upgrade in AllUpgrades)
             {
+                upgrade.Init();
                 if(upgrade.IsCrafted)
                 {
                     upgrade.Craft();

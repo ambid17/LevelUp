@@ -115,8 +115,8 @@ namespace Minigames.Fight
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
             upgradeButtonText.text = CurrencyManager.GetUpgradeCost(_currentUpgrade).ToCurrencyString();
-            descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
-            bonusText.text = _currentUpgrade.negative.effect.GetDescription();
+            descriptionText.text = _currentUpgrade.positive.effect != null ? _currentUpgrade.positive.effect.GetDescription() : string.Empty;
+            bonusText.text = _currentUpgrade.negative.effect != null ? _currentUpgrade.negative.effect.GetDescription() : string.Empty;
 
             resourcesText.gameObject.SetActive(false);
 

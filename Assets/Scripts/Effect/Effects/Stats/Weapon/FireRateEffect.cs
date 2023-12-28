@@ -19,5 +19,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.rateOfFire;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Fire Rate";
+        }
     }
 }

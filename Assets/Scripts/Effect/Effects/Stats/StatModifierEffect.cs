@@ -33,11 +33,11 @@ namespace Minigames.Fight
         {
             get
             {
-                if(statImpactType == StatImpactType.Flat || statImpactType == StatImpactType.Additive)
+                if (statImpactType == StatImpactType.Flat || statImpactType == StatImpactType.Additive)
                 {
                     return impactPerStack * _amountOwned;
                 }
-                else if(statImpactType == StatImpactType.Compounding)
+                else if (statImpactType == StatImpactType.Compounding)
                 {
                     return Mathf.Pow(impactPerStack, _amountOwned);
                 }
@@ -48,10 +48,53 @@ namespace Minigames.Fight
             }
         }
 
-        private readonly string _description = "Adds {0} base damage per stack";
+        private readonly string _description = "{0}{1} {2} per stack {3}";
         public override string GetDescription()
         {
-            return string.Format(_description, Impact);
+            string raisesOrLowers = "+";
+            switch (statImpactType)
+            {
+                case StatImpactType.Flat:
+                    if (impactPerStack < 0)
+                    {
+                        raisesOrLowers = "-";
+                    }
+                    break;
+                case StatImpactType.Additive:
+                case StatImpactType.Compounding:
+                    if(impactPerStack < 1)
+                    {
+                        raisesOrLowers = "-";
+                    }
+                    break;
+                default:
+                    raisesOrLowers = "+";
+                    break;
+            }
+
+            string impactString = impactPerStack.ToString();
+            if(statImpactType == StatImpactType.Additive || statImpactType == StatImpactType.Compounding)
+            {
+                // convert from 1.1 -> 0.1 -> 10%
+                // or from 0.9 -> -10%
+                float impact = impactPerStack;
+                if(impactPerStack > 1)
+                {
+                    impact -= 1;
+                }
+                else
+                {
+                    impact = Mathf.Abs(1 - impact);
+                }
+                impactString = $"{impact * 100}%";
+            }
+
+            string impactTypeString = string.Empty;
+            if(statImpactType == StatImpactType.Additive || statImpactType == StatImpactType.Compounding)
+            {
+                impactTypeString = $"({statImpactType})";
+            }
+            return string.Format(_description, raisesOrLowers, impactString, GetStatName(), impactTypeString);
         }
 
         public override void ApplyOverrides(EffectOverrides overrides)
@@ -72,6 +115,11 @@ namespace Minigames.Fight
         public virtual ModifiableStat GetStatToAffect(Entity entity)
         {
             throw new NotImplementedException();
+        }
+
+        public virtual string GetStatName()
+        {
+            return string.Empty;
         }
 
         public override float ImpactStat(float stat)

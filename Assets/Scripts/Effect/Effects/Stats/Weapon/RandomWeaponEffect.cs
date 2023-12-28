@@ -47,5 +47,10 @@ namespace Minigames.Fight
                     return weaponStats.ammoRegenRate;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Random Stat";
+        }
     }
 }

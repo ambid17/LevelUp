@@ -20,5 +20,10 @@ namespace Minigames.Fight
                 return entity.Stats.combatStats.meleeWeaponStats.projectileLifeTime;
             }
         }
+
+        public override string GetStatName()
+        {
+            return "Projectile Lifetime";
+        }
     }
 }
