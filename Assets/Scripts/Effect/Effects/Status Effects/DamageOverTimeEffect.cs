@@ -10,8 +10,9 @@ namespace Minigames.Fight
     [Serializable]
     public class DamageOverTimeEffect : Effect, IStatusEffect
     {
-        [Header("Effect specific")]
+        [Header("Overriden Stats")]
         public float chance = 0;
+        public float chanceToBackfire;
         public float duration = 0;
         public float Duration => duration;
         public float tickRate = 1f;
@@ -32,6 +33,7 @@ namespace Minigames.Fight
             duration = overrides.duration;
             damagePerStack = overrides.impactPerStack;
             tickRate = overrides.tickRate;
+            chanceToBackfire = overrides.chanceToBackfire;
         }
 
         public override void OnCraft(Entity target)
@@ -51,7 +53,15 @@ namespace Minigames.Fight
             bool doesApply = Random.value < chance;
             if (doesApply)
             {
-                target.Stats.combatStats.AddOrRefreshStatusEffect(this, source, target);
+                bool applyToSource = Random.value < chanceToBackfire;
+                if (applyToSource)
+                {
+                    source.Stats.combatStats.AddOrRefreshStatusEffect(this, source, source);
+                }
+                else
+                {
+                    target.Stats.combatStats.AddOrRefreshStatusEffect(this, source, target);
+                }
             }
         }
 

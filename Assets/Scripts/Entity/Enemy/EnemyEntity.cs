@@ -51,6 +51,7 @@ namespace Minigames.Fight
             EnemyDeathAnimationPlayer deathAnimPlayer = Instantiate(deathAnimPlayerPrafab, transform.position, transform.rotation);
             deathAnimPlayer.Setup(VisualController.SpriteRenderer, deathAnimation);
 
+
             Destroy(gameObject);
         }
     }

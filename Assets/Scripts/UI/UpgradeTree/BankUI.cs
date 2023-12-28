@@ -38,6 +38,11 @@ namespace Minigames.Fight
             StartCoroutine(RebuildUI());
         }
 
+        private void OnDisable()
+        {
+            Platform.EventService.Remove<CurrencyUpdatedEvent>(UpdateCurrencyText);
+        }
+
         // Forces the horizontal layout groups to regenerate, fixing any overlaps when the text changes
         private IEnumerator RebuildUI()
         {

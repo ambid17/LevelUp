@@ -148,6 +148,9 @@ namespace Minigames.Fight
         public float impactPerStack;
         public StatImpactType impactType;
 
+        public float chanceToBackfire;
+        public float maxRange;
+
         [Header("Stats/On hit effects")]
         public float applicationChance;
 

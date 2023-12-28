@@ -121,7 +121,6 @@ namespace Minigames.Fight
         public void AddSingleUseEffect(StatModifierEffect effect)
         {
             singleUseEffects.Add(effect);
-            RecalculateStat();
         }
 
         public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)

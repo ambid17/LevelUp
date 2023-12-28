@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
-  m_Name: Burn
+  m_Name: HealOrDamage
   m_EditorClassIdentifier: 
-  Name: Burn
+  Name: Heal or Damage
   Icon: {fileID: 0}
   IsUnlocked: 0
   AmountOwned: 0
@@ -22,14 +22,14 @@ MonoBehaviour:
   EffectCategory: 2
   TierCategory: 1
   positive:
-    effect: {fileID: 11400000, guid: ee316443cd6a6454095900a4729c5cc1, type: 2}
+    effect: {fileID: 11400000, guid: 8eab71a9620af974482a7b5092b62ce7, type: 2}
     overrides:
-      impactPerStack: 1
+      impactPerStack: 0.05
       impactType: 0
-      chanceToBackfire: 0.5
-      applicationChance: 0.5
-      duration: 3
-      tickRate: 1
+      chanceToBackfire: 0
+      applicationChance: 0.05
+      duration: 0
+      tickRate: 0
   negative:
     effect: {fileID: 0}
     overrides:

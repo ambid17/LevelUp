@@ -99,5 +99,11 @@ namespace Minigames.Fight
                 DamageLastTick -= damageDecayRate;
             }
         }
+
+        private void OnDestroy()
+        {
+            GameManager.EnemyObjectPool.ActiveEnemies.Remove(this);
+            GameManager.EnemyObjectPool.AllEnemies.Remove(this);
+        }
     }
 }

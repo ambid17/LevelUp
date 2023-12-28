@@ -65,7 +65,7 @@ namespace Minigames.Fight
             projectileWeaponStats.TickStatuses();
             maxHp.TickStatuses();
 
-            foreach (var status in hpStatusEffects)
+            foreach (var status in hpStatusEffects.ToList())
             {
                 bool didFinish = status.OnTick();
                 if (didFinish)
@@ -82,7 +82,7 @@ namespace Minigames.Fight
 
         public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)
         {
-            var existing = hpStatusEffects.First(e => e.statusEffect.Equals(statusEffect));
+            var existing = hpStatusEffects.FirstOrDefault(e => e.statusEffect.Equals(statusEffect));
             if (existing != null)
             {
                 existing.Reapply();

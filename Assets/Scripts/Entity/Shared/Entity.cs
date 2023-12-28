@@ -65,6 +65,7 @@ namespace Minigames.Fight
 
         protected virtual void Update()
         {
+            if(IsDead) return;
             Stats.TickStatuses();
         }
 
@@ -79,6 +80,15 @@ namespace Minigames.Fight
             {
                 Die(hitter);
             }
+        }
+
+        public virtual void TakeHeal(float amount, Entity source)
+        {
+            if (IsDead)
+            {
+                return;
+            }
+            Stats.combatStats.AddHp(amount);
         }
 
         public void DealDamage(Entity target, WeaponStats weaponStats)
