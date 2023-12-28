@@ -83,6 +83,11 @@ namespace Minigames.Fight
                 statusEffects = new();
             }
 
+            if(percentChanceEffects == null)
+            { 
+                percentChanceEffects = new(); 
+            }
+
             RecalculateStat();
         }
 
