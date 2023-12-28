@@ -107,8 +107,9 @@ namespace Minigames.Fight
             {
                 return;
             }
-            // TODO: effects are being overridden incorrectly
-            //effect = ScriptableObject.CreateInstance<Effect>();
+
+            // Create an instance of an effect so the actual scriptable object doesn't get overwritten
+            effect = (Effect)ScriptableObject.CreateInstance(effect.GetType().Name);
             effect.ApplyOverrides(overrides);
         }
 
