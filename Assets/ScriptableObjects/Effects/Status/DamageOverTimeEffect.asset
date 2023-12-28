@@ -12,22 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a5eecb9f1fa284dbc887229d3045b3, type: 3}
   m_Name: DamageOverTimeEffect
   m_EditorClassIdentifier: 
-  Name: Burn
-  Icon: {fileID: 0}
-  IsUnlocked: 0
-  AmountOwned: 0
-  MaxAmountOwned: 0
-  BaseCost: 5
-  CostScalar: 1
-  CostType: 0
   ExecutionOrder: 0
   TriggerType: 0
-  UpgradeCategory: 2
-  EffectCategory: 3
-  TierCategory: 1
-  DropWeight: 10
   chance: 0.5
   duration: 3
-  baseDamage: 2
-  damageScalar: 1
   tickRate: 1
+  damagePerStack: 1
