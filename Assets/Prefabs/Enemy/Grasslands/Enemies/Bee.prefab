@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a187b9572e844982f6aec8ea7bc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsControlled: 0
   VisualController: {fileID: 1047883154001853991}
   AnimationController: {fileID: 3106216748061571400}
   WeaponController: {fileID: 5889153746653695671}
@@ -233,14 +234,9 @@ MonoBehaviour:
         singleUseEffects: []
         statusEffects: []
         overrideEffect: {fileID: 0}
-        OnKillEffects: []
-        OnDeathEffects: []
-        OnTakeDamageEffects: []
-        OnTimerEffects: []
-        OnPurchaseEffects: []
     combatStats:
       meleeWeaponStats:
-        MaxRange: 1
+        MaxRange: 2
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 0
         targetLayers:
@@ -258,11 +254,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         onHitDamage:
           baseValue: 0
           flatEffects: []
@@ -270,23 +261,13 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileMoveSpeed:
-          baseValue: 1
+          baseValue: 3
           flatEffects: []
           compoundingEffects: []
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileLifeTime:
           baseValue: 0.25
           flatEffects: []
@@ -294,11 +275,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         rateOfFire:
           baseValue: 2
           flatEffects: []
@@ -306,11 +282,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         maxAmmo:
           baseValue: 0
           flatEffects: []
@@ -318,11 +289,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         ammoRegenRate:
           baseValue: 0
           flatEffects: []
@@ -330,11 +296,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectilesPerShot:
           baseValue: 1
           flatEffects: []
@@ -342,11 +303,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileSpread:
           baseValue: 0
           flatEffects: []
@@ -354,11 +310,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileSize:
           baseValue: 1
           flatEffects: []
@@ -366,11 +317,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         AoeEffects: []
         OnHitEffects: []
         AmmoStatusEffects: []
@@ -393,11 +339,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         onHitDamage:
           baseValue: 0
           flatEffects: []
@@ -405,11 +346,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileMoveSpeed:
           baseValue: 0
           flatEffects: []
@@ -417,11 +353,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileLifeTime:
           baseValue: 0
           flatEffects: []
@@ -429,11 +360,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         rateOfFire:
           baseValue: 0
           flatEffects: []
@@ -441,11 +367,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         maxAmmo:
           baseValue: 0
           flatEffects: []
@@ -453,11 +374,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         ammoRegenRate:
           baseValue: 0
           flatEffects: []
@@ -465,11 +381,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectilesPerShot:
           baseValue: 0
           flatEffects: []
@@ -477,11 +388,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileSpread:
           baseValue: 0
           flatEffects: []
@@ -489,11 +395,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         projectileSize:
           baseValue: 0
           flatEffects: []
@@ -501,11 +402,6 @@ MonoBehaviour:
           singleUseEffects: []
           statusEffects: []
           overrideEffect: {fileID: 0}
-          OnKillEffects: []
-          OnDeathEffects: []
-          OnTakeDamageEffects: []
-          OnTimerEffects: []
-          OnPurchaseEffects: []
         AoeEffects: []
         OnHitEffects: []
         AmmoStatusEffects: []
@@ -516,11 +412,8 @@ MonoBehaviour:
         singleUseEffects: []
         statusEffects: []
         overrideEffect: {fileID: 0}
-        OnKillEffects: []
-        OnDeathEffects: []
-        OnTakeDamageEffects: []
-        OnTimerEffects: []
-        OnPurchaseEffects: []
+      currentHp: 0
+      DamageTakenThisSecond: 0
       hpStatusEffects: []
       playerTimerEffects: []
   Rigidbody2D: {fileID: 8510735526301981989}
@@ -797,8 +690,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!95 &4602063734888168953
 Animator:
   serializedVersion: 5
