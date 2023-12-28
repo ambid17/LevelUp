@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
-  m_Name: Random +1 Projectile
+  m_Name: ChainLightning
   m_EditorClassIdentifier: 
-  Name: Random +1 projectile
+  Name: Chain lightning
   Icon: {fileID: 0}
   IsUnlocked: 0
   AmountOwned: 0
   MaxAmountOwned: 0
   IsCrafted: 0
   UpgradeCategory: 2
-  EffectCategory: 3
-  TierCategory: 2
+  EffectCategory: 2
+  TierCategory: 1
   positive:
-    effect: {fileID: 11400000, guid: d0fdb404485b7de4eb2ca83313abd853, type: 2}
+    effect: {fileID: 11400000, guid: 811b7b8d7b43c2046af92a78fbf45d96, type: 2}
     overrides:
       impactPerStack: 1
       impactType: 0
       chanceToBackfire: 0
-      maxRange: 0
-      applicationChance: 0
+      maxRange: 5
+      applicationChance: 0.1
       duration: 0
       tickRate: 0
   negative:
