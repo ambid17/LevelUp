@@ -29,7 +29,7 @@ namespace Minigames.Fight
         /// - Compounding:      +10% damage (compounding) per upgrade
         /// - Manual set:       set to 5 move speed
         /// </summary>
-        private float Impact
+        protected virtual float Impact
         {
             get
             {

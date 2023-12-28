@@ -36,6 +36,7 @@ namespace Minigames.Fight
         public ModifiableStat projectilesPerShot = new();
         public ModifiableStat projectileSpread = new();
         public ModifiableStat projectileSize = new();
+        public ModifiableStat projectilePenetration = new();
 
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();

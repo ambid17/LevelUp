@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
-  m_Name: Fire Rate Up - Damage Down
+  m_Name: Random +1 Penetration
   m_EditorClassIdentifier: 
-  Name: + Fire Rate, - Damage
+  Name: Random +1 penetration
   Icon: {fileID: 0}
   IsUnlocked: 0
   AmountOwned: 0
@@ -22,17 +22,17 @@ MonoBehaviour:
   EffectCategory: 3
   TierCategory: 2
   positive:
-    effect: {fileID: 11400000, guid: 05027ee5328f80c4fb927ef029f353f1, type: 2}
+    effect: {fileID: 11400000, guid: e206fc07aa47915478ca9c303c839398, type: 2}
     overrides:
-      impactPerStack: 0.9
-      impactType: 2
+      impactPerStack: 1
+      impactType: 0
       applicationChance: 0
       duration: 0
       tickRate: 0
   negative:
-    effect: {fileID: 11400000, guid: 6784cda21025112448fb934f01a7eeb4, type: 2}
+    effect: {fileID: 0}
     overrides:
-      impactPerStack: 0.5
+      impactPerStack: 0
       impactType: 0
       applicationChance: 0
       duration: 0

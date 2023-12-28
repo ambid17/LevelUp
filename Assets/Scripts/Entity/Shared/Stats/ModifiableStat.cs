@@ -23,8 +23,18 @@ namespace Minigames.Fight
         {
             get
             {
+                var finalCalculation = calculated;
+                foreach(var effect in percentChanceEffects)
+                {
+                    effect.ImpactStat(finalCalculation);
+                }
+
+                foreach (var effect in singleUseEffects)
+                {
+                    effect.ImpactStat(finalCalculation);
+                }
                 singleUseEffects.Clear();
-                return calculated;
+                return finalCalculation;
             }
         }
 
@@ -33,6 +43,8 @@ namespace Minigames.Fight
         public List<StatModifierEffect> compoundingEffects;
         [JsonIgnore]
         public List<StatModifierEffect> singleUseEffects;
+        [JsonIgnore]
+        public List<StatModifierEffect> percentChanceEffects;
         [JsonIgnore]
         public List<StatusEffectData> statusEffects;
         // If this effect is set, it will override all other effects and negate them
@@ -97,6 +109,10 @@ namespace Minigames.Fight
             RecalculateStat();
         }
 
+        /// <summary>
+        /// Currently not fully implemented
+        /// </summary>
+        /// <param name="effect"></param>
         public void AddSingleUseEffect(StatModifierEffect effect)
         {
             singleUseEffects.Add(effect);
@@ -144,11 +160,6 @@ namespace Minigames.Fight
                 calculated = effect.ImpactStat(calculated);
             }
 
-            foreach (var effect in singleUseEffects)
-            {
-                calculated = effect.ImpactStat(calculated);
-            }
-
             foreach (var effect in statusEffects)
             {
                 calculated = effect.statusEffect.ImpactStat(calculated);
@@ -173,6 +184,10 @@ namespace Minigames.Fight
             }
         }
 
+        /// <summary>
+        /// Only used for enemies to randomize their move speed so they don't clump up
+        /// </summary>
+        /// <param name="random"></param>
         public void Randomize(float random)
         {
             calculated *= random;

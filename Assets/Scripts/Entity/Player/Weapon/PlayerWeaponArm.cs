@@ -50,6 +50,7 @@ namespace Minigames.Fight
 
         public void Attack(float fireRate)
         {
+            // Will call MeleeShoot() or ProjectileShoot()
             AnimationController.PlayAttackAnimation(WeaponController.CurrentWeaponMode, fireRate);
         }
 
