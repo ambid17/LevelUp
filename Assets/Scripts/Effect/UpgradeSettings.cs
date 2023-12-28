@@ -17,9 +17,7 @@ namespace Minigames.Fight
         {
             foreach (var upgrade in AllUpgrades)
             {
-                upgrade.AmountOwned = 0;
-                upgrade.IsUnlocked = false;
-                upgrade.IsCrafted = false;
+                upgrade.SetDefaults();
             }
         }
 

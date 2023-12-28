@@ -58,6 +58,16 @@ namespace Minigames.Fight
             negative.Init();
         }
 
+        public void SetDefaults()
+        {
+            IsUnlocked = false;
+            AmountOwned = 0;
+            IsCrafted = false;
+
+            positive.SetDefaults();
+            negative.SetDefaults();
+        }
+
         public virtual void Unlock()
         {
             IsUnlocked = true;
@@ -101,6 +111,8 @@ namespace Minigames.Fight
         public Effect effect;
         public EffectOverrides overrides;
 
+        private Effect initialEffect;
+
         public void Init()
         {
             if(effect == null)
@@ -108,9 +120,15 @@ namespace Minigames.Fight
                 return;
             }
 
+            initialEffect = effect;
             // Create an instance of an effect so the actual scriptable object doesn't get overwritten
             effect = (Effect)ScriptableObject.CreateInstance(effect.GetType().Name);
             effect.ApplyOverrides(overrides);
+        }
+
+        public void SetDefaults()
+        {
+            effect = initialEffect;
         }
 
         public void Craft(Upgrade upgrade)
