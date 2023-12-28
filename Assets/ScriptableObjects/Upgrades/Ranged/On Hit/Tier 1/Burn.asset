@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
-  m_Name: Ammo regen Up - Projectile lifetime down
+  m_Name: Burn
   m_EditorClassIdentifier: 
-  Name: +Ammo Regen - Projectile Lifetime
+  Name: Burn
   Icon: {fileID: 0}
   IsUnlocked: 0
   AmountOwned: 0
   MaxAmountOwned: 0
   IsCrafted: 0
   UpgradeCategory: 2
-  EffectCategory: 3
+  EffectCategory: 2
   TierCategory: 1
   positive:
-    effect: {fileID: 11400000, guid: 27ecee44732f0d4418fe1e136494d428, type: 2}
+    effect: {fileID: 11400000, guid: ee316443cd6a6454095900a4729c5cc1, type: 2}
     overrides:
-      impactPerStack: 0.9
-      impactType: 2
-      applicationChance: 0
-      duration: 0
-      tickRate: 0
+      impactPerStack: 1
+      impactType: 0
+      applicationChance: 0.5
+      duration: 3
+      tickRate: 1
   negative:
     effect: {fileID: 0}
     overrides:
-      impactPerStack: 0.9
-      impactType: 2
+      impactPerStack: 0
+      impactType: 0
       applicationChance: 0
       duration: 0
       tickRate: 0

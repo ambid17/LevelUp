@@ -39,7 +39,7 @@ namespace Minigames.Fight
             {
                 // keeps overriden impact code, but allows the Impact to not be touched in favor of the stat upgrades 
                 // scaling the percent likelihood of success
-                if (scalingType == ImpactScalingType.Stat)
+                if (scalingType == ImpactScalingType.Chance)
                 {
                     return impactPerStack;
                 }

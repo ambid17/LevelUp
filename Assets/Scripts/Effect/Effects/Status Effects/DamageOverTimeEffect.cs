@@ -11,21 +11,27 @@ namespace Minigames.Fight
     public class DamageOverTimeEffect : Effect, IStatusEffect
     {
         [Header("Effect specific")]
-        public float chance = 0.1f;
-        public float duration = 2f;
+        public float chance = 0;
+        public float duration = 0;
         public float Duration => duration;
-        public float baseDamage = 5f;
-        public float damageScalar = 1f;
         public float tickRate = 1f;
         public float TickRate => tickRate;
-
-        public float HitDamage => baseDamage + (damageScalar * _amountOwned);
+        public float damagePerStack = 1f;
+        public float HitDamage => damagePerStack * _amountOwned;
         
-        private readonly string _description = "{0}% to burn enemies for {1} damage each second for {2} seconds";
+        private readonly string _description = "{0}% chance to burn enemies for {1} damage each second for {2} seconds";
         
         public override string GetDescription()
         {
             return string.Format(_description, chance * 100, HitDamage, duration);
+        }
+
+        public override void ApplyOverrides(EffectOverrides overrides)
+        {
+            chance = overrides.applicationChance;
+            duration = overrides.duration;
+            damagePerStack = overrides.impactPerStack;
+            tickRate = overrides.tickRate;
         }
 
         public override void OnCraft(Entity target)

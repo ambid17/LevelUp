@@ -165,8 +165,8 @@ namespace Minigames.Fight
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
             upgradeButtonText.text = "CRAFT";
-            descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
-            bonusText.text = _currentUpgrade.negative.effect.GetDescription();
+            descriptionText.text = _currentUpgrade.positive.effect != null ? _currentUpgrade.positive.effect.GetDescription() : string.Empty;
+            bonusText.text = _currentUpgrade.negative.effect != null ? _currentUpgrade.negative.effect.GetDescription() : string.Empty;
 
             resourcesText.gameObject.SetActive(true);
             StringBuilder stringBuilder = new StringBuilder();
