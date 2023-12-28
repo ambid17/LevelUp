@@ -43,6 +43,7 @@ namespace Minigames.Fight
 
         [Header("Craft info")]
         public bool IsCrafted;
+        public bool IsEquipped;
 
         [Header("Effect Tree info")]
         public UpgradeCategory UpgradeCategory;
@@ -63,17 +64,18 @@ namespace Minigames.Fight
             IsUnlocked = false;
             AmountOwned = 0;
             IsCrafted = false;
+            IsEquipped = false;
 
             positive.SetDefaults();
             negative.SetDefaults();
         }
 
-        public virtual void Unlock()
+        public void Unlock()
         {
             IsUnlocked = true;
         }
 
-        public virtual void BuyUpgrade() 
+        public void BuyUpgrade() 
         {
             AmountOwned++;
 
@@ -84,11 +86,18 @@ namespace Minigames.Fight
             }
         }
 
-        public virtual void Craft()
+        public void Craft()
         {
             IsCrafted = true;
             positive.Craft(this);
             negative.Craft(this);
+        }
+
+        public void ToggleEquip(bool isEquipped)
+        {
+            IsEquipped = isEquipped;
+            positive.ToggleEquip(this, isEquipped);
+            negative.ToggleEquip(this, isEquipped);
         }
 
         public string GetUpgradeCountText()
@@ -139,6 +148,16 @@ namespace Minigames.Fight
             }
             effect.GiveUpgradeInfo(upgrade.AmountOwned, upgrade.UpgradeCategory, upgrade.EffectCategory);
             effect.OnCraft(GameManager.PlayerEntity);
+        }
+
+        public void ToggleEquip(Upgrade upgrade, bool isEquipped)
+        {
+            if (effect == null)
+            {
+                return;
+            }
+            effect.GiveUpgradeInfo(upgrade.AmountOwned, upgrade.UpgradeCategory, upgrade.EffectCategory);
+            effect.ToggleEquip(GameManager.PlayerEntity, isEquipped);
         }
     }
 

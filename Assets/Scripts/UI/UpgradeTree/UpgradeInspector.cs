@@ -158,17 +158,19 @@ namespace Minigames.Fight
                 return;
             }
 
-            upgradeButton.onClick.RemoveAllListeners();
-            upgradeButton.onClick.AddListener(CraftUpgrade);
+            
 
             icon.gameObject.SetActive(_currentUpgrade.Icon != null);
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
-            upgradeButtonText.text = "CRAFT";
+
+
+
             descriptionText.text = _currentUpgrade.positive.effect != null ? _currentUpgrade.positive.effect.GetDescription() : string.Empty;
             bonusText.text = _currentUpgrade.negative.effect != null ? _currentUpgrade.negative.effect.GetDescription() : string.Empty;
 
-            resourcesText.gameObject.SetActive(true);
+
+            resourcesText.gameObject.SetActive(!_currentUpgrade.IsCrafted);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Resource costs:");
             foreach(var cost in CurrencyManager.GetUpgradeResourceCosts(_currentUpgrade))
@@ -177,7 +179,43 @@ namespace Minigames.Fight
             }
             resourcesText.text = stringBuilder.ToString();
 
+            HandleUpgradeButton();
+
             
+        }
+
+        private void HandleUpgradeButton()
+        {
+            // TODO : toggle off upgrade button icon
+            // move all this code into an upgrade button script
+            upgradeButton.onClick.RemoveAllListeners();
+            if (_currentUpgrade.IsCrafted)
+            {
+                upgradeButton.onClick.AddListener(ToggleUpgradeEquip);
+            }
+            else
+            {
+                upgradeButton.onClick.AddListener(CraftUpgrade);
+            }
+
+            string craftButtonText = "CRAFT";
+            if (!_currentUpgrade.IsCrafted)
+            {
+                craftButtonText = "CRAFT";
+            }
+            else
+            {
+                if (_currentUpgrade.IsEquipped)
+                {
+                    craftButtonText = "UNEQUIP";
+                }
+                else
+                {
+                    craftButtonText = "EQUIP";
+                }
+            }
+            upgradeButtonText.text = craftButtonText;
+
             bool canCraft = !_currentUpgrade.IsCrafted;
             bool canAfford = GameManager.CurrencyManager.CanAffordCraft(_currentUpgrade);
             upgradeButton.interactable = canAfford && canCraft;
@@ -193,6 +231,11 @@ namespace Minigames.Fight
                 OnUpgradeSelectedForCraft();
                 Platform.EventService.Dispatch<DidCraftUpgradeEvent>();
             }
+        }
+
+        private void ToggleUpgradeEquip()
+        {
+
         }
 
         // Forces the horizontal layout groups to regenerate, fixing any overlaps when the text changes

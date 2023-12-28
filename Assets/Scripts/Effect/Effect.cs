@@ -55,6 +55,11 @@ namespace Minigames.Fight
             throw new NotImplementedException();
         }
 
+        public virtual void ToggleEquip(Entity target, bool isEquipped) 
+        { 
+            throw new NotImplementedException(); 
+        }
+
         public virtual void Execute(Entity source, Entity target)
         {
             throw new NotImplementedException();
