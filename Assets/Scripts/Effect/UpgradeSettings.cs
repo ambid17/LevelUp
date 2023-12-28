@@ -108,5 +108,25 @@ namespace Minigames.Fight
 
             EditorUtility.SetDirty(this);
         }
+
+
+        [ContextMenu("Mark upgrades and effects dirty")]
+        public void MarkDirty()
+        {
+            foreach(var upgrade in AllUpgrades)
+            {
+                EditorUtility.SetDirty(upgrade);
+
+                if(upgrade.positive.effect != null)
+                {
+                    EditorUtility.SetDirty(upgrade.positive.effect);
+                }
+
+                if (upgrade.negative.effect != null)
+                {
+                    EditorUtility.SetDirty(upgrade.negative.effect);
+                }
+            }
+        }
     }
 }
