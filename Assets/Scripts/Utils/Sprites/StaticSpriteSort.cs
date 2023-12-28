@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 public class StaticSpriteSort : MonoBehaviour
@@ -10,6 +11,13 @@ public class StaticSpriteSort : MonoBehaviour
         void Awake()
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sortingOrder = transform.GetSortingOrder(offset);
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingOrder = transform.GetSortingOrder(offset);
+            return;
+        }
+        var tileRenderer = GetComponent<TilemapRenderer>();
+        tileRenderer.sortingOrder = transform.GetSortingOrder(offset);
     }
 }
