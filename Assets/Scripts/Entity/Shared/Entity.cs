@@ -74,6 +74,7 @@ namespace Minigames.Fight
             Debug.Log($"{gameObject.name} took damage from {hitter.name}, damage: {damage}");
             Stats.combatStats.TakeDamage(damage);
 
+            // TODO : don't stun ourselves with effects
             VisualController.StartDamageFx(damage);
 
             if (IsDead)
