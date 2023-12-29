@@ -13,7 +13,8 @@ namespace Minigames.Fight
         [Header("Effect specific")]
         public float duration = 2f;
         public float Duration => duration;
-        public float TickRate => 0;
+        private float tickRate = 0;
+        public float TickRate => tickRate;
 
         public float chanceToApply = 0.5f;
         public float chanceToBackfire = 0.5f;
@@ -32,6 +33,7 @@ namespace Minigames.Fight
             chanceToApply = overrides.applicationChance;
             slowPerStack = overrides.impactPerStack;
             chanceToBackfire = overrides.chanceToBackfire;
+            tickRate = overrides.tickRate;
         }
 
 

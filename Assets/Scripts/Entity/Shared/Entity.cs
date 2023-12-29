@@ -109,14 +109,17 @@ namespace Minigames.Fight
             WeaponController.CurrentWeapon.onHitDamage.Clear();
         }
 
-        protected virtual void OnKill()
+        protected virtual void OnKill(Entity killedEntity)
         {
-            // Execute OnKillEffects.
+            foreach (var effect in WeaponController.CurrentWeapon.OnKillEffects)
+            {
+                effect.Execute(this, killedEntity);
+            }
         }
 
         protected virtual void Die(Entity killer)
         {
-            killer.OnKill();
+            killer.OnKill(this);
         }
 
 

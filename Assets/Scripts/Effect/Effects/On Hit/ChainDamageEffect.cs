@@ -41,20 +41,7 @@ namespace Minigames.Fight
             bool doesApply = UnityEngine.Random.value < chanceToApply;
             if (doesApply)
             {
-                List<Entity> entitiesInMaxRange = new();
-
-                // Add all of the enemies that can possibly be hit
-                var enemiesInMaxRange = GameManager.EnemyObjectPool.ActiveEnemies
-                    .Select(e => e.MyEntity)
-                    .Where(e => Vector2.Distance(e.transform.position, target.transform.position) < maxRange * EnemiesImpacted && e != target);
-                entitiesInMaxRange.AddRange(enemiesInMaxRange);
-
-                // add the player if it can be hit
-                if(Vector2.Distance(GameManager.PlayerEntity.transform.position, target.transform.position) < maxRange * EnemiesImpacted)
-                {
-                    entitiesInMaxRange.Add(GameManager.PlayerEntity);
-                }
-
+                List<Entity> entitiesInMaxRange = EffectUtils.GetEntitiesInRange(target, maxRange * EnemiesImpacted, true, false);
 
                 // apply damage to the next closest target until we are out of enemies to impact
                 var damage = source.Stats.combatStats.projectileWeaponStats.baseDamage.Calculated;

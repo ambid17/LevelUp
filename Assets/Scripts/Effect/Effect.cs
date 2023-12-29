@@ -20,7 +20,6 @@ namespace Minigames.Fight
     {
         [Header("Trigger info")]
         public int ExecutionOrder;
-        public EffectTriggerType TriggerType;
 
         [Header("Set at runtime")]
         protected int _amountOwned;

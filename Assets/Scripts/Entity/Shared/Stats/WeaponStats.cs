@@ -40,6 +40,7 @@ namespace Minigames.Fight
 
         public List<AoeEffect> AoeEffects = new();
         public List<Effect> OnHitEffects = new();
+        public List<Effect> OnKillEffects = new();
         [JsonIgnore]
         public List<StatusEffectData> AmmoStatusEffects = new();
 
