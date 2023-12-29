@@ -38,17 +38,17 @@ namespace Minigames.Fight
             }
         }
 
-        public List<StatModifierEffect> flatEffects;
-        public List<StatModifierEffect> additiveEffects;
-        public List<StatModifierEffect> compoundingEffects;
+        public List<IImpactsStat> flatEffects;
+        public List<IImpactsStat> additiveEffects;
+        public List<IImpactsStat> compoundingEffects;
         [JsonIgnore]
-        public List<StatModifierEffect> singleUseEffects;
+        public List<IImpactsStat> singleUseEffects;
         [JsonIgnore]
-        public List<StatModifierEffect> percentChanceEffects;
+        public List<IImpactsStat> percentChanceEffects;
         [JsonIgnore]
         public List<StatusEffectData> statusEffects;
         // If this effect is set, it will override all other effects and negate them
-        public StatModifierEffect overrideEffect;
+        public IImpactsStat overrideEffect;
 
         //public List<Effect> OnKillEffects = new();
         //public List<Effect> OnDeathEffects = new();
@@ -96,7 +96,7 @@ namespace Minigames.Fight
         /// When updating an effect, the Impact is recalculated using AmountOwned, so we just ignore adding it to the list again
         /// </summary>
         /// <param name="effect"></param>
-        public void AddOrUpdateStatEffect(StatModifierEffect effect)
+        public void AddOrUpdateStatEffect(IImpactsStat effect)
         {
             if (effect.statImpactType == StatImpactType.Flat && !flatEffects.Contains(effect))
             {
@@ -118,7 +118,7 @@ namespace Minigames.Fight
         /// Currently not fully implemented
         /// </summary>
         /// <param name="effect"></param>
-        public void AddSingleUseEffect(StatModifierEffect effect)
+        public void AddSingleUseEffect(IImpactsStat effect)
         {
             singleUseEffects.Add(effect);
         }

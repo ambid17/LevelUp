@@ -15,19 +15,25 @@ namespace Minigames.Fight
         public float Duration => duration;
         public float TickRate => 0;
 
-        public float slowAmount = 0.5f;
-        public float chanceScalar = 0.01f;
+        public float chanceToApply = 0.5f;
+        public float chanceToBackfire = 0.5f;
+        public float slowPerStack = 0.05f;
+        public float SlowAmount => 1 - (slowPerStack * _amountOwned);
         
-
-        public float slowChance = 0.5f;
-        public float SlowChance => slowChance + (chanceScalar * _amountOwned);
-        
-        private readonly string _description = "{0}% chance to slow enemies by {1}% for {2} seconds";
+        private readonly string _description = "{0}% chance to slow Player or Hit target by {1}% per stack for {2} seconds";
         
         public override string GetDescription()
         {
-            return string.Format(_description, SlowChance * 100, slowAmount * 100, duration);
+            return string.Format(_description, chanceToBackfire * 100, slowPerStack * 100, duration);
         }
+
+        public override void ApplyOverrides(EffectOverrides overrides)
+        {
+            chanceToApply = overrides.applicationChance;
+            slowPerStack = overrides.impactPerStack;
+            chanceToBackfire = overrides.chanceToBackfire;
+        }
+
 
         public override void OnCraft(Entity target)
         {
@@ -43,16 +49,25 @@ namespace Minigames.Fight
 
         public override void Execute(Entity source, Entity target)
         {
-            bool doesSlow = Random.value < SlowChance;
+            bool doesSlow = Random.value < chanceToApply;
             if (doesSlow)
             {
-                target.Stats.movementStats.moveSpeed.AddOrRefreshStatusEffect(this, source, target);
+                bool doesBackfire = Random.value < chanceToBackfire;
+
+                if (doesBackfire)
+                {
+                    source.Stats.movementStats.moveSpeed.AddOrRefreshStatusEffect(this, source, source);
+                }
+                else
+                {
+                    target.Stats.movementStats.moveSpeed.AddOrRefreshStatusEffect(this, source, target);
+                }
             }
         }
 
         public override float ImpactStat(float stat)
         {
-            return stat * slowAmount;
+            return stat * SlowAmount;
         }
 
         public void OnTick(Entity source, Entity target)

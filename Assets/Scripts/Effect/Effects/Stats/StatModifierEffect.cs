@@ -14,7 +14,7 @@ namespace Minigames.Fight
     }
 
     [Serializable]
-    public class StatModifierEffect : Effect
+    public class StatModifierEffect : Effect, IImpactsStat
     {
         [Header("Stat Modifier Specific")]
 
