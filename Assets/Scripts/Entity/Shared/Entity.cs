@@ -112,7 +112,7 @@ namespace Minigames.Fight
             killer.OnKill();
         }
 
-
+#if UNITY_EDITOR
         [ContextMenu("Setup")]
         public void SetupInspector()
         {
@@ -125,5 +125,11 @@ namespace Minigames.Fight
 
             EditorUtility.SetDirty(this);
         }
+        [ContextMenu("Generate Collider Points")]
+        public void GenerateColliderPoints()
+        {
+            Stats.GenerateColliderPoints();
+        }
     }
+#endif
 }

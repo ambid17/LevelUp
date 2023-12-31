@@ -19,6 +19,7 @@ namespace Minigames.Fight
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rb;
         private Animator _anim;
+        private PolygonCollider2D _myCollider;
 
         private bool _isOverridingLifetime;
         private float _lifetimeOverride;
@@ -32,6 +33,7 @@ namespace Minigames.Fight
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _anim = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
+            _myCollider = GetComponent<PolygonCollider2D>();
         }
 
         private void OnDestroy()
@@ -79,6 +81,10 @@ namespace Minigames.Fight
             _myWeaponStats = weapon;
 
             _spriteRenderer.sprite = _myWeaponStats.sprite;
+
+            // Set collider points before scaling to ensure collider scales with the sprite.
+            _myCollider.SetPath(0, _myWeaponStats.colliderPoints);
+
             transform.localScale *= _myWeaponStats.projectileSize.Calculated;
 
             if (_myWeaponStats.animation != null)
