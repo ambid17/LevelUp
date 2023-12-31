@@ -105,11 +105,6 @@ namespace Minigames.Fight
                 return;
             }
 
-            if (col.gameObject.layer == PhysicsUtils.ObstacleLayer || col.gameObject.layer == PhysicsUtils.wallLayer)
-            {
-                Die();
-            }
-
             if ((_myWeaponStats.targetLayers.value & (1 << col.transform.gameObject.layer)) > 0)
             {
                 Entity target = col.gameObject.GetComponent<Entity>();

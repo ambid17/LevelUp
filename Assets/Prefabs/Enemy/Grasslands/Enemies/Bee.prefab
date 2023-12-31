@@ -236,6 +236,7 @@ MonoBehaviour:
         overrideEffect: {fileID: 0}
     combatStats:
       meleeWeaponStats:
+        collider: {fileID: 0}
         MaxRange: 2
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 0
@@ -247,6 +248,16 @@ MonoBehaviour:
           m_Bits: 0
         sprite: {fileID: 21300000, guid: da2bd36b73d1da64fa1448c1f7a08590, type: 3}
         animation: {fileID: 9100000, guid: 717ae667381b68446b3371138c1453ea, type: 2}
+        colliderPoints:
+        - {x: -0.04673185, y: 0.12031856}
+        - {x: 0.23462853, y: -0.06713361}
+        - {x: 0.28113055, y: -0.067274034}
+        - {x: 0.28117484, y: -0.05179687}
+        - {x: 0.045463175, y: 0.11177551}
+        - {x: 0.29670772, y: 0.24533351}
+        - {x: 0.2966644, y: 0.26056212}
+        - {x: 0.250613, y: 0.26031476}
+        - {x: -0.046755645, y: 0.13557814}
         baseDamage:
           baseValue: 1
           flatEffects: []
@@ -321,6 +332,7 @@ MonoBehaviour:
         OnHitEffects: []
         AmmoStatusEffects: []
       projectileWeaponStats:
+        collider: {fileID: 0}
         MaxRange: 0
         projectilePrefab: {fileID: 0}
         currentAmmo: 0
@@ -332,6 +344,7 @@ MonoBehaviour:
           m_Bits: 0
         sprite: {fileID: 0}
         animation: {fileID: 0}
+        colliderPoints: []
         baseDamage:
           baseValue: 0
           flatEffects: []
