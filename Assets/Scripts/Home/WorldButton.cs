@@ -19,7 +19,7 @@ public class WorldButton : MonoBehaviour
     [SerializeField] private int _sceneIndexOffset = 2;
     [SerializeField] private float _timer;
 
-    public World world;
+    public Biome world;
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -38,11 +38,11 @@ public class WorldButton : MonoBehaviour
         transform.position = GetRadialPosition(angle);
     }
 
-    public void SetForWorld(World world)
+    public void SetForWorld(Biome world)
     {
         this.world = world;
         gameObject.name = world.Name;
-        _spriteRenderer.sprite = world.WorldSprite;
+        _spriteRenderer.sprite = world.BiomeSprite;
         _sceneIndex = SceneManager.GetSceneByName("Fight").buildIndex;
         SetOrbitLine();
     }

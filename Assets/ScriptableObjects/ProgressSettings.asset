@@ -12,24 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f16366b4a76dd4391aa550b11c2bd9, type: 3}
   m_Name: ProgressSettings
   m_EditorClassIdentifier: 
-  Worlds:
+  Biomes:
   - Name: Grasslands
-    WorldSprite: {fileID: 914311742, guid: 8e2e2a1cd7f528b4fb0667e11bad81da, type: 3}
+    BiomeSprite: {fileID: 0}
     RoomSettings: {fileID: 11400000, guid: 3b38d4d9143c3164788eb8af518b9a32, type: 2}
+    FloorsToComplete: 5
     IsUnlocked: 0
-    IsCompleted: 0
+    FloorsCompleted: 0
   Dna: 0
   BankedDna: 0
-  TutorialState: 0
   PhysicalResources:
     m_keys: 0000000001000000
     m_values:
     - 0
     - 0
   BaseResourceValue: 1
-  currentWorld:
+  currentBiome:
     Name: 
-    WorldSprite: {fileID: 0}
+    BiomeSprite: {fileID: 0}
     RoomSettings: {fileID: 0}
+    FloorsToComplete: 0
     IsUnlocked: 0
-    IsCompleted: 0
+    FloorsCompleted: 0

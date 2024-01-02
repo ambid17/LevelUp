@@ -161,10 +161,9 @@ public class FightDataLoader : Singleton<FightDataLoader>
         Platform.ProgressSettings.BankedDna = progressModel.BankedDna;
         Platform.ProgressSettings.PhysicalResources = progressModel.PhysicalResources;
         
-        for (int worldIndex = 0; worldIndex < progressModel.WorldData.Count; worldIndex++)
+        for (int worldIndex = 0; worldIndex < progressModel.BiomeData.Count; worldIndex++)
         {
-            Platform.ProgressSettings.Worlds[worldIndex].IsUnlocked = progressModel.WorldData[worldIndex].IsUnlocked;
-            Platform.ProgressSettings.Worlds[worldIndex].IsCompleted = progressModel.WorldData[worldIndex].IsCompleted;
+            Platform.ProgressSettings.Biomes[worldIndex].FloorsCompleted = progressModel.BiomeData[worldIndex].FloorsCompleted;
         }
     }
 

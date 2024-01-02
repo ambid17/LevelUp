@@ -33,6 +33,8 @@ namespace Minigames.Fight
         private Transform bossEntry;
         [SerializeField]
         private ConstructionChamber constructionChamber;
+        [SerializeField]
+        private GameObject exit;
 
         private bool _fightOver => _hasActivated && _boss == null;
 
@@ -116,7 +118,7 @@ namespace Minigames.Fight
                     yMax = worldPos.y;
                 }
 
-                Tilemap.SetTile(tilePos, GameManager.ProgressSettings.CurrentWorld.RoomSettings.wallTile);
+                Tilemap.SetTile(tilePos, GameManager.ProgressSettings.CurrentBiome.RoomSettings.wallTile);
             }
             Vector2 min = new(xMin - 2, yMin -2);
             Vector2 max = new(xMax +2, yMax + 2);
@@ -145,7 +147,9 @@ namespace Minigames.Fight
         private void OnBossDefeated()
         {
             _bossDefeated = true;
+            GameManager.ProgressSettings.CompleteFloor();
             constructionChamber.gameObject.SetActive(true);
+            exit.SetActive(true);
             var gou = new GraphUpdateObject(constructionChamber.SpriteRenderer.bounds);
             AstarPath.active.UpdateGraphs(gou);
             foreach (Vector3Int tilePos in _entrance.TilePositions)

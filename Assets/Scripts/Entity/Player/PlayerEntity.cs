@@ -12,7 +12,7 @@ namespace Minigames.Fight
 {
     public enum InteractionType
     {
-        None, Upgrade, Craft
+        None, Upgrade, Craft, Exit
     }
 
     public enum PlayerControlledActionType
@@ -82,6 +82,10 @@ namespace Minigames.Fight
             {
                 PlayerPathfindingMovementController pathfindingMovementController = gameObject.AddComponent<PlayerPathfindingMovementController>();
                 pathfindingMovementController.StartPath(GameManager.RoomManager.BossRoom.ConstructionChamber.PlayerMoveTarget, PlayerControlledActionType.Craft);
+            }
+            else
+            {
+                eventService.Dispatch(new PlayerInteractedEvent(currentInteractionType));
             }
         }
 

@@ -33,7 +33,7 @@ namespace Minigames.Fight
 
         protected override void Initialize()
         {
-            _roomSettings = GameManager.ProgressSettings.CurrentWorld.RoomSettings;
+            _roomSettings = GameManager.ProgressSettings.CurrentBiome.RoomSettings;
 
             List<RoomController> availableRooms = new();
 
