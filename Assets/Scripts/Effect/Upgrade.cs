@@ -120,6 +120,8 @@ namespace Minigames.Fight
         public Effect effect;
         public EffectOverrides overrides;
 
+        // TODO: make custom property drawer for real properties
+        private string effectOverrideTips => effect.GetOverrideTips();
         private Effect initialEffect;
 
         public void Init()

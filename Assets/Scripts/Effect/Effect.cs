@@ -31,6 +31,11 @@ namespace Minigames.Fight
             return string.Empty;
         }
 
+        public virtual string GetOverrideTips()
+        {
+            return string.Empty;
+        }
+
         public bool Equals(Effect other)
         {
             if (other == null) return false;
