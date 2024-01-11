@@ -1884,7 +1884,7 @@ MonoBehaviour:
   roomManager: {fileID: 1191475636}
   shadowData: {fileID: 11400000, guid: 50d0bc3d3eb590a48969e8f0f02853a7, type: 2}
   progressSettings: {fileID: 11400000, guid: 797a0b11d5573634ab3e7f036ce0e290, type: 2}
-  effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
+  upgradeSettings: {fileID: 11400000, guid: dda7d6a15d8971346ade56821f451b42, type: 2}
   minimapCameraPrefab: {fileID: 6059376061663322771, guid: e47a9513a4611e547a602010a388f613, type: 3}
   enemyObjectPoolPrefab: {fileID: 1563358057859924787, guid: 15e5163a48363dd4088b29e9d0f26b41, type: 3}
 --- !u!4 &1191475632
@@ -3260,6 +3260,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 59952797911083174, guid: b15cb65a527bb4b45bcd13ed27b6a270, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119973252364763386, guid: b15cb65a527bb4b45bcd13ed27b6a270, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119973252364763386, guid: b15cb65a527bb4b45bcd13ed27b6a270, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119973252364763386, guid: b15cb65a527bb4b45bcd13ed27b6a270, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119973252364763386, guid: b15cb65a527bb4b45bcd13ed27b6a270, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

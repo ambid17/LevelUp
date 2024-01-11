@@ -65,6 +65,7 @@ namespace Minigames.Fight
 
         protected virtual void Update()
         {
+            if(IsDead) return;
             Stats.TickStatuses();
         }
 
@@ -85,6 +86,15 @@ namespace Minigames.Fight
             VisualController.StartDamageFx(damage);
         }
 
+        public virtual void TakeHeal(float amount, Entity source)
+        {
+            if (IsDead)
+            {
+                return;
+            }
+            Stats.combatStats.AddHp(amount);
+        }
+
         public void DealDamage(Entity target, WeaponStats weaponStats)
         {
             // Execute all of the onHit effects to populate the onHitDamage
@@ -102,17 +112,20 @@ namespace Minigames.Fight
             WeaponController.CurrentWeapon.onHitDamage.Clear();
         }
 
-        protected virtual void OnKill()
+        protected virtual void OnKill(Entity killedEntity)
         {
-            // Execute OnKillEffects.
+            foreach (var effect in WeaponController.CurrentWeapon.OnKillEffects)
+            {
+                effect.Execute(this, killedEntity);
+            }
         }
 
         protected virtual void Die(Entity killer)
         {
-            killer.OnKill();
+            killer.OnKill(this);
         }
 
-#if UNITY_EDITOR
+
         [ContextMenu("Setup")]
         public void SetupInspector()
         {
