@@ -42,6 +42,24 @@ namespace Minigames.Fight
         // TODO set up effects for this.
         public float ResourceValue { get => _progressSettings.BaseResourceValue; set => _progressSettings.BaseResourceValue = value; }
 
+
+        public static readonly float BASE_COST = 10;
+        public static readonly float COST_SCALAR = 1.5f;
+
+        public static readonly Dictionary<int, float> TierCostMapping = new Dictionary<int, float>()
+        {
+            {1, 100},
+            {2, 200},
+            {3, 500},
+        };
+
+        public static readonly SerializableDictionary<ResourceType, float> baseResourceCosts = new SerializableDictionary<ResourceType, float>()
+        {
+            { ResourceType.Dirt, 1 },
+            { ResourceType.Grass, 2 }
+        };
+
+
         protected override void Awake()
         { 
             base.Awake();
@@ -90,7 +108,7 @@ namespace Minigames.Fight
 
         public bool CanAffordCraft(Upgrade upgrade)
         {
-            foreach(var resource in upgrade.resourceCosts)
+            foreach(var resource in GetUpgradeResourceCosts(upgrade))
             {
                 if (PhysicalResources[resource.Key] < resource.Value)
                 {
@@ -111,7 +129,7 @@ namespace Minigames.Fight
 
             if (CanAffordCraft(upgrade))
             {
-                foreach (var resource in upgrade.resourceCosts)
+                foreach (var resource in GetUpgradeResourceCosts(upgrade))
                 {
                     PhysicalResources[resource.Key] -= resource.Value;
                 }
@@ -122,6 +140,31 @@ namespace Minigames.Fight
             }
 
             return true;
+        }
+
+        // example:
+        // base cost = 100, scalar = 1.5;
+        // 100, 150, 225
+        public static float GetUpgradeCost(Upgrade upgrade)
+        {
+            return BASE_COST * Mathf.Pow(COST_SCALAR, upgrade.AmountOwned + 1);
+        }
+
+        public static SerializableDictionary<ResourceType, float> GetUpgradeResourceCosts(Upgrade upgrade)
+        {
+            var resourceCosts = new SerializableDictionary<ResourceType, float>();
+
+            foreach (var cost in baseResourceCosts)
+            {
+                ResourceType resourceType = cost.Key;
+                float resourceCost = cost.Value;
+
+                float finalCost = resourceCost * Mathf.Pow(COST_SCALAR, upgrade.AmountOwned + 1);
+                finalCost = Mathf.Floor(finalCost);
+                resourceCosts.Add(cost.Key, finalCost);
+            }
+
+            return resourceCosts;
         }
     }
 }
