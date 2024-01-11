@@ -9,7 +9,7 @@ namespace Minigames.Fight
     /// <summary>
     /// Ex: +10% damage to enemies >60% hp
     /// </summary>
-    [CreateAssetMenu(fileName = "DamageHighHealthEffect", menuName = "ScriptableObjects/Fight/Effects/DamageHighHealthEffect", order = 1)]
+    [CreateAssetMenu(fileName = "DamageHighHealthEffect", menuName = "ScriptableObjects/Effects/DamageHighHealthEffect", order = 1)]
     [Serializable]
     public class DamageHighHealthEffect : StatModifierEffect
     {
