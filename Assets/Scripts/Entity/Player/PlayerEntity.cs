@@ -12,7 +12,7 @@ namespace Minigames.Fight
 {
     public enum InteractionType
     {
-        None, Upgrade, Craft
+        None, Upgrade, Craft, Exit
     }
 
     public enum PlayerControlledActionType
@@ -83,15 +83,25 @@ namespace Minigames.Fight
                 PlayerPathfindingMovementController pathfindingMovementController = gameObject.AddComponent<PlayerPathfindingMovementController>();
                 pathfindingMovementController.StartPath(GameManager.RoomManager.BossRoom.ConstructionChamber.PlayerMoveTarget, PlayerControlledActionType.Craft);
             }
+            else
+            {
+                eventService.Dispatch(new PlayerInteractedEvent(currentInteractionType));
+            }
         }
 
         protected override void Die(Entity killer)
         {
             base.Die(killer);
-            _animationControllerOverride.PlayDieAnimation();
+            _animationControllerOverride.EndStun();
+            VisualController.StopCoroutine(_animationControllerOverride.Stun(null, null));
             eventService.Dispatch<PlayerDiedEvent>();
             Stats.ClearAllStatusEffects();
             StartCoroutine(DropResources());
+            StartCoroutine(_animationControllerOverride.PlayDieAnimation(StartRevive));
+        }
+
+        private void StartRevive()
+        {
             StartCoroutine(WaitForRevive());
         }
 
@@ -134,11 +144,6 @@ namespace Minigames.Fight
 
         private IEnumerator WaitForRevive()
         {
-            while (!_animationControllerOverride.IsAnimFinished)
-            {
-                yield return new WaitForSeconds(0);
-            }
-
             while (!_hasFinishedDroppingResources)
             {
                 yield return new WaitForSeconds(0);
@@ -151,7 +156,8 @@ namespace Minigames.Fight
             yield return new WaitForSeconds(0.1f);
 
             eventService.Dispatch<PlayerRevivedEvent>();
-            _animationControllerOverride.ResetAnimations();
+            Stats.combatStats.ResetHp();
+            eventService.Dispatch<PlayerHpUpdatedEvent>();
         }
     }
 }

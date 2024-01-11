@@ -6,6 +6,8 @@ namespace Minigames.Fight
 {
     public class StaticSpriteShadow : MonoBehaviour
     {
+        public SpriteRenderer ParentRenderer { get => parentRenderer; set => parentRenderer = value; }
+        public SpriteRenderer MyRenderer { get  => myRenderer; set => myRenderer = value; }
         [SerializeField]
         private SpriteRenderer parentRenderer;
         [SerializeField]
@@ -18,6 +20,7 @@ namespace Minigames.Fight
             myRenderer.material = parentRenderer.sharedMaterial;
             myRenderer.sortingLayerID = parentRenderer.sortingLayerID;
             myRenderer.sortingOrder = parentRenderer.sortingOrder - 1;
+            transform.localScale = transform.parent.localScale;
         }
     }
 }

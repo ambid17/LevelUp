@@ -16,7 +16,7 @@ namespace Minigames.Fight
     [Serializable]
     public class ProgressSettings : ScriptableObject
     {
-        [Header("Set in Editor")] public List<World> Worlds;
+        [Header("Set in Editor")] public List<Biome> Biomes;
         public Dictionary<TierCategory, float> UnlockCostMaps = new() 
         {
             {TierCategory.Tier1, 1},
@@ -30,42 +30,42 @@ namespace Minigames.Fight
         public float BaseResourceValue;
 
         [SerializeField]
-        private World currentWorld;
+        private Biome currentBiome;
 
-        public World CurrentWorld
+        public Biome CurrentBiome
         {
             get
             {
-                return currentWorld;
+                return currentBiome;
             }
-            set { currentWorld = value; }
+            set { currentBiome = value; }
         }
 
-        public int WorldsConquered
+        public int BiomesCompleted
         {
             get
             {
-                int worldsCompleted = 0;
+                int biomesCompleted = 0;
 
-                foreach (var world in Worlds)
+                foreach (var biome in Biomes)
                 {
-                    if (world.IsCompleted)
-                        worldsCompleted++;
+                    if (biome.IsCompleted)
+                        biomesCompleted++;
                 }
 
-                return worldsCompleted;
+                return biomesCompleted;
             }
         }
 
         [ContextMenu("Set Defaults")]
         public void SetDefaults()
         {
-            CurrentWorld = null;
+            CurrentBiome = null;
             Dna = 0;
             BankedDna = 0;
             BaseResourceValue = 1;
 
-            foreach (var world in Worlds)
+            foreach (var world in Biomes)
             {
                 world.SetDefaults();
             }
@@ -80,14 +80,14 @@ namespace Minigames.Fight
         public void Init()
         {
             // TODO: don't just always pick the first world
-            currentWorld = Worlds[0];   
+            currentBiome = Biomes[0];   
         }
         
         public ProgressModel GetProgressForSerialization()
         {
             ProgressModel toReturn = new ProgressModel();
 
-            toReturn.WorldData = GetWorldData();
+            toReturn.BiomeData = GetBiomeData();
             toReturn.Dna = Dna;
             toReturn.BankedDna = BankedDna;
             toReturn.PhysicalResources = PhysicalResources;
@@ -95,48 +95,56 @@ namespace Minigames.Fight
             return toReturn;
         }
 
-        public List<WorldData> GetWorldData()
+        public List<BiomeData> GetBiomeData()
         {
-            List<WorldData> worldData = new List<WorldData>();
+            List<BiomeData> biomeData = new List<BiomeData>();
 
-            foreach (var world in Worlds)
+            foreach (var biome in Biomes)
             {
-                WorldData worldModel = new WorldData();
+                BiomeData biomeModel = new BiomeData();
 
-                worldModel.WorldName = world.Name;
-                worldData.Add(worldModel);
+                biomeModel.BiomeName = biome.Name;
+                biomeModel.FloorsCompleted = biome.FloorsCompleted;
+                biomeData.Add(biomeModel);
             }
 
-            return worldData;
+            return biomeData;
         }
 
         public void UnlockWorlds()
         {
-            int conquered = WorldsConquered;
+            int conquered = BiomesCompleted;
 
-            for (int i = 0; i < Worlds.Count; i++)
+            for (int i = 0; i < Biomes.Count; i++)
             {
-                Worlds[i].IsUnlocked = conquered >= i;
+                Biomes[i].IsUnlocked = conquered >= i;
             }
+        }
+
+        public void CompleteFloor()
+        {
+            currentBiome.FloorsCompleted++;
         }
     }
 
     [Serializable]
-    public class World
+    public class Biome
     {
         [Header("Set in Editor")] 
         public string Name;
-        public Sprite WorldSprite;
+        public Sprite BiomeSprite;
         public RoomSettings RoomSettings;
+        public int FloorsToComplete;
 
         [Header("Run-time Values")]
         public bool IsUnlocked;
-        public bool IsCompleted;
+        public int FloorsCompleted;
+        public bool IsCompleted => FloorsCompleted >= FloorsToComplete;
 
         public void SetDefaults()
         {
             IsUnlocked = false;
-            IsCompleted = false;
+            FloorsCompleted = 0;
         }
     }
 }

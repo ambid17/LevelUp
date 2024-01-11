@@ -7,16 +7,17 @@ namespace Minigames.Fight
 {
     public class ProgressModel
     {
-        public List<WorldData> WorldData;
+        public List<BiomeData> BiomeData;
         public float Dna;
         public float BankedDna;
         public ResourceTypeFloatDictionary PhysicalResources;
     }
 
-    public class WorldData
+    public class BiomeData
     {
-        public string WorldName;
+        public string BiomeName;
         public bool IsCompleted;
         public bool IsUnlocked;
+        public int FloorsCompleted;
     }
 }

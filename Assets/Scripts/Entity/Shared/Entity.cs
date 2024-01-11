@@ -71,16 +71,19 @@ namespace Minigames.Fight
 
         public virtual void TakeHit(float damage, Entity hitter)
         {
-            Debug.Log($"{gameObject.name} took damage from {hitter.name}, damage: {damage}");
+            if (IsDead)
+            {
+                return;
+            }
             Stats.combatStats.TakeDamage(damage);
-
-            // TODO : don't stun ourselves with effects
-            VisualController.StartDamageFx(damage);
 
             if (IsDead)
             {
                 Die(hitter);
+                return;
             }
+
+            VisualController.StartDamageFx(damage);
         }
 
         public virtual void TakeHeal(float amount, Entity source)
@@ -135,5 +138,11 @@ namespace Minigames.Fight
 
             EditorUtility.SetDirty(this);
         }
+        [ContextMenu("Generate Collider Points")]
+        public void GenerateColliderPoints()
+        {
+            Stats.GenerateColliderPoints();
+        }
     }
+#endif
 }

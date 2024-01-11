@@ -29,8 +29,8 @@ public class SunInspector : MonoBehaviour
         perksButton.onClick.AddListener(OpenPerksMenu);
         gemsButton.onClick.AddListener(OpenGemsMenu);
 
-        progressText.text = $"Conquered {_progressSettings.WorldsConquered}/{_progressSettings.Worlds.Count} Worlds";
-        resetButton.interactable = _progressSettings.WorldsConquered == _progressSettings.Worlds.Count;
+        progressText.text = $"Conquered {_progressSettings.BiomesCompleted}/{_progressSettings.Biomes.Count} Worlds";
+        resetButton.interactable = _progressSettings.BiomesCompleted == _progressSettings.Biomes.Count;
     }
 
     public void Hide()

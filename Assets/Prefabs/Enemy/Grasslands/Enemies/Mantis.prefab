@@ -76,6 +76,7 @@ MonoBehaviour:
         overrideEffect: {fileID: 0}
     combatStats:
       meleeWeaponStats:
+        collider: {fileID: 0}
         MaxRange: 1
         projectilePrefab: {fileID: 2340081581963468282, guid: a20052fd068addd45b8a4f95c6aa8166, type: 3}
         currentAmmo: 0
@@ -87,6 +88,16 @@ MonoBehaviour:
           m_Bits: 0
         sprite: {fileID: 21300000, guid: a2f324d6cd7d9fb439ffa59186b1ca89, type: 3}
         animation: {fileID: 9100000, guid: 6da85e683a1b45345be79d924e78b043, type: 2}
+        colliderPoints:
+        - {x: -0.0638268, y: -0.03655529}
+        - {x: 0.015968338, y: -0.19246879}
+        - {x: 0.107458234, y: -0.2719527}
+        - {x: 0.15380737, y: -0.27194744}
+        - {x: 0.000013127923, y: 0.05516216}
+        - {x: 0.12228747, y: 0.32124856}
+        - {x: 0.091935456, y: 0.32105377}
+        - {x: 0.0024285838, y: 0.24065702}
+        - {x: -0.06364541, y: 0.14862171}
         baseDamage:
           baseValue: 1
           flatEffects: []
@@ -161,6 +172,7 @@ MonoBehaviour:
         OnHitEffects: []
         AmmoStatusEffects: []
       projectileWeaponStats:
+        collider: {fileID: 0}
         MaxRange: 0
         projectilePrefab: {fileID: 0}
         currentAmmo: 0
@@ -172,6 +184,7 @@ MonoBehaviour:
           m_Bits: 0
         sprite: {fileID: 0}
         animation: {fileID: 0}
+        colliderPoints: []
         baseDamage:
           baseValue: 0
           flatEffects: []
@@ -507,7 +520,7 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(331,30)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-183.913651,101.475754)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-694.792358,125.615891)"},"ID":2,"Name":"Play
-        Animation","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Fly","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MoveAnimation","PropertyMappingOwner":0},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.MoveTowards","NodeData":{"Offset":"(-581.166,123.611679)"},"ID":3,"Name":"Move
+        Animation","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Fly","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/MoveAnimation","PropertyMappingOwner":0},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.MoveTowards","NodeData":{"Offset":"(-582.416,123.611679)"},"ID":3,"Name":"Move
         Towards","Instant":true,"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"speed","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/Speed","PropertyMappingOwner":1,"SinglemValue":0},"SharedFloatarriveDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0.1},"SharedBoollookAtTarget":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatmaxLookAtRotationDelta":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0},"SharedGameObjecttarget":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedVector2targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"EntryPoint","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisBehaviorData/InitialDestination","PropertyMappingOwner":2,"Vector2mValue":"(0,0)"}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-472.4411,124.275787)"},"ID":4,"Name":"Play
         Animation","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Land","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/LandAnimation","PropertyMappingOwner":3},"SuccessTypeSuccessType":"OnComplete","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.PlayAnimation","NodeData":{"Offset":"(-362.441132,121.775757)"},"ID":5,"Name":"Play
         Animation","Instant":true,"SharedAnimationNameAnimation":{"Type":"BehaviorDesigner.Runtime.SharedAnimationName","Name":"Idle","IsShared":true,"PropertyMapping":"Minigames.Fight.MantisAnimationData/IdleAnimation","PropertyMappingOwner":4},"SuccessTypeSuccessType":"OnStart","SharedBoolfailOnInterrupt":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(-256.816071,119.588287)"},"ID":6,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"BehaviorDesigner.Runtime.Tasks.InvokeMethod","NodeData":{"Offset":"(-141.957245,117.565506)"},"ID":7,"Name":"Invoke
@@ -736,6 +749,7 @@ MonoBehaviour:
   minCombo: 5
   maxCombo: 10
   _comboWeapon:
+    collider: {fileID: 0}
     MaxRange: 0
     projectilePrefab: {fileID: 0}
     currentAmmo: 0
@@ -747,6 +761,7 @@ MonoBehaviour:
       m_Bits: 0
     sprite: {fileID: 0}
     animation: {fileID: 0}
+    colliderPoints: []
     baseDamage:
       baseValue: 0
       flatEffects: []
@@ -843,7 +858,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.13, y: 0.64}

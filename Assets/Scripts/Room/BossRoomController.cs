@@ -2,6 +2,7 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ namespace Minigames.Fight
         private Transform bossEntry;
         [SerializeField]
         private ConstructionChamber constructionChamber;
+        [SerializeField]
+        private GameObject exit;
 
         private bool _fightOver => _hasActivated && _boss == null;
 
@@ -39,6 +42,8 @@ namespace Minigames.Fight
         private EntityBehaviorData _boss;
         private bool _hasActivated = false;
         private bool _bossDefeated = false;
+        private List<EntityBehaviorData> _enemiesToReactivate = new();
+        private Bounds _entranceBounds;
 
         private void Start()
         {
@@ -62,58 +67,102 @@ namespace Minigames.Fight
         // Using initialize enemies for entire boss opening sequence, possibly rename to initialize room for clarity?
         protected override void InitializeEnemies()
         {
-            // TODO: disable all enemies to save performance
-            AstarPath.OnLatePostScan += StartPlayerPathing;
+            foreach (EntityBehaviorData enemy in GameManager.EnemyObjectPool.AllEnemies)
+            {
+                if (enemy.gameObject.activeInHierarchy)
+                {
+                    _enemiesToReactivate.Add(enemy);
+                    enemy.gameObject.SetActive(false);
+                }
+            }
 
-            GridGraph graph = AstarPath.active.graphs.First(g => g.graphIndex == PhysicsUtils.playerGraph) as GridGraph;
-            graph.center = MyCollider.bounds.center;
-            graph.SetDimensions(Tilemap.cellBounds.size.x * 4, Tilemap.cellBounds.size.y * 4, .25f);
-            graph.Scan();
-
+            StartPlayerPathing();
         }
 
-        private void StartPlayerPathing(AstarPath script)
+        private void StartPlayerPathing()
         {
+            GameManager.CameraLerp.PlayCinematic(GameManager.PlayerEntity.transform);
             PlayerPathfindingMovementController pathfindingMovementController = GameManager.PlayerEntity.gameObject.AddComponent<PlayerPathfindingMovementController>();
             pathfindingMovementController.StartPath(playerEntryDestination.position, PlayerControlledActionType.BossRoomEntry);
-            AstarPath.OnLatePostScan -= StartPlayerPathing;
         }
 
         private void OnPlayerEntered(PlayerControlledActionFinishedEvent e)
         {
+            GameManager.CameraLerp.EndCinematic();
             if (e.ActionType != PlayerControlledActionType.BossRoomEntry)
             {
                 return;
             }
             _entrance = roomConnections.First(r => r.HasConnection);
+            float xMin = float.MaxValue;
+            float yMin = float.MaxValue;
+            float xMax = float.MinValue;
+            float yMax = float.MinValue;
             foreach (Vector3Int tilePos in _entrance.TilePositions)
             {
-                Tilemap.SetTile(tilePos, GameManager.ProgressSettings.CurrentWorld.RoomSettings.wallTile);
-                var gou = new GraphUpdateObject(MyCollider.bounds);
-                AstarPath.active.UpdateGraphs(gou);
+                Vector3 worldPos = Tilemap.CellToWorld(tilePos);
+                if (worldPos.x < xMin)
+                {
+                    xMin = worldPos.x;
+                }
+                if (worldPos.y < yMin)
+                {
+                    yMin = worldPos.y;
+                }
+                if (worldPos.x > xMax)
+                {
+                    xMax = worldPos.x;
+                }
+                if (worldPos.y > yMax)
+                {
+                    yMax = worldPos.y;
+                }
+
+                Tilemap.SetTile(tilePos, GameManager.ProgressSettings.CurrentBiome.RoomSettings.wallTile);
             }
+            Vector2 min = new(xMin - 2, yMin -2);
+            Vector2 max = new(xMax +2, yMax + 2);
+
+            Vector2 extents = (max - min) * .5f;
+            Vector2 center = min + extents;
+            _entranceBounds = new(center, extents * 2);
+
+            var gou = new GraphUpdateObject(_entranceBounds);
+            AstarPath.active.UpdateGraphs(gou);
+
             _boss = GameManager.EnemyObjectPool.AllEnemies.First(b => b.room == this);
             _boss.transform.parent = null;
-            _boss.transform.position = bossEntry.position;
+            _boss.transform.position = bossOrigin.position;
             _boss.gameObject.SetActive(true);
             _hasActivated = true;
+            GameManager.CameraLerp.PlayCinematic(_boss.transform);
         }
         
         private void OnBossEntered()
         {
             GameManager.PlayerEntity.IsControlled = false;
+            GameManager.CameraLerp.EndCinematic();
         }
 
         private void OnBossDefeated()
         {
             _bossDefeated = true;
+            GameManager.ProgressSettings.CompleteFloor();
             constructionChamber.gameObject.SetActive(true);
+            exit.SetActive(true);
+            var gou = new GraphUpdateObject(constructionChamber.SpriteRenderer.bounds);
+            AstarPath.active.UpdateGraphs(gou);
             foreach (Vector3Int tilePos in _entrance.TilePositions)
             {
                 Tilemap.SetTile(tilePos, null);
-                var gou = new GraphUpdateObject(MyCollider.bounds);
-                AstarPath.active.UpdateGraphs(gou);
             }
+            gou = new GraphUpdateObject(_entranceBounds);
+            AstarPath.active.UpdateGraphs(gou);
+            foreach (EntityBehaviorData enemy in _enemiesToReactivate)
+            {
+                enemy.gameObject.SetActive(true);
+            }
+            _enemiesToReactivate.Clear();
         }
     }
 }

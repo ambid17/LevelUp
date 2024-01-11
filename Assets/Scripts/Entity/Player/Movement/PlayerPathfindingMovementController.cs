@@ -30,10 +30,14 @@ namespace Minigames.Fight
             _myEntity = GetComponent<PlayerEntity>();
             _myRigidbody2D = GetComponent<Rigidbody2D>();
             _myRigidbody2D.velocity = Vector2.zero;
+            _myRigidbody2D.isKinematic = true;
             // path to the chamber
             _myEntity.IsControlled = true;
             _seeker = gameObject.AddComponent<Seeker>();
-            _simpleSmoothModifier = gameObject.AddComponent<SimpleSmoothModifier>();
+            if (actionType == PlayerControlledActionType.BossRoomEntry)
+            {
+                _simpleSmoothModifier = gameObject.AddComponent<SimpleSmoothModifier>();
+            }
             _seeker.graphMask = GraphMask.FromGraphName("PlayerGraph");
             _seeker.StartPath(transform.position, target, OnFinishPath);
             _actionType = actionType;
@@ -44,7 +48,7 @@ namespace Minigames.Fight
             if (!p.error)
             {
                 path = p;
-                currentWaypoint = 1;
+                currentWaypoint = _actionType == PlayerControlledActionType.BossRoomEntry ? 2 : 0;
                 targetPosition = path.vectorPath[currentWaypoint];
             }
         }
@@ -86,6 +90,7 @@ namespace Minigames.Fight
                 else
                 {
                     Platform.EventService.Dispatch(new PlayerControlledActionFinishedEvent(_actionType));
+                    _myRigidbody2D.isKinematic = false;
                     Destroy(_simpleSmoothModifier);
                     Destroy(_seeker);
                     Destroy(this);

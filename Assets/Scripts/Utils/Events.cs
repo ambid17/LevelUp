@@ -27,6 +27,16 @@ namespace Minigames.Fight
         }
     }
 
+    public class MouseHoverEvent : IEvent
+    {
+        public string Message;
+        
+        public MouseHoverEvent(string message)
+        {
+            Message = message;
+        }
+    }
+
     public class OnCanInteractEvent : IEvent
     {
         public InteractionType InteractionType;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 186092300}
   - component: {fileID: 186092301}
+  - component: {fileID: 2938351460327576565}
   m_Layer: 10
   m_Name: Door
   m_TagString: Untagged
@@ -70,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 625245563
-  m_SortingLayer: 4
+  m_SortingLayerID: 1162470409
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 589a6bffac1d1274caad1b572168ffbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,6 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2938351460327576565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186092299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1173b4414c4f2074bba316702cca9b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: -1
 --- !u!1 &1146848244121561846
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +115,8 @@ GameObject:
   - component: {fileID: 2744168883812054419}
   - component: {fileID: 1556266754249744284}
   - component: {fileID: 1345826647603380537}
+  - component: {fileID: 4162726417511244751}
+  - component: {fileID: 1352624292744552632}
   m_Layer: 10
   m_Name: Construction Chamber
   m_TagString: Untagged
@@ -215,6 +231,7 @@ MonoBehaviour:
     CurrentIndex: 1
   animationManager: {fileID: 5198208647757399415}
   playerMoveTarget: {fileID: 2863132289740258464}
+  spriteRenderer: {fileID: 7900254011857629874}
 --- !u!114 &5198208647757399415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1173b4414c4f2074bba316702cca9b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 0
 --- !u!114 &2744168883812054419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,13 +341,69 @@ PolygonCollider2D:
     - - {x: 0.1902504, y: 0.011169434}
       - {x: 0.074710846, y: -0.03475952}
       - {x: 0.007209778, y: -0.11390686}
-      - {x: -0.09544128, y: -0.067977905}
-      - {x: 0.09224579, y: 0.13347167}
-      - {x: 0.661026, y: 0.07194519}
-      - {x: 0.6613846, y: -0.113845825}
+      - {x: -0.001865387, y: -0.5389404}
+      - {x: -0.07021713, y: -0.64611816}
+      - {x: 0.12708664, y: -0.8432007}
+      - {x: 0.117622375, y: -1.0301971}
+      - {x: -0.16838455, y: -0.7668915}
+      - {x: -0.18151993, y: -0.26286316}
+      - {x: -0.11898422, y: -0.108169556}
+      - {x: 0.09224579, y: 0.096286}
+      - {x: 0.40127945, y: 0.12483215}
+      - {x: 0.56295013, y: 0.09899902}
+      - {x: 0.7880249, y: -0.09034729}
+      - {x: 0.84464264, y: -0.15705872}
+      - {x: 0.90392303, y: -0.2506256}
+      - {x: 0.87272644, y: -0.34733582}
+      - {x: 0.85105515, y: -0.5669708}
+      - {x: 0.85020065, y: -0.7723694}
+      - {x: 0.5561447, y: -1.0322113}
+      - {x: 0.54984283, y: -0.84558105}
+      - {x: 0.72636414, y: -0.6622467}
+      - {x: 0.66334915, y: -0.5362549}
+      - {x: 0.65592194, y: -0.12983704}
       - {x: 0.56370926, y: -0.030471802}
       - {x: 0.43824005, y: 0.02381897}
       - {x: 0.3318138, y: 0.039602637}
+--- !u!114 &4162726417511244751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146848244121561846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1173b4414c4f2074bba316702cca9b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
+--- !u!61 &1352624292744552632
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146848244121561846}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.80143356, y: -0.55661774}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.78079224, y: 0.8172455}
+  m_EdgeRadius: 0
 --- !u!1 &5993571852050906639
 GameObject:
   m_ObjectHideFlags: 0

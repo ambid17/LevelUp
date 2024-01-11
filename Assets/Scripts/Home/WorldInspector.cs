@@ -13,33 +13,29 @@ public class WorldInspector : MonoBehaviour
     [SerializeField] private Image planetImage;
     [SerializeField] private TMP_Text progressText;
     [SerializeField] private Button conquerButton;
-    [SerializeField] private Button travelButton;
     [SerializeField] private GameObject container;
     [SerializeField] private GameObject loadingTransition;
     
-    private World _world;
+    private Biome _biome;
     void Start()
     {
         Hide();
     }
 
-    public void InspectWorld(World world)
+    public void InspectWorld(Biome biome)
     {
-        if (world == null)
+        if (biome == null)
         {
             container.SetActive(false);
             return;
         }
         container.SetActive(true);
-        _world = world;
-        planetNameText.text = world.Name;
-        planetImage.sprite = world.WorldSprite;
+        _biome = biome;
+        planetNameText.text = biome.Name;
+        planetImage.sprite = biome.BiomeSprite;
         progressText.text = $"Conquered";
         conquerButton.onClick.AddListener(ConquerPlanet);
-        travelButton.onClick.AddListener(TravelToPlanet);
-
-        conquerButton.interactable = world.IsUnlocked;
-        travelButton.interactable = world.IsCompleted;
+        conquerButton.interactable = biome.IsUnlocked;
     }
 
     public void Hide()
@@ -47,20 +43,11 @@ public class WorldInspector : MonoBehaviour
         container.SetActive(false);
 
     }
-    
+
     private void ConquerPlanet()
     {
         GameManager.IsLoadingScene = true;
-        Platform.ProgressSettings.CurrentWorld = _world;
+        Platform.ProgressSettings.CurrentBiome = _biome;
         Instantiate(loadingTransition);
     }
-    
-    private void TravelToPlanet()
-    {
-        GameManager.IsLoadingScene = true;
-        Platform.ProgressSettings.CurrentWorld = _world;
-        Instantiate(loadingTransition);
-    }
-
-    
 }

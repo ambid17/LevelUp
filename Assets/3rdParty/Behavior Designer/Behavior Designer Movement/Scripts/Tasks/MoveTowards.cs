@@ -26,11 +26,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         {
             var position = Target();
             // Return a task status of success once we've reached the target
-            if (Vector3.Magnitude(transform.position.AsVector2() - position) < arriveDistance.Value) {
+            if (Vector2.Distance(transform.position.AsVector2(), position) < arriveDistance.Value) {
                 return TaskStatus.Success;
             }
             // We haven't reached the target yet so keep moving towards it
-            transform.position = Vector3.MoveTowards(transform.position, position, speed.Value * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, position, speed.Value * Time.deltaTime);
             if (lookAtTarget.Value && (position - transform.position.AsVector2()).sqrMagnitude > 0.01f) {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(position - transform.position.AsVector2()), maxLookAtRotationDelta.Value);
             }

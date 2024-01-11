@@ -8,12 +8,15 @@ namespace Minigames.Fight
 {
     public class ConstructionChamber : MonoBehaviour
     {
+        public SpriteRenderer SpriteRenderer => spriteRenderer;
+
         [SerializeField] private AnimationName idle;
         [SerializeField] private AnimationName doorOpen;
         [SerializeField] private AnimationName doorClose;
         [SerializeField] private AnimationName finishedUpgrade;
         [SerializeField] private AnimationManager animationManager;
         [SerializeField] private Transform playerMoveTarget;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         public Vector3 PlayerMoveTarget => playerMoveTarget.position;
 
         private EventService eventService;

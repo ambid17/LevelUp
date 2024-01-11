@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using Utils;
 
@@ -132,7 +134,7 @@ namespace Minigames.Fight
             }
             return animation;
         }
-        public void PlayDieAnimation()
+        public IEnumerator PlayDieAnimation(Action callback)
         {
             AnimationName animation = null;
             switch (currentDirection)
@@ -151,6 +153,13 @@ namespace Minigames.Fight
                     break;
             }
             OverrideAnimation(animation, 0);
+            while (!IsAnimPlaying(animation))
+            {
+                OverrideAnimation(animation, 0);
+                yield return new WaitForSeconds(0);
+            }
+            yield return new WaitUntil(() => IsAnimFinished);
+            callback();
         }
     }
 }
