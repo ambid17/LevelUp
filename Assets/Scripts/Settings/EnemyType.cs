@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "EnemyType", menuName = "ScriptableObjects/Room/EnemyType", order = 1)]
+    [CreateAssetMenu(fileName = "EnemyType", menuName = "ScriptableObjects/Fight/EnemyType", order = 1)]
     [Serializable]
     public class EnemyType : ScriptableObject
     {

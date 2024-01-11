@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEditor.Animations;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -50,7 +51,6 @@ namespace Minigames.Fight
 
             EnemyDeathAnimationPlayer deathAnimPlayer = Instantiate(deathAnimPlayerPrafab, transform.position, transform.rotation);
             deathAnimPlayer.Setup(VisualController.SpriteRenderer, deathAnimation);
-
 
             Destroy(gameObject);
         }

@@ -20,7 +20,7 @@ namespace Minigames.Fight
 
         void Awake()
         {
-            allUpgrades = GameManager.UpgradeSettings.AllUpgrades;
+            allUpgrades = GameManager.EffectSettings.AllUpgrades;
             buttonInstances = new List<GameObject>();
         }
 

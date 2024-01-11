@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "RoomSettings", menuName = "ScriptableObjects/Rooms/RoomSettings", order = 1)]
+    [CreateAssetMenu(fileName = "RoomSettings", menuName = "ScriptableObjects/Fight/RoomSettings", order = 1)]
     [Serializable]
     public class RoomSettings : ScriptableObject
     {

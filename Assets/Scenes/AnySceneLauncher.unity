@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca270ea179297fb4c922ca2911dff1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectSettings: {fileID: 11400000, guid: dda7d6a15d8971346ade56821f451b42, type: 2}
+  effectSettings: {fileID: 11400000, guid: b1360d803b0ce334aaf18bf3888c0a8e, type: 2}
   serializableEntities:
   - {fileID: -7786698165613059924, guid: 397fcdc02bde49141ab2b41163364880, type: 3}
   - {fileID: 5632584843697323086, guid: 8669bff7bca27bc4cbb529994d08bce4, type: 3}
@@ -246,12 +246,6 @@ MonoBehaviour:
   - {fileID: 5979765343580716156, guid: ddca6166c3e63f048b582f769e76b592, type: 3}
   - {fileID: -7786698165613059924, guid: e6cee23ed31a3004e82de48c9b44aa26, type: 3}
   - {fileID: 8595262085980706986, guid: 9b26fa634ed95b646821e49e17d514a2, type: 3}
-  fileNameRemappings:
-    m_keys: []
-    m_values: []
-  entityStatsMap:
-    m_keys: []
-    m_values: []
 --- !u!4 &1821568680
 Transform:
   m_ObjectHideFlags: 0
@@ -322,9 +316,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7993349945317546149, guid: 672d82bed3ef4f04d8f82d0b4a278ef2, type: 3}
-      propertyPath: upgradeSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: dda7d6a15d8971346ade56821f451b42, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 672d82bed3ef4f04d8f82d0b4a278ef2, type: 3}

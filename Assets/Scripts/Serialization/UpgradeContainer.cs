@@ -31,10 +31,10 @@ namespace Minigames.Fight
 
             UpgradeModel newEffect = new UpgradeModel()
             {
+                Type = upgrade.GetType(),
                 Name = upgrade.Name,
                 AmountOwned = upgrade.AmountOwned,
-                IsUnlocked = upgrade.IsUnlocked,
-                IsCrafted = upgrade.IsCrafted,
+                IsUnlocked = upgrade.IsUnlocked
             };
 
             upgrades.Add(newEffect);

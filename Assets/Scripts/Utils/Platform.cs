@@ -9,7 +9,7 @@ using Utils;
 public class Platform : Singleton<Platform>
 {
     [SerializeField] private ProgressSettings progressSettings;
-    [SerializeField] private UpgradeSettings upgradeSettings;
+    [SerializeField] private EffectSettings effectSettings;
     public static ProgressSettings ProgressSettings => Instance.progressSettings;
     
     public static bool ShouldSave = true;
@@ -53,7 +53,7 @@ public class Platform : Singleton<Platform>
         // Only clear progress on quit. If done on destroy it will delete loaded progress when loading into a game
 #if UNITY_EDITOR
         ProgressSettings.SetDefaults();
-        upgradeSettings.SetDefaults();
+        effectSettings.SetDefaults();
 #endif
     }
 

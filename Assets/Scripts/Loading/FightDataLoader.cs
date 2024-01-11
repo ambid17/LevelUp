@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class FightDataLoader : Singleton<FightDataLoader>
 {
-    public UpgradeSettings effectSettings;
+    public EffectSettings effectSettings;
     public static int TargetSceneIndex;
     public static readonly string ENTITY_FOLDER = "Entities";
 

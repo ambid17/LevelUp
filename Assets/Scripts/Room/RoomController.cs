@@ -54,7 +54,6 @@ namespace Minigames.Fight
                 enemy.transform.parent = null;
                 enemy.transform.position = spawnPoints[randomInt].position;
                 enemy.gameObject.SetActive(true);
-                GameManager.EnemyObjectPool.ActiveEnemies.Add(enemy);
 
                 IHiveMind hiveMind = enemy.GetComponent<IHiveMind>();
                 if (hiveMind != null)

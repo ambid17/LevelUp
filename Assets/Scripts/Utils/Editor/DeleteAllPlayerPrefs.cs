@@ -21,11 +21,11 @@ public class DeleteAllPlayerPrefs : MonoBehaviour
 
     static void ResetScriptableObjects()
     {
-        var progress = AssetDatabase.LoadAssetAtPath<ProgressSettings>("Assets/ScriptableObjects/ProgressSettings.asset");
+        var progress = AssetDatabase.LoadAssetAtPath<ProgressSettings>("Assets/Minigames/Fight/ScriptableObjects/ProgressSettings.asset");
         progress.SetDefaults();
         EditorUtility.SetDirty(progress);
         
-        var effectSettings = AssetDatabase.LoadAssetAtPath<UpgradeSettings>("Assets/ScriptableObjects/UpgradeSettings.asset");
+        var effectSettings = AssetDatabase.LoadAssetAtPath<EffectSettings>("Assets/Minigames/Fight/ScriptableObjects/EffectSettings.asset");
         effectSettings.SetDefaults();
         EditorUtility.SetDirty(effectSettings);
         

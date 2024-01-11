@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "RoomSpriteSettings", menuName = "ScriptableObjects/Rooms/RoomSpriteSettings", order = 1)]
+    [CreateAssetMenu(fileName = "RoomSpriteSettings", menuName = "ScriptableObjects/Fight/RoomSpriteSettings", order = 1)]
     [Serializable]
     public class RoomSpriteSettings : ScriptableObject
     {

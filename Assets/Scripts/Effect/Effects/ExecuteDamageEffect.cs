@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    [CreateAssetMenu(fileName = "ExecuteEffect", menuName = "ScriptableObjects/Effects/ExecuteEffect", order = 1)]
+    [CreateAssetMenu(fileName = "ExecuteEffect", menuName = "ScriptableObjects/Fight/Effects/ExecuteEffect", order = 1)]
     [Serializable]
     public class ExecuteDamageEffect : Effect
     {

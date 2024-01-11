@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ShadowData", menuName = "ScriptableObjects/ShadowData", order = 1)]
+[CreateAssetMenu(fileName = "ShadowData", menuName = "ScriptableObjects/Fight/ShadowData", order = 1)]
 [Serializable]
 public class ShadowData : ScriptableObject
 {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 using Utils;
 
@@ -25,6 +24,12 @@ namespace Minigames.Fight
 
         private Upgrade _currentUpgrade;
         private EventService _eventService;
+        private Dictionary<int, float> tierCostMapping = new Dictionary<int, float>()
+        {
+            {1, 100},
+            {2, 200},
+            {3, 500},
+        };
 
         private void Start()
         {
@@ -60,10 +65,10 @@ namespace Minigames.Fight
 
             // convert from the tier (1,2,3...) to the cost
             int tierValue = (int)upgradeUI.tierCategory;
-            float tierCost = CurrencyManager.TierCostMapping[tierValue];
+            float tierCost = tierCostMapping[tierValue];
             upgradeButtonText.text = tierCost.ToCurrencyString();
 
-            var upgradesInCategory = GameManager.UpgradeSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
+            var upgradesInCategory = GameManager.EffectSettings.GetAllUpgradesInCategory(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
             var unlockedInCategory = upgradesInCategory.Where(u => u.IsUnlocked).ToList();
             descriptionText.text = $"You have unlocked {unlockedInCategory.Count} / {upgradesInCategory.Count} upgrades in this category";
 
@@ -88,10 +93,10 @@ namespace Minigames.Fight
         public void UnlockRandomUpgrade()
         {
             int tierValue = (int)upgradeUI.tierCategory;
-            float tierCost = CurrencyManager.TierCostMapping[tierValue];
+            float tierCost = tierCostMapping[tierValue];
             if (GameManager.CurrencyManager.TrySpendCurrency(tierCost))
             {
-                var upgrade = GameManager.UpgradeSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
+                var upgrade = GameManager.EffectSettings.GetUpgradeToUnlock(upgradeUI.upgradeCategory, upgradeUI.effectCategory, upgradeUI.tierCategory);
                 upgrade.IsUnlocked = true;
 
                 // Update the UI with the new state
@@ -114,9 +119,9 @@ namespace Minigames.Fight
             icon.gameObject.SetActive(_currentUpgrade.Icon != null);
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
-            upgradeButtonText.text = CurrencyManager.GetUpgradeCost(_currentUpgrade).ToCurrencyString();
-            descriptionText.text = _currentUpgrade.positive.effect != null ? _currentUpgrade.positive.effect.GetDescription() : string.Empty;
-            bonusText.text = _currentUpgrade.negative.effect != null ? _currentUpgrade.negative.effect.GetDescription() : string.Empty;
+            upgradeButtonText.text = _currentUpgrade.GetCost(1).ToCurrencyString();
+            descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
+            bonusText.text = _currentUpgrade.negative.effect.GetDescription();
 
             resourcesText.gameObject.SetActive(false);
 
@@ -129,7 +134,7 @@ namespace Minigames.Fight
             {
                 bool hasPurchasesLeft = _currentUpgrade.AmountOwned < _currentUpgrade.MaxAmountOwned ||
                                         _currentUpgrade.MaxAmountOwned == 0;
-                bool canAfford = GameManager.CurrencyManager.BankedDna > CurrencyManager.GetUpgradeCost(_currentUpgrade);
+                bool canAfford = GameManager.CurrencyManager.BankedDna > _currentUpgrade.GetCost(1);
                 upgradeButton.interactable = canAfford && hasPurchasesLeft;
                 if (!hasPurchasesLeft)
                 {
@@ -142,7 +147,7 @@ namespace Minigames.Fight
 
         public void BuyUpgrade()
         {
-            if (GameManager.CurrencyManager.TrySpendCurrency(CurrencyManager.GetUpgradeCost(_currentUpgrade)))
+            if (GameManager.CurrencyManager.TrySpendCurrency(_currentUpgrade.GetCost(1)))
             {
                 _currentUpgrade.BuyUpgrade();
                 OnUpgradeSelectedForUpgrade();
@@ -158,64 +163,26 @@ namespace Minigames.Fight
                 return;
             }
 
-            
+            upgradeButton.onClick.RemoveAllListeners();
+            upgradeButton.onClick.AddListener(CraftUpgrade);
 
             icon.gameObject.SetActive(_currentUpgrade.Icon != null);
             icon.sprite = _currentUpgrade.Icon;
             nameText.text = $"{_currentUpgrade.Name}\n{_currentUpgrade.GetUpgradeCountText()}";
+            upgradeButtonText.text = "CRAFT";
+            descriptionText.text = _currentUpgrade.positive.effect.GetDescription();
+            bonusText.text = _currentUpgrade.negative.effect.GetDescription();
 
-
-
-            descriptionText.text = _currentUpgrade.positive.effect != null ? _currentUpgrade.positive.effect.GetDescription() : string.Empty;
-            bonusText.text = _currentUpgrade.negative.effect != null ? _currentUpgrade.negative.effect.GetDescription() : string.Empty;
-
-
-            resourcesText.gameObject.SetActive(!_currentUpgrade.IsCrafted);
+            resourcesText.gameObject.SetActive(true);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Resource costs:");
-            foreach(var cost in CurrencyManager.GetUpgradeResourceCosts(_currentUpgrade))
+            foreach(var cost in _currentUpgrade.resourceCosts)
             {
                 stringBuilder.AppendLine($"{cost.Key} : {cost.Value}");
             }
             resourcesText.text = stringBuilder.ToString();
 
-            HandleUpgradeButton();
-
             
-        }
-
-        private void HandleUpgradeButton()
-        {
-            // TODO : toggle off upgrade button icon
-            // move all this code into an upgrade button script
-            upgradeButton.onClick.RemoveAllListeners();
-            if (_currentUpgrade.IsCrafted)
-            {
-                upgradeButton.onClick.AddListener(ToggleUpgradeEquip);
-            }
-            else
-            {
-                upgradeButton.onClick.AddListener(CraftUpgrade);
-            }
-
-            string craftButtonText = "CRAFT";
-            if (!_currentUpgrade.IsCrafted)
-            {
-                craftButtonText = "CRAFT";
-            }
-            else
-            {
-                if (_currentUpgrade.IsEquipped)
-                {
-                    craftButtonText = "UNEQUIP";
-                }
-                else
-                {
-                    craftButtonText = "EQUIP";
-                }
-            }
-            upgradeButtonText.text = craftButtonText;
-
             bool canCraft = !_currentUpgrade.IsCrafted;
             bool canAfford = GameManager.CurrencyManager.CanAffordCraft(_currentUpgrade);
             upgradeButton.interactable = canAfford && canCraft;
@@ -231,11 +198,6 @@ namespace Minigames.Fight
                 OnUpgradeSelectedForCraft();
                 Platform.EventService.Dispatch<DidCraftUpgradeEvent>();
             }
-        }
-
-        private void ToggleUpgradeEquip()
-        {
-
         }
 
         // Forces the horizontal layout groups to regenerate, fixing any overlaps when the text changes
