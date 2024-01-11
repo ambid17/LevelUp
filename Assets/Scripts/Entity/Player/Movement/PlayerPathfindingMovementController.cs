@@ -44,7 +44,7 @@ namespace Minigames.Fight
             if (!p.error)
             {
                 path = p;
-                currentWaypoint = 2;
+                currentWaypoint = 1;
                 targetPosition = path.vectorPath[currentWaypoint];
             }
         }

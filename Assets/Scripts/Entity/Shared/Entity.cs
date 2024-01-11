@@ -65,19 +65,31 @@ namespace Minigames.Fight
 
         protected virtual void Update()
         {
+            if(IsDead) return;
             Stats.TickStatuses();
         }
 
         public virtual void TakeHit(float damage, Entity hitter)
         {
+            Debug.Log($"{gameObject.name} took damage from {hitter.name}, damage: {damage}");
             Stats.combatStats.TakeDamage(damage);
 
+            // TODO : don't stun ourselves with effects
             VisualController.StartDamageFx(damage);
 
             if (IsDead)
             {
                 Die(hitter);
             }
+        }
+
+        public virtual void TakeHeal(float amount, Entity source)
+        {
+            if (IsDead)
+            {
+                return;
+            }
+            Stats.combatStats.AddHp(amount);
         }
 
         public void DealDamage(Entity target, WeaponStats weaponStats)
@@ -97,14 +109,17 @@ namespace Minigames.Fight
             WeaponController.CurrentWeapon.onHitDamage.Clear();
         }
 
-        protected virtual void OnKill()
+        protected virtual void OnKill(Entity killedEntity)
         {
-            // Execute OnKillEffects.
+            foreach (var effect in WeaponController.CurrentWeapon.OnKillEffects)
+            {
+                effect.Execute(this, killedEntity);
+            }
         }
 
         protected virtual void Die(Entity killer)
         {
-            killer.OnKill();
+            killer.OnKill(this);
         }
 
 

@@ -13,6 +13,7 @@ namespace Minigames.Fight
         [SerializeField] private TMP_Text _goldText;
         [SerializeField] private Slider _hpSlider;
         [SerializeField] private Button _upgradeButton;
+        [SerializeField] private Button _craftButton;
         [SerializeField] private TMP_Text _remainingAmmoText;
         [SerializeField] private Image _ammoImage;
 
@@ -26,16 +27,34 @@ namespace Minigames.Fight
             _eventService.Add<PlayerAmmoUpdatedEvent>(UpdateAmmo);
             _eventService.Add<PlayerChangedWeaponEvent>(SetWeaponUI);
             _upgradeButton.onClick.AddListener(OpenUpgrades);
-        
+            _craftButton.onClick.AddListener(OpenCrafting);
+
+            SetupDevButtons();
             SetGoldText();
            // SetHpSlider(new PlayerHpUpdatedEvent());
+        }
+
+        private void SetupDevButtons()
+        {
+            _upgradeButton.gameObject.SetActive(false);
+            _craftButton.gameObject.SetActive(false);
+
+            #if UNITY_EDITOR
+                _upgradeButton.gameObject.SetActive(true);
+                _craftButton.gameObject.SetActive(true);
+            #endif
         }
 
         private void OpenUpgrades()
         {
             _eventService.Dispatch(new PlayerInteractedEvent(InteractionType.Upgrade));
         }
-        
+
+        private void OpenCrafting()
+        {
+            _eventService.Dispatch(new PlayerInteractedEvent(InteractionType.Craft));
+        }
+
         private void SetGoldText()
         {
             _goldText.text = GameManager.CurrencyManager.Dna.ToCurrencyString();

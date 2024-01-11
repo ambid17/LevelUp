@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ad5f75a8987e64fb5abf72ca6c6010, type: 3}
+  m_Name: Random +1 Penetration
+  m_EditorClassIdentifier: 
+  Name: Random +1 penetration
+  Icon: {fileID: 0}
+  IsUnlocked: 0
+  AmountOwned: 0
+  MaxAmountOwned: 0
+  IsCrafted: 0
+  UpgradeCategory: 2
+  EffectCategory: 3
+  TierCategory: 2
+  positive:
+    effect: {fileID: 11400000, guid: e206fc07aa47915478ca9c303c839398, type: 2}
+    overrides:
+      impactPerStack: 1
+      impactType: 0
+      chanceToBackfire: 0
+      maxRange: 0
+      applicationChance: 0
+      duration: 0
+      tickRate: 0
+  negative:
+    effect: {fileID: 0}
+    overrides:
+      impactPerStack: 0
+      impactType: 0
+      chanceToBackfire: 0
+      maxRange: 0
+      applicationChance: 0
+      duration: 0
+      tickRate: 0
