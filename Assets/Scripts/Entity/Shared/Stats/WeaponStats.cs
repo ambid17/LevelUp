@@ -9,6 +9,9 @@ namespace Minigames.Fight
     [Serializable]
     public class WeaponStats
     {
+#if UNITY_EDITOR
+        [SerializeField] private PolygonCollider2D collider;
+#endif
         [JsonIgnore]
         public float MaxRange;
         [JsonIgnore]
@@ -25,6 +28,8 @@ namespace Minigames.Fight
         public Sprite sprite;
         [JsonIgnore]
         public AnimatorController animation;
+        [JsonIgnore]
+        public Vector2[] colliderPoints;
 
         public ModifiableStat baseDamage = new();
         public ModifiableStat onHitDamage = new();
@@ -89,6 +94,14 @@ namespace Minigames.Fight
                 AmmoStatusEffects = new();
             }
         }
+
+#if UNITY_EDITOR
+
+        public void GenerateColliderPoints()
+        {
+            colliderPoints = collider.GetPath(0);
+        }
+#endif
 
         public virtual void ConsumeAmmo(int ammoToConsume)
         {

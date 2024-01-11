@@ -53,6 +53,11 @@ namespace Minigames.Fight
             currentHp = Mathf.Clamp(currentHp, 0, maxHp.Calculated);
         }
 
+        public void ResetHp()
+        {
+            currentHp = maxHp.Calculated;
+        }
+
         public void TakeDamage(float damage)
         {
             currentHp -= damage;

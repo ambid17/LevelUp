@@ -125,7 +125,7 @@ namespace Minigames.Fight
             killer.OnKill(this);
         }
 
-
+#if UNITY_EDITOR
         [ContextMenu("Setup")]
         public void SetupInspector()
         {

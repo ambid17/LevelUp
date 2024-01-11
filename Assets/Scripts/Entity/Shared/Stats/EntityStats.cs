@@ -41,5 +41,13 @@ namespace Minigames.Fight
             movementStats.ClearAllStatusEffects();
             combatStats.ClearAllStatusEffects();
         }
+
+#if UNITY_EDITOR
+        public void GenerateColliderPoints()
+        {
+            combatStats.meleeWeaponStats.GenerateColliderPoints();
+            combatStats.projectileWeaponStats.GenerateColliderPoints();
+        }
+#endif
     }
 }
