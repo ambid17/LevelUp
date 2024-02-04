@@ -51,22 +51,18 @@ namespace Minigames.Fight
 
         public virtual void ApplyOverrides(EffectOverrides overrides)
         {
-            throw new NotImplementedException();
         }
 
         public virtual void OnCraft(Entity target)
         {
-            throw new NotImplementedException();
         }
 
         public virtual void ToggleEquip(Entity target, bool isEquipped) 
         { 
-            throw new NotImplementedException(); 
         }
 
         public virtual void Execute(Entity source, Entity target)
         {
-            throw new NotImplementedException();
         }
 
         public virtual float ImpactStat(float stat)
