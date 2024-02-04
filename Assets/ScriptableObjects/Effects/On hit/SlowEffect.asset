@@ -12,21 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe36f6c3a4a4c5a971f5a14b2357330, type: 3}
   m_Name: SlowEffect
   m_EditorClassIdentifier: 
-  Name: Chilling touch
-  Icon: {fileID: 0}
-  IsUnlocked: 0
-  AmountOwned: 0
-  MaxAmountOwned: 0
-  BaseCost: 5
-  CostScalar: 1.05
-  CostType: 1
   ExecutionOrder: 0
-  TriggerType: 0
-  UpgradeCategory: 1
-  EffectCategory: 2
-  TierCategory: 1
-  DropWeight: 1
-  slowChance: 0.1
   duration: 2
-  slowAmount: 0.2
-  chanceScalar: 0.01
+  chanceToApply: 0.5
+  chanceToBackfire: 0.5
+  slowPerStack: 0.05

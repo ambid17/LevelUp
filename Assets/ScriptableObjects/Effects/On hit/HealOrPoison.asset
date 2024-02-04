@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HealOrPoison
   m_EditorClassIdentifier: 
   ExecutionOrder: 0
-  TriggerType: 0
   poisonEffect: {fileID: 11400000, guid: ee316443cd6a6454095900a4729c5cc1, type: 2}
   poisonDuration: 3
+  poisonTickRate: 1
   chanceToApply: 0.5
   chanceToBackfire: 0.15
   damagePerStack: 0.05

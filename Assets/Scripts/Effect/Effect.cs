@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace Minigames.Fight
 {
-    public enum EffectTriggerType
-    {
-        OnHit,
-        OnKill,
-        OnDeath,
-        OnTakeDamage,
-        OnCraft,
-        OnTimer
-    }
+    //public enum EffectTriggerType
+    //{
+    //    OnHit,
+    //    OnKill,
+    //    OnDeath,
+    //    OnTakeDamage,
+    //    OnCraft,
+    //    OnTimer
+    //}
 
     [Serializable]
     public class Effect : ScriptableObject, IEquatable<Effect>
