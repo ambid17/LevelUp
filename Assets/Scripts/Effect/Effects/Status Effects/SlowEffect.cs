@@ -34,6 +34,7 @@ namespace Minigames.Fight
             slowPerStack = overrides.impactPerStack;
             chanceToBackfire = overrides.chanceToBackfire;
             tickRate = overrides.tickRate;
+            duration = overrides.duration;
         }
 
 

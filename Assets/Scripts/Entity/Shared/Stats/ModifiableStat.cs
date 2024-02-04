@@ -125,7 +125,17 @@ namespace Minigames.Fight
 
         public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)
         {
-            var existing = statusEffects.FirstOrDefault(e => e.statusEffect.Equals(statusEffect));
+            StatusEffectData existing = null;
+
+            foreach(var statusEffectData in statusEffects)
+            {
+                var test = statusEffectData.statusEffect.GetType();
+                var test2 = statusEffect.GetType();
+                if (statusEffectData.statusEffect.GetType() == statusEffect.GetType())
+                {
+                    existing = statusEffectData;
+                }
+            }
             if (existing != null)
             {
                 existing.Reapply();
