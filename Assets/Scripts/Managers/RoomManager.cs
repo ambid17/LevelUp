@@ -88,7 +88,7 @@ namespace Minigames.Fight
 
 
                     // Abort before doing the overlap check if the chosen direction has already been used (slight performance boost).
-                    RoomConnection roomConnection = targetRoom.roomConnections.First(r => r.Direction == direction);
+                    RoomConnection roomConnection = targetRoom.roomConnections.FirstOrDefault(r => r.Direction == direction);
                     if (roomConnection.HasConnection)
                     {
                         continue;
@@ -113,7 +113,7 @@ namespace Minigames.Fight
                 roomInstance.DistanceFromStartRoom = targetRoom.DistanceFromStartRoom + 1;
 
                 // Mark the new rooms connection with the old room.
-                RoomConnection connectionInstance = roomInstance.roomConnections.First(r => r.Direction == -direction);
+                RoomConnection connectionInstance = roomInstance.roomConnections.FirstOrDefault(r => r.Direction == -direction);
                 connectionInstance.HasConnection = true;
 
                 // Add to available rooms so it too can be branched off of.
@@ -215,7 +215,7 @@ namespace Minigames.Fight
                         _bossRoom = Instantiate(bossRoom, spawnPosition, Quaternion.identity);
                         _bossRoom.DistanceFromStartRoom = room.DistanceFromStartRoom + 1;
 
-                        RoomConnection connectionInstance = _bossRoom.roomConnections.First(r => r.Direction == -unusedConnection.Direction);
+                        RoomConnection connectionInstance = _bossRoom.roomConnections.FirstOrDefault(r => r.Direction == -unusedConnection.Direction);
                         connectionInstance.HasConnection = true;
                         _bossRoom.SpawnEnemies();
 

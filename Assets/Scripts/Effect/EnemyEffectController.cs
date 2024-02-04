@@ -11,7 +11,9 @@ namespace Minigames.Fight
 
         void Start()
         {
-            foreach(var effectContainer in effectContainers)
+            MyEntity = GetComponent<Entity>();
+
+            foreach (var effectContainer in effectContainers)
             {
                 effectContainer.Init();
                 effectContainer.effect.GiveUpgradeInfo(1,UpgradeCategory.None, EffectCategory.None);

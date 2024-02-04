@@ -83,7 +83,7 @@ public class FightDataLoader : Singleton<FightDataLoader>
     {
         fileNameRemappings[baseName] = remappedName;
 
-        var entityToUpdate = serializableEntities.First(e => e.statsFileName == baseName);
+        var entityToUpdate = serializableEntities.FirstOrDefault(e => e.statsFileName == baseName);
         
         // Update the stats mapping
         var stats = FileUtils.LoadFile<EntityStats>(GetEntityMappedFilePath(entityToUpdate));

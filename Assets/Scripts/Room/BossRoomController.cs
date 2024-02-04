@@ -93,7 +93,7 @@ namespace Minigames.Fight
             {
                 return;
             }
-            _entrance = roomConnections.First(r => r.HasConnection);
+            _entrance = roomConnections.FirstOrDefault(r => r.HasConnection);
             float xMin = float.MaxValue;
             float yMin = float.MaxValue;
             float xMax = float.MinValue;
@@ -130,7 +130,7 @@ namespace Minigames.Fight
             var gou = new GraphUpdateObject(_entranceBounds);
             AstarPath.active.UpdateGraphs(gou);
 
-            _boss = GameManager.EnemyObjectPool.AllEnemies.First(b => b.room == this);
+            _boss = GameManager.EnemyObjectPool.AllEnemies.FirstOrDefault(b => b.room == this);
             _boss.transform.parent = null;
             _boss.transform.position = bossOrigin.position;
             _boss.gameObject.SetActive(true);

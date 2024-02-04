@@ -125,7 +125,7 @@ namespace Minigames.Fight
 
         public void AddOrRefreshStatusEffect(IStatusEffect statusEffect, Entity source, Entity target)
         {
-            var existing = statusEffects.First(e => e.statusEffect.Equals(statusEffect));
+            var existing = statusEffects.FirstOrDefault(e => e.statusEffect.Equals(statusEffect));
             if (existing != null)
             {
                 existing.Reapply();
@@ -177,7 +177,7 @@ namespace Minigames.Fight
 
         public void TickStatuses()
         {
-            foreach (var status in statusEffects)
+            foreach (var status in statusEffects.ToList())
             {
                 bool didFinish = status.OnTick();
                 if (didFinish)
