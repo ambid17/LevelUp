@@ -129,8 +129,6 @@ namespace Minigames.Fight
 
             foreach(var statusEffectData in statusEffects)
             {
-                var test = statusEffectData.statusEffect.GetType();
-                var test2 = statusEffect.GetType();
                 if (statusEffectData.statusEffect.GetType() == statusEffect.GetType())
                 {
                     existing = statusEffectData;
