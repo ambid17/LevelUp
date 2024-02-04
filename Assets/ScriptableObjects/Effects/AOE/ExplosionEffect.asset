@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3320b1ce2189147aba97c73880535e, type: 3}
+  m_Name: ExplosionEffect
+  m_EditorClassIdentifier: 
+  ExecutionOrder: 0
+  aoePrefab: {fileID: 2764326112176007323, guid: bcc8b925d688c9d4c8ba3df97fb49547, type: 3}
+  baseEffect: {fileID: 11400000, guid: 5ff66fabdd11c844a875951a7faa8b7e, type: 2}
+  statusEffect: {fileID: 0}
+  duration: 0.5
+  tickRate: 0.5
+  chanceToPlace: 0
+  onShootEffect: {fileID: 11400000, guid: e2da5c4ff262e534da394059dcdb0152, type: 2}

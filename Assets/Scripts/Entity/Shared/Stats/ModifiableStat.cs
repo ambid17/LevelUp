@@ -50,12 +50,6 @@ namespace Minigames.Fight
         // If this effect is set, it will override all other effects and negate them
         public IImpactsStat overrideEffect;
 
-        //public List<Effect> OnKillEffects = new();
-        //public List<Effect> OnDeathEffects = new();
-        //public List<Effect> OnTakeDamageEffects = new();
-        //public List<Effect> OnTimerEffects = new();
-        //public List<Effect> OnPurchaseEffects = new();
-
         public void Init()
         {
             if (flatEffects == null)

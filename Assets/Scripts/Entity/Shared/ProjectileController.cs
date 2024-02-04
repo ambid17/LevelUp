@@ -96,6 +96,11 @@ namespace Minigames.Fight
                 _isOverridingLifetime = true;
                 _lifetimeOverride = lifetimeOverride;
             }
+
+            foreach (var effect in _myWeaponStats.OnShootEffects)
+            {
+                effect.Execute(MyEntity, null);
+            }
         }
 
         protected void OnTriggerEnter2D(Collider2D col)

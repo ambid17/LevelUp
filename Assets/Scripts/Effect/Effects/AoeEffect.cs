@@ -17,6 +17,14 @@ namespace Minigames.Fight
         public Effect statusEffect;
         public float duration;
         public float tickRate;
+        public float chanceToPlace;
+
+        public override void ApplyOverrides(EffectOverrides overrides)
+        {
+            duration = overrides.duration;
+            tickRate = overrides.tickRate;
+            chanceToPlace = overrides.applicationChance;
+        }
 
         public override void OnCraft(Entity target)
         {
@@ -32,9 +40,13 @@ namespace Minigames.Fight
 
         public void Place(Entity source, Vector3 position)
         {
-            var instance = Instantiate(aoePrefab);
-            instance.transform.position = position;
-            instance.Setup(source, this);
+            bool doesApply = UnityEngine.Random.value < chanceToPlace;
+            if (doesApply)
+            {
+                var instance = Instantiate(aoePrefab);
+                instance.transform.position = position;
+                instance.Setup(source, this);
+            }
         }
     }
 }
