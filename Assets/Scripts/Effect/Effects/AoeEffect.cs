@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
@@ -10,20 +11,22 @@ namespace Minigames.Fight
     // AOE fire damage over time
     //  - take damage in AOE, apply status on leaving
 
-    public class AoeEffect : Effect
+    public class AoeEffect : ParentEffect
     {
         public AoeInstanceController aoePrefab;
-        public Effect baseEffect;
         public Effect statusEffect;
         public float duration;
         public float tickRate;
-        public float chanceToPlace;
+        public float size;
+
+        public Dictionary<ProjectileController, bool> projectileAoeMappings = new();
 
         public override void ApplyOverrides(EffectOverrides overrides)
         {
+            base.ApplyOverrides(overrides);
             duration = overrides.duration;
             tickRate = overrides.tickRate;
-            chanceToPlace = overrides.applicationChance;
+            size = overrides.maxRange;
         }
 
         public override void OnCraft(Entity target)
@@ -38,10 +41,17 @@ namespace Minigames.Fight
             }
         }
 
-        public void Place(Entity source, Vector3 position)
+        public virtual void TryPlace(ProjectileController projectile)
         {
-            bool doesApply = UnityEngine.Random.value < chanceToPlace;
-            if (doesApply)
+            float value = Random.value;
+            bool shouldPlace = value < chanceToApply;
+
+            projectileAoeMappings.Add(projectile, shouldPlace);
+        }
+
+        public void Place(Entity source, Vector3 position, ProjectileController projectile)
+        { 
+            if (projectileAoeMappings[projectile])
             {
                 var instance = Instantiate(aoePrefab);
                 instance.transform.position = position;

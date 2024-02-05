@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Minigames.Fight
 {
@@ -9,26 +10,22 @@ namespace Minigames.Fight
     [Serializable]
     public class ExplosionEffect : AoeEffect
     {
-        public Effect onShootEffect;
 
         public override void ApplyOverrides(EffectOverrides overrides)
         {
             base.ApplyOverrides(overrides);
-
-            overrides.applicationChance *= chanceToPlace;
-            onShootEffect.ApplyOverrides(overrides);
         }
 
-        public override void OnCraft(Entity target)
+        public override void TryPlace(ProjectileController projectile)
         {
-            base.OnCraft(target);
-            if (_upgradeCategory == UpgradeCategory.Range)
+            base.TryPlace(projectile);
+            if (projectileAoeMappings[projectile])
             {
-                target.Stats.combatStats.projectileWeaponStats.OnShootEffects.Add(onShootEffect);
-            }
-            else if (_upgradeCategory == UpgradeCategory.Melee)
-            {
-                target.Stats.combatStats.meleeWeaponStats.OnShootEffects.Add(onShootEffect);
+                bool shouldBackfire = Random.value < chanceToBackfire;
+                if (shouldBackfire) 
+                {
+                    projectile.MyWeaponStats.projectileLifeTime.AddSingleUseEffect(negative as StatModifierEffect);
+                }
             }
         }
     }

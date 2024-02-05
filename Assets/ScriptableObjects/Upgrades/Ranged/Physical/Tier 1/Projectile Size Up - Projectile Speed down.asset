@@ -22,8 +22,18 @@ MonoBehaviour:
   UpgradeCategory: 2
   EffectCategory: 3
   TierCategory: 1
+  parent:
+    effect: {fileID: 0}
+    overrides:
+      impactPerStack: 0
+      impactType: 0
+      chanceToBackfire: 0
+      maxRange: 0
+      applicationChance: 0
+      duration: 0
+      tickRate: 0
   positive:
-    effect: {fileID: 11400000, guid: 16c5bf9255205b44495166d02385e36a, type: 2}
+    effect: {fileID: 0}
     overrides:
       impactPerStack: 1.1
       impactType: 2
@@ -33,7 +43,7 @@ MonoBehaviour:
       duration: 0
       tickRate: 0
   negative:
-    effect: {fileID: 11400000, guid: ec257b75c41529a44b9d0d197eb3490a, type: 2}
+    effect: {fileID: 0}
     overrides:
       impactPerStack: 0.9
       impactType: 2

@@ -50,13 +50,18 @@ namespace Minigames.Fight
         public EffectCategory EffectCategory;
         public TierCategory TierCategory;
 
+        public EffectUpgradeContainer parent;
         public EffectUpgradeContainer positive;
         public EffectUpgradeContainer negative;
 
         public void Init()
         {
+            parent.Init();
             positive.Init();
             negative.Init();
+            ParentEffect parentEffect = parent.effect as ParentEffect;
+            parentEffect.positive = positive.effect;
+            parentEffect.negative = negative.effect;
         }
 
         public void SetDefaults()
@@ -66,6 +71,7 @@ namespace Minigames.Fight
             IsCrafted = false;
             IsEquipped = false;
 
+            parent.SetDefaults();
             positive.SetDefaults();
             negative.SetDefaults();
         }
@@ -89,15 +95,13 @@ namespace Minigames.Fight
         public void Craft()
         {
             IsCrafted = true;
-            positive.Craft(this);
-            negative.Craft(this);
+            parent.Craft(this);
         }
 
         public void ToggleEquip(bool isEquipped)
         {
             IsEquipped = isEquipped;
-            positive.ToggleEquip(this, isEquipped);
-            negative.ToggleEquip(this, isEquipped);
+            parent.ToggleEquip(this, IsEquipped);
         }
 
         public string GetUpgradeCountText()

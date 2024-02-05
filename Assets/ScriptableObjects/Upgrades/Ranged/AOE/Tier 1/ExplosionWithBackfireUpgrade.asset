@@ -14,29 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Explosion with backfire
   Icon: {fileID: 0}
-  IsUnlocked: 0
-  AmountOwned: 0
+  IsUnlocked: 1
+  AmountOwned: 1
   MaxAmountOwned: 0
-  IsCrafted: 0
-  IsEquipped: 0
+  IsCrafted: 1
+  IsEquipped: 1
   UpgradeCategory: 2
   EffectCategory: 1
   TierCategory: 1
-  positive:
+  parent:
     effect: {fileID: 11400000, guid: eb9ed5b015225a34aaaf97412c35e860, type: 2}
-    overrides:
-      impactPerStack: 1
-      impactType: 0
-      chanceToBackfire: 0.05
-      maxRange: 3
-      applicationChance: 0.5
-      duration: 0.5
-      tickRate: 0.5
-  negative:
-    effect: {fileID: 0}
     overrides:
       impactPerStack: 0
       impactType: 0
+      chanceToBackfire: 0.05
+      maxRange: 3
+      applicationChance: 0.1
+      duration: 0.5
+      tickRate: 0.5
+  positive:
+    effect: {fileID: 11400000, guid: 5ff66fabdd11c844a875951a7faa8b7e, type: 2}
+    overrides:
+      impactPerStack: 1
+      impactType: 0
+      chanceToBackfire: 0
+      maxRange: 0
+      applicationChance: 0
+      duration: 0
+      tickRate: 0
+  negative:
+    effect: {fileID: 11400000, guid: bdf4f28e0603d8d40b6c98a5df877a17, type: 2}
+    overrides:
+      impactPerStack: 0
+      impactType: 3
       chanceToBackfire: 0
       maxRange: 0
       applicationChance: 0

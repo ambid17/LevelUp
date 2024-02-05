@@ -10,6 +10,7 @@ public class AoeInstanceController : MonoBehaviour
     Entity myEntity;
     AoeEffect myEffect;
 
+
     public float timer;
 
     private Dictionary<Entity, float> entitiesInAoe;
@@ -32,6 +33,7 @@ public class AoeInstanceController : MonoBehaviour
     {
         myEntity = source;
         myEffect = aoeEffect;
+        transform.localScale = new Vector2(aoeEffect.size, aoeEffect.size);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,7 +57,7 @@ public class AoeInstanceController : MonoBehaviour
 
             if (entitiesInAoe[entity] > myEffect.tickRate)
             {
-                myEffect.baseEffect.Execute(myEntity, entity);
+                myEffect.positive.Execute(myEntity, entity);
                 entitiesInAoe[entity] = 0;
             }
         }

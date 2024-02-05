@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: ExplosionEffect
   m_EditorClassIdentifier: 
   ExecutionOrder: 0
+  positive: {fileID: 0}
+  negative: {fileID: 0}
+  chanceToApply: 0
+  chanceToBackfire: 0
   aoePrefab: {fileID: 2764326112176007323, guid: bcc8b925d688c9d4c8ba3df97fb49547, type: 3}
-  baseEffect: {fileID: 11400000, guid: 5ff66fabdd11c844a875951a7faa8b7e, type: 2}
   statusEffect: {fileID: 0}
-  duration: 0.5
-  tickRate: 0.5
-  chanceToPlace: 0
-  onShootEffect: {fileID: 11400000, guid: e2da5c4ff262e534da394059dcdb0152, type: 2}
+  duration: 0
+  tickRate: 0
+  size: 0

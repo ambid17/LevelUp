@@ -32,12 +32,8 @@ namespace Minigames.Fight
 
         public override void Execute(Entity source, Entity target)
         {
-            bool doesApply = UnityEngine.Random.value < chanceToApply;
-            if (doesApply)
-            {
-                var damage = source.Stats.combatStats.projectileWeaponStats.baseDamage.Calculated * Impact;
-                target.TakeHit(damage, source);
-            }
+            var damage = source.Stats.combatStats.projectileWeaponStats.baseDamage.Calculated * Impact;
+            target.TakeHit(damage, source);
         }
     }
 }

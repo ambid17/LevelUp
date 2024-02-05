@@ -6,6 +6,8 @@ namespace Minigames.Fight
 {
     public class ProjectileController : MonoBehaviour
     {
+        public WeaponStats MyWeaponStats;
+
         protected Entity _myEntity;
         protected float _deathTimer = 0;
         protected Vector2 _shootDirection;
@@ -101,6 +103,11 @@ namespace Minigames.Fight
             {
                 effect.Execute(MyEntity, null);
             }
+
+            foreach(var effect in _myWeaponStats.AoeEffects)
+            {
+                effect.TryPlace(this);
+            }
         }
 
         protected void OnTriggerEnter2D(Collider2D col)
@@ -142,7 +149,7 @@ namespace Minigames.Fight
             foreach(var effect in _myWeaponStats.AoeEffects)
             {
                 // TODO: add in offsets so that the effects aren't all on top of each other
-                effect.Place(MyEntity, transform.position);
+                effect.Place(MyEntity, transform.position, this);
             }
 
             Destroy(gameObject);
