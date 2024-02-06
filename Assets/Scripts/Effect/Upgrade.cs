@@ -60,8 +60,21 @@ namespace Minigames.Fight
             positive.Init();
             negative.Init();
             ParentEffect parentEffect = parent.effect as ParentEffect;
-            parentEffect.positive = positive.effect;
-            parentEffect.negative = negative.effect;
+
+            if(parentEffect == null)
+            {
+                return;
+            }
+
+            if(positive != null)
+            {
+                parentEffect.positive = positive.effect;
+            }
+
+            if(negative != null)
+            {
+                parentEffect.negative = negative.effect;
+            }
         }
 
         public void SetDefaults()
@@ -137,7 +150,10 @@ namespace Minigames.Fight
 
             initialEffect = effect;
             // Create an instance of an effect so the actual scriptable object doesn't get overwritten
-            effect = (Effect)ScriptableObject.CreateInstance(effect.GetType().Name);
+            var newInstance = ScriptableObject.CreateInstance(effect.GetType().Name);
+            effect = (Effect)newInstance;
+
+            effect.ApplyFailedSerialization(initialEffect);
             effect.ApplyOverrides(overrides);
         }
 

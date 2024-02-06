@@ -41,7 +41,7 @@ public class AoeInstanceController : MonoBehaviour
         var target = collision.gameObject.GetComponent<Entity>();
 
         // Make sure not to apply AOE effects to the source
-        if (target == myEntity)
+        if (target == myEntity || target == null)
         {
             return;
         }
@@ -68,7 +68,7 @@ public class AoeInstanceController : MonoBehaviour
         var target = collision.gameObject.GetComponent<Entity>();
 
         // Make sure not to apply AOE effects to the source
-        if (target == myEntity)
+        if (target == myEntity || target == null)
         {
             return;
         }

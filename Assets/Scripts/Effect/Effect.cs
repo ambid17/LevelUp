@@ -49,6 +49,11 @@ namespace Minigames.Fight
             _effectCategory = effectCategory;
         }
 
+        public virtual void ApplyFailedSerialization(Effect effect)
+        {
+
+        }
+
         public virtual void ApplyOverrides(EffectOverrides overrides)
         {
         }

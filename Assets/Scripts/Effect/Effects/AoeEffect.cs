@@ -29,6 +29,12 @@ namespace Minigames.Fight
             size = overrides.maxRange;
         }
 
+        public override void ApplyFailedSerialization(Effect effect)
+        {
+            AoeEffect converted = (AoeEffect)effect;
+            aoePrefab = converted.aoePrefab;
+        }
+
         public override void OnCraft(Entity target)
         {
             if (_upgradeCategory == UpgradeCategory.Range)
