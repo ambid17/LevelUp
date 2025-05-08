@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-public class GameManager : Singleton<GameManager>
+public class HomeManager : Singleton<HomeManager>
 {
     [SerializeField] private FightDataLoader _fightDataLoader;
     [SerializeField] private Texture2D _cursorTexture;

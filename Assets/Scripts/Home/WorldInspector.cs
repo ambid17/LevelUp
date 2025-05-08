@@ -46,7 +46,7 @@ public class WorldInspector : MonoBehaviour
 
     private void ConquerPlanet()
     {
-        GameManager.IsLoadingScene = true;
+        HomeManager.IsLoadingScene = true;
         Platform.ProgressSettings.CurrentBiome = _biome;
         Instantiate(loadingTransition);
     }
