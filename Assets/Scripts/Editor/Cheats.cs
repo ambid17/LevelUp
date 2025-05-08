@@ -12,4 +12,10 @@ public class Cheats : MonoBehaviour
         var obj = AssetDatabase.LoadAssetAtPath<ScriptableObject>(folderPath);
         EditorGUIUtility.PingObject(obj);
     }
+
+    [MenuItem("Caos Creations/Open Save Folder _F5")]
+    public static void OpenSaveFolder()
+    {
+        EditorUtility.RevealInFinder(Application.persistentDataPath);
+    }
 }
