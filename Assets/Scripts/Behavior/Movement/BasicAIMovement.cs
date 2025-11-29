@@ -103,13 +103,13 @@ namespace Minigames.Fight
                     // TODO from sabien: delete? this seems incorrect
                     UpdatePath();
                     // Kill off our velocity while we are waiting
-                    rb.velocity = Vector2.zero;
+                    rb.linearVelocity = Vector2.zero;
                     return;
                 }
                 currentWaypoint++;
             }
 
-            rb.velocity = move.normalized * speed;
+            rb.linearVelocity = move.normalized * speed;
 
             // To prevent sprite from flickering wait until the direction has changed for at least 5 physics updates in a row before switching
             if (Mathf.Abs(move.x) > 0.01)
@@ -157,7 +157,7 @@ namespace Minigames.Fight
 
         public void Stop()
         {
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             _Path = null;
         }
     }

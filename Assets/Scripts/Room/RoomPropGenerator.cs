@@ -90,7 +90,7 @@ public class RoomPropGenerator : MonoBehaviour
         filter.SetLayerMask(layersToCauseFailure);
         filter.useTriggers = true;
 
-        collider.OverlapCollider(filter, colList);
+        collider.Overlap(filter, colList);
 
         while (colList.Count > 0)
         {
@@ -147,7 +147,7 @@ public class RoomPropGenerator : MonoBehaviour
             filter.SetLayerMask(layersToCauseFailure);
             filter.useTriggers = true;
 
-            collider.OverlapCollider(filter, colList);
+            collider.Overlap(filter, colList);
 
             if(colList.Count > 0)
             {

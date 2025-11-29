@@ -77,9 +77,9 @@ namespace Minigames.Fight
         {
             if (!_hasStopped)
             {
-                if (myRigidbody.velocity.magnitude > 0.1f)
+                if (myRigidbody.linearVelocity.magnitude > 0.1f)
                 {
-                    myRigidbody.velocity -= myRigidbody.velocity * deceleration * Time.deltaTime;
+                    myRigidbody.linearVelocity -= myRigidbody.linearVelocity * deceleration * Time.deltaTime;
                     return;
                 }
                 _hasStopped = true;
@@ -91,7 +91,7 @@ namespace Minigames.Fight
             if (Vector2.Distance(transform.position, GameManager.PlayerEntity.transform.position) < attractDistance)
             {
                 Vector2 direction = GameManager.PlayerEntity.transform.position - transform.position;
-                myRigidbody.velocity = direction.normalized * attractSpeed;
+                myRigidbody.linearVelocity = direction.normalized * attractSpeed;
             }
             if (_isColliding)
             {

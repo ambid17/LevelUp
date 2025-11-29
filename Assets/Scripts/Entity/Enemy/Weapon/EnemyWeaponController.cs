@@ -108,7 +108,7 @@ namespace Minigames.Fight
         { 
             ShootTimer = 0;
             _storedTarget = GameManager.PlayerEntity.transform.position;
-            _storedVelocity = GameManager.PlayerEntity.Rigidbody2D.velocity;
+            _storedVelocity = GameManager.PlayerEntity.Rigidbody2D.linearVelocity;
             _storedDirection = PredictProjectileDirection(transform.position);
             EnemyVisualController myVC = MyEntity.VisualController as EnemyVisualController;
             myVC.FaceTarget(_storedPrediction);

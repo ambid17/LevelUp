@@ -34,7 +34,7 @@ namespace Minigames.Fight
 
             if (_myEntity.IsDead || _myEntity.Stunned)
             {
-                MyRigidbody2D.velocity = Vector2.zero;
+                MyRigidbody2D.linearVelocity = Vector2.zero;
                 return;
             }
             GetMovementInput();
@@ -82,7 +82,7 @@ namespace Minigames.Fight
     
         private void Move()
         {
-            if (MyRigidbody2D.velocity.sqrMagnitude <= _idleSpeed)
+            if (MyRigidbody2D.linearVelocity.sqrMagnitude <= _idleSpeed)
             {
                 _myEntity.AnimationController.PlayIdleAnimation();
                 return;
@@ -99,7 +99,7 @@ namespace Minigames.Fight
 
             if (_myEntity.IsDead || _myEntity.Stunned)
             {
-                MyRigidbody2D.velocity = Vector2.zero;
+                MyRigidbody2D.linearVelocity = Vector2.zero;
                 return;
             }
             ApplyAcceleration();
@@ -110,7 +110,7 @@ namespace Minigames.Fight
             float maxAcceleration = ACCELERATION * Time.fixedDeltaTime;
             _movementToApply.x = Mathf.MoveTowards(_movementToApply.x, _currentInput.x, maxAcceleration);
             _movementToApply.y = Mathf.MoveTowards(_movementToApply.y, _currentInput.y, maxAcceleration);
-            MyRigidbody2D.velocity = _movementToApply;
+            MyRigidbody2D.linearVelocity = _movementToApply;
         }
     }
 }

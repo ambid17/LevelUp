@@ -30,7 +30,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody2D
                 return TaskStatus.Failure;
             }
 
-            rigidbody2D.velocity = velocity.Value;
+            rigidbody2D.linearVelocity = velocity.Value;
 
             return TaskStatus.Success;
         }

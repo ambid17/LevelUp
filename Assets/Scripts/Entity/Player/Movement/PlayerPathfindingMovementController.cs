@@ -29,7 +29,7 @@ namespace Minigames.Fight
         {
             _myEntity = GetComponent<PlayerEntity>();
             _myRigidbody2D = GetComponent<Rigidbody2D>();
-            _myRigidbody2D.velocity = Vector2.zero;
+            _myRigidbody2D.linearVelocity = Vector2.zero;
             _myRigidbody2D.isKinematic = true;
             // path to the chamber
             _myEntity.IsControlled = true;
@@ -125,7 +125,7 @@ namespace Minigames.Fight
             }
             else
             {
-                _myRigidbody2D.velocity = Vector2.zero;
+                _myRigidbody2D.linearVelocity = Vector2.zero;
                 Platform.EventService.Dispatch(new PlayerChangedDirectionEvent(Direction.Down));
                 _myEntity.AnimationController.PlayIdleAnimation();
             }

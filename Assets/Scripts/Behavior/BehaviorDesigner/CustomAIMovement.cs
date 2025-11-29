@@ -37,7 +37,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement.Custom2D
         }
         protected override Vector3 Velocity()
         {
-            return agent.rb.velocity;
+            return agent.rb.linearVelocity;
         }
         protected override void UpdateRotation(bool update)
         {

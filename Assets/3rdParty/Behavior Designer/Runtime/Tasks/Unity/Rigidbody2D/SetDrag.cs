@@ -30,7 +30,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody2D
                 return TaskStatus.Failure;
             }
 
-            rigidbody2D.drag = drag.Value;
+            rigidbody2D.linearDamping = drag.Value;
 
             return TaskStatus.Success;
         }

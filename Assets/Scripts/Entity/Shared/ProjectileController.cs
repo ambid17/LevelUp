@@ -68,7 +68,7 @@ namespace Minigames.Fight
 
         protected virtual void Move()
         {
-            _rb.velocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
+            _rb.linearVelocity = _shootDirection * _myWeaponStats.projectileMoveSpeed.Calculated;
         }
 
         public virtual void Setup(Entity myEntity, WeaponStats weapon, Vector2 direction, float lifetimeOverride = 0)
